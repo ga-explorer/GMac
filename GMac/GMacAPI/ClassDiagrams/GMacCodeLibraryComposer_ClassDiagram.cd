@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAPI.CodeGen.GMacCodeLibraryComposer">
+    <Position X="5.5" Y="0.75" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgEACAAAACAAAABAQAAAAAIAAAAgAAAAIASAQAA=</HashCode>
+      <FileName>GMacAPI\CodeGen\GMacCodeLibraryComposer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextComposerLib.Code.CodeLibraryComposer">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

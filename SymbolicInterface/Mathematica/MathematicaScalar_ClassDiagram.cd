@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaMatrix">
+    <Position X="15.25" Y="2" Width="7.75" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="SymbolicInterface.Mathematica.Expression.MathematicaMatrix.EigenVectorsSpecs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Mathematica\Expression\MathematicaMatrix.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IACAQQAgCACoAECAaQcBICAAAAYAGEYAAAQ0AAhIBDA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaMatrix.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaScalar">
+    <Position X="0.5" Y="2" Width="6.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAKhAEAAAAgEAAE4AWGAgEAAA8AAFCAAGCABBQgByA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaScalar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaVector">
+    <Position X="7.5" Y="2" Width="7.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAkAAEAAEAAgBAAaAUQAAAAAQAAAEIEAAoAAQAAAAA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaVector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaExpression" Collapsed="true">
+    <Position X="10" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAggBAEgAAIAAAAAAAAgMQAAAABoIIAECA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaExpression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

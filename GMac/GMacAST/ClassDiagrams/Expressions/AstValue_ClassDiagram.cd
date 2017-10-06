@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAST.AstObject">
+    <Position X="2.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQgACCAAAAgAIAAAAAAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>GMacAST\AstObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstExpression">
+    <Position X="5.25" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAAAABgAAAACCAEAAgAAgAASgIAAAASAAABABQAAwA=</HashCode>
+      <FileName>GMacAST\Expressions\AstExpression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValue">
+    <Position X="5" Y="6" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAACAgBAgAAIAAABAAQAAAAAAAAAAADECAgAAQAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstValue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValueMultivector">
+    <Position X="9.25" Y="5" Width="4" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACQAAAgAAgAAACAAQAAAAAAAAAAAAACAAAAAAAAE=</HashCode>
+      <FileName>GMacAST\Expressions\AstValueMultivector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValueMultivectorTerm">
+    <Position X="9.25" Y="8.5" Width="4" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AiAEAAgAAAAAjAAAAAAQAAACCACAAIAAACAAAAAAAAE=</HashCode>
+      <FileName>GMacAST\Expressions\AstValueMultivectorTerm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValueScalar">
+    <Position X="5.25" Y="10" Width="3" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAAQEAAAAAAAAABAAQAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstValueScalar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValueStructure">
+    <Position X="0.5" Y="5" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAACAAQAAAEAAAAAEABACAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstValueStructure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValueStructureTerm">
+    <Position X="0.5" Y="8" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACAAAABAACAAAAAAAAQQAAEAAAgAEAAAGAAAEAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstValueStructureTerm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

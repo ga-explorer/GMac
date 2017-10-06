@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAST.AstObject">
+    <Position X="1.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQgACCAAAAgAIAAAAAAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>GMacAST\AstObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstExpression">
+    <Position X="4.25" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAEAABAAAAACCAEAAgAAgAASgIAAAASAAABABQAAwA=</HashCode>
+      <FileName>GMacAST\Expressions\AstExpression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstBinaryExpression" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAAAIAAAAABQACAAAAAIAAAAAEAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstBinaryExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstCompositeExpression" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAIAIAAAAAAAABAAAAAACAAABBAAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstCompositeExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstDatastoreValueAccess" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AcBEDAGAAAQAAAAGAgOAEIEQAiAAAAAiCA4EoAwCBgA=</HashCode>
+      <FileName>GMacAST\Expressions\AstDatastoreValueAccess.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstMacroCall" Collapsed="true">
+    <Position X="9" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAgAAAAAgAAgkAAEAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstMacroCall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstMultivectorConstructor" Collapsed="true">
+    <Position X="3.5" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAAAAAFAAAAAAggAAAAAAEAAIAACIAAAABABAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstMultivectorConstructor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstParametricSymbolicExpression" Collapsed="true">
+    <Position X="6.25" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAgAIAAACEAAAAACAAAAAAgABAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstParametricSymbolicExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstStructureConstructor" Collapsed="true">
+    <Position X="1.25" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAABAAAAAAggAMAAAAEAgIAACBAAAAAAAAgA=</HashCode>
+      <FileName>GMacAST\Expressions\AstStructureConstructor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstTransformCall" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAACBAAAAAAAAAsAAAAACAAAAAAEAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstTransformCall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstTypeCast" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAMAAAAACAAAAAAEQAQA=</HashCode>
+      <FileName>GMacAST\Expressions\AstTypeCast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstUnaryExpression" Collapsed="true">
+    <Position X="1.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAQAAAAAAAIAAAAAMIAAAACAAAAAAEAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstUnaryExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstValue" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAACAgBAgAAIAAABAAQAAAAAAAAAAADECAgAAQAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstValue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

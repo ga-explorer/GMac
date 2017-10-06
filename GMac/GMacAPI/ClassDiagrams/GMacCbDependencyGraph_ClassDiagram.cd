@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAPI.CodeBlock.GMacCbDependencyGraph">
+    <Position X="7.75" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\GMacCbDependencyGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UtilLib.DataStructures.Dependency.DependencyGraph&lt;TKey, TItem&gt;">
+    <Position X="0.5" Y="0.5" Width="6.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UtilLib.DataStructures.Dependency.DependencyInfo&lt;TItem&gt;">
+    <Position X="7.75" Y="3" Width="3" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

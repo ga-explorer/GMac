@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAST.AstObject">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQgACCAAAAgAIAAAAAAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>GMacAST\AstObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstSymbol">
+    <Position X="3.25" Y="0.5" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAAAAEAJAIABACCEEBoQAAUADACCAAQwgiAosAIAEAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstSymbol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstConstant" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAEBAAIAAIAAAEAAAAAEAQAAAAAAQAAAgAAAAAAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstConstant.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstFrame" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QwEAAAAiAIAGiAAAAAAAQCSFAgABAAgwCQAEAAUADDA=</HashCode>
+      <FileName>GMacAST\Symbols\AstFrame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstFrameBasisBlade" Collapsed="true">
+    <Position X="7.5" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgEEABAAIAAoCCCEAoAAgUAzABAAQBQAEEgEAVAEAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstFrameBasisBlade.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstFrameBasisVector" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAEAABAAIAA4ACAEAAAAAkASAACAQAQAkEgAAEAAIA=</HashCode>
+      <FileName>GMacAST\Symbols\AstFrameBasisVector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstFrameMultivector" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAABABEAYAAAAAAAAAAAAAAQABAAEAAgAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstFrameMultivector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstFrameSubspace" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAIAAgAAAAAAAAQCAAACBAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>GMacAST\Symbols\AstFrameSubspace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstLocalVariable" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAIABAAAAEAAAAAABQAAAAAAQACAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstLocalVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstMacro" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAIBAAAQAABoAAAkAYAAQAAAACIAAIAAABAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstMacro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstMacroParameter" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABIAIQBAACAEAAAAAAAQAAAAAAQCAAAAAAAEAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstMacroParameter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstNamespace" Collapsed="true">
+    <Position X="3.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAgAEAAaACwACAEAEAACQEAgAAIAgAASEAAAQADBE=</HashCode>
+      <FileName>GMacAST\Symbols\AstNamespace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstStructure" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAhAAYCAAAAAAAIAAAAEQABAAAAAAMAAAAACAAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstStructure.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstStructureDataMember" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABABIAAAAAAAAAAAAAAQAAAAAAAAAAAIAAAAIA=</HashCode>
+      <FileName>GMacAST\Symbols\AstStructureDataMember.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstTransform" Collapsed="true">
+    <Position X="5.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAABAAAQAAAAAAAgAAQAAAAgAAAAAAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstTransform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstSymbolsCollection">
+    <Position X="10.25" Y="0.5" Width="4.75" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACIBAAAAAAAAABAcAAAABAQEAASAQAAAAAAAAARUIEA=</HashCode>
+      <FileName>GMacAST\Symbols\AstSymbolsCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

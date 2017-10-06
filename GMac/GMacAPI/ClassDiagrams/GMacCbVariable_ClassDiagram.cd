@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAPI.CodeBlock.GMacCbComputedVariable">
+    <Position X="2" Y="13.5" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AECAAAEAAAAAAAABAggAAAABgQEkAIAACAAQwACAACA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\GMacCbComputedVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeBlock.GMacCbInputVariable">
+    <Position X="7" Y="13.75" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAQAAAQAEAAAAAEAAgAAAAQAACAAAgAAAIAA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\GMacCbInputVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeBlock.GMacCbOutputVariable">
+    <Position X="0.5" Y="18.25" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAQAACAAAAAAAIAA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\GMacCbOutputVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeBlock.GMacCbTempVariable">
+    <Position X="4.75" Y="18.25" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAgQAAAQIEAAAEAEAAgAAAAQAAAAAAgAAEAAE=</HashCode>
+      <FileName>GMacAPI\CodeBlock\GMacCbTempVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeBlock.GMacCbVariable">
+    <Position X="4.75" Y="8.25" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>MAAAAAAEBCQAAAAAEAQAAACAAAAAAQgAgAAAAIAEEQA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\GMacCbVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="GMac.GMacAPI.CodeBlock.IGMacCbComputedVariable">
+    <Position X="1.5" Y="4.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AECAAAEAAAAAAAABAAAAAAAAgAAAAIAACAAQAAAAAAA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\IGMacCbComputedVariable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAPI.CodeBlock.IGMacCbVariable">
+    <Position X="6.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAEBCQAAAAAEAQAAACAAAAAAAgAgAAAAIAAEQA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\IGMacCbVariable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAPI.CodeBlock.IGMacCbParameterVariable">
+    <Position X="6" Y="4.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAIAA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\IGMacCbParameterVariable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAPI.CodeBlock.IGMacCbRhsVariable">
+    <Position X="9.5" Y="4.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAQAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\CodeBlock\IGMacCbRhsVariable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

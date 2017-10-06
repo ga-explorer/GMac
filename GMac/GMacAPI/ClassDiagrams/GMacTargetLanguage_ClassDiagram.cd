@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAPI.Target.GMacTargetVariablesNaming">
+    <Position X="17" Y="0.5" Width="10.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAgAAAIAAAAAAEAAAQAAAAIABAAAAAAAAQQCAA=</HashCode>
+      <FileName>GMacAPI\Target\GMacTargetVariablesNaming.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAPI.Target.GMacLanguageServer">
+    <Position X="0.5" Y="3.5" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAIAACAAACAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>GMacAPI\Target\GMacLanguageServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAPI.Target.GMacMathematicaExpressionConverter">
+    <Position X="7.75" Y="4" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Target\GMacMathematicaExpressionConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextComposerLib.Code.Languages.LanguageServer">
+    <Position X="0.5" Y="0.5" Width="6.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="TextComposerLib.Code.Languages.LanguageExpressionConverter">
+    <Position X="7.25" Y="0.5" Width="6.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAPI.Target.CSharp.CSharpGMacLanguageServer">
+    <Position X="2" Y="6.75" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Target\CSharp\CSharpGMacLanguageServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAPI.Target.CSharp.MathematicaToCSharpConverter">
+    <Position X="8.75" Y="6.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Target\CSharp\MathematicaToCSharpConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

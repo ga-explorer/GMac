@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAPI.CodeGen.GMacComputationCodeInfo">
+    <Position X="8" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAACAAAAAEAgAAAAAAAQAAAA=</HashCode>
+      <FileName>GMacAPI\CodeGen\GMacComputationCodeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeGen.GMacMacroCodeComposer">
+    <Position X="0.5" Y="0.5" Width="7.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAEAAgAYSoAYAAAACAEQAASAAEIAAAACQAgBgEEAAKA=</HashCode>
+      <FileName>GMacAPI\CodeGen\GMacMacroCodeComposer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeGen.GMacMacroCodeComposerDefaults">
+    <Position X="8" Y="3" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>iAAAAAAAAAAIAAAAAAAAAAAAAAAAIAAAAAAAgAAAAIA=</HashCode>
+      <FileName>GMacAPI\CodeGen\GMacMacroCodeComposerDefaults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

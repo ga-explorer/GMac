@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaExpression">
+    <Position X="9" Y="1" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAggBAEgAAIAAAAAAAAgMQAAAABoIIAECA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaExpression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaCondition" Collapsed="true">
+    <Position X="5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAQAEAAAAAAAAAABgCAAgAACAAAMAgAAAAAAABAAA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaCondition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaMatrix" Collapsed="true">
+    <Position X="7.5" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IACAQQAgCACoAECAaQcBICAAAAYAGEYAAAQ0AAhIBDA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaMatrix.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaPattern" Collapsed="true">
+    <Position X="9.75" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaPattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaRule" Collapsed="true">
+    <Position X="12.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAAAAAAAAQAAAAAAAAAAAAAEAAAAgAAAAAAAI=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaScalar" Collapsed="true">
+    <Position X="14.25" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAKhAEAAAAgEAAE4AWGAgEAAA8AAFCAAGCABBQgByA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaScalar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SymbolicInterface.Mathematica.Expression.MathematicaVector" Collapsed="true">
+    <Position X="16.5" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAkAAEAAEAAgBAAaAUQAAAAAQAAAEIEAAoAAQAAAAA=</HashCode>
+      <FileName>Mathematica\Expression\MathematicaVector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="SymbolicInterface.Mathematica.ISymbolicObject">
+    <Position X="2.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAIAAAEAA=</HashCode>
+      <FileName>Mathematica\ISymbolicObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SymbolicInterface.Mathematica.ISymbolicVector">
+    <Position X="4.5" Y="3" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAkAAAAAAAAgAAACAAQAAAAAAAAAAIAAAoAAAAAAAA=</HashCode>
+      <FileName>Mathematica\ISymbolicVector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SymbolicInterface.Mathematica.ISymbolicMatrix">
+    <Position X="0.5" Y="3" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAgCACoAEAACQIBICAAAAIAGAIAAAAAAAgABDA=</HashCode>
+      <FileName>Mathematica\ISymbolicMatrix.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAST.AstObject">
+    <Position X="9.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQgACCAAAAgAIAAAAAAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>GMacAST\AstObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.AstRoot" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEEAASACwCAAEAkAICAEAoAAICoIAQAAAAQACAE=</HashCode>
+      <FileName>GMacAST\AstRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.AstType" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAUBABAAQAAAKAEAAqAAAAARABAIACEgQIAAAAAAAA=</HashCode>
+      <FileName>GMacAST\AstType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Commands.AstCommand" Collapsed="true">
+    <Position X="10.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAAAABAAAAAACgECIgAQAAACAAACAAECQAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Commands\AstCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAST.Expressions.AstExpression" Collapsed="true">
+    <Position X="13" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEABAABAAAAACCAMAEwAAAAAQACAQBA6AAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\Expressions\AstExpression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAST.Symbols.AstSymbol" Collapsed="true">
+    <Position X="15.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEAJAIABACCEEBoQAAUADACCAAQwgiAosAIAEAA=</HashCode>
+      <FileName>GMacAST\Symbols\AstSymbol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GMac.GMacAST.IAstObject">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\IAstObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAST.IAstObjectWithExpression">
+    <Position X="3" Y="4.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\IAstObjectWithExpression.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAST.IAstObjectWithType">
+    <Position X="3.25" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\IAstObjectWithType.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAST.IAstObjectWithValue">
+    <Position X="0.5" Y="6.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>GMacAST\IAstObjectWithValue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAST.IAstObjectWithDatastoreValueAccess">
+    <Position X="4.75" Y="6.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAST\IAstObjectWithDatastoreValueAccess.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

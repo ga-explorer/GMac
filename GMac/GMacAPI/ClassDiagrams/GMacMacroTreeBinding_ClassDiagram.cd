@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAPI.Binding.GMacMacroTreeBinding">
+    <Position X="0.5" Y="3.5" Width="10.25" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAMAQwIAAAABABQEAAEAAAACCAAAAGAUAAIAAEBAAAA=</HashCode>
+      <FileName>GMacAPI\Binding\GMacMacroTreeBinding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="GMac.GMacAPI.Binding.IGMacBinding" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Binding\IGMacBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAPI.Binding.IGMacCompositeBinding" Collapsed="true">
+    <Position X="3.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Binding\IGMacCompositeBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAPI.Binding.IGMacTypedBinding" Collapsed="true">
+    <Position X="1.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Binding\IGMacTypedBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GMac.GMacAPI.Binding.IGMacPrimitiveBinding" Collapsed="true">
+    <Position X="6" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacAPI\Binding\IGMacPrimitiveBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

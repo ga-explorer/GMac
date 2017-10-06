@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="GMac.GMacAST.Symbols.AstFrame" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AxEAEAAAAIAmiAAAAAAAACSFAiABAAggAQAkCAQADBA=</HashCode>
+      <FileName>GMacAST\Symbols\AstFrame.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacCompiler.Symbolic.Frame.GaFrame" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AQEEEABgQEAAiAACkAIEQIRJAAAACBQAABAAIIP8OMI=</HashCode>
+      <FileName>GMacCompiler\Symbolic\Frame\GAFrame.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacCompiler.Symbolic.Frame.GaFrameEuclidean" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgQAAACAAAAAIAAABAAAAAABAAABAAAICYEcI=</HashCode>
+      <FileName>GMacCompiler\Symbolic\Frame\GAFrameEuclidean.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacCompiler.Symbolic.Frame.GaFrameNonOrthogonal" Collapsed="true">
+    <Position X="2.5" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgQQAACAAAAAIAAABAABAAABAAABAAgICYEMI=</HashCode>
+      <FileName>GMacCompiler\Symbolic\Frame\GAFrameNonOrthogonal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacCompiler.Symbolic.Frame.GaFrameOrthogonal" Collapsed="true">
+    <Position X="4.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgQAAACAAAAAIAAABAAAABABAAABIAAKCYEMI=</HashCode>
+      <FileName>GMacCompiler\Symbolic\Frame\GAFrameOrthogonal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacCompiler.Symbolic.Frame.GaFrameOrthonormal" Collapsed="true">
+    <Position X="6.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgQAAACAAAgAIAAABAAAABABAAABIAAKCYEMI=</HashCode>
+      <FileName>GMacCompiler\Symbolic\Frame\GAFrameOrthonormal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacUtils.FrameUtils">
+    <Position X="0.5" Y="4" Width="8" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>wcGAAAYgAAIkiQBEgAAQIAyBAAAoAxDKASgAKAECywA=</HashCode>
+      <FileName>GMacUtils\FrameUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GMac.GMacUtils.IGMacFrame">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAAAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GMacUtils\IGMacFrame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

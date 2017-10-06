@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89C1F760-833F-45BA-AF7F-74CBDF2042B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IronyGrammars</RootNamespace>
+    <AssemblyName>IronyGrammars</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.0.9.1\lib\net40\Irony.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Irony.Interpreter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.Interpreter.0.9.1\lib\net40\Irony.Interpreter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compiler\CompilerUtils.cs" />
+    <Compile Include="Compiler\LanguageProjectCodeUnitCompiler.cs" />
+    <Compile Include="Compiler\LanguageProjectCompiler.cs" />
+    <Compile Include="Compiler\LanguageCompiler.cs" />
+    <Compile Include="Compiler\LanguageTempCodeCompiler.cs" />
+    <Compile Include="SourceCode\IronyAstObjectCodeLocation.cs" />
+    <Compile Include="SourceCode\LanguageSourceCodeManager.cs" />
+    <Compile Include="SourceCode\SourceCodeUtils.cs" />
+    <Compile Include="DSLException\ASTException.cs" />
+    <Compile Include="DSLException\ASTGeneratorException.cs" />
+    <Compile Include="DSLException\ASTGeneratorTypeMismatchException.cs" />
+    <Compile Include="DSLException\CompilerException.cs" />
+    <Compile Include="DSLException\DSLException.cs" />
+    <Compile Include="DSLException\EvaluationException.cs" />
+    <Compile Include="DSLException\ParserException.cs" />
+    <Compile Include="DSLInterpreter\ActivationRecord.cs" />
+    <Compile Include="DSLInterpreter\ActivationRecordEntry.cs" />
+    <Compile Include="DSLInterpreter\ILanguageInterpreter.cs" />
+    <Compile Include="DSLInterpreter\LanguageBasicBinaryDynamicEvaluator.cs" />
+    <Compile Include="DSLInterpreter\LanguageBasicUnaryDynamicEvaluator.cs" />
+    <Compile Include="DSLInterpreter\LanguageExpressionEvaluator.cs" />
+    <Compile Include="DSLInterpreter\LanguageInterpreter.cs" />
+    <Compile Include="DSLInterpreter\LanguageValueAccessPrecessor.cs" />
+    <Compile Include="Semantic\Expression\Basic\OperandsByValueAccessAssignment.cs" />
+    <Compile Include="Semantic\Expression\CompositeExpression.cs" />
+    <Compile Include="Semantic\Expression\Value\ILanguageValue.cs" />
+    <Compile Include="Semantic\Expression\Value\ILanguageValueCompositeSparse.cs" />
+    <Compile Include="Semantic\Expression\Value\ILanguageValuePrimitive.cs" />
+    <Compile Include="Semantic\Expression\Value\ILanguageValueComposite.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueArray.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueArraySparse.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueCompositeSparse.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueNULL.cs" />
+    <Compile Include="Semantic\Expression\Value\ValuePointer.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueReference.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueStructure.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueStructureSparse.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueTuple.cs" />
+    <Compile Include="Semantic\Command\CommandAssign.cs" />
+    <Compile Include="Semantic\Command\CommandComment.cs" />
+    <Compile Include="Semantic\Command\CommandDeclareVariable.cs" />
+    <Compile Include="Semantic\Command\CommandExitCommandBlock.cs" />
+    <Compile Include="Semantic\Command\CommandIfElse.cs" />
+    <Compile Include="Semantic\Command\CommandIfElseIf.cs" />
+    <Compile Include="Semantic\Command\LanguageCommand.cs" />
+    <Compile Include="Semantic\Expression\ILanguageExpression.cs" />
+    <Compile Include="Semantic\Expression\ILanguageExpressionAtomic.cs" />
+    <Compile Include="Semantic\Expression\ILanguageExpressionBasic.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueTupleSparse.cs" />
+    <Compile Include="Semantic\Expression\Value\ValueUnit.cs" />
+    <Compile Include="Semantic\IIronyAstObject.cs" />
+    <Compile Include="Semantic\IIronyAstObjectWithScope.cs" />
+    <Compile Include="Semantic\Symbol\SymbolLValue.cs" />
+    <Compile Include="Semantic\Symbol\SymbolWithCommandBlock.cs" />
+    <Compile Include="Semantic\Type\TypeArray.cs" />
+    <Compile Include="Semantic\Type\TypePointer.cs" />
+    <Compile Include="Semantic\Type\TypeReference.cs" />
+    <Compile Include="Semantic\Type\TypeTuple.cs" />
+    <Compile Include="Semantic\Expression\ValueAccess\ValueAccessStepAsRootSymbol.cs" />
+    <Compile Include="Semantic\IAstNodeDynamicVisitor.cs" />
+    <Compile Include="SourceCode\LanguageCodeProject.cs" />
+    <Compile Include="Semantic\Expression\Basic\BasicPolyadic.cs" />
+    <Compile Include="Semantic\Expression\Basic\PolyadicOperands.cs" />
+    <Compile Include="Semantic\Expression\Basic\OperandsByValueAccess.cs" />
+    <Compile Include="Semantic\Expression\Basic\OperandsList.cs" />
+    <Compile Include="Semantic\Expression\Basic\BasicUnary.cs" />
+    <Compile Include="Semantic\IIronyAstObjectNamed.cs" />
+    <Compile Include="Semantic\Scope\ScopeUtils.cs" />
+    <Compile Include="Semantic\Operator\ILanguageOperator.cs" />
+    <Compile Include="Semantic\Command\CommandBlock.cs" />
+    <Compile Include="Semantic\Expression\Basic\BasicBinary.cs" />
+    <Compile Include="Semantic\Expression\Basic\OperandsByIndex.cs" />
+    <Compile Include="Semantic\Expression\Basic\OperandsByName.cs" />
+    <Compile Include="Semantic\Expression\Basic\LanguageExpressionBasic.cs" />
+    <Compile Include="Semantic\LanguageRole.cs" />
+    <Compile Include="Semantic\Operator\OperatorPrimitive.cs" />
+    <Compile Include="Semantic\Scope\ScopeCommandBlockChild.cs" />
+    <Compile Include="Semantic\Scope\ScopeRoot.cs" />
+    <Compile Include="Semantic\Scope\ScopeScopeChild.cs" />
+    <Compile Include="Semantic\Scope\ScopeSymbolChild.cs" />
+    <Compile Include="Semantic\Symbol\ILanguageSymbol.cs" />
+    <Compile Include="Semantic\Symbol\SymbolNamedValue.cs" />
+    <Compile Include="Semantic\Translator\SymbolTranslatorContextState.cs" />
+    <Compile Include="DSLDebug\IronyASTDescription.cs" />
+    <Compile Include="Semantic\IronyAstObjectNamed.cs" />
+    <Compile Include="Semantic\Symbol\SymbolLocalVariable.cs" />
+    <Compile Include="Semantic\Symbol\SymbolNamedExpression.cs" />
+    <Compile Include="Semantic\Symbol\SymbolNamespace.cs" />
+    <Compile Include="Semantic\Symbol\SymbolProcedureParameter.cs" />
+    <Compile Include="Semantic\Symbol\SymbolStructureDataMember.cs" />
+    <Compile Include="Semantic\Symbol\SymbolDataStore.cs" />
+    <Compile Include="Semantic\Symbol\LanguageSymbol.cs" />
+    <Compile Include="Semantic\Symbol\SymbolProcedure.cs" />
+    <Compile Include="Semantic\Translator\SymbolTranslator.cs" />
+    <Compile Include="Semantic\Translator\SymbolTranslatorContext.cs" />
+    <Compile Include="Semantic\Type\TypePrimitive.cs" />
+    <Compile Include="Semantic\Type\TypeStructure.cs" />
+    <Compile Include="Semantic\Expression\ValueAccess\LanguageValueAccess.cs" />
+    <Compile Include="Semantic\Expression\ValueAccess\ValueAccessStep.cs" />
+    <Compile Include="Semantic\Expression\ValueAccess\ValueAccessStepByKeyList.cs" />
+    <Compile Include="Semantic\Expression\ValueAccess\ValueAccessStepByKey.cs" />
+    <Compile Include="Semantic\Expression\ValueAccess\ValueAccessStepBySymbol.cs" />
+    <Compile Include="Semantic\Expression\Value\ValuePrimitive.cs" />
+    <Compile Include="SourceCode\LanguageCompilationLog.cs" />
+    <Compile Include="SourceCode\LanguageCompilationMessage.cs" />
+    <Compile Include="SourceCode\LanguageCodeLocation.cs" />
+    <Compile Include="SourceCode\ISourceCodeUnitLine.cs" />
+    <Compile Include="SourceCode\LanguageCodeFileLine.cs" />
+    <Compile Include="SourceCode\LanguageCodeFile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semantic\Scope\LanguageScope.cs" />
+    <Compile Include="Semantic\Symbol\SymbolWithScope.cs" />
+    <Compile Include="Semantic\Type\ILanguageType.cs" />
+    <Compile Include="Semantic\IronyAst.cs" />
+    <Compile Include="SourceCode\ISourceCodeUnitsContainer.cs" />
+    <Compile Include="SourceCode\ISourceCodeUnit.cs" />
+    <Compile Include="SourceCode\LanguageCodeText.cs" />
+    <Compile Include="SourceCode\LanguageCodeTextLine.cs" />
+    <Compile Include="DSLs\IronyEBNF\IronyEBNFGrammar.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Semantic\ClassDiagrams\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TextComposerLib\TextComposerLib.csproj">
+      <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
+      <Name>TextComposerLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
