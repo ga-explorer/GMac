@@ -76,6 +76,10 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
+    <Reference Include="TextComposerLib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TextComposerLib.1.0.3\lib\TextComposerLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Wolfram.NETLink">
       <HintPath>..\..\..\..\Program Files\Wolfram Research\Mathematica\11.0\SystemFiles\Links\NETLink\Wolfram.NETLink.dll</HintPath>
@@ -514,6 +518,7 @@
     <Folder Include="GMacIDE\FramesDesigner\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="GMacAPI\ClassDiagrams\GMacCbVariable_ClassDiagram.cd" />
     <None Include="GMacAPI\ClassDiagrams\GMacMacroCodeFileComposer_ClassDiagram.cd" />
     <None Include="GMacAPI\ClassDiagrams\GMacMacroCodeComposer_ClassDiagram.cd" />
@@ -568,10 +573,6 @@
     <ProjectReference Include="..\SymbolicInterface\SymbolicInterface.csproj">
       <Project>{1A829048-079B-4BA4-8354-F5BE36946D11}</Project>
       <Name>SymbolicInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TextComposerLib\TextComposerLib.csproj">
-      <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
-      <Name>TextComposerLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\UtilLib\UtilLib.csproj">
       <Project>{D743AAC2-6F5B-4F9F-BDE8-366648110F1C}</Project>
