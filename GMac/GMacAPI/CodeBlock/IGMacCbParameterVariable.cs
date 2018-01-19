@@ -1,4 +1,5 @@
 ﻿using GMac.GMacAST.Expressions;
+using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.CodeBlock
 {
@@ -14,5 +15,10 @@ namespace GMac.GMacAPI.CodeBlock
         /// variable
         /// </summary>
         string ValueAccessName { get; }
+
+        /// <summary>
+        /// A test value used for debugging purposes
+        /// </summary>
+        Expr TestValueExpr { get; }
     }
 }

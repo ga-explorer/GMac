@@ -1,10 +1,13 @@
-﻿using GMac.GMacAPI.CodeBlock;
+﻿using System.Collections.Generic;
+using GMac.GMacAPI.Binding;
+using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator;
 using GMac.GMacUtils;
 using TextComposerLib.Logs.Progress;
+using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 {
@@ -49,12 +52,13 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
             return optimizer.CodeBlock;
         }
 
-        public static GMacCodeBlock Process(LlGenerator generator, bool fixOutputsOrder, ProgressComposer progress)
+        public static GMacCodeBlock Process(LlGenerator generator, Dictionary<string, GMacMacroParameterBinding> inputsWithTestValues, bool fixOutputsOrder, ProgressComposer progress)
         {
             var optimizer = new TcbOptimizer(generator)
             {
                 FixOutputComputationsOrder = fixOutputsOrder, 
-                EnableTestEvaluation = false
+                EnableTestEvaluation = inputsWithTestValues.Count > 0,
+                _inputsWithTestValues = inputsWithTestValues
             };
 
             optimizer.BeginProcessing();
@@ -63,12 +67,16 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
         }
 
 
+
+        private Dictionary<string, GMacMacroParameterBinding> _inputsWithTestValues;
+
+        
         /// <summary>
         /// The source low-level code generator for this optimizer
         /// </summary>
         public LlGenerator Generator { get; }
 
-        public bool EnableTestEvaluation { get; set; }
+        public bool EnableTestEvaluation { get; private set; }
 
         public TlCodeBlockEvaluationHistory EvaluationDataHistory { get; private set; }
 
@@ -134,7 +142,10 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 
             if (EnableTestEvaluation)
             {
-                EvaluationDataHistory = new TlCodeBlockEvaluationHistory(CodeBlock, -5.0D, 5.0D);
+                EvaluationDataHistory = 
+                    _inputsWithTestValues == null || _inputsWithTestValues.Count == 0
+                    ? new TlCodeBlockEvaluationHistory(CodeBlock, -5.0D, 5.0D)
+                    : new TlCodeBlockEvaluationHistory(CodeBlock, _inputsWithTestValues);
 
                 EvaluationDataHistory.AddEvaluation("Initialize Code Block");
             }

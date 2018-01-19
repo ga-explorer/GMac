@@ -15,6 +15,7 @@ using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
+using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -92,10 +93,11 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// Define an input or output macro parameter as a low-level variable
         /// </summary>
         /// <param name="hlValueAccess">The full or partial macro parameter</param>
-        internal void DefineParameter(LanguageValueAccess hlValueAccess)
+        /// <param name="testValueExpr"></param>
+        internal void DefineParameter(LanguageValueAccess hlValueAccess)//, Expr testValueExpr = null)
         {
             if (hlValueAccess.RootSymbolAsParameter.DirectionIn)
-                DataTable.DefineVariableInputParameter(hlValueAccess);
+                DataTable.DefineVariableInputParameter(hlValueAccess);//, testValueExpr);
 
             else
                 DataTable.DefineOutputParameter(hlValueAccess);

@@ -68,6 +68,36 @@ namespace GMac.GMacAPI.Target
         }
 
         /// <summary>
+        /// Sets the target variables name for a scalar input variable parameter in the code block
+        /// </summary>
+        /// <param name="valueAccess"></param>
+        /// <param name="targetVarName"></param>
+        /// <returns></returns>
+        public GMacTargetVariablesNaming SetScalarInputParameter(AstDatastoreValueAccess valueAccess, string targetVarName)
+        {
+            if (valueAccess.IsNullOrInvalid()) return this;
+
+            GMacCbInputVariable paramVar;
+            if (!CodeBlock.TryGetInputParameterVariable(valueAccess, out paramVar))
+                return this;
+
+            paramVar.TargetVariableName = targetVarName;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the target variables name for a scalar input variable parameter in the code block
+        /// </summary>
+        /// <param name="valueAccessName"></param>
+        /// <param name="targetVarName"></param>
+        /// <returns></returns>
+        public GMacTargetVariablesNaming SetScalarInputParameter(string valueAccessName, string targetVarName)
+        {
+            return SetScalarInputParameter(BaseMacro.Parameter(valueAccessName), targetVarName);
+        }
+
+        /// <summary>
         /// Sets the target variables names for a multivector input\output variable parameter in the code block
         /// </summary>
         /// <param name="valueAccess"></param>
@@ -597,8 +627,8 @@ namespace GMac.GMacAPI.Target
         /// <returns></returns>
         public GMacTargetVariablesNaming SetInputVariables(Func<GMacCbInputVariable, string> getTargetVarName)
         {
-            foreach (var tempVar in CodeBlock.InputVariables)
-                tempVar.TargetVariableName = getTargetVarName(tempVar);
+            foreach (var inputVar in CodeBlock.InputVariables)
+                inputVar.TargetVariableName = getTargetVarName(inputVar);
 
             return this;
         }
@@ -611,8 +641,8 @@ namespace GMac.GMacAPI.Target
         /// <returns></returns>
         public GMacTargetVariablesNaming SetInputVariables(IEnumerable<GMacCbInputVariable> variables, Func<GMacCbInputVariable, string> getTargetVarName)
         {
-            foreach (var tempVar in variables)
-                tempVar.TargetVariableName = getTargetVarName(tempVar);
+            foreach (var inputVar in variables)
+                inputVar.TargetVariableName = getTargetVarName(inputVar);
 
             return this;
         }

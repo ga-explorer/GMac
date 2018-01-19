@@ -44,14 +44,14 @@ namespace GMac.GMacAPI.Binding
             return new GMacMacroParameterBinding(valueAccess, valueExpr);
         }
 
-        internal static GMacMacroParameterBinding CreateVariable(AstDatastoreValueAccess valueAccess)
+        internal static GMacMacroParameterBinding CreateVariable(AstDatastoreValueAccess valueAccess, Expr testValueExpr = null)
         {
-            return new GMacMacroParameterBinding(valueAccess, null);
+            return new GMacMacroParameterBinding(valueAccess, null, testValueExpr);
         }
 
-        internal static GMacMacroParameterBinding Create(AstDatastoreValueAccess valueAccess, GMacScalarBinding scalarPattern)
+        internal static GMacMacroParameterBinding Create(AstDatastoreValueAccess valueAccess, GMacScalarBinding scalarPattern, Expr testValueExpr = null)
         {
-            return new GMacMacroParameterBinding(valueAccess, scalarPattern.ConstantExpr);
+            return new GMacMacroParameterBinding(valueAccess, scalarPattern.ConstantExpr, testValueExpr);
         }
 
 
@@ -68,7 +68,8 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// Create ascalar binding from this macro parameter binding
         /// </summary>
-        public GMacScalarBinding ToScalarBinding => IsVariable
+        public GMacScalarBinding ToScalarBinding 
+            => IsVariable
             ? GMacScalarBinding.CreateVariable(Root)
             : GMacScalarBinding.CreateConstant(Root, ConstantExpr);
 
@@ -77,6 +78,12 @@ namespace GMac.GMacAPI.Binding
         /// variable binding scalar pattern
         /// </summary>
         public Expr ConstantExpr { get; }
+
+        /// <summary>
+        /// The symbolic constant expression associated with this scalar pattern. This should be only
+        /// used for variable bindings with macro input parameters
+        /// </summary>
+        public Expr TestValueExpr { get; }
 
         /// <summary>
         /// The constarnt symbolic scalar associated with this macro parameter binding
@@ -150,7 +157,7 @@ namespace GMac.GMacAPI.Binding
                                       ConstantExpr.Args.Length == 0 && ConstantExpr.ToString() == "0";
 
 
-        private GMacMacroParameterBinding(AstDatastoreValueAccess valueAccess, Expr constExpr)
+        private GMacMacroParameterBinding(AstDatastoreValueAccess valueAccess, Expr constExpr, Expr testValueExpr = null)
         {
             if (valueAccess == null)
                 throw new ArgumentNullException(nameof(valueAccess));
@@ -160,6 +167,7 @@ namespace GMac.GMacAPI.Binding
 
             ValueAccess = valueAccess;
             ConstantExpr = constExpr;
+            TestValueExpr = testValueExpr;
         }
 
 

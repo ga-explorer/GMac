@@ -381,7 +381,7 @@ namespace GMac.GMacAPI.CodeBlock
         }
 
         /// <summary>
-        /// Try to get a parameter variable by its associated datastore value access name
+        /// Try to get a parameter variable by its associated datastore value access
         /// </summary>
         /// <param name="paramValueAccess"></param>
         /// <param name="paramVar"></param>
@@ -398,6 +398,24 @@ namespace GMac.GMacAPI.CodeBlock
                 );
 
             return (paramVar != null);
+        }
+
+        /// <summary>
+        /// Try to get an input parameter variable by its associated datastore value access
+        /// </summary>
+        /// <param name="paramValueAccess"></param>
+        /// <param name="inputParamVar"></param>
+        /// <returns></returns>
+        public bool TryGetInputParameterVariable(AstDatastoreValueAccess paramValueAccess, out GMacCbInputVariable inputParamVar)
+        {
+            inputParamVar = null;
+            IGMacCbParameterVariable paramVar;
+
+            if (!TryGetParameterVariable(paramValueAccess, out paramVar))
+                return false;
+
+            inputParamVar = paramVar as GMacCbInputVariable;
+            return inputParamVar != null;
         }
 
         /// <summary>

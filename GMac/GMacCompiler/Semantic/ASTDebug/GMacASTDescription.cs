@@ -9,6 +9,7 @@ using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.Basic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
+using IronyGrammars.Semantic.Operator;
 using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 
@@ -44,7 +45,7 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
 
         public void Visit(ValuePrimitive<double> value)
         {
-            Log.Append(value.Value.ToString(CultureInfo.InvariantCulture));
+            Log.Append(value.Value.ToString("G"));
         }
 
         public void Visit(ValuePrimitive<int> value)
@@ -120,6 +121,12 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
 
         public void Visit(BasicUnary expr)
         {
+            //var opPrimitive = expr.Operator as OperatorPrimitive;
+            //if (opPrimitive != null)
+            //    Log.Append(opPrimitive.OperatorSymbolString);
+            //else
+            //    Log.Append(expr.Operator.OperatorName);
+
             Log.Append(expr.Operator.OperatorName);
 
             Log.Append("(");
@@ -131,6 +138,24 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
 
         public void Visit(BasicBinary expr)
         {
+            var opPrimitive = expr.Operator as OperatorPrimitive;
+            if (opPrimitive != null)
+            {
+                Log.Append("(");
+
+                expr.Operand1.AcceptVisitor(this);
+
+                Log.Append(" ")
+                    .Append(opPrimitive.OperatorSymbolString)
+                    .Append(" ");
+
+                expr.Operand2.AcceptVisitor(this);
+
+                Log.Append(")");
+
+                return;
+            }
+
             Log.Append(expr.Operator.OperatorName);
 
             Log.Append("(");
@@ -246,19 +271,18 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
 
         public void Visit(BasicPolyadic expr)
         {
-            Log.Append(expr.Operator.OperatorName);
-
             var gmacMacro = expr.Operator as GMacMacro;
-            
             if (gmacMacro != null)
             {
-                var macro = gmacMacro;
-                Generate_BasicPolyadic_MacroCall(macro, expr.Operands.AsByValueAccess);
+                Log.Append(gmacMacro.SymbolAccessName);
+
+                Generate_BasicPolyadic_MacroCall(gmacMacro, expr.Operands.AsByValueAccess);
                 return;
             }
 
-            var multivectorConstructor = expr.Operator as GMacFrameMultivectorConstructor;
+            Log.Append(expr.Operator.OperatorName);
 
+            var multivectorConstructor = expr.Operator as GMacFrameMultivectorConstructor;
             if (multivectorConstructor != null)
             {
                 Generate_BasicPolyadic_FrameMultivectorConstruction(multivectorConstructor, expr.Operands.AsByIndex);
@@ -266,7 +290,6 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
             }
 
             var structureConstructor = expr.Operator as GMacStructureConstructor;
-
             if (structureConstructor != null)
             {
                 Generate_BasicPolyadic_StructureConstruction(structureConstructor, expr.Operands.AsByValueAccess);
@@ -274,7 +297,6 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
             }
 
             var symbolicExpression = expr.Operator as GMacParametricSymbolicExpression;
-
             if (symbolicExpression != null)
             {
                 var casExpr = symbolicExpression;

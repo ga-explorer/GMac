@@ -84,7 +84,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
                         )
                     );
 
-                if (String.Compare(item.ItemName, _lastUsedVarName, StringComparison.Ordinal) > 0)
+                if (string.Compare(item.ItemName, _lastUsedVarName, StringComparison.Ordinal) > 0)
                     _lastUsedVarName = item.ItemName;
             }
         }

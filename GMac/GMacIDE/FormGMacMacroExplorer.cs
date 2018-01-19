@@ -9,7 +9,9 @@ using GMac.GMacAST;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTDebug;
+using GMac.GMacCompiler.Symbolic;
 using GMac.GMacUtils;
+using SymbolicInterface.Mathematica;
 using TextComposerLib;
 using TextComposerLib.Diagrams.GraphViz.Dot;
 using TextComposerLib.Diagrams.GraphViz.UI;
@@ -18,11 +20,14 @@ using TextComposerLib.Logs.Progress;
 namespace GMac.GMacIDE
 {
     //TODO: Add possiblity to use interface to select names of variables bound to macro parameters
-    public partial class FormMacroExplorer : Form
+    public partial class FormGMacMacroExplorer : Form
     {
         private GMacAstDescription AstDescription { get; }
 
         private AstMacro SelectedMacro { get; }
+
+        private GMacMacroExplorerBindingData BindingTextData { get; }
+            = new GMacMacroExplorerBindingData();
 
         private GMacMacroBinding MacroBinding { get; set; }
 
@@ -35,7 +40,7 @@ namespace GMac.GMacIDE
         private Dictionary<int, ProgressEventArgs> ProgressHistory { get; set; }
 
 
-        internal FormMacroExplorer(GMacMacro macro)
+        internal FormGMacMacroExplorer(GMacMacro macro)
         {
             InitializeComponent();
 
@@ -59,50 +64,31 @@ namespace GMac.GMacIDE
                 .SelectMany(p => p.DatastoreValueAccess.ExpandAll());
 
             foreach (var valueAccess in valueAccessList)
-                composer.AppendLine(valueAccess.ValueAccessName);
+                composer
+                    .AppendLine(valueAccess.ValueAccessName);
 
             textBoxParameters.Text = composer.ToString();
         }
 
-        private void AddMacroParameterBinding(string line)
-        {
-            var eqIndex = line.IndexOf('=');
-
-            if (eqIndex < 0)
-            {
-                MacroBinding.BindToVariables(line);
-                
-                return;
-            }
-
-            var lhs = line.Substring(0, eqIndex - 1).Trim();
-            var rhs = line.Substring(eqIndex + 1).Trim();
-
-            MacroBinding.BindScalarToConstant(lhs, rhs);
-        }
-
-        private bool UpdateMacroBinding()
+        private bool UpdateMacroBindingTextData()
         {
             var result = true;
 
             textBoxDisplay.Text = String.Empty;
 
-            MacroBinding = 
-                GMacMacroBinding.Create(
-                    SelectedMacro
-                    );
+            BindingTextData.Clear();
 
             var paramText = 
                 textBoxParameters
                 .Text
                 .SplitLines()
                 .Select(line => line.Trim())
-                .Where(line => String.IsNullOrEmpty(line) == false);
+                .Where(line => string.IsNullOrEmpty(line) == false);
 
             foreach (var line in paramText)
                 try
                 {
-                    AddMacroParameterBinding(line);
+                    BindingTextData.AddFromText(line);
                 }
                 catch (Exception e)
                 {
@@ -161,6 +147,46 @@ namespace GMac.GMacIDE
             MacroCodeGenerator.ReportNormal("Optimized Body", itemText);
         }
 
+        private void GenerateMacro_RawBodyCallCode()
+        {
+            var itemText = MacroBinding.GenerateMacroBodyCallCode(
+                AstMacroBodyKind.RawBody, 
+                true
+                );
+
+            MacroCodeGenerator.ReportNormal("Raw Body Call Code", itemText);
+        }
+
+        private void GenerateMacro_ParsedBodyCallCode()
+        {
+            var itemText = MacroBinding.GenerateMacroBodyCallCode(
+                AstMacroBodyKind.ParsedBody,
+                true
+            );
+
+            MacroCodeGenerator.ReportNormal("Parsed Body Call Code", itemText);
+        }
+
+        private void GenerateMacro_CompiledBodyCallCode()
+        {
+            var itemText = MacroBinding.GenerateMacroBodyCallCode(
+                AstMacroBodyKind.CompiledBody,
+                true
+            );
+
+            MacroCodeGenerator.ReportNormal("Compiled Body Call Code", itemText);
+        }
+
+        private void GenerateMacro_OptimizedBodyCallCode()
+        {
+            var itemText = MacroBinding.GenerateMacroBodyCallCode(
+                AstMacroBodyKind.OptimizedCompiledBody,
+                true
+            );
+
+            MacroCodeGenerator.ReportNormal("Optimized Body Call Code", itemText);
+        }
+
         private void GenerateMacro_SampleTargetCode()
         {
             MacroCodeGenerator.Generate();
@@ -178,15 +204,44 @@ namespace GMac.GMacIDE
 
             Graph = null;
 
-            if (UpdateMacroBinding() == false)
+            if (UpdateMacroBindingTextData() == false)
                 return;
 
             GMacSystemUtils.ResetProgress();
+
+            MacroBinding = GMacMacroBinding.Create(SelectedMacro);
 
             MacroCodeGenerator = new SingleMacroGen(MacroBinding)
             {
                 MacroGenDefaults = {AllowGenerateMacroCode = true}
             };
+
+            foreach (var bindingData in BindingTextData.Bindings)
+            {
+                if (bindingData.IsConstantBinding)
+                {
+                    MacroBinding.BindScalarToConstant(
+                        bindingData.ValueAccessName,
+                        bindingData.ConstantValueText
+                        );
+
+                    continue;
+                }
+                
+                var testValueExpr =
+                    bindingData.HasTestValue
+                    ? bindingData.TestValueText.ToExpr(SymbolicUtils.Cas)
+                    : null;
+
+                MacroBinding.BindToVariables(bindingData.ValueAccessName, testValueExpr);
+
+                if (bindingData.HasTargetVariableName)
+                    MacroCodeGenerator
+                    .TargetVariablesNamesDictionary.Add(
+                        bindingData.ValueAccessName, 
+                        bindingData.TargetVariableName
+                        );
+            }
 
             GenerateMacro_DslCode();
 
@@ -195,6 +250,14 @@ namespace GMac.GMacIDE
             GenerateMacro_CompiledBody();
 
             GenerateMacro_OptimizedBody();
+
+            GenerateMacro_RawBodyCallCode();
+
+            GenerateMacro_ParsedBodyCallCode();
+
+            GenerateMacro_CompiledBodyCallCode();
+
+            GenerateMacro_OptimizedBodyCallCode();
 
             GenerateMacro_SampleTargetCode();
 

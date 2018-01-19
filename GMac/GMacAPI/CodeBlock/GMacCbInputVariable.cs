@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using GMac.GMacAST.Expressions;
 using IronyGrammars.Semantic.Expression.ValueAccess;
+using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.CodeBlock
 {
@@ -25,6 +26,11 @@ namespace GMac.GMacAPI.CodeBlock
         public string ValueAccessName => ValueAccess.ValueAccessName;
 
         /// <summary>
+        /// A Test Value associated with this input variable for debugging purposes
+        /// </summary>
+        public Expr TestValueExpr { get; internal set; }
+
+        /// <summary>
         /// The computed varibales depending on this variable
         /// </summary>
         public IEnumerable<GMacCbComputedVariable> UserVariables => _userVariables;
@@ -37,7 +43,10 @@ namespace GMac.GMacAPI.CodeBlock
         /// <summary>
         /// The last computed variable using this input variable in its computation
         /// </summary>
-        public GMacCbComputedVariable LastUsingVariable => _userVariables?.LastOrDefault();
+        public GMacCbComputedVariable LastUsingVariable =>
+            _userVariables?
+            .OrderBy(v => v.ComputationOrder)
+            .LastOrDefault();
 
         /// <summary>
         /// The computation order of the last computed variable using this input variable in its computation

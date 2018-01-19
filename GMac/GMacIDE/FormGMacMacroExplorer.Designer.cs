@@ -4,7 +4,7 @@ using FastColoredTextBoxNS;
 
 namespace GMac.GMacIDE
 {
-    partial class FormMacroExplorer
+    partial class FormGMacMacroExplorer
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@ namespace GMac.GMacIDE
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMacroExplorer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGMacMacroExplorer));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();

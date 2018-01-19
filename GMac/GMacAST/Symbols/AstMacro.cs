@@ -338,5 +338,25 @@ namespace GMac.GMacAST.Symbols
             //    ? new AstType(symbol.SymbolType) 
             //    : null;
         }
+
+        /// <summary>
+        /// Return the parsed, compiled, or optimized command block body of this macro. The default
+        /// is the optimized command block body.
+        /// </summary>
+        /// <param name="macroBodyKind"></param>
+        /// <returns></returns>
+        public AstCommandBlock GetBodyCommandBlock(AstMacroBodyKind macroBodyKind = AstMacroBodyKind.ParsedBody)
+        {
+            if (macroBodyKind == AstMacroBodyKind.RawBody)
+                return CommandBlock;
+
+            if (macroBodyKind == AstMacroBodyKind.ParsedBody)
+                return CommandBlock;
+
+            if (macroBodyKind == AstMacroBodyKind.CompiledBody)
+                return CompiledCommandBlock;
+
+            return OptimizedCommandBlock;
+        }
     }
 }

@@ -798,7 +798,7 @@ namespace GMac.GMacIDE.Editor
             if (_astRoot == null)
                 return;
 
-            var form = new FormMacroExplorer(macro);
+            var form = new FormGMacMacroExplorer(macro);
 
             form.ShowDialog(this);
         }

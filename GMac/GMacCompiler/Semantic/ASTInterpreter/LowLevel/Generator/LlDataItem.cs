@@ -10,6 +10,7 @@ using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Helpers;
+using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -84,6 +85,11 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// True if this item is a constant
         /// </summary>
         public bool IsConstant { get; }
+
+        /// <summary>
+        /// A test value associated with this item for debugging
+        /// </summary>
+        //public Expr TestValueExpr { get; }
 
         /// <summary>
         /// True if this item is associated with an input macro parameter
@@ -170,7 +176,8 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// </summary>
         /// <param name="llName"></param>
         /// <param name="hlValueAccess"></param>
-        private LlDataItem(string llName, LanguageValueAccess hlValueAccess)
+        /// <param name="testValueExpr"></param>
+        private LlDataItem(string llName, LanguageValueAccess hlValueAccess)//, Expr testValueExpr)
         {
             var isOutput = hlValueAccess.IsOutputParameter;
 
@@ -179,6 +186,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             ItemId = CreateNewId();
             ItemName = llName;
             AssociatedValueAccess = hlValueAccess;
+            //TestValueExpr = testValueExpr;
 
             //Input variable low-level items have no assigned values to them, while output items get assigned 
             //a default value
@@ -199,7 +207,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// <param name="llName"></param>
         /// <param name="hlValueAccess"></param>
         /// <param name="assignedValue"></param>
-        private LlDataItem(string llName, LanguageValueAccess hlValueAccess, ValuePrimitive<MathematicaScalar> assignedValue)
+        private LlDataItem(string llName, LanguageValueAccess hlValueAccess, ValuePrimitive<MathematicaScalar> assignedValue)//, Expr testValueExpr)
         {
             var llVarNamesCount = assignedValue.Value.GetDistinctLowLevelVariablesNames().Count();
             var isLlVar = assignedValue.Value.IsLowLevelVariable();
@@ -215,6 +223,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             AssociatedValueAccess = hlValueAccess;
 
             AssignedRhsValue = assignedValue;
+            //TestValueExpr = testValueExpr;
 
             //Apply a propagation step on the value of this item using its associated symbolic scalar 
             //(that is used in the RHS values of following items)
@@ -260,7 +269,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         public LlDataItem Duplicate()
         {
             if (ReferenceEquals(AssignedRhsValue, null))
-                return new LlDataItem(ItemName, AssociatedValueAccess) 
+                return new LlDataItem(ItemName, AssociatedValueAccess)//, TestValueExpr) 
                 { 
                     EvaluationOrder = EvaluationOrder,
                     IsDeleted = IsDeleted
@@ -269,7 +278,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             return new LlDataItem(
                 ItemName, 
                 AssociatedValueAccess, 
-                (ValuePrimitive<MathematicaScalar>)AssignedRhsValue.DuplicateValue(true))
+                (ValuePrimitive<MathematicaScalar>)AssignedRhsValue.DuplicateValue(true))//, TestValueExpr)
                 { 
                     EvaluationOrder = EvaluationOrder,
                     IsDeleted = IsDeleted
@@ -332,7 +341,6 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         }
 
 
-
         public override string ToString()
         {
             var s = new StringBuilder();
@@ -355,22 +363,22 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             else
                 s.Append("Unknown data item type ");
 
-            s.Append(" data item ");
+            s.Append(" data item ")
+                .Append(ItemName)
+                .Append("<")
+                .Append(HlItemName)
+                .Append(">")
+                .Append(" : ")
+                .Append(DataItemType.TypeSignature);
 
-            s.Append(ItemName);
-
-            s.Append("<");
-
-            s.Append(HlItemName);
-
-            s.Append(">");
-
-            s.Append(" : ");
-
-            s.Append(DataItemType.TypeSignature);
+            //if (TestValueExpr != null)
+            //    s.Append(" <Test Value = ")
+            //        .Append(TestValueExpr)
+            //        .Append(">");
 
             if (ReferenceEquals(AssignedRhsValue, null) == false)
-                s.Append(" = ").AppendLine(AssignedRhsValue.ToString());
+                s.Append(" = ")
+                    .AppendLine(AssignedRhsValue.ToString());
 
             return s.ToString();
         }
@@ -382,7 +390,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// <param name="llName"></param>
         /// <param name="hlValueAccess"></param>
         /// <returns></returns>
-        public static LlDataItem CreateVariableInputParameter(string llName, LanguageValueAccess hlValueAccess)
+        public static LlDataItem CreateVariableInputParameter(string llName, LanguageValueAccess hlValueAccess)//, Expr testValueExpr = null)
         {
             if (!(hlValueAccess.RootSymbol is SymbolProcedureParameter))
                 throw new InvalidOperationException("The given value access is not an input macro parameter");
@@ -390,7 +398,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             var hlParam = (SymbolProcedureParameter)hlValueAccess.RootSymbol;
 
             if (hlParam.DirectionIn)
-                return new LlDataItem(llName, hlValueAccess);
+                return new LlDataItem(llName, hlValueAccess);//, testValueExpr);
 
             throw new InvalidOperationException("The given value access is not an input macro parameter");
         }
@@ -410,7 +418,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             var hlParam = (SymbolProcedureParameter)hlValueAccess.RootSymbol;
 
             if (hlParam.DirectionIn)
-                return new LlDataItem(llName, hlValueAccess, assignedValue);
+                return new LlDataItem(llName, hlValueAccess, assignedValue);//, null);
 
             throw new InvalidOperationException("The given value access is not an input macro parameter");
         }

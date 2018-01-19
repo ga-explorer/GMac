@@ -1,4 +1,5 @@
 ﻿using System;
+using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.CodeBlock
 {

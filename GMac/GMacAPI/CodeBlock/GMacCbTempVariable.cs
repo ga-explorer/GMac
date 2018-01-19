@@ -80,7 +80,10 @@ namespace GMac.GMacAPI.CodeBlock
         /// <summary>
         /// The last variable that used this temp variable in its computation
         /// </summary>
-        public GMacCbComputedVariable LastUsingVariable => _userVariables?.LastOrDefault();
+        public GMacCbComputedVariable LastUsingVariable => 
+            _userVariables?
+            .OrderBy(v => v.ComputationOrder)
+            .LastOrDefault();
 
         /// <summary>
         /// The order of the last computation that uses this temp variable

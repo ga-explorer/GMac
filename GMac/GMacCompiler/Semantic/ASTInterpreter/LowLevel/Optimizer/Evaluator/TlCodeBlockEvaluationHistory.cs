@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GMac.GMacAPI.Binding;
 using GMac.GMacAPI.CodeBlock;
 using Wolfram.NETLink;
 
@@ -21,7 +22,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator
             new List<TlCodeBlockEvaluation>();
 
 
-        public TlCodeBlockEvaluationHistory(GMacCodeBlock codeBlock, double minValue, double maxValue)
+        internal TlCodeBlockEvaluationHistory(GMacCodeBlock codeBlock, double minValue, double maxValue)
         {
             CodeBlock = codeBlock;
 
@@ -29,14 +30,26 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator
                 CodeBlock
                 .InputVariables
                 .ToDictionary(
-                    item => 
-                        item.LowLevelName,
-
-                    item => 
-                        new Expr(
-                            _randomSource.NextDouble() * (maxValue - minValue) + minValue
-                            )
+                    item => item.LowLevelName,
+                    item => new Expr(_randomSource.NextDouble() * (maxValue - minValue) + minValue)
                     );
+        }
+
+        internal TlCodeBlockEvaluationHistory(GMacCodeBlock codeBlock, Dictionary<string, GMacMacroParameterBinding> inputsWithTestValues)
+        {
+            CodeBlock = codeBlock;
+
+            _inputVarsValues = new Dictionary<string, Expr>();
+
+            foreach (var pair in inputsWithTestValues)
+            {
+                GMacCbInputVariable inputParamVar;
+
+                if (!CodeBlock.TryGetInputParameterVariable(pair.Value.ValueAccess, out inputParamVar))
+                    continue;
+
+                _inputVarsValues.Add(inputParamVar.LowLevelName, pair.Value.TestValueExpr);
+            }
         }
 
 
@@ -62,7 +75,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator
 
             foreach (var outputVar in CodeBlock.OutputVariables)
             {
-                s.Append(outputVar.LowLevelName).AppendLine(":");
+                s.Append(outputVar.ValueAccessName).AppendLine(":");
 
                 foreach (var evalData in _evaluations)
                     s.Append(evalData.EvaluationTitle.PadLeft(maxLength))

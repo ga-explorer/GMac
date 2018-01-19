@@ -118,6 +118,7 @@
     <Compile Include="GMacAPI\Target\VBDotNet\VbDotNetLanguage.cs" />
     <Compile Include="GMacAST\Visitors\GMacAstDescriptionVisitor.cs" />
     <Compile Include="GMacCompiler\GMacCompilerFeatures.cs" />
+    <Compile Include="GMacAST\Symbols\AstMacroBodyKind.cs" />
     <Compile Include="GMacCompiler\Semantic\AST\GMacSymbolicMathNames.cs" />
     <Compile Include="GMacAST\Dependency\AstMacroDependencyGraph.cs" />
     <Compile Include="GMacAST\Dependency\AstTypeDependencyGraph.cs" />
@@ -182,6 +183,8 @@
     <Compile Include="GMacIDE\FormGMacSplash.Designer.cs">
       <DependentUpon>FormGMacSplash.cs</DependentUpon>
     </Compile>
+    <Compile Include="GMacIDE\GMacMacroExplorerBinding.cs" />
+    <Compile Include="GMacIDE\GMacMacroExplorerBindingData.cs" />
     <Compile Include="GMacUtils\BitUtils.cs" />
     <Compile Include="GMacIDE\Editor\FormCompilerOptions.cs">
       <SubType>Form</SubType>
@@ -290,11 +293,11 @@
     <Compile Include="GMacIDE\CodeGen\FormCodeGenerator.Designer.cs">
       <DependentUpon>FormCodeGenerator.cs</DependentUpon>
     </Compile>
-    <Compile Include="GMacIDE\FormMacroExplorer.cs">
+    <Compile Include="GMacIDE\FormGMacMacroExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GMacIDE\FormMacroExplorer.Designer.cs">
-      <DependentUpon>FormMacroExplorer.cs</DependentUpon>
+    <Compile Include="GMacIDE\FormGMacMacroExplorer.Designer.cs">
+      <DependentUpon>FormGMacMacroExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="GMacAST\Symbols\AstSymbol.cs" />
     <Compile Include="GMacIDE\GMacAstToTreeViewNodes.cs" />
@@ -490,8 +493,8 @@
     <EmbeddedResource Include="GMacIDE\FormGMacSplash.resx">
       <DependentUpon>FormGMacSplash.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GMacIDE\FormMacroExplorer.resx">
-      <DependentUpon>FormMacroExplorer.cs</DependentUpon>
+    <EmbeddedResource Include="GMacIDE\FormGMacMacroExplorer.resx">
+      <DependentUpon>FormGMacMacroExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GMacIDE\Editor\FormTargetSourceFilesEditor.resx">
       <DependentUpon>FormTargetSourceFilesEditor.cs</DependentUpon>

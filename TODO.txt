@@ -28,6 +28,8 @@ y = Grid[Transpose[Prepend[Transpose[Prepend[ipm, {"e1", "e2", "e3"}]], {"", "e1
 ==================================================
 
 Bugs:
+- When compiling a multivector expression inside a Mathematical scalar expression and there is an error, GMac reports the wrong line and character numbers
+
 - When assigning an integer to a multivectector a cast is needed
 
 -) Add a project files manager class to Irony Grammars so we can unify UI for editing source files

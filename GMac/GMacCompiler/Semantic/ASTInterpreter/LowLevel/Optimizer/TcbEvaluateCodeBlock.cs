@@ -36,7 +36,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
             {
                 if (expr.IsVariable)
                     return _evaluationData[expr.HeadText].ToString();
-
+                
                 return expr.HeadText;
             }
 

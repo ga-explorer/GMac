@@ -2,6 +2,7 @@
 using GMac.GMacAST.Expressions;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using TextComposerLib.Code.SyntaxTree.Expressions;
+using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.CodeBlock
 {
@@ -19,6 +20,11 @@ namespace GMac.GMacAPI.CodeBlock
         /// The primitive macro parameter component associated with this variable
         /// </summary>
         public AstDatastoreValueAccess ValueAccess { get; }
+
+        /// <summary>
+        /// A Test Value associated with this output variable for debugging purposes
+        /// </summary>
+        public Expr TestValueExpr { get; internal set; }
 
         /// <summary>
         /// The name of the primitive macro parameter component associated with this variable

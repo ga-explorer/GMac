@@ -8,6 +8,7 @@ using GMac.GMacAST.Expressions;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
+using GMac.GMacCompiler.Semantic.ASTDebug;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer;
 using GMac.GMacCompiler.Symbolic;
@@ -15,7 +16,10 @@ using GMac.GMacUtils;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica;
 using SymbolicInterface.Mathematica.Expression;
+using TextComposerLib;
 using TextComposerLib.Logs.Progress;
+using TextComposerLib.Text;
+using TextComposerLib.Text.Linear;
 using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Binding
@@ -600,8 +604,9 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         /// <param name="valueAccess"></param>
         /// <param name="scalarBinding"></param>
+        /// <param name="testValueExpr"></param>
         /// <returns></returns>
-        public GMacMacroBinding BindScalarToPattern(AstDatastoreValueAccess valueAccess, GMacScalarBinding scalarBinding)
+        public GMacMacroBinding BindScalarToPattern(AstDatastoreValueAccess valueAccess, GMacScalarBinding scalarBinding, Expr testValueExpr = null)
         {
             if (valueAccess.IsNullOrInvalid())
                 throw new ArgumentNullException(nameof(valueAccess));
@@ -642,7 +647,7 @@ namespace GMac.GMacAPI.Binding
             }
             else
             {
-                paramBinding = GMacMacroParameterBinding.Create(valueAccess, scalarBinding);
+                paramBinding = GMacMacroParameterBinding.Create(valueAccess, scalarBinding, testValueExpr);
             }
 
             //If the value access already exists remove it from the dictionary to preserve
@@ -1056,25 +1061,31 @@ namespace GMac.GMacAPI.Binding
         /// Bind a macro parameter of any type to a set of variables
         /// </summary>
         /// <param name="valueAccessName"></param>
+        /// <param name="testValueExpr"></param>
         /// <returns></returns>
-        public GMacMacroBinding BindToVariables(string valueAccessName)
+        public GMacMacroBinding BindToVariables(string valueAccessName, Expr testValueExpr = null)
         {
-            return BindToVariables(ToValueAccess(valueAccessName));
+            return BindToVariables(ToValueAccess(valueAccessName), testValueExpr);
         }
 
         /// <summary>
         /// Bind a macro parameter of any type to a set of variables
         /// </summary>
         /// <param name="valueAccess"></param>
+        /// <param name="testValueExpr"></param>
         /// <returns></returns>
-        public GMacMacroBinding BindToVariables(AstDatastoreValueAccess valueAccess)
+        public GMacMacroBinding BindToVariables(AstDatastoreValueAccess valueAccess, Expr testValueExpr = null)
         {
             if (valueAccess.IsNullOrInvalid())
                 throw new ArgumentNullException(nameof(valueAccess));
 
             if (valueAccess.IsScalar)
             {
-                BindScalarToPattern(valueAccess, GMacScalarBinding.CreateVariable(BaseMacro.Root));
+                BindScalarToPattern(
+                    valueAccess, 
+                    GMacScalarBinding.CreateVariable(BaseMacro.Root), 
+                    testValueExpr
+                    );
 
                 return this;
             }
@@ -1082,7 +1093,11 @@ namespace GMac.GMacAPI.Binding
             var primitiveValueAccessList = valueAccess.ExpandAll();
 
             foreach (var primitiveValueAccess in primitiveValueAccessList)
-                BindScalarToPattern(primitiveValueAccess, GMacScalarBinding.CreateVariable(BaseMacro.Root));
+                BindScalarToPattern(
+                    primitiveValueAccess, 
+                    GMacScalarBinding.CreateVariable(BaseMacro.Root),
+                    testValueExpr
+                    );
 
             return this;
         }
@@ -1224,13 +1239,106 @@ namespace GMac.GMacAPI.Binding
                         );
 
                 else
-                    gen.DefineParameter(binding.ValueAccess.AssociatedValueAccess);
+                    gen.DefineParameter(
+                        binding.ValueAccess.AssociatedValueAccess//, binding.TestValueExpr
+                        );
 
             //Generate un-optimized low-level macro computations from the base macro and its parameters bindings
             gen.GenerateLowLevelItems();
 
+            var inputsWithTestValues = 
+                Bindings
+                .Where(p => p.IsVariable && p.IsInput && p.TestValueExpr != null)
+                .ToDictionary(
+                    binding => binding.ValueAccessName,
+                    binding => binding
+                    );
+
             //Optimize low-level macro computations
-            return TcbOptimizer.Process(gen, FixOutputComputationsOrder, Progress);
+            return TcbOptimizer.Process(gen, inputsWithTestValues, FixOutputComputationsOrder, Progress);
+        }
+
+        /// <summary>
+        /// Compose GMacDSL code that calls the base macro of this binding using its parameters 
+        /// binding data
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateMacroBodyCallCode(AstMacroBodyKind macroBodyKind = AstMacroBodyKind.RawBody, bool useTestValues = false)
+        {
+            var codeComposer = new LinearComposer();
+
+            //Declare base macro input parameters
+            foreach (var inputParameter in BaseMacro.InputParameters)
+                codeComposer
+                    .Append("declare ")
+                    .Append(inputParameter.Name)
+                    .Append(" : ")
+                    .AppendLine(inputParameter.GMacTypeSignature);
+
+            //Assign binding values to parameter parts
+            var varCounter = 0;
+            foreach (var parameterBinding in InputBindings)
+            {
+                if (parameterBinding.IsConstant)
+                {
+                    codeComposer
+                        .Append("let ")
+                        .Append(parameterBinding.ValueAccessName)
+                        .Append(" = ")
+                        .AppendLine(parameterBinding.ConstantExpr.ToString().DoubleQuote());
+
+                    continue;
+                }
+
+                if (useTestValues && parameterBinding.TestValueExpr != null)
+                {
+                    codeComposer
+                        .Append("let ")
+                        .Append(parameterBinding.ValueAccessName)
+                        .Append(" = ")
+                        .AppendLine(parameterBinding.TestValueExpr.ToString().DoubleQuote());
+
+                    continue;
+                }
+
+                codeComposer
+                    .Append("let ")
+                    .Append(parameterBinding.ValueAccessName)
+                    .Append(" = 'var")
+                    .Append(varCounter.ToString())
+                    .AppendLine("'");
+
+                varCounter++;
+            }
+
+            //Add macro body code
+            codeComposer
+                .Append("let finalResult = ");
+
+            if (macroBodyKind == AstMacroBodyKind.RawBody)
+            {
+                codeComposer.Append(
+                    BaseMacro
+                    .InputParameters
+                    .Select(p => p.Name)
+                    .Concatenate(", ", BaseMacro.AccessName + "(", ")")
+                    );
+
+                return codeComposer.ToString();
+            }
+
+            var astDescription = new GMacAstDescription();
+
+            BaseMacro
+                .GetBodyCommandBlock(macroBodyKind)
+                .AssociatedCommandBlock
+                .AcceptVisitor(astDescription);
+
+            codeComposer.AppendAtNewLine(
+                astDescription.Log.ToString()
+            );
+
+            return codeComposer.ToString();
         }
 
         public override string ToString()

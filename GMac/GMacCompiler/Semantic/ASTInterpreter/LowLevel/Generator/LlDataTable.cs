@@ -10,6 +10,7 @@ using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
+using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -103,21 +104,23 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// Define a collection of variable low-level input items based on the given input macro parameter
         /// </summary>
         /// <param name="param"></param>
-        public void DefineVariableInputParameter(SymbolProcedureParameter param)
+        /// <param name="testValueExpr"></param>
+        public void DefineVariableInputParameter(SymbolProcedureParameter param)//, Expr testValueExpr = null)
         {
-            DefineVariableInputParameter(LanguageValueAccess.Create(param));
+            DefineVariableInputParameter(LanguageValueAccess.Create(param));//, testValueExpr);
         }
 
         /// <summary>
         /// Define a collection of variable low-level input items based on the given input macro parameter value access
         /// </summary>
         /// <param name="hlValueAccess"></param>
-        public void DefineVariableInputParameter(LanguageValueAccess hlValueAccess)
+        /// <param name="testValueExpr"></param>
+        public void DefineVariableInputParameter(LanguageValueAccess hlValueAccess)//, Expr testValueExpr = null)
         {
             if (hlValueAccess.ExpressionType is TypePrimitive)
             {
                 AttachDataItem(
-                    LlDataItem.CreateVariableInputParameter(GetNewDataItemName(), hlValueAccess)
+                    LlDataItem.CreateVariableInputParameter(GetNewDataItemName(), hlValueAccess)//, testValueExpr)
                     );
             }
             else
@@ -126,7 +129,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
                 foreach (var childValueAccess in valueAccessList)
                     AttachDataItem(
-                        LlDataItem.CreateVariableInputParameter(GetNewDataItemName(), childValueAccess)
+                        LlDataItem.CreateVariableInputParameter(GetNewDataItemName(), childValueAccess)//, testValueExpr)
                         );
             }
         }

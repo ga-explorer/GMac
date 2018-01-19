@@ -6,6 +6,7 @@ using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAPI.Target;
 using GMac.GMacAST;
 using GMac.GMacAST.Symbols;
+using GMac.GMacIDE;
 using TextComposerLib.Diagrams.GraphViz.Dot;
 using TextComposerLib.Logs.Progress;
 
@@ -14,6 +15,9 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct
     public sealed class SingleMacroGen : GMacCodeLibraryComposer
     {
         public GMacMacroBinding MacroBinding { get; }
+
+        public Dictionary<string, string> TargetVariablesNamesDictionary { get; }
+            = new Dictionary<string, string>();
 
         public DotGraph Graph { get; private set; }
 
@@ -87,6 +91,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct
 
         private void SetTargetNaming(GMacTargetVariablesNaming targetNaming)
         {
+            //Set default target variables names for macro parameters
             var valueAccessList =
                 targetNaming
                 .CodeBlock
@@ -113,6 +118,12 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct
                     );
             }
 
+            //Override default target variables names for macro parameters using the 
+            //items in the TargetVariablesNamesDictionary
+            foreach (var pair in TargetVariablesNamesDictionary)
+                targetNaming.SetScalarParameter(pair.Key, pair.Value);
+
+            //Set temporary target variables names
             targetNaming.SetTempVariables(v => "tmp" + v.NameIndex);
         }
 
@@ -124,10 +135,20 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct
                 macroGenBinding =>
                 {
                     foreach (var paramBinding in macroBinding.Bindings)
-                        macroGenBinding.BindScalarToConstant(paramBinding.ValueAccess, paramBinding.ConstantExpr);
+                        if (paramBinding.IsVariable)
+                            macroGenBinding.BindToVariables(
+                                paramBinding.ValueAccess,
+                                paramBinding.TestValueExpr
+                                );
+                        else
+                            macroGenBinding.BindScalarToConstant(
+                                paramBinding.ValueAccess, 
+                                paramBinding.ConstantExpr
+                                );
                 };
 
-            macroGenerator.ActionSetTargetVariablesNames = SetTargetNaming;
+            macroGenerator.ActionSetTargetVariablesNames = 
+                SetTargetNaming;
 
             return macroGenerator;
         }
@@ -174,6 +195,8 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct
                     );
 
                 codeBlock = macroGenerator.CodeBlock;
+
+                
             }
 
             ActiveFileTextComposer.AppendLineAtNewLine("return result;");
