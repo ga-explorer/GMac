@@ -65,30 +65,30 @@ namespace SymbolicInterface.Mathematica.Test
 
             TestUtils.AddTestStartingMessage("MathematicaMatrix Basic Operations Test Started.");
 
-            TestUtils.AddTest("Try get rows of full 3x4 matrix ... ", m1.Rows);
-            TestUtils.AddTest("Try get columns of full 3x4 matrix ... ", m1.Columns);
+            TestUtils.AddTest("Try get rows of full 3x4 matrix ... ", m1.RowCount);
+            TestUtils.AddTest("Try get columns of full 3x4 matrix ... ", m1.ColumnCount);
 
-            TestUtils.AddTest("Try get rows of sparse 3x4 matrix ... ", sm3.Rows);
-            TestUtils.AddTest("Try get columns of sparse 3x4 matrix ... ", sm3.Columns);
+            TestUtils.AddTest("Try get rows of sparse 3x4 matrix ... ", sm3.RowCount);
+            TestUtils.AddTest("Try get columns of sparse 3x4 matrix ... ", sm3.ColumnCount);
 
-            for (var i = 0; i < m1.Rows; i++)
-                for (var j = 0; j < m1.Columns; j++)
+            for (var i = 0; i < m1.RowCount; i++)
+                for (var j = 0; j < m1.ColumnCount; j++)
                     TestUtils.AddTest("Try get component (" + i + ", " + j + ") of full 3x4 matrix " + m1.ExpressionText + " ... ", m1[i, j]);
 
-            for (var i = 0; i < sm3.Rows; i++)
-                for (var j = 0; j < sm3.Columns; j++)
+            for (var i = 0; i < sm3.RowCount; i++)
+                for (var j = 0; j < sm3.ColumnCount; j++)
                     TestUtils.AddTest("Try get component (" + i + ", " + j + ") of sparse 3x4 matrix " + sm3.ToMathematicaFullMatrix().ExpressionText + " ... ", sm3[i, j]);
 
-            for (var i = 0; i < m1.Rows; i++)
+            for (var i = 0; i < m1.RowCount; i++)
                 TestUtils.AddTest("Try get row " + i + " of full 3x4 matrix " + m1.ExpressionText + " ... ", m1.GetRow(i));
 
-            for (var i = 0; i < m1.Columns; i++)
+            for (var i = 0; i < m1.ColumnCount; i++)
                 TestUtils.AddTest("Try get column " + i + " of full 3x4 matrix " + m1.ExpressionText + " ... ", m1.GetColumn(i));
 
-            for (var i = 0; i < sm3.Rows; i++)
+            for (var i = 0; i < sm3.RowCount; i++)
                 TestUtils.AddTest("Try get row " + i + " of sparse 3x4 matrix " + sm3.ToMathematicaFullMatrix().ExpressionText + " ... ", sm3.GetRow(i));
 
-            for (var i = 0; i < sm3.Columns; i++)
+            for (var i = 0; i < sm3.ColumnCount; i++)
                 TestUtils.AddTest("Try get column " + i + " of sparse 3x4 matrix " + sm3.ToMathematicaFullMatrix().ExpressionText + " ... ", sm3.GetColumn(i));
 
             TestUtils.AddTest("Try get diagonal of full matrix " + m2.ExpressionText + " ... ", m2.GetDiagonal());
@@ -202,10 +202,10 @@ namespace SymbolicInterface.Mathematica.Test
 
             TestUtils.AddTest("Try apply IsOrthogonal() to sparse 5x5 matrix " + sm1.ToMathematicaFullMatrix().ExpressionText + " ... ", sm1.IsOrthogonal());
 
-            m1 = MathematicaMatrix.Create(Cas, Cas[Mfs.Orthogonalize[m1.MathExpr]]);
+            m1 = MathematicaMatrix.Create(Cas, Cas[Mfs.Orthogonalize[m1.Expression]]);
             TestUtils.AddTest("Try apply IsOrthogonal() to full 5x5 symmetric matrix " + m1.ExpressionText + " ... ", m1.IsOrthogonal());
 
-            sm1 = MathematicaMatrix.Create(Cas, Cas[Mfs.SparseArray[Mfs.Orthogonalize[sm1.MathExpr]]]);
+            sm1 = MathematicaMatrix.Create(Cas, Cas[Mfs.SparseArray[Mfs.Orthogonalize[sm1.Expression]]]);
             TestUtils.AddTest("Try apply IsOrthogonal() to sparse 5x5 matrix " + sm1.ToMathematicaFullMatrix().ExpressionText + " ... ", sm1.IsOrthogonal());
 
 

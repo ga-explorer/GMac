@@ -1,6 +1,7 @@
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacUtils;
+using GMac.GMacMath.Symbolic;
+using GMac.GMacMath.Symbolic.Products;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica.Expression;
 
@@ -29,9 +30,12 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator.Binary
 
         public ILanguageValue Evaluate(GMacValueMultivector value1, GMacValueMultivector value2)
         {
-            var scalar = value1.MultivectorCoefficients.EuclideanSp(value2.MultivectorCoefficients);
+            var scalar = value1.SymbolicMultivector.ESp(value2.SymbolicMultivector);
 
-            return ValuePrimitive<MathematicaScalar>.Create(value1.CoefficientType, scalar[0]);
+            return ValuePrimitive<MathematicaScalar>.Create(
+                value1.CoefficientType, 
+                scalar[0].ToMathematicaScalar()
+                );
         }
 
         //All other allowed combinations are handled using casting

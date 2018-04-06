@@ -1,7 +1,7 @@
 ﻿using System;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Command;
 using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.Basic;

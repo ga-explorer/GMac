@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Helpers;
-using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -322,7 +321,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         {
             return
                 AssignedRhsSymbolicScalar
-                .MathExpr
+                .Expression
                 .GetLowLevelVariablesNames()
                 .Distinct();
         }
@@ -336,7 +335,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         {
             return
                 AssignedRhsSymbolicScalar
-                .MathExpr
+                .Expression
                 .GetLowLevelVariablesNames();
         }
 

@@ -17,31 +17,31 @@ namespace SymbolicInterface.Mathematica
 
         public MathematicaCondition True { get; }
 
-        public Expr ExprTrue => True.MathExpr;
+        public Expr ExprTrue => True.Expression;
 
         public MathematicaCondition False { get; }
 
-        public Expr ExprFalse => False.MathExpr;
+        public Expr ExprFalse => False.Expression;
 
         public MathematicaScalar Zero { get; }
 
-        public Expr ExprZero => Zero.MathExpr;
+        public Expr ExprZero => Zero.Expression;
 
         public MathematicaScalar One { get; }
 
-        public Expr ExprOne => One.MathExpr;
+        public Expr ExprOne => One.Expression;
 
         public MathematicaScalar MinusOne { get; }
 
-        public Expr ExprMinusOne => MinusOne.MathExpr;
+        public Expr ExprMinusOne => MinusOne.Expression;
 
         public MathematicaScalar Pi { get; }
 
-        public Expr ExprPi => Pi.MathExpr;
+        public Expr ExprPi => Pi.Expression;
 
         public MathematicaScalar TwoPi { get; }
 
-        public Expr ExprTwoPi => TwoPi.MathExpr;
+        public Expr ExprTwoPi => TwoPi.Expression;
 
 
         public MathematicaExpression this[string constName] => _constantsDictionary[constName];

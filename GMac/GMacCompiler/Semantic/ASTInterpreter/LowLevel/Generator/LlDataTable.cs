@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
-using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -104,7 +103,6 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// Define a collection of variable low-level input items based on the given input macro parameter
         /// </summary>
         /// <param name="param"></param>
-        /// <param name="testValueExpr"></param>
         public void DefineVariableInputParameter(SymbolProcedureParameter param)//, Expr testValueExpr = null)
         {
             DefineVariableInputParameter(LanguageValueAccess.Create(param));//, testValueExpr);
@@ -114,7 +112,6 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
         /// Define a collection of variable low-level input items based on the given input macro parameter value access
         /// </summary>
         /// <param name="hlValueAccess"></param>
-        /// <param name="testValueExpr"></param>
         public void DefineVariableInputParameter(LanguageValueAccess hlValueAccess)//, Expr testValueExpr = null)
         {
             if (hlValueAccess.ExpressionType is TypePrimitive)
@@ -340,7 +337,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
             //Symbolically simplify the value if indicated. This takes a lot of Mathematica processing and slows 
             //compilation but produces target code with better processing performance in some cases
-            var finalExpr = SymbolicUtils.Evaluator.Simplify(value.Value.MathExpr);
+            var finalExpr = SymbolicUtils.Evaluator.Simplify(value.Value.Expression);
 
             return
                 ValuePrimitive<MathematicaScalar>.Create(
@@ -411,7 +408,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
             //If all coefficients of multivector are zero it's a zero multivector with no existing items in the table
             return 
-                mv.MultivectorCoefficients.Count > 0 
+                mv.SymbolicMultivector.ExprTerms.Any() 
                 ? mv 
                 : null;
         }
@@ -437,7 +434,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
                 var id = ((ValueAccessStepByKey<int>)childValueAccess.LastAccessStep).AccessKey;
 
-                mv.MultivectorCoefficients[id] = scalarValue.Value;
+                mv.SymbolicMultivector.SetTermCoef(id, scalarValue.Value);
             }
 
             return mv;
@@ -537,7 +534,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
                 {
                     var id = ((ValueAccessStepByKey<int>)childValueAccess.LastAccessStep).AccessKey;
 
-                    if (mvValue.MultivectorCoefficients.ContainsKey(id))
+                    if (mvValue.SymbolicMultivector.ContainsBasisBlade(id))
                         DefineTemp(childValueAccess, ProcessRhsValue(mvValue[id]));
                 }
 

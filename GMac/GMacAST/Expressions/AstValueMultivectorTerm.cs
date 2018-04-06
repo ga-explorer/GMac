@@ -1,7 +1,7 @@
 ﻿using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacCompiler.Symbolic;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica.Expression;
 using Wolfram.NETLink;
@@ -24,7 +24,7 @@ namespace GMac.GMacAST.Expressions
                     _associatedMultivectorValue =
                         GMacValueMultivector.Create(
                             AssociatedFrameMultivector,
-                            GaMultivector.CreateTerm(
+                            GaSymMultivector.CreateTerm(
                                 AssociatedFrameMultivector.ParentFrame.GaSpaceDimension,
                                 TermBasisBladeId,
                                 TermCoef.Value
@@ -72,7 +72,7 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// The basis blade scalar coefficient Mathematica expression of this multivector term
         /// </summary>
-        public Expr TermCoefExpr => TermCoef.Value.MathExpr;
+        public Expr TermCoefExpr => TermCoef.Value.Expression;
 
         //public SimpleTreeNode<Expr> GetAstValueSimpleTree
         //{

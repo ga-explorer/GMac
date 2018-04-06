@@ -30,7 +30,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator.Binary
         {
             return GMacValueMultivector.Create(
                 value1.ValueMultivectorType,
-                value1.MultivectorCoefficients - value2.MultivectorCoefficients
+                value1.SymbolicMultivector - value2.SymbolicMultivector
                 );
         }
 

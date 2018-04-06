@@ -2,10 +2,9 @@
 using System.Linq;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacUtils;
+using GMac.GMacMath;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica.Expression;
-using FrameUtils = GMac.GMacUtils.EuclideanUtils;
 
 namespace GMac.GMacAST.Expressions
 {
@@ -37,7 +36,8 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// True if this multivector value contains no terms
         /// </summary>
-        public bool IsZero => AssociatedMultivectorValue.MultivectorCoefficients.Count == 0;
+        public bool IsZero 
+            => AssociatedMultivectorValue.SymbolicMultivector.IsZero();
 
         /// <summary>
         /// The multivector terms of this multivector value
@@ -50,8 +50,9 @@ namespace GMac.GMacAST.Expressions
                 var mvClass = AssociatedMultivectorValue.ValueMultivectorType;
                 var scalarType = value.CoefficientType;
 
-                return
-                    ((IDictionary<int, MathematicaScalar>)AssociatedMultivectorValue.MultivectorCoefficients)
+                return AssociatedMultivectorValue
+                    .SymbolicMultivector
+                    .NonZeroTerms
                     .Select(
                         pair =>
                             new AstValueMultivectorTerm(
@@ -73,28 +74,20 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// The basis blade IDs used in this value
         /// </summary>
-        public IEnumerable<int> ActiveIDs
-        {
-            get
-            {
-                return
-                    ((IDictionary<int, MathematicaScalar>) AssociatedMultivectorValue.MultivectorCoefficients)
-                        .Select(pair => pair.Key);
-            }
-        }
+        public IEnumerable<int> ActiveIDs 
+            => AssociatedMultivectorValue
+                .SymbolicMultivector
+                .BasisBladeIds;
 
         /// <summary>
         /// The basis blade grades used in this value
         /// </summary>
         public IEnumerable<int> ActiveGrades
-        {
-            get
-            {
-                return
-                    ((IDictionary<int, MathematicaScalar>)AssociatedMultivectorValue.MultivectorCoefficients)
-                        .Select(pair => pair.Key.BasisBladeGrade()).Distinct();
-            }
-        }
+            => AssociatedMultivectorValue
+                .SymbolicMultivector
+                .BasisBladeIds
+                .Select(id => id.BasisBladeGrade())
+                .Distinct();
 
 
         internal AstValueMultivector(GMacValueMultivector value)

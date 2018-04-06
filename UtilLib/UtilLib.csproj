@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UtilLib</RootNamespace>
     <AssemblyName>UtilLib</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FastColoredTextBox, Version=2.16.21.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
@@ -50,8 +53,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="TextComposerLib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TextComposerLib.1.0.3\lib\TextComposerLib.dll</HintPath>
+    <Reference Include="TextComposerLib, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TextComposerLib.1.0.5\lib\TextComposerLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -75,6 +78,10 @@
     <Compile Include="DataStructures\SimpleTree\SimpleTreeNodeList.cs" />
     <Compile Include="DataStructures\SimpleTree\SimpleTreeUtils.cs" />
     <Compile Include="DataStructures\SimpleTree\Visitor\SimpleTreeVisitor.cs" />
+    <Compile Include="DataStructures\SparseTable\SparseTable1D.cs" />
+    <Compile Include="DataStructures\SparseTable\SparseTable2D.cs" />
+    <Compile Include="DataStructures\SparseTable\SparseTable3D.cs" />
+    <Compile Include="DataStructures\SparseTable\SparseTableUtils.cs" />
     <Compile Include="DataStructures\SubArray.cs" />
     <Compile Include="DataStructures\Table\ContentsCell.cs" />
     <Compile Include="DataStructures\Table\ContentsRow.cs" />
@@ -168,6 +175,7 @@
     <Compile Include="DataStructures\ValueTree\ValueNodeInternal.cs" />
     <Compile Include="DataStructures\ValueTree\ValueNodeLeaf.cs" />
     <Compile Include="DataStructures\ValueTree\ValueNode.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FolderTree\Viewer\formGroupsDictionaryViewer.resx">

@@ -471,7 +471,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     GMacCompilerOptions.ForceOrthogonalMetricProducts &&
                     ReferenceEquals(operandsMvType, null) == false &&
                     operandsMvType.ParentFrame.IsDerivedFrame &&
-                    operandsMvType.ParentFrame.AssociatedSymbolicFrame.IsNonOrthogonal
+                    operandsMvType.ParentFrame.SymbolicFrame.IsNonOrthogonal
                 ))
                 return BasicBinary.CreatePrimitive(_resultType, opInfo.OpName, _atomicOperand1, _atomicOperand2);
 
@@ -513,7 +513,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     GMacCompilerOptions.ForceOrthogonalMetricProducts &&
                     ReferenceEquals(operandsMvType, null) == false &&
                     operandsMvType.ParentFrame.IsDerivedFrame &&
-                    operandsMvType.ParentFrame.AssociatedSymbolicFrame.IsNonOrthogonal
+                    operandsMvType.ParentFrame.SymbolicFrame.IsNonOrthogonal
                 ))
                 return BasicBinary.CreatePrimitive(_resultType, opInfo.OpName, _atomicOperand1, _atomicOperand2);
 

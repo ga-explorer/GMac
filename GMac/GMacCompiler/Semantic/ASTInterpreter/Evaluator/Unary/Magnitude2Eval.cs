@@ -30,7 +30,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator.Unary
         {
             return ValuePrimitive<MathematicaScalar>.Create(
                 value1.GMacRootAst.ScalarType,
-                value1.SymbolicFrame.Magnitude2(value1.MultivectorCoefficients)
+                value1.SymbolicFrame.Magnitude2(value1.SymbolicMultivector)
                 );
         }
     }

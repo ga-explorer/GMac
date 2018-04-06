@@ -38,19 +38,20 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public int ExpressionId { get; private set; }
 
-        public Expr MathExpr { get; private set; }
+        public Expr Expression { get; private set; }
 
-        public object Tag;
+        public object Tag { get; set; }
 
 
-        public string ExpressionText => MathExpr.ToString();
+        public string ExpressionText 
+            => Expression.ToString();
 
 
         protected MathematicaExpression(MathematicaInterface parentCas, Expr mathExpr)
         {
             CasInterface = parentCas;
             ExpressionId = GetNewExprId();
-            MathExpr = mathExpr;
+            Expression = mathExpr;
         }
 
 
@@ -60,7 +61,7 @@ namespace SymbolicInterface.Mathematica.Expression
 
             var stk = new Stack<Expr>();
 
-            var rootExpr = MathExpr;
+            var rootExpr = Expression;
 
             stk.Push(rootExpr);
             subList.Add(rootExpr.ToString(), Create(CasInterface, rootExpr));
@@ -86,13 +87,13 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public SteExpression ToTextExpressionTree()
         {
-            return MathExpr.ToTextExpressionTree();
+            return Expression.ToTextExpressionTree();
         }
 
 
         public bool IsSymbol()
         {
-            return MathExpr.SymbolQ();
+            return Expression.SymbolQ();
         }
 
         /// <summary>
@@ -101,9 +102,9 @@ namespace SymbolicInterface.Mathematica.Expression
         /// </summary>
         public void Simplify()
         {
-            if (MathExpr.AtomQ()) return;
+            if (Expression.AtomQ()) return;
 
-            MathExpr = CasInterface[Mfs.Simplify[MathExpr]];
+            Expression = CasInterface[Mfs.Simplify[Expression]];
         }
 
         public override bool Equals(object obj)

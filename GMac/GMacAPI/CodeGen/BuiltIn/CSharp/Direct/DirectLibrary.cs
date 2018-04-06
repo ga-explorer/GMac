@@ -76,7 +76,7 @@ public Multivector(IEnumerable<double> coefs)
 
         private void GenerateScalarValueCode(AstValueScalar valueInfo)
         {
-            var exprCode = GMacLanguage.GenerateCode(valueInfo.ScalarValue.MathExpr);
+            var exprCode = GMacLanguage.GenerateCode(valueInfo.ScalarValue.Expression);
 
             ActiveFileTextComposer.Append(exprCode);
         }

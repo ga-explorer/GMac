@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using Wolfram.NETLink;
 
@@ -8,6 +9,8 @@ namespace SymbolicInterface.Mathematica
     public sealed class MathematicaConnection
     {
         private IKernelLink _internalLink;
+
+        public Stopwatch Stopwatch { get; } = new Stopwatch();
 
 
         public MathematicaInterface Cas { get; private set; }
@@ -85,14 +88,24 @@ namespace SymbolicInterface.Mathematica
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToImage(exprObject, width, height);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToImage(exprObject, width, height);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
         public Image EvaluateToImage(string exprText, int width = 0, int height = 0)
         {
             CacheMisses++;
 
+            Stopwatch.Start();
+
             var img = KernelLink.EvaluateToImage(exprText, width, height);
+
+            Stopwatch.Stop();
 
             return img;
         }
@@ -101,53 +114,94 @@ namespace SymbolicInterface.Mathematica
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToInputForm(exprObject, pageWidth);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToInputForm(exprObject, pageWidth);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
         public string EvaluateToInputForm(string exprText, int pageWidth = 0)
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToInputForm(exprText, pageWidth);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToInputForm(exprText, pageWidth);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
         public string EvaluateToOutputForm(Expr exprObject, int pageWidth = 0)
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToOutputForm(exprObject, pageWidth);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToOutputForm(exprObject, pageWidth);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
         public string EvaluateToOutputForm(string exprText, int pageWidth = 0)
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToOutputForm(exprText, pageWidth);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToOutputForm(exprText, pageWidth);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
         public Image EvaluateToTypeset(Expr exprObject, int width = 0)
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToTypeset(exprObject, width);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToTypeset(exprObject, width);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
         public Image EvaluateToTypeset(string exprText, int width = 0)
         {
             CacheMisses++;
 
-            return KernelLink.EvaluateToTypeset(exprText, width);
+            Stopwatch.Start();
+
+            var result = KernelLink.EvaluateToTypeset(exprText, width);
+
+            Stopwatch.Stop();
+
+            return result;
         }
 
 
         public Expr EvaluateToExpr(Expr exprObject)
         {
+            Stopwatch.Start();
+
             Expr outExpr;
             string exprText = null;
 
             if (EnableCache && _exprCache.TryGetValue(exprText = exprObject.ToString(), out outExpr))
             {
                 CacheHits++;
+
+                Stopwatch.Stop();
+
                 return outExpr;
             }
 
@@ -166,16 +220,23 @@ namespace SymbolicInterface.Mathematica
             //    var x = 0;
             //}
 
+            Stopwatch.Stop();
+
             return outExpr;
         }
 
         public Expr EvaluateToExpr(string exprText)
         {
+            Stopwatch.Start();
+
             Expr outExpr;
 
             if (EnableCache && _exprCache.TryGetValue(exprText, out outExpr))
             {
                 CacheHits++;
+
+                Stopwatch.Stop();
+
                 return outExpr;
             }
 
@@ -194,11 +255,15 @@ namespace SymbolicInterface.Mathematica
             //    var x = 0;
             //}
 
+            Stopwatch.Stop();
+
             return outExpr;
         }
 
         public string EvaluateToString(Expr exprObject)
         {
+            Stopwatch.Start();
+
             //string expr_text = expr_object.ToString();
 
             KernelLink.Evaluate(exprObject);
@@ -208,17 +273,23 @@ namespace SymbolicInterface.Mathematica
 
             CacheMisses++;
 
+            Stopwatch.Stop();
+
             return outExpr;
         }
 
         public string EvaluateToString(string exprText)
         {
+            Stopwatch.Start();
+
             KernelLink.Evaluate(exprText);
             KernelLink.WaitForAnswer();
 
             var outExpr = KernelLink.GetString();
 
             CacheMisses++;
+
+            Stopwatch.Stop();
 
             return outExpr;
         }

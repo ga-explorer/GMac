@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SymbolicInterface.Mathematica.ExprFactory;
 using Wolfram.NETLink;
 
@@ -25,12 +26,42 @@ namespace SymbolicInterface.Mathematica.Expression
                 var items = new object[matrix.GetUpperBound(1) + 1];
 
                 for (var j = 0; j <= matrix.GetUpperBound(1); j++)
-                    items[j] = matrix[i, j].MathExpr;
+                    items[j] = matrix[i, j]?.Expression ?? Expr.INT_ZERO;
 
                 rows[i] = Mfs.List[items];
             }
 
             var mathExpr = parentCas[Mfs.List[rows]];
+
+            return new MathematicaMatrix(parentCas, mathExpr);
+        }
+
+        public static MathematicaMatrix CreateFullMatrix(MathematicaInterface parentCas, Expr[,] matrix)
+        {
+            var rows = new object[matrix.GetUpperBound(0) + 1];
+
+            for (var i = 0; i <= matrix.GetUpperBound(0); i++)
+            {
+                var items = new object[matrix.GetUpperBound(1) + 1];
+
+                for (var j = 0; j <= matrix.GetUpperBound(1); j++)
+                    items[j] = matrix[i, j] ?? Expr.INT_ZERO;
+
+                rows[i] = Mfs.List[items];
+            }
+
+            var mathExpr = parentCas[Mfs.List[rows]];
+
+            return new MathematicaMatrix(parentCas, mathExpr);
+        }
+
+        public static MathematicaMatrix CreateFullMatrixFromColumns(MathematicaInterface parentCas, IEnumerable<Expr[]> matrixColumns)
+        {
+            var exprList = matrixColumns
+                .Select(column => Mfs.List[column.Cast<object>().ToArray()])
+                .ToList();
+
+            var mathExpr = parentCas[Mfs.Transpose[Mfs.List[exprList]]];
 
             return new MathematicaMatrix(parentCas, mathExpr);
         }
@@ -47,8 +78,8 @@ namespace SymbolicInterface.Mathematica.Expression
         public static MathematicaMatrix CreateDiagonal(ISymbolicVector vector, bool asFullMatrix = true)
         {
             var mathExpr = asFullMatrix 
-                ? vector.CasInterface[Mfs.DiagonalMatrix[vector.ToMathematicaVector().MathExpr]] 
-                : vector.CasInterface[Mfs.SparseArray[Mfs.DiagonalMatrix[vector.ToMathematicaVector().MathExpr]]];
+                ? vector.CasInterface[Mfs.DiagonalMatrix[vector.ToMathematicaVector().Expression]] 
+                : vector.CasInterface[Mfs.SparseArray[Mfs.DiagonalMatrix[vector.ToMathematicaVector().Expression]]];
 
             return new MathematicaMatrix(vector.CasInterface, mathExpr);
         }
@@ -70,8 +101,8 @@ namespace SymbolicInterface.Mathematica.Expression
         public static MathematicaMatrix CreateRowVector(ISymbolicVector vector, bool asFullMatrix = true)
         {
             var mathExpr = asFullMatrix 
-                ? vector.CasInterface[Mfs.List[vector.ToMathematicaFullVector().MathExpr]] 
-                : vector.CasInterface[Mfs.SparseArray[Mfs.List[vector.ToMathematicaFullVector().MathExpr]]];
+                ? vector.CasInterface[Mfs.List[vector.ToMathematicaFullVector().Expression]] 
+                : vector.CasInterface[Mfs.SparseArray[Mfs.List[vector.ToMathematicaFullVector().Expression]]];
 
             return new MathematicaMatrix(vector.CasInterface, mathExpr);
         }
@@ -80,15 +111,15 @@ namespace SymbolicInterface.Mathematica.Expression
         {
             var mathExpr = 
                 asFullMatrix 
-                ? vector.CasInterface[Mfs.Transpose[Mfs.List[vector.ToMathematicaFullVector().MathExpr]]] 
-                : vector.CasInterface[Mfs.Transpose[Mfs.SparseArray[Mfs.List[vector.ToMathematicaFullVector().MathExpr]]]];
+                ? vector.CasInterface[Mfs.Transpose[Mfs.List[vector.ToMathematicaFullVector().Expression]]] 
+                : vector.CasInterface[Mfs.Transpose[Mfs.SparseArray[Mfs.List[vector.ToMathematicaFullVector().Expression]]]];
 
             return new MathematicaMatrix(vector.CasInterface, mathExpr);
         }
 
         public static MathematicaMatrix CreateConstant(MathematicaScalar scalar, int rows, int columns)
         {
-            var mathExpr = scalar.CasInterface[Mfs.ConstantArray[scalar.MathExpr, Mfs.List[rows.ToExpr(), columns.ToExpr()]]];
+            var mathExpr = scalar.CasInterface[Mfs.ConstantArray[scalar.Expression, Mfs.List[rows.ToExpr(), columns.ToExpr()]]];
 
             return new MathematicaMatrix(scalar.CasInterface, mathExpr);
         }
@@ -106,64 +137,65 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public static MathematicaMatrix operator -(MathematicaMatrix matrix1)
         {
-            var e = matrix1.CasInterface[Mfs.Minus[matrix1.MathExpr]];
+            var e = matrix1.CasInterface[Mfs.Minus[matrix1.Expression]];
 
             return new MathematicaMatrix(matrix1.CasInterface, e);
         }
 
         public static MathematicaMatrix operator +(MathematicaMatrix matrix1, MathematicaMatrix matrix2)
         {
-            var e = matrix1.CasInterface[Mfs.Plus[matrix1.MathExpr, matrix2.MathExpr]];
+            var e = matrix1.CasInterface[Mfs.Plus[matrix1.Expression, matrix2.Expression]];
 
             return new MathematicaMatrix(matrix1.CasInterface, e);
         }
 
         public static MathematicaMatrix operator -(MathematicaMatrix matrix1, MathematicaMatrix matrix2)
         {
-            var e = matrix1.CasInterface[Mfs.Subtract[matrix1.MathExpr, matrix2.MathExpr]];
+            var e = matrix1.CasInterface[Mfs.Subtract[matrix1.Expression, matrix2.Expression]];
 
             return new MathematicaMatrix(matrix1.CasInterface, e);
         }
 
         public static MathematicaMatrix operator *(MathematicaMatrix matrix1, MathematicaMatrix matrix2)
         {
-            var e = matrix1.CasInterface[Mfs.Dot[matrix1.MathExpr, matrix2.MathExpr]];
+            var e = matrix1.CasInterface[Mfs.Dot[matrix1.Expression, matrix2.Expression]];
 
             return new MathematicaMatrix(matrix1.CasInterface, e);
         }
 
         public static MathematicaMatrix operator *(MathematicaMatrix matrix1, MathematicaScalar scalar2)
         {
-            var e = matrix1.CasInterface[Mfs.Times[matrix1.MathExpr, scalar2.MathExpr]];
+            var e = matrix1.CasInterface[Mfs.Times[matrix1.Expression, scalar2.Expression]];
 
             return new MathematicaMatrix(matrix1.CasInterface, e);
         }
 
         public static MathematicaMatrix operator *(MathematicaScalar scalar1, MathematicaMatrix matrix2)
         {
-            var e = matrix2.CasInterface[Mfs.Times[scalar1.MathExpr, matrix2.MathExpr]];
+            var e = matrix2.CasInterface[Mfs.Times[scalar1.Expression, matrix2.Expression]];
 
             return new MathematicaMatrix(matrix2.CasInterface, e);
         }
 
         public static MathematicaMatrix operator /(MathematicaMatrix matrix1, MathematicaScalar scalar2)
         {
-            var e = matrix1.CasInterface[Mfs.Divide[matrix1.MathExpr, scalar2.MathExpr]];
+            var e = matrix1.CasInterface[Mfs.Divide[matrix1.Expression, scalar2.Expression]];
 
             return new MathematicaMatrix(matrix1.CasInterface, e);
         }
 
 
-        public int Rows { get; }
+        public int RowCount { get; }
 
-        public int Columns { get; }
+        public int ColumnCount { get; }
 
-        public MathematicaScalar this[int row, int column] => MathematicaScalar.Create(
-            CasInterface, 
-            IsFullMatrix() 
-                ? MathExpr.Args[row].Args[column] 
-                : CasInterface[Mfs.Part[MathExpr, (row + 1).ToExpr(), (column + 1).ToExpr()]]
-            );
+        public MathematicaScalar this[int row, int column] => 
+            MathematicaScalar.Create(
+                CasInterface, 
+                IsFullMatrix() 
+                    ? Expression.Args[row].Args[column] 
+                    : CasInterface[Mfs.Part[Expression, (row + 1).ToExpr(), (column + 1).ToExpr()]]
+                );
 
 
         private MathematicaMatrix(MathematicaInterface parentCas, Expr mathExpr)
@@ -171,57 +203,57 @@ namespace SymbolicInterface.Mathematica.Expression
         {
             var dimensions = CasInterface[Mfs.Dimensions[mathExpr]];
 
-            Rows = Int32.Parse(dimensions.Args[0].ToString());
+            RowCount = Int32.Parse(dimensions.Args[0].ToString());
 
-            Columns = Int32.Parse(dimensions.Args[1].ToString());
+            ColumnCount = Int32.Parse(dimensions.Args[1].ToString());
         }
 
 
         public ISymbolicMatrix Transpose()
         {
-            var e = CasInterface[Mfs.Transpose[MathExpr]];
+            var e = CasInterface[Mfs.Transpose[Expression]];
 
             return Create(CasInterface, e);
         }
 
         public ISymbolicMatrix Inverse()
         {
-            var e = CasInterface[Mfs.Inverse[MathExpr]];
+            var e = CasInterface[Mfs.Inverse[Expression]];
 
             return Create(CasInterface, e);
         }
 
         public ISymbolicMatrix InverseTranspose()
         {
-            var e = CasInterface[Mfs.Transpose[Mfs.Inverse[MathExpr]]];
+            var e = CasInterface[Mfs.Transpose[Mfs.Inverse[Expression]]];
 
             return Create(CasInterface, e);
         }
 
         public ISymbolicVector Times(ISymbolicVector v)
         {
-            var e = CasInterface[Mfs.Dot[MathExpr, v.ToMathematicaVector().MathExpr]];
+            var e = CasInterface[Mfs.Dot[Expression, v.ToMathematicaVector().Expression]];
 
             return MathematicaVector.Create(CasInterface, e);
         }
 
         public ISymbolicVector GetRow(int index)
         {
-            var e = CasInterface[Mfs.Part[MathExpr, (index + 1).ToExpr(), OptionSymbols.All]];
+            var e = CasInterface[Mfs.Part[Expression, (index + 1).ToExpr(), OptionSymbols.All]];
 
             return MathematicaVector.Create(CasInterface, e);
         }
 
         public ISymbolicVector GetColumn(int index)
         {
-            var e = CasInterface[Mfs.Part[MathExpr, OptionSymbols.All, (index + 1).ToExpr()]];
+            var e = CasInterface[Mfs.Part[Expression, OptionSymbols.All, (index + 1).ToExpr()]];
 
             return MathematicaVector.Create(CasInterface, e);
         }
 
         public ISymbolicVector GetDiagonal()
         {
-            var e = CasInterface[Mfs.Diagonal[MathExpr]];
+            var e = CasInterface[Mfs.Diagonal[Expression]];
 
             return MathematicaVector.Create(CasInterface, e);
         }
@@ -238,12 +270,12 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public MathematicaVector EigenValues_InVector()
         {
-            return MathematicaVector.Create(CasInterface, CasInterface[Mfs.Eigenvalues[MathExpr]]);
+            return MathematicaVector.Create(CasInterface, CasInterface[Mfs.Eigenvalues[Expression]]);
         }
 
         public MathematicaMatrix EigenValues_InDiagonalMatrix()
         {
-            return Create(CasInterface, CasInterface[Mfs.DiagonalMatrix[Mfs.Eigenvalues[MathExpr]]]);
+            return Create(CasInterface, CasInterface[Mfs.DiagonalMatrix[Mfs.Eigenvalues[Expression]]]);
         }
 
         public MathematicaMatrix EigenVectors(EigenVectorsSpecs specs)
@@ -253,19 +285,19 @@ namespace SymbolicInterface.Mathematica.Expression
             switch (specs)
             {
                 case EigenVectorsSpecs.InMatrixRows:
-                    vectorsExpr = Mfs.Eigenvectors[MathExpr];
+                    vectorsExpr = Mfs.Eigenvectors[Expression];
                     break;
 
                 case EigenVectorsSpecs.InMatrixColumns:
-                    vectorsExpr = Mfs.Transpose[Mfs.Eigenvectors[MathExpr]];
+                    vectorsExpr = Mfs.Transpose[Mfs.Eigenvectors[Expression]];
                     break;
 
                 case EigenVectorsSpecs.OrthogonalInMatrixRows:
-                    vectorsExpr = Mfs.Orthogonalize[Mfs.Eigenvectors[MathExpr]];
+                    vectorsExpr = Mfs.Orthogonalize[Mfs.Eigenvectors[Expression]];
                     break;
 
                 default:
-                    vectorsExpr = Mfs.Transpose[Mfs.Orthogonalize[Mfs.Eigenvectors[MathExpr]]];
+                    vectorsExpr = Mfs.Transpose[Mfs.Orthogonalize[Mfs.Eigenvectors[Expression]]];
                     break;
             }
 
@@ -274,7 +306,7 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public bool EigenSystem(EigenVectorsSpecs specs, out MathematicaVector values, out MathematicaMatrix vectors)
         {
-            var sysExpr = CasInterface[Mfs.Eigensystem[MathExpr]];
+            var sysExpr = CasInterface[Mfs.Eigensystem[Expression]];
 
             values = MathematicaVector.Create(CasInterface, sysExpr.Args[0]);
 
@@ -307,7 +339,7 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public bool EigenSystem(EigenVectorsSpecs specs, out MathematicaMatrix values, out MathematicaMatrix vectors)
         {
-            var sysExpr = CasInterface[Mfs.Eigensystem[MathExpr]];
+            var sysExpr = CasInterface[Mfs.Eigensystem[Expression]];
 
             values = Create(CasInterface, CasInterface[Mfs.DiagonalMatrix[sysExpr.Args[0]]]);
 
@@ -350,7 +382,7 @@ namespace SymbolicInterface.Mathematica.Expression
             if (IsFullMatrix())
                 return this;
 
-            var e = CasInterface[Mfs.Normal[MathExpr]];
+            var e = CasInterface[Mfs.Normal[Expression]];
 
             return new MathematicaMatrix(CasInterface, e);
         }
@@ -360,7 +392,7 @@ namespace SymbolicInterface.Mathematica.Expression
             if (IsSparseMatrix())
                 return this;
 
-            var e = CasInterface[Mfs.SparseArray[MathExpr]];
+            var e = CasInterface[Mfs.SparseArray[Expression]];
 
             return new MathematicaMatrix(CasInterface, e);
         }
@@ -368,22 +400,22 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public bool IsSquare()
         {
-            return (Rows == Columns);
+            return (RowCount == ColumnCount);
         }
 
         public bool IsRowVector()
         {
-            return (Rows == 1);
+            return (RowCount == 1);
         }
 
         public bool IsColumnVector()
         {
-            return (Columns == 1);
+            return (ColumnCount == 1);
         }
 
         public bool IsZero()
         {
-            var e = Mfs.Apply[Mfs.And.MathExpr, Mfs.Flatten[Mfs.PossibleZeroQ[MathExpr]]];
+            var e = Mfs.Apply[Mfs.And.MathExpr, Mfs.Flatten[Mfs.PossibleZeroQ[Expression]]];
 
             return CasInterface.EvalTrueQ(e);
         }
@@ -393,7 +425,7 @@ namespace SymbolicInterface.Mathematica.Expression
             if (!IsSquare())
                 return false;
 
-            var e = Mfs.Equal[MathExpr, Mfs.IdentityMatrix[Mfs.Dimensions[MathExpr]]];
+            var e = Mfs.Equal[Expression, Mfs.IdentityMatrix[Mfs.Dimensions[Expression]]];
 
             return CasInterface.EvalTrueQ(e);
         }
@@ -403,14 +435,14 @@ namespace SymbolicInterface.Mathematica.Expression
             if (!IsSquare())
                 return false;
 
-            var e = Mfs.Equal[MathExpr, Mfs.DiagonalMatrix[Mfs.Diagonal[MathExpr]]];
+            var e = Mfs.Equal[Expression, Mfs.DiagonalMatrix[Mfs.Diagonal[Expression]]];
 
             return CasInterface.EvalTrueQ(e);
         }
 
         public bool IsSymmetric()
         {
-            return IsSquare() && CasInterface.EvalTrueQ(Mfs.SymmetricMatrixQ[MathExpr]);
+            return IsSquare() && CasInterface.EvalTrueQ(Mfs.SymmetricMatrixQ[Expression]);
         }
 
         public bool IsOrthogonal()
@@ -418,24 +450,24 @@ namespace SymbolicInterface.Mathematica.Expression
             if (!IsSquare())
                 return false;
 
-            var e = Mfs.Equal[Mfs.Dot[MathExpr, Mfs.Transpose[MathExpr]], Mfs.IdentityMatrix[Mfs.Dimensions[MathExpr]]];
+            var e = Mfs.Equal[Mfs.Dot[Expression, Mfs.Transpose[Expression]], Mfs.IdentityMatrix[Mfs.Dimensions[Expression]]];
 
             return CasInterface.EvalTrueQ(e);
         }
 
         public bool IsInvertable()
         {
-            return IsSquare() && CasInterface.EvalFalseQ(Mfs.PossibleZeroQ[Mfs.Det[MathExpr]]);
+            return IsSquare() && CasInterface.EvalFalseQ(Mfs.PossibleZeroQ[Mfs.Det[Expression]]);
         }
 
         public bool IsFullMatrix()
         {
-            return MathExpr.ListQ();
+            return Expression.ListQ();
         }
 
         public bool IsSparseMatrix()
         {
-            return MathExpr.Head.ToString() == Mfs.SparseArray.ToString();
+            return Expression.Head.ToString() == Mfs.SparseArray.ToString();
         }
     }
 }

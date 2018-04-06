@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GMac.GMacUtils;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 using TextComposerLib.Text;

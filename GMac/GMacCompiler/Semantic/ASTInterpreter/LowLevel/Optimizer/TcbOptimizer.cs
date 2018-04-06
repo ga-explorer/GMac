@@ -5,9 +5,7 @@ using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator;
-using GMac.GMacUtils;
 using TextComposerLib.Logs.Progress;
-using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 {

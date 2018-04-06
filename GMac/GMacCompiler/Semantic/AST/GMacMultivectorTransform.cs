@@ -1,5 +1,5 @@
 ﻿using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacCompiler.Symbolic.GALT;
+using GMac.GMacMath.Symbolic.Maps.Unilinear;
 using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.Basic;
 using IronyGrammars.Semantic.Operator;
@@ -26,12 +26,12 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <summary>
         /// The associated symbolic linear transform
         /// </summary>
-        internal GaLinearTransform AssociatedSymbolicTransform { get; private set; }
+        internal IGaSymMapUnilinear AssociatedSymbolicTransform { get; private set; }
 
         internal GMacAst GMacRootAst => (GMacAst)RootAst;
 
 
-        internal GMacMultivectorTransform(string transformName, LanguageScope parentScope, GMacFrame sourceFrame, GMacFrame targetFrame, GaLinearTransform symbolicTransform)
+        internal GMacMultivectorTransform(string transformName, LanguageScope parentScope, GMacFrame sourceFrame, GMacFrame targetFrame, IGaSymMapUnilinear symbolicTransform)
             : base(transformName, parentScope, RoleNames.Transform)
         {
             SourceFrame = sourceFrame;

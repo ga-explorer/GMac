@@ -1,7 +1,6 @@
 ﻿using GMac.GMacAPI.Target;
 using GMac.GMacAST;
 using GMac.GMacAST.Symbols;
-using GMac.GMacUtils;
 using TextComposerLib.Code.Languages;
 using TextComposerLib.Logs.Progress;
 using TextComposerLib.Text.Parametric;

@@ -2,7 +2,6 @@
 using GMac.GMacAPI.Target;
 using GMac.GMacAST;
 using GMac.GMacAST.Symbols;
-using GMac.GMacUtils;
 using IronyGrammars.Semantic;
 using TextComposerLib.Code;
 using TextComposerLib.Code.Languages;

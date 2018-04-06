@@ -15,7 +15,6 @@ using GMac.GMacIDE.AstExplorer;
 using GMac.GMacIDE.CodeGen;
 using GMac.GMacIDE.Scripting;
 using GMac.GMacIDE.Tools;
-using GMac.GMacUtils;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.SourceCode;
 using TextComposerLib;

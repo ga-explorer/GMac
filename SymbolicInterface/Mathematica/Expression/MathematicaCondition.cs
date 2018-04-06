@@ -7,7 +7,7 @@ namespace SymbolicInterface.Mathematica.Expression
     {
         public static MathematicaCondition CreateIsDomainMemberTest(MathematicaExpression testedExpr, Expr domainExpr)
         {
-            var expr = testedExpr.CasInterface[Mfs.Element[testedExpr.MathExpr, domainExpr]];
+            var expr = testedExpr.CasInterface[Mfs.Element[testedExpr.Expression, domainExpr]];
 
             return new MathematicaCondition(testedExpr.CasInterface, expr);
         }
@@ -21,7 +21,7 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public static MathematicaCondition CreateIsDomainMemberTest(MathematicaExpression testedExpr, Expr domainExpr, Expr assumeExpr)
         {
-            var expr = testedExpr.CasInterface[Mfs.FullSimplify[Mfs.Element[testedExpr.MathExpr, domainExpr], assumeExpr]];
+            var expr = testedExpr.CasInterface[Mfs.FullSimplify[Mfs.Element[testedExpr.Expression, domainExpr], assumeExpr]];
 
             return new MathematicaCondition(testedExpr.CasInterface, expr);
         }
@@ -51,21 +51,21 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public static MathematicaCondition operator !(MathematicaCondition s1)
         {
-            var e = s1.CasInterface[Mfs.Not[s1.MathExpr]];
+            var e = s1.CasInterface[Mfs.Not[s1.Expression]];
 
             return new MathematicaCondition(s1.CasInterface, e);
         }
 
         public static MathematicaCondition operator &(MathematicaCondition s1, MathematicaCondition s2)
         {
-            var e = s1.CasInterface[Mfs.And[s1.MathExpr, s2.MathExpr]];
+            var e = s1.CasInterface[Mfs.And[s1.Expression, s2.Expression]];
 
             return new MathematicaCondition(s1.CasInterface, e);
         }
 
         public static MathematicaCondition operator |(MathematicaCondition s1, MathematicaCondition s2)
         {
-            var e = s1.CasInterface[Mfs.Or[s1.MathExpr, s2.MathExpr]];
+            var e = s1.CasInterface[Mfs.Or[s1.Expression, s2.Expression]];
 
             return new MathematicaCondition(s1.CasInterface, e);
         }
@@ -77,7 +77,7 @@ namespace SymbolicInterface.Mathematica.Expression
             var exprArgs = new object[args.Length];
 
             for (var i = 0; i < args.Length; i++)
-                exprArgs[i] = args[i].MathExpr;
+                exprArgs[i] = args[i].Expression;
 
             var e = parentCas[Mfs.And[exprArgs]];
 
@@ -90,7 +90,7 @@ namespace SymbolicInterface.Mathematica.Expression
             var exprArgs = new object[args.Length];
 
             for (var i = 0; i < args.Length; i++)
-                exprArgs[i] = args[i].MathExpr;
+                exprArgs[i] = args[i].Expression;
 
             var e = parentCas[Mfs.Or[exprArgs]];
 
@@ -103,7 +103,7 @@ namespace SymbolicInterface.Mathematica.Expression
             var exprArgs = new object[args.Length];
 
             for (var i = 0; i < args.Length; i++)
-                exprArgs[i] = args[i].MathExpr;
+                exprArgs[i] = args[i].Expression;
 
             var e = parentCas[Mfs.Nand[exprArgs]];
 
@@ -116,7 +116,7 @@ namespace SymbolicInterface.Mathematica.Expression
             var exprArgs = new object[args.Length];
 
             for (var i = 0; i < args.Length; i++)
-                exprArgs[i] = args[i].MathExpr;
+                exprArgs[i] = args[i].Expression;
 
             var e = parentCas[Mfs.Nor[exprArgs]];
 
@@ -132,31 +132,31 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public bool IsConstant()
         {
-            if (MathExpr.SymbolQ() == false) return false;
+            if (Expression.SymbolQ() == false) return false;
 
-            var exprText = MathExpr.ToString();
+            var exprText = Expression.ToString();
 
             return exprText == "True" || exprText == "False";
         }
 
         public bool IsConstant(bool value)
         {
-            if (MathExpr.SymbolQ() == false) return false;
+            if (Expression.SymbolQ() == false) return false;
 
             return 
                 value
-                ? MathExpr.ToString() == "True"
-                : MathExpr.ToString() == "False";
+                ? Expression.ToString() == "True"
+                : Expression.ToString() == "False";
         }
 
         public bool IsConstantTrue()
         {
-            return MathExpr.SymbolQ() && MathExpr.ToString() == "True";
+            return Expression.SymbolQ() && Expression.ToString() == "True";
         }
 
         public bool IsConstantFalse()
         {
-            return MathExpr.SymbolQ() && MathExpr.ToString() == "False";
+            return Expression.SymbolQ() && Expression.ToString() == "False";
         }
     }
 }

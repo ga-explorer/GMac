@@ -24,6 +24,13 @@
         }
 
         /// <summary>
+        /// If true, the function FrameUtils.IsNegativeEGp computes the sign swaps of two basis
+        /// blades instead of using the internal lookup table for Euclideam Geometric Product 
+        /// computations. This is a central computation in GMac and can affect performance.
+        /// </summary>
+        //public static bool ComputeIsNegativeEGp { get; set; }
+
+        /// <summary>
         /// If true, any metric products on non-orthogonal derived frames' multivectors are replaced by equivalent
         /// orthogonal operations using derived-to-base and base-to-derived outermorphisms on the derived frames
         /// When this flag is used better compilation time is achieved but more computations are generated.

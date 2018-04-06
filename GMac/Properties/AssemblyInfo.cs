@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("GMac")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("https://gmac-guides.netlify.com/index.php/about-gmac/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("gacomputing.info")]
+[assembly: AssemblyCompany("Dr. Ahmad Hosny Eid, https://ga-explorer.netlify.com/")]
 [assembly: AssemblyProduct("GMac")]
-[assembly: AssemblyCopyright("Copyright © Dr. Ahmad Hosny Eid 2016-2017")]
+[assembly: AssemblyCopyright("Copyright © Dr. Ahmad Hosny Eid 2016-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.3.0")]
-[assembly: AssemblyFileVersion("1.0.3.0")]
+[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyFileVersion("1.3.0.0")]

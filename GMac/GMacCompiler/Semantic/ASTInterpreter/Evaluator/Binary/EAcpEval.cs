@@ -1,6 +1,6 @@
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacUtils;
+using GMac.GMacMath.Symbolic.Products;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica.Expression;
 
@@ -23,7 +23,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator.Binary
         {
             return GMacValueMultivector.Create(
                 value1.ValueMultivectorType,
-                value1.MultivectorCoefficients.EuclideanAcp(value2.MultivectorCoefficients)
+                value1.SymbolicMultivector.EAcp(value2.SymbolicMultivector)
                 );
         }
 

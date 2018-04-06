@@ -386,10 +386,8 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
                             ? s.AccessKeyList
                             : null;
 
-                    foreach (var pair in mvValue.MultivectorCoefficients)
+                    foreach (var id in mvValue.SymbolicMultivector.NonZeroBasisBladeIds)
                     {
-                        var id = pair.Key;
-
                         if (!ReferenceEquals(idsList, null) && !idsList.Contains(id))
                             continue;
 

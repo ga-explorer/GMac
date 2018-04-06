@@ -5,9 +5,9 @@ using GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacCompiler.Symbolic.Frame;
 using GMac.GMacCompiler.Syntax;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic.Frames;
 using Irony.Parsing;
 using IronyGrammars.DSLException;
 using IronyGrammars.SourceCode;
@@ -108,26 +108,26 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                 basisVectorsNames.Add(basisVectorName);
             }
 
-            if (basisVectorsNames.Count > FrameUtils.MaxVSpaceDimension)
-                CompilationLog.RaiseGeneratorError<int>("Cannot handle spaces with dimension larger than " + FrameUtils.MaxVSpaceDimension, node);
+            if (basisVectorsNames.Count > GMacMathUtils.MaxVSpaceDimension)
+                CompilationLog.RaiseGeneratorError<int>("Cannot handle spaces with dimension larger than " + GMacMathUtils.MaxVSpaceDimension, node);
 
             return basisVectorsNames.ToArray();
         }
 
         ///Set the signature of the current frame to be defined by IPM
-        private GaFrame translate_Frame_Signature_IPM(ParseTreeNode node)
+        private GaSymFrame translate_Frame_Signature_IPM(ParseTreeNode node)
         {
             //Read the IPM symbolic matrix
             var ipmMatrix = MathematicaMatrix.Create(Cas, GenUtils.Translate_StringLiteral(node.ChildNodes[0]));
 
-            if (ipmMatrix.IsSymmetric() == false || ipmMatrix.Rows != _vSpaceDim)
+            if (ipmMatrix.IsSymmetric() == false || ipmMatrix.RowCount != _vSpaceDim)
                 CompilationLog.RaiseGeneratorError<int>("Expecting a square symmetric matrix with " + _vSpaceDim + " rows", node.ChildNodes[0]);
 
-            return GaFrame.CreateFromIpm(ipmMatrix);
+            return GaSymFrame.CreateFromIpm(ipmMatrix);
         }
 
         ///Set the signature of the current frame to a base frame with a change of basis matrix
-        private GaFrame translate_Frame_Signature_CBM(ParseTreeNode node)
+        private GaSymFrame translate_Frame_Signature_CBM(ParseTreeNode node)
         {
             var baseFrame = 
                 (GMacFrame)GMacValueAccessGenerator.Translate_Direct(Context, node.ChildNodes[0], RoleNames.Frame);
@@ -137,40 +137,40 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
             var cbmMatrix = MathematicaMatrix.Create(Cas, GenUtils.Translate_StringLiteral(node.ChildNodes[1]));
 
-            if (cbmMatrix.IsInvertable() == false || cbmMatrix.Rows != _vSpaceDim)
+            if (cbmMatrix.IsInvertable() == false || cbmMatrix.RowCount != _vSpaceDim)
                 CompilationLog.RaiseGeneratorError<int>("Expecting a square invertable matrix with " + _vSpaceDim + " rows", node.ChildNodes[1]);
 
             _baseFrame = baseFrame;
 
-            var derivedFrameSystem = GaFrame.CreateDerivedCbmFrameSystem(baseFrame.AssociatedSymbolicFrame, cbmMatrix);
+            var derivedFrameSystem = GaSymFrame.CreateDerivedCbmFrameSystem(baseFrame.SymbolicFrame, cbmMatrix);
 
             return derivedFrameSystem.DerivedFrame;
         }
 
         ///Set the signature of the current frame to a signature vector of +1's and -1's (diagonal IPM)
-        private GaFrame translate_Frame_Signature_Orthonormal(ParseTreeNode node)
+        private GaSymFrame translate_Frame_Signature_Orthonormal(ParseTreeNode node)
         {
             var bvSigString = GenUtils.Translate_StringLiteral(node.ChildNodes[0]).Trim();
 
             if (bvSigString.Count(c => c == '+' || c == '-') != _vSpaceDim || bvSigString.Length != _vSpaceDim)
                 CompilationLog.RaiseGeneratorError<int>("Expecting a vector of " + _vSpaceDim + @" (+\-) items", node.ChildNodes[0]);
 
-            return GaFrame.CreateOrthonormal(bvSigString);
+            return GaSymFrame.CreateOrthonormal(bvSigString);
         }
 
         ///Set the signature of the current frame to a signature vector (diagonal IPM)
-        private GaFrame translate_Frame_Signature_Orthogonal(ParseTreeNode node)
+        private GaSymFrame translate_Frame_Signature_Orthogonal(ParseTreeNode node)
         {
             var bvSigVector = MathematicaVector.Create(Cas, GenUtils.Translate_StringLiteral(node.ChildNodes[0]));
 
             if (bvSigVector.Size != _vSpaceDim)
                 CompilationLog.RaiseGeneratorError<int>("Expecting a vector with " + _vSpaceDim + " items", node.ChildNodes[0]);
 
-            return GaFrame.CreateOrthogonal(bvSigVector);
+            return GaSymFrame.CreateOrthogonal(bvSigVector);
         }
 
         ///Set the signature of the current frame to a reciprocal frame
-        private GaFrame translate_Frame_Signature_Reciprocal(ParseTreeNode node)
+        private GaSymFrame translate_Frame_Signature_Reciprocal(ParseTreeNode node)
         {
             var baseFrame = 
                 (GMacFrame)GMacValueAccessGenerator.Translate_Direct(Context, node.ChildNodes[0], RoleNames.Frame);
@@ -180,20 +180,20 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
             _baseFrame = baseFrame;
 
-            var derivedFrameSystem = GaFrame.CreateReciprocalCbmFrameSystem(baseFrame.AssociatedSymbolicFrame);
+            var derivedFrameSystem = GaSymFrame.CreateReciprocalCbmFrameSystem(baseFrame.SymbolicFrame);
 
             return derivedFrameSystem.DerivedFrame;
         }
 
         ///Select the signature definition method of the current frame
-        private GaFrame translate_Frame_Signature(ParseTreeNode node)
+        private GaSymFrame translate_Frame_Signature(ParseTreeNode node)
         {
             var subnode = node.ChildNodes[0];
 
             switch (subnode.ToString())
             {
                 case GMacParseNodeNames.FrameSignatureEuclidean:
-                    return GaFrame.CreateEuclidean(_vSpaceDim);
+                    return GaSymFrame.CreateEuclidean(_vSpaceDim);
 
                 case GMacParseNodeNames.FrameSignatureIpm:
                     return translate_Frame_Signature_IPM(subnode);
@@ -211,7 +211,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     return translate_Frame_Signature_Reciprocal(subnode);
 
                 default:
-                    return CompilationLog.RaiseGeneratorError<GaFrame>("Illegal frame signature definition", subnode);
+                    return CompilationLog.RaiseGeneratorError<GaSymFrame>("Illegal frame signature definition", subnode);
             }
         }
 
@@ -252,7 +252,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
         private void translate_Frame_DerivedFrameSystem(GMacFrame derivedFrame, GMacFrame baseFrame)
         {
-            var symbolicDerivedFrame = (GaFrameNonOrthogonal)derivedFrame.AssociatedSymbolicFrame;
+            var symbolicDerivedFrame = (GaSymFrameNonOrthogonal)derivedFrame.SymbolicFrame;
 
             if (ReferenceEquals(baseFrame, null))
             {
@@ -276,7 +276,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     derivedFrame.ParentScope,
                     derivedFrame,
                     baseFrame,
-                    symbolicDerivedFrame.ThisToBaseFrameOm
+                    symbolicDerivedFrame.ThisToBaseFrameCba
                     );
 
             var b2DOm =
@@ -285,7 +285,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     derivedFrame.ParentScope,
                     baseFrame,
                     derivedFrame,
-                    symbolicDerivedFrame.BaseFrameToThisOm
+                    symbolicDerivedFrame.BaseFrameToThisCba
                     );
 
             derivedFrame.SetDfs(baseFrame, d2BOm, b2DOm);
@@ -318,7 +318,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                 _generatedFrame = DefineFrame(frameName, basisVectorsNames, attachedSymbolicFrame, false);
 
                 //Set the derived frame system information for this derived frame
-                if (_generatedFrame.AssociatedSymbolicFrame.IsNonOrthogonal || ReferenceEquals(_baseFrame, null) == false)
+                if (_generatedFrame.SymbolicFrame.IsNonOrthogonal || ReferenceEquals(_baseFrame, null) == false)
                     translate_Frame_DerivedFrameSystem(_generatedFrame, _baseFrame);
 
                 _generatedFrame.CodeLocation = Context.GetCodeLocation(RootParseNode);

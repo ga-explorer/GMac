@@ -1,6 +1,5 @@
 ﻿using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTGenerator;
-using GMac.GMacUtils;
 using Irony.Parsing;
 using IronyGrammars.Compiler;
 using IronyGrammars.SourceCode;

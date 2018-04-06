@@ -12,7 +12,7 @@ namespace GMac.GMacScripting
     {
         internal static SimpleTreeLeaf<Expr> ToSimpleExprTree(this ValuePrimitive<MathematicaScalar> value)
         {
-            return new SimpleTreeLeaf<Expr>(value.Value.MathExpr);
+            return new SimpleTreeLeaf<Expr>(value.Value.Expression);
         }
 
         internal static SimpleTreeBranchDictionaryByIndex<Expr> ToSimpleExprTree(this GMacValueMultivector value)
@@ -20,8 +20,8 @@ namespace GMac.GMacScripting
             var scalarTypeName = value.CoefficientType.SymbolAccessName;
             var tree = new SimpleTreeBranchDictionaryByIndex<Expr>();
 
-            foreach (var pair in value.MultivectorCoefficients)
-                tree.Add(pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value.MathExpr);
+            foreach (var pair in value.SymbolicMultivector.NonZeroExprTerms)
+                tree.Add(pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value);
 
             return tree;
         }
@@ -65,7 +65,7 @@ namespace GMac.GMacScripting
 
         internal static SimpleTreeLeaf<string> ToSimpleStringTree(this ValuePrimitive<MathematicaScalar> value)
         {
-            return new SimpleTreeLeaf<string>(value.Value.MathExpr.ToString());
+            return new SimpleTreeLeaf<string>(value.Value.Expression.ToString());
         }
 
         internal static SimpleTreeBranchDictionaryByIndex<string> ToSimpleStringTree(this GMacValueMultivector value)
@@ -73,8 +73,8 @@ namespace GMac.GMacScripting
             var scalarTypeName = value.CoefficientType.SymbolAccessName;
             var tree = new SimpleTreeBranchDictionaryByIndex<string>();
 
-            foreach (var pair in value.MultivectorCoefficients)
-                tree.Add(pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value.MathExpr.ToString());
+            foreach (var pair in value.SymbolicMultivector.NonZeroExprTerms)
+                tree.Add(pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value.ToString());
 
             return tree;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GMac.GMacCompiler.Symbolic;
+using System.Linq;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica;
@@ -67,7 +68,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
             var primitive1 = value as ValuePrimitive<MathematicaScalar>;
 
             if (primitive1 != null)
-                return primitive1.Value.MathExpr;
+                return primitive1.Value.Expression;
 
             //Convert into equivalent Mathematica scalar value
             var primitive2 = value as ValuePrimitive<int>;
@@ -122,7 +123,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
 
             if (ReferenceEquals(mvValue, null) == false)
             {
-                mvValue.MultivectorCoefficients.Simplify();
+                mvValue.SymbolicMultivector.Simplify();
                 return;
             }
 
@@ -150,7 +151,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
 
                 if (ReferenceEquals(memberMvValue, null) == false)
                 {
-                    if (memberMvValue.MultivectorCoefficients.Count == 0) 
+                    if (!memberMvValue.SymbolicMultivector.ExprTerms.Any()) 
                         removeMembersList.Add(memberValue.Key);
 
                     continue;

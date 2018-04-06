@@ -18,21 +18,21 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public static MathematicaVector CreateFullVector(MathematicaInterface parentCas, params MathematicaScalar[] scalarsList)
         {
-            var mathExpr = parentCas[Mfs.List[scalarsList.Select(scalar => scalar.MathExpr as object).ToArray()]];
+            var mathExpr = parentCas[Mfs.List[scalarsList.Select(scalar => scalar.Expression as object).ToArray()]];
 
             return new MathematicaVector(parentCas, mathExpr);
         }
 
         public static MathematicaVector CreateFullVector(MathematicaInterface parentCas, IEnumerable<MathematicaScalar> scalarsList)
         {
-            var mathExpr = parentCas[Mfs.List[scalarsList.Select(scalar => scalar.MathExpr as object).ToArray()]];
+            var mathExpr = parentCas[Mfs.List[scalarsList.Select(scalar => scalar.Expression as object).ToArray()]];
 
             return new MathematicaVector(parentCas, mathExpr);
         }
 
         public static MathematicaVector Create(MathematicaScalar scalar, int size)
         {
-            var mathExpr = scalar.CasInterface[Mfs.ConstantArray[scalar.MathExpr, size.ToExpr()]];
+            var mathExpr = scalar.CasInterface[Mfs.ConstantArray[scalar.Expression, size.ToExpr()]];
 
             return new MathematicaVector(scalar.CasInterface, mathExpr);
         }
@@ -52,49 +52,49 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public static MathematicaVector operator -(MathematicaVector vector1)
         {
-            var e = vector1.CasInterface[Mfs.Minus[vector1.MathExpr]];
+            var e = vector1.CasInterface[Mfs.Minus[vector1.Expression]];
 
             return new MathematicaVector(vector1.CasInterface, e);
         }
 
         public static MathematicaVector operator +(MathematicaVector vector1, MathematicaVector vector2)
         {
-            var e = vector1.CasInterface[Mfs.Plus[vector1.MathExpr, vector2.MathExpr]];
+            var e = vector1.CasInterface[Mfs.Plus[vector1.Expression, vector2.Expression]];
 
             return new MathematicaVector(vector1.CasInterface, e);
         }
 
         public static MathematicaVector operator -(MathematicaVector vector1, MathematicaVector vector2)
         {
-            var e = vector1.CasInterface[Mfs.Subtract[vector1.MathExpr, vector2.MathExpr]];
+            var e = vector1.CasInterface[Mfs.Subtract[vector1.Expression, vector2.Expression]];
 
             return new MathematicaVector(vector1.CasInterface, e);
         }
 
         public static MathematicaScalar operator *(MathematicaVector vector1, MathematicaVector vector2)
         {
-            var e = vector1.CasInterface[Mfs.Dot[vector1.MathExpr, vector2.MathExpr]];
+            var e = vector1.CasInterface[Mfs.Dot[vector1.Expression, vector2.Expression]];
 
             return MathematicaScalar.Create(vector1.CasInterface, e);
         }
 
         public static MathematicaVector operator *(MathematicaVector vector1, MathematicaScalar scalar2)
         {
-            var e = vector1.CasInterface[Mfs.Times[vector1.MathExpr, scalar2.MathExpr]];
+            var e = vector1.CasInterface[Mfs.Times[vector1.Expression, scalar2.Expression]];
 
             return new MathematicaVector(vector1.CasInterface, e);
         }
 
         public static MathematicaVector operator *(MathematicaScalar scalar1, MathematicaVector vector2)
         {
-            var e = vector2.CasInterface[Mfs.Times[scalar1.MathExpr, vector2.MathExpr]];
+            var e = vector2.CasInterface[Mfs.Times[scalar1.Expression, vector2.Expression]];
 
             return new MathematicaVector(vector2.CasInterface, e);
         }
 
         public static MathematicaVector operator /(MathematicaVector vector1, MathematicaScalar scalar2)
         {
-            var e = vector1.CasInterface[Mfs.Divide[vector1.MathExpr, scalar2.MathExpr]];
+            var e = vector1.CasInterface[Mfs.Divide[vector1.Expression, scalar2.Expression]];
 
             return new MathematicaVector(vector1.CasInterface, e);
         }
@@ -111,9 +111,9 @@ namespace SymbolicInterface.Mathematica.Expression
             get
             {
                 if (IsFullVector())
-                    return MathExpr.Args.Length;
+                    return Expression.Args.Length;
 
-                var dimensions = CasConnection.EvaluateToExpr(Mfs.Dimensions[MathExpr]);
+                var dimensions = CasConnection.EvaluateToExpr(Mfs.Dimensions[Expression]);
 
                 return Int32.Parse(dimensions.Args[0].ToString());
             }
@@ -122,13 +122,13 @@ namespace SymbolicInterface.Mathematica.Expression
         public MathematicaScalar this[int index] => MathematicaScalar.Create(
             CasInterface, 
             IsFullVector() 
-                ? MathExpr.Args[index] 
-                : CasInterface[Mfs.Part[MathExpr, (index + 1).ToExpr()]]
+                ? Expression.Args[index] 
+                : CasInterface[Mfs.Part[Expression, (index + 1).ToExpr()]]
             );
 
         public bool IsFullVector()
         {
-            return MathExpr.ListQ();
+            return Expression.ListQ();
 
             //return
             //    this.MathExpr.Head.ToString() == FunctionNames.List &&
@@ -137,7 +137,7 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public bool IsSparseVector()
         {
-            return MathExpr.Head.ToString() == Mfs.SparseArray.ToString();
+            return Expression.Head.ToString() == Mfs.SparseArray.ToString();
 
             //return
             //    this.MathExpr.Head.ToString() == FunctionNames.SparseArray &&
@@ -147,7 +147,7 @@ namespace SymbolicInterface.Mathematica.Expression
 
         public ISymbolicVector Times(ISymbolicMatrix m)
         {
-            var e = CasInterface[Mfs.Dot[MathExpr, m.ToMathematicaMatrix().MathExpr]];
+            var e = CasInterface[Mfs.Dot[Expression, m.ToMathematicaMatrix().Expression]];
 
             return Create(CasInterface, e);
         }
@@ -158,7 +158,7 @@ namespace SymbolicInterface.Mathematica.Expression
         /// <returns></returns>
         public MathematicaScalar Norm()
         {
-            var e = CasInterface[Mfs.Norm[MathExpr]];
+            var e = CasInterface[Mfs.Norm[Expression]];
 
             return MathematicaScalar.Create(CasInterface, e);
         }
@@ -169,7 +169,7 @@ namespace SymbolicInterface.Mathematica.Expression
         /// <returns></returns>
         public MathematicaScalar Norm2()
         {
-            var e = CasInterface[Mfs.Dot[MathExpr, MathExpr]];
+            var e = CasInterface[Mfs.Dot[Expression, Expression]];
 
             return MathematicaScalar.Create(CasInterface, e);
         }
@@ -185,7 +185,7 @@ namespace SymbolicInterface.Mathematica.Expression
             if (IsFullVector())
                 return this;
 
-            var e = CasInterface[Mfs.Normal[MathExpr]];
+            var e = CasInterface[Mfs.Normal[Expression]];
 
             return new MathematicaVector(CasInterface, e);
         }
@@ -195,7 +195,7 @@ namespace SymbolicInterface.Mathematica.Expression
             if (IsSparseVector())
                 return this;
 
-            var e = CasInterface[Mfs.SparseArray[MathExpr]];
+            var e = CasInterface[Mfs.SparseArray[Expression]];
 
             return new MathematicaVector(CasInterface, e);
         }

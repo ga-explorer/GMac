@@ -1,0 +1,16 @@
+v1.0.4
+- Fixed a bug in the low-level expression optimizer part that reduces the number of temporary variables in the generated macro code. The bug resulted in emitting incorrect code and is now corrected.
+
+- Added the capability of controlling the naming of variables inside the Macro Explorer screen. Now you can bind any macro parameter using the following syntax:
+1) Bind an input parameter to a constant:
+mv.#e1# = 2.7
+
+2) Bind an input or output parameter to a variable with default target name:
+mv.#e1#
+result.#E0#
+
+3) Bind an input parameter to a variable with a defined target variable name:
+mv.#e1# = variable: point.X
+
+4) Bind an input parameter to a variable and give it a test value for debugging:
+mv.#e1# = variable: point.X test: 1.5

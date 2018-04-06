@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using SymbolicInterface.Mathematica.ExprFactory;
 using TextComposerLib.Code.SyntaxTree.Expressions;
 using Wolfram.NETLink;

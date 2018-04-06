@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using CSScriptLibrary;
 using GMac.GMacAST;
-using GMac.GMacUtils;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 using TextComposerLib.Text;

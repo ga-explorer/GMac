@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Text.Parametric;

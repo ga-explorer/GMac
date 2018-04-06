@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GMac.GMacAPI.CodeBlock;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator

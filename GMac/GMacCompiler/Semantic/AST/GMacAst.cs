@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using GMac.GMacCompiler.Semantic.ASTDebug;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;

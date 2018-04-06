@@ -4,7 +4,7 @@ using System.Linq;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacUtils;
+using GMac.GMacMath;
 using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;

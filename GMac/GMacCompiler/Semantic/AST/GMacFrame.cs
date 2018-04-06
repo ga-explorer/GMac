@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacCompiler.Symbolic.Frame;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic.Frames;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Scope;
 using IronyGrammars.Semantic.Symbol;
@@ -20,7 +20,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <summary>
         /// The associated sumbolic GA frame
         /// </summary>
-        internal GaFrame AssociatedSymbolicFrame { get; }
+        internal GaSymFrame SymbolicFrame { get; }
 
         /// <summary>
         /// The GMac base frame if this is a rerived frame
@@ -86,7 +86,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <summary>
         /// The base vector space dimension of this frame
         /// </summary>
-        public int VSpaceDimension => AssociatedSymbolicFrame.VSpaceDimension;
+        public int VSpaceDimension => SymbolicFrame.VSpaceDimension;
 
         /// <summary>
         /// Get the GA space dimension of the frame
@@ -112,10 +112,10 @@ namespace GMac.GMacCompiler.Semantic.AST
         }
 
 
-        internal GMacFrame(string frameName, LanguageScope parentScope, GaFrame attachedFrame)
+        internal GMacFrame(string frameName, LanguageScope parentScope, GaSymFrame attachedFrame)
             : base(frameName, parentScope, RoleNames.Frame)
         {
-            AssociatedSymbolicFrame = attachedFrame;
+            SymbolicFrame = attachedFrame;
 
             FrameBasisVectors = 
                 ChildSymbolScope.Symbols(RoleNames.FrameBasisVector).Cast<GMacFrameBasisVector>();
@@ -143,7 +143,7 @@ namespace GMac.GMacCompiler.Semantic.AST
 
         public string BasisBladeName(int grade, int index)
         {
-            return BasisVectorNames.ConcatenateUsingPattern(FrameUtils.BasisBladeId(grade, index), "E0", "^");
+            return BasisVectorNames.ConcatenateUsingPattern(GMacMathUtils.BasisBladeId(grade, index), "E0", "^");
         }
 
         public string BasisBladeName(int basisBladeId, BasisBladeFormat nameFormat)
@@ -154,7 +154,7 @@ namespace GMac.GMacCompiler.Semantic.AST
                     return BasisBladeName(basisBladeId);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return FrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
+                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
 
                 case BasisBladeFormat.GradePlusIndex:
                     return basisBladeId.BasisBladeGradeIndexName();
@@ -172,13 +172,13 @@ namespace GMac.GMacCompiler.Semantic.AST
                     return BasisBladeName(grade, index);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return FrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
+                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
 
                 case BasisBladeFormat.GradePlusIndex:
-                    return FrameUtils.BasisBladeGradeIndexName(grade, index);
+                    return GMacMathUtils.BasisBladeGradeIndexName(grade, index);
 
                 default:
-                    return FrameUtils.BasisBladeIndexedName(grade, index);
+                    return GMacMathUtils.BasisBladeIndexedName(grade, index);
             }
         }
 
@@ -237,7 +237,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         {
             var basisVectorIndex = FrameBasisVectors.Count();
 
-            var signature = AssociatedSymbolicFrame.BasisVectorSignature(basisVectorIndex);
+            var signature = SymbolicFrame.BasisVectorSignature(basisVectorIndex);
 
             return new GMacFrameBasisVector(symbolName, this, basisVectorIndex, signature);
         }

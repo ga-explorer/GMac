@@ -231,8 +231,39 @@ namespace SymbolicInterface.Mathematica
             }
         }
 
-        
-        
+        public static Expr Simplify(this Expr expr, MathematicaInterface casInterface)
+        {
+            return expr.AtomQ() 
+                ? expr 
+                : casInterface[Mfs.Simplify[expr]];
+        }
+
+        public static bool IsZero(this Expr expr)
+        {
+            return expr.NumberQ() && expr.ToString() == "0";
+        }
+
+        public static bool IsEqualZero(this Expr expr, MathematicaInterface casInterface)
+        {
+            return (expr.NumberQ() && expr.ToString() == "0") ||
+                   casInterface.EvalTrueQ(Mfs.Equal[expr, Expr.INT_ZERO]);
+        }
+
+        public static bool IsNullOrZero(this Expr expr)
+        {
+            return ReferenceEquals(expr, null) ||
+                   (expr.NumberQ() && expr.ToString() == "0");
+        }
+
+
+        public static bool IsNullOrEqualZero(this Expr expr, MathematicaInterface casInterface)
+        {
+            return ReferenceEquals(expr, null) || 
+                   (expr.NumberQ() && expr.ToString() == "0") || 
+                   casInterface.EvalTrueQ(Mfs.Equal[expr, Expr.INT_ZERO]);
+        }
+
+
         /// <summary>
         /// Evaluates the given expression and if the result is 'True' it returns true
         /// If the result is anything else it returns false and raises no errors

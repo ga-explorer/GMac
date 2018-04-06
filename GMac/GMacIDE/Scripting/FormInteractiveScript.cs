@@ -8,7 +8,6 @@ using GMac.GMacAST;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using GMac.GMacScripting;
-using GMac.GMacUtils;
 using IronyGrammars.Semantic.Symbol;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;

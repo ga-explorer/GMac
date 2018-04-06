@@ -7,14 +7,14 @@ using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacCompiler.Symbolic;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic;
+using GMac.GMacMath.Symbolic.Multivectors;
 using SymbolicInterface.Mathematica;
 using SymbolicInterface.Mathematica.Expression;
 using SymbolicInterface.Mathematica.ExprFactory;
 using TextComposerLib.Text.Parametric;
 using Wolfram.NETLink;
-using FrameUtils = GMac.GMacUtils.EuclideanUtils;
 
 namespace GMac.GMacAPI.Binding
 {
@@ -45,13 +45,13 @@ namespace GMac.GMacAPI.Binding
         {
             var mvPattern = new GMacMultivectorBinding(mv.FrameMultivector);
 
-            foreach (var term in mv.AssociatedMultivectorValue.MultivectorCoefficients)
+            foreach (var term in mv.AssociatedMultivectorValue.SymbolicMultivector.NonZeroTerms)
             {
                 if (ignoreZeroCoefs && term.Value.IsZero())
                     continue;
 
                 if (term.Value.IsConstant())
-                    mvPattern.BindCoefToConstant(term.Key, term.Value.MathExpr);
+                    mvPattern.BindCoefToConstant(term.Key, term.Value.Expression);
             }
 
             return mvPattern;
@@ -67,7 +67,7 @@ namespace GMac.GMacAPI.Binding
         {
             var mvPattern = new GMacMultivectorBinding(mv.FrameMultivector);
 
-            foreach (var term in mv.AssociatedMultivectorValue.MultivectorCoefficients)
+            foreach (var term in mv.AssociatedMultivectorValue.SymbolicMultivector.NonZeroTerms)
                 if (term.Value.IsConstant() == false)
                     mvPattern.BindCoefToVariable(term.Key);
 
@@ -85,7 +85,7 @@ namespace GMac.GMacAPI.Binding
         {
             var mvPattern = new GMacMultivectorBinding(mv.FrameMultivector);
 
-            foreach (var term in mv.AssociatedMultivectorValue.MultivectorCoefficients)
+            foreach (var term in mv.AssociatedMultivectorValue.SymbolicMultivector.NonZeroTerms)
             {
                 if (ignoreZeroCoefs && term.Value.IsZero())
                     continue;
@@ -107,7 +107,7 @@ namespace GMac.GMacAPI.Binding
         {
             var mvPattern = new GMacMultivectorBinding(mv.FrameMultivector);
 
-            foreach (var term in mv.AssociatedMultivectorValue.MultivectorCoefficients)
+            foreach (var term in mv.AssociatedMultivectorValue.SymbolicMultivector.NonZeroTerms)
             {
                 if (ignoreZeroCoefs && term.Value.IsZero())
                     continue;
@@ -143,13 +143,13 @@ namespace GMac.GMacAPI.Binding
         {
             var mvPattern = new GMacMultivectorBinding(mv.FrameMultivector);
 
-            foreach (var term in mv.AssociatedMultivectorValue.MultivectorCoefficients)
+            foreach (var term in mv.AssociatedMultivectorValue.SymbolicMultivector.NonZeroTerms)
             {
                 if (ignoreZeroCoefs && term.Value.IsZero())
                     continue;
 
                 if (term.Value.IsConstant())
-                    mvPattern.BindCoefToConstant(term.Key, term.Value.MathExpr);
+                    mvPattern.BindCoefToConstant(term.Key, term.Value.Expression);
 
                 else
                     mvPattern.BindCoefToVariable(term.Key);
@@ -280,7 +280,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The multivector grades having some scalar binding in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundGrades => BoundIDs.Select(GMacUtils.FrameUtils.BasisBladeGrade).Distinct();
+        public IEnumerable<int> BoundGrades => BoundIDs.Select(GMacMathUtils.BasisBladeGrade).Distinct();
 
         /// <summary>
         /// The multivector grades not having any scalar bindings in this binding pattern
@@ -353,7 +353,7 @@ namespace GMac.GMacAPI.Binding
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public GMacScalarBinding this[int grade, int index] => _patternDictionary[GMacUtils.FrameUtils.BasisBladeId(grade, index)];
+        public GMacScalarBinding this[int grade, int index] => _patternDictionary[GMacMathUtils.BasisBladeId(grade, index)];
 
 
         private GMacMultivectorBinding(AstFrameMultivector patternType)
@@ -382,7 +382,7 @@ namespace GMac.GMacAPI.Binding
 
         public bool HasBoundCoef(int grade, int index)
         {
-            return _patternDictionary.ContainsKey(GMacUtils.FrameUtils.BasisBladeId(grade, index));
+            return _patternDictionary.ContainsKey(GMacMathUtils.BasisBladeId(grade, index));
         }
 
         public bool HasBoundCoefOfGrade(int grade)
@@ -476,7 +476,7 @@ namespace GMac.GMacAPI.Binding
 
         public GMacMultivectorBinding UnBindCoef(int grade, int index)
         {
-            _patternDictionary.Remove(GMacUtils.FrameUtils.BasisBladeId(grade, index));
+            _patternDictionary.Remove(GMacMathUtils.BasisBladeId(grade, index));
 
             return this;
         }
@@ -491,7 +491,7 @@ namespace GMac.GMacAPI.Binding
 
         public GMacMultivectorBinding UnBindKVector(int grade)
         {
-            UnBindCoefs(GMacUtils.FrameUtils.BasisBladeIDsOfGrade(BaseFrame.VSpaceDimension, grade));
+            UnBindCoefs(GMacMathUtils.BasisBladeIDsOfGrade(BaseFrame.VSpaceDimension, grade));
 
             return this;
         }
@@ -499,7 +499,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding UnBindCoefs(int grade, IEnumerable<int> indexes)
         {
             foreach (var index in indexes)
-                _patternDictionary.Remove(GMacUtils.FrameUtils.BasisBladeId(grade, index));
+                _patternDictionary.Remove(GMacMathUtils.BasisBladeId(grade, index));
 
             return this;
         }
@@ -549,7 +549,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindCoefToConstant(int grade, int index, Expr valueExpr)
         {
             return BindCoefToPattern(
-                GMacUtils.FrameUtils.BasisBladeId(grade, index),
+                GMacMathUtils.BasisBladeId(grade, index),
                 GMacScalarBinding.CreateConstant(BaseFrameMultivector.Root, valueExpr)
                 );
         }
@@ -557,7 +557,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindCoefToVariable(int grade, int index)
         {
             return BindCoefToPattern(
-                GMacUtils.FrameUtils.BasisBladeId(grade, index),
+                GMacMathUtils.BasisBladeId(grade, index),
                 GMacScalarBinding.CreateVariable(BaseFrameMultivector.Root)
                 );
         }
@@ -565,7 +565,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindBasisVectorCoefToConstant(int index, Expr valueExpr)
         {
             return BindCoefToPattern(
-                GMacUtils.FrameUtils.BasisVectorId(index),
+                GMacMathUtils.BasisVectorId(index),
                 GMacScalarBinding.CreateConstant(BaseFrameMultivector.Root, valueExpr)
                 );
         }
@@ -573,7 +573,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindBasisVectorCoefToVariable(int index)
         {
             return BindCoefToPattern(
-                GMacUtils.FrameUtils.BasisVectorId(index),
+                GMacMathUtils.BasisVectorId(index),
                 GMacScalarBinding.CreateVariable(BaseFrameMultivector.Root)
                 );
         }
@@ -618,7 +618,7 @@ namespace GMac.GMacAPI.Binding
                 throw new InvalidOperationException("Grade not accepted");
 
             var kvSpaceDim = 
-                GMacUtils.FrameUtils.KvSpaceDimension(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension, grade);
+                GMacMathUtils.KvSpaceDimension(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
                 BindCoefToVariable(grade, index);
@@ -742,12 +742,12 @@ namespace GMac.GMacAPI.Binding
         /// <returns></returns>
         public GMacMultivectorBinding BindUsing(AstValueMultivector mvValue)
         {
-            foreach (var term in mvValue.AssociatedMultivectorValue.MultivectorCoefficients)
+            foreach (var term in mvValue.AssociatedMultivectorValue.SymbolicMultivector.NonZeroExprTerms)
             {
-                var expr = term.Value.MathExpr;
+                var expr = term.Value;
 
                 if (SymbolicUtils.Cas[Mfs.NumericQ[expr]].TrueQ())
-                    BindCoefToConstant(term.Key, term.Value.MathExpr);
+                    BindCoefToConstant(term.Key, expr);
 
                 else
                     BindCoefToVariable(term.Key);
@@ -913,10 +913,12 @@ namespace GMac.GMacAPI.Binding
         /// <returns></returns>
         public AstValueMultivector ToValue(StringSequenceTemplate varNameTemplate)
         {
-            var mv = GaMultivector.CreateZero(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                );
 
             foreach (var pair in _patternDictionary)
-                mv[pair.Key] = pair.Value.ToMathematicaScalar(varNameTemplate);
+                mv.AddFactor(pair.Key, pair.Value.ToMathematicaScalar(varNameTemplate));
 
             return new AstValueMultivector(
                 GMacValueMultivector.Create(
@@ -935,15 +937,17 @@ namespace GMac.GMacAPI.Binding
         {
             //var frameInfo = new AstFrame(MultivectorType.AssociatedFrameMultivector.ParentFrame);
 
-            var mv = GaMultivector.CreateZero(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                );
 
             foreach (var pair in _patternDictionary)
-                mv[pair.Key] =
+                mv.AddFactor(
+                    pair.Key,
                     pair.Value.IsConstant
-                    ? pair.Value.ConstantSymbolicScalar
-                    : MathematicaScalar.Create(
-                        SymbolicUtils.Cas, basisBladeToVarName(pair.Key)
-                        );
+                        ? pair.Value.ConstantSymbolicScalar
+                        : MathematicaScalar.Create(SymbolicUtils.Cas, basisBladeToVarName(pair.Key))
+                );
 
             return
                 new AstValueMultivector(
@@ -963,15 +967,17 @@ namespace GMac.GMacAPI.Binding
         {
             var frameInfo = new AstFrame(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame);
 
-            var mv = GaMultivector.CreateZero(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                );
 
             foreach (var pair in _patternDictionary)
-                mv[pair.Key] =
+                mv.AddFactor(
+                    pair.Key,
                     pair.Value.IsConstant
-                    ? pair.Value.ConstantSymbolicScalar
-                    : MathematicaScalar.Create(
-                        SymbolicUtils.Cas, basisBladeToVarName(frameInfo, pair.Key)
-                        );
+                        ? pair.Value.ConstantSymbolicScalar
+                        : MathematicaScalar.Create(SymbolicUtils.Cas, basisBladeToVarName(frameInfo, pair.Key))
+                );
 
             return
                 new AstValueMultivector(
@@ -991,15 +997,17 @@ namespace GMac.GMacAPI.Binding
         {
             var frameInfo = new AstFrame(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame);
 
-            var mv = GaMultivector.CreateZero(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                );
 
             foreach (var pair in _patternDictionary)
-                mv[pair.Key] = 
+                mv.AddFactor(
+                    pair.Key,
                     pair.Value.IsConstant 
-                    ? pair.Value.ConstantSymbolicScalar
-                    : MathematicaScalar.Create(
-                        SymbolicUtils.Cas, basisBladeToVarName(frameInfo.BasisBlade(pair.Key))
-                        );
+                        ? pair.Value.ConstantSymbolicScalar
+                        : MathematicaScalar.Create(SymbolicUtils.Cas, basisBladeToVarName(frameInfo.BasisBlade(pair.Key)))
+                );
 
             return 
                 new AstValueMultivector(

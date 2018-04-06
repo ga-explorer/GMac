@@ -45,8 +45,8 @@ namespace GMac.GMacAPI.CodeBlock
         /// </summary>
         public GMacCbComputedVariable LastUsingVariable =>
             _userVariables?
-            .OrderBy(v => v.ComputationOrder)
-            .LastOrDefault();
+            .OrderByDescending(v => v.ComputationOrder)
+            .FirstOrDefault();
 
         /// <summary>
         /// The computation order of the last computed variable using this input variable in its computation

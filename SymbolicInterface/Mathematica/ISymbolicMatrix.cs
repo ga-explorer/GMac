@@ -4,9 +4,9 @@ namespace SymbolicInterface.Mathematica
 {
     public interface ISymbolicMatrix : ISymbolicObject
     {
-        int Rows { get; }
+        int RowCount { get; }
 
-        int Columns { get; }
+        int ColumnCount { get; }
 
 
         bool IsZero();

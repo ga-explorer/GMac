@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using GMac.GMacAPI.CodeGen;
 using GMac.GMacAST.Symbols;
-using GMac.GMacUtils;
 using TextComposerLib.Logs.Progress.UI;
 using TextComposerLib.Files.UI;
 

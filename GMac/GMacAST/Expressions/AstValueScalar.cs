@@ -27,7 +27,7 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// The Mathematica expression of this value
         /// </summary>
-        public Expr ScalarValueExpr => AssociatedScalarValue.Value.MathExpr;
+        public Expr ScalarValueExpr => AssociatedScalarValue.Value.Expression;
 
         /// <summary>
         /// True if the value of this scalar is the integer zero

@@ -11,8 +11,7 @@ using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTDebug;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer;
-using GMac.GMacCompiler.Symbolic;
-using GMac.GMacUtils;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica;
 using SymbolicInterface.Mathematica.Expression;
@@ -776,7 +775,7 @@ namespace GMac.GMacAPI.Binding
         {
             return BindScalarToPattern(
                 ToValueAccess(valueAccessName, ScalarType),
-                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.MathExpr)
+                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.Expression)
                 );
         }
 
@@ -789,7 +788,7 @@ namespace GMac.GMacAPI.Binding
         {
             return BindScalarToPattern(
                 valueAccess,
-                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.MathExpr)
+                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.Expression)
                 );
         }
 
@@ -802,7 +801,7 @@ namespace GMac.GMacAPI.Binding
         {
             return BindScalarToPattern(
                 ToValueAccess(valueAccessName, ScalarType),
-                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.AssociatedScalarValue.Value.MathExpr)
+                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.AssociatedScalarValue.Value.Expression)
                 );
         }
 

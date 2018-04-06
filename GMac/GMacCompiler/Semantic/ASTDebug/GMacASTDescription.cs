@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using IronyGrammars.DSLDebug;
@@ -80,7 +79,7 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
             Log.Append("(");
 
             var flag = false;
-            foreach (var pair in value.MultivectorCoefficients)
+            foreach (var pair in value.SymbolicMultivector.NonZeroExprTerms)
             {
                 if (flag)
                     Log.Append(", ");
@@ -92,7 +91,7 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
                 Log.Append("#");
                 Log.Append(" = ");
                 Log.Append("'");
-                Log.Append(pair.Value.ExpressionText);
+                Log.Append(pair.Value.ToString());
                 Log.Append("'");
             }
 
@@ -582,7 +581,7 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
             Log.AppendAtNewLine("signature ");
 
             Log.Append("IPM ' ");
-            Log.Append(frame.AssociatedSymbolicFrame.Ipm.ToString());
+            Log.Append(frame.SymbolicFrame.Ipm.ToString());
             Log.AppendLine(" '");
 
             Log.AppendLineAtNewLine();

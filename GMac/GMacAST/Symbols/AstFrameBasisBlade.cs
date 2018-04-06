@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using GMac.GMacAST.Expressions;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacCompiler.Symbolic;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic;
+using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Symbol;
 using SymbolicInterface.Mathematica.Expression;
 using UtilLib.DataStructures.SimpleTree;
 using Wolfram.NETLink;
-using FrameUtils = GMac.GMacUtils.EuclideanUtils;
 
 namespace GMac.GMacAST.Symbols
 {
@@ -262,7 +262,7 @@ namespace GMac.GMacAST.Symbols
             return new AstValueMultivector(
                 GMacValueMultivector.Create(
                         AssociatedFrame.MultivectorType,
-                        GaMultivector.CreateBasisBlade(
+                        GaSymMultivector.CreateBasisBlade(
                             AssociatedFrame.GaSpaceDimension,
                             BasisBladeId
                             )
@@ -314,13 +314,13 @@ namespace GMac.GMacAST.Symbols
         internal AstFrameBasisBlade(GMacFrameMultivector mvType, int grade, int index)
         {
             AssociatedMultivector = mvType;
-            BasisBladeId = GMacUtils.FrameUtils.BasisBladeId(grade, index);
+            BasisBladeId = GMacMathUtils.BasisBladeId(grade, index);
         }
 
         internal AstFrameBasisBlade(GMacFrame frame, int grade, int index)
         {
             AssociatedMultivector = frame.MultivectorType;
-            BasisBladeId = GMacUtils.FrameUtils.BasisBladeId(grade, index);
+            BasisBladeId = GMacMathUtils.BasisBladeId(grade, index);
         }
     }
 }

@@ -2,7 +2,8 @@
 using System.Linq;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic.Frames;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
@@ -22,6 +23,8 @@ namespace GMac.GMacAST.Symbols
 
         internal override LanguageSymbol AssociatedSymbol => AssociatedFrame;
 
+
+        public GaSymFrame AssociatedSymbolicFrame => AssociatedFrame?.SymbolicFrame;
 
         public override bool IsValidFrame => AssociatedFrame != null;
 
@@ -324,10 +327,10 @@ namespace GMac.GMacAST.Symbols
         /// <returns></returns>
         public MathematicaScalar[,] GetInnerProductMatrix()
         {
-            var ipm = AssociatedFrame.AssociatedSymbolicFrame.Ipm;
+            var ipm = AssociatedFrame.SymbolicFrame.Ipm;
 
-            var rows = ipm.Rows;
-            var cols = ipm.Columns;
+            var rows = ipm.RowCount;
+            var cols = ipm.ColumnCount;
 
             var result = new MathematicaScalar[rows, cols];
 
@@ -391,7 +394,7 @@ namespace GMac.GMacAST.Symbols
         public string BasisBladeName(int grade, int index)
         {
             return AssociatedFrame.BasisVectorNames.ConcatenateUsingPattern(
-                FrameUtils.BasisBladeId(grade, index), "E0", "^"
+                GMacMathUtils.BasisBladeId(grade, index), "E0", "^"
                 );
         }
 
@@ -403,7 +406,7 @@ namespace GMac.GMacAST.Symbols
                     return BasisBladeName(basisBladeId);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return FrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
+                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
 
                 case BasisBladeFormat.GradePlusIndex:
                     return basisBladeId.BasisBladeGradeIndexName();
@@ -421,13 +424,13 @@ namespace GMac.GMacAST.Symbols
                     return BasisBladeName(grade, index);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return FrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
+                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
 
                 case BasisBladeFormat.GradePlusIndex:
-                    return FrameUtils.BasisBladeGradeIndexName(grade, index);
+                    return GMacMathUtils.BasisBladeGradeIndexName(grade, index);
 
                 default:
-                    return FrameUtils.BasisBladeIndexedName(grade, index);
+                    return GMacMathUtils.BasisBladeIndexedName(grade, index);
             }
         }
 
@@ -489,7 +492,7 @@ namespace GMac.GMacAST.Symbols
         /// <returns></returns>
         public IEnumerable<AstFrameBasisBlade> BasisBladesOfGrade(int grade, params int[] indexSeq)
         {
-            return BasisBlades(this.BasisBladeIDsOfGrade(grade, indexSeq));
+            return BasisBlades(this.BasisBladeIDsOfGradeIndex(grade, indexSeq));
         }
 
         /// <summary>
@@ -533,7 +536,7 @@ namespace GMac.GMacAST.Symbols
 
             for (var grade = startGrade; grade <= VSpaceDimension; grade++)
             {
-                var kvSpaceDim = FrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GMacMathUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
 
@@ -557,7 +560,7 @@ namespace GMac.GMacAST.Symbols
 
             foreach (var grade in gradesSeq)
             {
-                var kvSpaceDim = FrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GMacMathUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
 
@@ -581,7 +584,7 @@ namespace GMac.GMacAST.Symbols
 
             foreach (var grade in gradesSeq)
             {
-                var kvSpaceDim = FrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GMacMathUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
 

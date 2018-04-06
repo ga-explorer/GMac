@@ -1,6 +1,6 @@
 ﻿using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacUtils;
+using GMac.GMacMath.Symbolic.Products;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica.Expression;
 
@@ -31,7 +31,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator.Unary
         {
             return ValuePrimitive<MathematicaScalar>.Create(
                 value1.GMacRootAst.ScalarType,
-                value1.MultivectorCoefficients.EuclideanMagnitude2()
+                value1.SymbolicMultivector.EMagnitude2()
                 );
         }
     }

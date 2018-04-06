@@ -1,5 +1,5 @@
 ﻿using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using Irony.Parsing;
 using IronyGrammars.Semantic;
 using IronyGrammars.Semantic.Scope;

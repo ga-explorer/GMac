@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using GMac.GMacCompiler.Semantic.AST;
 using IronyGrammars.DSLInterpreter;
 using IronyGrammars.Semantic.Command;

@@ -12,7 +12,7 @@ namespace SymbolicInterface.Mathematica.ExpressionTree
             var srcStk = new Stack<Expr>();
             var dstStk = new Stack<CasExpressionTreeNode>();
 
-            var rootExpr = expr.MathExpr;
+            var rootExpr = expr.Expression;
             var rootNode = new CasExpressionTreeNode(lhsVarName, expr);
             var tree = new CasExpressionTree(rootNode, subExprDict);
 

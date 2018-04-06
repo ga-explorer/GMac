@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GMac.GMacCompiler.Semantic.AST;
+using GMac.GMacMath;
 using IronyGrammars.Semantic.Symbol;
-using FrameUtils = GMac.GMacUtils.EuclideanUtils;
 
 namespace GMac.GMacAST.Symbols
 {
@@ -42,7 +42,7 @@ namespace GMac.GMacAST.Symbols
                     AssociatedSubspace
                     .SubspaceSignaturePattern
                     .TrueIndexes
-                    .Select(GMacUtils.FrameUtils.BasisBladeGrade)
+                    .Select(GMacMathUtils.BasisBladeGrade)
                     .Distinct()
                     .OrderBy(grade => grade);
             }

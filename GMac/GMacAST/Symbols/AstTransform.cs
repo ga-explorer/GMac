@@ -1,5 +1,5 @@
 ﻿using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacCompiler.Symbolic.GALT;
+using GMac.GMacMath.Symbolic.Maps.Unilinear;
 using IronyGrammars.Semantic.Symbol;
 
 namespace GMac.GMacAST.Symbols
@@ -11,7 +11,7 @@ namespace GMac.GMacAST.Symbols
 
         internal override LanguageSymbol AssociatedSymbol => AssociatedTransform;
 
-        internal GaLinearTransform AssociatedSymbolicTransform => AssociatedTransform.AssociatedSymbolicTransform;
+        internal IGaSymMapUnilinear AssociatedSymbolicTransform => AssociatedTransform.AssociatedSymbolicTransform;
 
 
         public override bool IsValidTransform => AssociatedTransform != null;

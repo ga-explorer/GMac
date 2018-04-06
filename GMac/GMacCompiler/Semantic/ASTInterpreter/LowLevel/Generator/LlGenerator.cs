@@ -2,8 +2,7 @@
 using System.Linq;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacCompiler.Symbolic;
-using GMac.GMacUtils;
+using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.DSLInterpreter;
 using IronyGrammars.Semantic.Command;
 using IronyGrammars.Semantic.Expression;
@@ -15,7 +14,6 @@ using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
-using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -188,7 +186,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
                 return GMacValueMultivector.Create(
                     mvType,
-                    GaMultivector.CreateScalar(
+                    GaSymMultivector.CreateScalar(
                         mvType.ParentFrame.GaSpaceDimension,
                         scalarValue
                         )
@@ -202,7 +200,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
                 return GMacValueMultivector.Create(
                     mvType,
-                    GaMultivector.CreateCopy(mvValue.MultivectorCoefficients)
+                    GaSymMultivector.CreateCopy(mvValue.SymbolicMultivector)
                     );
             }
 
@@ -222,7 +220,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
             return GMacValueMultivector.Create(
                 transform.TargetFrame.MultivectorType,
-                transform.AssociatedSymbolicTransform.Transform(value1.MultivectorCoefficients)
+                transform.AssociatedSymbolicTransform[value1.SymbolicMultivector]
                 );
         }
 

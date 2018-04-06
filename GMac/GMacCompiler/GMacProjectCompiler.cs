@@ -6,7 +6,6 @@ using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTGenerator;
 using GMac.GMacCompiler.Syntax;
 using GMac.GMacIDE;
-using GMac.GMacUtils;
 using Irony.Parsing;
 using IronyGrammars.Compiler;
 using IronyGrammars.SourceCode;

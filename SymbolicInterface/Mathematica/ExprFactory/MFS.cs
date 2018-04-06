@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Wolfram.NETLink;
 
 namespace SymbolicInterface.Mathematica.ExprFactory
@@ -9,83 +12,120 @@ namespace SymbolicInterface.Mathematica.ExprFactory
     /// </summary>
     public sealed class Mfs
     {
-        public static readonly Mfs NumericQ = new Mfs("NumericQ");
+        public static Mfs NumericQ { get; } = new Mfs("NumericQ");
 
-        public static readonly Mfs PossibleZeroQ = new Mfs("PossibleZeroQ");
-        public static readonly Mfs Equal = new Mfs("Equal");
-        public static readonly Mfs Unequal = new Mfs("Unequal");
-        public static readonly Mfs Greater = new Mfs("Greater");
-        public static readonly Mfs GreaterEqual = new Mfs("GreaterEqual");
-        public static readonly Mfs Less = new Mfs("Less");
-        public static readonly Mfs LessEqual = new Mfs("LessEqual");
-        public static readonly Mfs Not = new Mfs("Not");
-        public static readonly Mfs And = new Mfs("And");
-        public static readonly Mfs Or = new Mfs("Or");
-        public static readonly Mfs Nand = new Mfs("Nand");
-        public static readonly Mfs Nor = new Mfs("Nor");
+        public static Mfs PossibleZeroQ { get; } = new Mfs("PossibleZeroQ");
+        public static Mfs Equal { get; } = new Mfs("Equal");
+        public static Mfs Unequal { get; } = new Mfs("Unequal");
+        public static Mfs Greater { get; } = new Mfs("Greater");
+        public static Mfs GreaterEqual { get; } = new Mfs("GreaterEqual");
+        public static Mfs Less { get; } = new Mfs("Less");
+        public static Mfs LessEqual { get; } = new Mfs("LessEqual");
+        public static Mfs Not { get; } = new Mfs("Not");
+        public static Mfs And { get; } = new Mfs("And");
+        public static Mfs Or { get; } = new Mfs("Or");
+        public static Mfs Nand { get; } = new Mfs("Nand");
+        public static Mfs Nor { get; } = new Mfs("Nor");
         
-        public static readonly Mfs Plus = new Mfs("Plus");
-        public static readonly Mfs Minus = new Mfs("Minus");
-        public static readonly Mfs Subtract = new Mfs("Subtract");
-        public static readonly Mfs Times = new Mfs("Times");
-        public static readonly Mfs Divide = new Mfs("Divide");
-        public static readonly Mfs Power = new Mfs("Power");
-        public static readonly Mfs Dot = new Mfs("Dot");
+        public static Mfs Plus { get; } = new Mfs("Plus");
+        public static Mfs Minus { get; } = new Mfs("Minus");
+        public static Mfs Subtract { get; } = new Mfs("Subtract");
+        public static Mfs Times { get; } = new Mfs("Times");
+        public static Mfs Divide { get; } = new Mfs("Divide");
+        public static Mfs Power { get; } = new Mfs("Power");
+        public static Mfs Dot { get; } = new Mfs("Dot");
 
-        public static readonly Mfs Rational = new Mfs("Rational");
-        public static readonly Mfs Abs = new Mfs("Abs");
-        public static readonly Mfs Sqrt = new Mfs("Sqrt");
-        public static readonly Mfs Sin = new Mfs("Sin");
-        public static readonly Mfs Cos = new Mfs("Cos");
-        public static readonly Mfs Tan = new Mfs("Tan");
-        public static readonly Mfs Sinh = new Mfs("Sinh");
-        public static readonly Mfs Cosh = new Mfs("Cosh");
-        public static readonly Mfs Tanh = new Mfs("Tanh");
-        public static readonly Mfs Exp = new Mfs("Exp");
-        public static readonly Mfs Log = new Mfs("Log");
-        public static readonly Mfs Log2 = new Mfs("Log2");
-        public static readonly Mfs Log10 = new Mfs("Log10");
-        public static readonly Mfs D = new Mfs("D");
-        public static readonly Mfs N = new Mfs("N");
+        public static Mfs Rational { get; } = new Mfs("Rational");
+        public static Mfs Abs { get; } = new Mfs("Abs");
+        public static Mfs Sqrt { get; } = new Mfs("Sqrt");
+        public static Mfs Sin { get; } = new Mfs("Sin");
+        public static Mfs Cos { get; } = new Mfs("Cos");
+        public static Mfs Tan { get; } = new Mfs("Tan");
+        public static Mfs Sinh { get; } = new Mfs("Sinh");
+        public static Mfs Cosh { get; } = new Mfs("Cosh");
+        public static Mfs Tanh { get; } = new Mfs("Tanh");
+        public static Mfs Exp { get; } = new Mfs("Exp");
+        public static Mfs Log { get; } = new Mfs("Log");
+        public static Mfs Log2 { get; } = new Mfs("Log2");
+        public static Mfs Log10 { get; } = new Mfs("Log10");
+        public static Mfs D { get; } = new Mfs("D");
+        public static Mfs N { get; } = new Mfs("N");
 
-        public static readonly Mfs List = new Mfs("List");
-        public static readonly Mfs IdentityMatrix = new Mfs("IdentityMatrix");
-        public static readonly Mfs ConstantArray = new Mfs("ConstantArray");
-        public static readonly Mfs DiagonalMatrix = new Mfs("DiagonalMatrix");
-        public static readonly Mfs SparseArray = new Mfs("SparseArray");
-        public static readonly Mfs Normal = new Mfs("Normal");
-        public static readonly Mfs Norm = new Mfs("Norm");
-        public static readonly Mfs VectorQ = new Mfs("VectorQ");
-        public static readonly Mfs MatrixQ = new Mfs("MatrixQ");
-        public static readonly Mfs Dimensions = new Mfs("Dimensions");
-        public static readonly Mfs Det = new Mfs("Det");
-        public static readonly Mfs Part = new Mfs("Part");
-        public static readonly Mfs Diagonal = new Mfs("Diagonal");
-        public static readonly Mfs Transpose = new Mfs("Transpose");
-        public static readonly Mfs Inverse = new Mfs("Inverse");
-        public static readonly Mfs SymmetricMatrixQ = new Mfs("SymmetricMatrixQ");
-        public static readonly Mfs Eigenvalues = new Mfs("Eigenvalues");
-        public static readonly Mfs Eigenvectors = new Mfs("Eigenvectors");
-        public static readonly Mfs Eigensystem = new Mfs("Eigensystem");
-        public static readonly Mfs Orthogonalize = new Mfs("Orthogonalize");
+        public static Mfs List { get; } = new Mfs("List");
+        public static Mfs IdentityMatrix { get; } = new Mfs("IdentityMatrix");
+        public static Mfs ConstantArray { get; } = new Mfs("ConstantArray");
+        public static Mfs DiagonalMatrix { get; } = new Mfs("DiagonalMatrix");
+        public static Mfs SparseArray { get; } = new Mfs("SparseArray");
+        public static Mfs Normal { get; } = new Mfs("Normal");
+        public static Mfs Norm { get; } = new Mfs("Norm");
+        public static Mfs VectorQ { get; } = new Mfs("VectorQ");
+        public static Mfs MatrixQ { get; } = new Mfs("MatrixQ");
+        public static Mfs Dimensions { get; } = new Mfs("Dimensions");
+        public static Mfs Det { get; } = new Mfs("Det");
+        public static Mfs Part { get; } = new Mfs("Part");
+        public static Mfs Diagonal { get; } = new Mfs("Diagonal");
+        public static Mfs Transpose { get; } = new Mfs("Transpose");
+        public static Mfs Inverse { get; } = new Mfs("Inverse");
+        public static Mfs SymmetricMatrixQ { get; } = new Mfs("SymmetricMatrixQ");
+        public static Mfs Eigenvalues { get; } = new Mfs("Eigenvalues");
+        public static Mfs Eigenvectors { get; } = new Mfs("Eigenvectors");
+        public static Mfs Eigensystem { get; } = new Mfs("Eigensystem");
+        public static Mfs Orthogonalize { get; } = new Mfs("Orthogonalize");
 
-        public static readonly Mfs Apply = new Mfs("Apply");
-        public static readonly Mfs Flatten = new Mfs("Flatten");
-        public static readonly Mfs Rule = new Mfs("Rule");
-        public static readonly Mfs RuleDelayed = new Mfs("RuleDelayed");
-        public static readonly Mfs Element = new Mfs("Element");
-        public static readonly Mfs Alternatives = new Mfs("Alternatives");
-        public static readonly Mfs Simplify = new Mfs("Simplify");
-        public static readonly Mfs FullSimplify = new Mfs("FullSimplify");
-        public static readonly Mfs ReplaceAll = new Mfs("ReplaceAll");
+        public static Mfs Apply { get; } = new Mfs("Apply");
+        public static Mfs Flatten { get; } = new Mfs("Flatten");
+        public static Mfs Rule { get; } = new Mfs("Rule");
+        public static Mfs RuleDelayed { get; } = new Mfs("RuleDelayed");
+        public static Mfs Element { get; } = new Mfs("Element");
+        public static Mfs Alternatives { get; } = new Mfs("Alternatives");
+        public static Mfs Simplify { get; } = new Mfs("Simplify");
+        public static Mfs FullSimplify { get; } = new Mfs("FullSimplify");
+        public static Mfs ReplaceAll { get; } = new Mfs("ReplaceAll");
 
-        public static readonly Mfs CForm = new Mfs("CForm");
-        public static readonly Mfs EToString = new Mfs("ToString");
+        public static Mfs CForm { get; } = new Mfs("CForm");
+        public static Mfs EToString { get; } = new Mfs("ToString");
+
+
+        public static Expr ProductExpr(params Expr[] argsList)
+        {
+            if (argsList.Length == 0)
+                return Expr.INT_ONE;
+
+            return
+                argsList.Length == 1
+                ? argsList[0]
+                : Times[argsList.Cast<object>().ToArray()];
+        }
+
+        public static Expr ProductExpr(bool isNegative, params Expr[] argsList)
+        {
+            if (argsList.Length == 0)
+                return isNegative ? Expr.INT_MINUSONE : Expr.INT_ONE;
+
+            var expr =
+                (argsList.Length == 1)
+                ? argsList[0]
+                : Times[argsList.Cast<object>().ToArray()];
+
+            return isNegative ? Minus[expr] : expr;
+        }
+
+        public static Expr SumExpr(params Expr[] argsList)
+        {
+            if (argsList.Length == 0)
+                return Expr.INT_ZERO;
+
+            return 
+                argsList.Length == 1 
+                ? argsList[0] 
+                : Plus[argsList.Cast<object>().ToArray()];
+        }
 
 
         public Expr MathExpr { get; }
 
-        public string FunctionName => MathExpr.ToString();
+        public string FunctionName 
+            => MathExpr.ToString();
 
 
         public Mfs(string functionName)
@@ -94,7 +134,8 @@ namespace SymbolicInterface.Mathematica.ExprFactory
         }
 
 
-        public Expr this[params object[] parameters] => new Expr(MathExpr, parameters);
+        public Expr this[params object[] parameters] 
+            => new Expr(MathExpr, parameters);
 
         public string this[string parametersText]
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;
@@ -87,7 +87,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel
         /// <returns></returns>
         public static bool IsLowLevelVariable(this MathematicaExpression symbolicScalar)
         {
-            var expr = symbolicScalar.MathExpr;
+            var expr = symbolicScalar.Expression;
 
             return expr.SymbolQ() && IsLowLevelVariableName(expr.ToString());
         }
@@ -101,12 +101,12 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel
 
         public static bool UsesSingleLowLevelVariable(this MathematicaScalar symbolicScalar)
         {
-            return GetLowLevelVariablesNames(symbolicScalar.MathExpr).Distinct().Count() == 1;
+            return GetLowLevelVariablesNames(symbolicScalar.Expression).Distinct().Count() == 1;
         }
 
         public static IEnumerable<string> GetDistinctLowLevelVariablesNames(this MathematicaScalar symbolicScalar)
         {
-            return GetLowLevelVariablesNames(symbolicScalar.MathExpr).Distinct();
+            return GetLowLevelVariablesNames(symbolicScalar.Expression).Distinct();
         }
 
         public static IEnumerable<string> GetLowLevelVariablesNames(this SteExpression expr)

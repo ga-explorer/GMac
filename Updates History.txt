@@ -1,0 +1,12 @@
+Version 1.3.0 - April 6th 2018
+1) Completely rewrote the core GMac Symbolic Multivector Computations engine:
+- Added the GMacMath namespace and added the Symbolic namespace under it
+- Rewrote a more efficient tree-based implementation of symbolic multivectors
+- Added comprehensive support for linear and bilinear mappings on symbolic multivectors
+- Added support for converting linear maps on multivectors between sparse tree-based implementation and traditional symbolic matrix representations for use with Wolfram Mathematica
+
+2) Added a comprehensive Numeric Multivectors Library under the GMac.GMacMath.Numric namespace, mirroring the functionality of the symbolic Multivector Computations engine. The use of Mathematica is not required for the new Numeric Multivectors library.
+
+3) Added the GMacTests and GMacBenchmarks projects to test and benchmark various GMac parts.
+
+4) Fixed a bug in the GMacAPI code generator that resulted in incorrectly emitting computational code.

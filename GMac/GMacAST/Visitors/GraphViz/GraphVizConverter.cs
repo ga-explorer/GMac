@@ -54,7 +54,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
                 .AddEdgeDefaults()
                 .SetHeadPort(DotCompass.Center)
                 .SetTailPort(DotCompass.Center)
-                .SetPenWdith(2)
+                .SetPenWidth(2)
                 .SetArrowHead(DotArrowType.Vee)
                 .SetArrowTail(DotArrowType.Crow)
                 .SetColor(DotColor.ColorList(DotColorScheme.Ylgn[9][7], DotColorScheme.Ylgn[9][2], DotColorScheme.Ylgn[9][7]));

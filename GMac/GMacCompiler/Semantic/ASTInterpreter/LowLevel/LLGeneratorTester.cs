@@ -6,7 +6,7 @@ using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
 using SymbolicInterface.Mathematica.Expression;

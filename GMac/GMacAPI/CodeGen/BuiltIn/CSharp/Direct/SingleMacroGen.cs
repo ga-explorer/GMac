@@ -6,7 +6,6 @@ using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAPI.Target;
 using GMac.GMacAST;
 using GMac.GMacAST.Symbols;
-using GMac.GMacIDE;
 using TextComposerLib.Diagrams.GraphViz.Dot;
 using TextComposerLib.Logs.Progress;
 

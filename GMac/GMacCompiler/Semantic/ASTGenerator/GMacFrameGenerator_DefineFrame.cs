@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacCompiler.Symbolic.Frame;
-using GMac.GMacUtils;
+using GMac.GMacMath;
+using GMac.GMacMath.Symbolic.Frames;
 using IronyGrammars.SourceCode;
 using UtilLib.DataStructures;
 
@@ -62,10 +62,10 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
             for (var grade = 0; grade <= frame.VSpaceDimension; grade = grade + 2)
             {
-                var basisCount = FrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
+                var basisCount = GMacMathUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
 
                 for (var index = 0; index < basisCount; index++)
-                    idsList.Add(FrameUtils.BasisBladeId(grade, index));
+                    idsList.Add(GMacMathUtils.BasisBladeId(grade, index));
             }
 
             const string subspaceName = "Even";
@@ -88,10 +88,10 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
             for (var grade = 1; grade <= frame.VSpaceDimension; grade = grade + 2)
             {
-                var basisCount = FrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
+                var basisCount = GMacMathUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
 
                 for (var index = 0; index < basisCount; index++)
-                    idsList.Add(FrameUtils.BasisBladeId(grade, index));
+                    idsList.Add(GMacMathUtils.BasisBladeId(grade, index));
             }
 
             const string subspaceName = "Odd";
@@ -109,11 +109,11 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         /// </summary>
         private void DefineDefaultSubspaces_KVectors(GMacFrame frame, int grade, string subspaceName)
         {
-            var basisCount = FrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
+            var basisCount = GMacMathUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
             var idsList = new List<int>(basisCount);
 
             for (var index = 0; index < basisCount; index++)
-                idsList.Add(FrameUtils.BasisBladeId(grade, index));
+                idsList.Add(GMacMathUtils.BasisBladeId(grade, index));
 
             var subspaceSignature = BooleanPattern.CreateFromTrueIndexes(frame.GaSpaceDimension, idsList);
 
@@ -178,7 +178,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             return frame;
         }
 
-        private GMacFrame DefineFrame(string frameName, string[] basisVectorsNames, GaFrame attachedSymbolicFrame, bool defineDefaultObjects)
+        private GMacFrame DefineFrame(string frameName, string[] basisVectorsNames, GaSymFrame attachedSymbolicFrame, bool defineDefaultObjects)
         {
             if (Context.GMacRootAst.FramesCount + 1 > GMacCompilerFeatures.MaxFramesNumber)
                 CompilationLog.RaiseGeneratorError<int>($"Can't define more than {GMacCompilerFeatures.MaxFramesNumber} frames", RootParseNode);

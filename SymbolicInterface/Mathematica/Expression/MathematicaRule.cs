@@ -20,13 +20,13 @@ namespace SymbolicInterface.Mathematica.Expression
         }
 
 
-        public bool IsImmediate => MathExpr.Head.ToString() == Mfs.Rule.ToString();
+        public bool IsImmediate => Expression.Head.ToString() == Mfs.Rule.ToString();
 
-        public bool IsDelayed => MathExpr.Head.ToString() == Mfs.RuleDelayed.ToString();
+        public bool IsDelayed => Expression.Head.ToString() == Mfs.RuleDelayed.ToString();
 
-        public Expr LhsExpr => MathExpr.Args[0];
+        public Expr LhsExpr => Expression.Args[0];
 
-        public Expr RhsExpr => MathExpr.Args[1];
+        public Expr RhsExpr => Expression.Args[1];
 
 
         private MathematicaRule(MathematicaInterface parentCas, Expr mathExpr)

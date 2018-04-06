@@ -4,7 +4,7 @@ using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacCompiler.Symbolic;
+using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using SymbolicInterface.Mathematica;
 using SymbolicInterface.Mathematica.Expression;

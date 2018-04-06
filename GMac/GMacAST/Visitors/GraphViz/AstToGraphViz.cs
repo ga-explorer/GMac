@@ -116,7 +116,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
                     "Constants",
                     "Macros"
                     )
-                .SetPenWdith(0)
+                .SetPenWidth(0)
                 .SetArrowSize(0);
 
             for (var i = 1; i <= maxNamespaceDepth; i++)

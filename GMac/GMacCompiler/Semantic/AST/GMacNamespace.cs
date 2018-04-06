@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacCompiler.Symbolic.Frame;
-using GMac.GMacCompiler.Symbolic.GALT;
+using GMac.GMacMath.Symbolic.Frames;
+using GMac.GMacMath.Symbolic.Maps.Unilinear;
 using Irony.Parsing;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Scope;
@@ -101,7 +101,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <param name="basisVectorsNames"></param>
         /// <param name="attachedSymbolicFrame"></param>
         /// <returns></returns>
-        internal GMacFrame DefineFrame(string frameName, string[] basisVectorsNames, GaFrame attachedSymbolicFrame)
+        internal GMacFrame DefineFrame(string frameName, string[] basisVectorsNames, GaSymFrame attachedSymbolicFrame)
         {
             var newFrame = new GMacFrame(frameName, ChildSymbolScope, attachedSymbolicFrame);
 
@@ -143,7 +143,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <param name="targetFrame"></param>
         /// <param name="baseTransform"></param>
         /// <returns></returns>
-        internal GMacMultivectorTransform DefineTransform(string transformName, GMacFrame sourceFrame, GMacFrame targetFrame, GaLinearTransform baseTransform)
+        internal GMacMultivectorTransform DefineTransform(string transformName, GMacFrame sourceFrame, GMacFrame targetFrame, GaSymMapUnilinear baseTransform)
         {
             return new GMacMultivectorTransform(transformName, ChildSymbolScope, sourceFrame, targetFrame, baseTransform);
         }
