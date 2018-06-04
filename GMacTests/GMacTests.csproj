@@ -90,21 +90,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.csproj">
+      <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>
+      <Name>GeometricAlgebraNumericsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.csproj">
+      <Project>{08858423-589f-4e23-9ea5-72ecedf3177b}</Project>
+      <Name>GeometricAlgebraSymbolicsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GMac\GMac.csproj">
       <Project>{8943d17a-189f-4ce2-960a-430755f0435b}</Project>
       <Name>GMac</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SymbolicInterface\SymbolicInterface.csproj">
-      <Project>{1a829048-079b-4ba4-8354-f5be36946d11}</Project>
-      <Name>SymbolicInterface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UtilLib\UtilLib.csproj">
       <Project>{d743aac2-6f5b-4f9f-bde8-366648110f1c}</Project>
       <Name>UtilLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Wolfram\Wolfram.csproj">
-      <Project>{6db90080-ff81-4763-a026-ead1fbf5a464}</Project>
-      <Name>Wolfram</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

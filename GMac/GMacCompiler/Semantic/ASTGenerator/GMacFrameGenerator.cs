@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using GMac.GMacCompiler.Syntax;
 using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Frames;
 using Irony.Parsing;
 using IronyGrammars.DSLException;
 using IronyGrammars.SourceCode;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Logs.Progress;
 using UtilLib.DataStructures;
 

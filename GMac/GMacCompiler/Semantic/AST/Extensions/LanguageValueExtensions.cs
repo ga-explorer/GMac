@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GMac.GMacMath.Symbolic;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica;
-using SymbolicInterface.Mathematica.Expression;
 using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.AST.Extensions
@@ -31,7 +31,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
             if (primitive2 != null)
                 return ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)value.ExpressionType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, primitive2.Value)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, primitive2.Value)
                     );
 
             //Convert into equivalent Mathematica scalar value
@@ -40,7 +40,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
             if (primitive3 != null)
                 return ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)value.ExpressionType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, primitive3.Value ? "True" : "False")
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, primitive3.Value ? "True" : "False")
                     );
 
             //if (value is ValuePrimitive<double>)

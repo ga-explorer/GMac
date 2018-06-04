@@ -1,8 +1,8 @@
-﻿using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Maps;
-using GMac.GMacMath.Symbolic.Maps.Bilinear;
-using GMac.GMacMath.Symbolic.Multivectors;
-using GMac.GMacMath.Symbolic.Multivectors.Tree;
+﻿using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Maps;
+using GeometricAlgebraSymbolicsLib.Maps.Bilinear;
+using GeometricAlgebraSymbolicsLib.Multivectors;
+using GeometricAlgebraSymbolicsLib.Multivectors.Tree;
 using TextComposerLib.Text.Markdown;
 
 namespace GMacTests.Symbolic

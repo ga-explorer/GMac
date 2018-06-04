@@ -1,7 +1,7 @@
-﻿using GMac.GMacAPI.Target.CSharp;
+﻿using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GMac.GMacAPI.Target.CSharp;
 using GMac.GMacAPI.Target.GMacDSL;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface;
 using TextComposerLib.Code.Languages;
 using TextComposerLib.Code.Languages.CSharp;
 using TextComposerLib.Code.Languages.GMacDSL;

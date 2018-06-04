@@ -1,9 +1,9 @@
-﻿using GMac.GMacAST.Symbols;
+﻿using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Multivectors;
+using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica.Expression;
 using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Expressions

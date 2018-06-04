@@ -174,185 +174,9 @@
     <Compile Include="GMacCompiler\GMacProjectCodeUnitCompiler.cs" />
     <Compile Include="GMacCompiler\GMacTempSymbolCompiler.cs" />
     <Compile Include="GMacAST\Visitors\GMacAstToTreeViewVisitor.cs" />
-    <Compile Include="GMacMath\GaUnilinearMapImplementation.cs" />
-    <Compile Include="GMacMath\Structures\GMacBinaryTreeLeafNode.cs" />
-    <Compile Include="GMacMath\Structures\GMacQuadTree.cs" />
-    <Compile Include="GMacMath\Structures\GMacQuadTreeLeafNode.cs" />
-    <Compile Include="GMacMath\Structures\GMacStructuresUtils.cs" />
-    <Compile Include="GMacMath\Structures\IGMacBinaryTree.cs" />
-    <Compile Include="GMacMath\Numeric\Frames\GaNumFrame.cs" />
-    <Compile Include="GMacMath\Numeric\Frames\GaNumFrameEuclidean.cs" />
-    <Compile Include="GMacMath\Numeric\Frames\GaNumFrameNonOrthogonal.cs" />
-    <Compile Include="GMacMath\Numeric\Frames\GaNumFrameOrthogonal.cs" />
-    <Compile Include="GMacMath\Numeric\Frames\GaNumFrameOrthonormal.cs" />
-    <Compile Include="GMacMath\Numeric\GaNumUtils.cs" />
-    <Compile Include="GMacMath\Numeric\GMacNumericException.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\GaNumMapBilinear.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\GaNumMapBilinearArray.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\GaNumMapBilinearCoefSums.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\GaNumMapBilinearCombined.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\GaNumMapBilinearHash.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\GaNumMapBilinearTree.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearArray.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearMatrix.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorTerm.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\IGaNumMultivector.cs" />
-    <Compile Include="GMacMath\Numeric\Products\IGaNumBilinearOrthogonalProduct.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Bilinear\IGaNumMapBilinear.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\GaNumMap.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\GaNumMapUtils.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\IGaNumMap.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Trilinear\GaNumMapTrilinear.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Trilinear\GaNumMapTrilinearHash.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Trilinear\IGaNumMapTrilinear.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinear.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearCoefSums.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearCombined.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearComposed.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearHash.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearIdentity.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumMapUnilinearTree.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\GaNumOutermorphism.cs" />
-    <Compile Include="GMacMath\Numeric\Maps\Unilinear\IGaNumMapUnilinear.cs" />
-    <Compile Include="GMacMath\Numeric\Metrics\GaNumMetricEuclidean.cs" />
-    <Compile Include="GMacMath\Numeric\Metrics\GaNumMetricNonOrthogonal.cs" />
-    <Compile Include="GMacMath\Numeric\Metrics\GaNumMetricOrthogonal.cs" />
-    <Compile Include="GMacMath\Numeric\Metrics\GaNumMetricOrthonormal.cs" />
-    <Compile Include="GMacMath\Numeric\Metrics\IGaNumMetric.cs" />
-    <Compile Include="GMacMath\Numeric\Metrics\IGaNumMetricOrthogonal.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivector.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorBinaryTree1D.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorBinaryTree2D.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorBinaryTree3D.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorBiTerm.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorHashTable1D.cs" />
-    <Compile Include="GMacMath\Structures\GMacHashTable2D.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorHashTable3D.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\GaNumMultivectorUtils.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\Intermediate\GaNumMultivectorTempArray.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\Intermediate\GaNumMultivectorTempHash.cs" />
-    <Compile Include="GMacMath\GaTempMultivectorImplementation.cs" />
-    <Compile Include="GMacMath\Numeric\Multivectors\Intermediate\IGaNumMultivectorTemp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumBilinearProduct.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumBilinearProductCba.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumBilinearProductEuclidean.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumBilinearProductOrthogonal.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumBilinearProductOrthonormal.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumProductsUtils.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanAcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanCp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanFdp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanGp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanHip.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanLcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanRcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Euclidean\GaNumEuclideanSp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\GaNumOp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalAcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalCp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalFdp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalGp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalHip.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalLcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalRcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthogonal\GaNumOrthogonalSp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalAcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalCp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalFdp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalGp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalHip.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalLcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalRcp.cs" />
-    <Compile Include="GMacMath\Numeric\Products\Orthonormal\GaNumOrthonormalSp.cs" />
-    <Compile Include="GMacMath\GaBilinearProductImplementation.cs" />
-    <Compile Include="GMacMath\Structures\IGMacQuadTreeNode.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearArray.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearMatrix.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorTerm.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\IGaSymBilinearOrthogonalProduct.cs" />
     <Compile Include="GMacMath\Validators\GaBilinearProductsValidator.cs" />
     <Compile Include="GMacMath\Validators\GaBladeOperationsValidator.cs" />
     <Compile Include="GMacMath\Validators\GMacMathValidator.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\GaSymMapBilinearCombined.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\GaSymMapUtils.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\IGaSymMap.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\GaSymMap.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\GaSymMapBilinearTree.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\IGaSymMapBilinear.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearCoefSums.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearCombined.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearComposed.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\IGaSymMapUnilinear.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Trilinear\IGaSymMapTrilinear.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorBinaryTree3D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorBiTerm.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymScalarBinaryTree1D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymScalarHashTable1D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymScalarHashTable2D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorBinaryTree1D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorBinaryTree2D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymScalarBinaryTree2D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Intermediate\GaSymMultivectorTempArray.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Intermediate\GaSymMultivectorTempHash.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Intermediate\IGaSymMultivectorTemp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymProductsUtils.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymBilinearProduct.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymBilinearProductEuclidean.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymBilinearProductCba.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymBilinearProductOrthonormal.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanAcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanCp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanFdp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymBilinearProductOrthogonal.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanGp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanHip.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanLcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanRcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Euclidean\GaSymEuclideanSp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\GaSymOp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalAcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalCp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalFdp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalGp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalHip.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalLcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalRcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthogonal\GaSymOrthogonalSp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalAcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalCp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalFdp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalGp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalHip.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalLcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalRcp.cs" />
-    <Compile Include="GMacMath\Symbolic\Products\Orthonormal\GaSymOrthonormalSp.cs" />
-    <Compile Include="GMacMath\Structures\GMacBinaryTree.cs" />
-    <Compile Include="GMacMath\Symbolic\Metrics\GaSymMetricEuclidean.cs" />
-    <Compile Include="GMacMath\Symbolic\Metrics\GaSymMetricOrthonormal.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\GaSymMapBilinear.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\GaSymMapBilinearArray.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\GaSymMapBilinearHash.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearHash.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearTree.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Trilinear\GaSymMapTrilinear.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Trilinear\GaSymMapTrilinearHash.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorHashTable1D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorHashTable2D.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorHashTable3D.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Bilinear\GaSymMapBilinearCoefSums.cs" />
-    <Compile Include="GMacMath\Symbolic\Metrics\GaSymMetricOrthogonal.cs" />
-    <Compile Include="GMacMath\Symbolic\Metrics\IGaMetric.cs" />
-    <Compile Include="GMacMath\Symbolic\Metrics\IGaMetricOrthogonal.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivector.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\GaSymMultivectorUtils.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\IGaSymMultivector.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Tree\GaTreeMultivectorNode.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Tree\GaTreeMultivectorLeaf.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Tree\GaTreeMultivector.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Intermediate\GaSymMultivectorTempTree.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Tree\IGaTreeMultivectorNode.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Tree\IGaTreeMultivectorParentNode.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Tree\GaTreeMultivectorUtils.cs" />
     <Compile Include="GMacIDE\FormGMacAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,7 +197,6 @@
     </Compile>
     <Compile Include="GMacIDE\GMacMacroExplorerBinding.cs" />
     <Compile Include="GMacIDE\GMacMacroExplorerBindingData.cs" />
-    <Compile Include="GMacMath\GMacBitUtils.cs" />
     <Compile Include="GMacIDE\Editor\FormCompilerOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -511,9 +334,7 @@
       <DependentUpon>FormTargetSourceFilesEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="GMacMath\GMacMathUtils.cs" />
-    <Compile Include="GMacMath\GMacRandomGenerator.cs" />
     <Compile Include="GMacSystemUtils.cs" />
-    <Compile Include="GMacMath\IGMacFrame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GMacAST\AstRoot.cs" />
@@ -624,20 +445,7 @@
     <Compile Include="GMacCompiler\Semantic\ASTConstants\BasisBladeFormat.cs" />
     <Compile Include="GMacCompiler\Semantic\ASTConstants\RoleNames.cs" />
     <Compile Include="GMacCompiler\Semantic\ASTConstants\TypeNames.cs" />
-    <Compile Include="GMacMath\Symbolic\Metrics\GaSymMetricNonOrthogonal.cs" />
-    <Compile Include="GMacMath\Symbolic\Frames\GaSymFrame.cs" />
-    <Compile Include="GMacMath\Symbolic\Frames\GaSymFrameEuclidean.cs" />
-    <Compile Include="GMacMath\Symbolic\Frames\GaSymFrameNonOrthogonal.cs" />
-    <Compile Include="GMacMath\Symbolic\Frames\GaSymFrameOrthogonal.cs" />
-    <Compile Include="GMacMath\Symbolic\Frames\GaSymFrameOrthonormal.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinear.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymMapUnilinearIdentity.cs" />
     <Compile Include="GMacMath\GMacLookupTables.cs" />
-    <Compile Include="GMacMath\Symbolic\GMacSymbolicException.cs" />
-    <Compile Include="GMacMath\Symbolic\Matrices\GaSymMatrixIdentity.cs" />
-    <Compile Include="GMacMath\Symbolic\Multivectors\Hash\GaSymMultivectorHash.cs" />
-    <Compile Include="GMacMath\Symbolic\Maps\Unilinear\GaSymOutermorphism.cs" />
-    <Compile Include="GMacMath\Symbolic\SymbolicUtils.cs" />
     <Compile Include="GMacCompiler\Syntax\GMacSourceParser.cs" />
     <Compile Include="GMacCompiler\Syntax\GMacGrammar.cs" />
     <Compile Include="GMacCompiler\Syntax\GMacParseNodeNames.cs" />
@@ -704,7 +512,6 @@
   <ItemGroup>
     <Folder Include="GMacAPI\CodeGen\BuiltIn\CSharp\Conformal\" />
     <Folder Include="GMacIDE\FramesDesigner\" />
-    <Folder Include="GMacMath\Numeric\Matrices\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -745,31 +552,26 @@
     <None Include="GMacAST\ClassDiagrams\Symbols\AstTransform_ClassDiagram.cd" />
     <None Include="GMacAST\Dependency\DependencyGraph_ClassDiagram.cd" />
     <None Include="GMacAST\Visitors\GMacAstVisitors_ClassDiagram.cd" />
-    <None Include="GMacMath\Symbolic\GaFrame_ClassDiagram.cd" />
-    <None Include="GMacMath\Symbolic\GaLinearTransform_ClassDiagram.cd" />
-    <None Include="GMacMath\Symbolic\Multivectors\GaMultivector_ClassDiagram.cd" />
-    <None Include="GMacMath\GMacBitUtils_ClassDiagram.cd" />
-    <None Include="GMacMath\GMacMathUtils_ClassDiagram.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.csproj">
+      <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>
+      <Name>GeometricAlgebraNumericsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.csproj">
+      <Project>{08858423-589f-4e23-9ea5-72ecedf3177b}</Project>
+      <Name>GeometricAlgebraSymbolicsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IronyGrammars\IronyGrammars.csproj">
       <Project>{89C1F760-833F-45BA-AF7F-74CBDF2042B5}</Project>
       <Name>IronyGrammars</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SymbolicInterface\SymbolicInterface.csproj">
-      <Project>{1A829048-079B-4BA4-8354-F5BE36946D11}</Project>
-      <Name>SymbolicInterface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UtilLib\UtilLib.csproj">
       <Project>{D743AAC2-6F5B-4F9F-BDE8-366648110F1C}</Project>
       <Name>UtilLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Wolfram\Wolfram.csproj">
-      <Project>{6db90080-ff81-4763-a026-ead1fbf5a464}</Project>
-      <Name>WolframNetLink</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

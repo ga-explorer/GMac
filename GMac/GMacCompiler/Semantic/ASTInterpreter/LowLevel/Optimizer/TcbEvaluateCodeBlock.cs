@@ -1,8 +1,8 @@
 ﻿using System.Text;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator;
-using GMac.GMacMath.Symbolic;
-using SymbolicInterface.Mathematica.ExprFactory;
 using TextComposerLib.Code.SyntaxTree.Expressions;
 using Wolfram.NETLink;
 
@@ -60,7 +60,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 
         private Expr EvaluateExpression(SteExpression expr)
         {
-            return SymbolicUtils.Cas[Mfs.Simplify[ExpressionToString(expr)]];
+            return GaSymbolicsUtils.Cas[Mfs.Simplify[ExpressionToString(expr)]];
         }
 
         protected override void BeginProcessing()

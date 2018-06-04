@@ -1,6 +1,8 @@
 ﻿using System;
-using GMac.GMacMath.Numeric.Multivectors;
-using GMac.GMacMath.Symbolic.Multivectors;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using TextComposerLib.Text.Markdown;
 
 namespace GMac.GMacMath.Validators
@@ -11,8 +13,8 @@ namespace GMac.GMacMath.Validators
             = Math.Pow(2, -26);
 
 
-        protected GMacRandomGenerator RandomGenerator { get; }
-            = new GMacRandomGenerator(10);
+        protected GaRandomGenerator RandomGenerator { get; }
+            = new GaRandomGenerator(10);
 
         public MarkdownComposer ReportComposer { get; } 
             = new MarkdownComposer();

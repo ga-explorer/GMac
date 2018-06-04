@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using IronyGrammars.DSLInterpreter;
 using IronyGrammars.Semantic.Expression;
@@ -8,7 +9,6 @@ using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Operator;
 using IronyGrammars.Semantic.Symbol;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter
 {

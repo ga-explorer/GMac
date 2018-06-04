@@ -1,5 +1,5 @@
-﻿using IronyGrammars.Semantic.Operator;
-using SymbolicInterface.Mathematica.Expression;
+﻿using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using IronyGrammars.Semantic.Operator;
 
 namespace GMac.GMacCompiler.Semantic.AST
 {

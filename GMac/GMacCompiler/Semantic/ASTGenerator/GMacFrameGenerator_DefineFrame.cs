@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Frames;
 using IronyGrammars.SourceCode;
 using UtilLib.DataStructures;
 
@@ -62,10 +62,10 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
             for (var grade = 0; grade <= frame.VSpaceDimension; grade = grade + 2)
             {
-                var basisCount = GMacMathUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
+                var basisCount = GaNumFrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
 
                 for (var index = 0; index < basisCount; index++)
-                    idsList.Add(GMacMathUtils.BasisBladeId(grade, index));
+                    idsList.Add(GaNumFrameUtils.BasisBladeId(grade, index));
             }
 
             const string subspaceName = "Even";
@@ -88,10 +88,10 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
             for (var grade = 1; grade <= frame.VSpaceDimension; grade = grade + 2)
             {
-                var basisCount = GMacMathUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
+                var basisCount = GaNumFrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
 
                 for (var index = 0; index < basisCount; index++)
-                    idsList.Add(GMacMathUtils.BasisBladeId(grade, index));
+                    idsList.Add(GaNumFrameUtils.BasisBladeId(grade, index));
             }
 
             const string subspaceName = "Odd";
@@ -109,11 +109,11 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         /// </summary>
         private void DefineDefaultSubspaces_KVectors(GMacFrame frame, int grade, string subspaceName)
         {
-            var basisCount = GMacMathUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
+            var basisCount = GaNumFrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
             var idsList = new List<int>(basisCount);
 
             for (var index = 0; index < basisCount; index++)
-                idsList.Add(GMacMathUtils.BasisBladeId(grade, index));
+                idsList.Add(GaNumFrameUtils.BasisBladeId(grade, index));
 
             var subspaceSignature = BooleanPattern.CreateFromTrueIndexes(frame.GaSpaceDimension, idsList);
 

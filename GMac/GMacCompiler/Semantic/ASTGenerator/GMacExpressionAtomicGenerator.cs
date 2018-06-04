@@ -1,13 +1,13 @@
 ﻿using System;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using GMac.GMacCompiler.Syntax;
-using GMac.GMacMath.Symbolic;
 using Irony.Parsing;
 using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.SourceCode;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.ASTGenerator
 {
@@ -70,14 +70,14 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             if (Int32.TryParse(numberText, out intNumber))
                 return ValuePrimitive<MathematicaScalar>.Create(
                     GMacRootAst.ScalarType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, intNumber)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, intNumber)
                     );
 
             Double doubleNumber;
             if (Double.TryParse(numberText, out doubleNumber))
                 return ValuePrimitive<MathematicaScalar>.Create(
                     GMacRootAst.ScalarType, 
-                    MathematicaScalar.Create(SymbolicUtils.Cas, doubleNumber)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, doubleNumber)
                     );
 
             return CompilationLog.RaiseGeneratorError<ILanguageExpression>("Constant number not recognized", node);

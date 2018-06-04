@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Code.SyntaxTree.Expressions;
 using Wolfram.NETLink;
 
@@ -33,10 +33,10 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel
             MathematicaScalar scalar;
 
             if (langType.IsNumber())
-                scalar = MathematicaScalar.Create(SymbolicUtils.Cas, 0);
+                scalar = MathematicaScalar.Create(GaSymbolicsUtils.Cas, 0);
 
             else if (langType.IsBoolean())
-                scalar = MathematicaScalar.Create(SymbolicUtils.Cas, "False");
+                scalar = MathematicaScalar.Create(GaSymbolicsUtils.Cas, "False");
 
             else
                 throw new InvalidOperationException();

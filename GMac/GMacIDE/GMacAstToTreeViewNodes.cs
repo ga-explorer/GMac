@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using IronyGrammars.Semantic;
@@ -9,7 +10,6 @@ using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using Microsoft.CSharp.RuntimeBinder;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 
 namespace GMac.GMacIDE

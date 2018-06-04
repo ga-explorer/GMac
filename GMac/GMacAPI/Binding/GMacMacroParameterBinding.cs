@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica;
-using SymbolicInterface.Mathematica.Expression;
 using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Binding
@@ -90,7 +90,7 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         internal MathematicaScalar ConstantSymbolicScalar => IsVariable
             ? null
-            : MathematicaScalar.Create(SymbolicUtils.Cas, ConstantExpr);
+            : MathematicaScalar.Create(GaSymbolicsUtils.Cas, ConstantExpr);
 
         /// <summary>
         /// The cosntant value associated with this macro parameter binding
@@ -100,7 +100,7 @@ namespace GMac.GMacAPI.Binding
             : new AstValueScalar(
                 ValuePrimitive<MathematicaScalar>.Create(
                     GMacType.AssociatedPrimitiveType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, ConstantExpr)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, ConstantExpr)
                     )
                 );
 

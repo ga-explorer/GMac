@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using GMac.GMacMath.Symbolic;
-using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Multivectors;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using IronyGrammars.Semantic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.AST
 {

@@ -1,7 +1,7 @@
-﻿using GMac.GMacCompiler.Semantic.ASTConstants;
+﻿using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GMac.GMacCompiler.Semantic.ASTConstants;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Symbol;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.AST
 {

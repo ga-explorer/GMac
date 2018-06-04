@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Text.Linear;
 using Wolfram.NETLink;
 
@@ -52,7 +52,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel
             return 
                 ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)valueType, 
-                    MathematicaScalar.Create(SymbolicUtils.Cas, valueExpr)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, valueExpr)
                     );
         }
 

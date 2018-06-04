@@ -1,7 +1,7 @@
 ﻿using System.Text;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Code.SyntaxTree.Expressions;
 using UtilLib.DataStructures.SimpleTree;
 using Wolfram.NETLink;

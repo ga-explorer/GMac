@@ -1,5 +1,4 @@
-﻿using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Multivectors;
+﻿using GeometricAlgebraSymbolicsLib.Frames;
 using TextComposerLib.Text.Markdown;
 
 namespace GMacTests.Symbolic

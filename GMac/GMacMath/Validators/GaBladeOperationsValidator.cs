@@ -1,6 +1,7 @@
 ﻿using System;
-using GMac.GMacMath.Numeric.Frames;
-using GMac.GMacMath.Symbolic.Frames;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Frames;
 
 namespace GMac.GMacMath.Validators
 {

@@ -1,8 +1,8 @@
-﻿using GMac.GMacCompiler.Semantic.AST;
+﻿using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator.Binary
 {

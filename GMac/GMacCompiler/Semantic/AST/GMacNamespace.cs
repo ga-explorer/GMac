@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Maps.Unilinear;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Maps.Unilinear;
 using Irony.Parsing;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Scope;

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTConstants;
@@ -9,8 +11,6 @@ using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Operator;
 using IronyGrammars.Semantic.Translator;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.ASTGenerator
 {

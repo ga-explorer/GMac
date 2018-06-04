@@ -1,7 +1,7 @@
 ﻿using System;
-using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Maps;
-using GMac.GMacMath.Symbolic.Maps.Bilinear;
+using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Maps;
+using GeometricAlgebraSymbolicsLib.Maps.Bilinear;
 using TextComposerLib.Text.Markdown;
 using TextComposerLib.Text.Markdown.Tables;
 using UtilLib;

@@ -5,10 +5,11 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacMath;
-using GMac.GMacMath.Symbolic;
 using GMac.Properties;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Text.Linear;
 
 namespace GMac.GMacIDE
@@ -42,8 +43,9 @@ namespace GMac.GMacIDE
 
             try
             {
-                GMacLookupTables.Choose(1, 1);
-                
+                GaLookupTables.Choose(1, 1);
+                GMacMathUtils.IsNegativeEGp(0, 0);
+
                 _log.AppendLine("Done").AppendLine();
                 labelStatus.Text = _log.ToString();
                 Application.DoEvents();
@@ -68,7 +70,7 @@ namespace GMac.GMacIDE
                 labelStatus.Text = _log.ToString();
                 Application.DoEvents();
 
-                MathematicaScalar.Create(SymbolicUtils.Cas, "0");
+                MathematicaScalar.Create(GaSymbolicsUtils.Cas, "0");
 
                 _log.AppendLine("Done").AppendLine();
                 labelStatus.Text = _log.ToString();

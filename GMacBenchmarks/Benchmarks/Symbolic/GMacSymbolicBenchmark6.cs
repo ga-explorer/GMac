@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Metrics;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraSymbolicsLib.Metrics;
 using UtilLib;
 
 namespace GMacBenchmarks.Benchmarks.Symbolic
 {
     public class GMacSymbolicBenchmark6
     {
-        private readonly GMacRandomGenerator _rand = new GMacRandomGenerator(10);
+        private readonly GaRandomGenerator _rand = new GaRandomGenerator(10);
 
         public int Size { get; } = 2048;
 

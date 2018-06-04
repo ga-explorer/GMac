@@ -1,9 +1,9 @@
 ﻿using System.Text;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Text.Parametric;
 using Wolfram.NETLink;
 
@@ -42,7 +42,7 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         internal MathematicaScalar ConstantSymbolicScalar => IsVariable
             ? null
-            : MathematicaScalar.Create(SymbolicUtils.Cas, ConstantExpr);
+            : MathematicaScalar.Create(GaSymbolicsUtils.Cas, ConstantExpr);
 
         /// <summary>
         /// The cosntant value associated with this scalar pattern. If null the pattern is a variable 
@@ -53,7 +53,7 @@ namespace GMac.GMacAPI.Binding
             : new AstValueScalar(
                 ValuePrimitive<MathematicaScalar>.Create(
                     GMacType.AssociatedPrimitiveType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, ConstantExpr)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, ConstantExpr)
                     )
                 );
 
@@ -125,7 +125,7 @@ namespace GMac.GMacAPI.Binding
             return
                 IsConstant
                 ? ConstantExpr
-                : SymbolicUtils.Cas[varNameTemplate.GenerateNextString()];
+                : GaSymbolicsUtils.Cas[varNameTemplate.GenerateNextString()];
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace GMac.GMacAPI.Binding
             return 
                 IsConstant 
                 ? ConstantSymbolicScalar 
-                : MathematicaScalar.Create(SymbolicUtils.Cas, varNameTemplate.GenerateNextString());
+                : MathematicaScalar.Create(GaSymbolicsUtils.Cas, varNameTemplate.GenerateNextString());
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace GMac.GMacAPI.Binding
                 : new AstValueScalar(
                     ValuePrimitive<MathematicaScalar>.Create(
                         GMacType.AssociatedPrimitiveType,
-                        MathematicaScalar.Create(SymbolicUtils.Cas, varNameTemplate.GenerateNextString())
+                        MathematicaScalar.Create(GaSymbolicsUtils.Cas, varNameTemplate.GenerateNextString())
                         )
                     );
         }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.DSLInterpreter;
 using IronyGrammars.Semantic.Command;
 using IronyGrammars.Semantic.Expression;
@@ -11,7 +12,6 @@ using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 

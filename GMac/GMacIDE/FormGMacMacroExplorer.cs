@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GMac.GMacAPI.Binding;
 using GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct;
 using GMac.GMacAST;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTDebug;
-using GMac.GMacMath.Symbolic;
-using SymbolicInterface.Mathematica;
 using TextComposerLib;
 using TextComposerLib.Diagrams.GraphViz.Dot;
 using TextComposerLib.Diagrams.GraphViz.UI;
@@ -229,7 +229,7 @@ namespace GMac.GMacIDE
                 
                 var testValueExpr =
                     bindingData.HasTestValue
-                    ? bindingData.TestValueText.ToExpr(SymbolicUtils.Cas)
+                    ? bindingData.TestValueText.ToExpr(GaSymbolicsUtils.Cas)
                     : null;
 
                 MacroBinding.BindToVariables(bindingData.ValueAccessName, testValueExpr);

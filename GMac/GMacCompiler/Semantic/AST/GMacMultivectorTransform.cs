@@ -1,5 +1,5 @@
-﻿using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacMath.Symbolic.Maps.Unilinear;
+﻿using GeometricAlgebraSymbolicsLib.Maps.Unilinear;
+using GMac.GMacCompiler.Semantic.ASTConstants;
 using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.Basic;
 using IronyGrammars.Semantic.Operator;

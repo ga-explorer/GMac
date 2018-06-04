@@ -1,12 +1,12 @@
-﻿using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath.Symbolic;
+﻿using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GMac.GMacCompiler.Semantic.AST;
 using Irony.Parsing;
 using IronyGrammars.Semantic;
 using IronyGrammars.Semantic.Scope;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Translator;
 using IronyGrammars.SourceCode;
-using SymbolicInterface.Mathematica;
 
 namespace GMac.GMacCompiler.Semantic.ASTGenerator
 {
@@ -19,9 +19,9 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
 
         public GMacAst GMacRootAst => (GMacAst)ParentDsl;
 
-        public MathematicaInterface Cas => SymbolicUtils.Cas;
+        public MathematicaInterface Cas => GaSymbolicsUtils.Cas;
 
-        public MathematicaEvaluator CasEval => SymbolicUtils.Cas.Evaluator;
+        public MathematicaEvaluator CasEval => GaSymbolicsUtils.Cas.Evaluator;
 
 
         //protected void SetContext(GMacSymbolTranslatorContext context)

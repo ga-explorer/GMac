@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic;
-using GMac.GMacMath.Symbolic.Multivectors;
-using GMac.GMacMath.Symbolic.Multivectors.Hash;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Multivectors;
+using GeometricAlgebraSymbolicsLib.Multivectors.Hash;
 using TextComposerLib.Text.Markdown;
 using TextComposerLib.Text.Markdown.Tables;
 using UtilLib;
@@ -54,12 +55,12 @@ namespace GMacTests.Symbolic
                 //Construct a multivector and set all its selected terms to the same symbolic scalar
                 var mv = GaSymMultivectorHash.CreateZero(gaSpaceDim);
                 foreach (var id in idsList)
-                    mv.Add(id, SymbolicUtils.Constants.One);
+                    mv.Add(id, GaSymbolicsUtils.Constants.One);
 
                 TermsCount = mv.Count;
 
                 //The overhead size is equal to the total size of the multivector minus the single symbolic scalar size
-                ScalarsSize = SymbolicUtils.Constants.One.SizeInBytes();
+                ScalarsSize = GaSymbolicsUtils.Constants.One.SizeInBytes();
 
                 HashSize = mv.SizeInBytes();
 
@@ -82,7 +83,7 @@ namespace GMacTests.Symbolic
         private static MarkdownTable CreateTable(int n)
         {
             var gaSpaceDim = n.ToGaSpaceDimension();
-            var idsList = GMacMathUtils.BasisBladeIDs(n).ToArray();
+            var idsList = GaNumFrameUtils.BasisBladeIDs(n).ToArray();
 
             var mdOverheadTable = new MarkdownTable();
             var firstColumn = mdOverheadTable.AddColumn("op", MarkdownTableColumnAlignment.Left);

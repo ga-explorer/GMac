@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Frames;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacAST.Symbols
 {
     /// <summary>
     /// This class represents a frame in GMacAST
     /// </summary>
-    public sealed class AstFrame : AstSymbol, IGMacFrame
+    public sealed class AstFrame : AstSymbol, IGaFrame
     {
         #region Static members
         #endregion
@@ -394,7 +395,7 @@ namespace GMac.GMacAST.Symbols
         public string BasisBladeName(int grade, int index)
         {
             return AssociatedFrame.BasisVectorNames.ConcatenateUsingPattern(
-                GMacMathUtils.BasisBladeId(grade, index), "E0", "^"
+                GaNumFrameUtils.BasisBladeId(grade, index), "E0", "^"
                 );
         }
 
@@ -406,7 +407,7 @@ namespace GMac.GMacAST.Symbols
                     return BasisBladeName(basisBladeId);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
+                    return GaNumFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
 
                 case BasisBladeFormat.GradePlusIndex:
                     return basisBladeId.BasisBladeGradeIndexName();
@@ -424,13 +425,13 @@ namespace GMac.GMacAST.Symbols
                     return BasisBladeName(grade, index);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
+                    return GaNumFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
 
                 case BasisBladeFormat.GradePlusIndex:
-                    return GMacMathUtils.BasisBladeGradeIndexName(grade, index);
+                    return GaNumFrameUtils.BasisBladeGradeIndexName(grade, index);
 
                 default:
-                    return GMacMathUtils.BasisBladeIndexedName(grade, index);
+                    return GaNumFrameUtils.BasisBladeIndexedName(grade, index);
             }
         }
 
@@ -536,7 +537,7 @@ namespace GMac.GMacAST.Symbols
 
             for (var grade = startGrade; grade <= VSpaceDimension; grade++)
             {
-                var kvSpaceDim = GMacMathUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
 
@@ -560,7 +561,7 @@ namespace GMac.GMacAST.Symbols
 
             foreach (var grade in gradesSeq)
             {
-                var kvSpaceDim = GMacMathUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
 
@@ -584,7 +585,7 @@ namespace GMac.GMacAST.Symbols
 
             foreach (var grade in gradesSeq)
             {
-                var kvSpaceDim = GMacMathUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
 

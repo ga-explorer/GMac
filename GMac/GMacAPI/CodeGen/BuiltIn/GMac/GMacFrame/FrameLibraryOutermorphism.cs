@@ -1,7 +1,7 @@
 ﻿using System;
+using GeometricAlgebraNumericsLib.Frames;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacMath;
 using TextComposerLib.Text.Structured;
 
 namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
@@ -19,7 +19,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             for (var index = 1; index <= frameInfo.VSpaceDimension; index++)
             {
-                var id = GMacMathUtils.BasisVectorId(index - 1);
+                var id = GaNumFrameUtils.BasisVectorId(index - 1);
 
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
@@ -37,7 +37,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
                 for (var index = 0; index < kvSpaceDim; index++)
                 {
-                    int id = GMacMathUtils.BasisBladeId(grade, index);
+                    int id = GaNumFrameUtils.BasisBladeId(grade, index);
                     int id1, id2;
 
                     id.SplitBySmallestBasisVectorId(out id1, out id2);
@@ -100,7 +100,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             for (var index = 2; index <= frameInfo.VSpaceDimension; index++)
             {
-                var id = GMacMathUtils.BasisVectorId(index - 1);
+                var id = GaNumFrameUtils.BasisVectorId(index - 1);
 
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
@@ -140,13 +140,13 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
             {
                 componentsText.Clear();
 
-                var id1 = GMacMathUtils.BasisBladeId(1, index1 - 1);
+                var id1 = GaNumFrameUtils.BasisBladeId(1, index1 - 1);
 
                 commandsList.AddFixedCode("let newOm.ImageV" + index1 + " = Multivector(");
 
                 for (var index2 = 1; index2 <= frameInfo.VSpaceDimension; index2++)
                 {
-                    var id2 = GMacMathUtils.BasisBladeId(1, index2 - 1);
+                    var id2 = GaNumFrameUtils.BasisBladeId(1, index2 - 1);
 
                     componentsText.Add("    #E" + id2 + "# = om.ImageV" + index2 + ".#E" + id1 + "#");
                 }

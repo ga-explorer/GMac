@@ -1,14 +1,14 @@
 ﻿using System;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Command;
 using IronyGrammars.Semantic.Expression;
 using IronyGrammars.Semantic.Expression.Basic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.ASTGenerator
 {
@@ -44,7 +44,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             if (valuePrimitive != null)
                 return ValuePrimitive<MathematicaScalar>.Create(
                     scalarType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, valuePrimitive.Value)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, valuePrimitive.Value)
                     );
 
             //This should be a value access of type integer
@@ -73,7 +73,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             if (valuePrimitive != null)
                 return GMacValueMultivector.CreateScalar(
                     mvType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, valuePrimitive.Value)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, valuePrimitive.Value)
                     );
 
             var primitive = oldExpr as ValuePrimitive<MathematicaScalar>;

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacMath;
-using GMac.GMacMath.Symbolic;
-using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Multivectors;
 using TextComposerLib.Text.Markdown;
 
 namespace GMacTests.Symbolic
@@ -30,7 +31,7 @@ namespace GMacTests.Symbolic
         {
             LogComposer.Clear();
 
-            var randGen = new GMacRandomGenerator(10);
+            var randGen = new GaRandomGenerator(10);
             var mvList = new List<GaSymMultivector>(10);
             
 
@@ -40,8 +41,8 @@ namespace GMacTests.Symbolic
             //var mvA = GaMultivector.CreateSymbolic(Frame.GaSpaceDimension, "A");
             //var mvB = GaMultivector.CreateSymbolic(Frame.GaSpaceDimension, "B");
 
-            var cacheMisses1 = SymbolicUtils.Cas.Connection.CacheMisses;
-            var elapsedTime1 = SymbolicUtils.Cas.Connection.Stopwatch.Elapsed;
+            var cacheMisses1 = GaSymbolicsUtils.Cas.Connection.CacheMisses;
+            var elapsedTime1 = GaSymbolicsUtils.Cas.Connection.Stopwatch.Elapsed;
 
             var resultList = new List<GaSymMultivector>(mvList.Count * mvList.Count);
 
@@ -49,8 +50,8 @@ namespace GMacTests.Symbolic
                 foreach (var mv2 in mvList)
                     resultList.Add(Frame.Gp[mv1, mv2]);
 
-            var cacheMisses2 = SymbolicUtils.Cas.Connection.CacheMisses;
-            var elapsedTime2 = SymbolicUtils.Cas.Connection.Stopwatch.Elapsed;
+            var cacheMisses2 = GaSymbolicsUtils.Cas.Connection.CacheMisses;
+            var elapsedTime2 = GaSymbolicsUtils.Cas.Connection.Stopwatch.Elapsed;
 
             //LogComposer
             //    .AppendAtNewLine("A = ")

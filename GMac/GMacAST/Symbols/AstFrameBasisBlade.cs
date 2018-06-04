@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacAST.Expressions;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic;
-using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Symbol;
-using SymbolicInterface.Mathematica.Expression;
 using UtilLib.DataStructures.SimpleTree;
 using Wolfram.NETLink;
 
@@ -38,7 +39,7 @@ namespace GMac.GMacAST.Symbols
                             BasisBladeId,
                             ValuePrimitive<MathematicaScalar>.Create(
                                 AssociatedFrame.GMacRootAst.ScalarType,
-                                SymbolicUtils.Constants.One
+                                GaSymbolicsUtils.Constants.One
                                 )
                             );
 
@@ -84,7 +85,7 @@ namespace GMac.GMacAST.Symbols
                 BasisBladeId, 
                 "#E" + BasisBladeId + "#", 
                 AssociatedFrame.GMacRootAst.ScalarType.TypeSignature,
-                SymbolicUtils.Constants.ExprOne
+                GaSymbolicsUtils.Constants.ExprOne
             }
         };
 
@@ -248,7 +249,7 @@ namespace GMac.GMacAST.Symbols
                 BasisBladeId,
                 ValuePrimitive<MathematicaScalar>.Create(
                         AssociatedFrame.GMacRootAst.ScalarType,
-                        SymbolicUtils.Constants.One
+                        GaSymbolicsUtils.Constants.One
                     )
                 );
         }
@@ -314,13 +315,13 @@ namespace GMac.GMacAST.Symbols
         internal AstFrameBasisBlade(GMacFrameMultivector mvType, int grade, int index)
         {
             AssociatedMultivector = mvType;
-            BasisBladeId = GMacMathUtils.BasisBladeId(grade, index);
+            BasisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
         }
 
         internal AstFrameBasisBlade(GMacFrame frame, int grade, int index)
         {
             AssociatedMultivector = frame.MultivectorType;
-            BasisBladeId = GMacMathUtils.BasisBladeId(grade, index);
+            BasisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
         }
     }
 }

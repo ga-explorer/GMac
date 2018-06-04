@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath;
 using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacAST.Expressions
 {

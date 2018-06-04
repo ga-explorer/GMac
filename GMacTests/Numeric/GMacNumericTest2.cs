@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using GMac.GMacMath.Numeric.Frames;
-using GMac.GMacMath.Numeric.Maps;
-using GMac.GMacMath.Numeric.Maps.Bilinear;
-using GMac.GMacMath.Numeric.Multivectors;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraNumericsLib.Maps;
+using GeometricAlgebraNumericsLib.Maps.Bilinear;
+using GeometricAlgebraNumericsLib.Multivectors;
 using JetBrains.Profiler.Windows.Api;
 using TextComposerLib.Text.Markdown;
 using TextComposerLib.Text.Markdown.Tables;

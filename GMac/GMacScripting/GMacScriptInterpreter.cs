@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib;
 using GMac.GMacAPI.Binding;
 using GMac.GMacAST;
 using GMac.GMacAST.Commands;
@@ -12,7 +13,6 @@ using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Command;
 using IronyGrammars.Semantic.Symbol;
 using TextComposerLib;
@@ -1080,11 +1080,11 @@ namespace GMac.GMacScripting
         /// <returns></returns>
         public Expr ComputeToExpr(string codeText)
         {
-            var expr = SymbolicUtils.Cas.Connection.EvaluateToExpr(codeText);
+            var expr = GaSymbolicsUtils.Cas.Connection.EvaluateToExpr(codeText);
 
-            if (SymbolicUtils.Cas.Connection.HasError)
+            if (GaSymbolicsUtils.Cas.Connection.HasError)
             {
-                this.ReportError(SymbolicUtils.Cas.Connection.LastException);
+                this.ReportError(GaSymbolicsUtils.Cas.Connection.LastException);
 
                 this.ReportNormal("Compute Symbolic Code To Expr Object", codeText, ProgressEventArgsResult.Failure);
             }
@@ -1101,11 +1101,11 @@ namespace GMac.GMacScripting
         /// <returns></returns>
         public string ComputeToString(string codeText)
         {
-            var text = SymbolicUtils.Cas.Connection.EvaluateToString(codeText);
+            var text = GaSymbolicsUtils.Cas.Connection.EvaluateToString(codeText);
 
-            if (SymbolicUtils.Cas.Connection.HasError)
+            if (GaSymbolicsUtils.Cas.Connection.HasError)
             {
-                this.ReportError(SymbolicUtils.Cas.Connection.LastException);
+                this.ReportError(GaSymbolicsUtils.Cas.Connection.LastException);
 
                 this.ReportNormal("Compute Symbolic Code To Text", codeText, ProgressEventArgsResult.Failure);
             }
@@ -1122,11 +1122,11 @@ namespace GMac.GMacScripting
         /// <returns></returns>
         public string ComputeToInputForm(string codeText)
         {
-            var text = SymbolicUtils.Cas.Connection.EvaluateToInputForm(codeText);
+            var text = GaSymbolicsUtils.Cas.Connection.EvaluateToInputForm(codeText);
 
-            if (SymbolicUtils.Cas.Connection.HasError)
+            if (GaSymbolicsUtils.Cas.Connection.HasError)
             {
-                this.ReportError(SymbolicUtils.Cas.Connection.LastException);
+                this.ReportError(GaSymbolicsUtils.Cas.Connection.LastException);
 
                 this.ReportNormal("Compute Symbolic Code To Input Form Text", codeText, ProgressEventArgsResult.Failure);
             }
@@ -1143,11 +1143,11 @@ namespace GMac.GMacScripting
         /// <returns></returns>
         public string ComputeToOutputForm(string codeText)
         {
-            var text = SymbolicUtils.Cas.Connection.EvaluateToOutputForm(codeText);
+            var text = GaSymbolicsUtils.Cas.Connection.EvaluateToOutputForm(codeText);
 
-            if (SymbolicUtils.Cas.Connection.HasError)
+            if (GaSymbolicsUtils.Cas.Connection.HasError)
             {
-                this.ReportError(SymbolicUtils.Cas.Connection.LastException);
+                this.ReportError(GaSymbolicsUtils.Cas.Connection.LastException);
 
                 this.ReportNormal("Compute Symbolic Code To Output Form Text", codeText, ProgressEventArgsResult.Failure);
             }
@@ -1164,11 +1164,11 @@ namespace GMac.GMacScripting
         /// <returns></returns>
         public Image ComputeToTypeset(string codeText)
         {
-            var img = SymbolicUtils.Cas.Connection.EvaluateToTypeset(codeText);
+            var img = GaSymbolicsUtils.Cas.Connection.EvaluateToTypeset(codeText);
 
-            if (SymbolicUtils.Cas.Connection.HasError)
+            if (GaSymbolicsUtils.Cas.Connection.HasError)
             {
-                this.ReportError(SymbolicUtils.Cas.Connection.LastException);
+                this.ReportError(GaSymbolicsUtils.Cas.Connection.LastException);
 
                 this.ReportNormal("Compute Symbolic Code To Typeset Image", codeText, ProgressEventArgsResult.Failure);
             }
@@ -1185,11 +1185,11 @@ namespace GMac.GMacScripting
         /// <returns></returns>
         public Image ComputeToImage(string codeText)
         {
-            var img = SymbolicUtils.Cas.Connection.EvaluateToImage(codeText);
+            var img = GaSymbolicsUtils.Cas.Connection.EvaluateToImage(codeText);
 
-            if (SymbolicUtils.Cas.Connection.HasError)
+            if (GaSymbolicsUtils.Cas.Connection.HasError)
             {
-                this.ReportError(SymbolicUtils.Cas.Connection.LastException);
+                this.ReportError(GaSymbolicsUtils.Cas.Connection.LastException);
 
                 this.ReportNormal("Compute Symbolic Code To Image", codeText, ProgressEventArgsResult.Failure);
             }

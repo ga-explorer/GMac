@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using GMac.GMacCompiler.Semantic.ASTDebug;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 using TextComposerLib.Text.Linear;
 
@@ -170,7 +170,7 @@ namespace GMac.GMacCompiler.Semantic.AST
                 return ValuePrimitive<int>.Create((TypePrimitive)langType, 0);
 
             if (langType.IsSameType(ScalarType))
-                return ValuePrimitive<MathematicaScalar>.Create((TypePrimitive)langType, SymbolicUtils.Constants.Zero);
+                return ValuePrimitive<MathematicaScalar>.Create((TypePrimitive)langType, GaSymbolicsUtils.Constants.Zero);
 
             var typeStructure = langType as GMacStructure;
 

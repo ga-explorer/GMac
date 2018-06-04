@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib.Helpers;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
@@ -197,7 +197,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             //symbolic scalar (i.e. for reading purposes)
             RhsUsableSymbolicScalar =
                 isOutput ? null :
-                MathematicaScalar.CreateSymbol(SymbolicUtils.Cas, llName);
+                MathematicaScalar.CreateSymbol(GaSymbolicsUtils.Cas, llName);
         }
 
         /// <summary>
@@ -233,21 +233,21 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
                     RhsUsableSymbolicScalar =
                         IsConstant 
                         ? assignedValue.Value 
-                        : MathematicaScalar.CreateSymbol(SymbolicUtils.Cas, llName);
+                        : MathematicaScalar.CreateSymbol(GaSymbolicsUtils.Cas, llName);
                     break;
 
                 case GMacCompilerOptions.LowLevelPropagation.PropagateSingleVariable:
                     RhsUsableSymbolicScalar =
                         (IsConstant || isLlVar) 
                         ? assignedValue.Value 
-                        : MathematicaScalar.CreateSymbol(SymbolicUtils.Cas, llName);
+                        : MathematicaScalar.CreateSymbol(GaSymbolicsUtils.Cas, llName);
                     break;
 
                 default:
                     RhsUsableSymbolicScalar =
                         (IsConstant || (llVarNamesCount == 1)) 
                         ? assignedValue.Value 
-                        : MathematicaScalar.CreateSymbol(SymbolicUtils.Cas, llName);
+                        : MathematicaScalar.CreateSymbol(GaSymbolicsUtils.Cas, llName);
                     break;
             }
         }

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GMac.GMacMath;
-using GMac.GMacMath.Numeric;
-using GMac.GMacMath.Numeric.Frames;
-using GMac.GMacMath.Numeric.Maps;
-using GMac.GMacMath.Structures;
+﻿using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraNumericsLib.Maps;
 
 namespace GMacTests.Numeric
 {
@@ -18,7 +11,7 @@ namespace GMacTests.Numeric
 
         public string Execute()
         {
-            var randGen = new GMacRandomGenerator(10);
+            var randGen = new GaRandomGenerator(10);
             var frame = GaNumFrame.CreateEuclidean(3);
 
             //var mv = randGen.GetNumMultivectorByGrades(frame.GaSpaceDimension, 2);

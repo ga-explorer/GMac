@@ -1,8 +1,9 @@
-﻿using GMac.GMacMath;
-using GMac.GMacMath.Numeric.Frames;
-using GMac.GMacMath.Numeric.Maps.Bilinear;
-using GMac.GMacMath.Numeric.Multivectors;
-using GMac.GMacMath.Symbolic.Frames;
+﻿using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Products;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Frames;
 using TextComposerLib.Text.Linear;
 
 namespace GMacTests.Numeric
@@ -16,7 +17,7 @@ namespace GMacTests.Numeric
 
         public string Execute()
         {
-            var randGen = new GMacRandomGenerator(10);
+            var randGen = new GaRandomGenerator(10);
             var textComposer = new LinearComposer();
 
             var numFrame = GaNumFrame.CreateConformal(5);

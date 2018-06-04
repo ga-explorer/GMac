@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 {
@@ -337,12 +337,12 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
             //Symbolically simplify the value if indicated. This takes a lot of Mathematica processing and slows 
             //compilation but produces target code with better processing performance in some cases
-            var finalExpr = SymbolicUtils.Evaluator.Simplify(value.Value.Expression);
+            var finalExpr = GaSymbolicsUtils.Evaluator.Simplify(value.Value.Expression);
 
             return
                 ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)value.ExpressionType, 
-                    MathematicaScalar.Create(SymbolicUtils.Cas, finalExpr)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, finalExpr)
                     );
         }
 
@@ -386,13 +386,13 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
             if (valueAccess.ExpressionType.IsBoolean())
                 ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)valueAccess.ExpressionType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, "False")
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, "False")
                     );
 
             return 
                 ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)valueAccess.ExpressionType, 
-                    SymbolicUtils.Constants.Zero
+                    GaSymbolicsUtils.Constants.Zero
                     );
         }
 

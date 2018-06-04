@@ -1,5 +1,5 @@
-﻿using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath.Symbolic.Maps.Unilinear;
+﻿using GeometricAlgebraSymbolicsLib.Maps.Unilinear;
+using GMac.GMacCompiler.Semantic.AST;
 using IronyGrammars.Semantic.Symbol;
 
 namespace GMac.GMacAST.Symbols

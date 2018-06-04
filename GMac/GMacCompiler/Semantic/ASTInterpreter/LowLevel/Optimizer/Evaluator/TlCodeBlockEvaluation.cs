@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraSymbolicsLib;
 using GMac.GMacAPI.CodeBlock;
-using GMac.GMacMath.Symbolic;
 using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator
@@ -38,7 +38,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator
                 if (_variablesValues.TryGetValue(varName, out value))
                     return value;
 
-                return SymbolicUtils.Constants.ExprZero;
+                return GaSymbolicsUtils.Constants.ExprZero;
             }
             set
             {

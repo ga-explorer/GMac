@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAST.Expressions;
 using GMac.GMacCompiler.Semantic.AST;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic;
 using GMac.GMacScripting;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Symbol;
-using SymbolicInterface.Mathematica.Expression;
 using UtilLib.DataStructures.SimpleTree;
 using Wolfram.NETLink;
 
@@ -63,7 +63,7 @@ namespace GMac.GMacAST.Symbols
                 AssociatedBasisVector.BasisVectorId,
                 ValuePrimitive<MathematicaScalar>.Create(
                         AssociatedBasisVector.GMacRootAst.ScalarType,
-                        SymbolicUtils.Constants.One
+                        GaSymbolicsUtils.Constants.One
                     )
                 );
         }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacCompiler.Semantic.ASTConstants;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Frames;
 using IronyGrammars.Semantic.Expression.Value;
 using IronyGrammars.Semantic.Scope;
 using IronyGrammars.Semantic.Symbol;
@@ -13,7 +14,7 @@ namespace GMac.GMacCompiler.Semantic.AST
     /// <summary>
     /// A GMac frame. This is the primary symbolic implementation structure for all GA multivectors and multivector operations
     /// </summary>
-    public sealed class GMacFrame : SymbolWithScope, IGMacFrame
+    public sealed class GMacFrame : SymbolWithScope, IGaFrame
     {
         internal GMacAst GMacRootAst => (GMacAst)RootAst;
 
@@ -143,7 +144,7 @@ namespace GMac.GMacCompiler.Semantic.AST
 
         public string BasisBladeName(int grade, int index)
         {
-            return BasisVectorNames.ConcatenateUsingPattern(GMacMathUtils.BasisBladeId(grade, index), "E0", "^");
+            return BasisVectorNames.ConcatenateUsingPattern(GaNumFrameUtils.BasisBladeId(grade, index), "E0", "^");
         }
 
         public string BasisBladeName(int basisBladeId, BasisBladeFormat nameFormat)
@@ -154,7 +155,7 @@ namespace GMac.GMacCompiler.Semantic.AST
                     return BasisBladeName(basisBladeId);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
+                    return GaNumFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
 
                 case BasisBladeFormat.GradePlusIndex:
                     return basisBladeId.BasisBladeGradeIndexName();
@@ -172,13 +173,13 @@ namespace GMac.GMacCompiler.Semantic.AST
                     return BasisBladeName(grade, index);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return GMacMathUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
+                    return GaNumFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
 
                 case BasisBladeFormat.GradePlusIndex:
-                    return GMacMathUtils.BasisBladeGradeIndexName(grade, index);
+                    return GaNumFrameUtils.BasisBladeGradeIndexName(grade, index);
 
                 default:
-                    return GMacMathUtils.BasisBladeIndexedName(grade, index);
+                    return GaNumFrameUtils.BasisBladeIndexedName(grade, index);
             }
         }
 

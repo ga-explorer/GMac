@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using GMac.GMacMath;
-using GMac.GMacMath.Numeric;
-using GMac.GMacMath.Numeric.Frames;
-using GMac.GMacMath.Numeric.Multivectors;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraNumericsLib.Multivectors;
 
 namespace GMacBenchmarks.Benchmarks.Numeric
 {
     public class GMacNumericBenchmark2
     {
-        private GMacRandomGenerator _randGen;
+        private GaRandomGenerator _randGen;
         private GaNumFrame _frame;
         private GaNumMultivector _mv1;
         private Dictionary<int, double> _mv2;
@@ -31,7 +29,7 @@ namespace GMacBenchmarks.Benchmarks.Numeric
         [GlobalSetup]
         public void Setup()
         {
-            _randGen = new GMacRandomGenerator(10);
+            _randGen = new GaRandomGenerator(10);
 
             _frame = GaNumFrame.CreateConformal(5);
             //_frame.SelectBilinearProductsImplementation(ProductsImplementation);

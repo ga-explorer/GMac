@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
@@ -11,10 +14,7 @@ using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTDebug;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer;
-using GMac.GMacMath.Symbolic;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 using TextComposerLib.Text;
@@ -749,7 +749,7 @@ namespace GMac.GMacAPI.Binding
         {
             return BindScalarToPattern(
                 ToValueAccess(valueAccessName, ScalarType),
-                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.ToExpr(SymbolicUtils.Cas))
+                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.ToExpr(GaSymbolicsUtils.Cas))
                 );
         }
 
@@ -762,7 +762,7 @@ namespace GMac.GMacAPI.Binding
         {
             return BindScalarToPattern(
                 valueAccess,
-                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.ToExpr(SymbolicUtils.Cas))
+                GMacScalarBinding.CreateConstant(BaseMacro.Root, value.ToExpr(GaSymbolicsUtils.Cas))
                 );
         }
 

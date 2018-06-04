@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Multivectors;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraNumericsLib.Products;
+using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using TextComposerLib.Text.Linear;
 
 namespace GMacTests.Symbolic

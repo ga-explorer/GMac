@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GMac.GMacMath.Numeric.Frames;
-using GMac.GMacMath.Symbolic.Frames;
+﻿using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacMath.Validators;
 
 namespace GMacTests.Validations

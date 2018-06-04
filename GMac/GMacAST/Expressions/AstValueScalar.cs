@@ -1,5 +1,5 @@
-﻿using IronyGrammars.Semantic.Expression.Value;
-using SymbolicInterface.Mathematica.Expression;
+﻿using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using IronyGrammars.Semantic.Expression.Value;
 using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Expressions

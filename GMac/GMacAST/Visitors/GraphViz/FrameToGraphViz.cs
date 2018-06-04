@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using GeometricAlgebraNumericsLib.Frames;
 using GMac.GMacAST.Symbols;
-using GMac.GMacMath;
 using TextComposerLib;
 using TextComposerLib.Diagrams.GraphViz.Dot;
 using TextComposerLib.Diagrams.GraphViz.Dot.Value;

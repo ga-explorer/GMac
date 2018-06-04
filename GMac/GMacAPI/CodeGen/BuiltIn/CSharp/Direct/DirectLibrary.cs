@@ -335,6 +335,8 @@ public Multivector(IEnumerable<double> coefs)
 
         private GMacMacroCodeComposer InitMacroCodeGenerator(GMacMacroBinding macroBinding)
         {
+            //MacroGenDefaults.FixOutputComputationsOrder = true;
+
             var macroGenerator =
                 new GMacMacroCodeComposer(MacroGenDefaults, macroBinding.BaseMacro)
                 {

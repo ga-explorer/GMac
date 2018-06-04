@@ -1,8 +1,9 @@
 ﻿using System;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using GMac.GMacMath.Symbolic;
-using GMac.GMacMath.Symbolic.Multivectors;
 using IronyGrammars.DSLInterpreter;
 using IronyGrammars.Semantic.Command;
 using IronyGrammars.Semantic.Expression;
@@ -12,7 +13,6 @@ using IronyGrammars.Semantic.Expression.ValueAccess;
 using IronyGrammars.Semantic.Scope;
 using IronyGrammars.Semantic.Symbol;
 using IronyGrammars.Semantic.Type;
-using SymbolicInterface.Mathematica.Expression;
 using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 
@@ -113,7 +113,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator
             if (value1.ExpressionType.IsInteger())
                 return ValuePrimitive<MathematicaScalar>.Create(
                     (TypePrimitive)expr.ExpressionType,
-                    MathematicaScalar.Create(SymbolicUtils.Cas, ((ValuePrimitive<int>)value1).Value)
+                    MathematicaScalar.Create(GaSymbolicsUtils.Cas, ((ValuePrimitive<int>)value1).Value)
                     );
 
             throw new InvalidOperationException("Invalid cast operation");
@@ -133,7 +133,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator
                     mvType,
                     GaSymMultivector.CreateScalar(
                         mvType.ParentFrame.GaSpaceDimension,
-                        MathematicaScalar.Create(SymbolicUtils.Cas, intValue)
+                        MathematicaScalar.Create(GaSymbolicsUtils.Cas, intValue)
                         )
                     );
             }

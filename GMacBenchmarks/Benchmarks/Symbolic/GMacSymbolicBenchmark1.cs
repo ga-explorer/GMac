@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
+using GeometricAlgebraNumericsLib;
+using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Frames;
+using GeometricAlgebraSymbolicsLib.Maps;
+using GeometricAlgebraSymbolicsLib.Maps.Bilinear;
+using GeometricAlgebraSymbolicsLib.Multivectors;
+using GeometricAlgebraSymbolicsLib.Products;
 using GMac.GMacMath;
-using GMac.GMacMath.Symbolic.Frames;
-using GMac.GMacMath.Symbolic.Maps;
-using GMac.GMacMath.Symbolic.Maps.Bilinear;
-using GMac.GMacMath.Symbolic.Multivectors;
-using GMac.GMacMath.Symbolic.Products;
 
 namespace GMacBenchmarks.Benchmarks.Symbolic
 {
     public class GMacSymbolicBenchmark1
     {
-        private readonly GMacRandomGenerator _randGen 
-            = new GMacRandomGenerator(10);
+        private readonly GaRandomGenerator _randGen 
+            = new GaRandomGenerator(10);
 
         private readonly List<GaSymMultivector> _multivectors
             = new List<GaSymMultivector>();
