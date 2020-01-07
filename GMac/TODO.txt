@@ -1,0 +1,94 @@
+- How to output an image from Mathematica to include it in a GraphViz node or link label?
+In mathematica write:
+    Export["C:\\Projects\\DotNET\\GMac\\test.gif", Style[TraditionalForm[IdentityMatrix[4]], Large]]
+
+In GraphViz write:
+    frame_ipm [shape=box, label="", style=rounded, image="C:\\Projects\\DotNET\\GMac\\test.gif"] 
+
+- How to test the type of an expression in Mathematica:
+FullSimplify[Element[2*y + x + 2.3*Pi, Reals], Element[x, Reals] && Element[y, Integers]]
+FullSimplify[Element[2*y + x + 2.3*Pi, Reals], Element[x|y, Reals]]
+
+- How to test if a matrix is zero:
+MemberQ[PossibleZeroQ[Flatten[m]], False]
+
+Possisble domains include: Reals, Integers, and Booleans
+
+- How to display the IPM in mathematica?
+if ipm is a 3x3 matrix then write:
+y = Grid[Transpose[Prepend[Transpose[Prepend[ipm, {"e1", "e2", "e3"}]], {"", "e1", "e2", "e3"}]]]
+
+
+- Add a <DEBUG MODE> for the compiler to produce more output
+- Implement an exception class CompilerUnhandledException() to chain an unhandled exception up the call stack
+- Create a test to find all symbols with no attached ParseTreeNode
+- For each symbol (Frame, Basis Vector, Transform, Structure, etc) attach a mathematica symbol name for display purposes and create a method for displaying a symbolic-graphic mathematical representation of such symbols.
+- 
+
+==================================================
+
+Bugs:
+- An expression like: "-v1 + v2" is interpreted as "-1 * (v1 + v2)" while it should be "(-1 * v1) + v2"; fix this
+
+- When compiling a multivector expression inside a Mathematical scalar expression and there is an error, GMac reports the wrong line and character numbers
+
+- When assigning an integer to a multivectector a cast is needed
+
+-) Add a project files manager class to Irony Grammars so we can unify UI for editing source files
+
+-) Implement Target Languages: Java, Scala, VB.NET, F#, Python, C++
+
+-) Make possible to bind several input parameters to same target variable and use this in optimizing code more -
+Ignored; this can be achieved easily by generating a custom macro that calls the original macro.
+
+-) Create a screen for designing frames
+- When the screen opens it reads all frames and each frame can be edited and its code
+re-generated and can be pasted in the source code
+
+-) Blades library:
+- implement versor product, LID test on vectors
+- Review meaning of versors and versor product and reflection using blade (use the book for that)
+
+- implement queries:
+   * public bool IsVersor { get { return SelfGPIsNonZeroScalar(); } }
+   * public bool IsEVersor { get { return SelfEGPIsNonZeroScalar(); } }
+   * public bool IsRotor 
+   * public bool IsERotor 
+   * public bool IsReflector 
+   * public bool IsEReflector 
+   (the idea for blade B is to find: B gp reverse(B) and confirm it to be a scalar => versor, 1 => rotor, -1 => reflector, and the same for B egp reverse(B) in Euclidean space)
+
+- create a unit test library
+
+- create one OOP version and compare performance
+
+- create a manual library and compare results
+
+-) Versors library:
+- use additive implementation and OM implementation (any versor is an outermorphism)
+
+-) cga5D library:
+- specialized operarations on the book's material
+- detect a macro's output multivector class to correctly bind with minimal target class
+- visualization library
+
+-) Create a text template editor for performing common tasks with parametric text templates - Done
+
+-) create full GMac documentation - Done
+
+-) Extending GMac for complex scalars
+- isomorphism between complex GA of dimension n real GA of dimension n + 2
+- Geometric meanings
+- Modify Language Value Access to accept real and imag partial access steps
+- Add more operators to handle complex numbers
+
+-) Allow creating multivector constructors from subspace name in addition to Multivector type when using a list of expressions. For example:
+- e3d.vector(1, -3, 5) is equivalend to e3d.Multivector(0, 1, -3, 0, 5) and e3d.Multivector(#e1# = 1, #e2# = -3, #e3# = 5)
+- Done
+
+-) Complete GMacDSL to define constant transforms and outermorphisms
+- "transform <qname> from <frame1> to <frame2> = <matrix_def>" : a full 2^n by 2^m matrix
+- "outermorphism <qname> from <frame1> to <frame2> = <matrix_def>" : a n by m matrix
+- we can use $<trans_name>$ inside <matrix_def> to reference the matrix of another transform
+- we can use $<frame_name>$ inside <matrix_def> to reference the IPM matrix of another frame
+- if the transform or outermorphism is inside a frame then "from" and "to" parts can be removed

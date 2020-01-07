@@ -1,0 +1,49 @@
+//Generate the inner product matrix for some given frame
+//Set main scope
+[:geometry2d.cga |> reset:];
+
+//Initialize C# local variables:
+//Get information of the geometry2d.cga frame from GMacAST
+var cgaFrameInfo = [:cga |> frame:];
+
+//Read the vector space dimension of the geometry2d.cga frame (= 4)
+var n = cgaFrameInfo.VSpaceDimension;
+
+//Create a list of basis vector IDs for the geometry2d.cga frame (= {1, 2, 4, 8})
+var ids = cgaFrameInfo.BasisVectorIDs().ToArray();
+
+//Initialize the table holding the result
+var table = new string[n + 1, n + 1];
+
+var r = 0;
+foreach (var id1 in ids)
+{
+    //Fill title row, column to hold names of basis vectors
+    var basisVectorName = cgaFrameInfo.BasisVectorFromIndex(r).Name;
+    table[r + 1, 0] = basisVectorName;
+    table[0, r + 1] = basisVectorName;
+    
+    var c = 0;
+    foreach (var id2 in ids)
+    {
+        //Each cell in the table is the scalar product of two basis vectors converted into a string value
+        table[r+1, c+1] = <: "| Multivector(#E|{id1}|# = 1) sp Multivector(#E|{id2}|# = 1) |" |> Evaluate |> AsString :>;
+        c++;
+    }
+    r++;
+}
+
+//Display the final result
+<: "Inner Product Matrix:" |> AppendLine :>;
+<: table.FormatAsTable() |> AppendLine :>;
+
+/* This will output:
+
+Inner Product Matrix:
+   no e1 e2 ni 
+no 0  0  0  -1 
+e1 0  1  0  0  
+e2 0  0  1  0  
+ni -1 0  0  0  
+
+*/

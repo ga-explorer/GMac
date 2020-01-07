@@ -1,0 +1,231 @@
+/*
+[: geometry2d.cga0 |> reset:];
+
+[:
+let ep = no - '1/2' * ni
+let en = no + '1/2' * ni
+|> exec
+:];
+
+[:ep^en |> ev |> as |> ap:];
+*/
+
+/*
+//Basic operations on a single multivector
+[: geometry3d.cga |> reset :];
+
+var frame = [: cga |> frame :];
+
+var valueA = <: "GA", (int id) => "a" + id |> ss2mv :>;
+
+[: let A = [valueA] |> exec :];
+[: let Is = PseudoScalar(1) |> exec :];
+[: let Iinv0 = reverse(Is) gp Is |> exec :];
+[: let Iinv = reverse(Is) / Iinv0.#E0# |> exec :];
+
+<:"A: "|> ap:>; [: A |> vo |> as |> apl :]; <:|> apl :>;
+
+//KVectors of a multivector
+<:"KVectors of A: "|> apl:>; 
+for (var i = 0; i <= frame.VSpaceDimension; i++)
+{
+    [: let A[i] = A.@G[i]@ |> exec :];
+    <:"|Grade [i]: |" |> apanl:>;
+    [: A[i] |> vo |> as |> apl :];
+}
+<:|> apl :>;
+
+//Reverse, grade involution, and Clifford Conjugate of multivectors
+<:"Reverse of A: "|> ap:>; [: reverse(A) |> ev |> as |> apl :];
+for (var i = 0; i <= frame.VSpaceDimension; i++)
+{
+    <:"|Grade [i]: |" |> apanl:>;
+    [: reverse(A[i]) |> ev |> as |> apl :];
+}
+<:|> apl :>;
+
+<:"Grade Involution of A: "|> ap:>; [: grade_inv(A) |> ev |> as |> apl :];
+for (var i = 0; i <= frame.VSpaceDimension; i++)
+{
+    <:"|Grade [i]: |" |> apanl:>;
+    [: grade_inv(A[i]) |> ev |> as |> apl :];
+}
+<:|> apl :>;
+
+<:"Clifford Conjugate of A: "|> ap:>; [: cliff_conj(A) |> ev |> as |> apl :];
+for (var i = 0; i <= frame.VSpaceDimension; i++)
+{
+    <:"|Grade [i]: |" |> apanl:>;
+    [: cliff_conj(A[i]) |> ev |> as |> apl :];
+}
+<:|> apl :>;
+
+<:"Dual of A: "|> ap:>; [: A gp Iinv |> ev |> as |> apl :];
+for (var i = 0; i <= frame.VSpaceDimension; i++)
+{
+    <:"|Grade [i]: |" |> apanl:>;
+    [: A[i] gp Iinv |> ev |> as |> apl :];
+}
+<:|> apl :>;
+*/
+
+/*
+//Generate the main basis blades bilinear product tables for some given frame
+[:geometry3d.e3d |> reset:];
+
+var frame = [:e3d |> frame:];
+
+var n = frame.GaSpaceDimension;
+
+var ids = frame.BasisBladeIDsSortedByGrade().ToArray();
+
+var table = new string[n, n];
+
+var bilinearProducts = new Dictionary<string, string>();
+bilinearProducts.Add("^", "Outer Product");
+bilinearProducts.Add("gp", "Geometric Product");
+bilinearProducts.Add("sp", "Scalar Product");
+bilinearProducts.Add("lcp", "Left Contraction Product");
+bilinearProducts.Add("rcp", "Right Contraction Product");
+
+foreach (var bilinearProduct in bilinearProducts)
+{
+    var productSymbol = bilinearProduct.Key;
+    var productName   = bilinearProduct.Value;
+    
+    for (var r = 0; r < n; r++)
+    {
+        for (var c = 0; c < n; c++)
+        {
+            var id1 = ids[r];
+            var id2 = ids[c];
+
+            table[r, c] = [: Multivector(#E[id1]# = 1) [productSymbol] Multivector(#E[id2]# = 1) |> ev |> as :];
+        }
+    }
+
+    [: Basis Blades [productName] Table: |> apl :];
+    <: table.FormatAsTable() |> apl :>;
+    <:|> apl :>;
+}
+*/
+
+/*
+//Verify main inner, outer, and geometric product identities for two vectors
+[: geometry3d.e3d |> reset :];
+
+[: 
+    let a = Vector('ax', 'ay', 'az') 
+    let b = Vector('bx', 'by', 'bz') 
+    
+    let agpb1 = a gp b
+    let aopb1 = a ^ b
+    let aspb1 = a sp b
+    
+    let agpb2 = a ^ b + a sp b
+    let aopb2 = (a gp b - b gp a) / 2
+    let aspb2 = (a gp b + b gp a) / 2
+    
+    |> exec
+:];
+
+<:"Vectors: "|>apl:>;
+[: a |> vo |> as |> aplanl :]; 
+[: b |> vo |> as |> aplanl :];
+<:|> apl :>;
+
+<:"Geometric Product: "|>apl:>;
+[: agpb1 |> vo |> as |> aplanl :]; 
+[: agpb2 |> vo |> as |> aplanl :]; 
+[: agpb1 - agpb2 |> ev |> as |> aplanl :];
+<:|> apl :>;
+
+<:"Outer Product: "|>apl:>;
+[: aopb1 |> vo |> as |> aplanl :]; 
+[: aopb2 |> vo |> as |> aplanl :]; 
+[: aopb1 - aopb2 |> ev |> as |> aplanl :];
+<:|> apl :>;
+
+<:"Scalar Product: "|>apl:>;
+[: aspb1 |> vo |> as |> aplanl :]; 
+[: aspb2 |> vo |> as |> aplanl :]; 
+[: aspb1 - aspb2 |> ev |> as |> aplanl :];
+<:|> apl :>;
+*/
+
+/*
+//Verify main inner, outer, and geometric product identities for two vectors
+[: geometry3d.e3d |> reset :];
+
+[: 
+    let a = [Ipr.SubspaceToMultivector("Vector", "a#index#")]
+    let b = [Ipr.SubspaceToMultivector("Vector", "b#index#")] 
+    let C = [Ipr.SubspaceToMultivector("GA", "C#index#")] 
+    
+    let lhs = a lcp (b ^ C)
+    let rhs = (a lcp b) ^ C - b ^ (a lcp C)
+    |> exec
+:];
+
+<:"Inputs: "|>apl:>;
+[: a |> vo |> as |> aplanl :]; 
+[: b |> vo |> as |> aplanl :];
+[: C |> vo |> as |> aplanl :]; 
+<:|> apl :>;
+
+
+<:"Outputs: "|>apl:>;
+[: lhs |> vo |> as |> aplanl :]; 
+[: rhs |> vo |> as |> aplanl :];
+[: lhs - rhs |> ev |> as |> aplanl :]; 
+<:|> apl :>;
+*/
+
+/*
+//Verify main inner, outer, and geometric product identities for two vectors
+[: geometry3d.e3d |> reset :];
+
+[: 
+    let A = [Ipr.SubspaceToMultivector("GA", "A#index#")]
+    let B = [Ipr.SubspaceToMultivector("GA", "B#index#")] 
+    let C = [Ipr.SubspaceToMultivector("GA", "C#index#")] 
+    
+    let lhs = (A ^ B) lcp C
+    let rhs = A lcp (B lcp C)
+    |> exec
+:];
+
+<:"Inputs: "|>apl:>;
+[: A |> vo |> as |> aplanl :]; 
+[: B |> vo |> as |> aplanl :];
+[: C |> vo |> as |> aplanl :]; 
+<:|> apl :>;
+
+
+<:"Outputs: "|>apl:>;
+[: lhs |> vo |> as |> aplanl :]; 
+[: rhs |> vo |> as |> aplanl :];
+[: lhs - rhs |> ev |> as |> aplanl :]; 
+<:|> apl :>;
+*/
+
+/*
+[: geometry3d.cga |> reset :];
+
+var bvns = new[] {"no", "e1", "e2", "e3", "ni"};
+
+//foreach (var bvn in bvns)
+//    [: let CGA[bvn] = Multivector(#[bvn]# = 1) |> exec :];
+
+foreach (var bvn1 in bvns)
+{
+    foreach (var bvn2 in bvns)
+    {
+        [:let v = [bvn1] sp [bvn2] |> exec:];
+        [:v |> vo |> ap:];
+        <:" " |> ap:>;
+    }
+    
+    <:"" |> apnl:>;
+}
+*/

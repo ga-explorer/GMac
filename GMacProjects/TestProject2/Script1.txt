@@ -1,0 +1,39 @@
+//commands:
+//1) Native form         : Ipr.OpenScope(Ipr.Namespace("geometry3d"));
+//2) Shortcut form       : @open(@ns("geometry3d")); 
+//3) Square Bracket form : [: geometry3d |> ns |> open :]; you can use angle bracket and shortcut forms inside this form
+//4) Angle Bracket Form  : <: "geometry3d" |> ns |> open :> you can use square bracket and shortcut form inside this form
+//Nesting of the two bracket forms is not allowed, the results will be unpredictable
+//
+//Parametric strings:
+//"| let v|{i}| = v|{i}| + Multivector(#E|{id}|# = '1') |"
+//This translates to:
+//Ipr.Substitute(@" let v|{0}| = v|{0}| + Multivector(#E|{1}|# = '1') ", i, id)
+//
+//Traslation sequence:
+//1) Translate square bracket form into shortcut form on a single parametric string argument
+//2) Translate angle bracket form into shortcut form on multiple arguments
+//3) Translate parametric strings
+//4) Translate shrtcut form into native form
+
+@reset("common");
+@open(@ns("geometry3d"));
+[: geometry3d.e3d |> open :];
+
+var frame = [: e3d |> frame :];
+
+for (var i = 1; i <= frame.VSpaceDimension; i++)
+{
+    [: declare v|{i}| : Multivector |> exec :];
+
+    for (var id = 1; id < frame.GaSpaceDimension; id = id << 1)
+        <: "| let v|{i}| = v|{i}| + Multivector(#E|{id}|# = 1) |" |> exec :>;
+}
+
+@apanl("v1 = "); [: v1 |> vo |> apl :];
+@apanl("v2 = "); @apl( [: v2 |> vo :] );
+@apanl("v3 = "); @apl(@vo("v3"));
+
+@exec("let v = v1 ^ v2 ^ v3");
+
+@apanl("v = v1 ^ v2 ^ v3 = "); @apl(<: "v" |> vo :>);

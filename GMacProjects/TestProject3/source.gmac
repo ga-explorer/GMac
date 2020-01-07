@@ -1,0 +1,48 @@
+namespace common
+ 
+template macro versorInverse( mv : Multivector) : Multivector
+begin
+    let b = reverse( mv )
+    let a = mv gp b
+    
+    return b / a.#E0#
+end
+ 
+namespace geometry2d
+ 
+frame cgaOrtho (ep, e1, e2, en) orthonormal '+++-'
+ 
+frame cga (no, e1, e2, ni)
+    CBM cgaOrtho @"
+    {
+        {1/2,  0,  0, 1/2},
+        {  0,  1,  0,   0},
+        {  0,  0,  1,   0},
+        { -1,  0,  0,   1}
+    }"
+ 
+open common
+ 
+implement versorInverse using cgaOrtho, cga
+ 
+macro cga.rotate(mv : Multivector, angle : scalar) : Multivector
+begin
+    let V = 'Cos[$ angle/2 $]' - 'Sin[$ angle/2 $]' * (e1^e2)
+ 
+    return V gp mv gp versorInverse(V)
+end
+ 
+namespace geometry3d
+ 
+frame cgaOrtho (ep, e1, e2, e3, en) orthonormal '++++-'
+ 
+frame cga (no, e1, e2, e3, ni)
+    CBM cgaOrtho @"
+    {
+        {1/2,  0,  0,  0, 1/2},
+        {  0,  1,  0,  0,   0},
+        {  0,  0,  1,  0,   0},
+        {  0,  0,  0,  1,   0},
+        { -1,  0,  0,  0,   1}
+    }"
+    

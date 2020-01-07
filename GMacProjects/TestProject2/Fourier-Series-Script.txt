@@ -1,0 +1,27 @@
+//Square wave approximation by geometric operations
+[:geometry2d.cga |> reset:];
+
+//Initialize GMac multivector variables
+[:
+   let angle = 't'
+   let unit = Multivector(#e1# = 1)
+   declare signalMv : Multivector
+   |> exec
+:];
+
+//Construct rotated vectors and add them together to form a multivector signal
+for (var i = 1; i <= 20; i += 2)
+   [: let signalMv =  signalMv + rotate(unit, |{i}| * angle) / |{i}| |> exec :];
+
+//Project multivector signal on vertical axis to get scalar signal. 
+//Then format signal equation using Mathematica
+var signal = [: signalMv.#e2# |> ValueOf |> AsString |> ComputeToInputForm :];
+
+//Display the symbolic equation of the signal
+<: signal |> AppendLine :>;
+
+//Plot signal between -2 Pi and 2 Pi using Mathematica into a C# image object
+var img = [: Plot[ |{signal}| , {t, -Pi, 2 Pi}] |> ComputeToImage :];
+
+//Save the C# image object into a file
+img.Save(@"C:\GMac\fs.bmp");

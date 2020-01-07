@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7f8b30da-b5dd-45ce-9b3d-bf2b5d17556f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.GMac/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.GMac/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.GMac/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.GMac/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac.sln" beforeDir="false" afterPath="$PROJECT_DIR$/GMac.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMac.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMac.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMacroBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMacroBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMacroParameterBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMacroParameterBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMacroTreeBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMacroTreeBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMultivectorBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacMultivectorBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacScalarBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacScalarBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacStructureBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Binding/GMacStructureBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbComputedVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbComputedVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbDependencyGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbDependencyGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbInputVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbInputVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbOutputVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbOutputVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbTempVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbTempVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCbVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCodeBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/GMacCodeBlock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/IGMacCbComputedVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/IGMacCbComputedVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/IGMacCbVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeBlock/IGMacCbVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/CSharp/Direct/DirectLibrary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/CSharp/Direct/SingleMacroGen.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibrary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibrary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryEuclideanUnary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryEuclideanUnary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryEuclideanVersor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryEuclideanVersor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryLinearTransform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryLinearTransform.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryMetricVersor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryMetricVersor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryOutermorphism.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/BuiltIn/GMac/GMacFrame/FrameLibraryOutermorphism.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/CodeInject/GMacCodeInjectComposer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/CodeInject/GMacCodeInjectComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacCodeFileComposer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacCodeFileComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacCodeLibraryComposer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacCodeLibraryComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacCodePartComposer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacCodePartComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacComputationCodeInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacComputationCodeInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacMacroCodeComposer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/CodeGen/GMacMacroCodeComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/CSharp/CSharpExpressionConverter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/CSharp/CSharpGMacLanguageServer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/CSharp/MathematicaToCSharpConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Target/CSharp/MathematicaToCSharpConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/Cpp/CppExpressionConverter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/Cpp/CppLanguage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacDSL/GMacDslGMacLanguageServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacDSL/GMacDslGMacLanguageServer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacLanguageServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacLanguageServer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacMathematicaExpressionConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacMathematicaExpressionConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacTargetVariablesNaming.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAPI/Target/GMacTargetVariablesNaming.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/AstRoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/AstRoot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/AstType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/AstType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommandBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommandBlock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommandDeclare.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommandDeclare.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommandLet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Commands/AstCommandLet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Commands/CommandsUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Commands/CommandsUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Dependency/AstMacroDependencyGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Dependency/AstMacroDependencyGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Dependency/AstTypeDependencyGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Dependency/AstTypeDependencyGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstBinaryExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstBinaryExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstCompositeExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstCompositeExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstDatastoreValueAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstDatastoreValueAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstMacroCall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstMacroCall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstMultivectorConstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstMultivectorConstructor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstParametricSymbolicExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstParametricSymbolicExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstStructureConstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstStructureConstructor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstTransformCall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstTransformCall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstTypeCast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstTypeCast.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstUnaryExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstUnaryExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValue.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueBoolean.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueBoolean.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueInteger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueInteger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueMultivector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueMultivector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueMultivectorTerm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueMultivectorTerm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueScalar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueScalar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueStructure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueStructure.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueStructureTerm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/AstValueStructureTerm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Expressions/ExpressionsUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Expressions/ExpressionsUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/GMacAstUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/GMacAstUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/IAstObjectWithValue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/IAstObjectWithValue.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstConstant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstConstant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameBasisBlade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameBasisBlade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameBasisVector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameBasisVector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameMultivector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameMultivector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameSubspace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstFrameSubspace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstLocalVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstLocalVariable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstMacro.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstMacro.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstMacroParameter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstMacroParameter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstNamespace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstNamespace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstStructure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstStructure.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstStructureDataMember.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstStructureDataMember.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstSymbol.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstSymbol.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstSymbolsCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstSymbolsCollection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstTransform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/AstTransform.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Symbols/SymbolsUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Symbols/SymbolsUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GMacAstDescriptionVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GMacAstDescriptionVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstGeneralDiagrams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstGeneralDiagrams.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstMacrosDependencyToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstMacrosDependencyToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstTypesDependencyToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstTypesDependencyToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstVisitorDotGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/AstVisitorDotGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/FrameToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/FrameToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/GMacCodeBlockToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/GMacCodeBlockToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/GMacTypeToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/GMacTypeToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/GraphVizConverter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/MacroBindingToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/MacroBindingToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/MacroDependenciesToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/MacroDependenciesToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/MacroToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/MacroToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/StructureToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/StructureToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/TypeDependenciesToGraphViz.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/GraphViz/TypeDependenciesToGraphViz.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacAST/Visitors/IAstObjectDynamicVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacAST/Visitors/IAstObjectDynamicVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/GMacDynamicCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/GMacDynamicCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/GMacProjectCodeUnitCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/GMacProjectCodeUnitCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/GMacProjectCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/GMacProjectCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/GMacRefResContextInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/GMacTempCodeCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/GMacTempCodeCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/GMacTempSymbolCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/GMacTempSymbolCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/IIronyDSLObjectExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/IIronyDSLObjectExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/LanguageTypeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/LanguageTypeExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/LanguageValueAccessExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/LanguageValueAccessExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/LanguageValueExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/Extensions/LanguageValueExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacAst.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacAst.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacAstSymbolsCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacAstSymbolsCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacAstUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacAstUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacConstant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacConstant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameBasisVector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameBasisVector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameMultivector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameMultivector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameMultivectorConstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameMultivectorConstructor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameSubspace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacFrameSubspace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacMacro.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacMacro.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacMacroTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacMacroTemplate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacMultivectorTransform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacMultivectorTransform.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacNamespace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacNamespace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacParametricSymbolicExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacParametricSymbolicExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacStructure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacStructure.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacStructureConstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacStructureConstructor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacSymbolicMathNames.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacSymbolicMathNames.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacValueMultivector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/AST/GMacValueMultivector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTDebug/GMacASTDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTDebug/GMacASTDescription.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacAstGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacAstGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacAstSymbolGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacAstSymbolGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacCommandBlockGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacCommandBlockGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacCommandGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacCommandGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacConstantGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacConstantGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionAtomicFunctionGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionAtomicFunctionGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionAtomicGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionAtomicGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionAtomicSymbolicGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionAtomicSymbolicGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionBasicGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionBasicGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionCompositeGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionCompositeGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacExpressionGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacFrameGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacFrameGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacFrameGenerator_DefineFrame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacFrameGenerator_DefineFrame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacFrameSubspacePatternGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacFrameSubspacePatternGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacImplicitExpressionsGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacImplicitExpressionsGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacMacroGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacMacroGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacMacroTemplateGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacMacroTemplateGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacNamespaceGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacNamespaceGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacStructureGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacStructureGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacSymbolTranslatorContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacSymbolTranslatorContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacTemplatesImplementationGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacTemplatesImplementationGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacTransformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacTransformGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacValueAccessGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacValueAccessGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GenUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GenUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/AcpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/AcpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/BinaryPlusEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/BinaryPlusEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/CpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/CpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/DivideEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/DivideEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EAcpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EAcpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ECpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ECpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EFdpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EFdpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EGpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EGpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EHipEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/EHipEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ELcpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ELcpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ERcpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ERcpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ESpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/ESpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/FdpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/FdpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/GpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/GpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/HipEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/HipEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/LcpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/LcpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/OpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/OpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/RcpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/RcpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/SpEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/SpEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/SubtractEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/SubtractEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/TimesEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Binary/TimesEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/GMacBasicBinaryEvaluator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/GMacBasicBinaryEvaluator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/GMacBasicUnaryEvaluator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/GMacBasicUnaryEvaluator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/GMacExpressionEvaluator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/GMacExpressionEvaluator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/CliffordConjugateEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/CliffordConjugateEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/EMagnitude2Eval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/EMagnitude2Eval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/EMagnitudeEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/EMagnitudeEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/GradeInversionEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/GradeInversionEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/Magnitude2Eval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/Magnitude2Eval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/MagnitudeEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/MagnitudeEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/NegativeEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/NegativeEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/Norm2Eval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/Norm2Eval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/ReverseEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/ReverseEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/UnaryPlusEval.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/Evaluator/Unary/UnaryPlusEval.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/GMacValueAccessProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/GMacValueAccessProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLCommandInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLCommandInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLLValueDefinitionInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLLValueDefinitionInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLLValuesTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLLValuesTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLMacroBodyCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLMacroBodyCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLOptimizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLOptimizer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/HighLevel/HLUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Generator/LlDataItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Generator/LlDataItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Generator/LlDataTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Generator/LlDataTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Generator/LlGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Generator/LlGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/LLGeneratorTester.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/LLGeneratorTester.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/LowLevelUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/LowLevelUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/Evaluator/TlCodeBlockEvaluation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/Evaluator/TlCodeBlockEvaluation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/Evaluator/TlCodeBlockEvaluationHistory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/Evaluator/TlCodeBlockEvaluationHistory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbEvaluateCodeBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbEvaluateCodeBlock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbFactorSubExpressions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbFactorSubExpressions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbInitialize.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbInitialize.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbReduceRhsExpressions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbReduceRhsExpressions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbRemoveDuplicateTemps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTInterpreter/LowLevel/Optimizer/TcbRemoveDuplicateTemps.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Syntax/GMacGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Syntax/GMacGrammar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacCompiler/Syntax/GMacSourceParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacCompiler/Syntax/GMacSourceParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/AstExplorer/FormAstExplorer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/AstExplorer/FormAstExplorer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/Editor/FormGMacDslEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/Editor/FormGMacDslEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/Editor/FormTargetSourceFilesEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/Editor/FormTargetSourceFilesEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacMacroExplorer.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacMacroExplorer.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacMacroExplorer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacMacroExplorer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacMacroExplorer.resx" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacMacroExplorer.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacSplash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/FormGMacSplash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/GMacAstToTreeViewNodes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/GMacAstToTreeViewNodes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/GMacAstToTreeViewNodesByRole.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/GMacAstToTreeViewNodesByRole.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/GMacMacroExplorerBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/GMacMacroExplorerBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/GMacMacroExplorerBindingData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/GMacMacroExplorerBindingData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/GMacProject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/GMacProject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/FormInteractiveScript.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/FormInteractiveScript.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/FormInteractiveScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/FormInteractiveScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/FormInteractiveScript.resx" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/FormInteractiveScript.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/NamespacesUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacIDE/Scripting/NamespacesUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacMath/GMacMathUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacMath/GMacMathUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacMath/Validators/GMacMathValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacMath/Validators/GMacMathValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptInterpreter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptInterpreter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptOutput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptOutput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptShortcuts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacScripting/GMacScriptShortcuts.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacScripting/ScriptUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacScripting/ScriptUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/GMacSystemUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/GMacSystemUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/Properties/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/Properties/Resources.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/app.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMac/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/GMac/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Numeric/GMacNumericBenchmark1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Numeric/GMacNumericBenchmark2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Symbolic/GMacSymbolicBenchmark1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Symbolic/GMacSymbolicBenchmark1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Symbolic/GMacSymbolicBenchmark5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Symbolic/GMacSymbolicBenchmark5.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Symbolic/GMacSymbolicBenchmark6.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/Benchmarks/Symbolic/GMacSymbolicBenchmark6.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/GMacBenchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/GMacBenchmarks.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacBenchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/GMacBenchmarks/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/GMacTestUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/GMacTests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/GMacTestsCollection.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/IGMacTest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Numeric/GMacNumericTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Numeric/GMacNumericTest2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Numeric/GMacNumericTest3.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Symbolic/GMacSymbolicTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Symbolic/GMacSymbolicTest2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Symbolic/GMacSymbolicTest3.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Symbolic/GMacSymbolicTest4.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Symbolic/GMacSymbolicTest5.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Symbolic/GMacSymbolicTest6.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Validations/GaBilinearProductsValidationTest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/Validations/GaBladeOperationsValidationTest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GMacTests/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Exceptions/GaNumericsException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/GaNumFrame.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/GaNumFrameEuclidean.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/GaNumFrameNonOrthogonal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/GaNumFrameOrthogonal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/GaNumFrameOrthonormal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/GaNumFrameUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Frames/IGaFrame.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/GaBitUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/GaLookupTables.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/GaNumericsUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/GaRandomGenerator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/GeometricAlgebraNumericsLib.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/GaNumMapBilinear.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/GaNumMapBilinearArray.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/GaNumMapBilinearCoefSums.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/GaNumMapBilinearCombined.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/GaNumMapBilinearHash.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/GaNumMapBilinearTree.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Bilinear/IGaNumMapBilinear.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/GaNumMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/GaNumMapUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/IGaNumMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Trilinear/GaNumMapTrilinear.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Trilinear/GaNumMapTrilinearHash.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Trilinear/IGaNumMapTrilinear.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinear.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearArray.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearCoefSums.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearCombined.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearComposed.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearHash.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearIdentity.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearMatrix.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumMapUnilinearTree.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaNumOutermorphism.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/GaUnilinearMapImplementation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Maps/Unilinear/IGaNumMapUnilinear.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Metrics/GaNumMetricEuclidean.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Metrics/GaNumMetricNonOrthogonal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Metrics/GaNumMetricOrthogonal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Metrics/GaNumMetricOrthonormal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Metrics/IGaNumMetric.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Metrics/IGaNumMetricOrthogonal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorBiTerm.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorBinaryTree1D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorBinaryTree2D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorBinaryTree3D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorHashTable1D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorHashTable3D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorTerm.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/GaNumMultivectorUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/IGaNumMultivector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/Intermediate/GaNumMultivectorTempArray.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/Intermediate/GaNumMultivectorTempHash.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/Intermediate/GaTempMultivectorImplementation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Multivectors/Intermediate/IGaNumMultivectorTemp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanAcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanCp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanFdp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanGp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanHip.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanLcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanRcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Euclidean/GaNumEuclideanSp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaBilinearProductImplementation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumBilinearProduct.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumBilinearProductCba.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumBilinearProductEuclidean.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumBilinearProductOrthogonal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumBilinearProductOrthonormal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumOp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/GaNumProductsUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/IGaNumBilinearOrthogonalProduct.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalAcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalCp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalFdp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalGp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalHip.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalLcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalRcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthogonal/GaNumOrthogonalSp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalAcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalCp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalFdp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalGp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalHip.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalLcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalRcp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Products/Orthonormal/GaNumOrthonormalSp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaBinaryTree.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaBinaryTreeLeafNode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaHashTable2D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaQuadTree.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaQuadTreeLeafNode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaSparseTable1D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaSparseTable2D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaSparseTable3D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/GaStructuresUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/IGaBinaryTreeNode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/Structures/IGaQuadTreeNode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraNumericsLib/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/ExprFactory/MFS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/ExprFactory/MFS.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/Expression/MathematicaExpression.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/Expression/MathematicaExpression.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/ExpressionTree/CasExpressionTreeUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/ExpressionTree/CasExpressionTreeUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/MathematicaConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/MathematicaConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/MathematicaUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/MathematicaUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/ComplexClassHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/ComplexClassHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/COM/COMDispatchHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/COM/COMDispatchHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/COM/COMTypeLibraryLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/COM/COMTypeLibraryLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/COM/COMUtilities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/COM/COMUtilities.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/CallPacketHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/CallPacketHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/NativeLink.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/NativeLink.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/ObjectHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Internal/ObjectHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/KernelLinkImpl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/KernelLinkImpl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/MathLinkImpl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/MathLinkImpl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/Utils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/WrappedKernelLink.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/NETLink/WrappedKernelLink.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/Test/TestMathematicaMatrix.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/Test/TestMathematicaMatrix.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/Test/TestUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Cas/Mathematica/Test/TestUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrameNonOrthogonal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrameNonOrthogonal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrameOrthogonal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrameOrthogonal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrameOrthonormal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Frames/GaSymFrameOrthonormal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/GaSymbolicsUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/GaSymbolicsUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/GeometricAlgebraSymbolicsLib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/GeometricAlgebraSymbolicsLib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinear.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinear.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearArray.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearArray.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearCoefSums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearCoefSums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearHash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearHash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Bilinear/GaSymMapBilinearTree.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/GaSymMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/GaSymMap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/GaSymMapUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/GaSymMapUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Trilinear/GaSymMapTrilinear.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Trilinear/GaSymMapTrilinear.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Trilinear/GaSymMapTrilinearHash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Trilinear/GaSymMapTrilinearHash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinear.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinear.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearCoefSums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearCoefSums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearHash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearHash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearMatrix.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearMatrix.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymMapUnilinearTree.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymOutermorphism.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Maps/Unilinear/GaSymOutermorphism.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Metrics/GaSymMetricEuclidean.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Metrics/GaSymMetricEuclidean.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Metrics/GaSymMetricOrthogonal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Metrics/GaSymMetricOrthogonal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Metrics/GaSymMetricOrthonormal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Metrics/GaSymMetricOrthonormal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBiTerm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBiTerm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBinaryTree1D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBinaryTree1D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBinaryTree2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBinaryTree2D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBinaryTree3D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorBinaryTree3D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorTerm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorTerm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymMultivectorUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymScalarBinaryTree1D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymScalarBinaryTree1D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymScalarBinaryTree2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/GaSymScalarBinaryTree2D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Hash/GaSymMultivectorHash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Hash/GaSymMultivectorHash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Intermediate/GaSymMultivectorTempArray.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Intermediate/GaSymMultivectorTempArray.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Intermediate/GaSymMultivectorTempHash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Intermediate/GaSymMultivectorTempHash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Intermediate/GaSymMultivectorTempTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Intermediate/GaSymMultivectorTempTree.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Tree/GaTreeMultivector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Tree/GaTreeMultivector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Tree/GaTreeMultivectorUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Multivectors/Tree/GaTreeMultivectorUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanAcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanAcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanCp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanCp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanFdp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanFdp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanGp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanGp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanHip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanHip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanLcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanLcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanRcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanRcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanSp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Euclidean/GaSymEuclideanSp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductCba.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductCba.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductEuclidean.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductEuclidean.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductOrthogonal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductOrthogonal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductOrthonormal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymBilinearProductOrthonormal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymOp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/GaSymOp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalAcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalAcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalCp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalCp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalFdp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalFdp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalGp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalGp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalHip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalHip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalLcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalLcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalRcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalRcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalSp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthogonal/GaSymOrthogonalSp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalAcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalAcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalCp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalCp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalFdp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalFdp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalGp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalGp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalHip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalHip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalLcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalLcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalRcp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalRcp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalSp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/Products/Orthonormal/GaSymOrthonormalSp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/GeometricAlgebraSymbolicsLib/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Compiler/CompilerUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Compiler/LanguageCompiler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Compiler/LanguageProjectCodeUnitCompiler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Compiler/LanguageProjectCompiler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Compiler/LanguageTempCodeCompiler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLDebug/IronyASTDescription.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/ASTException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/ASTGeneratorException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/ASTGeneratorTypeMismatchException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/CompilerException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/DSLException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/EvaluationException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLException/ParserException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/ActivationRecord.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/ActivationRecordEntry.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/ILanguageInterpreter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/LanguageBasicBinaryDynamicEvaluator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/LanguageBasicUnaryDynamicEvaluator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/LanguageExpressionEvaluator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/LanguageInterpreter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLInterpreter/LanguageValueAccessPrecessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/DSLs/IronyEBNF/IronyEBNFGrammar.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/IronyGrammars.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/IronyGrammars/IronyGrammars.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandAssign.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandBlock.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandComment.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandDeclareVariable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandExitCommandBlock.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandIfElse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/CommandIfElseIf.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Command/LanguageCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/BasicBinary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/BasicPolyadic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/BasicUnary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/LanguageExpressionBasic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/OperandsByIndex.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/OperandsByName.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/OperandsByValueAccess.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/OperandsByValueAccessAssignment.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/OperandsList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Basic/PolyadicOperands.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/CompositeExpression.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ILanguageExpression.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ILanguageExpressionAtomic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ILanguageExpressionBasic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ILanguageValue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ILanguageValueComposite.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ILanguageValueCompositeSparse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ILanguageValuePrimitive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueArray.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueArraySparse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueCompositeSparse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueNULL.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValuePointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValuePrimitive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueReference.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueStructure.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueStructureSparse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueTuple.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueTupleSparse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/Value/ValueUnit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ValueAccess/LanguageValueAccess.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ValueAccess/ValueAccessStep.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ValueAccess/ValueAccessStepAsRootSymbol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ValueAccess/ValueAccessStepByKey.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ValueAccess/ValueAccessStepByKeyList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Expression/ValueAccess/ValueAccessStepBySymbol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/IAstNodeDynamicVisitor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/IIronyAstObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/IIronyAstObjectNamed.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/IIronyAstObjectWithScope.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/IronyAst.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/IronyAstObjectNamed.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/LanguageRole.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Operator/ILanguageOperator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Operator/OperatorPrimitive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Scope/LanguageScope.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Scope/ScopeCommandBlockChild.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Scope/ScopeRoot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Scope/ScopeScopeChild.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Scope/ScopeSymbolChild.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Scope/ScopeUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/ILanguageSymbol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/LanguageSymbol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolDataStore.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolLValue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolLocalVariable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolNamedExpression.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolNamedValue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolNamespace.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolProcedure.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolProcedureParameter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolStructureDataMember.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolWithCommandBlock.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Symbol/SymbolWithScope.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Translator/SymbolTranslator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Translator/SymbolTranslatorContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Translator/SymbolTranslatorContextState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/ILanguageType.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/TypeArray.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/TypePointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/TypePrimitive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/TypeReference.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/TypeStructure.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/Semantic/Type/TypeTuple.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/ISourceCodeUnit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/ISourceCodeUnitLine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/ISourceCodeUnitsContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/IronyAstObjectCodeLocation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCodeFile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCodeFileLine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCodeLocation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCodeProject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCodeText.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCodeTextLine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCompilationLog.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageCompilationMessage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/LanguageSourceCodeManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/SourceCode/SourceCodeUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IronyGrammars/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/IronyGrammars/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/ADictionary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/ASortedDictionary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/BooleanPattern.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/Dependency/DependencyGraph.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/Dependency/DependencyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/IADictionary.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/MutableBooleanPattern.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/PriorityQueue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeBranch.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeBranchDictionaryByIndex.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeBranchDictionaryByName.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeBranchInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeBranchList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeLeaf.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeNode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeNodeDictionaryByIndex.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeNodeDictionaryByName.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeNodeList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/SimpleTreeUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SimpleTree/Visitor/SimpleTreeVisitor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SparseTable/SparseTable1D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SparseTable/SparseTable2D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SparseTable/SparseTable3D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SparseTable/SparseTableUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/SubArray.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/DataStructures/TrimmedList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/Reflection/MethodInfoExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UtilLib/Reflection/MethodInfoExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/SectionedGrid/Section/SectionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UtilLib/SectionedGrid/Section/SectionBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/StringToLiteralEncoder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/Strings/StringUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/UtilLib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UtilLib/UtilLib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/Utils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UtilLib/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/UtilLib/packages.config" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/GMac/Scripting.Extensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GradedMultivectorsLibraryComposer/Composers/CSharp/CodeLibraryComposer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GMac/GMacCompiler/Semantic/ASTGenerator/GMacConstantGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GMacProjects/Program.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1S0LYVGGUdXHMlPbecBuQICwOsl" />
+  <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected=".NET Project.GradedMultivectorsLibraryComposer">
+    <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="None" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GradedMultivectorsLibraryComposer" type="DotNetProject" factoryName=".NET Project" temporary="true">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/GradedMultivectorsLibraryComposer/bin/Debug/GradedMultivectorsLibraryComposer.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GradedMultivectorsLibraryComposer/bin/Debug" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/GradedMultivectorsLibraryComposer/GradedMultivectorsLibraryComposer.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Console" />
+      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.7.2" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue=".NET Project.GradedMultivectorsLibraryComposer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f8b30da-b5dd-45ce-9b3d-bf2b5d17556f" name="Default Changelist" comment="" />
+      <created>1570695634687</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570695634687</updated>
+      <workItem from="1570695687035" duration="4879000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

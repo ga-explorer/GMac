@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryComposerLib", "GeometryComposerLib\GeometryComposerLib.csproj", "{745A0099-6B17-4808-AD60-1056AD39CF37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryComposerLibBenchmarks", "GeometryComposerLibBenchmarks\GeometryComposerLibBenchmarks.csproj", "{80E811A9-7A69-49D7-891F-F513998CE0C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{745A0099-6B17-4808-AD60-1056AD39CF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745A0099-6B17-4808-AD60-1056AD39CF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745A0099-6B17-4808-AD60-1056AD39CF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745A0099-6B17-4808-AD60-1056AD39CF37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E811A9-7A69-49D7-891F-F513998CE0C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E811A9-7A69-49D7-891F-F513998CE0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E811A9-7A69-49D7-891F-F513998CE0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E811A9-7A69-49D7-891F-F513998CE0C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

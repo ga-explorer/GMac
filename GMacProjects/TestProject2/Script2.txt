@@ -1,0 +1,39 @@
+//Reset main scope
+[: geometry3d.cga |> reset :];
+
+//Initialize some GMac multivector variables
+[:
+    let v1 = Multivector(#e1# = 1, #e2# = 3, #e3# = -4)
+    let v2 = Multivector(#e1# = -1, #e2# = 2, #e3# = 1)
+    let v3 = Multivector(#e1# = 2, #e2# = 5, #e3# = -1)
+
+    let A = v1 ^ v2
+    let B = v2 ^ v3
+    let C = v1 ^ v2 ^ v3
+    
+    |> exec
+:];
+
+//Verify the GA identity v3 ^ A == v3 gp A + grade_inv(A) gp v3
+//By computing the difference and verifying it equals the zero multivector
+[: let s = v3 ^ A - (v3 gp A + grade_inv(A) gp v3) / 2 |> exec :];
+
+//Display the values of the GMac multivector variables
+for (var i = 1; i <= 3; i++)
+{
+    [: v|{i}| = |> ap :]; 
+    [: v|{i}| |> vo |> apl :];
+}
+
+@aplanl();
+
+for (var c = 'A'; c <= 'C'; c++)
+{
+    [: |{c}| = |> ap :]; 
+    [: |{c}| |> vo |> apl :];
+}
+
+@aplanl();
+
+[: s = |> ap :]; 
+[: s |> vo |> apl :];

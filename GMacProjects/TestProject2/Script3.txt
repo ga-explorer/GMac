@@ -1,0 +1,39 @@
+private void OutputValue(string name)
+{
+    <: "| |{name}| = |" |> ap :>; 
+    [: |{name}| |> vo |> apl :];
+}
+
+private void OutputValue(char name)
+{
+    <: "| |{name}| = |" |> ap :>; 
+    [: |{name}| |> vo |> apl :];
+}
+
+[: geometry3d.cga |> reset :];
+
+[:
+    let a = Multivector(#e1# = 'ax', #e2# = 'ay', #e3# = 'az')
+    let b = Multivector(#e1# = 'bx', #e2# = 'by', #e3# = 'bz')
+    let c = Multivector(#e1# = 'cx', #e2# = 'cy', #e3# = 'cz')
+
+    let X = a ^ b
+    let Y = b ^ c
+    let Z = a ^ b ^ c
+
+    |> exec
+:];
+
+[: let s = c ^ X - (c gp X + grade_inv(X) gp c) / 2 |> exec :];
+
+for (var c = 'a'; c <= 'c'; c++)
+    OutputValue(c);
+
+@aplanl();
+
+for (var c = 'X'; c <= 'Z'; c++)
+    OutputValue(c);
+
+@aplanl();
+
+OutputValue('s');

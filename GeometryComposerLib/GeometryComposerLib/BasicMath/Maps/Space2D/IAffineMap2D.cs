@@ -1,0 +1,18 @@
+﻿using GeometryComposerLib.BasicMath.Matrices;
+using GeometryComposerLib.BasicMath.Tuples;
+
+namespace GeometryComposerLib.BasicMath.Maps.Space2D
+{
+    public interface IAffineMap2D
+    {
+        Matrix3X3 ToMatrix();
+
+        ITuple2D MapPoint(ITuple2D point);
+
+        ITuple2D MapVector(ITuple2D vector);
+
+        ITuple2D MapNormal(ITuple2D normal);
+
+        IAffineMap2D InverseMap();
+    }
+}

@@ -1,0 +1,56 @@
+//Verify the GA identity c ^ X == (c gp X + grade_inv(X) gp c) / 2 
+//on the given symbolic vector c and 2-blade X
+
+//Set main scope
+[: geometry3d.cga |> reset :];
+
+//Execute some GMac commands
+[:
+    let a = Multivector(#e1# = 'ax', #e2# = 'ay', #e3# = 'az')
+    let b = Multivector(#e1# = 'bx', #e2# = 'by', #e3# = 'bz')
+    let c = Multivector(#e1# = 'cx', #e2# = 'cy', #e3# = 'cz')
+
+    let X = a ^ b
+
+    |> exec
+:];
+
+//Output the values of local GMac variables a, b, c, and X
+[: a = |> Append :]; 
+[: a |> ValueOf |> AsString |> AppendLine :];
+
+[: b = |> Append :]; 
+[: b |> ValueOf |> AsString |> AppendLine :];
+
+[: c = |> Append :]; 
+[: c |> ValueOf |> AsString |> AppendLine :];
+
+[: X = |> Append :]; 
+[: X |> ValueOf |> AsString |> AppendLine :];
+
+[: |> AppendLine :]; 
+
+//Evaluate and output values of both sides of the identity and the difference between them
+[: c ^ X = |> Append :]; 
+[: c ^ X |> Evaluate |> AsString |> AppendLine :];
+
+[: (c gp X + grade_inv(X) gp c) / 2 = |> Append :]; 
+[: (c gp X + grade_inv(X) gp c) / 2 |> Evaluate |> AsString |> AppendLine :];
+
+[: |> AppendLine :]; 
+
+[: Difference = |> Append :]; 
+[: c ^ X - (c gp X + grade_inv(X) gp c) / 2 |> Evaluate |> AsString |> AppendLine :];
+
+/*
+This should give the text result:
+ a = ax e1 + ay e2 + az e3
+ b = bx e1 + by e2 + bz e3
+ c = cx e1 + cy e2 + cz e3
+ X = Plus[Times[-1,ay,bx],Times[ax,by]] e1^e2 + Plus[Times[-1,az,bx],Times[ax,bz]] e1^e3 + Plus[Times[-1,az,by],Times[ay,bz]] e2^e3
+ 
+ c ^ X = Plus[Times[-1,az,by,cx],Times[ay,bz,cx],Times[az,bx,cy],Times[-1,ax,bz,cy],Times[-1,ay,bx,cz],Times[ax,by,cz]] e1^e2^e3
+ (c gp X + grade_inv(X) gp c) / 2 = Plus[Times[-1,az,by,cx],Times[ay,bz,cx],Times[az,bx,cy],Times[-1,ax,bz,cy],Times[-1,ay,bx,cz],Times[ax,by,cz]] e1^e2^e3
+ 
+ Difference = 0
+*/

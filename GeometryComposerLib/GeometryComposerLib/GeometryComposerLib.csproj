@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8654325D-0259-4912-8071-66AF79A2DC23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeometryComposerLib</RootNamespace>
+    <AssemblyName>GeometryComposerLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\..\Courses\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
+      <HintPath>..\..\GMac\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
+    </Reference>
+    <Reference Include="FsMpir.NET, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Mpir.NET.0.4.0\lib\net40\FsMpir.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony.Interpreter, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Irony.Interpreter.1.1.0\lib\net40\Irony.Interpreter.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\MeshComposerLib\packages\MathNet.Numerics.4.9.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.5.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\GMac\packages\MathNet.Spatial.0.5.0\lib\net461\MathNet.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mpir.NET, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Mpir.NET.0.4.0\lib\net40\Mpir.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\MeshComposerLib\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\MeshComposerLib\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.TextWriter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Serilog.Sinks.TextWriter.2.1.0\lib\net45\Serilog.Sinks.TextWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Supercluster.KDTree, Version=1.0.4.0, Culture=neutral, PublicKeyToken=4423da5f8ba350cf, processorArchitecture=MSIL">
+      <HintPath>..\..\CEMSim\packages\Supercluster.KDTree.1.0.4\lib\Supercluster.KDTree.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\..\CEMSim\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accelerators\BIH\BihUtils.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\AccBih2D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\Traversal\AccBihLineTraverser3D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\Traversal\AccBihLineTraversalState3D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\Traversal\AccBihLineTraversalData3D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\Traversal\AccBihLineTraverser2D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\IAccBih2D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\IAccBih3D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\AccBih3D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\AccBihNodeInfo2D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\AccBihNodeInfo3D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\AccBihNodeInternal2D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\AccBihNodeLeaf2D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\IAccBihNode2D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\AccBihNodeInternal3D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\AccBihNodeLeaf3D.cs" />
+    <Compile Include="Accelerators\BIH\Space3D\IAccBihNode3D.cs" />
+    <Compile Include="Accelerators\Grids\Space3D\AccGridLineTraverser3D.cs" />
+    <Compile Include="Accelerators\Grids\Space3D\IAccGrid3D.cs" />
+    <Compile Include="Accelerators\Grids\Space3D\AccGridInfo3D.cs" />
+    <Compile Include="Accelerators\Grids\Space3D\AccGridCellInfo3D.cs" />
+    <Compile Include="Accelerators\Grids\Space2D\AccGridLineTraverser2D.cs" />
+    <Compile Include="Accelerators\Grids\GridsUtils.cs" />
+    <Compile Include="Accelerators\Grids\Space2D\AccGrid2D.cs" />
+    <Compile Include="Accelerators\Grids\Space2D\AccGridCellInfo2D.cs" />
+    <Compile Include="Accelerators\Grids\Space2D\AccGridDrawingSettings2D.cs" />
+    <Compile Include="Accelerators\Grids\Space2D\AccGridInfo2D.cs" />
+    <Compile Include="Accelerators\Grids\Space2D\IAccGrid2D.cs" />
+    <Compile Include="Accelerators\Grids\Space3D\AccGrid3D.cs" />
+    <Compile Include="Accelerators\IAccelerator2D.cs" />
+    <Compile Include="Accelerators\IAccelerator3D.cs" />
+    <Compile Include="BasicMath\Coordinates\PolarCoordinates2D.cs" />
+    <Compile Include="BasicMath\Coordinates\SphericalPosition3D.cs" />
+    <Compile Include="BasicMath\Coordinates\UnitSphericalPosition3D.cs" />
+    <Compile Include="BasicMath\Coordinates\IPolarPosition2D.cs" />
+    <Compile Include="BasicMath\Coordinates\ISphericalPosition3D.cs" />
+    <Compile Include="BasicMath\IntUtils.cs" />
+    <Compile Include="BasicMath\Maps\Space3D\RotateScaleTranslateMap3D.cs" />
+    <Compile Include="BasicMath\Maps\Space3D\TrsMap3Dp.cs" />
+    <Compile Include="BasicMath\Matrices\MatrixUtils.cs" />
+    <Compile Include="BasicMath\Tuples\Collections\DistinctTuplesList2D.cs" />
+    <Compile Include="BasicMath\Tuples\Collections\DistinctTuplesList3D.cs" />
+    <Compile Include="BasicMath\Tuples\IComplexTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\IComplexTuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\IComplexTuple4D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\ComplexTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\ComplexTuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableComplexTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableComplexTuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableIntTuple2D.cs" />
+    <Compile Include="BasicMath\VectorAlgebraUtils.cs" />
+    <Compile Include="BasicOperations\DistanceUtils.cs" />
+    <Compile Include="BasicOperations\IntersectionUtils.cs" />
+    <Compile Include="BasicShapes\Boxes\IAxisAlignedBox2D.cs" />
+    <Compile Include="BasicShapes\Lines\ILimitedLine2D.cs" />
+    <Compile Include="BasicShapes\Lines\ILimitedLine3D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LimitedLine2D.cs" />
+    <Compile Include="BasicShapes\Boxes\IAxisAlignedBox3D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LimitedLine3D.cs" />
+    <Compile Include="BasicShapes\Lines\LinesUtils.cs" />
+    <Compile Include="BasicShapes\Planes\Immutable\Plane3D.cs" />
+    <Compile Include="BasicShapes\Planes\IPlane3D.cs" />
+    <Compile Include="BasicShapes\Triangles\Mutable\MutableTriangle3D.cs" />
+    <Compile Include="BasicShapes\IFiniteGeometricShape4D.cs" />
+    <Compile Include="BasicShapes\IGeometricObjectsContainer2D.cs" />
+    <Compile Include="BasicShapes\IGeometricObjectsContainer3D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableBoolTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\BoolTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\BoolTuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableBoolTuple3D.cs" />
+    <Compile Include="BasicShapes\BasicShapesUtils.cs" />
+    <Compile Include="BasicShapes\Circles\ICircle2D.cs" />
+    <Compile Include="BasicShapes\Circles\ICircleSegment2D.cs" />
+    <Compile Include="BasicShapes\Circles\ICircle3D.cs" />
+    <Compile Include="BasicShapes\Points\IPointPair2D.cs" />
+    <Compile Include="BasicShapes\Circles\ICircleSegment3D.cs" />
+    <Compile Include="BasicShapes\Circles\ICircleTriplet3D.cs" />
+    <Compile Include="BasicShapes\Spheres\ISphere3D.cs" />
+    <Compile Include="BasicShapes\Points\IPointPair3D.cs" />
+    <Compile Include="BasicShapes\Triangles\TrianglesUtils.cs" />
+    <Compile Include="Borders\BoundariesUtils.cs" />
+    <Compile Include="Borders\Space1D\IBoundingBox1D.cs" />
+    <Compile Include="Borders\Space1D\Immutable\BoundingBox1D.cs" />
+    <Compile Include="Borders\Space1D\Mutable\MutableBoundingBox1D.cs" />
+    <Compile Include="Borders\Space2D\Immutable\BoundingBox2D.cs" />
+    <Compile Include="Borders\Space2D\Mutable\MutableBoundingSphere2D.cs" />
+    <Compile Include="Borders\Space3D\Immutable\BoundingBox3D.cs" />
+    <Compile Include="Borders\Space2D\Mutable\MutableBoundingBox2D.cs" />
+    <Compile Include="Borders\Space2D\BoundingBox2Int.cs" />
+    <Compile Include="Borders\Space2D\Immutable\BoundingSphere2D.cs" />
+    <Compile Include="Borders\Space2D\IBoundingBox2D.cs" />
+    <Compile Include="Borders\IBorderCurve2D.cs" />
+    <Compile Include="Borders\Space3D\Mutable\MutableBoundingBox3D.cs" />
+    <Compile Include="Borders\Space3D\BoundingSphere3D.cs" />
+    <Compile Include="Borders\Space3D\IBoundingBox3D.cs" />
+    <Compile Include="Borders\IBorderSurface3D.cs" />
+    <Compile Include="Colors\ColorsUtils.cs" />
+    <Compile Include="Computers\ComputersUtils.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\Traversal\AccBihLineTraversalState2D.cs" />
+    <Compile Include="Computers\GeometryComputer.cs" />
+    <Compile Include="Computers\IGeometryComputer.cs" />
+    <Compile Include="Computers\Intersections\GcLimitedLineIntersector2D.cs" />
+    <Compile Include="Computers\Intersections\GcLimitedLineIntersector3D.cs" />
+    <Compile Include="Computers\Intersections\GcLineSegmentIntersector2D.cs" />
+    <Compile Include="Computers\Intersections\GcLineIntersector2D.cs" />
+    <Compile Include="Computers\Intersections\GcLineIntersector3D.cs" />
+    <Compile Include="Computers\Intersections\LineSegmentsIntersectionData.cs" />
+    <Compile Include="Computers\LineTraversalData2D.cs" />
+    <Compile Include="Accelerators\BIH\Space2D\Traversal\AccBihLineTraversalData2D.cs" />
+    <Compile Include="Computers\LineTraversalData3D.cs" />
+    <Compile Include="Computers\Intersections\SegmentSegmentIntersectionComputer2D.cs" />
+    <Compile Include="BasicShapes\Planes\PlanesUtils.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\Beam2D.cs" />
+    <Compile Include="BasicShapes\Lines\IBeam2D.cs" />
+    <Compile Include="BasicShapes\Triangles\ITriangle3D.cs" />
+    <Compile Include="BasicShapes\Triangles\Mutable\MutableTriangle2D.cs" />
+    <Compile Include="BasicShapes\Triangles\ITriangle2D.cs" />
+    <Compile Include="BasicShapes\Lines\Mutable\MutableLinePair2D.cs" />
+    <Compile Include="BasicShapes\Lines\Mutable\MutableLineSegment2D.cs" />
+    <Compile Include="BasicShapes\Lines\Mutable\MutableBeam2D.cs" />
+    <Compile Include="BasicShapes\Lines\Mutable\MutableLine2D.cs" />
+    <Compile Include="BasicShapes\Lines\IBeam3D.cs" />
+    <Compile Include="BasicShapes\Lines\Mutable\MutableLine3D.cs" />
+    <Compile Include="BasicShapes\Lines\Mutable\MutableLinePair3D.cs" />
+    <Compile Include="BasicShapes\Lines\IPlanarBeam3D.cs" />
+    <Compile Include="BasicShapes\Lines\ILine3D.cs" />
+    <Compile Include="BasicShapes\Lines\ILinePair3D.cs" />
+    <Compile Include="BasicShapes\Lines\ILineTriplet3D.cs" />
+    <Compile Include="BasicShapes\Lines\ILineSegment2D.cs" />
+    <Compile Include="BasicShapes\Lines\ILine2D.cs" />
+    <Compile Include="BasicShapes\Lines\ILinePair2D.cs" />
+    <Compile Include="BasicShapes\Lines\ILineSegment3D.cs" />
+    <Compile Include="BasicShapes\IFiniteGeometricShape2D.cs" />
+    <Compile Include="BasicShapes\IFiniteGeometricShape3D.cs" />
+    <Compile Include="BasicShapes\IIntersectable2D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\Line2D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LinePair2D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\Line3D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LineSegment2D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LineSegment3D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\PlanarBeam3Dp.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\Beam3D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LinePair3D.cs" />
+    <Compile Include="BasicShapes\Lines\Immutable\LineTriplet3D.cs" />
+    <Compile Include="BasicShapes\Polyhedra\Immutable\Tetrahedron3D.cs" />
+    <Compile Include="BasicShapes\Triangles\Immutable\Triangle2D.cs" />
+    <Compile Include="BasicShapes\Triangles\Immutable\Triangle3D.cs" />
+    <Compile Include="BasicMath\Frames\Space2D\AffineFrame2D.cs" />
+    <Compile Include="BasicMath\Frames\Space3D\AffineFrame3D.cs" />
+    <Compile Include="BasicMath\Frames\Space2D\LinearFrame2D.cs" />
+    <Compile Include="BasicMath\Frames\Space3D\LinearFrame3D.cs" />
+    <Compile Include="BasicMath\IGeometryElement.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\CombinedMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\ComposedMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\IdentityMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\ReflectionOriginMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\ReflectionXMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\ReflectionYMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\RotationMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\ScalingMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\TranslationMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space3D\ComposedMap3Dp.cs" />
+    <Compile Include="BasicMath\Maps\Space3D\IdentityMap3Dp.cs" />
+    <Compile Include="BasicMath\Maps\Space2D\IAffineMap2D.cs" />
+    <Compile Include="BasicMath\Maps\Space3D\IAffineMap3D.cs" />
+    <Compile Include="BasicMath\Maps\Space3D\LinearMap3Dp.cs" />
+    <Compile Include="BasicMath\Tuples\ITuple4D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\ITuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\ITuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\Tuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\IntTuple2D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\Tuple4D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\TupleQuad2D.cs" />
+    <Compile Include="BasicMath\BasicMathUtils.cs" />
+    <Compile Include="BasicMath\Float32Utils.cs" />
+    <Compile Include="BasicMath\Matrices\Matrix2X2.cs" />
+    <Compile Include="BasicMath\Matrices\Matrix3X3.cs" />
+    <Compile Include="BasicMath\Matrices\Matrix4X4.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableTuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\Mutable\MutableTuple4D.cs" />
+    <Compile Include="BasicMath\Tuples\TuplesUtils.cs" />
+    <Compile Include="Computers\Projections\GcPlaneProjector3D.cs" />
+    <Compile Include="Computers\Reflections\GcLineSegmentReflector2D.cs" />
+    <Compile Include="Computers\Reflections\GcTriangleReflector3D.cs" />
+    <Compile Include="Computers\Voronoi\DelaunayTriangulation2D.cs" />
+    <Compile Include="Computers\Voronoi\VoronoiComputer2D.cs" />
+    <Compile Include="Computers\Voronoi\VoronoiEdge2D.cs" />
+    <Compile Include="Computers\Voronoi\VoronoiPointsList.cs" />
+    <Compile Include="Computers\Voronoi\VoronoiTriangle2D.cs" />
+    <Compile Include="Curves\CurvesUtils.cs" />
+    <Compile Include="Curves\Space2D\ICurve2D.cs" />
+    <Compile Include="Curves\Space3D\ICurve3D.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5DFullMultivectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\MultivectorGeometry3D.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5D0VectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5D2VectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5D3VectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5D5VectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5DkVectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5DMultivectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\MultivectorNullSpaceKind.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5D1VectorGeometry.cs" />
+    <Compile Include="GeometricAlgebra\CGA5D\Cga5D4VectorGeometry.cs" />
+    <Compile Include="Random\RandomGeometryGenerator.cs" />
+    <Compile Include="Collections\CollectionsUtils.cs" />
+    <Compile Include="Collections\Finite\FcComputed.cs" />
+    <Compile Include="Collections\Finite\FcConstant.cs" />
+    <Compile Include="Collections\Finite\FcEven.cs" />
+    <Compile Include="Collections\Finite\FcPermutation.cs" />
+    <Compile Include="Collections\Finite\FcShiftReflect.cs" />
+    <Compile Include="Collections\Finite\FcSlice.cs" />
+    <Compile Include="Collections\Finite\FcSparse.cs" />
+    <Compile Include="Collections\Finite\FcTwoEndList.cs" />
+    <Compile Include="Collections\Finite\FiniteCollection.cs" />
+    <Compile Include="Collections\Finite\FiniteCollectionEnumerator.cs" />
+    <Compile Include="Collections\Finite\IFiniteCollection.cs" />
+    <Compile Include="Collections\Finite\Iterators\FciMappedIndexIterator.cs" />
+    <Compile Include="Collections\Finite\Iterators\FciMappedOffsetIterator.cs" />
+    <Compile Include="Collections\Finite\Iterators\FciPeriodicIterator.cs" />
+    <Compile Include="Collections\Finite\Iterators\FciSliceIterator.cs" />
+    <Compile Include="Collections\Finite\Iterators\FciSwingIterator.cs" />
+    <Compile Include="Collections\Finite\Natural\NaturalFiniteCollection.cs" />
+    <Compile Include="Collections\Finite\Natural\NaturalFiniteCollectionEnumerator.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcChained.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcChainedEnumerator.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcComputed.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcConstant.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcInterleaved.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcLinearIntDoubleMap.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcList.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcRepeated.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcReversed.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcSlice.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcSparse.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcUtils.cs" />
+    <Compile Include="Collections\Finite\Natural\NfcVector.cs" />
+    <Compile Include="Collections\GcConstant.cs" />
+    <Compile Include="Collections\GcEven.cs" />
+    <Compile Include="Collections\GcInterleaved.cs" />
+    <Compile Include="Collections\GcOverlap.cs" />
+    <Compile Include="Collections\GcPeriodic.cs" />
+    <Compile Include="Collections\GcReversed.cs" />
+    <Compile Include="Collections\GcShiftReflect.cs" />
+    <Compile Include="Collections\GcSparse.cs" />
+    <Compile Include="Collections\GcSplit.cs" />
+    <Compile Include="Collections\GenerativeCollection.cs" />
+    <Compile Include="Collections\IGenerativeCollection.cs" />
+    <Compile Include="BasicMath\Float64Utils.cs" />
+    <Compile Include="Random\RandomVectorsGenerator.cs" />
+    <Compile Include="Sampling\SamplingUtils.cs" />
+    <Compile Include="ScalarToIntOption.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\Tuple3D.cs" />
+    <Compile Include="BasicMath\Tuples\Immutable\IntTuple3D.cs" />
+    <Compile Include="GeometryComposerLibUtils.cs" />
+    <Compile Include="SdfGeometry\ISdfGeometry.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfAnd3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfBinaryAnd3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfBinaryAndNot3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfBinaryNotAnd3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfBinaryNotOr3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfBinaryOr3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfBinaryOrNot3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfCurveElongation3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfNot3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfOr3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfRounding3D.cs" />
+    <Compile Include="SdfGeometry\Operations\SdfSurfaceElongation3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfBox3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfCylinderX3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfCylinderY3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfCylinderZ3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfLineSegment3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfLineSegmentX3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfLineSegmentY3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfLineSegmentZ3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfPlane3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfPlaneXy3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfPlaneXz3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfPlaneYz3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfRoundBox3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfSphere3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfTorusX3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfTorusY3D.cs" />
+    <Compile Include="SdfGeometry\Primitives\SdfTorusZ3D.cs" />
+    <Compile Include="SdfGeometry\SdfAggregation.cs" />
+    <Compile Include="SdfGeometry\SdfBinaryOperation.cs" />
+    <Compile Include="SdfGeometry\SdfUnaryOperation.cs" />
+    <Compile Include="SdfGeometry\SdfUtils.cs" />
+    <Compile Include="SdfGeometry\SignedDistanceFunction.cs" />
+    <Compile Include="SdfGeometry\Transforms\SdfRotate3D.cs" />
+    <Compile Include="SdfGeometry\Transforms\SdfRotateX3D.cs" />
+    <Compile Include="SdfGeometry\Transforms\SdfRotateY3D.cs" />
+    <Compile Include="SdfGeometry\Transforms\SdfRotateZ3D.cs" />
+    <Compile Include="SdfGeometry\Transforms\SdfScale3D.cs" />
+    <Compile Include="SdfGeometry\Transforms\SdfTranslate3D.cs" />
+    <Compile Include="Textures\GridTextureComposer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Computers\Normals\" />
+    <Folder Include="DataStructures\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj">
+      <Project>{52834d87-7593-4e6e-a9b0-dbaede8ce6da}</Project>
+      <Name>DataStructuresLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj">
+      <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
+      <Name>TextComposerLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="xmpir32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xmpir64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,129 @@
+[shortcuts]
+Ipr.Assign : assign
+Ipr.Assign : asn
+Ipr.AsString : asstring
+Ipr.AsString : as
+Ipr.BasisVector : basisvector
+Ipr.BasisVector : bv
+Ipr.CloseScope : close
+Ipr.CloseScope : cls
+Ipr.ComputeToExpr : computetoexpr
+Ipr.ComputeToExpr : cte
+Ipr.ComputeToImage : computetoimage
+Ipr.ComputeToImage : cti
+Ipr.ComputeToInputForm : computetoinputform
+Ipr.ComputeToInputForm : ctif
+Ipr.ComputeToOutputForm : computetooutputform
+Ipr.ComputeToOutputForm : ctof
+Ipr.ComputeToString : computetostring
+Ipr.ComputeToString : cts
+Ipr.ComputeToTypeset : computetotypeset
+Ipr.ComputeToTypeset : ctt
+Ipr.Constant : constant
+Ipr.Constant : ct
+Ipr.Declare : declare
+Ipr.Declare : dclr
+Ipr.Evaluate : evaluate
+Ipr.Evaluate : eval
+Ipr.Evaluate : evl
+Ipr.Execute : execute
+Ipr.Execute : exec
+Ipr.Expression : expression
+Ipr.Expression : expr
+Ipr.Frame : frame
+Ipr.Frame : fr
+Ipr.FrameMultivector : multivector
+Ipr.FrameMultivector : mv
+Ipr.GMacType : type
+Ipr.GMacType : ty
+Ipr.GMacTypeOf : typeof
+Ipr.GMacTypeOf : tyo
+Ipr.LocalVariable : variable
+Ipr.LocalVariable : lv
+Ipr.Macro : macro
+Ipr.Macro : mc
+Ipr.Namespace : namespace
+Ipr.Namespace : ns
+Ipr.OpenScope : open
+Ipr.OpenScope : opn
+Ipr.Output.Log.Append : append
+Ipr.Output.Log.Append : ap
+Ipr.Output.Log.AppendAtNewLine : appendatnewline
+Ipr.Output.Log.AppendAtNewLine : apanl
+Ipr.Output.Log.AppendLine : appendline
+Ipr.Output.Log.AppendLine : apl
+Ipr.Output.Log.AppendLineAtNewLine : appendlineatnewline
+Ipr.Output.Log.AppendLineAtNewLine : aplanl
+Ipr.Output.Log.AppendNewLine : appendnewline
+Ipr.Output.Log.AppendNewLine : apnl
+Ipr.Output.Log.DecreaseIndentation : decindent
+Ipr.Output.Log.DecreaseIndentation : di
+Ipr.Output.Log.IncreaseIndentation : incindent
+Ipr.Output.Log.IncreaseIndentation : ii
+Ipr.Output.Store : store
+Ipr.Output.Store : str
+Ipr.Reset : reset
+Ipr.Reset : rst
+Ipr.ResetShortcuts : resetshortcuts
+Ipr.ResetShortcuts : rsc
+Ipr.SetShortcuts : setshortcuts
+Ipr.SetShortcuts : ssc
+Ipr.Structure : structure
+Ipr.Structure : st
+Ipr.Subspace : subspace
+Ipr.Subspace : ss
+Ipr.SubspaceToMultivector : subspacetomultivector
+Ipr.SubspaceToMultivector : ss2mv
+Ipr.Symbol : symbol
+Ipr.Symbol : sy
+Ipr.ValueAccess : valueaccess
+Ipr.ValueAccess : vla
+Ipr.ValueAccessExists : valueexists
+Ipr.ValueAccessExists : vle
+Ipr.ValueOf : valueof
+Ipr.ValueOf : vlo
+
+[namespaces]
+System
+System.Collections.Generic
+System.Drawing
+System.Linq
+GMac
+GMac.GMacUtils
+GMac.GMacAST
+GMac.GMacAST.Symbols
+GMac.GMacAST.Expressions
+GMac.GMacAST.Commands
+GMac.GMacAPI.Binding
+GMac.GMacScripting
+TextComposerLib
+TextComposerLib.Text.Linear
+Wolfram.NETLink
+
+[members]
+
+[script]
+//Reset script context
+[: geometry3d.cga |> reset :];
+
+
+[:
+   //Create a symbolic cga vector
+   let v = Multivector(#no# = 'Vo', #e1# = 'Vx', #e2# = 'Vy', #e3# = 'Vz', #ni# = 'Vi')
+   //let w = Multivector(#no# = 'Wo', #e1# = 'Wx', #e2# = 'Wy', #e3# = 'Wz', #ni# = 'Wi')
+
+   //Create a sphere multivector with center C = (1, 2, 3) and radius r = 10
+   let C_euclidean = Multivector(#e1# = 'Cx', #e2# = 'Cy', #e3# = 'Cz')
+   let C = no + C_euclidean + C_euclidean gp C_euclidean gp ni / 2
+   
+   let sphere = C - 'r * r' / 2 * ni
+
+   let vCv = C gp v + v gp C
+   
+   let v2 = v gp v
+   
+   |> exec
+:];
+
+[: vCv |> ValueOf |> AsString |> ctif |> AppendLine :];
+[: v2 |> ValueOf |> AsString |> ctif |> AppendLine :];
