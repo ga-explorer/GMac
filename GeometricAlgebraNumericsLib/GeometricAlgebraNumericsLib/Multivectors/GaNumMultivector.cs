@@ -496,7 +496,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors
             => VSpaceDimension.ToGaSpaceDimension();
 
         public IEnumerable<int> BasisBladeIds
-            => TermsTree.LeafNodeIDs.Select(k => (int)k);
+            => _termsDictionary
+                .Select(pair => pair.Key);
 
         public IEnumerable<int> NonZeroBasisBladeIds
             => _termsDictionary
@@ -504,7 +505,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors
                 .Select(pair => pair.Key);
 
         public IEnumerable<double> BasisBladeScalars
-            => _termsDictionary.Select(pair => pair.Value);
+            => _termsDictionary
+                .Select(pair => pair.Value);
 
         public IEnumerable<double> NonZeroBasisBladeScalars 
             => _termsDictionary

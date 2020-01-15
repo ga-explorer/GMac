@@ -108,6 +108,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors
         }
 
 
+        public static GaNumMultivectorGraded ToGradedMultivector(this IGaNumMultivector mv)
+        {
+            return GaNumMultivectorGraded.CreateCopy(mv);
+        }
+
+
         public static IEnumerable<GaNumMultivectorBiTerm> GetBiTermsForEGp(this GaNumMultivector mv1, GaNumMultivector mv2)
         {
             foreach (var term1 in mv1.Terms)
