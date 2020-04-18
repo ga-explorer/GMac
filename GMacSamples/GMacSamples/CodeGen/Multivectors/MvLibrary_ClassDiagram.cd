@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GMacSamples.CodeGen.Multivectors.MvLibrary" Collapsed="true">
+    <Position X="0.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAgFAEgggAQgQACBAAAQAAEAACIAABAAAYAAAEQA=</HashCode>
+      <FileName>CodeGen\Multivectors\MvLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMacSamples.CodeGen.Multivectors.DerivedMvClassFileGenerator" Collapsed="true">
+    <Position X="7" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAECAAIAABAAAAAAAAQCAAABAAAAAADggAAAEAAAAA=</HashCode>
+      <FileName>CodeGen\Multivectors\DerivedMvClassFileGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMacSamples.CodeGen.Multivectors.DerivedMvClassCalcFileGenerator" Collapsed="true">
+    <Position X="10" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAgAQAAZACAAAAAAACAAACAAAAAARGAQAAEAgAAA=</HashCode>
+      <FileName>CodeGen\Multivectors\DerivedMvClassCalcFileGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMacSamples.CodeGen.Multivectors.BaseMvClassFileGenerator" Collapsed="true">
+    <Position X="4.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAgAAAEAAAAA=</HashCode>
+      <FileName>CodeGen\Multivectors\BaseMvClassFileGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMacSamples.CodeGen.Multivectors.MvLibraryCodeFileGenerator" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>CodeGen\Multivectors\MvLibraryCodeFileGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMacSamples.CodeGen.Multivectors.MvLibraryMacroCodeFileGenerator" Collapsed="true">
+    <Position X="10" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CodeGen\Multivectors\MvLibraryMacroCodeFileGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMacSamples.CodeGen.Multivectors.MvClassData" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAACAAAAAAADABAEAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>CodeGen\Multivectors\MvClassData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeGen.GMacCodeLibraryComposer" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="TextComposerLib.Code.CodeLibraryComposer" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeGen.GMacMacroCodeFileComposer" Collapsed="true">
+    <Position X="10" Y="3.25" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeGen.GMacCodeFileComposer" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GMac.GMacAPI.CodeGen.GMacCodePartComposer" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

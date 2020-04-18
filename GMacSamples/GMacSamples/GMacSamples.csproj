@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3187901B-F838-405B-8200-71AEBBD897FD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GMacSamples</RootNamespace>
+    <AssemblyName>GMacSamples</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.16.11.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\packages\FCTB.2.16.11.0\lib\FastColoredTextBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Wolfram.NETLink, Version=1.6.6098.33246, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Wolfram Research\Mathematica\11.0\SystemFiles\Links\NETLink\Wolfram.NETLink.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeGen\CodeGenSamples.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeGen\CodeGenSamples.designer.cs">
+      <DependentUpon>CodeGenSamples.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CodeGen\CodeGenSampleTask.cs" />
+    <Compile Include="CodeGen\Multivectors\BaseMvClassFileGenerator.cs" />
+    <Compile Include="CodeGen\Multivectors\DerivedMvClassCalcFileGenerator.cs" />
+    <Compile Include="CodeGen\Multivectors\DerivedMvClassFileGenerator.cs" />
+    <Compile Include="CodeGen\Multivectors\MvClassData.cs" />
+    <Compile Include="CodeGen\Multivectors\MvLibrary.cs" />
+    <Compile Include="CodeGen\Multivectors\MvLibraryCodeFileGenerator.cs" />
+    <Compile Include="CodeGen\Multivectors\MvLibraryMacroCodeFileGenerator.cs" />
+    <Compile Include="DSLCode\DslCodeSamples.cs" />
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GMacBase\GMacBaseSampleTasks.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CodeGen\CodeGenSamples.resx">
+      <DependentUpon>CodeGenSamples.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="CodeGen\Multivectors\MvLibrary_ClassDiagram.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GMacAST\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GMac\GMac\GMac.csproj">
+      <Project>{8943D17A-189F-4CE2-960A-430755F0435B}</Project>
+      <Name>GMac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GMac\IronyGrammars\IronyGrammars.csproj">
+      <Project>{89C1F760-833F-45BA-AF7F-74CBDF2042B5}</Project>
+      <Name>IronyGrammars</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GMac\SymbolicInterface\SymbolicInterface.csproj">
+      <Project>{1A829048-079B-4BA4-8354-F5BE36946D11}</Project>
+      <Name>SymbolicInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GMac\TextComposerLib\TextComposerLib.csproj">
+      <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
+      <Name>TextComposerLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GMac\UtilLib\UtilLib.csproj">
+      <Project>{D743AAC2-6F5B-4F9F-BDE8-366648110F1C}</Project>
+      <Name>UtilLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
