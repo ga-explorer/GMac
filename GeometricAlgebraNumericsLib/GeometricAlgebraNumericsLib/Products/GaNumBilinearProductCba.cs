@@ -4,7 +4,7 @@ using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Maps.Unilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
@@ -92,8 +92,8 @@ namespace GeometricAlgebraNumericsLib.Products
         {
             get
             {
-                var baseMv1 = NonOrthogonalMetric.DerivedToBaseCba[id1].ToMultivector();
-                var baseMv2 = NonOrthogonalMetric.DerivedToBaseCba[id2].ToMultivector();
+                var baseMv1 = NonOrthogonalMetric.DerivedToBaseCba[id1].GetSarMultivector();
+                var baseMv2 = NonOrthogonalMetric.DerivedToBaseCba[id2].GetSarMultivector();
 
                 var baseMv = BaseProductMap[baseMv1, baseMv2];
 
@@ -101,7 +101,20 @@ namespace GeometricAlgebraNumericsLib.Products
             }
         }
 
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
+        {
+            get
+            {
+                var baseMv1 = NonOrthogonalMetric.DerivedToBaseCba[mv1];
+                var baseMv2 = NonOrthogonalMetric.DerivedToBaseCba[mv2];
+
+                var baseMv = BaseProductMap[baseMv1, baseMv2];
+
+                return NonOrthogonalMetric.BaseToDerivedCba[baseMv];
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
         {
             get
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
@@ -21,7 +21,9 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public abstract IGaNumMultivector this[int id1] { get; }
 
-        public abstract GaNumMultivector this[GaNumMultivector mv1] { get; }
+        public abstract GaNumSarMultivector this[GaNumSarMultivector mv1] { get; }
+
+        public abstract GaNumDgrMultivector this[GaNumDgrMultivector mv1] { get; }
 
         public virtual IGaNumMultivector DomainPseudoScalarMap 
             => this[DomainGaSpaceDimension - 1];
@@ -68,9 +70,9 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
                 foreach (var term in pair.Item2)
                 {
-                    var row = term.Key.BasisBladeIndex();
+                    var row = term.BasisBladeId.BasisBladeIndex();
 
-                    matrixItems[row, col] = term.Value;
+                    matrixItems[row, col] = term.ScalarValue;
                 }
             }
 
@@ -89,7 +91,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
             for (var id = 0; id < TargetGaSpaceDimension; id++)
             {
-                var mv = GaNumMultivector.CreateFromRow(exprArray, id);
+                var mv = GaNumSarMultivector.CreateFromRow(exprArray, id);
 
                 if (!mv.IsNullOrEmpty())
                     resultMap.SetBasisBladeMap(id, mv);
@@ -100,12 +102,12 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public virtual GaNumMapUnilinear Inverse()
         {
-            return (this.ToMatrix().Inverse() as Matrix).ToTreeMap();
+            return (this.ToDenseMatrix().Inverse() as Matrix).ToTreeMap();
         }
 
         public virtual GaNumMapUnilinear InverseAdjoint()
         {
-            return (this.ToMatrix().Inverse().Transpose() as Matrix).ToTreeMap();
+            return (this.ToDenseMatrix().Inverse().Transpose() as Matrix).ToTreeMap();
         }
 
 

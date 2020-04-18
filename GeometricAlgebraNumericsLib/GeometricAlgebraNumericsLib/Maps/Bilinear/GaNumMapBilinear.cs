@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 {
@@ -16,9 +16,11 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 
         public abstract IGaNumMultivector this[int id1, int id2] { get; }
 
-        public abstract GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2] { get; }
+        public abstract GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2] { get; }
 
-        public virtual GaNumMultivector this[params GaNumMultivector[] mvList]
+        public abstract GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2] { get; }
+
+        public virtual GaNumSarMultivector this[params GaNumSarMultivector[] mvList]
         {
             get
             {
@@ -26,7 +28,36 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                     throw new InvalidOperationException();
 
                 var n = mvList.Length - 1;
-                GaNumMultivector resultMv;
+                GaNumSarMultivector resultMv;
+
+                if (Associativity == GaNumMapBilinearAssociativity.RightAssociative)
+                {
+                    resultMv = mvList[0];
+
+                    for (var i = 1; i <= n; i++)
+                        resultMv = this[resultMv, mvList[i]];
+                }
+                else
+                {
+                    resultMv = mvList[n];
+
+                    for (var i = n - 1; i >= 0; i--)
+                        resultMv = this[mvList[i], resultMv];
+                }
+
+                return resultMv;
+            }
+        }
+
+        public virtual GaNumDgrMultivector this[params GaNumDgrMultivector[] mvList]
+        {
+            get
+            {
+                if (Associativity == GaNumMapBilinearAssociativity.NoneAssociative)
+                    throw new InvalidOperationException();
+
+                var n = mvList.Length - 1;
+                GaNumDgrMultivector resultMv;
 
                 if (Associativity == GaNumMapBilinearAssociativity.RightAssociative)
                 {

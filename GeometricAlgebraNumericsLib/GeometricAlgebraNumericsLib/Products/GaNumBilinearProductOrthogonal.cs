@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
@@ -25,7 +25,7 @@ namespace GeometricAlgebraNumericsLib.Products
             OrthogonalMetric = basisBladesSignatures;
         }
 
-        public abstract GaNumMultivectorTerm MapToTerm(int id1, int id2);
+        public abstract GaNumTerm MapToTerm(int id1, int id2);
 
         public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
         {

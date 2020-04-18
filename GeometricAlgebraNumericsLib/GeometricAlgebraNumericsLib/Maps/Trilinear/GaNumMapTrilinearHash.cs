@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraNumericsLib.Structures.Collections;
 
 namespace GeometricAlgebraNumericsLib.Maps.Trilinear
 {
@@ -38,7 +40,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
             {
                 return
                     !_basisBladesMaps.TryGetValue(id1, id2, id3, out var basisBladeMv) || ReferenceEquals(basisBladeMv, null)
-                        ? GaNumMultivector.CreateZero(TargetGaSpaceDimension)
+                        ? GaNumSarMultivector.CreateZero(TargetVSpaceDimension)
                         : basisBladeMv;
             }
         }
@@ -79,7 +81,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
         }
 
 
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2, GaNumMultivector mv3]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2, GaNumSarMultivector mv3]
         {
             get
             {
@@ -87,37 +89,37 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
                     mv3.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var tempMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var tempMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
-                foreach (var term1 in mv1.NonZeroTerms)
+                foreach (var term1 in mv1.GetNonZeroTerms())
                 {
-                    var id1 = term1.Key;
-                    var coef1 = term1.Value;
+                    var id1 = term1.BasisBladeId;
+                    var coef1 = term1.ScalarValue;
 
-                    foreach (var term2 in mv2.NonZeroTerms)
+                    foreach (var term2 in mv2.GetNonZeroTerms())
                     {
-                        var id2 = term2.Key;
-                        var coef2 = term2.Value;
+                        var id2 = term2.BasisBladeId;
+                        var coef2 = term2.ScalarValue;
 
-                        foreach (var term3 in mv3.NonZeroTerms)
+                        foreach (var term3 in mv3.GetNonZeroTerms())
                         {
-                            var id3 = term3.Key;
-                            var coef3 = term3.Value;
+                            var id3 = term3.BasisBladeId;
+                            var coef3 = term3.ScalarValue;
 
                             if (!_basisBladesMaps.TryGetValue(id1, id2, id3, out var basisBladeMv) ||
                                 basisBladeMv == null)
                                 continue;
 
-                            foreach (var basisBladeMvTerm in basisBladeMv.NonZeroTerms)
-                                tempMv.UpdateTerm(
-                                    basisBladeMvTerm.Key,
-                                    basisBladeMvTerm.Value * coef1 * coef2 * coef3
+                            foreach (var basisBladeMvTerm in basisBladeMv.GetNonZeroTerms())
+                                tempMv.AddTerm(
+                                    basisBladeMvTerm.BasisBladeId,
+                                    basisBladeMvTerm.ScalarValue * coef1 * coef2 * coef3
                                 );
                         }
                     }
                 }
 
-                return tempMv;
+                return tempMv.GetSarMultivector();
             }
         }
 

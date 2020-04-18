@@ -36,7 +36,7 @@ namespace CSScriptNativeApi
         {
             var host = new HostApp();
             host.Log("Testing compiling services CS-Script Native API");
-            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine(@"---------------------------------------------");
 
             CodeDomSamples.LoadMethod_Instance();
             CodeDomSamples.LoadMethod_Static();
@@ -332,7 +332,7 @@ namespace CSScriptNativeApi
                 {
                     Console.WriteLine("Script: " + info.ScriptFile);
 
-                    Console.WriteLine("Referenced assemblies:");
+                    Console.WriteLine(@"Referenced assemblies:");
                     foreach (string asm in info.Input.ReferencedAssemblies)
                         Console.WriteLine(asm);
 

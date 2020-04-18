@@ -1,23 +1,33 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 
 namespace GeometricAlgebraNumericsLib.Products.Euclidean
 {
-    public sealed class GaNumEuclideanGp : GaNumBilinearProductEuclidean
+    public sealed class GaNumEuclideanGp 
+        : GaNumBilinearProductEuclidean, IGaNumOrthogonalGeometricProduct
     {
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                return
-                    GaNumMultivector
-                        .CreateZero(TargetGaSpaceDimension)
-                        .AddFactors(mv1.GetBiTermsForEGp(mv2));
+                return mv1.GetGbtEGpTerms(mv2).SumAsSarMultivector(TargetVSpaceDimension);
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                return mv1.GetGbtEGpTerms(mv2).SumAsDgrMultivector(TargetVSpaceDimension);
             }
         }
 
@@ -28,13 +38,33 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
         }
 
 
-        public override GaNumMultivectorTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(int id1, int id2)
         {
-            return GaNumMultivectorTerm.CreateTerm(
+            return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
                 GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d
             );
+        }
+
+        public GaNumTerm MapToTermLa(int id1, int id2, int id3)
+        {
+            var idXor12 = id1 ^ id2;
+            var value = 
+                (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3)) 
+                    ? -1 : 1;
+
+            return GaNumTerm.Create(TargetGaSpaceDimension, idXor12 ^ id3, value);
+        }
+
+        public GaNumTerm MapToTermRa(int id1, int id2, int id3)
+        {
+            var idXor23 = id2 ^ id3;
+            var value =
+                (GaNumFrameUtils.IsNegativeEGp(id1, idXor23) != GaNumFrameUtils.IsNegativeEGp(id2, id3))
+                    ? -1 : 1;
+
+            return GaNumTerm.Create(TargetGaSpaceDimension, id1 ^ idXor23, value);
         }
     }
 }

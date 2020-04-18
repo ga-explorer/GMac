@@ -12,7 +12,7 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// The maximum allowed GA vector space dimension
         /// </summary>
         public static int MaxVSpaceDimension { get; } 
-            = 20;
+            = 25;
 
         /// <summary>
         /// The maximum possible basis blade ID in the maximum allowed GA vector space dimension
@@ -850,9 +850,9 @@ namespace GeometricAlgebraNumericsLib.Frames
         }
 
 
-        public static bool IsValidVaSpaceDimension(this int vaSpaceDim)
+        public static bool IsValidVSpaceDimension(this int vaSpaceDim)
         {
-            return vaSpaceDim >= 0 && vaSpaceDim < MaxVSpaceDimension;
+            return vaSpaceDim >= 2 && vaSpaceDim < MaxVSpaceDimension;
         }
 
         /// <summary>
@@ -876,6 +876,27 @@ namespace GeometricAlgebraNumericsLib.Frames
         public static bool IsValidBasisVectorId(this int basisBladeId)
         {
             return basisBladeId.IsValidBasisBladeId() && basisBladeId.IsBasicPattern();
+        }
+
+        public static bool TryGetValidBasisVectorIndex(this int basisBladeId, out int basisVectorIndex)
+        {
+            var onesCount = 0;
+            basisVectorIndex = -1;
+
+            var i = 0;
+            while (basisBladeId != 0 && onesCount <= 1)
+            {
+                if ((basisBladeId & 1) != 0)
+                {
+                    basisVectorIndex = (onesCount == 0) ? i : -1;
+                    onesCount++;
+                }
+
+                i++;
+                basisBladeId >>= 1;
+            }
+
+            return onesCount == 1;
         }
 
         public static bool IsValidBasisVectorIndex(this IGaFrame frame, int index)
@@ -989,27 +1010,36 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         /// <summary>
         /// Test if the clifford conjugate of a basis blade with a given grade is -1 the original basis blade
+        /// Sign Pattern: +--+
         /// </summary>
         /// <param name="frame"></param>
         /// <param name="grade"></param>
         /// <returns></returns>
-        public static bool GradeHasNegativeClifConj(this IGaFrame frame, int grade)
+        public static bool GradeHasNegativeCliffConj(this IGaFrame frame, int grade)
         {
-            return ((grade * (grade + 1)) & 2) != 0;
+            var v = grade % 4;
+            return v == 1 || v == 2;
+
+            //return ((grade * (grade + 1)) & 2) != 0;
         }
 
         /// <summary>
         /// Test if the clifford conjugate of a basis blade with a given grade is -1 the original basis blade
+        /// Sign Pattern: +--+
         /// </summary>
         /// <param name="grade"></param>
         /// <returns></returns>
-        public static bool GradeHasNegativeClifConj(this int grade)
+        public static bool GradeHasNegativeCliffConj(this int grade)
         {
-            return ((grade * (grade + 1)) & 2) != 0;
+            var v = grade % 4;
+            return v == 1 || v == 2;
+
+            //return ((grade * (grade + 1)) & 2) != 0;
         }
 
         /// <summary>
         /// Test if the grade inverse of a basis blade with a given grade is -1 the original basis blade
+        /// Sign Pattern: +-+-
         /// </summary>
         /// <param name="frame"></param>
         /// <param name="grade"></param>
@@ -1021,6 +1051,7 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         /// <summary>
         /// Test if the grade inverse of a basis blade with a given grade is -1 the original basis blade
+        /// Sign Pattern: +-+-
         /// </summary>
         /// <param name="grade"></param>
         /// <returns></returns>
@@ -1031,25 +1062,41 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         /// <summary>
         /// Test if the reverse of a basis blade with a given grade is -1 the original basis blade
+        /// Sign Pattern: ++--
         /// </summary>
         /// <param name="frame"></param>
         /// <param name="grade"></param>
         /// <returns></returns>
         public static bool GradeHasNegativeReverse(this IGaFrame frame, int grade)
         {
-            return ((grade * (grade - 1)) & 2) != 0;
+            return grade % 4 > 1;
+
+            //return ((grade * (grade - 1)) & 2) != 0;
         }
 
         /// <summary>
         /// Test if the reverse of a basis blade with a given grade is -1 the original basis blade
+        /// Sign Pattern: ++--
         /// </summary>
         /// <param name="grade"></param>
         /// <returns></returns>
         public static bool GradeHasNegativeReverse(this int grade)
         {
-            return ((grade * (grade - 1)) & 2) != 0;
+            return grade % 4 > 1;
+
+            //return ((grade * (grade - 1)) & 2) != 0;
         }
 
+
+        public static bool BasisBladeHasEvenGrade(this int basisBladeId)
+        {
+            return (GaLookupTables.IdToGradeTable[basisBladeId] & 1) == 0;
+        }
+
+        public static bool BasisBladeHasOddGrade(this int basisBladeId)
+        {
+            return (GaLookupTables.IdToGradeTable[basisBladeId] & 1) != 0;
+        }
 
         /// <summary>
         /// Test if the clifford conjugate of a given basis blade is -1 the original basis blade 
@@ -1057,9 +1104,9 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// <param name="frame"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static bool BasisBladeIdHasNegativeClifConj(this IGaFrame frame, int id)
+        public static bool BasisBladeIdHasNegativeCliffConj(this IGaFrame frame, int id)
         {
-            return GaLookupTables.IsNegativeClifConjTable.Get(id);
+            return GaLookupTables.IsNegativeCliffConjTable.Get(id);
         }
 
         /// <summary>
@@ -1067,9 +1114,9 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static bool BasisBladeIdHasNegativeClifConj(this int id)
+        public static bool BasisBladeIdHasNegativeCliffConj(this int id)
         {
-            return GaLookupTables.IsNegativeClifConjTable.Get(id);
+            return GaLookupTables.IsNegativeCliffConjTable.Get(id);
         }
 
         /// <summary>
@@ -1127,12 +1174,57 @@ namespace GeometricAlgebraNumericsLib.Frames
         }
 
         /// <summary>
+        /// True if the outer product of the given euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroOp(ulong id1, ulong id2)
+        {
+            return (id1 & id2) == 0;
+        }
+
+        /// <summary>
+        /// True if the outer product of the given euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <param name="id3"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroOp(int id1, int id2, int id3)
+        {
+            return (id1 & id2 & id3) == 0;
+        }
+
+        /// <summary>
+        /// True if the Euclidean geometric product of the given euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroEGp(int id1, int id2)
+        {
+            return true;
+        }
+
+        /// <summary>
         /// True if the scalar product of the given Euclidean basis blades is non-zero
         /// </summary>
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
         public static bool IsNonZeroESp(int id1, int id2)
+        {
+            return id1 == id2;
+        }
+
+        /// <summary>
+        /// True if the scalar product of the given Euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroESp(ulong id1, ulong id2)
         {
             return id1 == id2;
         }
@@ -1149,12 +1241,34 @@ namespace GeometricAlgebraNumericsLib.Frames
         }
 
         /// <summary>
+        /// True if the left contraction product of the given Euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroELcp(ulong id1, ulong id2)
+        {
+            return (id1 & ~id2) == 0;
+        }
+
+        /// <summary>
         /// True if the right contraction product of the given Euclidean basis blades is non-zero
         /// </summary>
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
         public static bool IsNonZeroERcp(int id1, int id2)
+        {
+            return (id2 & ~id1) == 0;
+        }
+
+        /// <summary>
+        /// True if the right contraction product of the given Euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroERcp(ulong id1, ulong id2)
         {
             return (id2 & ~id1) == 0;
         }
@@ -1171,12 +1285,34 @@ namespace GeometricAlgebraNumericsLib.Frames
         }
 
         /// <summary>
+        /// True if the fat-dot product of the given Euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroEFdp(ulong id1, ulong id2)
+        {
+            return (id1 & ~id2) == 0 || (id2 & ~id1) == 0;
+        }
+
+        /// <summary>
         /// True if the Hestenes inner product of the given Euclidean basis blades is non-zero
         /// </summary>
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
         public static bool IsNonZeroEHip(int id1, int id2)
+        {
+            return id1 != 0 && id2 != 0 && ((id1 & ~id2) == 0 || (id2 & ~id1) == 0);
+        }
+
+        /// <summary>
+        /// True if the Hestenes inner product of the given Euclidean basis blades is non-zero
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public static bool IsNonZeroEHip(ulong id1, ulong id2)
         {
             return id1 != 0 && id2 != 0 && ((id1 & ~id2) == 0 || (id2 & ~id1) == 0);
         }
@@ -1205,6 +1341,26 @@ namespace GeometricAlgebraNumericsLib.Frames
             return IsNegativeEGp(id1, id2) != IsNegativeEGp(id2, id1);
         }
 
+        public static bool IsNonZeroTriProductLeftAssociative(int id1, int id2, int id3, Func<int, int, bool> isNonZeroProductFunc1, Func<int, int, bool> isNonZeroProductFunc2)
+        {
+            return isNonZeroProductFunc1(id1, id2) && isNonZeroProductFunc2(id1 ^ id2, id3);
+        }
+
+        public static bool IsNonZeroTriProductRightAssociative(int id1, int id2, int id3, Func<int, int, bool> isNonZeroProductFunc1, Func<int, int, bool> isNonZeroProductFunc2)
+        {
+            return isNonZeroProductFunc1(id1, id2 ^ id3) && isNonZeroProductFunc2(id2, id3);
+        }
+
+        public static bool IsNonZeroELcpELcpLa(int id1, int id2, int id3)
+        {
+            return IsNonZeroTriProductLeftAssociative(id1, id2, id3, IsNonZeroELcp, IsNonZeroELcp);
+        }
+
+        public static bool IsNonZeroELcpELcpRa(int id1, int id2, int id3)
+        {
+            return IsNonZeroTriProductRightAssociative(id1, id2, id3, IsNonZeroELcp, IsNonZeroELcp);
+        }
+
 
         /// <summary>
         /// Given a bit pattern in id1 and id2 this shifts id2 by MaxVSpaceDimension bits to the left and 
@@ -1213,7 +1369,7 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
-        public static int JoinIDs(int id1, int id2)
+        public static ulong JoinIDs(ulong id1, ulong id2)
         {
             return id1 | (id2 << MaxVSpaceDimension);
         }
@@ -1226,7 +1382,7 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
-        public static int JoinIDs(this IGaFrame frame, int id1, int id2)
+        public static ulong JoinIDs(this IGaFrame frame, ulong id1, ulong id2)
         {
             return id1 | (id2 << frame.VSpaceDimension);
         }
@@ -1239,7 +1395,7 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
-        public static int JoinIDs(int vSpaceDim, int id1, int id2)
+        public static ulong JoinIDs(int vSpaceDim, ulong id1, ulong id2)
         {
             return id1 | (id2 << vSpaceDim);
         }
@@ -1310,6 +1466,18 @@ namespace GeometricAlgebraNumericsLib.Frames
             }
 
             return ComputeIsNegativeEGp(id1, id2);
+        }
+
+        /// <summary>
+        /// Find if the Euclidean Geometric Product of the given basis blades is -1.
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <param name="id3"></param>
+        /// <returns></returns>
+        public static bool IsNegativeEGp(int id1, int id2, int id3)
+        {
+            return IsNegativeEGp(id1, id2) != IsNegativeEGp(id1 ^ id2, id3);
         }
 
         /// <summary>

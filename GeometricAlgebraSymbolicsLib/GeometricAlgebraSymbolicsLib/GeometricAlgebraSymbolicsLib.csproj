@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08858423-589F-4E23-9EA5-72ECEDF3177B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeometricAlgebraSymbolicsLib</RootNamespace>
+    <AssemblyName>GeometricAlgebraSymbolicsLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony.Interpreter, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.Interpreter.1.1.0\lib\net40\Irony.Interpreter.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Applications\GAPoT\GaPoTSymMultiPhaseBivector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymMultiPhaseVector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymMultiPhaseVectorTerm.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymPolarPhasor.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymRectPhasor.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymSinglePhaseBivector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymSinglePhaseBivectorTerm.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymSinglePhaseVector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymSinglePhaseVectorTerm.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymUtils.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTSymVectorConstructorGrammar.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\ComplexClassHandler.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Expr.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\ExprFormatException.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\IKernelLink.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\ILinkMark.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\ILoopbackLink.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\IMathLink.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Install.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\CallNETException.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\CallPacketHandler.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\COM\COMDispatchHandler.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\COM\COMObjectWrapper.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\COM\COMTypeLibraryLoader.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\COM\COMUtilities.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\DelegateHelper.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\DLLHelper.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\EventHelper.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\MacMathLinkAPIProvider.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\MathLinkAPIProvider.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\NativeLink.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\NativeLoopbackLink.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\NativeMark.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\ObjectHandler.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\Unix64MathLinkAPIProvider.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\UnixMathLinkAPIProvider.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\Win64MathLinkAPIProvider.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Internal\WindowsMathLinkAPIProvider.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\KernelLinkImpl.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\MathDelegate.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\MathematicaNotReadyException.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\MathKernel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cas\Mathematica\NETLink\MathLinkConstants.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\MathLinkException.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\MathLinkFactory.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\MathLinkImpl.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\Reader.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\StdLink.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\TypeLoader.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\UI\ConsoleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cas\Mathematica\NETLink\UI\DoubleBufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cas\Mathematica\NETLink\UI\MathPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cas\Mathematica\NETLink\Utils.cs" />
+    <Compile Include="Cas\Mathematica\NETLink\WrappedKernelLink.cs" />
+    <Compile Include="Exceptions\GaSymbolicsException.cs" />
+    <Compile Include="Frames\GaSymFrame.cs" />
+    <Compile Include="Frames\GaSymFrameEuclidean.cs" />
+    <Compile Include="Frames\GaSymFrameNonOrthogonal.cs" />
+    <Compile Include="Frames\GaSymFrameOrthogonal.cs" />
+    <Compile Include="Frames\GaSymFrameOrthonormal.cs" />
+    <Compile Include="GaSymbolicsUtils.cs" />
+    <Compile Include="Maps\Bilinear\GaSymMapBilinear.cs" />
+    <Compile Include="Maps\Bilinear\GaSymMapBilinearArray.cs" />
+    <Compile Include="Maps\Bilinear\GaSymMapBilinearCoefSums.cs" />
+    <Compile Include="Maps\Bilinear\GaSymMapBilinearCombined.cs" />
+    <Compile Include="Maps\Bilinear\GaSymMapBilinearHash.cs" />
+    <Compile Include="Maps\Bilinear\GaSymMapBilinearTree.cs" />
+    <Compile Include="Maps\Bilinear\IGaSymMapBilinear.cs" />
+    <Compile Include="Maps\GaSymMap.cs" />
+    <Compile Include="Maps\GaSymMapUtils.cs" />
+    <Compile Include="Maps\IGaSymMap.cs" />
+    <Compile Include="Maps\Trilinear\GaSymMapTrilinear.cs" />
+    <Compile Include="Maps\Trilinear\GaSymMapTrilinearHash.cs" />
+    <Compile Include="Maps\Trilinear\IGaSymMapTrilinear.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinear.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearArray.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearCoefSums.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearCombined.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearComposed.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearHash.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearIdentity.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearMatrix.cs" />
+    <Compile Include="Maps\Unilinear\GaSymMapUnilinearTree.cs" />
+    <Compile Include="Maps\Unilinear\GaSymOutermorphism.cs" />
+    <Compile Include="Maps\Unilinear\IGaSymMapUnilinear.cs" />
+    <Compile Include="Cas\Mathematica\ExpressionTree\CasExpressionTree.cs" />
+    <Compile Include="Cas\Mathematica\ExpressionTree\CasExpressionTreeNode.cs" />
+    <Compile Include="Cas\Mathematica\ExpressionTree\CasExpressionTreeUtils.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaAtomicType.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaCondition.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaExpression.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaMatrix.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaPattern.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaRule.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaScalar.cs" />
+    <Compile Include="Cas\Mathematica\Expression\MathematicaVector.cs" />
+    <Compile Include="Cas\Mathematica\ExprFactory\CharacterSymbols.cs" />
+    <Compile Include="Cas\Mathematica\ExprFactory\DomainSymbols.cs" />
+    <Compile Include="Cas\Mathematica\ExprFactory\MFS.cs" />
+    <Compile Include="Cas\Mathematica\ExprFactory\OptionSymbols.cs" />
+    <Compile Include="Cas\Mathematica\ISymbolicMatrix.cs" />
+    <Compile Include="Cas\Mathematica\ISymbolicObject.cs" />
+    <Compile Include="Cas\Mathematica\ISymbolicVector.cs" />
+    <Compile Include="Cas\Mathematica\MathematicaConnection.cs" />
+    <Compile Include="Cas\Mathematica\MathematicaConstants.cs" />
+    <Compile Include="Cas\Mathematica\MathematicaEvaluator.cs" />
+    <Compile Include="Cas\Mathematica\MathematicaInterface.cs" />
+    <Compile Include="Cas\Mathematica\MathematicaUtils.cs" />
+    <Compile Include="Cas\Mathematica\Test\TestMathematicaMatrix.cs" />
+    <Compile Include="Cas\Mathematica\Test\TestMathematicaScalar.cs" />
+    <Compile Include="Cas\Mathematica\Test\TestMathematicaVector.cs" />
+    <Compile Include="Cas\Mathematica\Test\TestUtils.cs" />
+    <Compile Include="Matrices\GaSymMatrixIdentity.cs" />
+    <Compile Include="Metrics\GaSymMetricEuclidean.cs" />
+    <Compile Include="Metrics\GaSymMetricNonOrthogonal.cs" />
+    <Compile Include="Metrics\GaSymMetricOrthogonal.cs" />
+    <Compile Include="Metrics\GaSymMetricOrthonormal.cs" />
+    <Compile Include="Metrics\IGaMetric.cs" />
+    <Compile Include="Metrics\IGaMetricOrthogonal.cs" />
+    <Compile Include="Multivectors\GaSymMultivector.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorBinaryTree1D.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorBinaryTree2D.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorBinaryTree3D.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorBiTerm.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorHashTable1D.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorHashTable2D.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorHashTable3D.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorTerm.cs" />
+    <Compile Include="Multivectors\GaSymMultivectorUtils.cs" />
+    <Compile Include="Multivectors\GaSymScalarBinaryTree1D.cs" />
+    <Compile Include="Multivectors\GaSymScalarBinaryTree2D.cs" />
+    <Compile Include="Multivectors\GaSymScalarHashTable1D.cs" />
+    <Compile Include="Multivectors\GaSymScalarHashTable2D.cs" />
+    <Compile Include="Multivectors\Hash\GaSymMultivectorHash.cs" />
+    <Compile Include="Multivectors\IGaSymMultivector.cs" />
+    <Compile Include="Multivectors\Intermediate\GaSymMultivectorTempArray.cs" />
+    <Compile Include="Multivectors\Intermediate\GaSymMultivectorTempHash.cs" />
+    <Compile Include="Multivectors\Intermediate\GaSymMultivectorTempTree.cs" />
+    <Compile Include="Multivectors\Intermediate\IGaSymMultivectorTemp.cs" />
+    <Compile Include="Multivectors\Tree\GaTreeMultivector.cs" />
+    <Compile Include="Multivectors\Tree\GaTreeMultivectorLeaf.cs" />
+    <Compile Include="Multivectors\Tree\GaTreeMultivectorNode.cs" />
+    <Compile Include="Multivectors\Tree\GaTreeMultivectorUtils.cs" />
+    <Compile Include="Multivectors\Tree\IGaTreeMultivectorNode.cs" />
+    <Compile Include="Multivectors\Tree\IGaTreeMultivectorParentNode.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanAcp.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanCp.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanFdp.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanGp.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanHip.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanLcp.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanRcp.cs" />
+    <Compile Include="Products\Euclidean\GaSymEuclideanSp.cs" />
+    <Compile Include="Products\GaSymBilinearProduct.cs" />
+    <Compile Include="Products\GaSymBilinearProductCba.cs" />
+    <Compile Include="Products\GaSymBilinearProductEuclidean.cs" />
+    <Compile Include="Products\GaSymBilinearProductOrthogonal.cs" />
+    <Compile Include="Products\GaSymBilinearProductOrthonormal.cs" />
+    <Compile Include="Products\GaSymOp.cs" />
+    <Compile Include="Products\GaSymProductsUtils.cs" />
+    <Compile Include="Products\IGaSymBilinearOrthogonalProduct.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalAcp.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalCp.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalFdp.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalGp.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalHip.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalLcp.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalRcp.cs" />
+    <Compile Include="Products\Orthogonal\GaSymOrthogonalSp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalAcp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalCp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalFdp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalGp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalHip.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalLcp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalRcp.cs" />
+    <Compile Include="Products\Orthonormal\GaSymOrthonormalSp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\GraphViz\GaSymGraphVizRenderer.cs" />
+    <Compile Include="Rendering\LaTeX\GaSymLaTeXRenderer.cs" />
+    <Compile Include="Rendering\RenderingUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeComposerLib\CodeComposerLib\CodeComposerLib.csproj">
+      <Project>{5b86340a-91e4-43f3-a454-c69674144a28}</Project>
+      <Name>CodeComposerLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj">
+      <Project>{52834d87-7593-4e6e-a9b0-dbaede8ce6da}</Project>
+      <Name>DataStructuresLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.csproj">
+      <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>
+      <Name>GeometricAlgebraNumericsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj">
+      <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
+      <Name>TextComposerLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Cas\Mathematica\MathematicaExpression_ClassDiagram.cd" />
+    <None Include="Cas\Mathematica\MathematicaInterface_ClassDiagram.cd" />
+    <None Include="Cas\Mathematica\MathematicaScalar_ClassDiagram.cd" />
+    <None Include="Multivectors\GaMultivector_ClassDiagram.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ml32i4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ml64i4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

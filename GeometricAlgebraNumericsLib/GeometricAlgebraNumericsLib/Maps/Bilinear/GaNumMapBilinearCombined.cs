@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 {
@@ -51,34 +52,53 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         {
             get
             {
-                var resultMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var resultMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var term in _termsList)
-                    resultMv.AddFactors(
+                    resultMv.AddTerms(
                         term.Coef,
                         term.LinearMap[id1, id2]
                     );
 
-                return resultMv.ToMultivector();
+                return resultMv.GetSarMultivector();
             }
         }
 
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var resultMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var resultMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var term in _termsList)
-                    resultMv.AddFactors(
+                    resultMv.AddTerms(
                         term.Coef,
                         term.LinearMap[mv1, mv2]
                     );
 
-                return resultMv;
+                return resultMv.GetSarMultivector();
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                var resultMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
+
+                foreach (var term in _termsList)
+                    resultMv.AddTerms(
+                        term.Coef,
+                        term.LinearMap[mv1, mv2]
+                    );
+
+                return resultMv.GetDgrMultivector();
             }
         }
 

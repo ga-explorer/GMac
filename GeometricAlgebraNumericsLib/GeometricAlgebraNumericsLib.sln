@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStructuresLib", "..\Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComposerLib", "..\TextComposerLib\TextComposerLib\TextComposerLib.csproj", "{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometricAlgebraNumericsLib.UnitTests", "GeometricAlgebraNumericsLib.UnitTests\GeometricAlgebraNumericsLib.UnitTests.csproj", "{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Release|x64.Build.0 = Release|x64
 		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Release|x86.ActiveCfg = Release|x86
 		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Release|x86.Build.0 = Release|x86
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Debug|x64.ActiveCfg = Debug|x64
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Debug|x64.Build.0 = Debug|x64
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Debug|x86.Build.0 = Debug|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Release|x64.ActiveCfg = Release|x64
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Release|x64.Build.0 = Release|x64
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Release|x86.ActiveCfg = Release|Any CPU
+		{AFE2FA3A-F8BB-427D-B885-58A74D1F884E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

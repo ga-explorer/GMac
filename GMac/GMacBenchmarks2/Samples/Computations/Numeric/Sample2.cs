@@ -4,7 +4,7 @@ using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using JetBrains.Profiler.Api;
 using TextComposerLib.Text.Markdown;
 using TextComposerLib.Text.Markdown.Tables;

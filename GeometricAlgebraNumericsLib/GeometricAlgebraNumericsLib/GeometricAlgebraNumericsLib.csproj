@@ -96,6 +96,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applications\GAPoT\GaPoTNumMultiPhaseVectorTerm.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumUtils.cs" />
+    <Compile Include="Interop\MATLAB\MatlabUtils.cs" />
+    <Compile Include="Interop\MATLAB\MatlabSparseColumnMatrixData.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumSinglePhaseBivectorTerm.cs" />
+    <Compile Include="Multivectors\GAPoT\GaPoTComputer.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumMultiPhaseBivector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumMultiPhaseVector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumPolarPhasor.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumRectPhasor.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumSinglePhaseBivector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumSinglePhaseVector.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumVectorConstructorGrammar.cs" />
+    <Compile Include="Applications\GAPoT\GaPoTNumSinglePhaseVectorTerm.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumMultivectorConstructorGrammar.cs" />
+    <Compile Include="Multivectors\GAPoT\GaPoTMultivectorFactory.cs" />
+    <Compile Include="Multivectors\GAPoT\GaPoTMultivectorConstructorGrammar.cs" />
+    <Compile Include="Evaluator\IronyExpressionEvaluator.cs" />
+    <Compile Include="Evaluator\IronyExpressionEvaluatorGrammar.cs" />
     <Compile Include="Exceptions\GaNumericsException.cs" />
     <Compile Include="Frames\GaNumFrame.cs" />
     <Compile Include="Frames\GaNumFrameEuclidean.cs" />
@@ -114,16 +133,82 @@
     <Compile Include="Geometry\Primitives\GaNumSphere3D.cs" />
     <Compile Include="Geometry\Primitives\GaNumSpherePoints3D.cs" />
     <Compile Include="Geometry\Primitives\GaNumVector3D.cs" />
+    <Compile Include="GuidedBinaryTraversal\Multivectors\GaGbtNumSgrMultivectorStack1.cs" />
     <Compile Include="Maps\Bilinear\GaNumMapBilinearAssociativity.cs" />
-    <Compile Include="Maps\Outermorphisms\GaNumOutermorphism.cs" />
-    <Compile Include="Maps\Outermorphisms\GaNumMixedOutermorphism.cs" />
+    <Compile Include="Multivectors\GAPoT\GaPoTMultivector.cs" />
+    <Compile Include="Multivectors\GAPoT\GaPoTUtils.cs" />
+    <Compile Include="Multivectors\GaTerm.cs" />
+    <Compile Include="Multivectors\GaTermUtils.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumMultivector.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumSarKVector.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumSgrMultivector.cs" />
+    <Compile Include="Multivectors\IGaMultivectorSource.cs" />
+    <Compile Include="Multivectors\Numeric\IGaNumMultivectorSource.cs" />
+    <Compile Include="Structures\Collections\GaDarMultivectorAsDarKVectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaDarMultivectorAsVectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaDgrMultivectorAsDarMultivectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaDarKVectorAsDarMultivectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaDarKVectorAsSarMultivectorReadOnlyDictionary.cs" />
+    <Compile Include="Structures\Collections\GaSarKVectorAsDarMultivectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaSarKVectorAsSarMultivectorReadOnlyDictionary.cs" />
+    <Compile Include="Structures\Collections\GaSarMultivectorAsDarKVectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaSarMultivectorAsSarKVectorReadOnlyDictionary.cs" />
+    <Compile Include="Structures\Collections\GaSarMultivectorAsVectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaSgrMultivectorAsDarMultivectorReadOnlyList.cs" />
+    <Compile Include="Structures\Collections\GaSgrMultivectorAsSarMultivectorReadOnlyDictionary.cs" />
+    <Compile Include="Structures\Collections\GaVectorAsDarMultivectorReadOnlyList.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumMultivectorFactoryUtils.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumSgrMultivectorFactory.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumSarMultivectorFactory.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumDarMultivectorFactory.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumDgrMultivectorFactory.cs" />
+    <Compile Include="Multivectors\Numeric\Factories\GaNumMultivectorFactory.cs" />
+    <Compile Include="Multivectors\Numeric\IGaNumGradedMultivector.cs" />
+    <Compile Include="Multivectors\Numeric\IGaNumKVector.cs" />
+    <Compile Include="Multivectors\Numeric\IGaNumVector.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumVector.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumDgrMultivector.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumDarKVector.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumDarMultivector.cs" />
+    <Compile Include="Outermorphisms\GaNumOutermorphismUtils.cs" />
+    <Compile Include="Products\GaNumBilinearProductsUtils.cs" />
+    <Compile Include="Products\GaNumTrilinearProductsUtils.cs" />
+    <Compile Include="Outermorphisms\GaNumOutermorphism.cs" />
+    <Compile Include="Outermorphisms\GaNumMixedOutermorphism.cs" />
+    <Compile Include="Products\GaNumProductTerm.cs" />
+    <Compile Include="Products\IGaNumOrthogonalGeometricProduct.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtBasisBladeNode.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtBasisVectorNode.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtBtrMultivectorOutermorphismPairNode.cs" />
+    <Compile Include="GuidedBinaryTraversal\IGaGbtStack.cs" />
+    <Compile Include="GuidedBinaryTraversal\IGaGbtStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\GaGbtBtrNodeStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\IGaGbtStack2.cs" />
+    <Compile Include="GuidedBinaryTraversal\IGaGbtStack3.cs" />
+    <Compile Include="GuidedBinaryTraversal\Multivectors\GaGbtNumSarMultivectorStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\Multivectors\GaGbtNumDarMultivectorStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\GaGbtStackUtils.cs" />
+    <Compile Include="GuidedBinaryTraversal\Multivectors\GaGbtNumDgrMultivectorStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\Multivectors\GaGbtNumTermMultivectorStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\Outermorphisms\GaGbtNumOutermorphismStack.cs" />
+    <Compile Include="GuidedBinaryTraversal\Products\IGaGbtNumMultivectorProductStack2.cs" />
+    <Compile Include="GuidedBinaryTraversal\Multivectors\IGaGbtNumMultivectorStack1.cs" />
+    <Compile Include="GuidedBinaryTraversal\Products\GaGbtNumMultivectorOrthogonalProductsStack2.cs" />
+    <Compile Include="GuidedBinaryTraversal\GaGbtStack.cs" />
+    <Compile Include="GuidedBinaryTraversal\GaGbtStack2.cs" />
+    <Compile Include="GuidedBinaryTraversal\GaGbtStack3.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtFarMultivectorNode.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtJarMultivectorNode.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtNode2.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtNode3.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtBtrMultivectorNode.cs" />
+    <Compile Include="GuidedBinaryTraversal\GaGbtStack1.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtUtils.cs" />
+    <Compile Include="Structures\BinaryTraversal\IGaGbtNode1.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtJarMultivectorOutermorphismNode.cs" />
+    <Compile Include="Structures\BinaryTraversal\GaGbtBtrMultivectorOutermorphismNode.cs" />
     <Compile Include="Maps\Unilinear\GaNumMapUnilinearKVectorsArray.cs" />
     <Compile Include="Maps\Unilinear\GaNumMapUnilinearSparseRows.cs" />
-    <Compile Include="Multivectors\GaNumImmutableMultivector.cs" />
-    <Compile Include="Multivectors\GaNumImmutableMultivectorUtils.cs" />
-    <Compile Include="Multivectors\GaNumKVector.cs" />
-    <Compile Include="Multivectors\GaNumKVectorUtils.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorGraded.cs" />
     <Compile Include="Multivectors\VectorKVectorOp\GaNumVectorKVectorOpUtils.cs" />
     <Compile Include="Multivectors\VectorKVectorOp\GaNumVectorKVectorOpUtils1.cs" />
     <Compile Include="Multivectors\VectorKVectorOp\GaNumVectorKVectorOpUtils2.cs" />
@@ -157,7 +242,7 @@
     <Compile Include="Maps\Unilinear\GaNumMapUnilinearIdentity.cs" />
     <Compile Include="Maps\Unilinear\GaNumMapUnilinearMatrix.cs" />
     <Compile Include="Maps\Unilinear\GaNumMapUnilinearTree.cs" />
-    <Compile Include="Maps\Outermorphisms\GaNumStoredOutermorphism.cs" />
+    <Compile Include="Outermorphisms\GaNumStoredOutermorphism.cs" />
     <Compile Include="Maps\Unilinear\IGaNumMapUnilinear.cs" />
     <Compile Include="Metrics\GaNumMetricEuclidean.cs" />
     <Compile Include="Metrics\GaNumMetricNonOrthogonal.cs" />
@@ -165,19 +250,15 @@
     <Compile Include="Metrics\GaNumMetricOrthonormal.cs" />
     <Compile Include="Metrics\IGaNumMetric.cs" />
     <Compile Include="Metrics\IGaNumMetricOrthogonal.cs" />
-    <Compile Include="Multivectors\GaNumMultivector.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorBinaryTree1D.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorBinaryTree2D.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorBinaryTree3D.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorBiTerm.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorHashTable1D.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorHashTable3D.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorTerm.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorUtils.cs" />
-    <Compile Include="Multivectors\IGaNumMultivector.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorArray.cs" />
-    <Compile Include="Multivectors\GaNumMultivectorHash.cs" />
-    <Compile Include="Multivectors\IGaNumMultivectorMutable.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumSarMultivector.cs" />
+    <Compile Include="Structures\Collections\GaNumMultivectorBinaryTree1D.cs" />
+    <Compile Include="Structures\Collections\GaNumMultivectorBinaryTree2D.cs" />
+    <Compile Include="Structures\Collections\GaNumMultivectorBinaryTree3D.cs" />
+    <Compile Include="Structures\Collections\GaNumMultivectorHashTable1D.cs" />
+    <Compile Include="Structures\Collections\GaNumMultivectorHashTable3D.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumTerm.cs" />
+    <Compile Include="Multivectors\Numeric\GaNumMultivectorUtils.cs" />
+    <Compile Include="Multivectors\Numeric\IGaNumMultivector.cs" />
     <Compile Include="Products\Euclidean\GaNumEuclideanAcp.cs" />
     <Compile Include="Products\Euclidean\GaNumEuclideanCp.cs" />
     <Compile Include="Products\Euclidean\GaNumEuclideanFdp.cs" />
@@ -216,8 +297,17 @@
     <Compile Include="Rendering\LaTeX\GaLaTeXBasisBladeForm.cs" />
     <Compile Include="Rendering\LaTeX\GaNumLaTeXRenderer.cs" />
     <Compile Include="Rendering\RenderingUtils.cs" />
-    <Compile Include="Structures\GaBinaryTreeInternalNode.cs" />
-    <Compile Include="Structures\GaBinaryTreeLeafNode.cs" />
+    <Compile Include="Structures\BinaryTrees\GaBtrInternalNode.cs" />
+    <Compile Include="Structures\BinaryTrees\GaBtrLeafNode.cs" />
+    <Compile Include="Structures\BinaryTrees\NodeInfo\GaBinaryTreeGradedNodeInfo1.cs" />
+    <Compile Include="Structures\BinaryTrees\NodeInfo\GaBinaryTreeGradedNodeInfo2.cs" />
+    <Compile Include="Structures\BinaryTrees\NodeInfo\GaBinaryTreeNodeInfo1.cs" />
+    <Compile Include="Structures\BinaryTrees\NodeInfo\GaBinaryTreeNodeInfo2.cs" />
+    <Compile Include="Structures\BinaryTraversal\IGaGbtNode.cs" />
+    <Compile Include="Structures\Collections\GaNumCollectionsUtils.cs" />
+    <Compile Include="Structures\Collections\GaNumReadOnlyMatrixRow.cs" />
+    <Compile Include="Structures\Collections\GaNumReadOnlyMatrixColumn.cs" />
+    <Compile Include="Structures\Collections\GaDarVectorAsSarMultivectorReadOnlyDictionary.cs" />
     <Compile Include="Structures\GaCompactBinaryTree.cs" />
     <Compile Include="Structures\GaCompactBinaryTreeEmptyNode.cs" />
     <Compile Include="Structures\GaCompactBinaryTreeInternalNode.cs" />
@@ -226,18 +316,26 @@
     <Compile Include="Structures\GaQuadTreeInternalNode.cs" />
     <Compile Include="Structures\GaQuadTreeLeafNode.cs" />
     <Compile Include="Structures\GaStructuresUtils.cs" />
-    <Compile Include="Structures\IGaBinaryTreeNode.cs" />
+    <Compile Include="Structures\BinaryTrees\IGaBtrNode.cs" />
+    <Compile Include="GuidedBinaryTraversal\Outermorphisms\GaGbtNumMultivectorOutermorphismStack.cs" />
     <Compile Include="Structures\IGaCompactBinaryTreeNode.cs" />
     <Compile Include="Structures\IGaQuadTreeNode.cs" />
     <Compile Include="Structures\GaSparseTable1D.cs" />
     <Compile Include="Structures\GaSparseTable2D.cs" />
     <Compile Include="Structures\GaSparseTable3D.cs" />
+    <Compile Include="Validators\GaNumMultivectorValidator.cs" />
+    <Compile Include="Validators\GaNumOutermorphismValidator.cs" />
+    <Compile Include="Validators\GaNumSandwichProductValidator.cs" />
+    <Compile Include="Validators\GaNumValidator.cs" />
+    <Compile Include="Validators\GaNumVersorValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Matrices\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CodeComposerLib\CodeComposerLib\CodeComposerLib.csproj">
       <Project>{5b86340a-91e4-43f3-a454-c69674144a28}</Project>
@@ -251,6 +349,9 @@
       <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
       <Name>TextComposerLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Documentation\TextFile1.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

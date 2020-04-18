@@ -2,6 +2,7 @@
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib;
 using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GMacBenchmarks2.Samples.Computations;
 using TextComposerLib.Text.Linear;
 
@@ -21,43 +22,41 @@ namespace GMacBenchmarks2.Samples.Memory.Numeric
             var randGen = new GaRandomGenerator(10);
             var composer = new LinearTextComposer();
 
-            composer.AppendLine("Term Sizes:");
+            //composer.AppendLine("Term Sizes:");
 
-            for (var i = 3; i <= 15; i++)
-            {
-                var gaSpaceDim = i.ToGaSpaceDimension();
+            //for (var i = 3; i <= 24; i++)
+            //{
+            //    var gaSpaceDim = i.ToGaSpaceDimension();
 
-                var mvSize =
-                    Enumerable.Range(0, gaSpaceDim).Select(
-                        id =>
-                        {
-                            var mv = randGen.GetNumTerm(gaSpaceDim, id);
-                            var termSize = mv.GetInternalTermsTree().SizeInBytes();
+            //    var mvSize =
+            //        Enumerable.Range(0, gaSpaceDim).Select(
+            //            id =>
+            //            {
+            //                var mv = randGen.GetNumTerm(gaSpaceDim, id);
+            //                var termSize = mv.GetInternalTermsTree().SizeInBytes();
 
-                            return termSize;
-                        }
-                    ).Max();
+            //                return termSize;
+            //            }
+            //        ).Max();
 
-                composer.AppendLine(mvSize);
-            }
+            //    composer.AppendLine(mvSize);
+            //}
 
             composer
                 .AppendLine()
                 .AppendLine("k-Vector Sizes:");
 
-            for (var i = 3; i <= 15; i++)
+            for (var vSpaceDim = 3; vSpaceDim <= 24; vSpaceDim++)
             {
-                var gaSpaceDim = i.ToGaSpaceDimension();
+                var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
 
                 var mvSize =
-                    Enumerable.Range(0, i + 1).Select(
-                        grade =>
-                        {
-                            var mv = randGen.GetNumKVector(gaSpaceDim, grade);
-                            var kVectorSize = mv.GetInternalTermsTree().SizeInBytes();
-
-                            return kVectorSize;// / (double)mv.TermsCount;
-                        }
+                    Enumerable.Range(0, vSpaceDim + 1).Select(
+                        grade => randGen
+                            .GetNumFullKVectorTerms(vSpaceDim, grade)
+                            .CreateSarMultivector(vSpaceDim)
+                            .GetBtrRootNode()
+                            .SizeInBytes()
                     ).Max();
 
                 composer.AppendLine(mvSize);
@@ -67,11 +66,10 @@ namespace GMacBenchmarks2.Samples.Memory.Numeric
                 .AppendLine()
                 .AppendLine("Full Multivector Sizes:");
 
-            for (var i = 3; i <= 15; i++)
+            for (var vSpaceDim = 3; vSpaceDim <= 24; vSpaceDim++)
             {
-                var gaSpaceDim = i.ToGaSpaceDimension();
-                var mv = randGen.GetNumMultivectorFull(gaSpaceDim);
-                var mvSize = mv.GetInternalTermsTree().SizeInBytes();
+                var mv = randGen.GetNumFullMultivectorTerms(vSpaceDim).CreateSarMultivector(vSpaceDim);
+                var mvSize = mv.GetBtrRootNode().SizeInBytes();
 
                 composer.AppendLine(mvSize);// / (double)mv.TermsCount);
             }

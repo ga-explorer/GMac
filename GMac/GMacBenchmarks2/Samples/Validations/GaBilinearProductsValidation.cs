@@ -1,5 +1,4 @@
 ﻿using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacMath.Validators;
 using GMacBenchmarks2.Samples.Computations;
 
@@ -18,8 +17,8 @@ namespace GMacBenchmarks2.Samples.Validations
         {
             var validation = new GaBilinearProductsValidator();
 
-            validation.SymbolicFrame = GaSymFrame.CreateConformal(5);
-            validation.NumericFrame = GaNumFrame.CreateConformal(5);
+            //validation.SymbolicFrame = GaSymFrame.CreateConformal(5);
+            validation.NumericFrame = GaNumFrame.CreateOrthonormal("++--+");
 
             validation.ShowValidatedResults = false;
 

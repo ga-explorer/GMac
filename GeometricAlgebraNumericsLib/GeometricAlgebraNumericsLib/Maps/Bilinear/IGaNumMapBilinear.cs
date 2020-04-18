@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 {
@@ -14,9 +14,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 
         IGaNumMultivector this[int id1, int id2] { get; }
 
-        GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2] { get; }
+        GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2] { get; }
 
-        GaNumMultivector this[params GaNumMultivector[] mvList] { get; }
+        GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2] { get; }
+
+        GaNumSarMultivector this[params GaNumSarMultivector[] mvList] { get; }
+
+        GaNumDgrMultivector this[params GaNumDgrMultivector[] mvList] { get; }
 
         IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps();
 

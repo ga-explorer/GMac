@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Products.Orthonormal;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -74,9 +74,9 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// <param name="frameSigList"></param>
         internal GaNumFrameOrthonormal(IEnumerable<bool> frameSigList)
         {
-            BasisVectorsSignatures = frameSigList.Select(b => b ? -1 : 1).ToArray();
+            BasisVectorsSignatures = frameSigList.Select(b => b ? 1 : -1).ToArray();
 
-            OrthonormalMetric = GaNumMetricOrthonormal.Create(BasisVectorsSignatures);
+            OrthonormalMetric = GaNumMetricOrthonormal.Create(frameSigList);
 
             Op = ComputedOp = new GaNumOp(VSpaceDimension);
             Gp = ComputedGp = new GaNumOrthonormalGp(OrthonormalMetric);
@@ -113,15 +113,20 @@ namespace GeometricAlgebraNumericsLib.Frames
             throw new IndexOutOfRangeException();
         }
 
-        public override GaNumMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(int id)
         {
             if (id < 0 || id >= GaSpaceDimension)
                 throw new IndexOutOfRangeException();
 
-            return GaNumMultivector.CreateScalar(
-                GaSpaceDimension,
+            return GaNumSarMultivector.CreateScalar(
+                VSpaceDimension,
                 OrthonormalMetric[id] < 0 ? -1.0d : 1.0d
             );
+        }
+
+        public override double Norm2(IGaNumMultivector mv)
+        {
+            return mv.Norm2(OrthonormalMetric);
         }
     }
 }

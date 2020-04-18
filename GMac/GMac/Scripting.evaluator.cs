@@ -34,20 +34,20 @@ namespace CSScriptEvaluatorApi
 
             var samples = new EvaluatorSamples();
 
-            Console.WriteLine("Testing compiling services");
-            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine(@"Testing compiling services");
+            Console.WriteLine(@"---------------------------------------------");
 
             CSScript.EvaluatorConfig.Engine = EvaluatorEngine.Mono;
             Console.WriteLine(CSScript.Evaluator.GetType().Name + "...");
             samples.RunAll();
 
-            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine(@"---------------------------------------------");
 
             CSScript.EvaluatorConfig.Engine = EvaluatorEngine.Roslyn;
             Console.WriteLine(CSScript.Evaluator.GetType().Name + "...");
             samples.RunAll();
 
-            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine(@"---------------------------------------------");
 
             CSScript.EvaluatorConfig.Engine = EvaluatorEngine.CodeDom;
             Console.WriteLine(CSScript.Evaluator.GetType().Name + "...");
@@ -309,8 +309,10 @@ namespace CSScriptEvaluatorApi
 
             Action runAll = () =>
             {
-                Console.WriteLine("\n---------------------------------------------");
-                Console.WriteLine($"Caching enabled: {!preventCaching}\n");
+                Console.WriteLine(@"
+---------------------------------------------");
+                Console.WriteLine($@"Caching enabled: {!preventCaching}
+");
 
                 CSScript.EvaluatorConfig.Engine = EvaluatorEngine.Mono;
                 run();
@@ -324,7 +326,7 @@ namespace CSScriptEvaluatorApi
 
             RoslynEvaluator.LoadCompilers(); //Roslyn is extremely heavy so exclude startup time from profiling
 
-            Console.WriteLine("Testing performance");
+            Console.WriteLine(@"Testing performance");
 
             preventCaching = true;
             runAll();

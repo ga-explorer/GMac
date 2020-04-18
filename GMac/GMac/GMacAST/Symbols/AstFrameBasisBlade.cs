@@ -256,7 +256,7 @@ namespace GMac.GMacAST.Symbols
         /// True if the Clifford conjugate of this basis blade is negative to itself
         /// </summary>
         public bool HasNegativeClifConj 
-            => BasisBladeId.BasisBladeIdHasNegativeClifConj();
+            => BasisBladeId.BasisBladeIdHasNegativeCliffConj();
 
 
         /// <summary>

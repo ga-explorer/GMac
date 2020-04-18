@@ -78,7 +78,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
 
             GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.GradeInvolution, GaNumFrameUtils.GradeHasNegativeGradeInv);
 
-            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.CliffordConjugate, GaNumFrameUtils.GradeHasNegativeClifConj);
+            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.CliffordConjugate, GaNumFrameUtils.GradeHasNegativeCliffConj);
 
             GenerateKVectorFileFinishCode();
 

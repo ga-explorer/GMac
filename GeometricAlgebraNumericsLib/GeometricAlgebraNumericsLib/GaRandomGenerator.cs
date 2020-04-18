@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
 
 namespace GeometricAlgebraNumericsLib
@@ -125,6 +127,7 @@ namespace GeometricAlgebraNumericsLib
             return this;
         }
 
+
         public double GetScalar()
         {
             return _random.NextDouble() * (MaxScalarLimit - MinScalarLimit) + MinScalarLimit;
@@ -200,6 +203,7 @@ namespace GeometricAlgebraNumericsLib
             }
         }
 
+
         public IEnumerable<double> GetUniqueScalars(int scalarsCount)
         {
             var dict = new Dictionary<double, double>();
@@ -263,6 +267,7 @@ namespace GeometricAlgebraNumericsLib
             }
         }
 
+
         public IEnumerable<int> GetIntegers(int integersCount)
         {
             while (integersCount > 0)
@@ -292,6 +297,7 @@ namespace GeometricAlgebraNumericsLib
                 integersCount--;
             }
         }
+
 
         public IEnumerable<int> GetUniqueIntegers(int integersCount)
         {
@@ -356,6 +362,7 @@ namespace GeometricAlgebraNumericsLib
             }
         }
 
+
         public IEnumerable<T> GetPermutation<T>(IEnumerable<T> valuesList)
         {
             var inputsList = valuesList.ToList();
@@ -395,224 +402,372 @@ namespace GeometricAlgebraNumericsLib
         }
 
 
+        public double[,] GetSymmetricArray(int n)
+        {
+            var array = new double[n, n];
+
+            for (var i = 0; i < n; i++)
+            {
+                for (var j = 0; j <= i; j++)
+                {
+                    var value = GetScalar();
+
+                    array[i, j] = value;
+
+                    if (i != j)
+                        array[i, j] = value;
+                }
+            }
+
+            return array;
+        }
+
+
         #region Random Numeric Multivectors
-        public GaNumMultivector GetNumMultivectorFull(int gaSpaceDim)
+
+        public GaTerm<double> GetNumTerm(int basisBladeId)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            return new GaTerm<double>(
+                basisBladeId,
+                GetScalar()
+            );
+        }
+
+        public GaTerm<double> GetNumTerm(int basisBladeId, double maxValue)
+        {
+            return new GaTerm<double>(
+                basisBladeId,
+                GetScalar(maxValue)
+            );
+        }
+
+        public GaTerm<double> GetNumTerm(int basisBladeId, double minValue, double maxValue)
+        {
+            return new GaTerm<double>(
+                basisBladeId,
+                GetScalar(minValue, maxValue)
+            );
+        }
+
+        public GaTerm<double> GetNumTerm(int grade, int index)
+        {
+            return new GaTerm<double>(
+                GaNumFrameUtils.BasisBladeId(grade, index),
+                GetScalar()
+            );
+        }
+
+        public GaTerm<double> GetNumTerm(int grade, int index, double maxValue)
+        {
+            return new GaTerm<double>(
+                GaNumFrameUtils.BasisBladeId(grade, index),
+                GetScalar(maxValue)
+            );
+        }
+
+        public GaTerm<double> GetNumTerm(int grade, int index, double minValue, double maxValue)
+        {
+            return new GaTerm<double>(
+                GaNumFrameUtils.BasisBladeId(grade, index),
+                GetScalar(minValue, maxValue)
+            );
+        }
+
+
+        public IEnumerable<GaTerm<double>> GetNumTerms(int vSpaceDim, int count)
+        {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+
+            while (count > 0)
+            {
+                yield return new GaTerm<double>(
+                    GetInteger(gaSpaceDim - 1),
+                    GetScalar()
+                );
+
+                count--;
+            }
+        }
+
+        public IEnumerable<GaTerm<double>> GetNumTerms(int vSpaceDim, int count, double maxValue)
+        {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+
+            while (count > 0)
+            {
+                yield return new GaTerm<double>(
+                    GetInteger(gaSpaceDim - 1),
+                    GetScalar(maxValue)
+                );
+
+                count--;
+            }
+        }
+
+        public IEnumerable<GaTerm<double>> GetNumTerms(int vSpaceDim, int count, double minValue, double maxValue)
+        {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+
+            while (count > 0)
+            {
+                yield return new GaTerm<double>(
+                    GetInteger(gaSpaceDim - 1),
+                    GetScalar(minValue, maxValue)
+                );
+
+                count--;
+            }
+        }
+
+
+        public IEnumerable<GaTerm<double>> GetNumFullMultivectorTerms(int vSpaceDim)
+        {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
 
             for (var basisBladeId = 0; basisBladeId < gaSpaceDim; basisBladeId++)
-                mv.AddTerm(basisBladeId, GetScalar());
-
-            return mv;
+                yield return new GaTerm<double>(basisBladeId, GetScalar());
         }
 
-        public GaNumMultivector GetNumMultivectorFull(int gaSpaceDim, double maxValue)
+        public IEnumerable<GaTerm<double>> GetNumFullMultivectorTerms(int vSpaceDim, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
 
             for (var basisBladeId = 0; basisBladeId < gaSpaceDim; basisBladeId++)
-                mv.SetTerm(basisBladeId, GetScalar(maxValue));
-
-            return mv;
+                yield return new GaTerm<double>(basisBladeId, GetScalar(maxValue));
         }
 
-        public GaNumMultivector GetNumMultivectorFull(int gaSpaceDim, double minValue, double maxValue)
+        public IEnumerable<GaTerm<double>> GetNumFullMultivectorTerms(int vSpaceDim, double minValue, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
 
             for (var basisBladeId = 0; basisBladeId < gaSpaceDim; basisBladeId++)
-                mv.SetTerm(basisBladeId, GetScalar(minValue, maxValue));
-
-            return mv;
+                yield return new GaTerm<double>(basisBladeId, GetScalar(minValue, maxValue));
         }
 
-        public GaNumMultivector GetNumMultivectorByTerms(int gaSpaceDim, params int[] basisBladeIDs)
+
+        public IEnumerable<GaTerm<double>> GetNumSparseMultivectorTerms(int vSpaceDim)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+            var termsCount = GetInteger(gaSpaceDim);
+            var termIDs = GetUniqueIntegers(termsCount, gaSpaceDim - 1);
 
-            foreach (var basisBladeId in basisBladeIDs)
-                mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            foreach (var id in termIDs)
+                yield return new GaTerm<double>(id, GetScalar());
         }
 
-        public GaNumMultivector GetNumMultivectorByTerms(int gaSpaceDim, IEnumerable<int> basisBladeIDs)
+        public IEnumerable<GaTerm<double>> GetNumSparseMultivectorTerms(int vSpaceDim, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+            var termsCount = GetInteger(gaSpaceDim);
+            var termIDs = GetUniqueIntegers(termsCount, gaSpaceDim - 1);
 
-            foreach (var basisBladeId in basisBladeIDs)
-                mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            foreach (var id in termIDs)
+                yield return new GaTerm<double>(id, GetScalar(maxValue));
         }
 
-        public GaNumMultivector GetNumMultivectorByGrades(int gaSpaceDim, params int[] grades)
+        public IEnumerable<GaTerm<double>> GetNumSparseMultivectorTerms(int vSpaceDim, double minValue, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+            var termsCount = GetInteger(gaSpaceDim);
+            var termIDs = GetUniqueIntegers(termsCount, gaSpaceDim - 1);
 
-            var basisBladeIDs =
-                GaNumFrameUtils.BasisBladeIDsOfGrades(
-                    mv.VSpaceDimension,
-                    grades
-                    );
-
-            foreach (var basisBladeId in basisBladeIDs)
-                mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            foreach (var id in termIDs)
+                yield return new GaTerm<double>(id, GetScalar(minValue, maxValue));
         }
 
-        public GaNumMultivector GetNumMultivector(int gaSpaceDim)
+
+        public IEnumerable<GaTerm<double>> GetNumMultivectorTerms(params int[] basisBladeIDs)
         {
-            //Randomly select the number of terms in the multivector
-            var termsCount = GetInteger(gaSpaceDim - 1);
-
-            //Randomly select the terms basis blades in the multivectors
-            var basisBladeIDs = GetRangePermutation(gaSpaceDim - 1).Take(termsCount);
-
-            //Randomly generate the multivector's coefficients
-            return GetNumMultivectorByTerms(gaSpaceDim, basisBladeIDs);
+            return basisBladeIDs.Select(basisBladeId =>
+                new GaTerm<double>(basisBladeId, GetScalar())
+            );
         }
 
-        public GaNumMultivector GetNumVector(int gaSpaceDim)
+        public IEnumerable<GaTerm<double>> GetNumMultivectorTerms(double maxValue, params int[] basisBladeIDs)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            foreach (var basisBladeId in GaNumFrameUtils.BasisBladeIDsOfGrade(mv.VSpaceDimension, 1))
-                mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            return basisBladeIDs.Select(basisBladeId =>
+                new GaTerm<double>(basisBladeId, GetScalar(maxValue))
+            );
         }
 
-        public GaNumMultivector GetNumVector(int gaSpaceDim, double maxValue)
+        public IEnumerable<GaTerm<double>> GetNumMultivectorTerms(double minValue, double maxValue, params int[] basisBladeIDs)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            foreach (var basisBladeId in GaNumFrameUtils.BasisBladeIDsOfGrade(mv.VSpaceDimension, 1))
-                mv.SetTerm(basisBladeId, GetScalar(maxValue));
-
-            return mv;
+            return basisBladeIDs.Select(basisBladeId => 
+                new GaTerm<double>(basisBladeId, GetScalar(minValue, maxValue))
+            );
         }
 
-        public GaNumMultivector GetNumVector(int gaSpaceDim, double minValue, double maxValue)
+
+        public IEnumerable<GaTerm<double>> GetNumMultivectorTerms(IEnumerable<int> basisBladeIDs)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            foreach (var basisBladeId in GaNumFrameUtils.BasisBladeIDsOfGrade(mv.VSpaceDimension, 1))
-                mv.SetTerm(basisBladeId, GetScalar(minValue, maxValue));
-
-            return mv;
+            return basisBladeIDs.Select(basisBladeId =>
+                new GaTerm<double>(basisBladeId, GetScalar())
+            );
         }
 
-        public GaNumMultivector GetNumKVector(int gaSpaceDim, int grade)
+        public IEnumerable<GaTerm<double>> GetNumMultivectorTerms(double maxValue, IEnumerable<int> basisBladeIDs)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            foreach (var basisBladeId in GaNumFrameUtils.BasisBladeIDsOfGrade(mv.VSpaceDimension, grade))
-                mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            return basisBladeIDs.Select(basisBladeId =>
+                new GaTerm<double>(basisBladeId, GetScalar(maxValue))
+            );
         }
 
-        public GaNumMultivector GetNumKVector(int gaSpaceDim, int grade, double maxValue)
+        public IEnumerable<GaTerm<double>> GetNumMultivectorTerms(double minValue, double maxValue, IEnumerable<int> basisBladeIDs)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            foreach (var basisBladeId in GaNumFrameUtils.BasisBladeIDsOfGrade(mv.VSpaceDimension, grade))
-                mv.SetTerm(basisBladeId, GetScalar(maxValue));
-
-            return mv;
+            return basisBladeIDs.Select(basisBladeId =>
+                new GaTerm<double>(basisBladeId, GetScalar(minValue, maxValue))
+            );
         }
 
-        public GaNumMultivector GetNumKVector(int gaSpaceDim, int grade, double minValue, double maxValue)
+
+        public IEnumerable<GaTerm<double>> GetNumFullVectorTerms(int vSpaceDim)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            foreach (var basisBladeId in GaNumFrameUtils.BasisBladeIDsOfGrade(mv.VSpaceDimension, grade))
-                mv.SetTerm(basisBladeId, GetScalar(minValue, maxValue));
-
-            return mv;
+            for (var index = 0; index < vSpaceDim; index++)
+                yield return new GaTerm<double>(1 << index, GetScalar());
         }
 
-        public GaNumMultivector GetNumTerm(int gaSpaceDim, int basisBladeId)
+        public IEnumerable<GaTerm<double>> GetNumFullVectorTerms(int vSpaceDim, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            for (var index = 0; index < vSpaceDim; index++)
+                yield return new GaTerm<double>(1 << index, GetScalar(maxValue));
         }
 
-        public GaNumMultivector GetNumTerm(int gaSpaceDim, int basisBladeId, double maxValue)
+        public IEnumerable<GaTerm<double>> GetNumFullVectorTerms(int vSpaceDim, double minValue, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
-
-            mv.SetTerm(basisBladeId, GetScalar(maxValue));
-
-            return mv;
+            for (var index = 0; index < vSpaceDim; index++)
+                yield return new GaTerm<double>(1 << index, GetScalar(minValue, maxValue));
         }
 
-        public GaNumMultivector GetNumTerm(int gaSpaceDim, int basisBladeId, double minValue, double maxValue)
+
+        public IEnumerable<GaTerm<double>> GetNumFullKVectorTerms(int vSpaceDim, int grade)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
 
-            mv.SetTerm(basisBladeId, GetScalar(minValue, maxValue));
-
-            return mv;
+            for (var index = 0; index < kvSpaceDim; index++)
+                yield return new GaTerm<double>(
+                    GaNumFrameUtils.BasisBladeId(grade, index), 
+                    GetScalar()
+                );
         }
 
-        public GaNumMultivector GetNumTerm(int gaSpaceDim, int grade, int index)
+        public IEnumerable<GaTerm<double>> GetNumFullKVectorTerms(int vSpaceDim, int grade, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
 
-            var basisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
-
-            mv.SetTerm(basisBladeId, GetScalar());
-
-            return mv;
+            for (var index = 0; index < kvSpaceDim; index++)
+                yield return new GaTerm<double>(
+                    GaNumFrameUtils.BasisBladeId(grade, index), 
+                    GetScalar(maxValue)
+                );
         }
 
-        public GaNumMultivector GetNumTerm(int gaSpaceDim, int grade, int index, double maxValue)
+        public IEnumerable<GaTerm<double>> GetNumFullKVectorTerms(int vSpaceDim, int grade, double minValue, double maxValue)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
 
-            var basisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
-
-            mv.SetTerm(basisBladeId, GetScalar(maxValue));
-
-            return mv;
+            for (var index = 0; index < kvSpaceDim; index++)
+                yield return new GaTerm<double>(
+                    GaNumFrameUtils.BasisBladeId(grade, index), 
+                    GetScalar(minValue, maxValue)
+                );
         }
 
-        public GaNumMultivector GetNumTerm(int gaSpaceDim, int grade, int index, double minValue, double maxValue)
+
+        public IEnumerable<GaTerm<double>> GetNumSparseVectorTerms(int vSpaceDim)
         {
-            var mv = GaNumMultivector.CreateZero(gaSpaceDim);
+            var termsCount = GetInteger(vSpaceDim);
+            var indexList = GetUniqueIntegers(termsCount, vSpaceDim - 1);
 
-            var basisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
-
-            mv.SetTerm(basisBladeId, GetScalar(minValue, maxValue));
-
-            return mv;
+            foreach (var index in indexList)
+                yield return new GaTerm<double>(
+                    1 << index, 
+                    GetScalar()
+                );
         }
 
-        public GaNumMultivector GetNumBlade(int gaSpaceDim, int grade)
+        public IEnumerable<GaTerm<double>> GetNumSparseVectorTerms(int vSpaceDim, double maxValue)
         {
-            var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
+            var termsCount = GetInteger(vSpaceDim);
+            var indexList = GetUniqueIntegers(termsCount, vSpaceDim - 1);
 
+            foreach (var index in indexList)
+                yield return new GaTerm<double>(
+                    1 << index,
+                    GetScalar(maxValue)
+                );
+        }
+
+        public IEnumerable<GaTerm<double>> GetNumSparseVectorTerms(int vSpaceDim, double minValue, double maxValue)
+        {
+            var termsCount = GetInteger(vSpaceDim);
+            var indexList = GetUniqueIntegers(termsCount, vSpaceDim - 1);
+
+            foreach (var index in indexList)
+                yield return new GaTerm<double>(
+                    1 << index,
+                    GetScalar(minValue, maxValue)
+                );
+        }
+
+
+        public IEnumerable<GaTerm<double>> GetNumSparseKVectorTerms(int vSpaceDim, int grade)
+        {
+            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var termsCount = GetInteger(kvSpaceDim);
+            var indexList = GetUniqueIntegers(termsCount, kvSpaceDim - 1);
+
+            foreach (var index in indexList)
+                yield return new GaTerm<double>(
+                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GetScalar()
+                );
+        }
+
+        public IEnumerable<GaTerm<double>> GetNumSparseKVectorTerms(int vSpaceDim, int grade, double maxValue)
+        {
+            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var termsCount = GetInteger(kvSpaceDim);
+            var indexList = GetUniqueIntegers(termsCount, kvSpaceDim - 1);
+
+            foreach (var index in indexList)
+                yield return new GaTerm<double>(
+                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GetScalar(maxValue)
+                );
+        }
+
+        public IEnumerable<GaTerm<double>> GetNumSparseKVectorTerms(int vSpaceDim, int grade, double minValue, double maxValue)
+        {
+            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var termsCount = GetInteger(kvSpaceDim);
+            var indexList = GetUniqueIntegers(termsCount, kvSpaceDim - 1);
+
+            foreach (var index in indexList)
+                yield return new GaTerm<double>(
+                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GetScalar(minValue, maxValue)
+                );
+        }
+
+        
+        public GaNumSarMultivector GetNumBlade(int vSpaceDim, int grade)
+        {
             if (grade < 0 || grade > vSpaceDim)
-                return GaNumMultivector.CreateZero(gaSpaceDim);
+                return GaNumSarMultivector.CreateZero(vSpaceDim);
 
             if (grade <= 1 || grade >= vSpaceDim - 1)
-                return GetNumKVector(gaSpaceDim, grade);
+                return GetNumFullKVectorTerms(vSpaceDim, grade).CreateSarMultivector(vSpaceDim);
 
-            var mv = GetNumVector(gaSpaceDim);
+            var mv = GetNumFullVectorTerms(vSpaceDim).CreateSarMultivector(vSpaceDim);
             grade--;
 
             while (grade > 0)
             {
-                var v = GetNumVector(gaSpaceDim);
+                var v = GetNumFullVectorTerms(vSpaceDim).CreateSarMultivector(vSpaceDim);
                 var mv1 = mv.Op(v);
 
-                if (mv1.IsZero()) continue;
+                if (mv1.IsZero()) 
+                    continue;
 
                 mv = mv1;
                 grade--;
@@ -621,18 +776,18 @@ namespace GeometricAlgebraNumericsLib
             return mv;
         }
 
-        public GaNumMultivector GetNumNonNullVector(GaNumFrame frame)
+        public GaNumSarMultivector GetNumNonNullVector(GaNumFrame frame)
         {
-            GaNumMultivector mv;
+            GaNumSarMultivector mv;
 
             do
-                mv = GetNumVector(frame.GaSpaceDimension);
+                mv = GetNumFullVectorTerms(frame.VSpaceDimension).CreateSarMultivector(frame.VSpaceDimension);
             while (!frame.Norm2(mv).IsNearZero());
 
             return mv;
         }
 
-        public GaNumMultivector GetNumVersor(GaNumFrame frame, int vectorsCount)
+        public GaNumSarMultivector GetNumVersor(GaNumFrame frame, int vectorsCount)
         {
             var mv = GetNumNonNullVector(frame);
             vectorsCount--;

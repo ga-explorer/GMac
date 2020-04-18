@@ -2,26 +2,32 @@
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 
 namespace GeometricAlgebraNumericsLib.Products.Orthonormal
 {
     public sealed class GaNumOrthonormalAcp : GaNumBilinearProductOrthonormal
     {
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                return
-                    GaNumMultivector
-                        .CreateZero(TargetGaSpaceDimension)
-                        .AddFactors(
-                            mv1.GetBiTermsForEAcp(mv2),
-                            OrthonormalMetric
-                        );
+                return mv1.GetGbtAcpTerms(mv2, OrthonormalMetric).SumAsSarMultivector(TargetVSpaceDimension);
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                return mv1.GetGbtAcpTerms(mv2, OrthonormalMetric).SumAsDgrMultivector(TargetVSpaceDimension);
             }
         }
 
@@ -32,9 +38,9 @@ namespace GeometricAlgebraNumericsLib.Products.Orthonormal
         }
 
 
-        public override GaNumMultivectorTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(int id1, int id2)
         {
-            return GaNumMultivectorTerm.CreateTerm(
+            return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
                 GaNumFrameUtils.IsNonZeroEAcp(id1, id2)

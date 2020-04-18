@@ -7,9 +7,9 @@ using CodeComposerLib.GraphViz.Dot.Color;
 using CodeComposerLib.GraphViz.Dot.Value;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Maps.Unilinear;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Structures;
+using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
 
 namespace GeometricAlgebraNumericsLib.Rendering
 {
@@ -179,10 +179,15 @@ namespace GeometricAlgebraNumericsLib.Rendering
         }
 
 
-        public static DotGraph AddBinaryTree<T>(this DotGraph dotGraph, GaBinaryTreeInternalNode<T> binaryTree, bool showFullGraph)
+        public static DotGraph AddBinaryTree<T>(this DotGraph dotGraph, GaBtrInternalNode<T> binaryTree, bool showFullGraph)
         {
-            var maxTreeDepth = binaryTree.TreeDepth;
-            var activeIDs = binaryTree.LeafNodeIDs.ToArray();
+            var maxTreeDepth = binaryTree.GetTreeDepth();
+
+            var activeIDs = 
+                binaryTree
+                    .GetNodeInfo(maxTreeDepth, 0)
+                    .GetTreeLeafNodeIDs()
+                    .ToArray();
 
             var inactiveColor = DotColor.Rgb(Color.Gray);
             var activeColor = DotColor.Rgb(Color.Black);
@@ -441,20 +446,20 @@ namespace GeometricAlgebraNumericsLib.Rendering
         }
 
 
-        public static DotGraph ToGraphViz(this GaNumMultivector mv, bool showFullGraph = false, bool showLeafValues = false)
+        public static DotGraph ToGraphViz(this GaNumSarMultivector mv, bool showFullGraph = false, bool showLeafValues = false)
         {
             var dotGraph = DotGraph.Directed("Graph");
-            dotGraph.AddBinaryTree(mv.TermsTree, showFullGraph);
+            dotGraph.AddBinaryTree(mv.BtrRootNode, showFullGraph);
 
             if (!showLeafValues)
                 return dotGraph;
 
-            foreach (var term in mv.Terms)
+            foreach (var term in mv.GetStoredTerms())
             {
-                var parentNodeName = term.Key.PatternToString(mv.VSpaceDimension);
+                var parentNodeName = term.BasisBladeId.PatternToString(mv.VSpaceDimension);
                 var node = dotGraph.AddNode("coef" + parentNodeName);
 
-                node.SetLabel(term.Value.ToString("G"));
+                node.SetLabel(term.ScalarValue.ToString("G"));
                 node.SetShape(DotNodeShape.Note);
                 node.SetStyle(DotNodeStyle.Solid);
                 node.SetColor(DotColor.Rgb(Color.Black));
@@ -487,15 +492,15 @@ namespace GeometricAlgebraNumericsLib.Rendering
                 var dotHtmlRow = dotHtmlTable.AddRow();
                 var mv = leafPair.Item3;
 
-                foreach (var term in mv.Terms)
+                foreach (var term in mv.GetStoredTerms())
                 {
                     var columnTable = DotUtils.Table();
                     columnTable.SetBorder(0);
                     columnTable.SetCellBorder(0);
                     columnTable.AddRow(
-                        term.Key.PatternToString(mv.VSpaceDimension).ToHtmlString()
+                        term.BasisBladeId.PatternToString(mv.VSpaceDimension).ToHtmlString()
                     );
-                    columnTable.AddRow(term.Value.ToString("G"));
+                    columnTable.AddRow(term.ScalarValue.ToString("G"));
 
                     dotHtmlRow.AddCell(columnTable);
                 }
@@ -522,53 +527,59 @@ namespace GeometricAlgebraNumericsLib.Rendering
             return dotGraph;
         }
 
-        public static DotGraph ToGraphViz(this GaNumMapUnilinearTree unilinearMap, bool showFullGraph = false, bool showLeafValues = false)
-        {
-            var dotGraph = DotGraph.Directed("Graph");
-            dotGraph.AddBinaryTree(unilinearMap.BasisBladesMapTree, showFullGraph);
+        //public static DotGraph ToGraphViz(this GaNumMapUnilinearTree unilinearMap, bool showFullGraph = false, bool showLeafValues = false)
+        //{
+        //    var dotGraph = DotGraph.Directed("Graph");
+        //    dotGraph.AddBinaryTree(unilinearMap.BasisBladesMapTree, showFullGraph);
 
-            if (!showLeafValues)
-                return dotGraph;
+        //    if (!showLeafValues)
+        //        return dotGraph;
 
-            foreach (var leafPair in unilinearMap.BasisBladesMapTree.LeafValuePairs)
-            {
-                var dotHtmlTable = DotUtils.Table();
-                dotHtmlTable.SetBorder(0);
-                dotHtmlTable.SetCellBorder(1);
-                var dotHtmlRow = dotHtmlTable.AddRow();
-                var mv = leafPair.Value;
+        //    var leafValuePairs =
+        //        unilinearMap
+        //            .BasisBladesMapTree
+        //            .GetNodeInfo(unilinearMap.DomainVSpaceDimension, 0)
+        //            .GetTreeLeafValuePairs();
 
-                foreach (var term in mv.Terms)
-                {
-                    var columnTable = DotUtils.Table();
-                    columnTable.SetBorder(0);
-                    columnTable.SetCellBorder(0);
-                    columnTable.AddRow(
-                        term.Key.PatternToString(mv.VSpaceDimension).ToHtmlString()
-                    );
-                    columnTable.AddRow(term.Value.ToString("G"));
+        //    foreach (var leafPair in leafValuePairs)
+        //    {
+        //        var dotHtmlTable = DotUtils.Table();
+        //        dotHtmlTable.SetBorder(0);
+        //        dotHtmlTable.SetCellBorder(1);
+        //        var dotHtmlRow = dotHtmlTable.AddRow();
+        //        var mv = leafPair.Value;
 
-                    dotHtmlRow.AddCell(columnTable);
-                }
+        //        foreach (var term in mv.Terms)
+        //        {
+        //            var columnTable = DotUtils.Table();
+        //            columnTable.SetBorder(0);
+        //            columnTable.SetCellBorder(0);
+        //            columnTable.AddRow(
+        //                term.Key.PatternToString(mv.VSpaceDimension).ToHtmlString()
+        //            );
+        //            columnTable.AddRow(term.Value.ToString("G"));
 
-                var parentNodeName = leafPair.Key.PatternToString(unilinearMap.DomainVSpaceDimension);
-                var node = dotGraph.AddNode("coef" + parentNodeName);
+        //            dotHtmlRow.AddCell(columnTable);
+        //        }
 
-                node.SetLabel(dotHtmlTable);
-                node.SetShape(DotNodeShape.Note);
-                node.SetStyle(DotNodeStyle.Solid);
-                node.SetColor(DotColor.Rgb(Color.Black));
-                node.SetFontColor(DotColor.Rgb(Color.Black));
+        //        var parentNodeName = leafPair.Key.PatternToString(unilinearMap.DomainVSpaceDimension);
+        //        var node = dotGraph.AddNode("coef" + parentNodeName);
 
-                var dotEdge = node.AddEdgeFrom(parentNodeName);
-                dotEdge.SetArrowHead(DotArrowType.Inv);
-                dotEdge.SetArrowTail(DotArrowType.Inv);
-                dotEdge.SetStyle(DotEdgeStyle.Solid);
-                dotEdge.SetColor(DotColor.Rgb(Color.Black));
-                dotEdge.SetFontColor(DotColor.Rgb(Color.Black));
-            }
+        //        node.SetLabel(dotHtmlTable);
+        //        node.SetShape(DotNodeShape.Note);
+        //        node.SetStyle(DotNodeStyle.Solid);
+        //        node.SetColor(DotColor.Rgb(Color.Black));
+        //        node.SetFontColor(DotColor.Rgb(Color.Black));
 
-            return dotGraph;
-        }
+        //        var dotEdge = node.AddEdgeFrom(parentNodeName);
+        //        dotEdge.SetArrowHead(DotArrowType.Inv);
+        //        dotEdge.SetArrowTail(DotArrowType.Inv);
+        //        dotEdge.SetStyle(DotEdgeStyle.Solid);
+        //        dotEdge.SetColor(DotColor.Rgb(Color.Black));
+        //        dotEdge.SetFontColor(DotColor.Rgb(Color.Black));
+        //    }
+
+        //    return dotGraph;
+        //}
     }
 }

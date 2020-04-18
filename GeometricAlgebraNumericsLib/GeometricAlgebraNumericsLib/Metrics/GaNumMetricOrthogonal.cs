@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
-using GeometricAlgebraNumericsLib.Structures;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
 
 namespace GeometricAlgebraNumericsLib.Metrics
 {
@@ -10,87 +13,135 @@ namespace GeometricAlgebraNumericsLib.Metrics
     {
         public static GaNumMetricOrthogonal Create(IReadOnlyList<double> basisVectorsSignaturesList)
         {
-            var vSpaceDim = basisVectorsSignaturesList.Count;
-            var bbsList = new GaNumMetricOrthogonal(vSpaceDim);
+            return new GaNumMetricOrthogonal(basisVectorsSignaturesList);
+        }
 
-            bbsList[0] = 1.0d;
+        public static GaNumMetricOrthogonal Create(params double[] basisVectorsSignaturesList)
+        {
+            return new GaNumMetricOrthogonal(basisVectorsSignaturesList);
+        }
 
-            for (var m = 0; m < vSpaceDim; m++)
+        public static GaNumMetricOrthogonal Create(IEnumerable<double> basisVectorsSignaturesList)
+        {
+            return new GaNumMetricOrthogonal(basisVectorsSignaturesList.ToArray());
+        }
+
+
+        public IReadOnlyList<double> BasisVectorsSignatures { get; }
+
+        public GaBtrInternalNode<double> BasisSignaturesTermsTree
+            => GetMetricSignatureMultivector().BtrRootNode;
+
+        public int VSpaceDimension { get; }
+
+        public int GaSpaceDimension
+            => VSpaceDimension.ToGaSpaceDimension();
+
+        public int Count
+            => VSpaceDimension.ToGaSpaceDimension();
+
+        public double this[int index] 
+            => GetBasisBladeSignature(index);
+
+
+        private GaNumMetricOrthogonal(IReadOnlyList<double> basisVectorsSignaturesList)
+        {
+            BasisVectorsSignatures = basisVectorsSignaturesList;
+
+            VSpaceDimension = basisVectorsSignaturesList.Count;
+        }
+
+
+        public GaNumSarMultivector GetMetricSignatureMultivector()
+        {
+            var basisSignaturesMultivector = new GaNumSarMultivectorFactory(VSpaceDimension);
+
+            for (var m = 0; m < VSpaceDimension; m++)
             {
-                var bvs = basisVectorsSignaturesList[m];
+                var basisVectorSignature = BasisVectorsSignatures[m];
 
-                if (bvs != 0.0d)
-                    bbsList[1 << m] = bvs;
+                if (basisVectorSignature != 0.0d)
+                    basisSignaturesMultivector.SetTerm(1 << m, basisVectorSignature);
             }
 
-            var idsSeq = GaNumFrameUtils.BasisBladeIDsSortedByGrade(vSpaceDim, 2);
+            var idsSeq = GaNumFrameUtils.BasisBladeIDsSortedByGrade(VSpaceDimension, 2);
             foreach (var id in idsSeq)
             {
                 id.SplitBySmallestBasisVectorId(out var id1, out var id2);
 
-                var bvs1 = bbsList[id1];
-                var bvs2 = bbsList[id2];
+                var bvs1 = basisSignaturesMultivector[id1];
+                var bvs2 = basisSignaturesMultivector[id2];
                 var bvs = bvs1 * bvs2;
 
                 if (bvs != 0.0d)
-                    bbsList[id] = bvs1 * bvs2;
+                    basisSignaturesMultivector.SetTerm(id, bvs1 * bvs2);
             }
 
-            return bbsList;
+            return basisSignaturesMultivector.GetSarMultivectorCopy();
         }
 
-
-        internal GaBinaryTreeInternalNode<double> RootNode { get; private set; }
-
-        public int VSpaceDimension
-            => RootNode.TreeDepth;
-
-        public int GaSpaceDimension
-            => RootNode.TreeDepth.ToGaSpaceDimension();
-
-        public int Count
-            => RootNode.TreeDepth.ToGaSpaceDimension();
-
-        public double this[int index]
+        public double GetBasisVectorSignature(int index)
         {
-            get
-            {
-                if (RootNode.TryGetLeafValue((ulong)index, out var value))
-                    return value;
-
-                return 0.0d;
-            }
-            private set
-            {
-                var node = RootNode;
-                for (var i = RootNode.TreeDepth - 1; i > 0; i--)
-                {
-                    var bitPattern = (1 << i) & index;
-                    node = node.GetOrAddInternalChildNode(bitPattern != 0);
-                }
-
-                node.SetOrAddLeafChildNode((1 & index) != 0, value);
-            }
-        }
-
-
-        private GaNumMetricOrthogonal(int vSpaceDim)
-        {
-            RootNode = new GaBinaryTreeInternalNode<double>(0, vSpaceDim);
-        }
-
-
-        public GaNumMultivector GetMetricSignatureMultivector()
-        {
-            return GaNumMultivector.CreateCopy(RootNode);
+            return BasisVectorsSignatures[1 << index];
         }
 
         public double GetBasisBladeSignature(int id)
         {
-            if (RootNode.TryGetLeafValue((ulong)id, out var value))
-                return value;
+            var signature = 1.0d;
 
-            return 0.0d;
+            var index = 0;
+            while (id != 0)
+            {
+                if ((id & 1) != 0)
+                    signature *= BasisVectorsSignatures[index];
+
+                id >>= 1;
+                index++;
+            }
+
+            return signature;
+        }
+
+        public GaTerm<double> Gp(int id1, int id2)
+        {
+            var metricValue = this[id1 & id2];
+
+            return new GaTerm<double>(
+                id1 ^ id2,
+                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -metricValue : metricValue
+            );
+        }
+
+        public GaTerm<double> ScaledGp(int id1, int id2, double scalingFactor)
+        {
+            var metricValue = scalingFactor * this[id1 & id2];
+
+            return new GaTerm<double>(
+                id1 ^ id2,
+                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -metricValue : metricValue
+            );
+        }
+
+        public GaTerm<double> Gp(int id1, int id2, int id3)
+        {
+            var idXor12 = id1 ^ id2;
+            var metricValue = this[id1 & id2] * this[idXor12 & id3];
+
+            if (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+                metricValue = -metricValue;
+
+            return new GaTerm<double>(idXor12 ^ id3, metricValue);
+        }
+
+        public GaTerm<double> ScaledGp(int id1, int id2, int id3, double scalingFactor)
+        {
+            var idXor12 = id1 ^ id2;
+            var metricValue = scalingFactor * this[id1 & id2] * this[idXor12 & id3];
+
+            if (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+                metricValue = -metricValue;
+
+            return new GaTerm<double>(idXor12 ^ id3, metricValue);
         }
 
         public IEnumerator<double> GetEnumerator()

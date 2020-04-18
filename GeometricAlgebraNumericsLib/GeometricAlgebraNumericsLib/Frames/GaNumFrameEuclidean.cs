@@ -1,7 +1,7 @@
 ﻿using System;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Products.Euclidean;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -77,12 +77,17 @@ namespace GeometricAlgebraNumericsLib.Frames
             throw new IndexOutOfRangeException();
         }
 
-        public override GaNumMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(int id)
         {
             if (id >= 0 && id < GaSpaceDimension)
-                return GaNumMultivector.CreateScalar(GaSpaceDimension, 1.0d);
+                return GaNumSarMultivector.CreateScalar(VSpaceDimension, 1.0d);
 
             throw new IndexOutOfRangeException();
+        }
+
+        public override double Norm2(IGaNumMultivector mv)
+        {
+            return mv.ENorm2();
         }
     }
 }

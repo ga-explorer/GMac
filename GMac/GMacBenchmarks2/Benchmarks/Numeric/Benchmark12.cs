@@ -1,178 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using GeometricAlgebraNumericsLib;
-using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
-using GeometricAlgebraNumericsLib.Products;
-using TextComposerLib.Text.Linear;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
 
 namespace GMacBenchmarks2.Benchmarks.Numeric
 {
     /// <summary>
-    /// Compare performance of dynamic-tree multivectors vs array based
-    /// static-tree multivectors
+    /// Benchmark internal tree construction of multivectors
     /// </summary>
     public class Benchmark12
     {
         private GaRandomGenerator _randGen;
-        private int _size;
-        private KeyValuePair<int, double>[][] _sourceTermsArray;
-        private GaNumMultivector[] _dynamicMultivectorsArray;
-        private GaNumImmutableMultivector[] _staticMultivectorsArray;
-        
-        //[Params(2, 3, 4, 5, 6)]
-        public int VSpaceDimension { get; set; }
-            = 6;
+        private GaNumSarMultivector _mv1;
 
-        public int GaSpaceDimension
-            => VSpaceDimension.ToGaSpaceDimension();
 
+        //[Params(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)]
+        public int VSpaceDim { get; set; }
+            = 15;
+
+        [Params(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)]
+        public int Grade { get; set; }
+            //= 8;
 
         [GlobalSetup]
         public void Setup()
         {
             _randGen = new GaRandomGenerator(10);
 
-            var sourceTermsArray = 
-                new List<KeyValuePair<int, double>[]>();
+            //_mv1 = _randGen.GetNumMultivectorFull(
+            //    VSpaceDim.ToGaSpaceDimension()
+            //);
 
-            //for (var id = 0; id < GaSpaceDimension; id++)
-            //{
-            //    sourceTermsArray.Add(
-            //    _randGen
-            //            .GetNumTerm(GaSpaceDimension, id)
-            //            .Terms
-            //            .ToArray()
-            //    );
-            //}
-
-            //for (var grade = 0; grade <= VSpaceDimension; grade++)
-            //{
-            //    sourceTermsArray.Add(
-            //    _randGen
-            //            .GetNumKVector(GaSpaceDimension, grade)
-            //            .Terms
-            //            .ToArray()
-            //    );
-            //}
-
-            sourceTermsArray.Add(
-                _randGen
-                    .GetNumMultivector(GaSpaceDimension)
-                    .Terms
-                    .ToArray()
-            );
-
-            _size = sourceTermsArray.Count;
-
-            _sourceTermsArray = sourceTermsArray.ToArray();
-            _dynamicMultivectorsArray = new GaNumMultivector[_size];
-            _staticMultivectorsArray = new GaNumImmutableMultivector[_size];
-
-            StaticTreeMultivectors();
-            DynamicTreeMultivectors();
+            _mv1 = _randGen.GetNumBlade(VSpaceDim, Grade);
         }
+
 
         [Benchmark]
-        public GaNumImmutableMultivector[,] StaticOp()
+        public GaBtrInternalNode<double> ConstructMultivectorTree()
         {
-            var result = new GaNumImmutableMultivector[_size, _size];
+            _mv1.ClearBtr();
 
-            for (var i = 0; i < _size; i++)
-            for (var j = 0; j < _size; j++)
-            {
-                result[i, j] = _staticMultivectorsArray[i].Op(
-                    _staticMultivectorsArray[j]
-                );
-            }
-
-            return result;
-        }
-
-        [Benchmark]
-        public GaNumMultivector[,] DynamicOp()
-        {
-            var result = new GaNumMultivector[_size, _size];
-
-            for (var i = 0; i < _size; i++)
-            for (var j = 0; j < _size; j++)
-            {
-                result[i, j] = _dynamicMultivectorsArray[i].Op(
-                    _dynamicMultivectorsArray[j]
-                );
-            }
-
-            return result;
-        }
-
-        //[Benchmark]
-        public void StaticTreeMultivectors()
-        {
-            for (var i = 0; i < _size; i++)
-            {
-                //var term = _sourceTermsArray[i][0];
-
-                //_staticMultivectorsArray[i] =
-                //    GaNumImmutableMultivector.CreateTerm(
-                //        GaSpaceDimension,
-                //        term.Key,
-                //        term.Value
-                //    );
-
-                _staticMultivectorsArray[i] =
-                    GaNumImmutableMultivector.CreateFromTerms(
-                        GaSpaceDimension,
-                        _sourceTermsArray[i]
-                    );
-            }
-        }
-
-        //[Benchmark]
-        public void DynamicTreeMultivectors()
-        {
-            for (var i = 0; i < _size; i++)
-                _dynamicMultivectorsArray[i] = 
-                    GaNumMultivector.CreateFromTerms(
-                        GaSpaceDimension,
-                        _sourceTermsArray[i]
-                    );
-        }
-
-        public void Validate()
-        {
-            StaticTreeMultivectors();
-            DynamicTreeMultivectors();
-
-            for (var i = 0; i < _size; i++)
-            {
-                var staticMv = _staticMultivectorsArray[i];
-                var dynamicMv = _dynamicMultivectorsArray[i];
-                var diffMv = GaNumMultivectorHash.Create(GaSpaceDimension);
-
-                foreach (var term in staticMv.Terms)
-                    diffMv.SetTerm(term.Key, term.Value);
-
-                foreach (var term in dynamicMv.Terms)
-                    diffMv.UpdateTerm(term.Key, -term.Value);
-
-                if (diffMv.Terms.Any(t => !t.Value.IsNearZero()))
-                {
-                    var composer = new LinearTextComposer();
-
-                    composer
-                        .Append("Invalid difference at i = ")
-                        .AppendLine(i)
-                        .Append("Static multivector = ")
-                        .AppendLine(staticMv.ToString())
-                        .AppendLineAtNewLine()
-                        .Append("Dynamic multivector = ")
-                        .AppendLine(dynamicMv.ToString());
-
-                    Console.WriteLine(composer.ToString());
-                }
-            }
+            return _mv1.GetBtrRootNode();
         }
     }
 }

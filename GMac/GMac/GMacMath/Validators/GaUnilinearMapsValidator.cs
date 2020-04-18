@@ -1,6 +1,7 @@
 ﻿using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Maps.Outermorphisms;
 using GeometricAlgebraNumericsLib.Maps.Unilinear;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraNumericsLib.Outermorphisms;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GMac.GMacMath.Validators
@@ -38,8 +39,15 @@ namespace GMac.GMacMath.Validators
             ReportComposer.AppendHeader("Numeric Outermorphism Validations");
 
             //Initialize multivectors with random coefficients
-            var mv1 = RandomGenerator.GetNumMultivectorFull(GaSpaceDimension);
-            var mv2 = RandomGenerator.GetNumKVector(GaSpaceDimension, VSpaceDimension >> 1);
+            var mv1 = 
+                RandomGenerator
+                    .GetNumFullMultivectorTerms(VSpaceDimension)
+                    .CreateSarMultivector(VSpaceDimension);
+
+            var mv2 = 
+                RandomGenerator
+                    .GetNumFullKVectorTerms(VSpaceDimension, VSpaceDimension >> 1)
+                    .CreateSarMultivector(VSpaceDimension);
 
             //Initialize outermorphism vector mapping matrix
             var vsMatrix = DenseMatrix.Create(

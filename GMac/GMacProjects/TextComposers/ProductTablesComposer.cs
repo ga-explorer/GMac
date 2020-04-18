@@ -8,7 +8,7 @@ using CodeComposerLib.MathML.Elements.Layout.Tabular;
 using CodeComposerLib.MathML.Elements.Tokens;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using TextComposerLib.Text.Linear;
 
 namespace GMacProjects.TextComposers
@@ -47,29 +47,29 @@ namespace GMacProjects.TextComposers
             var rowElement = MathMlRow.Create();
 
             var termsList =
-                mv.NonZeroTerms
-                    .OrderBy(t => t.Key.BasisBladeGrade())
-                    .ThenBy(t => t.Key);
+                mv.GetNonZeroTerms()
+                    .OrderBy(t => t.BasisBladeId.BasisBladeGrade())
+                    .ThenBy(t => t.BasisBladeId);
 
             var firstItemFlag = true;
             foreach (var term in termsList)
             {
-                var basisBladeName = getBasisBladeNameFunc(term.Key);
+                var basisBladeName = getBasisBladeNameFunc(term.BasisBladeId);
 
                 if (firstItemFlag)
                 {
-                    if (term.Value == 1.0d)
+                    if (term.ScalarValue == 1.0d)
                         rowElement.Append(basisBladeName);
 
-                    else if (term.Value == -1.0d)
+                    else if (term.ScalarValue == -1.0d)
                         rowElement.AppendElements(
                             MathMlOperator.MinusSign,
                             basisBladeName
                         );
 
-                    else if (term.Value > 0 || term.Value < 0)
+                    else if (term.ScalarValue > 0 || term.ScalarValue < 0)
                         rowElement.AppendElements(
-                            term.Value.ToMathMlNumber(),
+                            term.ScalarValue.ToMathMlNumber(),
                             basisBladeName
                         );
 
@@ -77,29 +77,29 @@ namespace GMacProjects.TextComposers
                     continue;
                 }
 
-                if (term.Value == 1.0d)
+                if (term.ScalarValue == 1.0d)
                     rowElement.AppendElements(
                         MathMlOperator.PlusSign,
                         basisBladeName
                     );
 
-                else if (term.Value == -1.0d)
+                else if (term.ScalarValue == -1.0d)
                     rowElement.AppendElements(
                         MathMlOperator.MinusSign,
                         basisBladeName
                     );
 
-                else if (term.Value > 0)
+                else if (term.ScalarValue > 0)
                     rowElement.AppendElements(
                         MathMlOperator.PlusSign,
-                        term.Value.ToMathMlNumber(),
+                        term.ScalarValue.ToMathMlNumber(),
                         basisBladeName
                     );
 
-                else if (term.Value < 0)
+                else if (term.ScalarValue < 0)
                     rowElement.AppendElements(
                         MathMlOperator.MinusSign,
-                        (-term.Value).ToMathMlNumber(),
+                        (-term.ScalarValue).ToMathMlNumber(),
                         basisBladeName
                     );
             }

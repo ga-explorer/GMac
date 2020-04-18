@@ -2,7 +2,7 @@
 using System.Linq;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Products.Orthogonal;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -86,9 +86,15 @@ namespace GeometricAlgebraNumericsLib.Frames
             return BasisVectorsSignatures[basisVectorIndex];
         }
 
-        public override GaNumMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(int id)
         {
-            return GaNumMultivector.CreateScalar(GaSpaceDimension, OrthogonalMetric[id]);
+            return GaNumSarMultivector.CreateScalar(VSpaceDimension, OrthogonalMetric[id]);
         }
+
+        public override double Norm2(IGaNumMultivector mv)
+        {
+            return mv.Norm2(OrthogonalMetric);
+        }
+
     }
 }

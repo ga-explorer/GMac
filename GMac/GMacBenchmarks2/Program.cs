@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Running;
 
 namespace GMacBenchmarks2
 {
@@ -13,7 +8,7 @@ namespace GMacBenchmarks2
         static void Main(string[] args)
         {
             #region Benchmarking Code
-            //var summary = BenchmarkRunner.Run<Benchmarks.Numeric.Benchmark9>();
+            //var summary = BenchmarkRunner.Run<Benchmarks.Numeric.Outermorphisms.Benchmark1>();
             //var sample = new Benchmarks.Numeric.Benchmark9 {VSpaceDim = 12};
             //sample.Setup();
             //var result = sample.Validate();
@@ -30,9 +25,11 @@ namespace GMacBenchmarks2
             #endregion
 
             #region Samples Code
+            var sample = new Samples.Parsing.GAPoT.Sample1();
+            //var sample = new Samples.GraphViz.Sample2();
             //var sample = new Samples.Rendering.Numeric.Sample1();
-            var sample = new Samples.Memory.Numeric.Sample3();
-            //var sample = new Samples.Validations.GaUnilinearMapsValidation();
+            //var sample = new Samples.Memory.Numeric.Sample3();
+            //var sample = new Samples.Validations.GaVersorValidation();
             //var sample = new Samples.Generators.VectorKVectorOpGenerator();
             //var sample = new Samples.Generators.VectorKVectorOpIndexTablesGenerator();
             var result = sample.Execute();
@@ -46,6 +43,13 @@ namespace GMacBenchmarks2
             Console.WriteLine();
             Console.Write(@"Press any key to continue...");
             Console.ReadKey();
+            #endregion
+
+            #region Tests
+            //var test = new GaNumMultivectorProductsTests();
+            //test.ClassInit();
+            //test.EGp("dar", "dar");
+
             #endregion
         }
     }

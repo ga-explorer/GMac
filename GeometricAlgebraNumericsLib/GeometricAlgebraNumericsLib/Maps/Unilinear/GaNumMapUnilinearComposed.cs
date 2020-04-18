@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 {
@@ -57,7 +57,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         {
             get
             {
-                var resultMv = _mappingsList[0][id1].ToMultivector();
+                var resultMv = _mappingsList[0][id1].GetSarMultivector();
 
                 for (var i = 1; i < _mappingsList.Count; i++)
                     resultMv = _mappingsList[i][resultMv];
@@ -66,7 +66,23 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             }
         }
 
-        public override GaNumMultivector this[GaNumMultivector mv]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv]
+        {
+            get
+            {
+                if (mv.GaSpaceDimension != DomainGaSpaceDimension)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                var resultMv = _mappingsList[0][mv];
+
+                for (var i = 1; i < _mappingsList.Count - 1; i++)
+                    resultMv = _mappingsList[i][resultMv];
+
+                return _mappingsList[_mappingsList.Count - 1][resultMv];
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv]
         {
             get
             {

@@ -1,7 +1,97 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Projects\Active\CodeComposerLib\CodeComposerLib" t="IncludeRecursive">
+    <e p="C:\Users\Ahmad 2022\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Ahmad 2022\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_GMac.355448444.00" t="ExcludeRecursive" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef_100_percent.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef_200_percent.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef_extensions.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\chrome_elf.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\d3dcompiler_47.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\devtools_resources.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\icudtl.dat" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\libcef.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\libEGL.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\libGLESv2.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales" t="Include">
+      <e p="am.pak" t="Include" />
+      <e p="ar.pak" t="Include" />
+      <e p="bg.pak" t="Include" />
+      <e p="bn.pak" t="Include" />
+      <e p="ca.pak" t="Include" />
+      <e p="cs.pak" t="Include" />
+      <e p="da.pak" t="Include" />
+      <e p="de.pak" t="Include" />
+      <e p="el.pak" t="Include" />
+      <e p="en-GB.pak" t="Include" />
+      <e p="en-US.pak" t="Include" />
+      <e p="es-419.pak" t="Include" />
+      <e p="es.pak" t="Include" />
+      <e p="et.pak" t="Include" />
+      <e p="fa.pak" t="Include" />
+      <e p="fi.pak" t="Include" />
+      <e p="fil.pak" t="Include" />
+      <e p="fr.pak" t="Include" />
+      <e p="gu.pak" t="Include" />
+      <e p="he.pak" t="Include" />
+      <e p="hi.pak" t="Include" />
+      <e p="hr.pak" t="Include" />
+      <e p="hu.pak" t="Include" />
+      <e p="id.pak" t="Include" />
+      <e p="it.pak" t="Include" />
+      <e p="ja.pak" t="Include" />
+      <e p="kn.pak" t="Include" />
+      <e p="ko.pak" t="Include" />
+      <e p="lt.pak" t="Include" />
+      <e p="lv.pak" t="Include" />
+      <e p="ml.pak" t="Include" />
+      <e p="mr.pak" t="Include" />
+      <e p="ms.pak" t="Include" />
+      <e p="nb.pak" t="Include" />
+      <e p="nl.pak" t="Include" />
+      <e p="pl.pak" t="Include" />
+      <e p="pt-BR.pak" t="Include" />
+      <e p="pt-PT.pak" t="Include" />
+      <e p="ro.pak" t="Include" />
+      <e p="ru.pak" t="Include" />
+      <e p="sk.pak" t="Include" />
+      <e p="sl.pak" t="Include" />
+      <e p="sr.pak" t="Include" />
+      <e p="sv.pak" t="Include" />
+      <e p="sw.pak" t="Include" />
+      <e p="ta.pak" t="Include" />
+      <e p="te.pak" t="Include" />
+      <e p="th.pak" t="Include" />
+      <e p="tr.pak" t="Include" />
+      <e p="uk.pak" t="Include" />
+      <e p="vi.pak" t="Include" />
+      <e p="zh-CN.pak" t="Include" />
+      <e p="zh-TW.pak" t="Include" />
+    </e>
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\natives_blob.bin" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\README.txt" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\snapshot_blob.bin" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\swiftshader" t="Include">
+      <e p="libEGL.dll" t="Include" />
+      <e p="libGLESv2.dll" t="Include" />
+    </e>
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\v8_context_snapshot.bin" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.BrowserSubprocess.Core.pdb" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.BrowserSubprocess.exe" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.BrowserSubprocess.pdb" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.Core.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.Core.pdb" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.Core.xml" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.pdb" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.XML" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.WinForms.75.1.143\CefSharp\x64\CefSharp.WinForms.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.WinForms.75.1.143\CefSharp\x64\CefSharp.WinForms.pdb" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\CefSharp.WinForms.75.1.143\CefSharp\x64\CefSharp.WinForms.XML" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\Magick.NET-Q8-x64.7.15.0\runtimes\win-x64\native\Magick.Native-Q8-x64.dll" t="Include" />
+    <e p="D:\Projects\Active\CodeComposerLib\CodeComposerLib" t="IncludeRecursive">
       <e p="app.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="CodeComposerLib.csproj" t="IncludeRecursive" />
@@ -629,11 +719,30 @@
         <e p="XmlComposer.cs" t="Include" />
       </e>
     </e>
-    <e p="C:\Projects\Active\DataStructuresLib\DataStructuresLib" t="IncludeRecursive">
+    <e p="D:\Projects\Active\DataStructuresLib\DataStructuresLib" t="IncludeRecursive">
+      <e p="Basic" t="Include">
+        <e p="BasicUtils.cs" t="Include" />
+        <e p="IPair.cs" t="Include" />
+        <e p="IQuad.cs" t="Include" />
+        <e p="ITriplet.cs" t="Include" />
+        <e p="MutablePair.cs" t="Include" />
+        <e p="Pair.cs" t="Include" />
+        <e p="Quad.cs" t="Include" />
+        <e p="Triplet.cs" t="Include" />
+      </e>
       <e p="bin" t="ExcludeRecursive" />
       <e p="BooleanPattern" t="Include">
         <e p="BooleanPattern.cs" t="Include" />
         <e p="MutableBooleanPattern.cs" t="Include" />
+      </e>
+      <e p="Collections" t="Include">
+        <e p="CollectionsUtils.cs" t="Include" />
+        <e p="IReadOnlyCollection2D.cs" t="Include" />
+        <e p="IReadOnlyCollection3D.cs" t="Include" />
+        <e p="IReadOnlyCollection4D.cs" t="Include" />
+        <e p="IReadOnlyList2D.cs" t="Include" />
+        <e p="IReadOnlyList3D.cs" t="Include" />
+        <e p="IReadOnlyList4D.cs" t="Include" />
       </e>
       <e p="DataStructuresLib.csproj" t="IncludeRecursive" />
       <e p="DataStructuresLibUtils.cs" t="Include" />
@@ -660,6 +769,24 @@
       <e p="IntegerSequenceGenerator.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages.config" t="Include" />
+      <e p="Permutations" t="Include">
+        <e p="ComputedIndexMap1DTo2D.cs" t="Include" />
+        <e p="IIndexMap1D.cs" t="Include" />
+        <e p="IIndexMap1D2D.cs" t="Include" />
+        <e p="IIndexMap1DTo2D.cs" t="Include" />
+        <e p="IIndexMap2DTo1D.cs" t="Include" />
+        <e p="IIntegerMap1Dto1D.cs" t="Include" />
+        <e p="IIntegerMap1Dto2D.cs" t="Include" />
+        <e p="IIntegerMap2Dto1D.cs" t="Include" />
+        <e p="IIntegerMap2Dto2D.cs" t="Include" />
+        <e p="IndexMap01.cs" t="Include" />
+        <e p="IndexMap10.cs" t="Include" />
+        <e p="IndexMapComputed1D.cs" t="Include" />
+        <e p="IndexMapIdentity1D.cs" t="Include" />
+        <e p="IndexMapPermutation1D.cs" t="Include" />
+        <e p="IndexMapRange1D.cs" t="Include" />
+        <e p="IndexMapReverse1D.cs" t="Include" />
+      </e>
       <e p="PriorityQueue.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
@@ -669,6 +796,42 @@
         <e p="RandomGenerator.cs" t="Include" />
         <e p="RandomUtils.cs" t="Include" />
         <e p="UniformRandomGenerator.cs" t="Include" />
+      </e>
+      <e p="Sequences" t="Include">
+        <e p="Periodic1D" t="Include">
+          <e p="IPeriodicSequence1D.cs" t="Include" />
+          <e p="IPeriodicSequencesAggregate1D.cs" t="Include" />
+          <e p="PeriodicSequenceUtils.cs" t="Include" />
+          <e p="PSeq2DSubset1D.cs" t="Include" />
+          <e p="PSeqArray1D.cs" t="Include" />
+          <e p="PSeqConstant1D.cs" t="Include" />
+          <e p="PSeqIndexed1D.cs" t="Include" />
+          <e p="PSeqIndexMapped1D.cs" t="Include" />
+          <e p="PSeqJoined1D.cs" t="Include" />
+          <e p="PSeqJoined21D.cs" t="Include" />
+          <e p="PSeqLinearDouble1D.cs" t="Include" />
+          <e p="PSeqMapped1D.cs" t="Include" />
+          <e p="PSeqMultiplexed1D.cs" t="Include" />
+          <e p="PSeqPartial1D.cs" t="Include" />
+          <e p="PSeqPermuted1D.cs" t="Include" />
+          <e p="PSeqReadOnlyList1D.cs" t="Include" />
+          <e p="PSeqReverse1D.cs" t="Include" />
+          <e p="PSeqSlice1D.cs" t="Include" />
+          <e p="PSeqSparse1D.cs" t="Include" />
+          <e p="PSeqSwitched1D.cs" t="Include" />
+        </e>
+        <e p="Periodic2D" t="Include">
+          <e p="IPeriodicSequence2D.cs" t="Include" />
+          <e p="IPeriodicSequencesAggregate2D.cs" t="Include" />
+          <e p="PSeqArray2D.cs" t="Include" />
+          <e p="PSeqConstant2D.cs" t="Include" />
+          <e p="PSeqIndexed2D.cs" t="Include" />
+          <e p="PSeqLinearDouble2D.cs" t="Include" />
+          <e p="PSeqMapped1D2D.cs" t="Include" />
+          <e p="PSeqMapped2D.cs" t="Include" />
+          <e p="PSeqPartial2D.cs" t="Include" />
+          <e p="PSeqTransposed2D.cs" t="Include" />
+        </e>
       </e>
       <e p="SimpleTree" t="Include">
         <e p="SimpleTreeBranch.cs" t="Include" />
@@ -685,6 +848,9 @@
         <e p="Visitor" t="Include">
           <e p="SimpleTreeVisitor.cs" t="Include" />
         </e>
+      </e>
+      <e p="SparseArray" t="Include">
+        <e p="SparseArray1D.cs" t="Include" />
       </e>
       <e p="SparseTable" t="Include">
         <e p="SparseTable1D.cs" t="Include" />
@@ -706,7 +872,7 @@
       </e>
       <e p="TrimmedList.cs" t="Include" />
     </e>
-    <e p="C:\Projects\Active\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib" t="IncludeRecursive">
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib" t="IncludeRecursive">
       <e p="app.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Exceptions" t="Include">
@@ -803,6 +969,7 @@
         <e p="GaNumMultivectorBinaryTree2D.cs" t="Include" />
         <e p="GaNumMultivectorBinaryTree3D.cs" t="Include" />
         <e p="GaNumMultivectorBiTerm.cs" t="Include" />
+        <e p="GaNumMultivectorGraded.cs" t="Include" />
         <e p="GaNumMultivectorHash.cs" t="Include" />
         <e p="GaNumMultivectorHashTable1D.cs" t="Include" />
         <e p="GaNumMultivectorHashTable3D.cs" t="Include" />
@@ -810,6 +977,11 @@
         <e p="GaNumMultivectorUtils.cs" t="Include" />
         <e p="IGaNumMultivector.cs" t="Include" />
         <e p="IGaNumMultivectorMutable.cs" t="Include" />
+        <e p="VectorKVectorOp" t="Include">
+          <e p="GaNumVectorKVectorOpUtils.cs" t="Include" />
+          <e p="GaNumVectorKVectorOpUtils1.cs" t="Include" />
+          <e p="GaNumVectorKVectorOpUtils2.cs" t="Include" />
+        </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages.config" t="Include" />
@@ -869,8 +1041,16 @@
         <e p="RenderingUtils.cs" t="Include" />
       </e>
       <e p="Structures" t="Include">
-        <e p="GaBinaryTreeInternalNode.cs" t="Include" />
-        <e p="GaBinaryTreeLeafNode.cs" t="Include" />
+        <e p="BinaryTrees" t="Include">
+          <e p="GaBinaryTreeInternalNode.cs" t="Include" />
+          <e p="GaBinaryTreeLeafNode.cs" t="Include" />
+          <e p="IGaBinaryTreeNode.cs" t="Include" />
+          <e p="NodeInfo" t="Include">
+            <e p="GaBinaryTreeGradedNodeInfo.cs" t="Include" />
+            <e p="GaBinaryTreeNodeInfo.cs" t="Include" />
+            <e p="GaBinaryTreeNodeInfo2.cs" t="Include" />
+          </e>
+        </e>
         <e p="GaCompactBinaryTree.cs" t="Include" />
         <e p="GaCompactBinaryTreeEmptyNode.cs" t="Include" />
         <e p="GaCompactBinaryTreeInternalNode.cs" t="Include" />
@@ -882,12 +1062,16 @@
         <e p="GaSparseTable2D.cs" t="Include" />
         <e p="GaSparseTable3D.cs" t="Include" />
         <e p="GaStructuresUtils.cs" t="Include" />
-        <e p="IGaBinaryTreeNode.cs" t="Include" />
         <e p="IGaCompactBinaryTreeNode.cs" t="Include" />
         <e p="IGaQuadTreeNode.cs" t="Include" />
       </e>
+      <e p="Validators" t="Include">
+        <e p="GaNumMultivectorValidator.cs" t="Include" />
+        <e p="GaNumOutermorphismValidator.cs" t="Include" />
+        <e p="GaNumValidator.cs" t="Include" />
+      </e>
     </e>
-    <e p="C:\Projects\Active\GeometryComposerLib\GeometryComposerLib" t="IncludeRecursive">
+    <e p="D:\Projects\Active\GeometryComposerLib\GeometryComposerLib" t="IncludeRecursive">
       <e p="Accelerators" t="Include">
         <e p="BIH" t="Include">
           <e p="BihUtils.cs" t="Include" />
@@ -939,6 +1123,7 @@
         <e p="IAccelerator2D.cs" t="Include" />
         <e p="IAccelerator3D.cs" t="Include" />
       </e>
+      <e p="app.config" t="Include" />
       <e p="BasicMath" t="Include">
         <e p="BasicMathUtils.cs" t="Include" />
         <e p="Coordinates" t="Include">
@@ -1009,7 +1194,6 @@
             <e p="Tuple3D.cs" t="Include" />
             <e p="Tuple4D.cs" t="Include" />
             <e p="TupleQuad2D.cs" t="Include" />
-            <e p="TupleQuad3D.cs" t="Include" />
           </e>
           <e p="ITuple2D.cs" t="Include" />
           <e p="ITuple3D.cs" t="Include" />
@@ -1212,61 +1396,6 @@
       <e p="Colors" t="Include">
         <e p="ColorsUtils.cs" t="Include" />
       </e>
-      <e p="CompositeShapes" t="Include">
-        <e p="Space2D" t="Include" />
-        <e p="Space3D" t="Include">
-          <e p="Bezier" t="Include">
-            <e p="Bezier3D.cs" t="Include" />
-            <e p="BezierUtils.cs" t="Include" />
-            <e p="CubicBezier3D.cs" t="Include" />
-            <e p="LinearBezier3D.cs" t="Include" />
-            <e p="QuadraticBezier3D.cs" t="Include" />
-          </e>
-          <e p="Composers" t="Include">
-            <e p="GridsBoxComposer.cs" t="Include" />
-            <e p="MeshComposersUtils.cs" t="Include" />
-            <e p="XyGridComposer.cs" t="Include" />
-            <e p="YzGridComposer.cs" t="Include" />
-            <e p="ZxGridComposer.cs" t="Include" />
-          </e>
-          <e p="LineMeshes" t="Include">
-            <e p="LineMesh3D.cs" t="Include" />
-            <e p="LineMesh3DUtils.cs" t="Include" />
-            <e p="LineMeshVertex3D.cs" t="Include" />
-          </e>
-          <e p="PathMesh" t="Include">
-            <e p="IPath3D.cs" t="Include" />
-            <e p="IPathMesh3D.cs" t="Include" />
-            <e p="LerpPath3D.cs" t="Include" />
-            <e p="LerpPathMesh3D.cs" t="Include" />
-            <e p="LinePath3D.cs" t="Include" />
-            <e p="PathMeshPatch3D.cs" t="Include" />
-            <e p="PathMeshPatchQuad3D.cs" t="Include" />
-            <e p="PathMeshPatchVertex3D.cs" t="Include" />
-            <e p="PathMeshUtils.cs" t="Include" />
-            <e p="PathMeshVertex3D.cs" t="Include" />
-            <e p="StoredPath3D.cs" t="Include" />
-            <e p="StoredPathMesh3D.cs" t="Include" />
-          </e>
-          <e p="Space3DUtils.cs" t="Include" />
-          <e p="Transforms" t="Include">
-            <e p="ITransform3D.cs" t="Include" />
-            <e p="TrstMap3D.cs" t="Include" />
-          </e>
-          <e p="TriangleMeshes" t="Include">
-            <e p="TriangleList.cs" t="Include" />
-          </e>
-          <e p="TrianglePatches" t="Include">
-            <e p="TrianglePatch3D.cs" t="Include" />
-            <e p="TrianglePatchesList3D.cs" t="Include" />
-            <e p="TrianglePatchVertex3D.cs" t="Include" />
-          </e>
-          <e p="Validators" t="Include">
-            <e p="SlicesMeshValidator3D.cs" t="Include" />
-            <e p="TrianglesMeshValidator3D.cs" t="Include" />
-          </e>
-        </e>
-      </e>
       <e p="Computers" t="Include">
         <e p="ComputersUtils.cs" t="Include" />
         <e p="GeometryComputer.cs" t="Include" />
@@ -1282,9 +1411,7 @@
         </e>
         <e p="LineTraversalData2D.cs" t="Include" />
         <e p="LineTraversalData3D.cs" t="Include" />
-        <e p="Normals" t="Include">
-          <e p="TrianglesMeshVertexNormalsComputer.cs" t="Include" />
-        </e>
+        <e p="Normals" t="Include" />
         <e p="Projections" t="Include">
           <e p="GcPlaneProjector3D.cs" t="Include" />
         </e>
@@ -1327,582 +1454,8 @@
       </e>
       <e p="GeometryComposerLib.csproj" t="IncludeRecursive" />
       <e p="GeometryComposerLibUtils.cs" t="Include" />
-      <e p="Graphics" t="Include">
-        <e p="AnimatedGifComposer.cs" t="Include" />
-        <e p="Geometry" t="Include">
-          <e p="Constants" t="Include">
-            <e p="GraphicsAxis2D.cs" t="Include" />
-            <e p="GraphicsAxis3D.cs" t="Include" />
-          </e>
-          <e p="DistinctVerticesPrimitivesGeometry.cs" t="Include" />
-          <e p="IPrimitivesGeometry.cs" t="Include" />
-          <e p="Lines" t="Include">
-            <e p="ILinePrimitivesGeometry.cs" t="Include" />
-            <e p="LineLoopPrimitivesGeometry.cs" t="Include" />
-            <e p="LinePrimitivesGeometry.cs" t="Include" />
-            <e p="LinesListPrimitivesGeometry.cs" t="Include" />
-            <e p="LinesPrimitivesGeometry.cs" t="Include" />
-            <e p="LineStripPrimitivesGeometry.cs" t="Include" />
-          </e>
-          <e p="Points" t="Include">
-            <e p="IPointPrimitivesGeometry.cs" t="Include" />
-            <e p="PointsListPrimitivesGeometry.cs" t="Include" />
-            <e p="PointsPrimitivesGeometry.cs" t="Include" />
-          </e>
-          <e p="PrimitivesGeometry.cs" t="Include" />
-          <e p="PrimitivesGeometryUtils.cs" t="Include" />
-          <e p="Triangles" t="Include">
-            <e p="ITrianglePrimitivesGeometry.cs" t="Include" />
-            <e p="TriangleFanPrimitivesGeometry.cs" t="Include" />
-            <e p="TrianglePrimitivesGeometry.cs" t="Include" />
-            <e p="TrianglePrimitivesGeometryUtils.cs" t="Include" />
-            <e p="TrianglesListPrimitivesGeometry.cs" t="Include" />
-            <e p="TrianglesPrimitivesGeometry.cs" t="Include" />
-            <e p="TriangleStripPrimitivesGeometry.cs" t="Include" />
-          </e>
-        </e>
-        <e p="GraphicsPrimitiveType3D.cs" t="Include" />
-        <e p="GraphicsUtils.cs" t="Include" />
-        <e p="OpenSCAD" t="Include" />
-        <e p="POVRay" t="Include">
-          <e p="Custom" t="Include">
-            <e p="PovRayEuclideanDiagramScene.cs" t="Include" />
-          </e>
-          <e p="SDL" t="Include">
-            <e p="Cameras" t="Include">
-              <e p="ISdlCamera.cs" t="Include" />
-              <e p="SdlCamera.cs" t="Include" />
-              <e p="SdlFullCamera.cs" t="Include" />
-              <e p="SdlNamedCamera.cs" t="Include" />
-              <e p="SdlOrthographicCamera.cs" t="Include" />
-              <e p="SdlPerspectiveCamera.cs" t="Include" />
-            </e>
-            <e p="Directives" t="Include">
-              <e p="ISdlDirective.cs" t="Include" />
-              <e p="SdlDeclareDirective.cs" t="Include" />
-              <e p="SdlDefaultFinishDirective.cs" t="Include" />
-              <e p="SdlDefaultPigmentDirective.cs" t="Include" />
-              <e p="SdlDefaultTextureDirective.cs" t="Include" />
-              <e p="SdlDirective.cs" t="Include" />
-              <e p="SdlForDirective.cs" t="Include" />
-              <e p="SdlIfElseDirective.cs" t="Include" />
-              <e p="SdlIncludeDirective.cs" t="Include" />
-              <e p="SdlMacroDirective.cs" t="Include" />
-              <e p="SdlWhileDirective.cs" t="Include" />
-            </e>
-            <e p="Finishes" t="Include">
-              <e p="ISdlFinish.cs" t="Include" />
-              <e p="ISdlFinishItem.cs" t="Include" />
-              <e p="SdlAmbientFinishItem.cs" t="Include" />
-              <e p="SdlBrillianceFinishItem.cs" t="Include" />
-              <e p="SdlCrandFinishItem.cs" t="Include" />
-              <e p="SdlDiffuseFinishItem.cs" t="Include" />
-              <e p="SdlEmissionFinishItem.cs" t="Include" />
-              <e p="SdlFinish.cs" t="Include" />
-              <e p="SdlPhongFinishItem.cs" t="Include" />
-              <e p="SdlReflectionFinishItem.cs" t="Include" />
-              <e p="SdlSpecularFinishItem.cs" t="Include" />
-            </e>
-            <e p="Interiors" t="Include" />
-            <e p="ISdlDynamicVisitor.cs" t="Include" />
-            <e p="ISdlElement.cs" t="Include" />
-            <e p="ISdlNameable.cs" t="Include" />
-            <e p="ISdlStatement.cs" t="Include" />
-            <e p="ISdlTransformable.cs" t="Include" />
-            <e p="Lights" t="Include">
-              <e p="ISdlLight.cs" t="Include" />
-              <e p="SdlAreaLightSpecs.cs" t="Include" />
-              <e p="SdlLight.cs" t="Include" />
-              <e p="SdlSpotLightSpecs.cs" t="Include" />
-            </e>
-            <e p="Modifiers" t="Include">
-              <e p="ISdlObjectModifier.cs" t="Include" />
-              <e p="SdlBoundClipModifier.cs" t="Include" />
-              <e p="SdlSimpleModifier.cs" t="Include" />
-            </e>
-            <e p="Normals" t="Include" />
-            <e p="Objects" t="Include">
-              <e p="FPP" t="Include" />
-              <e p="FSP" t="Include">
-                <e p="ISdlBlobComponent.cs" t="Include" />
-                <e p="SdlBlob.cs" t="Include" />
-                <e p="SdlBlobCylinder.cs" t="Include" />
-                <e p="SdlBlobSphere.cs" t="Include" />
-                <e p="SdlBox.cs" t="Include" />
-                <e p="SdlCone.cs" t="Include" />
-                <e p="SdlCylinder.cs" t="Include" />
-                <e p="SdlLathe.cs" t="Include" />
-                <e p="SdlOvus.cs" t="Include" />
-                <e p="SdlPrism.cs" t="Include" />
-                <e p="SdlSphere.cs" t="Include" />
-                <e p="SdlSphereSweep.cs" t="Include" />
-                <e p="SdlSuperquadricEllipsoid.cs" t="Include" />
-                <e p="SdlSurfaceOfRevolution.cs" t="Include" />
-                <e p="SdlText.cs" t="Include" />
-                <e p="SdlTorus.cs" t="Include" />
-              </e>
-              <e p="ISdlCsgObject.cs" t="Include" />
-              <e p="ISdlFppObject.cs" t="Include" />
-              <e p="ISdlFspObject.cs" t="Include" />
-              <e p="ISdlIspObject.cs" t="Include" />
-              <e p="ISdlObject.cs" t="Include" />
-              <e p="ISdlPatchObject.cs" t="Include" />
-              <e p="ISdlPolynomialObject.cs" t="Include" />
-              <e p="ISdlSolidObject.cs" t="Include" />
-              <e p="ISP" t="Include">
-                <e p="SdlCubicPolySurface.cs" t="Include" />
-                <e p="SdlPlane.cs" t="Include" />
-                <e p="SdlPolySurface.cs" t="Include" />
-                <e p="SdlPolySurfaceSparse.cs" t="Include" />
-                <e p="SdlQuadric.cs" t="Include" />
-                <e p="SdlQuarticPolySurface.cs" t="Include" />
-              </e>
-              <e p="SdlCsgObject.cs" t="Include" />
-              <e p="SdlNamedObject.cs" t="Include" />
-              <e p="SdlObject.cs" t="Include" />
-              <e p="SdlPolynomialObject.cs" t="Include" />
-            </e>
-            <e p="Patterns" t="Include">
-              <e p="ISdlPattern.cs" t="Include" />
-            </e>
-            <e p="Pigments" t="Include">
-              <e p="ISdlPigment.cs" t="Include" />
-              <e p="SdlColorListPigment.cs" t="Include" />
-              <e p="SdlColorMapPigment.cs" t="Include" />
-              <e p="SdlPigment.cs" t="Include" />
-              <e p="SdlPigmentListPigment.cs" t="Include" />
-              <e p="SdlPigmentMapPigment.cs" t="Include" />
-              <e p="SdlSolidColorPigment.cs" t="Include" />
-            </e>
-            <e p="SdlCodeGenContext.cs" t="Include" />
-            <e p="SdlFreeCode.cs" t="Include" />
-            <e p="SdlScene.cs" t="Include" />
-            <e p="SdlUtils.cs" t="Include" />
-            <e p="Textures" t="Include">
-              <e p="ISdlTexture.cs" t="Include" />
-              <e p="SdlPlainTexture.cs" t="Include" />
-              <e p="SdlTexture.cs" t="Include" />
-            </e>
-            <e p="Transforms" t="Include">
-              <e p="ISdlTransform.cs" t="Include" />
-              <e p="SdlCompositeTransform.cs" t="Include" />
-              <e p="SdlMatrixTransform.cs" t="Include" />
-              <e p="SdlNamedTransform.cs" t="Include" />
-              <e p="SdlRotateTransform.cs" t="Include" />
-              <e p="SdlScaleTransform.cs" t="Include" />
-              <e p="SdlTransform.cs" t="Include" />
-              <e p="SdlTranslateTransform.cs" t="Include" />
-            </e>
-            <e p="Values" t="Include">
-              <e p="ISdlBooleanValue.cs" t="Include" />
-              <e p="ISdlColorValue.cs" t="Include" />
-              <e p="ISdlScalarValue.cs" t="Include" />
-              <e p="ISdlStringValue.cs" t="Include" />
-              <e p="ISdlValue.cs" t="Include" />
-              <e p="ISdlVectorValue.cs" t="Include" />
-              <e p="SdlBooleanExpression.cs" t="Include" />
-              <e p="SdlBooleanLiteral.cs" t="Include" />
-              <e p="SdlColorExpression.cs" t="Include" />
-              <e p="SdlColorRgbft.cs" t="Include" />
-              <e p="SdlMatrix4X3.cs" t="Include" />
-              <e p="SdlScalarExpression.cs" t="Include" />
-              <e p="SdlScalarLiteral.cs" t="Include" />
-              <e p="SdlStoredValue.cs" t="Include" />
-              <e p="SdlValue.cs" t="Include" />
-              <e p="SdlVector2D.cs" t="Include" />
-              <e p="SdlVector3D.cs" t="Include" />
-              <e p="SdlVectorExpression.cs" t="Include" />
-              <e p="SdlVectorLiteral3D.cs" t="Include" />
-            </e>
-          </e>
-          <e p="UI" t="Include" />
-        </e>
-        <e p="RayMarching" t="Include">
-          <e p="RayMarchingCamera3D.cs" t="Include" />
-          <e p="RayMarchingComputer3D.cs" t="Include" />
-          <e p="RayMarchingMaterial.cs" t="Include" />
-          <e p="RayMarchingPointLight3D.cs" t="Include" />
-          <e p="RayMarchingScene3D.cs" t="Include" />
-          <e p="RayMarchingShape3D.cs" t="Include" />
-          <e p="RayMarchingUtils.cs" t="Include" />
-          <e p="SDFs" t="Include">
-            <e p="ISdfGeometry.cs" t="Include" />
-            <e p="Operations" t="Include">
-              <e p="SdfAnd3D.cs" t="Include" />
-              <e p="SdfBinaryAnd3D.cs" t="Include" />
-              <e p="SdfBinaryAndNot3D.cs" t="Include" />
-              <e p="SdfBinaryNotAnd3D.cs" t="Include" />
-              <e p="SdfBinaryNotOr3D.cs" t="Include" />
-              <e p="SdfBinaryOr3D.cs" t="Include" />
-              <e p="SdfBinaryOrNot3D.cs" t="Include" />
-              <e p="SdfCurveElongation3D.cs" t="Include" />
-              <e p="SdfNot3D.cs" t="Include" />
-              <e p="SdfOr3D.cs" t="Include" />
-              <e p="SdfRounding3D.cs" t="Include" />
-              <e p="SdfSurfaceElongation3D.cs" t="Include" />
-            </e>
-            <e p="Primitives" t="Include">
-              <e p="SdfBox3D.cs" t="Include" />
-              <e p="SdfCylinderX3D.cs" t="Include" />
-              <e p="SdfCylinderY3D.cs" t="Include" />
-              <e p="SdfCylinderZ3D.cs" t="Include" />
-              <e p="SdfLineSegment3D.cs" t="Include" />
-              <e p="SdfLineSegmentX3D.cs" t="Include" />
-              <e p="SdfLineSegmentY3D.cs" t="Include" />
-              <e p="SdfLineSegmentZ3D.cs" t="Include" />
-              <e p="SdfPlane3D.cs" t="Include" />
-              <e p="SdfPlaneXy3D.cs" t="Include" />
-              <e p="SdfPlaneXz3D.cs" t="Include" />
-              <e p="SdfPlaneYz3D.cs" t="Include" />
-              <e p="SdfRoundBox3D.cs" t="Include" />
-              <e p="SdfSphere3D.cs" t="Include" />
-              <e p="SdfTorusX3D.cs" t="Include" />
-              <e p="SdfTorusY3D.cs" t="Include" />
-              <e p="SdfTorusZ3D.cs" t="Include" />
-            </e>
-            <e p="SdfAggregation.cs" t="Include" />
-            <e p="SdfBinaryOperation.cs" t="Include" />
-            <e p="SdfUnaryOperation.cs" t="Include" />
-            <e p="SdfUtils.cs" t="Include" />
-            <e p="SignedDistanceFunction.cs" t="Include" />
-            <e p="Transforms" t="Include">
-              <e p="SdfRotate3D.cs" t="Include" />
-              <e p="SdfRotateX3D.cs" t="Include" />
-              <e p="SdfRotateY3D.cs" t="Include" />
-              <e p="SdfRotateZ3D.cs" t="Include" />
-              <e p="SdfScale3D.cs" t="Include" />
-              <e p="SdfTranslate3D.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-        <e p="SVG" t="Include">
-          <e p="Attributes" t="Include">
-            <e p="ISvgAttributeValue.cs" t="Include" />
-            <e p="SvgAttributeInfo.cs" t="Include" />
-            <e p="SvgAttributeUtils.cs" t="Include" />
-            <e p="SvgEav.cs" t="Include" />
-            <e p="SvgEavAngle.cs" t="Include" />
-            <e p="SvgEavAttribute.cs" t="Include" />
-            <e p="SvgEavClock.cs" t="Include" />
-            <e p="SvgEavLength.cs" t="Include" />
-            <e p="SvgEavNumber.cs" t="Include" />
-            <e p="SvgEavPreserveAspectRatio.cs" t="Include" />
-            <e p="SvgEavString.cs" t="Include" />
-            <e p="SvgEavStruct.cs" t="Include" />
-            <e p="SvgEavViewBox.cs" t="Include" />
-            <e p="SvgElementAttributeValue.cs" t="Include" />
-          </e>
-          <e p="Compositions" t="Include">
-            <e p="Grids" t="Include">
-              <e p="SvgGcSquareGrid.cs" t="Include" />
-              <e p="SvgGcSquareGridIDs.cs" t="Include" />
-              <e p="SvgGcSquareGridStyler.cs" t="Include" />
-            </e>
-            <e p="ISvgGeometryComposer.cs" t="Include" />
-            <e p="ISvgGeometryComposerIDs.cs" t="Include" />
-            <e p="ISvgGeometryComposerStyler.cs" t="Include" />
-          </e>
-          <e p="Content" t="Include">
-            <e p="ISvgContent.cs" t="Include" />
-            <e p="SvgContentComment.cs" t="Include" />
-            <e p="SvgContentsList.cs" t="Include" />
-            <e p="SvgContentText.cs" t="Include" />
-          </e>
-          <e p="DrawingBoard" t="Include">
-            <e p="SvgDrawingBoard.cs" t="Include" />
-            <e p="SvgDrawingBoardLayer.cs" t="Include" />
-            <e p="SvgDrawingBoardLayerActiveStyle.cs" t="Include" />
-            <e p="SvgDrawingBoardStyle.cs" t="Include" />
-            <e p="SvgDrawingBoardUtils.cs" t="Include" />
-          </e>
-          <e p="Elements" t="Include">
-            <e p="Animation" t="Include">
-              <e p="SvgElementAnimate.cs" t="Include" />
-              <e p="SvgElementAnimateMotion.cs" t="Include" />
-              <e p="SvgElementAnimateTransform.cs" t="Include" />
-              <e p="SvgElementDiscard.cs" t="Include" />
-              <e p="SvgElementMPath.cs" t="Include" />
-              <e p="SvgElementSet.cs" t="Include" />
-            </e>
-            <e p="Categories" t="Include">
-              <e p="ISvgAnimationElement.cs" t="Include" />
-              <e p="ISvgBasicShapeElement.cs" t="Include" />
-              <e p="ISvgContainerElement.cs" t="Include" />
-              <e p="ISvgDescriptiveElement.cs" t="Include" />
-              <e p="ISvgElement.cs" t="Include" />
-              <e p="ISvgFilterPrimitiveElement.cs" t="Include" />
-              <e p="ISvgFontElement.cs" t="Include" />
-              <e p="ISvgGradientElement.cs" t="Include" />
-              <e p="ISvgGraphicsElement.cs" t="Include" />
-              <e p="ISvgGraphicsReferencingElement.cs" t="Include" />
-              <e p="ISvgHtmlElement.cs" t="Include" />
-              <e p="ISvgLightSourceElement.cs" t="Include" />
-              <e p="ISvgNeverRenderedElement.cs" t="Include" />
-              <e p="ISvgPaintServerElement.cs" t="Include" />
-              <e p="ISvgRenderableElement.cs" t="Include" />
-              <e p="ISvgShapeElement.cs" t="Include" />
-              <e p="ISvgStructuralElement.cs" t="Include" />
-              <e p="ISvgTextContentChildElement.cs" t="Include" />
-              <e p="ISvgTextContentElement.cs" t="Include" />
-              <e p="ISvgUncategorizedElement.cs" t="Include" />
-              <e p="SvgInterfaces.cd" t="Include" />
-            </e>
-            <e p="Containers" t="Include">
-              <e p="SvgElementAnchor.cs" t="Include" />
-              <e p="SvgElementDefinitions.cs" t="Include" />
-              <e p="SvgElementGroup.cs" t="Include" />
-              <e p="SvgElementMarker.cs" t="Include" />
-              <e p="SvgElementMask.cs" t="Include" />
-              <e p="SvgElementPattern.cs" t="Include" />
-              <e p="SvgElementSvg.cs" t="Include" />
-              <e p="SvgElementSymbol.cs" t="Include" />
-              <e p="SvgElementUse.cs" t="Include" />
-            </e>
-            <e p="Descriptive" t="Include">
-              <e p="SvgElementDescription.cs" t="Include" />
-              <e p="SvgElementTitle.cs" t="Include" />
-            </e>
-            <e p="Filter" t="Include" />
-            <e p="Font" t="Include" />
-            <e p="Gradient" t="Include">
-              <e p="SvgElementGradientStop.cs" t="Include" />
-              <e p="SvgElementLinearGradient.cs" t="Include" />
-              <e p="SvgElementRadialGradient.cs" t="Include" />
-            </e>
-            <e p="Graphics" t="Include" />
-            <e p="Misc" t="Include" />
-            <e p="Shape" t="Include">
-              <e p="SvgElementCircle.cs" t="Include" />
-              <e p="SvgElementEllipse.cs" t="Include" />
-              <e p="SvgElementLine.cs" t="Include" />
-              <e p="SvgElementPath.cs" t="Include" />
-              <e p="SvgElementPolygon.cs" t="Include" />
-              <e p="SvgElementPolyline.cs" t="Include" />
-              <e p="SvgElementRectangle.cs" t="Include" />
-            </e>
-            <e p="SvgElement.cs" t="Include" />
-            <e p="SvgElementUtils.cs" t="Include" />
-            <e p="Text" t="Include">
-              <e p="SvgElementText.cs" t="Include" />
-              <e p="SvgElementTextSpan.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Paths" t="Include">
-            <e p="Segments" t="Include">
-              <e p="ISvgPathSegment.cs" t="Include" />
-              <e p="SvgPathSegmentArc.cs" t="Include" />
-              <e p="SvgPathSegmentCBezier.cs" t="Include" />
-              <e p="SvgPathSegmentLine.cs" t="Include" />
-              <e p="SvgPathSegmentQBezier.cs" t="Include" />
-              <e p="SvgPathSegmentScBezier.cs" t="Include" />
-              <e p="SvgPathSegmentsList.cs" t="Include" />
-              <e p="SvgPathSegmentSqBezier.cs" t="Include" />
-            </e>
-            <e p="SvgPathCommand.cs" t="Include" />
-            <e p="SvgPathCommandArc.cs" t="Include" />
-            <e p="SvgPathCommandCBezier.cs" t="Include" />
-            <e p="SvgPathCommandClosePath.cs" t="Include" />
-            <e p="SvgPathCommandComposer.cs" t="Include" />
-            <e p="SvgPathCommandHLine.cs" t="Include" />
-            <e p="SvgPathCommandLine.cs" t="Include" />
-            <e p="SvgPathCommandMoveTo.cs" t="Include" />
-            <e p="SvgPathCommandQBezier.cs" t="Include" />
-            <e p="SvgPathCommandScBezier.cs" t="Include" />
-            <e p="SvgPathCommandSqBezier.cs" t="Include" />
-            <e p="SvgPathCommandVLine.cs" t="Include" />
-            <e p="SvgSegmentsPathCommand.cs" t="Include" />
-          </e>
-          <e p="Styles" t="Include">
-            <e p="ISvgStyle.cs" t="Include" />
-            <e p="Properties" t="Include">
-              <e p="SvgSpv.cs" t="Include" />
-              <e p="SvgSpvColor.cs" t="Include" />
-              <e p="SvgSpvFontSize.cs" t="Include" />
-              <e p="SvgSpvLength.cs" t="Include" />
-              <e p="SvgSpvMarker.cs" t="Include" />
-              <e p="SvgSpvNumber.cs" t="Include" />
-              <e p="SvgSpvPaint.cs" t="Include" />
-              <e p="SvgSpvString.cs" t="Include" />
-              <e p="SvgSpvStruct.cs" t="Include" />
-              <e p="SvgStylePropertyValue.cs" t="Include" />
-            </e>
-            <e p="SubStyles" t="Include">
-              <e p="SvgSubStyle.cs" t="Include" />
-              <e p="SvgSubStyleFill.cs" t="Include" />
-              <e p="SvgSubStyleStroke.cs" t="Include" />
-            </e>
-            <e p="SvgStyle.cs" t="Include" />
-            <e p="SvgStyleSheetComposer.cs" t="Include" />
-            <e p="SvgStyleUtils.cs" t="Include" />
-          </e>
-          <e p="SvgComposer.cs" t="Include" />
-          <e p="SvgUtils.cs" t="Include" />
-          <e p="Transforms" t="Include">
-            <e p="SvgTransform.cs" t="Include" />
-            <e p="SvgTransformComposer.cs" t="Include" />
-            <e p="SvgTransformMatrix.cs" t="Include" />
-            <e p="SvgTransformRotate.cs" t="Include" />
-            <e p="SvgTransformScale.cs" t="Include" />
-            <e p="SvgTransformSkewX.cs" t="Include" />
-            <e p="SvgTransformSkewY.cs" t="Include" />
-            <e p="SvgTransformTranslate.cs" t="Include" />
-          </e>
-          <e p="Values" t="Include">
-            <e p="ISvgValue.cs" t="Include" />
-            <e p="SvgComputedValue.cs" t="Include" />
-            <e p="SvgConstants.cs" t="Include" />
-            <e p="SvgStoredValue.cs" t="Include" />
-            <e p="SvgValueAngle.cs" t="Include" />
-            <e p="SvgValueAngleUnit.cs" t="Include" />
-            <e p="SvgValueAnimationAccumulate.cs" t="Include" />
-            <e p="SvgValueAnimationAdditive.cs" t="Include" />
-            <e p="SvgValueAnimationCalcMode.cs" t="Include" />
-            <e p="SvgValueAnimationFill.cs" t="Include" />
-            <e p="SvgValueAnimationRestart.cs" t="Include" />
-            <e p="SvgValueAttributeType.cs" t="Include" />
-            <e p="SvgValueColorInterpolation.cs" t="Include" />
-            <e p="SvgValueColorInterpolationFilters.cs" t="Include" />
-            <e p="SvgValueColorRendering.cs" t="Include" />
-            <e p="SvgValueFillRule.cs" t="Include" />
-            <e p="SvgValueFontStretch.cs" t="Include" />
-            <e p="SvgValueFontStyle.cs" t="Include" />
-            <e p="SvgValueFontVariant.cs" t="Include" />
-            <e p="SvgValueFontWeight.cs" t="Include" />
-            <e p="SvgValueGradientSpreadMethod.cs" t="Include" />
-            <e p="SvgValueGradientUnits.cs" t="Include" />
-            <e p="SvgValueImageRendering.cs" t="Include" />
-            <e p="SvgValueLength.cs" t="Include" />
-            <e p="SvgValueLengthsList.cs" t="Include" />
-            <e p="SvgValueLengthUnit.cs" t="Include" />
-            <e p="SvgValueMarkerUnits.cs" t="Include" />
-            <e p="SvgValueMaskUnits.cs" t="Include" />
-            <e p="SvgValueNumbersList.cs" t="Include" />
-            <e p="SvgValuePatternUnits.cs" t="Include" />
-            <e p="SvgValuePoint.cs" t="Include" />
-            <e p="SvgValuePointsList.cs" t="Include" />
-            <e p="SvgValueShapeRendering.cs" t="Include" />
-            <e p="SvgValueStrokeLineCap.cs" t="Include" />
-            <e p="SvgValueStrokeLineJoin.cs" t="Include" />
-            <e p="SvgValueTextAnchor.cs" t="Include" />
-            <e p="SvgValueTextDecoration.cs" t="Include" />
-            <e p="SvgValueTextDirection.cs" t="Include" />
-            <e p="SvgValueTextRendering.cs" t="Include" />
-            <e p="SvgValueUnicodeBidi.cs" t="Include" />
-            <e p="SvgValueUtils.cs" t="Include" />
-            <e p="SvgValueZoomAndPan.cs" t="Include" />
-          </e>
-        </e>
-        <e p="Xeogl" t="Include">
-          <e p="Camera" t="Include">
-            <e p="XeoglCamera.cs" t="Include" />
-            <e p="XeoglCameraControl.cs" t="Include" />
-            <e p="XeoglCameraProjection.cs" t="Include" />
-            <e p="XeoglCustomProjection.cs" t="Include" />
-            <e p="XeoglFrustumProjection.cs" t="Include" />
-            <e p="XeoglOrthographicProjection.cs" t="Include" />
-            <e p="XeoglPerspectiveProjection.cs" t="Include" />
-          </e>
-          <e p="Constants" t="Include">
-            <e p="XeoglAlphaMode.cs" t="Include" />
-            <e p="XeoglBillboardBehaviour.cs" t="Include" />
-            <e p="XeoglCameraProjectionType.cs" t="Include" />
-            <e p="XeoglConstantsUtils.cs" t="Include" />
-            <e p="XeoglMaterialType.cs" t="Include" />
-            <e p="XeoglPerspectiveFieldOfViewAxis.cs" t="Include" />
-            <e p="XeoglSpace.cs" t="Include" />
-            <e p="XeoglWindingDirection.cs" t="Include" />
-          </e>
-          <e p="DrawingSpace" t="Include">
-            <e p="XeoglDrawingSpace.cs" t="Include" />
-            <e p="XeoglDrawingSpaceLayer.cs" t="Include" />
-            <e p="XeoglDrawingSpaceStyle.cs" t="Include" />
-            <e p="XeoglDrawingSpaceUtils.cs" t="Include" />
-          </e>
-          <e p="Generators" t="Include">
-            <e p="XeoglLineMeshGenerator.cs" t="Include" />
-            <e p="XeoglMeshGenerator.cs" t="Include" />
-            <e p="XeoglTriangleListMeshGenerator.cs" t="Include" />
-            <e p="XeoglTrianglePatchesListGenerator.cs" t="Include" />
-          </e>
-          <e p="Geometry" t="Include">
-            <e p="BuiltIn" t="Include">
-              <e p="XeoglAaBbGeometry.cs" t="Include" />
-              <e p="XeoglBoxGeometry.cs" t="Include" />
-              <e p="XeoglBuiltinSolidGeometry.cs" t="Include" />
-              <e p="XeoglCylinderGeometry.cs" t="Include" />
-              <e p="XeoglOBbGeometry.cs" t="Include" />
-              <e p="XeoglPlaneGeometry.cs" t="Include" />
-              <e p="XeoglSphereGeometry.cs" t="Include" />
-              <e p="XeoglTeapotGeometry.cs" t="Include" />
-              <e p="XeoglTorusGeometry.cs" t="Include" />
-              <e p="XeoglVectorTextGeometry.cs" t="Include" />
-            </e>
-            <e p="IXeoglGeometry.cs" t="Include" />
-            <e p="Primitives" t="Include">
-              <e p="XeoglLinePrimitivesGeometry.cs" t="Include" />
-              <e p="XeoglPointPrimitivesGeometry.cs" t="Include" />
-              <e p="XeoglPrimitivesGeometry.cs" t="Include" />
-              <e p="XeoglPrimitivesGeometryUtils.cs" t="Include" />
-              <e p="XeoglTrianglePrimitivesGeometry.cs" t="Include" />
-            </e>
-            <e p="XeoglBuilderGeometry.cs" t="Include" />
-            <e p="XeoglCodeGeometry.cs" t="Include" />
-            <e p="XeoglGeometry.cs" t="Include" />
-            <e p="XeoglGeometryUtils.cs" t="Include" />
-          </e>
-          <e p="IXeoglComponent.cs" t="Include" />
-          <e p="IXeoglScriptGenerator.cs" t="Include" />
-          <e p="Lights" t="Include">
-            <e p="XeoglAmbientLight.cs" t="Include" />
-            <e p="XeoglDirectionalLight.cs" t="Include" />
-            <e p="XeoglLight.cs" t="Include" />
-            <e p="XeoglPointLight.cs" t="Include" />
-            <e p="XeoglSpotLight.cs" t="Include" />
-          </e>
-          <e p="Materials" t="Include">
-            <e p="XeoglCodeMaterial.cs" t="Include" />
-            <e p="XeoglEdgeMaterial.cs" t="Include" />
-            <e p="XeoglEmphasisMaterial.cs" t="Include" />
-            <e p="XeoglFresnelEffect.cs" t="Include" />
-            <e p="XeoglLambertMaterial.cs" t="Include" />
-            <e p="XeoglMaterial.cs" t="Include" />
-            <e p="XeoglMaterialsUtils.cs" t="Include" />
-            <e p="XeoglMetallicMaterial.cs" t="Include" />
-            <e p="XeoglOutlineMaterial.cs" t="Include" />
-            <e p="XeoglPhongMaterial.cs" t="Include" />
-            <e p="XeoglSpecularMaterial.cs" t="Include" />
-          </e>
-          <e p="Objects" t="Include">
-            <e p="XeoglMesh.cs" t="Include" />
-            <e p="XeoglObject.cs" t="Include" />
-            <e p="XeoglObjectsGroup.cs" t="Include" />
-            <e p="XeoglObjectsUtils.cs" t="Include" />
-          </e>
-          <e p="Scene" t="Include">
-            <e p="XeoglScene.cs" t="Include" />
-          </e>
-          <e p="Transforms" t="Include">
-            <e p="IXeoglNumericalTransform.cs" t="Include" />
-            <e p="IXeoglTransform.cs" t="Include" />
-            <e p="XeoglCodeTransform.cs" t="Include" />
-            <e p="XeoglERotateScaleTranslateTransform.cs" t="Include" />
-            <e p="XeoglERotateTransform.cs" t="Include" />
-            <e p="XeoglERotateTranslateTransform.cs" t="Include" />
-            <e p="XeoglMatrixTransform.cs" t="Include" />
-            <e p="XeoglQRotateScaleTranslateTransform.cs" t="Include" />
-            <e p="XeoglQRotateTransform.cs" t="Include" />
-            <e p="XeoglTranslateTransform.cs" t="Include" />
-          </e>
-          <e p="XeoglCodeComposer.cs" t="Include" />
-          <e p="XeoglComponent.cs" t="Include" />
-          <e p="XeoglHtmlComposer.cs" t="Include" />
-          <e p="XeoglUtils.cs" t="Include" />
-        </e>
-      </e>
-      <e p="IndexRange.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages.config" t="Include" />
-      <e p="Pair.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
       </e>
@@ -1910,11 +1463,59 @@
         <e p="RandomGeometryGenerator.cs" t="Include" />
         <e p="RandomVectorsGenerator.cs" t="Include" />
       </e>
-      <e p="SampledScalarRange.cs" t="Include" />
       <e p="Sampling" t="Include">
         <e p="SamplingUtils.cs" t="Include" />
       </e>
       <e p="ScalarToIntOption.cs" t="Include" />
+      <e p="SdfGeometry" t="Include">
+        <e p="ISdfGeometry.cs" t="Include" />
+        <e p="Operations" t="Include">
+          <e p="SdfAnd3D.cs" t="Include" />
+          <e p="SdfBinaryAnd3D.cs" t="Include" />
+          <e p="SdfBinaryAndNot3D.cs" t="Include" />
+          <e p="SdfBinaryNotAnd3D.cs" t="Include" />
+          <e p="SdfBinaryNotOr3D.cs" t="Include" />
+          <e p="SdfBinaryOr3D.cs" t="Include" />
+          <e p="SdfBinaryOrNot3D.cs" t="Include" />
+          <e p="SdfCurveElongation3D.cs" t="Include" />
+          <e p="SdfNot3D.cs" t="Include" />
+          <e p="SdfOr3D.cs" t="Include" />
+          <e p="SdfRounding3D.cs" t="Include" />
+          <e p="SdfSurfaceElongation3D.cs" t="Include" />
+        </e>
+        <e p="Primitives" t="Include">
+          <e p="SdfBox3D.cs" t="Include" />
+          <e p="SdfCylinderX3D.cs" t="Include" />
+          <e p="SdfCylinderY3D.cs" t="Include" />
+          <e p="SdfCylinderZ3D.cs" t="Include" />
+          <e p="SdfLineSegment3D.cs" t="Include" />
+          <e p="SdfLineSegmentX3D.cs" t="Include" />
+          <e p="SdfLineSegmentY3D.cs" t="Include" />
+          <e p="SdfLineSegmentZ3D.cs" t="Include" />
+          <e p="SdfPlane3D.cs" t="Include" />
+          <e p="SdfPlaneXy3D.cs" t="Include" />
+          <e p="SdfPlaneXz3D.cs" t="Include" />
+          <e p="SdfPlaneYz3D.cs" t="Include" />
+          <e p="SdfRoundBox3D.cs" t="Include" />
+          <e p="SdfSphere3D.cs" t="Include" />
+          <e p="SdfTorusX3D.cs" t="Include" />
+          <e p="SdfTorusY3D.cs" t="Include" />
+          <e p="SdfTorusZ3D.cs" t="Include" />
+        </e>
+        <e p="SdfAggregation.cs" t="Include" />
+        <e p="SdfBinaryOperation.cs" t="Include" />
+        <e p="SdfUnaryOperation.cs" t="Include" />
+        <e p="SdfUtils.cs" t="Include" />
+        <e p="SignedDistanceFunction.cs" t="Include" />
+        <e p="Transforms" t="Include">
+          <e p="SdfRotate3D.cs" t="Include" />
+          <e p="SdfRotateX3D.cs" t="Include" />
+          <e p="SdfRotateY3D.cs" t="Include" />
+          <e p="SdfRotateZ3D.cs" t="Include" />
+          <e p="SdfScale3D.cs" t="Include" />
+          <e p="SdfTranslate3D.cs" t="Include" />
+        </e>
+      </e>
       <e p="Textures" t="Include">
         <e p="GridTextureComposer.cs" t="Include" />
       </e>
@@ -1922,7 +1523,7 @@
       <e p="xmpir32.dll" t="Include" />
       <e p="xmpir64.dll" t="Include" />
     </e>
-    <e p="C:\Projects\Active\GMac" t="IncludeFlat">
+    <e p="D:\Projects\Active\GMac" t="IncludeFlat">
       <e p="GeometricAlgebraSymbolicsLib" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -2678,7 +2279,7 @@
         <e p="Scripting.native.cs" t="Include" />
       </e>
       <e p="GMac.sln" t="IncludeFlat" />
-      <e p="GMacBenchmarks" t="IncludeRecursive">
+      <e p="GMacBenchmarks2" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="Benchmarks" t="Include">
           <e p="Numeric" t="Include">
@@ -2686,6 +2287,7 @@
             <e p="Benchmark10.cs" t="Include" />
             <e p="Benchmark11.cs" t="Include" />
             <e p="Benchmark12.cs" t="Include" />
+            <e p="Benchmark13.cs" t="Include" />
             <e p="Benchmark2.cs" t="Include" />
             <e p="Benchmark3.cs" t="Include" />
             <e p="Benchmark4.cs" t="Include" />
@@ -2705,7 +2307,7 @@
           </e>
         </e>
         <e p="bin" t="ExcludeRecursive" />
-        <e p="GMacBenchmarks.csproj" t="IncludeRecursive" />
+        <e p="GMacBenchmarks2.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="packages.config" t="Include" />
         <e p="Program.cs" t="Include" />
@@ -2731,15 +2333,29 @@
             </e>
           </e>
           <e p="Generators" t="Include">
+            <e p="VectorKVectorOpFunctionTablesGenerator.cs" t="Include" />
             <e p="VectorKVectorOpGenerator.cs" t="Include" />
+            <e p="VectorKVectorOpIndexTablesGenerator.cs" t="Include" />
+          </e>
+          <e p="GraphViz" t="Include">
+            <e p="Sample1.cs" t="Include" />
+            <e p="Sample2.cs" t="Include" />
           </e>
           <e p="Memory" t="Include">
             <e p="Numeric" t="Include">
               <e p="Sample1.cs" t="Include" />
               <e p="Sample2.cs" t="Include" />
+              <e p="Sample3.cs" t="Include" />
             </e>
           </e>
-          <e p="Rendering" t="Include">
+          <e p="Validations" t="Include">
+            <e p="GaBilinearProductsValidation.cs" t="Include" />
+            <e p="GaBladeOperationsValidation.cs" t="Include" />
+            <e p="GaMultivectorValidation.cs" t="Include" />
+            <e p="GaOutermorphismValidation.cs" t="Include" />
+            <e p="GaUnilinearMapsValidation.cs" t="Include" />
+          </e>
+          <e p="Visualizations" t="Include">
             <e p="Numeric" t="Include">
               <e p="Sample1.cs" t="Include" />
               <e p="Sample2.cs" t="Include" />
@@ -2750,11 +2366,6 @@
               <e p="Sample2.cs" t="Include" />
               <e p="Sample3.cs" t="Include" />
             </e>
-          </e>
-          <e p="Validations" t="Include">
-            <e p="GaBilinearProductsValidation.cs" t="Include" />
-            <e p="GaBladeOperationsValidation.cs" t="Include" />
-            <e p="GaUnilinearMapsValidation.cs" t="Include" />
           </e>
         </e>
       </e>
@@ -3055,9 +2666,572 @@
           <e p="Settings.settings" t="Include" />
         </e>
       </e>
-      <e p="packages" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive">
+        <e p="Magick.NET-Q8-x64.7.15.0\runtimes\win-x64\native\Magick.Native-Q8-x64.dll" t="Include" />
+      </e>
     </e>
-    <e p="C:\Projects\Active\TextComposerLib\TextComposerLib" t="IncludeRecursive">
+    <e p="D:\Projects\Active\GraphicsComposerLib\GraphicsComposerLib" t="IncludeRecursive">
+      <e p="AnimatedGifComposer.cs" t="Include" />
+      <e p="app.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Form1.cs" t="Include" />
+      <e p="Form1.Designer.cs" t="Include" />
+      <e p="Geometry" t="Include">
+        <e p="Composers" t="Include">
+          <e p="GraphicsLinesGeometryComposer3D.cs" t="Include" />
+          <e p="GraphicsLinesListGeometryComposer3D.cs" t="Include" />
+          <e p="GraphicsTrianglesGeometryComposer3D.cs" t="Include" />
+          <e p="GraphicsTrianglesListGeometryComposer3D.cs" t="Include" />
+        </e>
+        <e p="Constants" t="Include">
+          <e p="GraphicsAxis2D.cs" t="Include" />
+          <e p="GraphicsAxis3D.cs" t="Include" />
+        </e>
+        <e p="GraphicsGeometryUtils.cs" t="Include" />
+        <e p="IGraphicsGeometry3D.cs" t="Include" />
+        <e p="Lines" t="Include">
+          <e p="GraphicsLineLoopGeometry3D.cs" t="Include" />
+          <e p="GraphicsLinesGeometry3D.cs" t="Include" />
+          <e p="GraphicsLinesListGeometry3D.cs" t="Include" />
+          <e p="GraphicsLineStripGeometry3D.cs" t="Include" />
+          <e p="IGraphicsLinesGeometry3D.cs" t="Include" />
+        </e>
+        <e p="Points" t="Include">
+          <e p="GraphicsPointsGeometry3D.cs" t="Include" />
+          <e p="GraphicsPointsListGeometry3D.cs" t="Include" />
+          <e p="IGraphicsPointsGeometry3D.cs" t="Include" />
+        </e>
+        <e p="Textures" t="Include">
+          <e p="GraphicsColorsGrid.cs" t="Include" />
+          <e p="GraphicsTextureCoordinatesGrid.cs" t="Include" />
+        </e>
+        <e p="Triangles" t="Include">
+          <e p="GraphicsTriangleFanGeometry3D.cs" t="Include" />
+          <e p="GraphicsTrianglesGeometry3D.cs" t="Include" />
+          <e p="GraphicsTrianglesGeometryBase3D.cs" t="Include" />
+          <e p="GraphicsTrianglesListGeometry3D.cs" t="Include" />
+          <e p="GraphicsTriangleStripGeometry3D.cs" t="Include" />
+          <e p="GraphicsVertexNormalComputationMethod.cs" t="Include" />
+          <e p="IGraphicsTrianglesGeometry3D.cs" t="Include" />
+        </e>
+        <e p="Vertices" t="Include">
+          <e p="GraphicsColoredVertex3D.cs" t="Include" />
+          <e p="GraphicsNormal3D.cs" t="Include" />
+          <e p="GraphicsNormalColoredVertex3D.cs" t="Include" />
+          <e p="GraphicsNormalTexturedVertex3D.cs" t="Include" />
+          <e p="GraphicsNormalVertex3D.cs" t="Include" />
+          <e p="GraphicsTexturedVertex3D.cs" t="Include" />
+          <e p="GraphicsVertex3D.cs" t="Include" />
+          <e p="GraphicsVertexInfo3D.cs" t="Include" />
+          <e p="IGraphicsNormalVertex3D.cs" t="Include" />
+          <e p="IGraphicsVertex3D.cs" t="Include" />
+        </e>
+      </e>
+      <e p="GraphicsComposerLib.csproj" t="IncludeRecursive" />
+      <e p="GraphicsPrimitiveType3D.cs" t="Include" />
+      <e p="GraphicsUtils.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="OpenSCAD" t="Include" />
+      <e p="packages.config" t="Include" />
+      <e p="POVRay" t="Include">
+        <e p="Custom" t="Include">
+          <e p="PovRayEuclideanDiagramScene.cs" t="Include" />
+        </e>
+        <e p="SDL" t="Include">
+          <e p="Cameras" t="Include">
+            <e p="ISdlCamera.cs" t="Include" />
+            <e p="SdlCamera.cs" t="Include" />
+            <e p="SdlFullCamera.cs" t="Include" />
+            <e p="SdlNamedCamera.cs" t="Include" />
+            <e p="SdlOrthographicCamera.cs" t="Include" />
+            <e p="SdlPerspectiveCamera.cs" t="Include" />
+          </e>
+          <e p="Directives" t="Include">
+            <e p="ISdlDirective.cs" t="Include" />
+            <e p="SdlDeclareDirective.cs" t="Include" />
+            <e p="SdlDefaultFinishDirective.cs" t="Include" />
+            <e p="SdlDefaultPigmentDirective.cs" t="Include" />
+            <e p="SdlDefaultTextureDirective.cs" t="Include" />
+            <e p="SdlDirective.cs" t="Include" />
+            <e p="SdlForDirective.cs" t="Include" />
+            <e p="SdlIfElseDirective.cs" t="Include" />
+            <e p="SdlIncludeDirective.cs" t="Include" />
+            <e p="SdlMacroDirective.cs" t="Include" />
+            <e p="SdlWhileDirective.cs" t="Include" />
+          </e>
+          <e p="Finishes" t="Include">
+            <e p="ISdlFinish.cs" t="Include" />
+            <e p="ISdlFinishItem.cs" t="Include" />
+            <e p="SdlAmbientFinishItem.cs" t="Include" />
+            <e p="SdlBrillianceFinishItem.cs" t="Include" />
+            <e p="SdlCrandFinishItem.cs" t="Include" />
+            <e p="SdlDiffuseFinishItem.cs" t="Include" />
+            <e p="SdlEmissionFinishItem.cs" t="Include" />
+            <e p="SdlFinish.cs" t="Include" />
+            <e p="SdlPhongFinishItem.cs" t="Include" />
+            <e p="SdlReflectionFinishItem.cs" t="Include" />
+            <e p="SdlSpecularFinishItem.cs" t="Include" />
+          </e>
+          <e p="Interiors" t="Include" />
+          <e p="ISdlDynamicVisitor.cs" t="Include" />
+          <e p="ISdlElement.cs" t="Include" />
+          <e p="ISdlNameable.cs" t="Include" />
+          <e p="ISdlStatement.cs" t="Include" />
+          <e p="ISdlTransformable.cs" t="Include" />
+          <e p="Lights" t="Include">
+            <e p="ISdlLight.cs" t="Include" />
+            <e p="SdlAreaLightSpecs.cs" t="Include" />
+            <e p="SdlLight.cs" t="Include" />
+            <e p="SdlSpotLightSpecs.cs" t="Include" />
+          </e>
+          <e p="Modifiers" t="Include">
+            <e p="ISdlObjectModifier.cs" t="Include" />
+            <e p="SdlBoundClipModifier.cs" t="Include" />
+            <e p="SdlSimpleModifier.cs" t="Include" />
+          </e>
+          <e p="Normals" t="Include" />
+          <e p="Objects" t="Include">
+            <e p="FPP" t="Include" />
+            <e p="FSP" t="Include">
+              <e p="ISdlBlobComponent.cs" t="Include" />
+              <e p="SdlBlob.cs" t="Include" />
+              <e p="SdlBlobCylinder.cs" t="Include" />
+              <e p="SdlBlobSphere.cs" t="Include" />
+              <e p="SdlBox.cs" t="Include" />
+              <e p="SdlCone.cs" t="Include" />
+              <e p="SdlCylinder.cs" t="Include" />
+              <e p="SdlLathe.cs" t="Include" />
+              <e p="SdlOvus.cs" t="Include" />
+              <e p="SdlPrism.cs" t="Include" />
+              <e p="SdlSphere.cs" t="Include" />
+              <e p="SdlSphereSweep.cs" t="Include" />
+              <e p="SdlSuperquadricEllipsoid.cs" t="Include" />
+              <e p="SdlSurfaceOfRevolution.cs" t="Include" />
+              <e p="SdlText.cs" t="Include" />
+              <e p="SdlTorus.cs" t="Include" />
+            </e>
+            <e p="ISdlCsgObject.cs" t="Include" />
+            <e p="ISdlFppObject.cs" t="Include" />
+            <e p="ISdlFspObject.cs" t="Include" />
+            <e p="ISdlIspObject.cs" t="Include" />
+            <e p="ISdlObject.cs" t="Include" />
+            <e p="ISdlPatchObject.cs" t="Include" />
+            <e p="ISdlPolynomialObject.cs" t="Include" />
+            <e p="ISdlSolidObject.cs" t="Include" />
+            <e p="ISP" t="Include">
+              <e p="SdlCubicPolySurface.cs" t="Include" />
+              <e p="SdlPlane.cs" t="Include" />
+              <e p="SdlPolySurface.cs" t="Include" />
+              <e p="SdlPolySurfaceSparse.cs" t="Include" />
+              <e p="SdlQuadric.cs" t="Include" />
+              <e p="SdlQuarticPolySurface.cs" t="Include" />
+            </e>
+            <e p="SdlCsgObject.cs" t="Include" />
+            <e p="SdlNamedObject.cs" t="Include" />
+            <e p="SdlObject.cs" t="Include" />
+            <e p="SdlPolynomialObject.cs" t="Include" />
+          </e>
+          <e p="Patterns" t="Include">
+            <e p="ISdlPattern.cs" t="Include" />
+          </e>
+          <e p="Pigments" t="Include">
+            <e p="ISdlPigment.cs" t="Include" />
+            <e p="SdlColorListPigment.cs" t="Include" />
+            <e p="SdlColorMapPigment.cs" t="Include" />
+            <e p="SdlPigment.cs" t="Include" />
+            <e p="SdlPigmentListPigment.cs" t="Include" />
+            <e p="SdlPigmentMapPigment.cs" t="Include" />
+            <e p="SdlSolidColorPigment.cs" t="Include" />
+          </e>
+          <e p="SdlCodeGenContext.cs" t="Include" />
+          <e p="SdlFreeCode.cs" t="Include" />
+          <e p="SdlScene.cs" t="Include" />
+          <e p="SdlUtils.cs" t="Include" />
+          <e p="Textures" t="Include">
+            <e p="ISdlTexture.cs" t="Include" />
+            <e p="SdlPlainTexture.cs" t="Include" />
+            <e p="SdlTexture.cs" t="Include" />
+          </e>
+          <e p="Transforms" t="Include">
+            <e p="ISdlTransform.cs" t="Include" />
+            <e p="SdlCompositeTransform.cs" t="Include" />
+            <e p="SdlMatrixTransform.cs" t="Include" />
+            <e p="SdlNamedTransform.cs" t="Include" />
+            <e p="SdlRotateTransform.cs" t="Include" />
+            <e p="SdlScaleTransform.cs" t="Include" />
+            <e p="SdlTransform.cs" t="Include" />
+            <e p="SdlTranslateTransform.cs" t="Include" />
+          </e>
+          <e p="Values" t="Include">
+            <e p="ISdlBooleanValue.cs" t="Include" />
+            <e p="ISdlColorValue.cs" t="Include" />
+            <e p="ISdlScalarValue.cs" t="Include" />
+            <e p="ISdlStringValue.cs" t="Include" />
+            <e p="ISdlValue.cs" t="Include" />
+            <e p="ISdlVectorValue.cs" t="Include" />
+            <e p="SdlBooleanExpression.cs" t="Include" />
+            <e p="SdlBooleanLiteral.cs" t="Include" />
+            <e p="SdlColorExpression.cs" t="Include" />
+            <e p="SdlColorRgbft.cs" t="Include" />
+            <e p="SdlMatrix4X3.cs" t="Include" />
+            <e p="SdlScalarExpression.cs" t="Include" />
+            <e p="SdlScalarLiteral.cs" t="Include" />
+            <e p="SdlStoredValue.cs" t="Include" />
+            <e p="SdlValue.cs" t="Include" />
+            <e p="SdlVector2D.cs" t="Include" />
+            <e p="SdlVector3D.cs" t="Include" />
+            <e p="SdlVectorExpression.cs" t="Include" />
+            <e p="SdlVectorLiteral3D.cs" t="Include" />
+          </e>
+        </e>
+        <e p="UI" t="Include" />
+      </e>
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+        <e p="Resources.Designer.cs" t="Include" />
+        <e p="Resources.resx" t="Include" />
+        <e p="Settings.Designer.cs" t="Include" />
+        <e p="Settings.settings" t="Include" />
+      </e>
+      <e p="RayMarching" t="Include">
+        <e p="RayMarchingCamera3D.cs" t="Include" />
+        <e p="RayMarchingComputer3D.cs" t="Include" />
+        <e p="RayMarchingMaterial.cs" t="Include" />
+        <e p="RayMarchingPointLight3D.cs" t="Include" />
+        <e p="RayMarchingScene3D.cs" t="Include" />
+        <e p="RayMarchingShape3D.cs" t="Include" />
+      </e>
+      <e p="SVG" t="Include">
+        <e p="Attributes" t="Include">
+          <e p="ISvgAttributeValue.cs" t="Include" />
+          <e p="SvgAttributeInfo.cs" t="Include" />
+          <e p="SvgAttributeUtils.cs" t="Include" />
+          <e p="SvgEav.cs" t="Include" />
+          <e p="SvgEavAngle.cs" t="Include" />
+          <e p="SvgEavAttribute.cs" t="Include" />
+          <e p="SvgEavClock.cs" t="Include" />
+          <e p="SvgEavLength.cs" t="Include" />
+          <e p="SvgEavNumber.cs" t="Include" />
+          <e p="SvgEavPreserveAspectRatio.cs" t="Include" />
+          <e p="SvgEavString.cs" t="Include" />
+          <e p="SvgEavStruct.cs" t="Include" />
+          <e p="SvgEavViewBox.cs" t="Include" />
+          <e p="SvgElementAttributeValue.cs" t="Include" />
+        </e>
+        <e p="Compositions" t="Include">
+          <e p="Grids" t="Include">
+            <e p="SvgGcSquareGrid.cs" t="Include" />
+            <e p="SvgGcSquareGridIDs.cs" t="Include" />
+            <e p="SvgGcSquareGridStyler.cs" t="Include" />
+          </e>
+          <e p="ISvgGeometryComposer.cs" t="Include" />
+          <e p="ISvgGeometryComposerIDs.cs" t="Include" />
+          <e p="ISvgGeometryComposerStyler.cs" t="Include" />
+        </e>
+        <e p="Content" t="Include">
+          <e p="ISvgContent.cs" t="Include" />
+          <e p="SvgContentComment.cs" t="Include" />
+          <e p="SvgContentsList.cs" t="Include" />
+          <e p="SvgContentText.cs" t="Include" />
+        </e>
+        <e p="DrawingBoard" t="Include">
+          <e p="SvgDrawingBoard.cs" t="Include" />
+          <e p="SvgDrawingBoardLayer.cs" t="Include" />
+          <e p="SvgDrawingBoardLayerActiveStyle.cs" t="Include" />
+          <e p="SvgDrawingBoardStyle.cs" t="Include" />
+          <e p="SvgDrawingBoardUtils.cs" t="Include" />
+        </e>
+        <e p="Elements" t="Include">
+          <e p="Animation" t="Include">
+            <e p="SvgElementAnimate.cs" t="Include" />
+            <e p="SvgElementAnimateMotion.cs" t="Include" />
+            <e p="SvgElementAnimateTransform.cs" t="Include" />
+            <e p="SvgElementDiscard.cs" t="Include" />
+            <e p="SvgElementMPath.cs" t="Include" />
+            <e p="SvgElementSet.cs" t="Include" />
+          </e>
+          <e p="Categories" t="Include">
+            <e p="ISvgAnimationElement.cs" t="Include" />
+            <e p="ISvgBasicShapeElement.cs" t="Include" />
+            <e p="ISvgContainerElement.cs" t="Include" />
+            <e p="ISvgDescriptiveElement.cs" t="Include" />
+            <e p="ISvgElement.cs" t="Include" />
+            <e p="ISvgFilterPrimitiveElement.cs" t="Include" />
+            <e p="ISvgFontElement.cs" t="Include" />
+            <e p="ISvgGradientElement.cs" t="Include" />
+            <e p="ISvgGraphicsElement.cs" t="Include" />
+            <e p="ISvgGraphicsReferencingElement.cs" t="Include" />
+            <e p="ISvgHtmlElement.cs" t="Include" />
+            <e p="ISvgLightSourceElement.cs" t="Include" />
+            <e p="ISvgNeverRenderedElement.cs" t="Include" />
+            <e p="ISvgPaintServerElement.cs" t="Include" />
+            <e p="ISvgRenderableElement.cs" t="Include" />
+            <e p="ISvgShapeElement.cs" t="Include" />
+            <e p="ISvgStructuralElement.cs" t="Include" />
+            <e p="ISvgTextContentChildElement.cs" t="Include" />
+            <e p="ISvgTextContentElement.cs" t="Include" />
+            <e p="ISvgUncategorizedElement.cs" t="Include" />
+            <e p="SvgInterfaces.cd" t="Include" />
+          </e>
+          <e p="Containers" t="Include">
+            <e p="SvgElementAnchor.cs" t="Include" />
+            <e p="SvgElementDefinitions.cs" t="Include" />
+            <e p="SvgElementGroup.cs" t="Include" />
+            <e p="SvgElementMarker.cs" t="Include" />
+            <e p="SvgElementMask.cs" t="Include" />
+            <e p="SvgElementPattern.cs" t="Include" />
+            <e p="SvgElementSvg.cs" t="Include" />
+            <e p="SvgElementSymbol.cs" t="Include" />
+            <e p="SvgElementUse.cs" t="Include" />
+          </e>
+          <e p="Descriptive" t="Include">
+            <e p="SvgElementDescription.cs" t="Include" />
+            <e p="SvgElementTitle.cs" t="Include" />
+          </e>
+          <e p="Filter" t="Include" />
+          <e p="Font" t="Include" />
+          <e p="Gradient" t="Include">
+            <e p="SvgElementGradientStop.cs" t="Include" />
+            <e p="SvgElementLinearGradient.cs" t="Include" />
+            <e p="SvgElementRadialGradient.cs" t="Include" />
+          </e>
+          <e p="Graphics" t="Include" />
+          <e p="Misc" t="Include" />
+          <e p="Shape" t="Include">
+            <e p="SvgElementCircle.cs" t="Include" />
+            <e p="SvgElementEllipse.cs" t="Include" />
+            <e p="SvgElementLine.cs" t="Include" />
+            <e p="SvgElementPath.cs" t="Include" />
+            <e p="SvgElementPolygon.cs" t="Include" />
+            <e p="SvgElementPolyline.cs" t="Include" />
+            <e p="SvgElementRectangle.cs" t="Include" />
+          </e>
+          <e p="SvgElement.cs" t="Include" />
+          <e p="SvgElementUtils.cs" t="Include" />
+          <e p="Text" t="Include">
+            <e p="SvgElementText.cs" t="Include" />
+            <e p="SvgElementTextSpan.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Paths" t="Include">
+          <e p="Segments" t="Include">
+            <e p="ISvgPathSegment.cs" t="Include" />
+            <e p="SvgPathSegmentArc.cs" t="Include" />
+            <e p="SvgPathSegmentCBezier.cs" t="Include" />
+            <e p="SvgPathSegmentLine.cs" t="Include" />
+            <e p="SvgPathSegmentQBezier.cs" t="Include" />
+            <e p="SvgPathSegmentScBezier.cs" t="Include" />
+            <e p="SvgPathSegmentsList.cs" t="Include" />
+            <e p="SvgPathSegmentSqBezier.cs" t="Include" />
+          </e>
+          <e p="SvgPathCommand.cs" t="Include" />
+          <e p="SvgPathCommandArc.cs" t="Include" />
+          <e p="SvgPathCommandCBezier.cs" t="Include" />
+          <e p="SvgPathCommandClosePath.cs" t="Include" />
+          <e p="SvgPathCommandComposer.cs" t="Include" />
+          <e p="SvgPathCommandHLine.cs" t="Include" />
+          <e p="SvgPathCommandLine.cs" t="Include" />
+          <e p="SvgPathCommandMoveTo.cs" t="Include" />
+          <e p="SvgPathCommandQBezier.cs" t="Include" />
+          <e p="SvgPathCommandScBezier.cs" t="Include" />
+          <e p="SvgPathCommandSqBezier.cs" t="Include" />
+          <e p="SvgPathCommandVLine.cs" t="Include" />
+          <e p="SvgSegmentsPathCommand.cs" t="Include" />
+        </e>
+        <e p="Styles" t="Include">
+          <e p="ISvgStyle.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="SvgSpv.cs" t="Include" />
+            <e p="SvgSpvColor.cs" t="Include" />
+            <e p="SvgSpvFontSize.cs" t="Include" />
+            <e p="SvgSpvLength.cs" t="Include" />
+            <e p="SvgSpvMarker.cs" t="Include" />
+            <e p="SvgSpvNumber.cs" t="Include" />
+            <e p="SvgSpvPaint.cs" t="Include" />
+            <e p="SvgSpvString.cs" t="Include" />
+            <e p="SvgSpvStruct.cs" t="Include" />
+            <e p="SvgStylePropertyValue.cs" t="Include" />
+          </e>
+          <e p="SubStyles" t="Include">
+            <e p="SvgSubStyle.cs" t="Include" />
+            <e p="SvgSubStyleFill.cs" t="Include" />
+            <e p="SvgSubStyleStroke.cs" t="Include" />
+          </e>
+          <e p="SvgStyle.cs" t="Include" />
+          <e p="SvgStyleSheetComposer.cs" t="Include" />
+          <e p="SvgStyleUtils.cs" t="Include" />
+        </e>
+        <e p="SvgComposer.cs" t="Include" />
+        <e p="SvgUtils.cs" t="Include" />
+        <e p="Transforms" t="Include">
+          <e p="SvgTransform.cs" t="Include" />
+          <e p="SvgTransformComposer.cs" t="Include" />
+          <e p="SvgTransformMatrix.cs" t="Include" />
+          <e p="SvgTransformRotate.cs" t="Include" />
+          <e p="SvgTransformScale.cs" t="Include" />
+          <e p="SvgTransformSkewX.cs" t="Include" />
+          <e p="SvgTransformSkewY.cs" t="Include" />
+          <e p="SvgTransformTranslate.cs" t="Include" />
+        </e>
+        <e p="Values" t="Include">
+          <e p="ISvgValue.cs" t="Include" />
+          <e p="SvgComputedValue.cs" t="Include" />
+          <e p="SvgConstants.cs" t="Include" />
+          <e p="SvgStoredValue.cs" t="Include" />
+          <e p="SvgValueAngle.cs" t="Include" />
+          <e p="SvgValueAngleUnit.cs" t="Include" />
+          <e p="SvgValueAnimationAccumulate.cs" t="Include" />
+          <e p="SvgValueAnimationAdditive.cs" t="Include" />
+          <e p="SvgValueAnimationCalcMode.cs" t="Include" />
+          <e p="SvgValueAnimationFill.cs" t="Include" />
+          <e p="SvgValueAnimationRestart.cs" t="Include" />
+          <e p="SvgValueAttributeType.cs" t="Include" />
+          <e p="SvgValueColorInterpolation.cs" t="Include" />
+          <e p="SvgValueColorInterpolationFilters.cs" t="Include" />
+          <e p="SvgValueColorRendering.cs" t="Include" />
+          <e p="SvgValueFillRule.cs" t="Include" />
+          <e p="SvgValueFontStretch.cs" t="Include" />
+          <e p="SvgValueFontStyle.cs" t="Include" />
+          <e p="SvgValueFontVariant.cs" t="Include" />
+          <e p="SvgValueFontWeight.cs" t="Include" />
+          <e p="SvgValueGradientSpreadMethod.cs" t="Include" />
+          <e p="SvgValueGradientUnits.cs" t="Include" />
+          <e p="SvgValueImageRendering.cs" t="Include" />
+          <e p="SvgValueLength.cs" t="Include" />
+          <e p="SvgValueLengthsList.cs" t="Include" />
+          <e p="SvgValueLengthUnit.cs" t="Include" />
+          <e p="SvgValueMarkerUnits.cs" t="Include" />
+          <e p="SvgValueMaskUnits.cs" t="Include" />
+          <e p="SvgValueNumbersList.cs" t="Include" />
+          <e p="SvgValuePatternUnits.cs" t="Include" />
+          <e p="SvgValuePoint.cs" t="Include" />
+          <e p="SvgValuePointsList.cs" t="Include" />
+          <e p="SvgValueShapeRendering.cs" t="Include" />
+          <e p="SvgValueStrokeLineCap.cs" t="Include" />
+          <e p="SvgValueStrokeLineJoin.cs" t="Include" />
+          <e p="SvgValueTextAnchor.cs" t="Include" />
+          <e p="SvgValueTextDecoration.cs" t="Include" />
+          <e p="SvgValueTextDirection.cs" t="Include" />
+          <e p="SvgValueTextRendering.cs" t="Include" />
+          <e p="SvgValueUnicodeBidi.cs" t="Include" />
+          <e p="SvgValueUtils.cs" t="Include" />
+          <e p="SvgValueZoomAndPan.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Xeogl" t="Include">
+        <e p="Camera" t="Include">
+          <e p="XeoglCamera.cs" t="Include" />
+          <e p="XeoglCameraAxisHelper.cs" t="Include" />
+          <e p="XeoglCameraControl.cs" t="Include" />
+          <e p="XeoglCameraDefaults.cs" t="Include" />
+          <e p="XeoglCameraOrbit.cs" t="Include" />
+          <e p="XeoglCameraProjection.cs" t="Include" />
+          <e p="XeoglCustomProjection.cs" t="Include" />
+          <e p="XeoglFrustumProjection.cs" t="Include" />
+          <e p="XeoglOrthographicProjection.cs" t="Include" />
+          <e p="XeoglPerspectiveProjection.cs" t="Include" />
+        </e>
+        <e p="Constants" t="Include">
+          <e p="XeoglAlphaMode.cs" t="Include" />
+          <e p="XeoglBillboardBehaviour.cs" t="Include" />
+          <e p="XeoglCameraProjectionType.cs" t="Include" />
+          <e p="XeoglConstantsUtils.cs" t="Include" />
+          <e p="XeoglMaterialType.cs" t="Include" />
+          <e p="XeoglPerspectiveFieldOfViewAxis.cs" t="Include" />
+          <e p="XeoglSpace.cs" t="Include" />
+          <e p="XeoglWindingDirection.cs" t="Include" />
+        </e>
+        <e p="DrawingSpace" t="Include">
+          <e p="XeoglDrawingSpace.cs" t="Include" />
+          <e p="XeoglDrawingSpaceLayer.cs" t="Include" />
+          <e p="XeoglDrawingSpaceStyle.cs" t="Include" />
+          <e p="XeoglDrawingSpaceUtils.cs" t="Include" />
+        </e>
+        <e p="FormXeoglRendering.cs" t="Include" />
+        <e p="FormXeoglRendering.Designer.cs" t="Include" />
+        <e p="FormXeoglRendering.resx" t="Include" />
+        <e p="Generators" t="Include">
+          <e p="XeoglLinesMeshGenerator.cs" t="Include" />
+          <e p="XeoglMeshGenerator.cs" t="Include" />
+          <e p="XeoglPointsMeshGenerator.cs" t="Include" />
+          <e p="XeoglTrianglesMeshGenerator.cs" t="Include" />
+        </e>
+        <e p="Geometry" t="Include">
+          <e p="BuiltIn" t="Include">
+            <e p="XeoglAaBbGeometry.cs" t="Include" />
+            <e p="XeoglBoxGeometry.cs" t="Include" />
+            <e p="XeoglBuiltinSolidGeometry.cs" t="Include" />
+            <e p="XeoglCylinderGeometry.cs" t="Include" />
+            <e p="XeoglOBbGeometry.cs" t="Include" />
+            <e p="XeoglPlaneGeometry.cs" t="Include" />
+            <e p="XeoglSphereGeometry.cs" t="Include" />
+            <e p="XeoglTeapotGeometry.cs" t="Include" />
+            <e p="XeoglTorusGeometry.cs" t="Include" />
+            <e p="XeoglVectorTextGeometry.cs" t="Include" />
+          </e>
+          <e p="IXeoglGeometry.cs" t="Include" />
+          <e p="Primitives" t="Include">
+            <e p="XeoglLinesGeometry.cs" t="Include" />
+            <e p="XeoglPointsGeometry.cs" t="Include" />
+            <e p="XeoglPrimitivesGeometry.cs" t="Include" />
+            <e p="XeoglTrianglesGeometry.cs" t="Include" />
+          </e>
+          <e p="XeoglBuilderGeometry.cs" t="Include" />
+          <e p="XeoglCodeGeometry.cs" t="Include" />
+          <e p="XeoglGeometry.cs" t="Include" />
+          <e p="XeoglGeometryUtils.cs" t="Include" />
+        </e>
+        <e p="IXeoglComponent.cs" t="Include" />
+        <e p="IXeoglScriptGenerator.cs" t="Include" />
+        <e p="Lights" t="Include">
+          <e p="XeoglAmbientLight.cs" t="Include" />
+          <e p="XeoglDirectionalLight.cs" t="Include" />
+          <e p="XeoglLight.cs" t="Include" />
+          <e p="XeoglPointLight.cs" t="Include" />
+          <e p="XeoglSpotLight.cs" t="Include" />
+        </e>
+        <e p="Materials" t="Include">
+          <e p="XeoglCodeMaterial.cs" t="Include" />
+          <e p="XeoglEdgeMaterial.cs" t="Include" />
+          <e p="XeoglEmphasisMaterial.cs" t="Include" />
+          <e p="XeoglFresnelEffect.cs" t="Include" />
+          <e p="XeoglLambertMaterial.cs" t="Include" />
+          <e p="XeoglMaterial.cs" t="Include" />
+          <e p="XeoglMaterialsUtils.cs" t="Include" />
+          <e p="XeoglMetallicMaterial.cs" t="Include" />
+          <e p="XeoglOutlineMaterial.cs" t="Include" />
+          <e p="XeoglPhongMaterial.cs" t="Include" />
+          <e p="XeoglSpecularMaterial.cs" t="Include" />
+        </e>
+        <e p="Objects" t="Include">
+          <e p="XeoglMesh.cs" t="Include" />
+          <e p="XeoglObject.cs" t="Include" />
+          <e p="XeoglObjectsGroup.cs" t="Include" />
+          <e p="XeoglObjectsUtils.cs" t="Include" />
+        </e>
+        <e p="Scene" t="Include">
+          <e p="XeoglScene.cs" t="Include" />
+        </e>
+        <e p="Transforms" t="Include">
+          <e p="IXeoglNumericalTransform.cs" t="Include" />
+          <e p="IXeoglTransform.cs" t="Include" />
+          <e p="XeoglCodeTransform.cs" t="Include" />
+          <e p="XeoglERotateScaleTranslateTransform.cs" t="Include" />
+          <e p="XeoglERotateTransform.cs" t="Include" />
+          <e p="XeoglERotateTranslateTransform.cs" t="Include" />
+          <e p="XeoglMatrixTransform.cs" t="Include" />
+          <e p="XeoglQRotateScaleTranslateTransform.cs" t="Include" />
+          <e p="XeoglQRotateTransform.cs" t="Include" />
+          <e p="XeoglTranslateTransform.cs" t="Include" />
+        </e>
+        <e p="XeoglCodeComposer.cs" t="Include" />
+        <e p="XeoglComponent.cs" t="Include" />
+        <e p="XeoglHtmlComposer.cs" t="Include" />
+        <e p="XeoglUtils.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\TextComposerLib\TextComposerLib" t="IncludeRecursive">
       <e p="app.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Code" t="Include" />
@@ -3242,7 +3416,5 @@
         <e p="SampleTasksCollection.cs" t="Include" />
       </e>
     </e>
-    <e p="C:\Users\ahmad\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\ahmad\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_GMac.-1929415011.00" t="ExcludeRecursive" />
   </component>
 </project>

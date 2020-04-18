@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComposerLibSamples", "TextComposerLibSamples\TextComposerLibSamples.csproj", "{C6AE43B5-13C4-41BB-9305-27406B41845D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComposerLib", "TextComposerLib\TextComposerLib.csproj", "{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6AE43B5-13C4-41BB-9305-27406B41845D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6AE43B5-13C4-41BB-9305-27406B41845D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6AE43B5-13C4-41BB-9305-27406B41845D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6AE43B5-13C4-41BB-9305-27406B41845D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

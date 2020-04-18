@@ -107,5 +107,9 @@ namespace DataStructuresLib.Collections
         }
 
 
+        public static bool IsNullOrEmpty<T>(this IReadOnlyCollection<T> collection)
+        {
+            return collection == null || collection.Count == 0;
+        }
     }
 }

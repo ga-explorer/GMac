@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{52B7A16F-E6C5-4DED-A4B8-9EA6751EAB1B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TextComposerLib</RootNamespace>
+    <AssemblyName>TextComposerLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony.Interpreter, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Irony.Interpreter.1.1.0\lib\net40\Irony.Interpreter.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.TextWriter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Serilog.Sinks.TextWriter.2.1.0\lib\net45\Serilog.Sinks.TextWriter.dll</HintPath>
+    </Reference>
+    <Reference Include="Svg, Version=3.0.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Svg.3.0.102\lib\net452\Svg.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Files\TextFilesComposer.cs" />
+    <Compile Include="Files\UI\FormFilesComposer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Files\UI\FormFilesComposer.Designer.cs">
+      <DependentUpon>FormFilesComposer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNotificationMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNotificationMessage.designer.cs">
+      <DependentUpon>FormNotificationMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\SettingsComposer.cs" />
+    <Compile Include="Settings\SettingsUtils.cs" />
+    <Compile Include="Settings\SettingsXmlConverter.cs" />
+    <Compile Include="TextComposerLibUtils.cs" />
+    <Compile Include="TextExpressions\Ast\ICompositeTextExpression.cs" />
+    <Compile Include="TextExpressions\Ast\ISimpleTextExpression.cs" />
+    <Compile Include="TextExpressions\Ast\ITextExpression.cs" />
+    <Compile Include="TextExpressions\Ast\TeDictionary.cs" />
+    <Compile Include="TextExpressions\Ast\TeIdentifier.cs" />
+    <Compile Include="TextExpressions\Ast\TeList.cs" />
+    <Compile Include="TextExpressions\Ast\TeLiteralNumber.cs" />
+    <Compile Include="TextExpressions\Ast\TeLiteralString.cs" />
+    <Compile Include="TextExpressions\ITextExpressionVisitor.cs" />
+    <Compile Include="TextExpressions\TextExpressionComposer.cs" />
+    <Compile Include="TextExpressions\TextExpressionDslGrammar.cs" />
+    <Compile Include="TextExpressions\TextExpressionParser.cs" />
+    <Compile Include="TextExpressions\TextExpressionVisitor.cs" />
+    <Compile Include="Text\Literals\HtmlLiterals.cs" />
+    <Compile Include="Text\Markdown\MarkdownComposer.cs" />
+    <Compile Include="Text\Markdown\Tables\MarkdownTable.cs" />
+    <Compile Include="Text\Markdown\MarkdownUtils.cs" />
+    <Compile Include="Text\Markdown\Tables\MarkdownTableColumn.cs" />
+    <Compile Include="Text\Attributes\AttributesTextComposer.cs" />
+    <Compile Include="Text\Region\IRcTemplatePart.cs" />
+    <Compile Include="Text\Region\IRcTag.cs" />
+    <Compile Include="Text\Region\RcFixedTag.cs" />
+    <Compile Include="Text\Region\RcLineMarker.cs" />
+    <Compile Include="Text\Region\RcSlotRegion.cs" />
+    <Compile Include="Text\Region\RcFixedRegion.cs" />
+    <Compile Include="Text\Region\RcSlotTag.cs" />
+    <Compile Include="Text\Region\RcTemplateMarkers.cs" />
+    <Compile Include="Text\Region\RcTemplateProcessor.cs" />
+    <Compile Include="Text\Region\RegionComposer.cs" />
+    <Compile Include="Text\Region\RegionUtils.cs" />
+    <Compile Include="Text\Region\IRcRegion.cs" />
+    <Compile Include="Text\Region\RcTemplate.cs" />
+    <Compile Include="Files\TextFileComposer.cs" />
+    <Compile Include="UserInterface\ISampleTasksTreeNode.cs" />
+    <Compile Include="UserInterface\SampleTasksCollection.cs" />
+    <Compile Include="UserInterface\FormSamples.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\FormSamples.Designer.cs">
+      <DependentUpon>FormSamples.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\SampleTask.cs" />
+    <Compile Include="Logs\EventLog\EventLogComposerPeriod.cs" />
+    <Compile Include="Logs\EventLog\EventLogComposer.cs" />
+    <Compile Include="Text\Linear\LinearTextComposerUtils.cs" />
+    <Compile Include="Text\Mapped\SegmentMarkingMethod.cs" />
+    <Compile Include="Text\Mapped\MappedUtils.cs" />
+    <Compile Include="Text\Parametric\ParametricUtils.cs" />
+    <Compile Include="Text\Parametric\UI\FormEditTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormEditTemplate.Designer.cs">
+      <DependentUpon>FormEditTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormImportTemplateFromText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormImportTemplateFromText.Designer.cs">
+      <DependentUpon>FormImportTemplateFromText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormNewTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormNewTemplate.Designer.cs">
+      <DependentUpon>FormNewTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormTemplateComposerEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Text\Parametric\UI\FormTemplateComposerEditor.Designer.cs">
+      <DependentUpon>FormTemplateComposerEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logs\Progress\IProgressReportSource.cs" />
+    <Compile Include="Logs\Progress\UI\FormProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logs\Progress\UI\FormProgress.Designer.cs">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logs\Progress\ProgressComposer.cs" />
+    <Compile Include="Logs\Progress\ProgressComposerEvents.cs" />
+    <Compile Include="Logs\Progress\ProgressComposerHistory.cs" />
+    <Compile Include="Logs\Progress\ProgressUtils.cs" />
+    <Compile Include="StringUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text\Structured\DictionaryTextComposer.cs" />
+    <Compile Include="Text\Structured\IStructuredTextComposer.cs" />
+    <Compile Include="Text\Parametric\IParametricTextComposerValueSource.cs" />
+    <Compile Include="Text\Linear\LinearTextComposer.cs" />
+    <Compile Include="Text\Structured\ListTextComposer.cs" />
+    <Compile Include="Text\Structured\ListComposerCollection.cs" />
+    <Compile Include="Text\Linear\LineHeader\LtcIndentation.cs" />
+    <Compile Include="Text\Linear\LineHeader\LtcLineCount.cs" />
+    <Compile Include="Text\Linear\LineHeader\LtcLineHeader.cs" />
+    <Compile Include="Text\Linear\LineHeader\LtcStackIndentation.cs" />
+    <Compile Include="Text\Linear\LineHeader\LtcStopWatch.cs" />
+    <Compile Include="Text\Linear\LineHeader\LtcTimeStamp.cs" />
+    <Compile Include="Text\Parametric\ParametricTextComposer.cs" />
+    <Compile Include="Text\Parametric\ParametricTextComposerCollection.cs" />
+    <Compile Include="Text\Structured\PriorityQueueTextComposer.cs" />
+    <Compile Include="Text\Parametric\PtcLine.cs" />
+    <Compile Include="Text\Parametric\PtcLineSegment.cs" />
+    <Compile Include="Text\Parametric\PtcParameter.cs" />
+    <Compile Include="Text\Structured\QueueTextComposer.cs" />
+    <Compile Include="Text\Structured\SequenceTextComposer.cs" />
+    <Compile Include="Text\Structured\StructuredTextItem.cs" />
+    <Compile Include="Text\Structured\StackTextComposer.cs" />
+    <Compile Include="Text\Parametric\StringSequenceTemplate.cs" />
+    <Compile Include="Text\Structured\StructuredTextComposerUtils.cs" />
+    <Compile Include="Text\Tabular\TableComposer.cs" />
+    <Compile Include="Text\Tabular\TableComposerColumn.cs" />
+    <Compile Include="Text\Tabular\TableComposerRow.cs" />
+    <Compile Include="Text\Columns\TextColumn.cs" />
+    <Compile Include="Text\Columns\TextColumnSpecs.cs" />
+    <Compile Include="Text\Columns\TextRowSpecs.cs" />
+    <Compile Include="Text\Columns\TextColumnsComposer.cs" />
+    <Compile Include="Text\TextUtils.cs" />
+    <Compile Include="Text\Mapped\MappingComposer.cs" />
+    <Compile Include="Text\Mapped\MappingComposerSegment.cs" />
+    <Compile Include="Text\Tabular\ArrayPrinter.cs" />
+    <Compile Include="Text\Parametric\UniqueNameFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Code\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\UI\FormFilesComposer.resx">
+      <DependentUpon>FormFilesComposer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNotificationMessage.resx">
+      <DependentUpon>FormNotificationMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\FormSamples.resx">
+      <DependentUpon>FormSamples.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Text\Parametric\UI\FormEditTemplate.resx">
+      <DependentUpon>FormEditTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Text\Parametric\UI\FormImportTemplateFromText.resx">
+      <DependentUpon>FormImportTemplateFromText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Text\Parametric\UI\FormNewTemplate.resx">
+      <DependentUpon>FormNewTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Text\Parametric\UI\FormTemplateComposerEditor.resx">
+      <DependentUpon>FormTemplateComposerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logs\Progress\UI\FormProgress.resx">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="TextExpressions\TextExpressionAst_ClassDiagram.cd" />
+    <None Include="TextExpressions\TextExpressionVisitor_ClassDiagram.cd" />
+    <None Include="Text\Concatenate-Methods.cd" />
+    <None Include="Files\FilesComposer_ClassDiagram.cd" />
+    <None Include="Text\Linear\LinearComposer.cd" />
+    <None Include="Text\Mapped\MappingComposer.cd" />
+    <None Include="Text\Parametric\ParametricComposer.cd" />
+    <None Include="Logs\Progress\ProgressComposer_ClassDiagram.cd" />
+    <None Include="Text\Region\RegionComposer_ClassDiagram.cd" />
+    <None Include="Text\Structured\Structured-Composers.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj">
+      <Project>{52834d87-7593-4e6e-a9b0-dbaede8ce6da}</Project>
+      <Name>DataStructuresLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

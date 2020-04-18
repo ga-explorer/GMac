@@ -1,4 +1,5 @@
 ﻿using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Frames;
@@ -7,19 +8,21 @@ namespace GMac.GMacMath.Validators
 {
     public sealed class GaBilinearProductsValidator : GMacMathValidator
     {
-        private readonly GaBilinearProductImplementation[] _methods = {
-                GaBilinearProductImplementation.LookupArray,
-                GaBilinearProductImplementation.LookupHash,
-                GaBilinearProductImplementation.LookupTree,
-                GaBilinearProductImplementation.LookupCoefSums
-            };
+        private readonly GaBilinearProductImplementation[] _methods = 
+        {
+            GaBilinearProductImplementation.LookupArray,
+            GaBilinearProductImplementation.LookupHash,
+            GaBilinearProductImplementation.LookupTree,
+            GaBilinearProductImplementation.LookupCoefSums
+        };
 
-        private readonly string[] _methodNames = {
-                "Lookup Array",
-                "Lookup Hash",
-                "Lookup Tree",
-                "Lookup CoefSums"
-            };
+        private readonly string[] _methodNames = 
+        {
+            "Lookup Array",
+            "Lookup Hash",
+            "Lookup Tree",
+            "Lookup CoefSums"
+        };
 
 
         public GaNumFrame NumericFrame { get; set; }
@@ -29,6 +32,9 @@ namespace GMac.GMacMath.Validators
 
         private void ValidateSymbolicFrame()
         {
+            if (SymbolicFrame == null)
+                return;
+
             ReportComposer.AppendHeader("Symbolic Bilinear Products Validations");
 
             //Initialize multivectors with random coefficients
@@ -77,11 +83,21 @@ namespace GMac.GMacMath.Validators
 
         private void ValidateNumericFrame()
         {
+            if (NumericFrame == null)
+                return;
+
             ReportComposer.AppendHeader("Numeric Bilinear Products Validations");
 
             //Initialize multivectors with random coefficients
-            var mv1 = RandomGenerator.GetNumMultivectorFull(SymbolicFrame.GaSpaceDimension);
-            var mv2 = RandomGenerator.GetNumMultivectorFull(SymbolicFrame.GaSpaceDimension);
+            var mv1 = 
+                RandomGenerator
+                    .GetNumFullMultivectorTerms(NumericFrame.VSpaceDimension)
+                    .CreateDgrMultivector(NumericFrame.VSpaceDimension);
+
+            var mv2 = 
+                RandomGenerator
+                    .GetNumFullMultivectorTerms(NumericFrame.VSpaceDimension)
+                    .CreateDgrMultivector(NumericFrame.VSpaceDimension);
 
             var mvComputedGp = NumericFrame.ComputedGp[mv1, mv2];
             var mvComputedOp = NumericFrame.ComputedOp[mv1, mv2];
@@ -125,14 +141,24 @@ namespace GMac.GMacMath.Validators
 
         private void ValidateBothFrame()
         {
+            if (NumericFrame == null || SymbolicFrame == null)
+                return;
+
             ReportComposer.AppendHeader("Numeric Bilinear Products Validations using Symbolic Computations");
 
             SymbolicFrame.SetProductsImplementation(GaBilinearProductImplementation.Computed);
             NumericFrame.SetProductsImplementation(GaBilinearProductImplementation.Computed);
 
             //Initialize multivectors with random coefficients
-            var numMv1 = RandomGenerator.GetNumMultivectorFull(SymbolicFrame.GaSpaceDimension);
-            var numMv2 = RandomGenerator.GetNumMultivectorFull(SymbolicFrame.GaSpaceDimension);
+            var numMv1 = 
+                RandomGenerator
+                    .GetNumFullMultivectorTerms(SymbolicFrame.VSpaceDimension)
+                    .CreateSarMultivector(SymbolicFrame.VSpaceDimension);
+
+            var numMv2 = 
+                RandomGenerator
+                    .GetNumFullMultivectorTerms(SymbolicFrame.VSpaceDimension)
+                    .CreateSarMultivector(SymbolicFrame.VSpaceDimension);
 
             var symMv1 = numMv1.ToSymbolic();
             var symMv2 = numMv2.ToSymbolic();

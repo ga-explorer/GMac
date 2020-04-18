@@ -56,6 +56,12 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony.Interpreter, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.Interpreter.1.1.0\lib\net40\Irony.Interpreter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -70,9 +76,13 @@
     <Compile Include="Frames\E2D.cs" />
     <Compile Include="Frames\E3D.cs" />
     <Compile Include="Frames\Hga4D.cs" />
+    <Compile Include="GAPoT\ParsingSample1.cs" />
+    <Compile Include="GAPoT\ParsingSample2.cs" />
+    <Compile Include="GAPoT\Sample2.cs" />
+    <Compile Include="GAPoT\Sample3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Samples\Sample1.cs" />
+    <Compile Include="GAPoT\Sample1.cs" />
     <Compile Include="Structures\LineSegment3D.cs" />
     <Compile Include="Structures\Point3D.cs" />
     <Compile Include="Structures\Sphere3D.cs" />
@@ -81,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CodeComposerLib\CodeComposerLib\CodeComposerLib.csproj">
@@ -100,5 +111,6 @@
       <Name>GeometricAlgebraNumericsLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

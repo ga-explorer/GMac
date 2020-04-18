@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Frames;
@@ -11,7 +12,7 @@ namespace GeometricAlgebraNumericsLib
         /// <summary>
         /// This is a lookup table for C(n, k) where n is any number between 0 and 25
         /// </summary>
-        internal static List<int[]> ChooseList;
+        internal static int[][] ChooseList;
 
         /// <summary>
         /// ID to grade lookup table
@@ -36,7 +37,7 @@ namespace GeometricAlgebraNumericsLib
         /// <summary>
         /// ID to 'is clifford conjugate sign = -1' lookup table
         /// </summary>
-        internal static BitArray IsNegativeClifConjTable;
+        internal static BitArray IsNegativeCliffConjTable;
 
         /// <summary>
         /// (grade, index) to ID lookup table
@@ -49,9 +50,14 @@ namespace GeometricAlgebraNumericsLib
         internal static BitArray[] IsNegativeEgpLookupTables;
 
         /// <summary>
-        /// Is (basis vector by basis blade) EGP Negative lookup tables
+        /// Is (basis blade by basis blade) EGP Negative lookup tables
         /// </summary>
         internal static BitArray[] IsNegativeVectorEgpLookupTables;
+
+        /// <summary>
+        /// An index lookup table used to compute the outer product of a vector with a k-vector
+        /// </summary>
+        internal static int[][][][] VectorKVectorOpIndexLookupTables;
 
 
         static GaLookupTables()
@@ -63,29 +69,14 @@ namespace GeometricAlgebraNumericsLib
             ComputeIsNegativeEgpLookupTables();
 
             ComputeGaLookupTables();
+
+            ComputeVectorKVectorOpIndexLookupTables();
         }
 
 
-        /// <summary>
-        /// Get the combination C(n, r) where n is between 0 and 16 and r is between 0 and n using a lookup table
-        /// </summary>
-        /// <param name="n"></param>
-        /// <param name="r"></param>
-        /// <returns></returns>
-        public static int Choose(int n, int r)
+        private static void FillChooseList()
         {
-            if (ReferenceEquals(ChooseList, null))
-                ChooseList = FillChooseList();
-
-            return ChooseList[n][r];
-        }
-
-        /// <summary>
-        /// Compute and fill the combinations lookup table
-        /// </summary>
-        private static List<int[]> FillChooseList()
-        {
-            ChooseList = new List<int[]>
+            ChooseList = new[]
             {
                 new[] {1},
                 new[] {1, 1},
@@ -114,32 +105,30 @@ namespace GeometricAlgebraNumericsLib
                 new[] {1, 24, 276, 2024, 10626, 42504, 134596, 346104, 735471, 1307504, 1961256, 2496144, 2704156, 2496144, 1961256, 1307504, 735471, 346104, 134596, 42504, 10626, 2024, 276, 24, 1},
                 new[] {1, 25, 300, 2300, 12650, 53130, 177100, 480700, 1081575, 2042975, 3268760, 4457400, 5200300, 5200300, 4457400, 3268760, 2042975, 1081575, 480700, 177100, 53130, 12650, 2300, 300, 25, 1}
             };
-
-            return ChooseList;
         }
 
         private static void ComputeIsNegativeEgpLookupTables()
         {
             const int c = 1;
-            const int maxDim = 12;
+            const int maxDim = 13;
 
             var maxVSpaceDim = 
                 GaNumFrameUtils.MaxVSpaceDimension < maxDim
                     ? GaNumFrameUtils.MaxVSpaceDimension 
                     : maxDim;
 
-            var gaSpaceDim = (c << maxVSpaceDim);
+            var maxGaSpaceDim = (c << maxVSpaceDim);
             
-            IsNegativeEgpLookupTables = new BitArray[gaSpaceDim];
+            IsNegativeEgpLookupTables = new BitArray[maxGaSpaceDim];
 
-            for (var id1 = 0; id1 < gaSpaceDim; id1++)
+            for (var id1 = 0; id1 < maxGaSpaceDim; id1++)
             {
-                var bitArray = new BitArray(gaSpaceDim);
+                var bitArray = new BitArray(maxGaSpaceDim);
 
                 var n = id1;
                 Parallel.For(
                     0, 
-                    gaSpaceDim, 
+                    maxGaSpaceDim, 
                     id2 => { bitArray[id2] = GaNumFrameUtils.ComputeIsNegativeEGp(n, id2); }
                 );
 
@@ -176,9 +165,6 @@ namespace GeometricAlgebraNumericsLib
             }
         }
 
-        /// <summary>
-        /// Compute and fill all GA lookup tables
-        /// </summary>
         private static void ComputeGaLookupTables()
         {
             const int c = 1;
@@ -192,7 +178,7 @@ namespace GeometricAlgebraNumericsLib
             IdToIndexTable = new int[gaSpaceDim];
             IsNegativeReverseTable = new BitArray(gaSpaceDim);
             IsNegativeGradeInvTable = new BitArray(gaSpaceDim);
-            IsNegativeClifConjTable = new BitArray(gaSpaceDim);
+            IsNegativeCliffConjTable = new BitArray(gaSpaceDim);
             GradeIndexToIdTable = new List<int[]>(GaNumFrameUtils.MaxVSpaceDimension);
             
             for (var id = 0; id <= maxId; id++)
@@ -210,8 +196,8 @@ namespace GeometricAlgebraNumericsLib
                     IsNegativeReverseTable.Set(id, true);
 
                 //Calculate Clifford conjugate sign
-                if (grade.GradeHasNegativeClifConj())
-                    IsNegativeClifConjTable.Set(id, true);
+                if (grade.GradeHasNegativeCliffConj())
+                    IsNegativeCliffConjTable.Set(id, true);
 
                 //Calculate index of basis blade ID
                 IdToIndexTable[id] = gradeCount[grade];
@@ -234,6 +220,71 @@ namespace GeometricAlgebraNumericsLib
 
                 GradeIndexToIdTable[grade][index] = id;
             }
+        }
+
+        private static void ComputeVectorKVectorOpIndexLookupTables()
+        {
+            const int maxDim = 15;
+            const int minVSpaceDim = 12;
+
+            var maxVSpaceDim =
+                GaNumFrameUtils.MaxVSpaceDimension < maxDim
+                    ? GaNumFrameUtils.MaxVSpaceDimension
+                    : maxDim;
+
+            //var maxGaSpaceDim = (1 << maxVSpaceDim);
+
+            VectorKVectorOpIndexLookupTables = new int[maxVSpaceDim - minVSpaceDim + 1][][][];
+
+            for (var vSpaceDim = minVSpaceDim; vSpaceDim <= maxVSpaceDim; vSpaceDim++)
+            {
+                var vectorKVectorOpIndexLookupTable = new int[vSpaceDim - 1][][];
+
+                for (var grade = 1; grade < vSpaceDim; grade++)
+                {
+                    var lookupTable = new int[Choose(vSpaceDim, grade + 1)][];
+
+                    var resultIdsList =
+                        GaNumFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
+
+                    var lookupTableIndex = 0;
+                    foreach (var id in resultIdsList)
+                    {
+                        var indexList1 = id.PatternToPositions().ToArray();
+                        var lookupTableItems = new List<int>(2 * indexList1.Length);
+
+                        foreach (var index1 in indexList1)
+                        {
+                            var id1 = 1 << index1;
+                            var id2 = id ^ id1;
+                            var index2 = id2.BasisBladeIndex();
+
+                            lookupTableItems.Add(index1);
+                            lookupTableItems.Add(index2);
+                        }
+
+                        lookupTable[lookupTableIndex] = lookupTableItems.ToArray();
+
+                        lookupTableIndex++;
+                    }
+
+                    vectorKVectorOpIndexLookupTable[grade - 1] = lookupTable;
+                }
+
+                VectorKVectorOpIndexLookupTables[vSpaceDim - minVSpaceDim] = vectorKVectorOpIndexLookupTable;
+            }
+        }
+
+
+        /// <summary>
+        /// Get the combination C(n, r) where n is between 0 and 16 and r is between 0 and n using a lookup table
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static int Choose(int n, int r)
+        {
+            return ChooseList[n][r];
         }
     }
 }

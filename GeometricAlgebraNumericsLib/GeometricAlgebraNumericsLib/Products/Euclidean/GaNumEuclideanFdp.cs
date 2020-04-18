@@ -1,23 +1,32 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 
 namespace GeometricAlgebraNumericsLib.Products.Euclidean
 {
     public sealed class GaNumEuclideanFdp : GaNumBilinearProductEuclidean
     {
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                return
-                    GaNumMultivector
-                        .CreateZero(TargetGaSpaceDimension)
-                        .AddFactors(mv1.GetBiTermsForEFdp(mv2));
+                return mv1.GetGbtEFdpTerms(mv2).SumAsSarMultivector(TargetVSpaceDimension);
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                return mv1.GetGbtEFdpTerms(mv2).SumAsDgrMultivector(TargetVSpaceDimension);
             }
         }
 
@@ -28,9 +37,9 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
         }
 
 
-        public override GaNumMultivectorTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(int id1, int id2)
         {
-            return GaNumMultivectorTerm.CreateTerm(
+            return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
                 GaNumFrameUtils.IsNonZeroEFdp(id1, id2)

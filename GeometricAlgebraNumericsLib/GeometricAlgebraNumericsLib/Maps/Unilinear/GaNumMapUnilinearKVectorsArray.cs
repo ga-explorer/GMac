@@ -4,7 +4,8 @@ using System.Diagnostics;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
 using MathNet.Numerics.LinearAlgebra.Double;
 
@@ -32,8 +33,11 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             var domainGaSpaceDim =
                 linearVectorMapsMatrix.ColumnCount.ToGaSpaceDimension();
 
+            var targetVSpaceDim =
+                linearVectorMapsMatrix.RowCount;
+
             var targetGaSpaceDim =
-                linearVectorMapsMatrix.RowCount.ToGaSpaceDimension();
+                targetVSpaceDim.ToGaSpaceDimension();
 
             var omMap = Create(
                 linearVectorMapsMatrix.ColumnCount,
@@ -43,18 +47,20 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             //Add unit scalar as the image of the 0-basis blade
             omMap.SetBasisBladeMap(
                 0,
-                GaNumKVector.CreateScalar(targetGaSpaceDim, 1)
+                GaNumDarKVector.CreateScalar(targetGaSpaceDim, 1)
             );
 
             for (var id = 1; id <= domainGaSpaceDim - 1; id++)
             {
-                GaNumKVector basisBladeImage;
+                GaNumDarKVector basisBladeImage;
 
                 if (id.IsValidBasisVectorId())
                 {
                     //Add images of vector basis blades
                     basisBladeImage =
-                        GaNumKVector.CreateVectorFromColumn(
+                        GaNumDarKVector.CreateFromColumn(
+                            targetVSpaceDim,
+                            1,
                             linearVectorMapsMatrix,
                             id.BasisBladeIndex()
                         );
@@ -78,7 +84,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        private readonly GaNumKVector[] _basisBladeMaps;
+        private readonly GaNumDarKVector[] _basisBladeMaps;
 
 
         public override int DomainVSpaceDimension { get; }
@@ -87,28 +93,51 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override IGaNumMultivector this[int id1]
             => _basisBladeMaps[id1]
-               ?? GaNumKVector.CreateScalar(TargetGaSpaceDimension);
+               ?? GaNumDarKVector.CreateScalar(TargetVSpaceDimension, 0);
 
-        public override GaNumMultivector this[GaNumMultivector mv]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv]
         {
             get
             {
                 if (mv.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var resultMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var resultMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
-                foreach (var term1 in mv.NonZeroTerms)
+                foreach (var term1 in mv.GetNonZeroTerms())
                 {
-                    var basisBladeMv = _basisBladeMaps[term1.Key];
+                    var basisBladeMv = _basisBladeMaps[term1.BasisBladeId];
 
                     if (ReferenceEquals(basisBladeMv, null))
                         continue;
 
-                    resultMv.AddFactors(term1.Value, basisBladeMv);
+                    resultMv.AddTerms(term1.ScalarValue, basisBladeMv);
                 }
 
-                return resultMv;
+                return resultMv.GetSarMultivector();
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv]
+        {
+            get
+            {
+                if (mv.GaSpaceDimension != DomainGaSpaceDimension)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                var resultMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
+
+                foreach (var term1 in mv.GetNonZeroTerms())
+                {
+                    var basisBladeMv = _basisBladeMaps[term1.BasisBladeId];
+
+                    if (ReferenceEquals(basisBladeMv, null))
+                        continue;
+
+                    resultMv.AddTerms(term1.ScalarValue, basisBladeMv);
+                }
+
+                return resultMv.GetDgrMultivector();
             }
         }
 
@@ -118,7 +147,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             DomainVSpaceDimension = targetVSpaceDim;
             TargetVSpaceDimension = targetVSpaceDim;
 
-            _basisBladeMaps = new GaNumKVector[DomainGaSpaceDimension];
+            _basisBladeMaps = new GaNumDarKVector[DomainGaSpaceDimension];
         }
 
         private GaNumMapUnilinearKVectorsArray(int domainVSpaceDim, int targetVSpaceDim)
@@ -126,7 +155,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             DomainVSpaceDimension = domainVSpaceDim;
             TargetVSpaceDimension = targetVSpaceDim;
 
-            _basisBladeMaps = new GaNumKVector[DomainGaSpaceDimension];
+            _basisBladeMaps = new GaNumDarKVector[DomainGaSpaceDimension];
         }
 
 
@@ -138,12 +167,12 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumKVector GetBasisBladeMap(int basisBladeId)
+        public GaNumDarKVector GetBasisBladeMap(int basisBladeId)
         {
             return _basisBladeMaps[basisBladeId];
         }
 
-        public GaNumMapUnilinearKVectorsArray SetBasisBladeMap(int basisBladeId, GaNumKVector targetMv)
+        public GaNumMapUnilinearKVectorsArray SetBasisBladeMap(int basisBladeId, GaNumDarKVector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 

@@ -1,10 +1,10 @@
 ﻿using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
     public interface IGaNumBilinearOrthogonalProduct : IGaNumMapBilinear
     {
-        GaNumMultivectorTerm MapToTerm(int id1, int id2);
+        GaNumTerm MapToTerm(int id1, int id2);
     }
 }

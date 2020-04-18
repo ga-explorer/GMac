@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
@@ -24,10 +24,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             => _vSpaceDimension;
 
         public override IGaNumMultivector this[int id1] 
-            => GaNumMultivector.CreateBasisBlade(TargetGaSpaceDimension, id1);
+            => GaNumSarMultivector.CreateBasisBlade(TargetVSpaceDimension, id1);
 
-        public override GaNumMultivector this[GaNumMultivector mv]
-            => GaNumMultivector.CreateCopy(mv);
+        public override GaNumSarMultivector this[GaNumSarMultivector mv]
+            => mv.GetSarMultivector();
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv]
+            => mv.GetDgrMultivector();
 
 
         private GaNumMapUnilinearIdentity(int vSpaceDim)
@@ -64,7 +67,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return Enumerable.Range(0, TargetGaSpaceDimension)
                 .Select(id => new Tuple<int, IGaNumMultivector>(
                     id,
-                    GaNumMultivector.CreateBasisBlade(TargetGaSpaceDimension, id)
+                    GaNumSarMultivector.CreateBasisBlade(TargetVSpaceDimension, id)
                 ));
         }
     }

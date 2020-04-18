@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Supercluster.KDTree, Version=1.0.4.0, Culture=neutral, PublicKeyToken=4423da5f8ba350cf, processorArchitecture=MSIL">
-      <HintPath>..\..\GMac\packages\Supercluster.KDTree.1.0.4\lib\Supercluster.KDTree.dll</HintPath>
+      <HintPath>..\..\GeometricAlgebraNumericsLib\packages\Supercluster.KDTree.1.0.4\lib\Supercluster.KDTree.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,11 +67,17 @@
     <Compile Include="Basic\Quad.cs" />
     <Compile Include="Basic\Triplet.cs" />
     <Compile Include="Collections\CollectionsUtils.cs" />
+    <Compile Include="Collections\EmptyReadOnlyDictionary.cs" />
+    <Compile Include="Collections\EmptyReadOnlyList.cs" />
     <Compile Include="Collections\IReadOnlyCollection2D.cs" />
     <Compile Include="Collections\IReadOnlyCollection3D.cs" />
     <Compile Include="Collections\IReadOnlyCollection4D.cs" />
     <Compile Include="Collections\IReadOnlyList3D.cs" />
     <Compile Include="Collections\IReadOnlyList4D.cs" />
+    <Compile Include="Collections\ReadOnlyListAsDictionary.cs" />
+    <Compile Include="Collections\SingleItemReadOnlyList.cs" />
+    <Compile Include="Collections\SparseReadOnlyList.cs" />
+    <Compile Include="Extensions\SequenceExtensions.cs" />
     <Compile Include="Permutations\ComputedIndexMap1DTo2D.cs" />
     <Compile Include="Permutations\IIndexMap1DTo2D.cs" />
     <Compile Include="Permutations\IIndexMap2DTo1D.cs" />
@@ -162,6 +168,7 @@
     <Compile Include="SparseTable\SparseTable2D.cs" />
     <Compile Include="SparseTable\SparseTable3D.cs" />
     <Compile Include="SparseTable\SparseTableUtils.cs" />
+    <Compile Include="Stacks\FixedStack.cs" />
     <Compile Include="Statistics\BooleanOutcomesEventSummary.cs" />
     <Compile Include="Statistics\EventSummaryCollection.cs" />
     <Compile Include="Statistics\EventOutcomeSummary.cs" />
@@ -174,7 +181,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

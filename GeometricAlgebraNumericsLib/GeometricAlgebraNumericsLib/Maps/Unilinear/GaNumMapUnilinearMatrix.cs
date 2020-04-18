@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
@@ -19,9 +19,12 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         public override int DomainVSpaceDimension { get; }
 
         public override IGaNumMultivector this[int id1]
-            => GaNumMultivector.CreateFromColumn(InternalMappingMatrix, id1);
+            => GaNumSarMultivector.CreateFromColumn(InternalMappingMatrix, id1);
 
-        public override GaNumMultivector this[GaNumMultivector mv1]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1]
+            => InternalMappingMatrix.MapMultivector(mv1);
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1]
             => InternalMappingMatrix.MapMultivector(mv1);
 
 

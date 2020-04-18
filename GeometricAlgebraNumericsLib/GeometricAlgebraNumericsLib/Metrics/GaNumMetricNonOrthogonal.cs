@@ -1,5 +1,5 @@
 ﻿using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Maps.Outermorphisms;
+using GeometricAlgebraNumericsLib.Outermorphisms;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Metrics

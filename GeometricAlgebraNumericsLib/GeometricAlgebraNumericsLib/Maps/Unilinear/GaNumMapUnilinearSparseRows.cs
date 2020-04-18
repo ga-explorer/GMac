@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 {
@@ -23,8 +24,8 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        private readonly Dictionary<int, GaNumMultivector> _rowMultivectors
-            = new Dictionary<int, GaNumMultivector>();
+        private readonly Dictionary<int, GaNumSarMultivector> _rowMultivectors
+            = new Dictionary<int, GaNumSarMultivector>();
 
 
         public override int TargetVSpaceDimension { get; }
@@ -35,24 +36,24 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         {
             get
             {
-                var resultMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var resultMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var pair in _rowMultivectors)
                     if (pair.Value.TryGetValue(id1, out var value))
                         resultMv.AddTerm(pair.Key, value);
 
-                return resultMv;
+                return resultMv.GetSarMultivector();
             }
         }
 
-        public override GaNumMultivector this[GaNumMultivector mv1]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var resultMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var resultMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var pair in _rowMultivectors)
                 {
@@ -62,7 +63,28 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                         resultMv.AddTerm(pair.Key, value);
                 }
 
-                return resultMv;
+                return resultMv.GetSarMultivector();
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                var resultMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
+
+                foreach (var pair in _rowMultivectors)
+                {
+                    var value = pair.Value.RowColumnProduct(mv1);
+
+                    if (!value.IsNearZero())
+                        resultMv.SetTerm(pair.Key, value);
+                }
+
+                return resultMv.GetDgrMultivector();
             }
         }
 
@@ -87,7 +109,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearSparseRows SetRow(int rowId, GaNumMultivector rowMv)
+        public GaNumMapUnilinearSparseRows SetRow(int rowId, GaNumSarMultivector rowMv)
         {
             if (rowMv.IsNullOrEmpty())
             {
@@ -108,26 +130,26 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearSparseRows SetColumn(int columnId, IGaNumMultivector columnMv)
-        {
-            if (columnMv.GaSpaceDimension != TargetGaSpaceDimension)
-                throw new GaNumericsException("Multivector size mismatch");
+        //public GaNumMapUnilinearSparseRows SetColumn(int columnId, IGaNumMultivector columnMv)
+        //{
+        //    if (columnMv.GaSpaceDimension != TargetGaSpaceDimension)
+        //        throw new GaNumericsException("Multivector size mismatch");
 
-            foreach (var columnTerm in columnMv.NonZeroTerms)
-            {
-                var rowId = columnTerm.Key;
+        //    foreach (var columnTerm in columnMv.NonZeroTerms)
+        //    {
+        //        var rowId = columnTerm.BasisBladeId;
 
-                if (!_rowMultivectors.TryGetValue(rowId, out var rowMv))
-                {
-                    rowMv = GaNumMultivector.CreateZero(DomainGaSpaceDimension);
-                    _rowMultivectors.Add(rowId, rowMv);
-                }
+        //        if (!_rowMultivectors.TryGetValue(rowId, out var rowMv))
+        //        {
+        //            rowMv = GaNumSarMultivector.CreateZero(DomainVSpaceDimension);
+        //            _rowMultivectors.Add(rowId, rowMv);
+        //        }
 
-                rowMv.SetTerm(columnId, columnTerm.Value);
-            }
+        //        rowMv.SetTerm(columnId, columnTerm.ScalarValue);
+        //    }
 
-            return this;
-        }
+        //    return this;
+        //}
 
         public GaNumMapUnilinearSparseRows RemoveRow(int id)
         {

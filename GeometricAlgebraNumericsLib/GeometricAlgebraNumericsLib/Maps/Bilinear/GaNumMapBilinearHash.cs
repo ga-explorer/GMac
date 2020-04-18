@@ -4,7 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Structures;
 using TextComposerLib.Text.Tabular;
@@ -52,7 +53,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             => _basisBladesMaps.Count;
 
         public int TargetMultivectorTermsCount
-            => _basisBladesMaps.Sum(p => p.Item3.TermsCount);
+            => _basisBladesMaps.Sum(p => p.Item3.StoredTermsCount);
 
         public override IGaNumMultivector this[int id1, int id2]
         {
@@ -61,29 +62,57 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 _basisBladesMaps.TryGetValue(id1, id2, out var resultMv);
 
                 return resultMv
-                       ?? GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                       ?? GaNumSarMultivector.CreateZero(TargetVSpaceDimension);
             }
         }
 
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var tempMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var tempMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
-                foreach (var biTerm in mv1.GetBiTermsForEGp(mv2))
+                foreach (var term1 in mv1.GetNonZeroTerms())
                 {
-                    _basisBladesMaps.TryGetValue(biTerm.Id1, biTerm.Id2, out var basisBladeMv);
-                    if (ReferenceEquals(basisBladeMv, null))
-                        continue;
+                    foreach (var term2 in mv2.GetNonZeroTerms())
+                    {
+                        _basisBladesMaps.TryGetValue(term1.BasisBladeId, term2.BasisBladeId, out var basisBladeMv);
+                        if (ReferenceEquals(basisBladeMv, null))
+                            continue;
 
-                    tempMv.AddFactors(biTerm.ValuesProduct, basisBladeMv);
+                        tempMv.AddTerms(term1.ScalarValue * term2.ScalarValue, basisBladeMv);
+                    }
                 }
 
-                return tempMv;
+                return tempMv.GetSarMultivector();
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                var tempMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
+
+                foreach (var term1 in mv1.GetNonZeroTerms())
+                {
+                    foreach (var term2 in mv2.GetNonZeroTerms())
+                    {
+                        _basisBladesMaps.TryGetValue(term1.BasisBladeId, term2.BasisBladeId, out var basisBladeMv);
+                        if (ReferenceEquals(basisBladeMv, null))
+                            continue;
+
+                        tempMv.AddTerms(term1.ScalarValue * term2.ScalarValue, basisBladeMv);
+                    }
+                }
+
+                return tempMv.GetDgrMultivector();
             }
         }
 

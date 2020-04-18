@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Structures;
+using GeometricAlgebraNumericsLib.Structures.BinaryTrees.NodeInfo;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 {
@@ -63,23 +65,23 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 BasisBladesMapTree.TryGetLeafValue((ulong)id1, (ulong)id2, out var mv);
 
                 return mv
-                       ?? GaNumMultivectorTerm.CreateZero(TargetGaSpaceDimension);
+                       ?? GaNumTerm.CreateZero(TargetGaSpaceDimension);
             }
         }
 
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var tempMv = GaNumMultivector.CreateZero(TargetGaSpaceDimension);
+                var tempMv = new GaNumSarMultivectorFactory(TargetVSpaceDimension);
 
                 var mapNodeStack = BasisBladesMapTree.CreateNodesStack();
 
-                var mvNodeStack1 = mv1.TermsTree.CreateNodesStack();
-                var mvNodeStack2 = mv2.TermsTree.CreateNodesStack();
+                var mvNodeStack1 = mv1.BtrRootNode.CreateNodesStack();
+                var mvNodeStack2 = mv2.BtrRootNode.CreateNodesStack();
 
                 while (mapNodeStack.Count > 0)
                 {
@@ -90,7 +92,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 
                     if (mapNode.IsLeafNode)
                     {
-                        tempMv.AddFactors(
+                        tempMv.AddTerms(
                             mvNode1.Value * mvNode2.Value,
                             mapNode.Value
                         );
@@ -137,7 +139,79 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                     }
                 }
 
-                return tempMv;
+                return tempMv.GetSarMultivector();
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                var tempMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
+
+                var mapNodeStack = BasisBladesMapTree.CreateNodesStack();
+
+                var mvNodeInfoStack = GaBinaryTreeGradedNodeInfo2<double>.CreateStack(
+                    DomainVSpaceDimension,  
+                    (ulong)mv1.GetStoredGradesBitPattern(),
+                    (ulong)mv2.GetStoredGradesBitPattern()
+                );
+
+                while (mapNodeStack.Count > 0)
+                {
+                    var mapNode = mapNodeStack.Pop();
+                    var mvNodeInfo = mvNodeInfoStack.Pop();
+
+                    if (mapNode.IsLeafNode)
+                    {
+                        var scalar = 
+                            mv1[(int)mvNodeInfo.Id1] * 
+                            mv2[(int)mvNodeInfo.Id2];
+
+                        tempMv.AddTerms(scalar, mapNode.Value);
+
+                        continue;
+                    }
+
+                    if (mvNodeInfo.HasChildNode10)
+                    {
+                        if (mvNodeInfo.HasChildNode20 && mapNode.HasChildNode00)
+                        {
+                            mapNodeStack.Push(mapNode.ChildNode00);
+
+                            mvNodeInfoStack.Push(mvNodeInfo.GetChildNodeInfo00());
+                        }
+
+                        if (mvNodeInfo.HasChildNode21 && mapNode.HasChildNode10)
+                        {
+                            mapNodeStack.Push(mapNode.ChildNode10);
+
+                            mvNodeInfoStack.Push(mvNodeInfo.GetChildNodeInfo01());
+                        }
+                    }
+
+                    if (mvNodeInfo.HasChildNode11)
+                    {
+                        if (mvNodeInfo.HasChildNode20 && mapNode.HasChildNode01)
+                        {
+                            mapNodeStack.Push(mapNode.ChildNode01);
+
+                            mvNodeInfoStack.Push(mvNodeInfo.GetChildNodeInfo10()); 
+                        }
+
+                        if (mvNodeInfo.HasChildNode21 && mapNode.HasChildNode11)
+                        {
+                            mapNodeStack.Push(mapNode.ChildNode11);
+
+                            mvNodeInfoStack.Push(mvNodeInfo.GetChildNodeInfo11());
+                        }
+                    }
+                }
+
+                return tempMv.GetDgrMultivector();
             }
         }
 

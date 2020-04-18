@@ -2,7 +2,9 @@
 
 namespace DataStructuresLib.Dictionary
 {
-    public class ADictionary<TKey, TValue> : Dictionary<TKey, TValue>, IADictionary<TKey, TValue>
+    public class ADictionary<TKey, TValue> : 
+        Dictionary<TKey, TValue>, 
+        IADictionary<TKey, TValue>
     {
         public void AddOrSetValue(TKey key, TValue value)
         {

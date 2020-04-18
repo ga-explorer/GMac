@@ -1,23 +1,33 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
-    public sealed class GaNumOp : GaNumBilinearProductEuclidean
+    public sealed class GaNumOp : 
+        GaNumBilinearProductEuclidean
     {
-        public override GaNumMultivector this[GaNumMultivector mv1, GaNumMultivector mv2]
+        public override GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2]
         {
             get
             {
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                return
-                    GaNumMultivector
-                        .CreateZero(TargetGaSpaceDimension)
-                        .AddFactors(mv1.GetBiTermsForOp(mv2));
+                return mv1.GetGbtOpTerms(mv2).SumAsSarMultivector(TargetVSpaceDimension);
+            }
+        }
+
+        public override GaNumDgrMultivector this[GaNumDgrMultivector mv1, GaNumDgrMultivector mv2]
+        {
+            get
+            {
+                if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
+                    throw new GaNumericsException("Multivector size mismatch");
+
+                return mv1.GetGbtOpTerms(mv2).SumAsDgrMultivector(TargetVSpaceDimension);
             }
         }
 
@@ -28,9 +38,9 @@ namespace GeometricAlgebraNumericsLib.Products
         }
 
 
-        public override GaNumMultivectorTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(int id1, int id2)
         {
-            return GaNumMultivectorTerm.CreateTerm(
+            return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
                 GaNumFrameUtils.IsNonZeroOp(id1, id2)

@@ -1,6 +1,6 @@
 ﻿using GeometricAlgebraNumericsLib;
 using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Frames;
@@ -26,8 +26,9 @@ namespace GMacBenchmarks2.Samples.Computations.Numeric
             var numFrame = GaNumFrame.CreateConformal(5);
             var symFrame = GaSymFrame.CreateConformal(5);
 
-            var numMv1 = randGen.GetNumMultivectorFull(numFrame.GaSpaceDimension);
-            var numMv2 = randGen.GetNumMultivectorFull(numFrame.GaSpaceDimension);
+            var numMv1 = randGen.GetNumFullMultivectorTerms(numFrame.VSpaceDimension).CreateSarMultivector(numFrame.VSpaceDimension);
+            var numMv2 = randGen.GetNumFullMultivectorTerms(numFrame.VSpaceDimension).CreateSarMultivector(numFrame.VSpaceDimension);
+
             var symMv1 = numMv1.ToSymbolic();
             var symMv2 = numMv2.ToSymbolic();
 
@@ -44,74 +45,74 @@ namespace GMacBenchmarks2.Samples.Computations.Numeric
 
 
             numFrame.SetProductsImplementation(GaBilinearProductImplementation.Computed);
-            GaNumMultivector.ResetAddFactorsCallCount();
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             var numMvGp = numFrame.Gp[numMv1, numMv2];
-            var callsCount = GaNumMultivector.AddFactorsCallCount;
+            //var callsCount = GaNumSarMultivector.AddFactorsCallCount;
             var diff = symMvGp.ToNumeric() - numMvGp;
-            diff.Simplify();
-            GaNumMultivector.ResetAddFactorsCallCount();
+
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             textComposer
                 .AppendLineAtNewLine("Difference, Computed Tree: ")
-                .AppendLine(callsCount)
+                //.AppendLine(callsCount)
                 .AppendLine(diff);
 
 
             numFrame.SetProductsImplementation(GaBilinearProductImplementation.LookupArray);
-            GaNumMultivector.ResetAddFactorsCallCount();
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             numMvGp = numFrame.Gp[numMv1, numMv2];
-            callsCount = GaNumMultivector.AddFactorsCallCount;
+            //callsCount = GaNumSarMultivector.AddFactorsCallCount;
             //var factorsCount = ((GaNumMapBilinearArray) numFrame.Gp).FactorsCount;
             diff = symMvGp.ToNumeric() - numMvGp;
-            diff.Simplify();
-            GaNumMultivector.ResetAddFactorsCallCount();
+
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             textComposer
                 .AppendLineAtNewLine("Difference, Lookup Array: ")
-                .AppendLine(callsCount)
+                //.AppendLine(callsCount)
                 //.AppendLine(factorsCount)
                 .AppendLine(diff);
 
 
             numFrame.SetProductsImplementation(GaBilinearProductImplementation.LookupHash);
-            GaNumMultivector.ResetAddFactorsCallCount();
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             numMvGp = numFrame.Gp[numMv1, numMv2];
-            callsCount = GaNumMultivector.AddFactorsCallCount;
+            //callsCount = GaNumSarMultivector.AddFactorsCallCount;
             //factorsCount = ((GaNumMapBilinearHash)numFrame.Gp).FactorsCount;
             diff = symMvGp.ToNumeric() - numMvGp;
-            diff.Simplify();
-            GaNumMultivector.ResetAddFactorsCallCount();
+
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             textComposer
                 .AppendLineAtNewLine("Difference, Lookup Hash: ")
-                .AppendLine(callsCount)
+                //.AppendLine(callsCount)
                 //.AppendLine(factorsCount)
                 .AppendLine(diff);
 
 
             numFrame.SetProductsImplementation(GaBilinearProductImplementation.LookupTree);
-            GaNumMultivector.ResetAddFactorsCallCount();
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             numMvGp = numFrame.Gp[numMv1, numMv2];
-            callsCount = GaNumMultivector.AddFactorsCallCount;
+            //callsCount = GaNumSarMultivector.AddFactorsCallCount;
             //factorsCount = ((GaNumMapBilinearTree)numFrame.Gp).FactorsCount;
             diff = symMvGp.ToNumeric() - numMvGp;
-            diff.Simplify();
-            GaNumMultivector.ResetAddFactorsCallCount();
+
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             textComposer
                 .AppendLineAtNewLine("Difference, Lookup Tree: ")
-                .AppendLine(callsCount)
+                //.AppendLine(callsCount)
                 //.AppendLine(factorsCount)
                 .AppendLine(diff);
 
 
             numFrame.SetProductsImplementation(GaBilinearProductImplementation.LookupCoefSums);
-            GaNumMultivector.ResetAddFactorsCallCount();
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             numMvGp = numFrame.Gp[numMv1, numMv2];
-            callsCount = GaNumMultivector.AddFactorsCallCount;
+            //callsCount = GaNumSarMultivector.AddFactorsCallCount;
             //factorsCount = ((GaNumMapBilinearCoefSums)numFrame.Gp).FactorsCount;
             diff = symMvGp.ToNumeric() - numMvGp;
-            diff.Simplify();
-            GaNumMultivector.ResetAddFactorsCallCount();
+
+            //GaNumSarMultivector.ResetAddFactorsCallCount();
             textComposer
                 .AppendLineAtNewLine("Difference, Lookup CoefSums: ")
-                .AppendLine(callsCount)
+                //.AppendLine(callsCount)
                 //.AppendLine(factorsCount)
                 .AppendLine(diff);
 

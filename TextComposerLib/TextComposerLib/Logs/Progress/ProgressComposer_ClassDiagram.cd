@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="TextComposerLib.Progress.ProgressComposer">
+    <Position X="0.5" Y="0.5" Width="7.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAABIAAAAAAgAAAEAEAAAgAAAACwAAACAA=</HashCode>
+      <FileName>Progress\ProgressComposer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextComposerLib.Progress.ProgressComposerHistory">
+    <Position X="0.5" Y="5" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAgAAAAIAEAAAAAAAIAAAAAAAAAAAAAABAIAA=</HashCode>
+      <FileName>Progress\ProgressComposerHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextComposerLib.Progress.ProgressEventArgs">
+    <Position X="8.5" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAAAAAACAABDIEAEAAAAAAxAIAAAAAAABIAAAAAABgA=</HashCode>
+      <FileName>Progress\ProgressComposerEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextComposerLib.Progress.ErrorEventArgs">
+    <Position X="8.75" Y="5.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Progress\ProgressComposerEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="TextComposerLib.Progress.ProgressEventArgsKind">
+    <Position X="5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAQAAAAAAABAAAAAIAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Progress\ProgressComposerEvents.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TextComposerLib.Progress.ProgressEventArgsResult">
+    <Position X="5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAIAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Progress\ProgressComposerEvents.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

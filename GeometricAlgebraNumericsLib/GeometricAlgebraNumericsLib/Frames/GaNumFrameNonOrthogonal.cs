@@ -1,10 +1,10 @@
 ﻿using System;
 using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
-using GeometricAlgebraNumericsLib.Maps.Outermorphisms;
 using GeometricAlgebraNumericsLib.Maps.Unilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Outermorphisms;
 using GeometricAlgebraNumericsLib.Products;
 using MathNet.Numerics.LinearAlgebra.Double;
 
@@ -106,14 +106,18 @@ namespace GeometricAlgebraNumericsLib.Frames
             return InnerProductMatrix[basisVectorIndex, basisVectorIndex];
         }
 
-        public override GaNumMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(int id)
         {
-            var basisBlade = GaNumMultivector.CreateBasisBlade(GaSpaceDimension, id);
+            var basisBlade = GaNumSarMultivector.CreateBasisBlade(VSpaceDimension, id);
 
             var sig = Gp[basisBlade, basisBlade];
 
             return id.BasisBladeIdHasNegativeReverse() ? -sig : sig;
         }
 
+        public override double Norm2(IGaNumMultivector mv)
+        {
+            return mv.Norm2(NonOrthogonalMetric);
+        }
     }
 }

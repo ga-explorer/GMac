@@ -135,10 +135,6 @@
       <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
       <Name>TextComposerLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.csproj">
-      <Project>{08858423-589f-4e23-9ea5-72ecedf3177b}</Project>
-      <Name>GeometricAlgebraSymbolicsLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GMac\GMac.csproj">
       <Project>{8943d17a-189f-4ce2-960a-430755f0435b}</Project>
       <Name>GMac</Name>

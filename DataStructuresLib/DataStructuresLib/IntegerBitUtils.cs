@@ -113,6 +113,24 @@ namespace DataStructuresLib
         }
 
         /// <summary>
+        /// Count the number of ones in the given bit pattern
+        /// </summary>
+        /// <param name="bitPattern"></param>
+        /// <returns></returns>
+        public static int CountOnes(this ulong bitPattern)
+        {
+            var onesCount = 0;
+
+            while (bitPattern > 0)
+            {
+                bitPattern &= bitPattern - 1; // clear the least significant bit set
+                onesCount++;
+            }
+
+            return onesCount;
+        }
+
+        /// <summary>
         /// Returns the bit position of the first one bit in the given pattern. If the pattern is zero this
         /// returns -1.
         /// </summary>

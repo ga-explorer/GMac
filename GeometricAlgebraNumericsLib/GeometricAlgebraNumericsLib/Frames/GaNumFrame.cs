@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Maps;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
-using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraNumericsLib.Outermorphisms;
 using GeometricAlgebraNumericsLib.Products;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -35,7 +37,7 @@ namespace GeometricAlgebraNumericsLib.Frames
         /// </summary>
         /// <param name="ipm"></param>
         /// <returns></returns>
-        private static GaNumFrameNonOrthogonal CreateNonOrthogonalFromIpm(Matrix ipm)
+        public static GaNumFrameNonOrthogonal CreateNonOrthogonalFromIpm(Matrix ipm)
         {
             var eigenSystem = ipm.Evd(Symmetricity.Symmetric);
             var eigenValues = eigenSystem.EigenValues.Select(v => v.Real < 0 ? -v.Magnitude : v.Magnitude);
@@ -49,8 +51,8 @@ namespace GeometricAlgebraNumericsLib.Frames
             //var baseToDerivedOm = GaNumOutermorphismHash.Create(eigenVectors);
             //var derivedToBaseOm = GaNumOutermorphismHash.Create(eigenVectors.Transpose());
 
-            var baseToDerivedOm = (eigenVectors as Matrix).ToComputedOutermorphism();
-            var derivedToBaseOm = (eigenVectors.Transpose() as Matrix).ToComputedOutermorphism();
+            var baseToDerivedOm = (eigenVectors as Matrix).ToOutermorphism();
+            var derivedToBaseOm = (eigenVectors.Transpose() as Matrix).ToOutermorphism();
 
             return new GaNumFrameNonOrthogonal(baseFrame, ipm, derivedToBaseOm, baseToDerivedOm);
         }
@@ -180,6 +182,27 @@ namespace GeometricAlgebraNumericsLib.Frames
             return CreateNonOrthogonalFromIpm(ipm);
         }
 
+        public static GaNumFrameOrthonormal CreateGaPoT(int vSpaceDim1, int vSpaceDim2)
+        {
+            var vSpaceDim = vSpaceDim1 + vSpaceDim2 + 1;
+
+            Debug.Assert(
+                vSpaceDim.IsValidVSpaceDimension() &&
+                vSpaceDim1.IsValidVSpaceDimension() &&
+                vSpaceDim2.IsValidVSpaceDimension()
+            );
+
+            var basisVectorsSignaturesArray = new bool[vSpaceDim];
+
+            for (var i = 0; i < vSpaceDim1; i++)
+                basisVectorsSignaturesArray[i] = true;
+
+            for (var i = vSpaceDim1; i < vSpaceDim - 1; i++)
+                basisVectorsSignaturesArray[i] = true;
+
+            return new GaNumFrameOrthonormal(basisVectorsSignaturesArray);
+        }
+
         public static GaNumFrame CreateOrthonormal(IEnumerable<char> frameSigSignList)
         {
             var psgCount = 0;
@@ -192,13 +215,13 @@ namespace GeometricAlgebraNumericsLib.Frames
                 switch (c)
                 {
                     case '+':
-                        sigList.Add(false);
+                        sigList.Add(true);
                         s.Append("+");
                         psgCount++;
                         break;
 
                     case '-':
-                        sigList.Add(true);
+                        sigList.Add(false);
                         s.Append("-");
                         nsgCount++;
                         break;
@@ -242,13 +265,13 @@ namespace GeometricAlgebraNumericsLib.Frames
                 {
                     case 1:
                         frameSig.Append('+');
-                        sigList.Add(false);
+                        sigList.Add(true);
                         psgCount++;
                         break;
 
                     case -1:
                         frameSig.Append('-');
-                        sigList.Add(true);
+                        sigList.Add(false);
                         nsgCount++;
                         break;
 
@@ -342,8 +365,8 @@ namespace GeometricAlgebraNumericsLib.Frames
 
             var ipm = cbm * baseIpm * cbmTrans;
 
-            var baseToDerivedCba = cbmInverseTrans.ToComputedOutermorphism();
-            var derivedToBaseCba = cbmTrans.ToComputedOutermorphism();
+            var baseToDerivedCba = cbmInverseTrans.ToOutermorphism();
+            var derivedToBaseCba = cbmTrans.ToOutermorphism();
 
             if ((ipm as Matrix).IsDiagonal())
             {
@@ -376,8 +399,8 @@ namespace GeometricAlgebraNumericsLib.Frames
             {
                 var cbmat = baseFrame.Ipm.Inverse();
 
-                var b2DOm = baseFrame.Ipm.ToComputedOutermorphism();
-                var d2BOm = (cbmat as Matrix).ToComputedOutermorphism();
+                var b2DOm = baseFrame.Ipm.ToOutermorphism();
+                var d2BOm = (cbmat as Matrix).ToOutermorphism();
 
                 var derivedFrame = CreateOrthogonal(cbmat.Diagonal());
                 return new GaNumMetricNonOrthogonal(baseFrame, derivedFrame, d2BOm, b2DOm);
@@ -390,18 +413,18 @@ namespace GeometricAlgebraNumericsLib.Frames
             for (var i = 0; i < baseFrame.VSpaceDimension; i++)
             {
                 var id = (1 << i) ^ baseFrame.MaxBasisBladeId;
-                var mv1 = GaNumMultivector.CreateTerm(baseFrame.GaSpaceDimension, id, 1.0d);
+                var mv1 = GaNumSarMultivector.CreateTerm(baseFrame.VSpaceDimension, id, 1.0d);
 
                 var mv = baseFrame.Lcp[mv1, mv2];
 
-                foreach (var term in mv.NonZeroTerms)
+                foreach (var term in mv.GetNonZeroTerms())
                 {
-                    var j = term.Key.BasisBladeIndex();
+                    var j = term.BasisBladeId.BasisBladeIndex();
 
                     if ((i & 1) == 1)
-                        cbmArray[i, j] = term.Value;
+                        cbmArray[i, j] = term.ScalarValue;
                     else
-                        cbmArray[i, j] = -term.Value;
+                        cbmArray[i, j] = -term.ScalarValue;
                 }
             }
 
@@ -659,138 +682,123 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         public abstract double BasisVectorSignature(int basisVectorIndex);
 
-        public abstract GaNumMultivector BasisBladeSignature(int id);
+        public abstract GaNumSarMultivector BasisBladeSignature(int id);
 
 
-        public GaNumMultivector CreateUnitPseudoScalar()
+        public GaNumSarMultivector CreateUnitPseudoScalar()
         {
-            return GaNumMultivector.CreateBasisBlade(GaSpaceDimension, MaxBasisBladeId);
+            return GaNumSarMultivector.CreateBasisBlade(VSpaceDimension, MaxBasisBladeId);
         }
 
-        public GaNumMultivector CreateInverseUnitPseudoScalar()
+        public GaNumSarMultivector CreateInverseUnitPseudoScalar()
         {
-            return GaNumMultivector.CreateTerm(GaSpaceDimension, MaxBasisBladeId, UnitPseudoScalarCoef);
+            return GaNumSarMultivector.CreateTerm(VSpaceDimension, MaxBasisBladeId, UnitPseudoScalarCoef);
         }
 
-        public double Magnitude(GaNumMultivector mv)
+        public double Magnitude(IGaNumMultivector mv)
         {
             return Math.Sqrt(
-                mv
-                .GetKVectorParts()
-                .Select(pair => Sp[pair.Value, pair.Value.Reverse()])
-                .Aggregate(0.0d, (current, mv1) => current + Math.Abs(mv1[0]))
-                );
+                mv.GetKVectorParts().Sum(kVector => Math.Abs(kVector.GetGbtNorm2(Metric)))
+            );
         }
 
-        public double Magnitude2(GaNumMultivector mv)
+        public double Magnitude2(GaNumSarMultivector mv)
         {
             return
-                mv
-                .GetKVectorParts()
-                .Select(pair => Sp[pair.Value, pair.Value.Reverse()])
-                .Aggregate(0.0d, (current, mv1) => current + Math.Abs(mv1[0]));
+                mv.GetKVectorParts().Sum(kVector => Math.Abs(kVector.GetGbtNorm2(Metric)));
         }
 
-        public double Norm2(GaNumMultivector mv)
-        {
-            return Sp[mv, mv.Reverse()][0];
-        }
+        public abstract double Norm2(IGaNumMultivector mv);
 
-        /// <summary>
-        /// Odd Versor Product of a list of basis blades given by their IDs
-        /// </summary>
-        /// <param name="oddVersor"></param>
-        /// <param name="basisBladeIDs"></param>
-        /// <returns></returns>
-        public IEnumerable<GaNumMultivector> OddVersorProduct(GaNumMultivector oddVersor, IEnumerable<int> basisBladeIDs)
-        {
-            var oddVersorReverse = oddVersor.Reverse();
-            var oddVersorNorm2Inverse = 1.0d / Sp[oddVersor, oddVersorReverse][0];
-            var oddVersorInverse = oddVersorReverse * oddVersorNorm2Inverse;
+        ///// <summary>
+        ///// Odd Versor Product of a list of basis blades given by their IDs
+        ///// </summary>
+        ///// <param name="oddVersor"></param>
+        ///// <param name="basisBladeIDs"></param>
+        ///// <returns></returns>
+        //public IEnumerable<GaNumSarMultivector> OddVersorProduct(GaNumSarMultivector oddVersor, IEnumerable<int> basisBladeIDs)
+        //{
+        //    var oddVersorReverse = oddVersor.Reverse();
+        //    var oddVersorNorm2Inverse = 1.0d / Sp[oddVersor, oddVersorReverse][0];
+        //    var oddVersorInverse = oddVersorReverse * oddVersorNorm2Inverse;
 
-            return basisBladeIDs.Select(id =>
-                {
-                    var mv = GaNumMultivector.CreateTerm(
-                        GaSpaceDimension,
-                        id,
-                        id.BasisBladeIdHasNegativeGradeInv() ? -1.0d : 1.0d
-                    );
+        //    return basisBladeIDs.Select(id =>
+        //        {
+        //            var mv = GaNumSarMultivector.CreateTerm(
+        //                VSpaceDimension,
+        //                id,
+        //                id.BasisBladeIdHasNegativeGradeInv() ? -1.0d : 1.0d
+        //            );
 
-                    return 
-                        Gp[Gp[oddVersor, mv], oddVersorInverse]
-                            .GetKVectorPart(id.BasisBladeGrade());
-                });
-        }
+        //            return Gp[Gp[oddVersor, mv], oddVersorInverse].GetKVectorPart(id.BasisBladeGrade()).ToSarMultivector();
+        //        });
+        //}
 
-        public IEnumerable<GaNumMultivector> RotorProduct(GaNumMultivector rotorVersor, IEnumerable<int> basisBladeIDs)
-        {
-            var rotorVersorInverse = rotorVersor.Reverse();
+        //public IEnumerable<GaNumSarMultivector> RotorProduct(GaNumSarMultivector rotorVersor, IEnumerable<int> basisBladeIDs)
+        //{
+        //    var rotorVersorInverse = rotorVersor.Reverse();
 
-            return basisBladeIDs.Select(id =>
-            {
-                var mv = GaNumMultivector.CreateBasisBlade(GaSpaceDimension, id);
+        //    return basisBladeIDs.Select(id =>
+        //    {
+        //        var mv = GaNumSarMultivector.CreateBasisBlade(VSpaceDimension, id);
 
-                return
-                    Gp[Gp[rotorVersor, mv], rotorVersorInverse]
-                        .GetKVectorPart(id.BasisBladeGrade());
-            });
-        }
+        //        return Gp[Gp[rotorVersor, mv], rotorVersorInverse].GetKVectorPart(id.BasisBladeGrade()).ToSarMultivector();
+        //    });
+        //}
 
-        public IEnumerable<GaNumMultivector> EvenVersorProduct(GaNumMultivector evenVersor, IEnumerable<int> basisBladeIDs)
-        {
-            var evenVersorReverse = evenVersor.Reverse();
-            var evenVersorNorm2Inverse = 1.0d / Sp[evenVersor, evenVersorReverse][0];
-            var evenVersorInverse = evenVersorReverse * evenVersorNorm2Inverse;
+        //public IEnumerable<GaNumSarMultivector> EvenVersorProduct(GaNumSarMultivector evenVersor, IEnumerable<int> basisBladeIDs)
+        //{
+        //    var evenVersorReverse = evenVersor.Reverse();
+        //    var evenVersorNorm2Inverse = 1.0d / Sp[evenVersor, evenVersorReverse][0];
+        //    var evenVersorInverse = evenVersorReverse * evenVersorNorm2Inverse;
 
-            return basisBladeIDs.Select(id =>
-            {
-                var mv = GaNumMultivector.CreateBasisBlade(GaSpaceDimension, id);
+        //    return basisBladeIDs.Select(id =>
+        //    {
+        //        var mv = GaNumSarMultivector.CreateBasisBlade(VSpaceDimension, id);
 
-                return
-                    Gp[Gp[evenVersor, mv], evenVersorInverse]
-                        .GetKVectorPart(id.BasisBladeGrade());
-            });
-        }
+        //        return Gp[Gp[evenVersor, mv], evenVersorInverse].GetKVectorPart(id.BasisBladeGrade()).ToSarMultivector();
+        //    });
+        //}
 
-        /// <summary>
-        /// Odd Versor Product
-        /// </summary>
-        /// <param name="oddVersor"></param>
-        /// <param name="mv"></param>
-        /// <returns></returns>
-        public GaNumMultivector OddVersorProduct(GaNumMultivector oddVersor, GaNumMultivector mv)
-        {
-            var oddVersorReverse = oddVersor.Reverse();
-            var oddVersorNorm2Inverse = 1.0d / Sp[oddVersor, oddVersorReverse][0];
-            var oddVersorInverse = oddVersorReverse * oddVersorNorm2Inverse;
+        ///// <summary>
+        ///// Odd Versor Product
+        ///// </summary>
+        ///// <param name="oddVersor"></param>
+        ///// <param name="mv"></param>
+        ///// <returns></returns>
+        //public GaNumSarMultivector OddVersorProduct(GaNumSarMultivector oddVersor, GaNumSarMultivector mv)
+        //{
+        //    var oddVersorReverse = oddVersor.Reverse();
+        //    var oddVersorNorm2Inverse = 1.0d / Sp[oddVersor, oddVersorReverse][0];
+        //    var oddVersorInverse = oddVersorReverse * oddVersorNorm2Inverse;
 
-            return Gp[Gp[oddVersor, mv.GradeInv()], oddVersorInverse];
-        }
+        //    return Gp[Gp[oddVersor, mv.GradeInv()], oddVersorInverse];
+        //}
 
-        /// <summary>
-        /// Even Versor Product
-        /// </summary>
-        /// <param name="evenVersor"></param>
-        /// <param name="mv"></param>
-        /// <returns></returns>
-        public GaNumMultivector EvenVersorProduct(GaNumMultivector evenVersor, GaNumMultivector mv)
-        {
-            var evenVersorReverse = evenVersor.Reverse();
-            var evenVersorNorm2Inverse = 1.0d / Sp[evenVersor, evenVersorReverse][0];
-            var evenVersorInverse = evenVersorReverse * evenVersorNorm2Inverse;
+        ///// <summary>
+        ///// Even Versor Product
+        ///// </summary>
+        ///// <param name="evenVersor"></param>
+        ///// <param name="mv"></param>
+        ///// <returns></returns>
+        //public GaNumSarMultivector EvenVersorProduct(GaNumSarMultivector evenVersor, GaNumSarMultivector mv)
+        //{
+        //    var evenVersorReverse = evenVersor.Reverse();
+        //    var evenVersorNorm2Inverse = 1.0d / Sp[evenVersor, evenVersorReverse][0];
+        //    var evenVersorInverse = evenVersorReverse * evenVersorNorm2Inverse;
 
-            return Gp[Gp[evenVersor, mv], evenVersorInverse];
-        }
+        //    return Gp[Gp[evenVersor, mv], evenVersorInverse];
+        //}
 
-        /// <summary>
-        /// Rotor Product
-        /// </summary>
-        /// <param name="rotorVersor"></param>
-        /// <param name="mv"></param>
-        /// <returns></returns>
-        public GaNumMultivector RotorProduct(GaNumMultivector rotorVersor, GaNumMultivector mv)
-        {
-            return Gp[Gp[rotorVersor, mv], rotorVersor.Reverse()];
-        }
+        ///// <summary>
+        ///// Rotor Product
+        ///// </summary>
+        ///// <param name="rotorVersor"></param>
+        ///// <param name="mv"></param>
+        ///// <returns></returns>
+        //public GaNumSarMultivector RotorProduct(GaNumSarMultivector rotorVersor, GaNumSarMultivector mv)
+        //{
+        //    return Gp[Gp[rotorVersor, mv], rotorVersor.Reverse()];
+        //}
     }
 }

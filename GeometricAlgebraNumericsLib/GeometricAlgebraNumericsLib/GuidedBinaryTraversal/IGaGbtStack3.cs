@@ -1,0 +1,69 @@
+﻿namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
+{
+    public interface IGaGbtStack3 : IGaGbtStack
+    {
+        ulong TosId1 { get; }
+
+        ulong TosId2 { get; }
+
+        ulong TosId3 { get; }
+
+        ulong TosChildId10 { get; }
+
+        ulong TosChildId11 { get; }
+
+        ulong TosChildId20 { get; }
+
+        ulong TosChildId21 { get; }
+
+        ulong TosChildId30 { get; }
+
+        ulong TosChildId31 { get; }
+
+
+        ulong RootId1 { get; }
+
+        ulong RootId2 { get; }
+
+        ulong RootId3 { get; }
+
+
+        bool TosHasChild10();
+
+        bool TosHasChild11();
+
+        bool TosHasChild20();
+
+        bool TosHasChild21();
+
+        bool TosHasChild30();
+
+        bool TosHasChild31();
+
+
+        void PushDataOfChild000();
+
+        void PushDataOfChild100();
+
+        void PushDataOfChild010();
+
+        void PushDataOfChild110();
+
+        void PushDataOfChild001();
+
+        void PushDataOfChild101();
+
+        void PushDataOfChild011();
+
+        void PushDataOfChild111();
+    }
+
+    public interface IGaGbtStack3<out T> : IGaGbtStack3
+    {
+        T TosValue1 { get; }
+
+        T TosValue2 { get; }
+
+        T TosValue3 { get; }
+    }
+}
