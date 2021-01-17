@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Linq;
 using CodeComposerLib.LaTeX;
 using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
 using TextComposerLib.Text;
 
 namespace GeometricAlgebraNumericsLib.Rendering.LaTeX

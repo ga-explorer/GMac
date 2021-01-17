@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -14,12 +15,12 @@ namespace CodeComposerLib.LaTeX
 {
     public class LaTeXRenderer
     {
-        /// <summary>
-        /// ImageConverter object used to convert byte arrays containing JPEG or PNG file images into 
-        /// Bitmap objects. This is static and only gets instantiated once.
-        /// </summary>
-        private static ImageConverter ImageConverter { get; } 
-            = new ImageConverter();
+        ///// <summary>
+        ///// ImageConverter object used to convert byte arrays containing JPEG or PNG file images into 
+        ///// Bitmap objects. This is static and only gets instantiated once.
+        ///// </summary>
+        //private static ImageConverter ImageConverter { get; } 
+        //    = new ImageConverter();
 
         
         /// <summary>
@@ -31,7 +32,11 @@ namespace CodeComposerLib.LaTeX
         /// <returns>Bitmap object if it works, else exception is thrown</returns>
         private static Bitmap GetImageFromByteArray(byte[] byteArray)
         {
-            var bm = (Bitmap)ImageConverter.ConvertFrom(byteArray);
+            var tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+
+            var bm = (Bitmap)tc.ConvertFrom(byteArray);
+            
+            //var bm = (Bitmap)ImageConverter.ConvertFrom(byteArray);
 
             if (bm != null && (
                     bm.HorizontalResolution != (int)bm.HorizontalResolution ||
@@ -376,7 +381,49 @@ namespace CodeComposerLib.LaTeX
                 foreach (var image in images)
                 {
                     //image.Resize(new Percentage(50));
-                    yield return image.ToBitmap();
+
+                    using (var memStream = new MemoryStream())
+                    {
+                        image.Write(memStream);
+                        yield return (Bitmap)Image.FromStream(memStream);
+                    }
+
+                    //// Writing to a specific format works the same as for a single image
+                    //image.Format = MagickFormat.Ptif;
+                    //image.Write("Snakeware.Page" + page + ".tif");    
+                    page++;
+                }
+            }
+        }
+
+        public IEnumerable<byte[]> ConvertPdfFileToByteArrays(string pdfFileName, double resolution)
+        {
+            var settings = new MagickReadSettings
+            {
+                // Setting the density to 300 dpi will create an image with a better quality
+                Density = new Density(resolution, resolution)
+            };
+
+            var pdfFilePath = Path.Combine(WorkingPath, pdfFileName) + ".pdf";
+            using (var images = new MagickImageCollection())
+            {
+                // Add all the pages of the pdf file to the collection
+                images.Read(pdfFilePath, settings);
+                
+                var page = 1;
+                foreach (var image in images)
+                {
+                    //image.Resize(new Percentage(50));
+
+                    using (var memStream = new MemoryStream())
+                    {
+                        image.Write(memStream);
+
+                        var byteArray = new byte[memStream.Length];
+                        memStream.Read(byteArray, 0, (int)memStream.Length);
+
+                        yield return byteArray;
+                    }
 
                     //// Writing to a specific format works the same as for a single image
                     //image.Format = MagickFormat.Ptif;
@@ -404,6 +451,25 @@ namespace CodeComposerLib.LaTeX
 
             var bitmaps = 
                 ConvertPdfFileToBitmaps(fileName, resolution).ToArray();
+
+            if (bitmaps.Length < 1)
+                return null;
+
+            return bitmaps[0];
+        }
+
+        public byte[] RenderMathToByteArray(string mathText, double resolution = 300)
+        {
+            var fileName = "texput";
+
+            var pdfDone = 
+                RenderMathToPdfFile(fileName, mathText);
+
+            if (!pdfDone)
+                return null;
+
+            var bitmaps = 
+                ConvertPdfFileToByteArrays(fileName, resolution).ToArray();
 
             if (bitmaps.Length < 1)
                 return null;

@@ -33,17 +33,16 @@ namespace CSScriptEvaluatorExtensions
     {
         public static void Test()
         {
-            Console.WriteLine(@"---------------------------------------------");
-            Console.WriteLine(@"Testing asynchronous API");
-            Console.WriteLine(@"---------------------------------------------");
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Testing asynchronous API");
+            Console.WriteLine("---------------------------------------------");
             new AsyncSamples().RunAll();
             Thread.Sleep(2000);
-            Console.WriteLine(@"
-Press 'Enter' to run uloading samples...");
+            Console.WriteLine("\nPress 'Enter' to run uloading samples...");
             Console.ReadLine();
-            Console.WriteLine(@"---------------------------------------------");
-            Console.WriteLine(@"Testing unloading API");
-            Console.WriteLine(@"---------------------------------------------");
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Testing unloading API");
+            Console.WriteLine("---------------------------------------------");
             new UnloadingSamples().RunAll();
         }
 

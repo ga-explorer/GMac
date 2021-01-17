@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
+using GeometricAlgebraStructuresLib.Maps;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 {
-    public abstract class GaNumMapUnilinear : GaNumMap, IGaNumMapUnilinear
+    public abstract class GaNumMapUnilinear : GaMap, IGaNumMapUnilinear
     {
         protected Matrix InternalMappingMatrix;
 
@@ -17,7 +18,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             => DomainVSpaceDimension.ToGaSpaceDimension();
 
         public IGaNumMultivector this[int grade1, int index1]
-            => this[GaNumFrameUtils.BasisBladeId(grade1, index1)];
+            => this[GaFrameUtils.BasisBladeId(grade1, index1)];
 
         public abstract IGaNumMultivector this[int id1] { get; }
 
@@ -117,7 +118,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         {
             for (var index = 0; index < DomainVSpaceDimension; index++)
             {
-                var mv = this[GaNumFrameUtils.BasisBladeId(1, index)];
+                var mv = this[GaFrameUtils.BasisBladeId(1, index)];
 
                 if (!mv.IsNullOrEmpty())
                     yield return new Tuple<int, IGaNumMultivector>(index, mv);

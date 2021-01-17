@@ -8,7 +8,7 @@ namespace TextComposerLibSamples.Samples
     {
         internal static string Task1()
         {
-            var composer = new ListComposer()
+            var composer = new ListTextComposer()
             {
                 Separator = ", ",
                 FinalPrefix = "{",
@@ -32,7 +32,7 @@ namespace TextComposerLibSamples.Samples
 
         internal static string Task3()
         {
-            var listComposer = new ListComposer(Environment.NewLine);
+            var listComposer = new ListTextComposer(Environment.NewLine);
 
             var stackComposer =
                 Enumerable.Range(1, 3)

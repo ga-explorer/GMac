@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 {
@@ -108,7 +108,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             var kVectorsArray = new IReadOnlyList<double>[vSpaceDim + 1];
 
             kVectorsArray[grade] = new SingleItemReadOnlyList<double>(
-                GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade),
+                GaFrameUtils.KvSpaceDimension(vSpaceDim, grade),
                 index,
                 term.ScalarValue
             );
@@ -145,7 +145,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             term.BasisBladeId.BasisBladeGradeIndex(out var grade, out var index);
 
             var scalarValues = new SingleItemReadOnlyList<double>(
-                GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade),
+                GaFrameUtils.KvSpaceDimension(vSpaceDim, grade),
                 index,
                 term.ScalarValue
             );

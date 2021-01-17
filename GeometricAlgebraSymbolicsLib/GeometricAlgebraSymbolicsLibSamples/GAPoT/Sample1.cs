@@ -12,12 +12,12 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
             //Voltage
-            var mvU = $"[p('1','Pi/6') <1,2>] <a>"
-                .GaPoTSymParseMultiPhaseVector();
+            var mvU = $"p('1','Pi/6') <1,2>"
+                .GaPoTSymParseVector();
 
             //Current
-            var mvI = $"[p('1/2','Pi/6') <1,2>] <a>; [p('1/2','-Pi/6') <1,2>] <b>"
-                .GaPoTSymParseMultiPhaseVector();
+            var mvI = $"p('1/2','Pi/6') <1,2>, p('1/2','-Pi/6') <3,4>"
+                .GaPoTSymParseVector();
 
             //Power
             var mvM = mvU * mvI;
@@ -49,10 +49,6 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             Console.WriteLine($@"inverse(U) = {mvU.Inverse().ToLaTeX()}");
             Console.WriteLine($@"inverse(I) = {mvI.Inverse().ToLaTeX()}");
-            Console.WriteLine();
-            
-            //Note: I'm not sure this computation is as required, please verify results.
-            Console.WriteLine($@"inverse(Z) = {mvZ.PerPhaseInverse().ToLaTeX()}");
             Console.WriteLine();
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using CodeComposerLib.GraphViz.Dot;
 using CodeComposerLib.GraphViz.Dot.Value;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Rendering;
+using GeometricAlgebraStructuresLib.Frames;
 using GMacBenchmarks2.Samples.Computations;
 
 namespace GMacBenchmarks2.Samples.GraphViz
@@ -29,13 +29,13 @@ namespace GMacBenchmarks2.Samples.GraphViz
                     .Create(
                         vSpaceDim,
                         3,
-                        Enumerable.Repeat(1.0d, GaNumFrameUtils.KvSpaceDimension(vSpaceDim, 3))
+                        Enumerable.Repeat(1.0d, GaFrameUtils.KvSpaceDimension(vSpaceDim, 3))
                     )
                     .GetSarMultivector();
 
             var mv2 =
                 GaNumDarKVector
-                    .Create(gaSpaceDim, 4, Enumerable.Repeat(1.0d, GaNumFrameUtils.KvSpaceDimension(vSpaceDim, 4)))
+                    .Create(gaSpaceDim, 4, Enumerable.Repeat(1.0d, GaFrameUtils.KvSpaceDimension(vSpaceDim, 4)))
                     .GetSarMultivector();
 
             var mv = mv1;// + mv2;

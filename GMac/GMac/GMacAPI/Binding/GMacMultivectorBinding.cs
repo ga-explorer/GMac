@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
@@ -280,7 +280,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The multivector grades having some scalar binding in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundGrades => BoundIDs.Select(GaNumFrameUtils.BasisBladeGrade).Distinct();
+        public IEnumerable<int> BoundGrades => BoundIDs.Select(GaFrameUtils.BasisBladeGrade).Distinct();
 
         /// <summary>
         /// The multivector grades not having any scalar bindings in this binding pattern
@@ -353,7 +353,7 @@ namespace GMac.GMacAPI.Binding
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public GMacScalarBinding this[int grade, int index] => _patternDictionary[GaNumFrameUtils.BasisBladeId(grade, index)];
+        public GMacScalarBinding this[int grade, int index] => _patternDictionary[GaFrameUtils.BasisBladeId(grade, index)];
 
 
         private GMacMultivectorBinding(AstFrameMultivector patternType)
@@ -382,7 +382,7 @@ namespace GMac.GMacAPI.Binding
 
         public bool HasBoundCoef(int grade, int index)
         {
-            return _patternDictionary.ContainsKey(GaNumFrameUtils.BasisBladeId(grade, index));
+            return _patternDictionary.ContainsKey(GaFrameUtils.BasisBladeId(grade, index));
         }
 
         public bool HasBoundCoefOfGrade(int grade)
@@ -470,7 +470,7 @@ namespace GMac.GMacAPI.Binding
 
         public GMacMultivectorBinding UnBindCoef(int grade, int index)
         {
-            _patternDictionary.Remove(GaNumFrameUtils.BasisBladeId(grade, index));
+            _patternDictionary.Remove(GaFrameUtils.BasisBladeId(grade, index));
 
             return this;
         }
@@ -485,7 +485,7 @@ namespace GMac.GMacAPI.Binding
 
         public GMacMultivectorBinding UnBindKVector(int grade)
         {
-            UnBindCoefs(GaNumFrameUtils.BasisBladeIDsOfGrade(BaseFrame.VSpaceDimension, grade));
+            UnBindCoefs(GaFrameUtils.BasisBladeIDsOfGrade(BaseFrame.VSpaceDimension, grade));
 
             return this;
         }
@@ -493,7 +493,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding UnBindCoefs(int grade, IEnumerable<int> indexes)
         {
             foreach (var index in indexes)
-                _patternDictionary.Remove(GaNumFrameUtils.BasisBladeId(grade, index));
+                _patternDictionary.Remove(GaFrameUtils.BasisBladeId(grade, index));
 
             return this;
         }
@@ -543,7 +543,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindCoefToConstant(int grade, int index, Expr valueExpr)
         {
             return BindCoefToPattern(
-                GaNumFrameUtils.BasisBladeId(grade, index),
+                GaFrameUtils.BasisBladeId(grade, index),
                 GMacScalarBinding.CreateConstant(BaseFrameMultivector.Root, valueExpr)
                 );
         }
@@ -551,7 +551,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindCoefToVariable(int grade, int index)
         {
             return BindCoefToPattern(
-                GaNumFrameUtils.BasisBladeId(grade, index),
+                GaFrameUtils.BasisBladeId(grade, index),
                 GMacScalarBinding.CreateVariable(BaseFrameMultivector.Root)
                 );
         }
@@ -559,7 +559,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindBasisVectorCoefToConstant(int index, Expr valueExpr)
         {
             return BindCoefToPattern(
-                GaNumFrameUtils.BasisVectorId(index),
+                GaFrameUtils.BasisVectorId(index),
                 GMacScalarBinding.CreateConstant(BaseFrameMultivector.Root, valueExpr)
                 );
         }
@@ -567,7 +567,7 @@ namespace GMac.GMacAPI.Binding
         public GMacMultivectorBinding BindBasisVectorCoefToVariable(int index)
         {
             return BindCoefToPattern(
-                GaNumFrameUtils.BasisVectorId(index),
+                GaFrameUtils.BasisVectorId(index),
                 GMacScalarBinding.CreateVariable(BaseFrameMultivector.Root)
                 );
         }
@@ -612,7 +612,7 @@ namespace GMac.GMacAPI.Binding
                 throw new InvalidOperationException("Grade not accepted");
 
             var kvSpaceDim =
-                GaNumFrameUtils.KvSpaceDimension(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension, grade);
+                GaFrameUtils.KvSpaceDimension(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
                 BindCoefToVariable(grade, index);

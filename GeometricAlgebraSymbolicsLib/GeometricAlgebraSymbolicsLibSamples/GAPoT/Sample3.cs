@@ -12,11 +12,11 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             var mvU = 
                 "p('233.92', '-1.57') <1,2>, p('0.46', '-2.61') <3,4>, p('4.74', '1.28') <5,6>, p('4.02', '-0.07') <7,8>, p('0.42', '-2.60') <9,10>"
-                    .GaPoTSymParseSinglePhaseVector();
+                    .GaPoTSymParseVector();
 
             var mvI = 
                 "p('2.33', '-0.72') <1,2>, p('0.93', '1.85') <3,4>, p('0.45', '-1.69') <5,6>, p('0.49', '1.70') <7,8>, p('0.16', '-1.44') <9,10>"
-                    .GaPoTSymParseSinglePhaseVector();
+                    .GaPoTSymParseVector();
 
             var mvM = mvU * mvI;
 

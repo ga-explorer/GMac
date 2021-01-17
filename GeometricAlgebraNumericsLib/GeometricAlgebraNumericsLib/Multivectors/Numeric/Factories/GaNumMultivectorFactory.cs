@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 {
@@ -46,7 +46,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public int GetKvSpaceDimension(int grade)
         {
-            return GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            return GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
         }
 
         /// <summary>
@@ -79,11 +79,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public abstract IEnumerable<GaTerm<double>> GetStoredTerms();
 
-        public abstract IEnumerable<GaTerm<double>> GetStoredTerms(int grade);
+        public abstract IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade);
 
         public abstract IEnumerable<GaTerm<double>> GetNonZeroTerms();
 
-        public abstract IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade);
+        public abstract IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade);
 
 
         public abstract IEnumerable<int> GetStoredTermIds();
@@ -99,7 +99,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public abstract bool ContainsStoredTerm(int grade, int index);
 
-        public abstract bool ContainsStoredKVector(int grade);
+        public abstract bool ContainsStoredTermOfGrade(int grade);
 
 
         /// <summary>

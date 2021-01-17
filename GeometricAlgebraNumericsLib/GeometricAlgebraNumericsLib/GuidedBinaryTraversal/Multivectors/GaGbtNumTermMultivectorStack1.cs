@@ -1,4 +1,5 @@
 ﻿using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.GuidedBinaryTraversal;
 
 namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
 {
@@ -26,15 +27,15 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
         }
 
 
-        public override bool TosHasChild0()
-        {
-            return ((1ul << (TosTreeDepth - 1)) & (ulong)Term.BasisBladeId) == 0;
-        }
+        //public override bool TosHasChild0()
+        //{
+        //    return ((1ul << (TosTreeDepth - 1)) & (ulong)Term.BasisBladeId) == 0;
+        //}
 
-        public override bool TosHasChild1()
-        {
-            return ((1ul << (TosTreeDepth - 1)) & (ulong)Term.BasisBladeId) != 0;
-        }
+        //public override bool TosHasChild1()
+        //{
+        //    return ((1ul << (TosTreeDepth - 1)) & (ulong)Term.BasisBladeId) != 0;
+        //}
 
 
         public override void PushRootData()
@@ -58,20 +59,41 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
             TosIndex--;
         }
 
-        public override void PushDataOfChild0()
+        public override bool TosHasChild(int childIndex)
         {
-            TosIndex++;
+            var v = 
+                (1ul << (TosTreeDepth - 1)) & (ulong) Term.BasisBladeId;
 
-            TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId0;
+            return (childIndex & 1) == 0
+                ? v == 0
+                : v != 0;
         }
 
-        public override void PushDataOfChild1()
+        public override void PushDataOfChild(int childIndex)
         {
             TosIndex++;
-
             TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId1;
+
+            if ((childIndex & 1) == 0)
+                IdArray[TosIndex] = TosChildId0;
+            else
+                IdArray[TosIndex] = TosChildId1;
         }
+
+        //public override void PushDataOfChild0()
+        //{
+        //    TosIndex++;
+
+        //    TreeDepthArray[TosIndex] = TosTreeDepth - 1;
+        //    IdArray[TosIndex] = TosChildId0;
+        //}
+
+        //public override void PushDataOfChild1()
+        //{
+        //    TosIndex++;
+
+        //    TreeDepthArray[TosIndex] = TosTreeDepth - 1;
+        //    IdArray[TosIndex] = TosChildId1;
+        //}
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using GeometricAlgebraNumericsLibSamples.GAPoT;
 
 namespace GeometricAlgebraNumericsLibSamples
 {
@@ -7,7 +6,7 @@ namespace GeometricAlgebraNumericsLibSamples
     {
         static void Main(string[] args)
         {
-            Sample1.Execute();
+            //Sample6.Execute();
 
             Console.WriteLine();
             Console.WriteLine(@"Press any key to exit...");

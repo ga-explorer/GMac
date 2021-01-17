@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Unilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
+using GeometricAlgebraStructuresLib.Frames;
 using TextComposerLib.Text.Tabular;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
@@ -274,7 +274,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         public override string ToString()
         {
             var tableText = new TableComposer(TargetGaSpaceDimension, TargetGaSpaceDimension);
-            var basisBladeIds = GaNumFrameUtils.BasisBladeIDs(TargetVSpaceDimension).ToArray();
+            var basisBladeIds = GaFrameUtils.BasisBladeIDs(TargetVSpaceDimension).ToArray();
 
             foreach (var basisBladeId in basisBladeIds)
             {

@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Structures.BinaryTraversal;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 {
@@ -15,10 +15,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
     /// </summary>
     public sealed class GaNumDarMultivector : GaNumMultivector
     {
-        public static GaNumDarMultivector CreateZero(int gaSpaceDim)
+        public static GaNumDarMultivector CreateZero(int vSpaceDim)
         {
             return new GaNumDarMultivector(
-                new EmptyReadOnlyList<double>(gaSpaceDim)
+                new EmptyReadOnlyList<double>(vSpaceDim.ToGaSpaceDimension())
             );
         }
 
@@ -69,7 +69,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             => ScalarValuesArray[id];
 
         public override double this[int grade, int index]
-            => ScalarValuesArray[GaNumFrameUtils.BasisBladeId(grade, index)];
+            => ScalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)];
 
         public override int StoredTermsCount 
             => ScalarValuesArray.Count;
@@ -96,12 +96,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override bool ContainsStoredTerm(int grade, int index)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return id >= 0 && id <= GaSpaceDimension;
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return grade >= 0 && grade <= VSpaceDimension;
         }
@@ -118,13 +118,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 yield return new GaTerm<double>(id, ScalarValuesArray[id]);
             }
@@ -142,13 +142,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 var value = ScalarValuesArray[id];
 
@@ -200,7 +200,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override bool TryGetValue(int grade, int index, out double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (id >= 0 && id < GaSpaceDimension)
             {
@@ -226,7 +226,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (id >= 0 && id < GaSpaceDimension)
             {

@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Metrics
 {
@@ -58,7 +58,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         {
             return new GaTerm<double>(
                 id1 ^ id2,
-                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d
+                GaFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d
             );
         }
 
@@ -66,7 +66,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         {
             return new GaTerm<double>(
                 id1 ^ id2,
-                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -scalingFactor : scalingFactor
+                GaFrameUtils.IsNegativeEGp(id1, id2) ? -scalingFactor : scalingFactor
             );
         }
 
@@ -74,7 +74,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         {
             var idXor12 = id1 ^ id2;
             var value =
-                (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+                (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                     ? -1 : 1;
 
             return new GaTerm<double>(idXor12 ^ id3, value);
@@ -84,7 +84,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         {
             var idXor12 = id1 ^ id2;
             var value =
-                (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+                (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                     ? -scalingFactor : scalingFactor;
 
             return new GaTerm<double>(idXor12 ^ id3, value);

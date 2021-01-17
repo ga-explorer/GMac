@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacAPI.CodeGen;
 using GMac.GMacAPI.Target;
 using GMac.GMacAST;

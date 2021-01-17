@@ -12,11 +12,11 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             var mvU = 
                 "'Sqrt[2] * Subscript[v,1] * Cos[x]'<1>, 'Sqrt[2] * Subscript[v,2] * Sin[x]'<2>"
-                    .GaPoTSymParseSinglePhaseVector();
+                    .GaPoTSymParseVector();
 
             var mvI = 
                 "'Sqrt[2] * Subscript[i,1] * Cos[x]'<1>, 'Sqrt[2] * Subscript[i,2] * Sin[x]'<2>"
-                    .GaPoTSymParseSinglePhaseVector();
+                    .GaPoTSymParseVector();
 
             var mvM = mvU * mvI;
 

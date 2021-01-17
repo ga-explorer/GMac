@@ -1,5 +1,5 @@
 ﻿using CodeComposerLib.Irony.Semantic.Expression.Value;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacAST.Symbols;

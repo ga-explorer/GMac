@@ -5,7 +5,7 @@ using CodeComposerLib.Irony.Semantic.Expression.Value;
 using CodeComposerLib.Irony.Semantic.Expression.ValueAccess;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib.SimpleTree;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GMac.GMacAST.Expressions;

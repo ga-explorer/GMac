@@ -109,6 +109,10 @@
       <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>
       <Name>GeometricAlgebraNumericsLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib.csproj">
+      <Project>{c27c6e13-4db7-4430-acb4-1a500f42d494}</Project>
+      <Name>GeometricAlgebraStructuresLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GeometryComposerLib\GeometryComposerLib\GeometryComposerLib.csproj">
       <Project>{8654325d-0259-4912-8071-66af79a2dc23}</Project>
       <Name>GeometryComposerLib</Name>

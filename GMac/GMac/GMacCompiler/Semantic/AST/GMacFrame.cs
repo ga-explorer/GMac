@@ -5,7 +5,7 @@ using CodeComposerLib.Irony.Semantic.Scope;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib;
 using DataStructuresLib.BooleanPattern;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Frames;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 
@@ -144,7 +144,7 @@ namespace GMac.GMacCompiler.Semantic.AST
 
         public string BasisBladeName(int grade, int index)
         {
-            return BasisVectorNames.ConcatenateUsingPattern(GaNumFrameUtils.BasisBladeId(grade, index), "E0", "^");
+            return BasisVectorNames.ConcatenateUsingPattern(GaFrameUtils.BasisBladeId(grade, index), "E0", "^");
         }
 
         public string BasisBladeName(int basisBladeId, BasisBladeFormat nameFormat)
@@ -155,7 +155,7 @@ namespace GMac.GMacCompiler.Semantic.AST
                     return BasisBladeName(basisBladeId);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return GaNumFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
+                    return GaFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, basisBladeId);
 
                 case BasisBladeFormat.GradePlusIndex:
                     return basisBladeId.BasisBladeGradeIndexName();
@@ -173,13 +173,13 @@ namespace GMac.GMacCompiler.Semantic.AST
                     return BasisBladeName(grade, index);
 
                 case BasisBladeFormat.BinaryIndexed:
-                    return GaNumFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
+                    return GaFrameUtils.BasisBladeBinaryIndexedName(VSpaceDimension, grade, index);
 
                 case BasisBladeFormat.GradePlusIndex:
-                    return GaNumFrameUtils.BasisBladeGradeIndexName(grade, index);
+                    return GaFrameUtils.BasisBladeGradeIndexName(grade, index);
 
                 default:
-                    return GaNumFrameUtils.BasisBladeIndexedName(grade, index);
+                    return GaFrameUtils.BasisBladeIndexedName(grade, index);
             }
         }
 

@@ -4,7 +4,7 @@ using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 {
-    public interface IGaNumMapUnilinear : IGaNumMap
+    public interface IGaNumMapUnilinear : IGaMap
     {
         int DomainVSpaceDimension { get; }
 

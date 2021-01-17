@@ -10,11 +10,11 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
             
-            var mvU = "['1'<1>, '1'<2>, '1'<3>] <a>; ['2'<1>, '1'<2>] <b>; ['1'<1>, '-1'<2>] <c>"
-                .GaPoTSymParseMultiPhaseVector();
+            var mvU = "'1'<1>, '1'<2>, '1'<3>, '2'<4>, '1'<5>, '1'<7>, '-1'<8>"
+                .GaPoTSymParseVector();
 
-            var mvI = "['1'<1>, '1'<2>, '1'<3>] <a>; ['3'<1>, '1/2'<2>] <b>; ['1'<1>] <c>"
-                .GaPoTSymParseMultiPhaseVector();
+            var mvI = "['1'<1>, '1'<2>, '1'<3>, '3'<4>, '1/2'<5>, '1'<7>"
+                .GaPoTSymParseVector();
            
             Console.WriteLine(@"Display multivectors in LaTeX form");
             Console.WriteLine($@"U = {mvU.ToLaTeX()}");

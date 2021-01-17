@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 {
@@ -33,12 +33,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         public override double this[int grade, int index]
         {
             get => _scalarValuesDictionary.TryGetValue(
-                GaNumFrameUtils.BasisBladeId(grade, index), 
+                GaFrameUtils.BasisBladeId(grade, index), 
                 out var value
             ) ? value : 0.0d;
             set
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 if (_scalarValuesDictionary.ContainsKey(id))
                     _scalarValuesDictionary[id] = value;
@@ -117,7 +117,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool TryGetValue(int grade, int index, out double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return _scalarValuesDictionary.TryGetValue(id, out value);
         }
@@ -136,7 +136,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (_scalarValuesDictionary.TryGetValue(id, out var value))
             {
@@ -161,7 +161,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 .Select(p => new GaTerm<double>(p.Key, p.Value));
         }
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
             return _scalarValuesDictionary
                 .Where(p => p.Key.BasisBladeGrade() == grade)
@@ -175,7 +175,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 .Select(p => new GaTerm<double>(p.Key, p.Value));
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
             return _scalarValuesDictionary
                 .Where(p => p.Key.BasisBladeGrade() == grade && !p.Value.IsNearZero())
@@ -218,13 +218,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool ContainsStoredTerm(int grade, int index)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return id >= 0 && id < GaSpaceDimension &&
                 _scalarValuesDictionary.ContainsKey(id);
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return grade >= 0 && grade <= VSpaceDimension &&
                 _scalarValuesDictionary.Any(p => p.Key.BasisBladeGrade() == grade);
@@ -537,7 +537,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory SetTerm(int grade, int index, double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (_scalarValuesDictionary.ContainsKey(id))
                 _scalarValuesDictionary[id] = value;
@@ -613,7 +613,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory AddTerm(int grade, int index, double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (_scalarValuesDictionary.ContainsKey(id))
                 _scalarValuesDictionary[id] += value;

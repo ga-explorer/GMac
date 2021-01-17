@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -14,7 +14,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public int Count { get; }
 
         public T this[int index]
-            => SarValues[GaNumFrameUtils.BasisBladeId(KVectorGrade, index)];
+            => SarValues[GaFrameUtils.BasisBladeId(KVectorGrade, index)];
 
         public IEnumerable<int> Keys
             => SarValues
@@ -35,14 +35,14 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         public bool ContainsKey(int key)
         {
-            var id = GaNumFrameUtils.BasisBladeId(KVectorGrade, key);
+            var id = GaFrameUtils.BasisBladeId(KVectorGrade, key);
 
             return SarValues.ContainsKey(id);
         }
 
         public bool TryGetValue(int key, out T value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(KVectorGrade, key);
+            var id = GaFrameUtils.BasisBladeId(KVectorGrade, key);
 
             return SarValues.TryGetValue(id, out value);
         }

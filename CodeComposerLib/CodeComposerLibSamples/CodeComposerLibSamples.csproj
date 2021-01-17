@@ -58,10 +58,6 @@
       <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
       <Name>TextComposerLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CodeComposerLib\CodeComposerLib.csproj">
-      <Project>{5b86340a-91e4-43f3-a454-c69674144a28}</Project>
-      <Name>CodeComposerLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

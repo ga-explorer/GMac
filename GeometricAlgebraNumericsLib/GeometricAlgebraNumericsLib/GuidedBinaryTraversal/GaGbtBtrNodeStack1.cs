@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
+using GeometricAlgebraStructuresLib.GuidedBinaryTraversal;
 
 namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
 {
@@ -95,17 +96,6 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
         }
 
 
-        public override bool TosHasChild0()
-        {
-            return TosBtrNode.HasChildNode0;
-        }
-
-        public override bool TosHasChild1()
-        {
-            return TosBtrNode.HasChildNode1;
-        }
-
-
         public override void PushRootData()
         {
             TosIndex = 0;
@@ -136,22 +126,28 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
             TosIndex--;
         }
 
-        public override void PushDataOfChild0()
+        public override bool TosHasChild(int childIndex)
         {
-            TosIndex++;
-
-            TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId0;
-            BtrNodeArray[TosIndex] = TosBtrNode.ChildNode0;
+            return (childIndex & 1) == 0
+                ? TosBtrNode.HasChildNode0
+                : TosBtrNode.HasChildNode1;
         }
 
-        public override void PushDataOfChild1()
+        public override void PushDataOfChild(int childIndex)
         {
             TosIndex++;
-
             TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId1;
-            BtrNodeArray[TosIndex] = TosBtrNode.ChildNode1;
+
+            if ((childIndex & 1) == 0)
+            {
+                IdArray[TosIndex] = TosChildId0;
+                BtrNodeArray[TosIndex] = TosBtrNode.ChildNode0;
+            }
+            else
+            {
+                IdArray[TosIndex] = TosChildId1;
+                BtrNodeArray[TosIndex] = TosBtrNode.ChildNode1;
+            }
         }
 
 
@@ -170,11 +166,11 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
                     continue;
                 }
 
-                if (TosHasChild1())
-                    PushDataOfChild1();
+                if (TosHasChild(1))
+                    PushDataOfChild(1);
 
-                if (TosHasChild0())
-                    PushDataOfChild0();
+                if (TosHasChild(0))
+                    PushDataOfChild(0);
             }
         }
     }

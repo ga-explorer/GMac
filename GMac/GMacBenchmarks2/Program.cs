@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using BenchmarkDotNet.Running;
 
 namespace GMacBenchmarks2
 {
@@ -8,7 +7,7 @@ namespace GMacBenchmarks2
         static void Main(string[] args)
         {
             #region Benchmarking Code
-            //var summary = BenchmarkRunner.Run<Benchmarks.Numeric.Outermorphisms.Benchmark1>();
+            var summary = BenchmarkRunner.Run<Benchmarks.Numeric.Benchmark7>();
             //var sample = new Benchmarks.Numeric.Benchmark9 {VSpaceDim = 12};
             //sample.Setup();
             //var result = sample.Validate();
@@ -25,24 +24,24 @@ namespace GMacBenchmarks2
             #endregion
 
             #region Samples Code
-            var sample = new Samples.Parsing.GAPoT.Sample1();
-            //var sample = new Samples.GraphViz.Sample2();
-            //var sample = new Samples.Rendering.Numeric.Sample1();
-            //var sample = new Samples.Memory.Numeric.Sample3();
-            //var sample = new Samples.Validations.GaVersorValidation();
-            //var sample = new Samples.Generators.VectorKVectorOpGenerator();
-            //var sample = new Samples.Generators.VectorKVectorOpIndexTablesGenerator();
-            var result = sample.Execute();
+            ////var sample = new Samples.Parsing.GAPoT.Sample1();
+            ////var sample = new Samples.GraphViz.Sample2();
+            ////var sample = new Samples.Rendering.Numeric.Sample1();
+            ////var sample = new Samples.Memory.Numeric.Sample3();
+            //var sample = new Samples.Validations.GaMetricTrilinearProductsValidation();
+            ////var sample = new Samples.Generators.VectorKVectorOpGenerator();
+            ////var sample = new Samples.Generators.VectorKVectorOpIndexTablesGenerator();
+            //var result = sample.Execute();
 
-            var fileName = DateTime.Now.ToString("s").Replace(":", "-");
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName + ".log");
-            File.WriteAllText(filePath, result);
+            //var fileName = DateTime.Now.ToString("s").Replace(":", "-");
+            //var filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName + ".log");
+            //File.WriteAllText(filePath, result);
 
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
 
-            Console.WriteLine();
-            Console.Write(@"Press any key to continue...");
-            Console.ReadKey();
+            //Console.WriteLine();
+            //Console.Write(@"Press any key to continue...");
+            //Console.ReadKey();
             #endregion
 
             #region Tests

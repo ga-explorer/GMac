@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 {
@@ -272,13 +272,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                 for (var index = 0; index < scalarValuesArray.Length; index++)
                     yield return new GaTerm<double>(
-                        GaNumFrameUtils.BasisBladeId(grade, index),
+                        GaFrameUtils.BasisBladeId(grade, index),
                         scalarValuesArray[index]
                     );
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
             var scalarValuesArray = 
                 _gradedScalarValuesArray[grade];
@@ -288,7 +288,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
             for (var index = 0; index < scalarValuesArray.Length; index++)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GaFrameUtils.BasisBladeId(grade, index),
                     scalarValuesArray[index]
                 );
         }
@@ -309,14 +309,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                     if (!value.IsNearZero())
                         yield return new GaTerm<double>(
-                            GaNumFrameUtils.BasisBladeId(grade, index),
+                            GaFrameUtils.BasisBladeId(grade, index),
                             value
                         );
                 }
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
             var scalarValuesArray = _gradedScalarValuesArray[grade];
 
@@ -329,7 +329,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                 if (!value.IsNearZero())
                     yield return new GaTerm<double>(
-                        GaNumFrameUtils.BasisBladeId(grade, index),
+                        GaFrameUtils.BasisBladeId(grade, index),
                         value
                     );
             }
@@ -346,7 +346,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                     continue;
 
                 for (var index = 0; index < kVectorArray.Length; index++)
-                    yield return GaNumFrameUtils.BasisBladeId(grade, index);
+                    yield return GaFrameUtils.BasisBladeId(grade, index);
             }
         }
 
@@ -361,7 +361,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                 for (var index = 0; index < kVectorArray.Length; index++)
                     if (!kVectorArray[index].IsNearZero())
-                        yield return GaNumFrameUtils.BasisBladeId(grade, index);
+                        yield return GaFrameUtils.BasisBladeId(grade, index);
             }
         }
 
@@ -405,13 +405,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool ContainsStoredTerm(int grade, int index)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return id >= 0 && id < GaSpaceDimension &&
                 !_gradedScalarValuesArray[grade].IsNullOrEmpty();
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return grade >= 0 && grade <= VSpaceDimension &&
                 !_gradedScalarValuesArray[grade].IsNullOrEmpty();
@@ -490,7 +490,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             if (kVector.IsNullOrEmpty())
                 return null;
 
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
             var scalarValues = new double[kvSpaceDim];
             kVector.CopyTo(scalarValues, 0);
 
@@ -504,7 +504,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             if (kVector.IsNullOrEmpty())
                 return null;
 
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
             var scalarValues = new Dictionary<int, double>();
 
             for (var index = 0; index < kvSpaceDim; index++)
@@ -556,7 +556,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                     if (!value.IsNearZero())
                         scalarValues.Add(
-                            GaNumFrameUtils.BasisBladeId(grade, index),
+                            GaFrameUtils.BasisBladeId(grade, index),
                             value
                         );
                 }
@@ -614,7 +614,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                     if (value.IsNearZero())
                         continue;
 
-                    var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, index);
 
                     scalarValues[id] = value;
                 }
@@ -634,7 +634,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 if (kVector.IsNullOrEmpty())
                     continue;
 
-                var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
                 var scalarValues = new double[kvSpaceDim];
                 kVector.CopyTo(scalarValues, 0);
 
@@ -662,7 +662,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                     if (!value.IsNearZero())
                         scalarValues.Add(
-                            GaNumFrameUtils.BasisBladeId(grade, index),
+                            GaFrameUtils.BasisBladeId(grade, index),
                             value
                         );
                 }
@@ -1045,7 +1045,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
                 for (var index = 0; index < scalarValues.Length; index++)
                 {
-                    var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, index);
 
                     scalarValues[index] = mappingFunc(id, scalarValues[index]);
                 }

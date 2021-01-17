@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B599FD82-2921-48D8-ACBB-5DF40B799A94}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TextComposerLib.UI.WinForms</RootNamespace>
+    <AssemblyName>TextComposerLib.UI.WinForms</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cottle, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\GMac\packages\Cottle.2.0.2\lib\net472\Cottle.dll</HintPath>
+    </Reference>
+    <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNotificationMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNotificationMessage.designer.cs">
+      <DependentUpon>FormNotificationMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInterface\FormSamples.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\FormSamples.Designer.cs">
+      <DependentUpon>FormSamples.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\ISampleTasksTreeNode.cs" />
+    <Compile Include="UserInterface\SampleTask.cs" />
+    <Compile Include="UserInterface\SampleTasksCollection.cs" />
+    <Compile Include="UserInterface\UI\FormEditTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormEditTemplate.Designer.cs">
+      <DependentUpon>FormEditTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormFilesComposer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormFilesComposer.Designer.cs">
+      <DependentUpon>FormFilesComposer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormImportTemplateFromText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormImportTemplateFromText.Designer.cs">
+      <DependentUpon>FormImportTemplateFromText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormNewTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormNewTemplate.Designer.cs">
+      <DependentUpon>FormNewTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormProgress.Designer.cs">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormTemplateComposerEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UI\FormTemplateComposerEditor.Designer.cs">
+      <DependentUpon>FormTemplateComposerEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormNotificationMessage.resx">
+      <DependentUpon>FormNotificationMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UserInterface\FormSamples.resx">
+      <DependentUpon>FormSamples.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UI\FormEditTemplate.resx">
+      <DependentUpon>FormEditTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UI\FormFilesComposer.resx">
+      <DependentUpon>FormFilesComposer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UI\FormImportTemplateFromText.resx">
+      <DependentUpon>FormImportTemplateFromText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UI\FormNewTemplate.resx">
+      <DependentUpon>FormNewTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UI\FormProgress.resx">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UI\FormTemplateComposerEditor.resx">
+      <DependentUpon>FormTemplateComposerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj">
+      <Project>{52834d87-7593-4e6e-a9b0-dbaede8ce6da}</Project>
+      <Name>DataStructuresLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextComposerLib\TextComposerLib.csproj">
+      <Project>{7d81ff84-ed6b-4713-8d7e-a47b26e992d4}</Project>
+      <Name>TextComposerLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

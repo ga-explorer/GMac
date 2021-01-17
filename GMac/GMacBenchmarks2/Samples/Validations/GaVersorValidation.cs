@@ -1,7 +1,4 @@
-﻿using GeometricAlgebraNumericsLib.Validators;
-using GMacBenchmarks2.Samples.Computations;
-
-namespace GMacBenchmarks2.Samples.Validations
+﻿namespace GMacBenchmarks2.Samples.Validations
 {
     //public sealed class GaVersorValidation : IGMacSample
     //{

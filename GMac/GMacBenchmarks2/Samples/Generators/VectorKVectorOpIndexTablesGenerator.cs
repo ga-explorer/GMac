@@ -1,5 +1,5 @@
 ﻿using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMacBenchmarks2.Samples.Computations;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Parametric;
@@ -42,7 +42,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
                 .IncreaseIndentation();
 
             var resultIdsList = 
-                GaNumFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
+                GaFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
 
             var firstIdFlag = true;
             foreach (var id in resultIdsList)

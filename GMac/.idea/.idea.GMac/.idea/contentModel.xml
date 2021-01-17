@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Ahmad 2022\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Ahmad 2022\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_GMac.355448444.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Ahm2022\AppData\local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Ahm2022\AppData\local\JetBrains\Rider2020.3\resharper-host\local\Transient\Rider\v203\SolutionCaches\_GMac.355448444.00" t="ExcludeRecursive" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef.pak" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef_100_percent.pak" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\cef_200_percent.pak" t="Include" />
@@ -14,68 +14,64 @@
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\libcef.dll" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\libEGL.dll" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\libGLESv2.dll" t="Include" />
-    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales" t="Include">
-      <e p="am.pak" t="Include" />
-      <e p="ar.pak" t="Include" />
-      <e p="bg.pak" t="Include" />
-      <e p="bn.pak" t="Include" />
-      <e p="ca.pak" t="Include" />
-      <e p="cs.pak" t="Include" />
-      <e p="da.pak" t="Include" />
-      <e p="de.pak" t="Include" />
-      <e p="el.pak" t="Include" />
-      <e p="en-GB.pak" t="Include" />
-      <e p="en-US.pak" t="Include" />
-      <e p="es-419.pak" t="Include" />
-      <e p="es.pak" t="Include" />
-      <e p="et.pak" t="Include" />
-      <e p="fa.pak" t="Include" />
-      <e p="fi.pak" t="Include" />
-      <e p="fil.pak" t="Include" />
-      <e p="fr.pak" t="Include" />
-      <e p="gu.pak" t="Include" />
-      <e p="he.pak" t="Include" />
-      <e p="hi.pak" t="Include" />
-      <e p="hr.pak" t="Include" />
-      <e p="hu.pak" t="Include" />
-      <e p="id.pak" t="Include" />
-      <e p="it.pak" t="Include" />
-      <e p="ja.pak" t="Include" />
-      <e p="kn.pak" t="Include" />
-      <e p="ko.pak" t="Include" />
-      <e p="lt.pak" t="Include" />
-      <e p="lv.pak" t="Include" />
-      <e p="ml.pak" t="Include" />
-      <e p="mr.pak" t="Include" />
-      <e p="ms.pak" t="Include" />
-      <e p="nb.pak" t="Include" />
-      <e p="nl.pak" t="Include" />
-      <e p="pl.pak" t="Include" />
-      <e p="pt-BR.pak" t="Include" />
-      <e p="pt-PT.pak" t="Include" />
-      <e p="ro.pak" t="Include" />
-      <e p="ru.pak" t="Include" />
-      <e p="sk.pak" t="Include" />
-      <e p="sl.pak" t="Include" />
-      <e p="sr.pak" t="Include" />
-      <e p="sv.pak" t="Include" />
-      <e p="sw.pak" t="Include" />
-      <e p="ta.pak" t="Include" />
-      <e p="te.pak" t="Include" />
-      <e p="th.pak" t="Include" />
-      <e p="tr.pak" t="Include" />
-      <e p="uk.pak" t="Include" />
-      <e p="vi.pak" t="Include" />
-      <e p="zh-CN.pak" t="Include" />
-      <e p="zh-TW.pak" t="Include" />
-    </e>
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\am.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ar.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\bg.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\bn.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ca.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\cs.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\da.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\de.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\el.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\en-GB.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\en-US.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\es-419.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\es.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\et.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\fa.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\fi.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\fil.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\fr.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\gu.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\he.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\hi.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\hr.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\hu.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\id.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\it.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ja.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\kn.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ko.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\lt.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\lv.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ml.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\mr.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ms.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\nb.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\nl.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\pl.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\pt-BR.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\pt-PT.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ro.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ru.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\sk.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\sl.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\sr.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\sv.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\sw.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\ta.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\te.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\th.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\tr.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\uk.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\vi.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\zh-CN.pak" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\locales\zh-TW.pak" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\natives_blob.bin" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\README.txt" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\snapshot_blob.bin" t="Include" />
-    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\swiftshader" t="Include">
-      <e p="libEGL.dll" t="Include" />
-      <e p="libGLESv2.dll" t="Include" />
-    </e>
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\swiftshader\libEGL.dll" t="Include" />
+    <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\swiftshader\libGLESv2.dll" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\cef.redist.x64.75.1.14\CEF\v8_context_snapshot.bin" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\CefSharp.Common.75.1.143\CefSharp\x64\CefSharp.BrowserSubprocess.Core.pdb" t="Include" />
@@ -92,13 +88,11 @@
     <e p="D:\Projects\Active\CEMSim\packages\CefSharp.WinForms.75.1.143\CefSharp\x64\CefSharp.WinForms.XML" t="Include" />
     <e p="D:\Projects\Active\CEMSim\packages\Magick.NET-Q8-x64.7.15.0\runtimes\win-x64\native\Magick.Native-Q8-x64.dll" t="Include" />
     <e p="D:\Projects\Active\CodeComposerLib\CodeComposerLib" t="IncludeRecursive">
-      <e p="app.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="Class1.cs" t="Include" />
       <e p="CodeComposerLib.csproj" t="IncludeRecursive" />
       <e p="CodeComposerLibUtils.cs" t="Include" />
       <e p="CodeLibraryComposer.cs" t="Include" />
-      <e p="Form1.cs" t="Include" />
-      <e p="Form1.Designer.cs" t="Include" />
       <e p="GraphViz" t="Include">
         <e p="Dot" t="Include">
           <e p="Color" t="Include">
@@ -192,17 +186,6 @@
         <e p="GvOutputFormat.cs" t="Include" />
         <e p="GvRenderer.cs" t="Include" />
         <e p="GvTextOutputFormat.cs" t="Include" />
-        <e p="UserInterface" t="Include">
-          <e p="FormGraphVizEditor.cs" t="Include" />
-          <e p="FormGraphVizEditor.Designer.cs" t="Include" />
-          <e p="FormGraphVizEditor.resx" t="Include" />
-          <e p="FormImageDisplay.cs" t="Include" />
-          <e p="FormImageDisplay.Designer.cs" t="Include" />
-          <e p="FormImageDisplay.resx" t="Include" />
-          <e p="FormTextDisplay.cs" t="Include" />
-          <e p="FormTextDisplay.Designer.cs" t="Include" />
-          <e p="FormTextDisplay.resx" t="Include" />
-        </e>
       </e>
       <e p="HTML" t="Include">
         <e p="HtmlComposer.cs" t="Include" />
@@ -320,6 +303,7 @@
             <e p="IronyEBNFGrammar.cs" t="Include" />
           </e>
         </e>
+        <e p="IronyParsingResults.cs" t="Include" />
         <e p="Semantic" t="Include">
           <e p="ClassDiagrams" t="Include" />
           <e p="Command" t="Include">
@@ -574,6 +558,7 @@
           <e p="LaTeXSetCounter.cs" t="Include" />
         </e>
         <e p="LaTeXComposer.cs" t="Include" />
+        <e p="LaTeXMathUtils.cs" t="Include" />
         <e p="LaTeXRenderer.cs" t="Include" />
         <e p="LaTeXUtils.cs" t="Include" />
         <e p="Templates" t="Include">
@@ -658,19 +643,15 @@
           </e>
         </e>
       </e>
-      <e p="obj" t="ExcludeRecursive" />
-      <e p="packages.config" t="Include" />
-      <e p="Program.cs" t="Include" />
-      <e p="Properties" t="Include">
-        <e p="AssemblyInfo.cs" t="Include" />
-        <e p="Resources.Designer.cs" t="Include" />
-        <e p="Resources.resx" t="Include" />
-        <e p="Settings.Designer.cs" t="Include" />
-        <e p="Settings.settings" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="x64" t="Include">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="CodeComposerLib.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
       </e>
-      <e p="Scripting.evaluator.cs" t="Include" />
-      <e p="Scripting.Extensions.cs" t="Include" />
-      <e p="Scripting.native.cs" t="Include" />
       <e p="SyntaxTree" t="Include">
         <e p="Expressions" t="Include">
           <e p="ISteAtomicHeadSpecs.cs" t="Include" />
@@ -719,6 +700,36 @@
         <e p="XmlComposer.cs" t="Include" />
       </e>
     </e>
+    <e p="D:\Projects\Active\CodeComposerLib\CodeComposerLib.UI.WinForms" t="IncludeRecursive">
+      <e p="app.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="CodeComposerLib.UI.WinForms.csproj" t="IncludeRecursive" />
+      <e p="Form1.cs" t="Include" />
+      <e p="Form1.Designer.cs" t="Include" />
+      <e p="GraphViz" t="Include">
+        <e p="UserInterface" t="Include">
+          <e p="FormGraphVizEditor.cs" t="Include" />
+          <e p="FormGraphVizEditor.Designer.cs" t="Include" />
+          <e p="FormGraphVizEditor.resx" t="Include" />
+          <e p="FormImageDisplay.cs" t="Include" />
+          <e p="FormImageDisplay.Designer.cs" t="Include" />
+          <e p="FormImageDisplay.resx" t="Include" />
+          <e p="FormTextDisplay.cs" t="Include" />
+          <e p="FormTextDisplay.Designer.cs" t="Include" />
+          <e p="FormTextDisplay.resx" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+        <e p="Resources.Designer.cs" t="Include" />
+        <e p="Resources.resx" t="Include" />
+        <e p="Settings.Designer.cs" t="Include" />
+        <e p="Settings.settings" t="Include" />
+      </e>
+    </e>
     <e p="D:\Projects\Active\DataStructuresLib\DataStructuresLib" t="IncludeRecursive">
       <e p="Basic" t="Include">
         <e p="BasicUtils.cs" t="Include" />
@@ -735,14 +746,20 @@
         <e p="BooleanPattern.cs" t="Include" />
         <e p="MutableBooleanPattern.cs" t="Include" />
       </e>
+      <e p="Class1.cs" t="Include" />
       <e p="Collections" t="Include">
         <e p="CollectionsUtils.cs" t="Include" />
+        <e p="EmptyReadOnlyDictionary.cs" t="Include" />
+        <e p="EmptyReadOnlyList.cs" t="Include" />
         <e p="IReadOnlyCollection2D.cs" t="Include" />
         <e p="IReadOnlyCollection3D.cs" t="Include" />
         <e p="IReadOnlyCollection4D.cs" t="Include" />
         <e p="IReadOnlyList2D.cs" t="Include" />
         <e p="IReadOnlyList3D.cs" t="Include" />
         <e p="IReadOnlyList4D.cs" t="Include" />
+        <e p="ReadOnlyListAsDictionary.cs" t="Include" />
+        <e p="SingleItemReadOnlyList.cs" t="Include" />
+        <e p="SparseReadOnlyList.cs" t="Include" />
       </e>
       <e p="DataStructuresLib.csproj" t="IncludeRecursive" />
       <e p="DataStructuresLibUtils.cs" t="Include" />
@@ -759,7 +776,9 @@
       </e>
       <e p="Extensions" t="Include">
         <e p="ArrayExtensions.cs" t="Include" />
+        <e p="DictionaryUtils.cs" t="Include" />
         <e p="ListExtensions.cs" t="Include" />
+        <e p="SequenceExtensions.cs" t="Include" />
       </e>
       <e p="Files" t="Include">
         <e p="FilesUtils.cs" t="Include" />
@@ -767,8 +786,15 @@
       <e p="IDynamicTreeVisitor.cs" t="Include" />
       <e p="IntegerBitUtils.cs" t="Include" />
       <e p="IntegerSequenceGenerator.cs" t="Include" />
-      <e p="obj" t="ExcludeRecursive" />
-      <e p="packages.config" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="x64" t="Include">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="DataStructuresLib.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Permutations" t="Include">
         <e p="ComputedIndexMap1DTo2D.cs" t="Include" />
         <e p="IIndexMap1D.cs" t="Include" />
@@ -788,9 +814,7 @@
         <e p="IndexMapReverse1D.cs" t="Include" />
       </e>
       <e p="PriorityQueue.cs" t="Include" />
-      <e p="Properties" t="Include">
-        <e p="AssemblyInfo.cs" t="Include" />
-      </e>
+      <e p="Program.cs" t="Include" />
       <e p="QueueStack.cs" t="Include" />
       <e p="Random" t="Include">
         <e p="RandomGenerator.cs" t="Include" />
@@ -859,6 +883,9 @@
         <e p="SparseTableUtils.cs" t="Include" />
       </e>
       <e p="SparseTable.cs" t="Include" />
+      <e p="Stacks" t="Include">
+        <e p="FixedStack.cs" t="Include" />
+      </e>
       <e p="Statistics" t="Include">
         <e p="BooleanOutcomesEventSummary.cs" t="Include" />
         <e p="EventOutcomeSummary.cs" t="Include" />
@@ -873,8 +900,15 @@
       <e p="TrimmedList.cs" t="Include" />
     </e>
     <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib" t="IncludeRecursive">
-      <e p="app.config" t="Include" />
+      <e p="Applications" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="Documentation" t="Include">
+        <e p="TextFile1.md" t="Include" />
+      </e>
+      <e p="Evaluator" t="Include">
+        <e p="IronyExpressionEvaluator.cs" t="Include" />
+        <e p="IronyExpressionEvaluatorGrammar.cs" t="Include" />
+      </e>
       <e p="Exceptions" t="Include">
         <e p="GaNumericsException.cs" t="Include" />
       </e>
@@ -884,8 +918,6 @@
         <e p="GaNumFrameNonOrthogonal.cs" t="Include" />
         <e p="GaNumFrameOrthogonal.cs" t="Include" />
         <e p="GaNumFrameOrthonormal.cs" t="Include" />
-        <e p="GaNumFrameUtils.cs" t="Include" />
-        <e p="IGaFrame.cs" t="Include" />
         <e p="QCGA" t="Include">
           <e p="GaNumQcga.cs" t="Include" />
         </e>
@@ -909,6 +941,34 @@
           <e p="GaNumVector3D.cs" t="Include" />
         </e>
       </e>
+      <e p="GuidedBinaryTraversal" t="Include">
+        <e p="GaGbtBtrNodeStack1.cs" t="Include" />
+        <e p="GaGbtStackUtils.cs" t="Include" />
+        <e p="Multivectors" t="Include">
+          <e p="GaGbtNumDarMultivectorStack1.cs" t="Include" />
+          <e p="GaGbtNumDgrMultivectorStack1.cs" t="Include" />
+          <e p="GaGbtNumSarMultivectorStack1.cs" t="Include" />
+          <e p="GaGbtNumSgrMultivectorStack1.cs" t="Include" />
+          <e p="GaGbtNumTermMultivectorStack1.cs" t="Include" />
+          <e p="IGaGbtNumMultivectorStack1.cs" t="Include" />
+        </e>
+        <e p="Outermorphisms" t="Include">
+          <e p="GaGbtNumMultivectorOutermorphismStack.cs" t="Include" />
+          <e p="GaGbtNumOutermorphismStack.cs" t="Include" />
+        </e>
+        <e p="Products" t="Include">
+          <e p="GaGbtNumMultivectorOrthogonalProductsStack2.cs" t="Include" />
+          <e p="GaGbtNumMultivectorOrthogonalProductsStack3.cs" t="Include" />
+          <e p="IGaGbtNumMultivectorProductStack2.cs" t="Include" />
+          <e p="TruthTable3Inputs.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Interop" t="Include">
+        <e p="MATLAB" t="Include">
+          <e p="GaNumMatlabSparseMatrixData.cs" t="Include" />
+          <e p="MatlabUtils.cs" t="Include" />
+        </e>
+      </e>
       <e p="Maps" t="Include">
         <e p="Bilinear" t="Include">
           <e p="GaNumMapBilinear.cs" t="Include" />
@@ -920,14 +980,7 @@
           <e p="GaNumMapBilinearTree.cs" t="Include" />
           <e p="IGaNumMapBilinear.cs" t="Include" />
         </e>
-        <e p="GaNumMap.cs" t="Include" />
         <e p="GaNumMapUtils.cs" t="Include" />
-        <e p="IGaNumMap.cs" t="Include" />
-        <e p="Outermorphisms" t="Include">
-          <e p="GaNumMixedOutermorphism.cs" t="Include" />
-          <e p="GaNumOutermorphism.cs" t="Include" />
-          <e p="GaNumStoredOutermorphism.cs" t="Include" />
-        </e>
         <e p="Trilinear" t="Include">
           <e p="GaNumMapTrilinear.cs" t="Include" />
           <e p="GaNumMapTrilinearHash.cs" t="Include" />
@@ -949,6 +1002,7 @@
           <e p="IGaNumMapUnilinear.cs" t="Include" />
         </e>
       </e>
+      <e p="Matrices" t="Include" />
       <e p="Metrics" t="Include">
         <e p="GaNumMetricEuclidean.cs" t="Include" />
         <e p="GaNumMetricNonOrthogonal.cs" t="Include" />
@@ -958,33 +1012,60 @@
         <e p="IGaNumMetricOrthogonal.cs" t="Include" />
       </e>
       <e p="Multivectors" t="Include">
+        <e p="Development-Specs.md" t="Include" />
         <e p="GaMultivectorMutableImplementation.cs" t="Include" />
-        <e p="GaNumImmutableMultivector.cs" t="Include" />
-        <e p="GaNumImmutableMultivectorUtils.cs" t="Include" />
-        <e p="GaNumKVector.cs" t="Include" />
-        <e p="GaNumKVectorUtils.cs" t="Include" />
-        <e p="GaNumMultivector.cs" t="Include" />
-        <e p="GaNumMultivectorArray.cs" t="Include" />
-        <e p="GaNumMultivectorBinaryTree1D.cs" t="Include" />
-        <e p="GaNumMultivectorBinaryTree2D.cs" t="Include" />
-        <e p="GaNumMultivectorBinaryTree3D.cs" t="Include" />
-        <e p="GaNumMultivectorBiTerm.cs" t="Include" />
-        <e p="GaNumMultivectorGraded.cs" t="Include" />
-        <e p="GaNumMultivectorHash.cs" t="Include" />
-        <e p="GaNumMultivectorHashTable1D.cs" t="Include" />
-        <e p="GaNumMultivectorHashTable3D.cs" t="Include" />
-        <e p="GaNumMultivectorTerm.cs" t="Include" />
-        <e p="GaNumMultivectorUtils.cs" t="Include" />
-        <e p="IGaNumMultivector.cs" t="Include" />
-        <e p="IGaNumMultivectorMutable.cs" t="Include" />
+        <e p="GaTerm.cs" t="Include" />
+        <e p="GaTermUtils.cs" t="Include" />
+        <e p="IGaMultivectorSource.cs" t="Include" />
+        <e p="Numeric" t="Include">
+          <e p="Factories" t="Include">
+            <e p="GaNumDarMultivectorFactory.cs" t="Include" />
+            <e p="GaNumDgrMultivectorFactory.cs" t="Include" />
+            <e p="GaNumMultivectorConstructorGrammar.cs" t="Include" />
+            <e p="GaNumMultivectorFactory.cs" t="Include" />
+            <e p="GaNumMultivectorFactoryUtils.cs" t="Include" />
+            <e p="GaNumSarMultivectorFactory.cs" t="Include" />
+            <e p="GaNumSgrMultivectorFactory.cs" t="Include" />
+          </e>
+          <e p="GaNumDarKVector.cs" t="Include" />
+          <e p="GaNumDarMultivector.cs" t="Include" />
+          <e p="GaNumDgrMultivector.cs" t="Include" />
+          <e p="GaNumMultivector.cs" t="Include" />
+          <e p="GaNumMultivectorUtils.cs" t="Include" />
+          <e p="GaNumSarKVector.cs" t="Include" />
+          <e p="GaNumSarMultivector.cs" t="Include" />
+          <e p="GaNumSgrMultivector.cs" t="Include" />
+          <e p="GaNumTerm.cs" t="Include" />
+          <e p="GaNumVector.cs" t="Include" />
+          <e p="IGaNumGradedMultivector.cs" t="Include" />
+          <e p="IGaNumKVector.cs" t="Include" />
+          <e p="IGaNumMultivector.cs" t="Include" />
+          <e p="IGaNumMultivectorSource.cs" t="Include" />
+          <e p="IGaNumVector.cs" t="Include" />
+        </e>
         <e p="VectorKVectorOp" t="Include">
           <e p="GaNumVectorKVectorOpUtils.cs" t="Include" />
           <e p="GaNumVectorKVectorOpUtils1.cs" t="Include" />
           <e p="GaNumVectorKVectorOpUtils2.cs" t="Include" />
         </e>
       </e>
-      <e p="obj" t="ExcludeRecursive" />
-      <e p="packages.config" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="x64" t="Include">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="GeometricAlgebraNumericsLib.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Outermorphisms" t="Include">
+        <e p="0e14crlx.liw~" t="Include" />
+        <e p="GaNumMixedOutermorphism.cs" t="Include" />
+        <e p="GaNumMixedOutermorphism.cs~RF3220446c.TMP" t="Include" />
+        <e p="GaNumOutermorphism.cs" t="Include" />
+        <e p="GaNumOutermorphismUtils.cs" t="Include" />
+        <e p="GaNumStoredOutermorphism.cs" t="Include" />
+      </e>
       <e p="Products" t="Include">
         <e p="Euclidean" t="Include">
           <e p="GaNumEuclideanAcp.cs" t="Include" />
@@ -1003,9 +1084,14 @@
         <e p="GaNumBilinearProductNonOrthogonal.cs" t="Include" />
         <e p="GaNumBilinearProductOrthogonal.cs" t="Include" />
         <e p="GaNumBilinearProductOrthonormal.cs" t="Include" />
+        <e p="GaNumBilinearProductsUtils.cs" t="Include" />
         <e p="GaNumOp.cs" t="Include" />
         <e p="GaNumProductsUtils.cs" t="Include" />
+        <e p="GaNumProductTerm.cs" t="Include" />
+        <e p="GaNumTrilinearProductsUtils.cs" t="Include" />
+        <e p="GaNumTrilinearProductUtils.cs" t="Include" />
         <e p="IGaNumBilinearOrthogonalProduct.cs" t="Include" />
+        <e p="IGaNumOrthogonalGeometricProduct.cs" t="Include" />
         <e p="NonOrthogonal" t="Include">
           <e p="GaNumNonOrthogonalGp.cs" t="Include" />
         </e>
@@ -1030,9 +1116,6 @@
           <e p="GaNumOrthonormalSp.cs" t="Include" />
         </e>
       </e>
-      <e p="Properties" t="Include">
-        <e p="AssemblyInfo.cs" t="Include" />
-      </e>
       <e p="Rendering" t="Include">
         <e p="LaTeX" t="Include">
           <e p="GaLaTeXBasisBladeForm.cs" t="Include" />
@@ -1040,16 +1123,60 @@
         </e>
         <e p="RenderingUtils.cs" t="Include" />
       </e>
+      <e p="Scalars" t="Include">
+        <e p="GaNumScalarTuple2.cs" t="Include" />
+        <e p="IGaNumScalar.cs" t="Include" />
+      </e>
       <e p="Structures" t="Include">
+        <e p="BinaryTraversal" t="Include">
+          <e p="GaGbtBasisBladeNode.cs" t="Include" />
+          <e p="GaGbtBasisVectorNode.cs" t="Include" />
+          <e p="GaGbtBtrMultivectorNode.cs" t="Include" />
+          <e p="GaGbtBtrMultivectorOutermorphismNode.cs" t="Include" />
+          <e p="GaGbtBtrMultivectorOutermorphismPairNode.cs" t="Include" />
+          <e p="GaGbtFarMultivectorNode.cs" t="Include" />
+          <e p="GaGbtJarMultivectorNode.cs" t="Include" />
+          <e p="GaGbtJarMultivectorOutermorphismNode.cs" t="Include" />
+          <e p="GaGbtNode2.cs" t="Include" />
+          <e p="GaGbtNode3.cs" t="Include" />
+          <e p="GaGbtUtils.cs" t="Include" />
+          <e p="IGaGbtNode.cs" t="Include" />
+          <e p="IGaGbtNode1.cs" t="Include" />
+        </e>
         <e p="BinaryTrees" t="Include">
-          <e p="GaBinaryTreeInternalNode.cs" t="Include" />
-          <e p="GaBinaryTreeLeafNode.cs" t="Include" />
-          <e p="IGaBinaryTreeNode.cs" t="Include" />
+          <e p="GaBtrInternalNode.cs" t="Include" />
+          <e p="GaBtrLeafNode.cs" t="Include" />
+          <e p="IGaBtrNode.cs" t="Include" />
           <e p="NodeInfo" t="Include">
-            <e p="GaBinaryTreeGradedNodeInfo.cs" t="Include" />
-            <e p="GaBinaryTreeNodeInfo.cs" t="Include" />
+            <e p="GaBinaryTreeGradedNodeInfo1.cs" t="Include" />
+            <e p="GaBinaryTreeGradedNodeInfo2.cs" t="Include" />
+            <e p="GaBinaryTreeNodeInfo1.cs" t="Include" />
             <e p="GaBinaryTreeNodeInfo2.cs" t="Include" />
           </e>
+        </e>
+        <e p="Collections" t="Include">
+          <e p="GaDarKVectorAsDarMultivectorReadOnlyList.cs" t="Include" />
+          <e p="GaDarKVectorAsSarMultivectorReadOnlyDictionary.cs" t="Include" />
+          <e p="GaDarMultivectorAsDarKVectorReadOnlyList.cs" t="Include" />
+          <e p="GaDarMultivectorAsVectorReadOnlyList.cs" t="Include" />
+          <e p="GaDarVectorAsSarMultivectorReadOnlyDictionary.cs" t="Include" />
+          <e p="GaDgrMultivectorAsDarMultivectorReadOnlyList.cs" t="Include" />
+          <e p="GaNumCollectionsUtils.cs" t="Include" />
+          <e p="GaNumMultivectorBinaryTree1D.cs" t="Include" />
+          <e p="GaNumMultivectorBinaryTree2D.cs" t="Include" />
+          <e p="GaNumMultivectorBinaryTree3D.cs" t="Include" />
+          <e p="GaNumMultivectorHashTable1D.cs" t="Include" />
+          <e p="GaNumMultivectorHashTable3D.cs" t="Include" />
+          <e p="GaNumReadOnlyMatrixColumn.cs" t="Include" />
+          <e p="GaNumReadOnlyMatrixRow.cs" t="Include" />
+          <e p="GaSarKVectorAsDarMultivectorReadOnlyList.cs" t="Include" />
+          <e p="GaSarKVectorAsSarMultivectorReadOnlyDictionary.cs" t="Include" />
+          <e p="GaSarMultivectorAsDarKVectorReadOnlyList.cs" t="Include" />
+          <e p="GaSarMultivectorAsSarKVectorReadOnlyDictionary.cs" t="Include" />
+          <e p="GaSarMultivectorAsVectorReadOnlyList.cs" t="Include" />
+          <e p="GaSgrMultivectorAsDarMultivectorReadOnlyList.cs" t="Include" />
+          <e p="GaSgrMultivectorAsSarMultivectorReadOnlyDictionary.cs" t="Include" />
+          <e p="GaVectorAsDarMultivectorReadOnlyList.cs" t="Include" />
         </e>
         <e p="GaCompactBinaryTree.cs" t="Include" />
         <e p="GaCompactBinaryTreeEmptyNode.cs" t="Include" />
@@ -1068,7 +1195,484 @@
       <e p="Validators" t="Include">
         <e p="GaNumMultivectorValidator.cs" t="Include" />
         <e p="GaNumOutermorphismValidator.cs" t="Include" />
+        <e p="GaNumSandwichProductValidator.cs" t="Include" />
         <e p="GaNumValidator.cs" t="Include" />
+        <e p="GaNumVersorValidator.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.UnitTests" t="IncludeRecursive">
+      <e p="app.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="GeometricAlgebraNumericsLib.UnitTests.csproj" t="IncludeRecursive" />
+      <e p="Multivectors" t="Include">
+        <e p="GaNumMultivectorFactoryTests.cs" t="Include" />
+        <e p="GaNumMultivectorProductsTests.cs" t="Include" />
+        <e p="GaNumMultivectorTests.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLibSamples" t="IncludeRecursive">
+      <e p="app.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Frames" t="Include">
+        <e p="E2D.cs" t="Include" />
+        <e p="E3D.cs" t="Include" />
+        <e p="Hga3D.cs" t="Include" />
+        <e p="Hga4D.cs" t="Include" />
+      </e>
+      <e p="GAPoT" t="Include" />
+      <e p="GeometricAlgebraNumericsLibSamples.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+      <e p="Structures" t="Include">
+        <e p="LineSegment3D.cs" t="Include" />
+        <e p="Point3D.cs" t="Include" />
+        <e p="Sphere3D.cs" t="Include" />
+        <e p="SphereKind.cs" t="Include" />
+        <e p="Triangle3D.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\MSTest.TestAdapter.2.1.1\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\MSTest.TestAdapter.2.1.1\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\MSTest.TestAdapter.2.1.1\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\NUnit3TestAdapter.3.16.1\build\net35\nunit.engine.api.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\NUnit3TestAdapter.3.16.1\build\net35\nunit.engine.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\NUnit3TestAdapter.3.16.1\build\net35\NUnit3.TestAdapter.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraNumericsLib\packages\NUnit3TestAdapter.3.16.1\build\net35\NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="D:\Projects\Active\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Frames" t="Include">
+        <e p="GaFrameUtils.cs" t="Include" />
+        <e p="GaLookupTables.cs" t="Include" />
+        <e p="IGaFrame.cs" t="Include" />
+      </e>
+      <e p="GeometricAlgebraStructuresLib.csproj" t="IncludeRecursive" />
+      <e p="GuidedBinaryTraversal" t="Include">
+        <e p="GaGbtBinaryTreeStack1.cs" t="Include" />
+        <e p="GaGbtStack.cs" t="Include" />
+        <e p="GaGbtStack1.cs" t="Include" />
+        <e p="GaGbtStack2.cs" t="Include" />
+        <e p="GaGbtStack3.cs" t="Include" />
+        <e p="IGaGbtStack.cs" t="Include" />
+        <e p="IGaGbtStack1.cs" t="Include" />
+        <e p="IGaGbtStack2.cs" t="Include" />
+        <e p="IGaGbtStack3.cs" t="Include" />
+        <e p="Multivectors" t="Include">
+          <e p="GaGbtMvsDenseArrayStack1.cs" t="Include" />
+          <e p="GaGbtMvsDenseGradedStack1.cs" t="Include" />
+          <e p="GaGbtMvsSparseArrayStack1.cs" t="Include" />
+          <e p="GaGbtMvsSparseGradedStack1.cs" t="Include" />
+          <e p="GaGbtMvsTermStack1.cs" t="Include" />
+          <e p="IGaGbtMultivectorStorageStack1.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Maps" t="Include">
+        <e p="Bilinear" t="Include">
+          <e p="GaNumMapBilinear.cs" t="Include" />
+          <e p="GaNumMapBilinearArray.cs" t="Include" />
+          <e p="GaNumMapBilinearCoefSums.cs" t="Include" />
+          <e p="GaNumMapBilinearCombined.cs" t="Include" />
+          <e p="GaNumMapBilinearHash.cs" t="Include" />
+          <e p="GaNumMapBilinearTree.cs" t="Include" />
+        </e>
+        <e p="GaMap.cs" t="Include" />
+        <e p="GaMapBilinearAssociativity.cs" t="Include" />
+        <e p="GaNumMapUtils.cs" t="Include" />
+        <e p="IGaMap.cs" t="Include" />
+        <e p="IGaMapBilinear.cs" t="Include" />
+        <e p="IGaMapTrilinear.cs" t="Include" />
+        <e p="IGaMapUnilinear.cs" t="Include" />
+        <e p="Trilinear" t="Include">
+          <e p="GaNumMapTrilinear.cs" t="Include" />
+          <e p="GaNumMapTrilinearHash.cs" t="Include" />
+        </e>
+        <e p="Unilinear" t="Include">
+          <e p="GaMapUnilinear.cs" t="Include" />
+          <e p="GaMapUnilinearArray.cs" t="Include" />
+          <e p="GaNumMapUnilinearCoefSums.cs" t="Include" />
+          <e p="GaNumMapUnilinearCombined.cs" t="Include" />
+          <e p="GaNumMapUnilinearComposed.cs" t="Include" />
+          <e p="GaNumMapUnilinearIdentity.cs" t="Include" />
+          <e p="GaNumMapUnilinearKVectorsArray.cs" t="Include" />
+          <e p="GaNumMapUnilinearMatrix.cs" t="Include" />
+          <e p="GaNumMapUnilinearSparseColumns.cs" t="Include" />
+          <e p="GaNumMapUnilinearSparseRows.cs" t="Include" />
+          <e p="GaNumMapUnilinearTree.cs" t="Include" />
+          <e p="GaUnilinearMapImplementation.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Multivectors" t="Include">
+        <e p="GaGradedTerm.cs" t="Include" />
+        <e p="GaMultivector.cs" t="Include" />
+        <e p="GaScaledTerms.cs" t="Include" />
+        <e p="GaScaledTermsList.cs" t="Include" />
+        <e p="GaTerm.cs" t="Include" />
+        <e p="GaUniformTerm.cs" t="Include" />
+        <e p="IGaMultivector.cs" t="Include" />
+        <e p="IGaTerm.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="x64" t="Include">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="GeometricAlgebraStructuresLib.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Processors" t="Include">
+        <e p="IGaMultivectorConverter.cs" t="Include" />
+        <e p="IGaMultivectorProcessor.cs" t="Include" />
+      </e>
+      <e p="Scalars" t="Include">
+        <e p="GaScalarDomainUtils.cs" t="Include" />
+        <e p="GaSdComplex.cs" t="Include" />
+        <e p="GaSdEwMatrix64.cs" t="Include" />
+        <e p="GaSdFloat32.cs" t="Include" />
+        <e p="GaSdFloat64.cs" t="Include" />
+        <e p="GaSdScalarsTuple.cs" t="Include" />
+        <e p="GaSdTuple.cs" t="Include" />
+        <e p="IGaScalarDomain.cs" t="Include" />
+      </e>
+      <e p="Storage" t="Include">
+        <e p="GaGradedMultivectorStorage.cs" t="Include" />
+        <e p="GaMultivectorStorageUtils.cs" t="Include" />
+        <e p="GaMvsBinaryTree.cs" t="Include" />
+        <e p="GaMvsDenseArray.cs" t="Include" />
+        <e p="GaMvsDenseGraded.cs" t="Include" />
+        <e p="GaMvsDenseKVector.cs" t="Include" />
+        <e p="GaMvsSparseArray.cs" t="Include" />
+        <e p="GaMvsSparseGraded.cs" t="Include" />
+        <e p="GaMvsSparseKVector.cs" t="Include" />
+        <e p="GaMvsTerm.cs" t="Include" />
+        <e p="GaMvsVector.cs" t="Include" />
+        <e p="GaUniformMultivectorStorage.cs" t="Include" />
+        <e p="IGaKVectorStorage.cs" t="Include" />
+        <e p="IGaMultivectorStorage.cs" t="Include" />
+        <e p="IGaVectorStorage.cs" t="Include" />
+      </e>
+      <e p="Trees" t="Include">
+        <e p="GaBinaryTree.cs" t="Include" />
+        <e p="GaTreesUtils.cs" t="Include" />
+      </e>
+      <e p="Tuples" t="Include">
+        <e p="GaConstantScalarsTuple.cs" t="Include" />
+        <e p="GaDenseScalarsTuple.cs" t="Include" />
+        <e p="GaSparseScalarsTuple.cs" t="Include" />
+        <e p="GaZeroScalarsTuple.cs" t="Include" />
+        <e p="IGaScalarsTuple.cs" t="Include" />
+        <e p="IGaSparseScalarsTuple.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib.Samples" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="GeometricAlgebraStructuresLib.Samples.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="x64" t="Include">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="GeometricAlgebraStructuresLib.Samples.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Program.cs" t="Include" />
+      <e p="Structures" t="Include">
+        <e p="Sample1.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.Framework" t="IncludeRecursive">
+      <e p="app.config" t="Include" />
+      <e p="Applications" t="Include">
+        <e p="GAPoT" t="Include">
+          <e p="GaPoTSymBiversor.cs" t="Include" />
+          <e p="GaPoTSymBiversorConstructorGrammar.cs" t="Include" />
+          <e p="GaPoTSymBiversorTerm.cs" t="Include" />
+          <e p="GaPoTSymFrame.cs" t="Include" />
+          <e p="GaPoTSymMultivector.cs" t="Include" />
+          <e p="GaPoTSymMultivectorTerm.cs" t="Include" />
+          <e p="GaPoTSymPolarPhasor.cs" t="Include" />
+          <e p="GaPoTSymRectPhasor.cs" t="Include" />
+          <e p="GaPoTSymUtils.cs" t="Include" />
+          <e p="GaPoTSymVector.cs" t="Include" />
+          <e p="GaPoTSymVectorConstructorGrammar.cs" t="Include" />
+          <e p="GaPoTSymVectorTerm.cs" t="Include" />
+        </e>
+      </e>
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Cas" t="Include">
+        <e p="Mathematica" t="Include">
+          <e p="Expression" t="Include">
+            <e p="MathematicaAtomicType.cs" t="Include" />
+            <e p="MathematicaCondition.cs" t="Include" />
+            <e p="MathematicaExpression.cs" t="Include" />
+            <e p="MathematicaMatrix.cs" t="Include" />
+            <e p="MathematicaPattern.cs" t="Include" />
+            <e p="MathematicaRule.cs" t="Include" />
+            <e p="MathematicaScalar.cs" t="Include" />
+            <e p="MathematicaVector.cs" t="Include" />
+          </e>
+          <e p="ExpressionTree" t="Include">
+            <e p="CasExpressionTree.cs" t="Include" />
+            <e p="CasExpressionTreeNode.cs" t="Include" />
+            <e p="CasExpressionTreeUtils.cs" t="Include" />
+          </e>
+          <e p="ExprFactory" t="Include">
+            <e p="CharacterSymbols.cs" t="Include" />
+            <e p="DomainSymbols.cs" t="Include" />
+            <e p="MFS.cs" t="Include" />
+            <e p="OptionSymbols.cs" t="Include" />
+          </e>
+          <e p="ISymbolicMatrix.cs" t="Include" />
+          <e p="ISymbolicObject.cs" t="Include" />
+          <e p="ISymbolicVector.cs" t="Include" />
+          <e p="MathematicaConnection.cs" t="Include" />
+          <e p="MathematicaConstants.cs" t="Include" />
+          <e p="MathematicaEvaluator.cs" t="Include" />
+          <e p="MathematicaExpression_ClassDiagram.cd" t="Include" />
+          <e p="MathematicaInterface.cs" t="Include" />
+          <e p="MathematicaInterface_ClassDiagram.cd" t="Include" />
+          <e p="MathematicaScalar_ClassDiagram.cd" t="Include" />
+          <e p="MathematicaUtils.cs" t="Include" />
+          <e p="NETLink" t="Include">
+            <e p="ComplexClassHandler.cs" t="Include" />
+            <e p="Expr.cs" t="Include" />
+            <e p="ExprFormatException.cs" t="Include" />
+            <e p="IKernelLink.cs" t="Include" />
+            <e p="ILinkMark.cs" t="Include" />
+            <e p="ILoopbackLink.cs" t="Include" />
+            <e p="IMathLink.cs" t="Include" />
+            <e p="Install.cs" t="Include" />
+            <e p="Internal" t="Include">
+              <e p="CallNETException.cs" t="Include" />
+              <e p="CallPacketHandler.cs" t="Include" />
+              <e p="COM" t="Include">
+                <e p="COMDispatchHandler.cs" t="Include" />
+                <e p="COMObjectWrapper.cs" t="Include" />
+                <e p="COMTypeLibraryLoader.cs" t="Include" />
+                <e p="COMUtilities.cs" t="Include" />
+              </e>
+              <e p="DelegateHelper.cs" t="Include" />
+              <e p="DLLHelper.cs" t="Include" />
+              <e p="EventHelper.cs" t="Include" />
+              <e p="MacMathLinkAPIProvider.cs" t="Include" />
+              <e p="MathLinkAPIProvider.cs" t="Include" />
+              <e p="NativeLink.cs" t="Include" />
+              <e p="NativeLoopbackLink.cs" t="Include" />
+              <e p="NativeMark.cs" t="Include" />
+              <e p="ObjectHandler.cs" t="Include" />
+              <e p="Unix64MathLinkAPIProvider.cs" t="Include" />
+              <e p="UnixMathLinkAPIProvider.cs" t="Include" />
+              <e p="Win64MathLinkAPIProvider.cs" t="Include" />
+              <e p="WindowsMathLinkAPIProvider.cs" t="Include" />
+            </e>
+            <e p="KernelLinkImpl.cs" t="Include" />
+            <e p="MathDelegate.cs" t="Include" />
+            <e p="MathematicaNotReadyException.cs" t="Include" />
+            <e p="MathKernel.cs" t="Include" />
+            <e p="MathLinkConstants.cs" t="Include" />
+            <e p="MathLinkException.cs" t="Include" />
+            <e p="MathLinkFactory.cs" t="Include" />
+            <e p="MathLinkImpl.cs" t="Include" />
+            <e p="Reader.cs" t="Include" />
+            <e p="StdLink.cs" t="Include" />
+            <e p="TypeLoader.cs" t="Include" />
+            <e p="UI" t="Include">
+              <e p="ConsoleWindow.cs" t="Include" />
+              <e p="DoubleBufferedPanel.cs" t="Include" />
+              <e p="MathPictureBox.cs" t="Include" />
+            </e>
+            <e p="Utils.cs" t="Include" />
+            <e p="WrappedKernelLink.cs" t="Include" />
+          </e>
+          <e p="Test" t="Include">
+            <e p="TestMathematicaMatrix.cs" t="Include" />
+            <e p="TestMathematicaScalar.cs" t="Include" />
+            <e p="TestMathematicaVector.cs" t="Include" />
+            <e p="TestUtils.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Exceptions" t="Include">
+        <e p="GaSymbolicsException.cs" t="Include" />
+      </e>
+      <e p="Frames" t="Include">
+        <e p="GaSymFrame.cs" t="Include" />
+        <e p="GaSymFrameEuclidean.cs" t="Include" />
+        <e p="GaSymFrameNonOrthogonal.cs" t="Include" />
+        <e p="GaSymFrameOrthogonal.cs" t="Include" />
+        <e p="GaSymFrameOrthonormal.cs" t="Include" />
+      </e>
+      <e p="GaSymbolicsUtils.cs" t="Include" />
+      <e p="GeometricAlgebraSymbolicsLib.Framework.csproj" t="IncludeRecursive" />
+      <e p="Maps" t="Include">
+        <e p="Bilinear" t="Include">
+          <e p="GaSymMapBilinear.cs" t="Include" />
+          <e p="GaSymMapBilinearArray.cs" t="Include" />
+          <e p="GaSymMapBilinearCoefSums.cs" t="Include" />
+          <e p="GaSymMapBilinearCombined.cs" t="Include" />
+          <e p="GaSymMapBilinearHash.cs" t="Include" />
+          <e p="GaSymMapBilinearTree.cs" t="Include" />
+          <e p="IGaSymMapBilinear.cs" t="Include" />
+        </e>
+        <e p="GaSymMap.cs" t="Include" />
+        <e p="GaSymMapUtils.cs" t="Include" />
+        <e p="IGaSymMap.cs" t="Include" />
+        <e p="Trilinear" t="Include">
+          <e p="GaSymMapTrilinear.cs" t="Include" />
+          <e p="GaSymMapTrilinearHash.cs" t="Include" />
+          <e p="IGaSymMapTrilinear.cs" t="Include" />
+        </e>
+        <e p="Unilinear" t="Include">
+          <e p="GaSymMapUnilinear.cs" t="Include" />
+          <e p="GaSymMapUnilinearArray.cs" t="Include" />
+          <e p="GaSymMapUnilinearCoefSums.cs" t="Include" />
+          <e p="GaSymMapUnilinearCombined.cs" t="Include" />
+          <e p="GaSymMapUnilinearComposed.cs" t="Include" />
+          <e p="GaSymMapUnilinearHash.cs" t="Include" />
+          <e p="GaSymMapUnilinearIdentity.cs" t="Include" />
+          <e p="GaSymMapUnilinearMatrix.cs" t="Include" />
+          <e p="GaSymMapUnilinearTree.cs" t="Include" />
+          <e p="GaSymOutermorphism.cs" t="Include" />
+          <e p="IGaSymMapUnilinear.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Matrices" t="Include">
+        <e p="GaSymMatrixIdentity.cs" t="Include" />
+      </e>
+      <e p="Metrics" t="Include">
+        <e p="GaSymMetricEuclidean.cs" t="Include" />
+        <e p="GaSymMetricNonOrthogonal.cs" t="Include" />
+        <e p="GaSymMetricOrthogonal.cs" t="Include" />
+        <e p="GaSymMetricOrthonormal.cs" t="Include" />
+        <e p="IGaMetric.cs" t="Include" />
+        <e p="IGaMetricOrthogonal.cs" t="Include" />
+      </e>
+      <e p="ml32i4.dll" t="Include" />
+      <e p="ml64i4.dll" t="Include" />
+      <e p="Multivectors" t="Include">
+        <e p="GaMultivector_ClassDiagram.cd" t="Include" />
+        <e p="GaSymMultivector.cs" t="Include" />
+        <e p="GaSymMultivectorBinaryTree1D.cs" t="Include" />
+        <e p="GaSymMultivectorBinaryTree2D.cs" t="Include" />
+        <e p="GaSymMultivectorBinaryTree3D.cs" t="Include" />
+        <e p="GaSymMultivectorBiTerm.cs" t="Include" />
+        <e p="GaSymMultivectorHashTable1D.cs" t="Include" />
+        <e p="GaSymMultivectorHashTable2D.cs" t="Include" />
+        <e p="GaSymMultivectorHashTable3D.cs" t="Include" />
+        <e p="GaSymMultivectorTerm.cs" t="Include" />
+        <e p="GaSymMultivectorUtils.cs" t="Include" />
+        <e p="GaSymScalarBinaryTree1D.cs" t="Include" />
+        <e p="GaSymScalarBinaryTree2D.cs" t="Include" />
+        <e p="GaSymScalarHashTable1D.cs" t="Include" />
+        <e p="GaSymScalarHashTable2D.cs" t="Include" />
+        <e p="Hash" t="Include">
+          <e p="GaSymMultivectorHash.cs" t="Include" />
+        </e>
+        <e p="IGaSymMultivector.cs" t="Include" />
+        <e p="Intermediate" t="Include">
+          <e p="GaSymMultivectorTempArray.cs" t="Include" />
+          <e p="GaSymMultivectorTempHash.cs" t="Include" />
+          <e p="GaSymMultivectorTempTree.cs" t="Include" />
+          <e p="IGaSymMultivectorTemp.cs" t="Include" />
+        </e>
+        <e p="Tree" t="Include">
+          <e p="GaTreeMultivector.cs" t="Include" />
+          <e p="GaTreeMultivectorLeaf.cs" t="Include" />
+          <e p="GaTreeMultivectorNode.cs" t="Include" />
+          <e p="GaTreeMultivectorUtils.cs" t="Include" />
+          <e p="IGaTreeMultivectorNode.cs" t="Include" />
+          <e p="IGaTreeMultivectorParentNode.cs" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Products" t="Include">
+        <e p="Euclidean" t="Include">
+          <e p="GaSymEuclideanAcp.cs" t="Include" />
+          <e p="GaSymEuclideanCp.cs" t="Include" />
+          <e p="GaSymEuclideanFdp.cs" t="Include" />
+          <e p="GaSymEuclideanGp.cs" t="Include" />
+          <e p="GaSymEuclideanHip.cs" t="Include" />
+          <e p="GaSymEuclideanLcp.cs" t="Include" />
+          <e p="GaSymEuclideanRcp.cs" t="Include" />
+          <e p="GaSymEuclideanSp.cs" t="Include" />
+        </e>
+        <e p="GaSymBilinearProduct.cs" t="Include" />
+        <e p="GaSymBilinearProductCba.cs" t="Include" />
+        <e p="GaSymBilinearProductEuclidean.cs" t="Include" />
+        <e p="GaSymBilinearProductOrthogonal.cs" t="Include" />
+        <e p="GaSymBilinearProductOrthonormal.cs" t="Include" />
+        <e p="GaSymOp.cs" t="Include" />
+        <e p="GaSymProductsUtils.cs" t="Include" />
+        <e p="IGaSymBilinearOrthogonalProduct.cs" t="Include" />
+        <e p="Orthogonal" t="Include">
+          <e p="GaSymOrthogonalAcp.cs" t="Include" />
+          <e p="GaSymOrthogonalCp.cs" t="Include" />
+          <e p="GaSymOrthogonalFdp.cs" t="Include" />
+          <e p="GaSymOrthogonalGp.cs" t="Include" />
+          <e p="GaSymOrthogonalHip.cs" t="Include" />
+          <e p="GaSymOrthogonalLcp.cs" t="Include" />
+          <e p="GaSymOrthogonalRcp.cs" t="Include" />
+          <e p="GaSymOrthogonalSp.cs" t="Include" />
+        </e>
+        <e p="Orthonormal" t="Include">
+          <e p="GaSymOrthonormalAcp.cs" t="Include" />
+          <e p="GaSymOrthonormalCp.cs" t="Include" />
+          <e p="GaSymOrthonormalFdp.cs" t="Include" />
+          <e p="GaSymOrthonormalGp.cs" t="Include" />
+          <e p="GaSymOrthonormalHip.cs" t="Include" />
+          <e p="GaSymOrthonormalLcp.cs" t="Include" />
+          <e p="GaSymOrthonormalRcp.cs" t="Include" />
+          <e p="GaSymOrthonormalSp.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+      <e p="Rendering" t="Include">
+        <e p="GraphViz" t="Include">
+          <e p="GaSymGraphVizRenderer.cs" t="Include" />
+        </e>
+        <e p="LaTeX" t="Include">
+          <e p="GaSymLaTeXRenderer.cs" t="Include" />
+        </e>
+        <e p="RenderingUtils.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Projects\Active\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLibSamples" t="IncludeRecursive">
+      <e p="app.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="GAPoT" t="Include">
+        <e p="ClarkeRotation3DSample.cs" t="Include" />
+        <e p="ClarkeRotation4DSample.cs" t="Include" />
+        <e p="ClarkeRotation5DSample.cs" t="Include" />
+        <e p="ClarkeRotation6DSample.cs" t="Include" />
+        <e p="ClarkeRotationNDSample.cs" t="Include" />
+        <e p="ParsingSample1.cs" t="Include" />
+        <e p="ParsingSample2.cs" t="Include" />
+        <e p="ParsingSample3.cs" t="Include" />
+        <e p="Sample1.cs" t="Include" />
+        <e p="Sample2.cs" t="Include" />
+        <e p="Sample3.cs" t="Include" />
+        <e p="Sample4.cs" t="Include" />
+        <e p="Sample5.cs" t="Include" />
+        <e p="Sample6.cs" t="Include" />
+      </e>
+      <e p="GeometricAlgebraSymbolicsLibSamples.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
       </e>
     </e>
     <e p="D:\Projects\Active\GeometryComposerLib\GeometryComposerLib" t="IncludeRecursive">
@@ -1523,250 +2127,91 @@
       <e p="xmpir32.dll" t="Include" />
       <e p="xmpir64.dll" t="Include" />
     </e>
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\cef.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\cef_100_percent.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\cef_200_percent.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\cef_extensions.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\chrome_elf.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\d3dcompiler_47.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\devtools_resources.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\icudtl.dat" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\libcef.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\libEGL.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\libGLESv2.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\am.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ar.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\bg.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\bn.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ca.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\cs.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\da.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\de.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\el.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\en-GB.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\en-US.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\es-419.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\es.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\et.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\fa.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\fi.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\fil.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\fr.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\gu.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\he.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\hi.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\hr.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\hu.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\id.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\it.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ja.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\kn.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ko.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\lt.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\lv.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ml.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\mr.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ms.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\nb.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\nl.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\pl.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\pt-BR.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\pt-PT.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ro.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ru.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\sk.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\sl.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\sr.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\sv.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\sw.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\ta.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\te.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\th.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\tr.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\uk.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\vi.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\zh-CN.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\locales\zh-TW.pak" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\natives_blob.bin" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\README.txt" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\snapshot_blob.bin" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\swiftshader\libEGL.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\swiftshader\libGLESv2.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\cef.redist.x64.79.1.36\CEF\v8_context_snapshot.bin" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.BrowserSubprocess.Core.pdb" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.BrowserSubprocess.exe" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.BrowserSubprocess.pdb" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.Core.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.Core.pdb" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.Core.xml" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.pdb" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.Common.79.1.360\CefSharp\x64\CefSharp.XML" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\CefSharp\x64\CefSharp.WinForms.dll" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\CefSharp\x64\CefSharp.WinForms.pdb" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\CefSharp\x64\CefSharp.WinForms.XML" t="Include" />
+    <e p="D:\Projects\Active\GeometryComposerLib\packages\Magick.NET-Q8-x64.7.15.5\runtimes\win-x64\native\Magick.Native-Q8-x64.dll" t="Include" />
     <e p="D:\Projects\Active\GMac" t="IncludeFlat">
-      <e p="GeometricAlgebraSymbolicsLib" t="IncludeRecursive">
-        <e p="app.config" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="Cas" t="Include">
-          <e p="Mathematica" t="Include">
-            <e p="Expression" t="Include">
-              <e p="MathematicaAtomicType.cs" t="Include" />
-              <e p="MathematicaCondition.cs" t="Include" />
-              <e p="MathematicaExpression.cs" t="Include" />
-              <e p="MathematicaMatrix.cs" t="Include" />
-              <e p="MathematicaPattern.cs" t="Include" />
-              <e p="MathematicaRule.cs" t="Include" />
-              <e p="MathematicaScalar.cs" t="Include" />
-              <e p="MathematicaVector.cs" t="Include" />
-            </e>
-            <e p="ExpressionTree" t="Include">
-              <e p="CasExpressionTree.cs" t="Include" />
-              <e p="CasExpressionTreeNode.cs" t="Include" />
-              <e p="CasExpressionTreeUtils.cs" t="Include" />
-            </e>
-            <e p="ExprFactory" t="Include">
-              <e p="CharacterSymbols.cs" t="Include" />
-              <e p="DomainSymbols.cs" t="Include" />
-              <e p="MFS.cs" t="Include" />
-              <e p="OptionSymbols.cs" t="Include" />
-            </e>
-            <e p="ISymbolicMatrix.cs" t="Include" />
-            <e p="ISymbolicObject.cs" t="Include" />
-            <e p="ISymbolicVector.cs" t="Include" />
-            <e p="MathematicaConnection.cs" t="Include" />
-            <e p="MathematicaConstants.cs" t="Include" />
-            <e p="MathematicaEvaluator.cs" t="Include" />
-            <e p="MathematicaExpression_ClassDiagram.cd" t="Include" />
-            <e p="MathematicaInterface.cs" t="Include" />
-            <e p="MathematicaInterface_ClassDiagram.cd" t="Include" />
-            <e p="MathematicaScalar_ClassDiagram.cd" t="Include" />
-            <e p="MathematicaUtils.cs" t="Include" />
-            <e p="NETLink" t="Include">
-              <e p="ComplexClassHandler.cs" t="Include" />
-              <e p="Expr.cs" t="Include" />
-              <e p="ExprFormatException.cs" t="Include" />
-              <e p="IKernelLink.cs" t="Include" />
-              <e p="ILinkMark.cs" t="Include" />
-              <e p="ILoopbackLink.cs" t="Include" />
-              <e p="IMathLink.cs" t="Include" />
-              <e p="Install.cs" t="Include" />
-              <e p="Internal" t="Include">
-                <e p="CallNETException.cs" t="Include" />
-                <e p="CallPacketHandler.cs" t="Include" />
-                <e p="COM" t="Include">
-                  <e p="COMDispatchHandler.cs" t="Include" />
-                  <e p="COMObjectWrapper.cs" t="Include" />
-                  <e p="COMTypeLibraryLoader.cs" t="Include" />
-                  <e p="COMUtilities.cs" t="Include" />
-                </e>
-                <e p="DelegateHelper.cs" t="Include" />
-                <e p="DLLHelper.cs" t="Include" />
-                <e p="EventHelper.cs" t="Include" />
-                <e p="MacMathLinkAPIProvider.cs" t="Include" />
-                <e p="MathLinkAPIProvider.cs" t="Include" />
-                <e p="NativeLink.cs" t="Include" />
-                <e p="NativeLoopbackLink.cs" t="Include" />
-                <e p="NativeMark.cs" t="Include" />
-                <e p="ObjectHandler.cs" t="Include" />
-                <e p="Unix64MathLinkAPIProvider.cs" t="Include" />
-                <e p="UnixMathLinkAPIProvider.cs" t="Include" />
-                <e p="Win64MathLinkAPIProvider.cs" t="Include" />
-                <e p="WindowsMathLinkAPIProvider.cs" t="Include" />
-              </e>
-              <e p="KernelLinkImpl.cs" t="Include" />
-              <e p="MathDelegate.cs" t="Include" />
-              <e p="MathematicaNotReadyException.cs" t="Include" />
-              <e p="MathKernel.cs" t="Include" />
-              <e p="MathLinkConstants.cs" t="Include" />
-              <e p="MathLinkException.cs" t="Include" />
-              <e p="MathLinkFactory.cs" t="Include" />
-              <e p="MathLinkImpl.cs" t="Include" />
-              <e p="Reader.cs" t="Include" />
-              <e p="StdLink.cs" t="Include" />
-              <e p="TypeLoader.cs" t="Include" />
-              <e p="UI" t="Include">
-                <e p="ConsoleWindow.cs" t="Include" />
-                <e p="DoubleBufferedPanel.cs" t="Include" />
-                <e p="MathPictureBox.cs" t="Include" />
-              </e>
-              <e p="Utils.cs" t="Include" />
-              <e p="WrappedKernelLink.cs" t="Include" />
-            </e>
-            <e p="Test" t="Include">
-              <e p="TestMathematicaMatrix.cs" t="Include" />
-              <e p="TestMathematicaScalar.cs" t="Include" />
-              <e p="TestMathematicaVector.cs" t="Include" />
-              <e p="TestUtils.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-        <e p="Exceptions" t="Include">
-          <e p="GaSymbolicsException.cs" t="Include" />
-        </e>
-        <e p="Frames" t="Include">
-          <e p="GaSymFrame.cs" t="Include" />
-          <e p="GaSymFrameEuclidean.cs" t="Include" />
-          <e p="GaSymFrameNonOrthogonal.cs" t="Include" />
-          <e p="GaSymFrameOrthogonal.cs" t="Include" />
-          <e p="GaSymFrameOrthonormal.cs" t="Include" />
-        </e>
-        <e p="GaSymbolicsUtils.cs" t="Include" />
-        <e p="GeometricAlgebraSymbolicsLib.csproj" t="IncludeRecursive" />
-        <e p="Maps" t="Include">
-          <e p="Bilinear" t="Include">
-            <e p="GaSymMapBilinear.cs" t="Include" />
-            <e p="GaSymMapBilinearArray.cs" t="Include" />
-            <e p="GaSymMapBilinearCoefSums.cs" t="Include" />
-            <e p="GaSymMapBilinearCombined.cs" t="Include" />
-            <e p="GaSymMapBilinearHash.cs" t="Include" />
-            <e p="GaSymMapBilinearTree.cs" t="Include" />
-            <e p="IGaSymMapBilinear.cs" t="Include" />
-          </e>
-          <e p="GaSymMap.cs" t="Include" />
-          <e p="GaSymMapUtils.cs" t="Include" />
-          <e p="IGaSymMap.cs" t="Include" />
-          <e p="Trilinear" t="Include">
-            <e p="GaSymMapTrilinear.cs" t="Include" />
-            <e p="GaSymMapTrilinearHash.cs" t="Include" />
-            <e p="IGaSymMapTrilinear.cs" t="Include" />
-          </e>
-          <e p="Unilinear" t="Include">
-            <e p="GaSymMapUnilinear.cs" t="Include" />
-            <e p="GaSymMapUnilinearArray.cs" t="Include" />
-            <e p="GaSymMapUnilinearCoefSums.cs" t="Include" />
-            <e p="GaSymMapUnilinearCombined.cs" t="Include" />
-            <e p="GaSymMapUnilinearComposed.cs" t="Include" />
-            <e p="GaSymMapUnilinearHash.cs" t="Include" />
-            <e p="GaSymMapUnilinearIdentity.cs" t="Include" />
-            <e p="GaSymMapUnilinearMatrix.cs" t="Include" />
-            <e p="GaSymMapUnilinearTree.cs" t="Include" />
-            <e p="GaSymOutermorphism.cs" t="Include" />
-            <e p="IGaSymMapUnilinear.cs" t="Include" />
-          </e>
-        </e>
-        <e p="Matrices" t="Include">
-          <e p="GaSymMatrixIdentity.cs" t="Include" />
-        </e>
-        <e p="Metrics" t="Include">
-          <e p="GaSymMetricEuclidean.cs" t="Include" />
-          <e p="GaSymMetricNonOrthogonal.cs" t="Include" />
-          <e p="GaSymMetricOrthogonal.cs" t="Include" />
-          <e p="GaSymMetricOrthonormal.cs" t="Include" />
-          <e p="IGaMetric.cs" t="Include" />
-          <e p="IGaMetricOrthogonal.cs" t="Include" />
-        </e>
-        <e p="ml32i4.dll" t="Include" />
-        <e p="ml64i4.dll" t="Include" />
-        <e p="Multivectors" t="Include">
-          <e p="GaMultivector_ClassDiagram.cd" t="Include" />
-          <e p="GaSymMultivector.cs" t="Include" />
-          <e p="GaSymMultivectorBinaryTree1D.cs" t="Include" />
-          <e p="GaSymMultivectorBinaryTree2D.cs" t="Include" />
-          <e p="GaSymMultivectorBinaryTree3D.cs" t="Include" />
-          <e p="GaSymMultivectorBiTerm.cs" t="Include" />
-          <e p="GaSymMultivectorHashTable1D.cs" t="Include" />
-          <e p="GaSymMultivectorHashTable2D.cs" t="Include" />
-          <e p="GaSymMultivectorHashTable3D.cs" t="Include" />
-          <e p="GaSymMultivectorTerm.cs" t="Include" />
-          <e p="GaSymMultivectorUtils.cs" t="Include" />
-          <e p="GaSymScalarBinaryTree1D.cs" t="Include" />
-          <e p="GaSymScalarBinaryTree2D.cs" t="Include" />
-          <e p="GaSymScalarHashTable1D.cs" t="Include" />
-          <e p="GaSymScalarHashTable2D.cs" t="Include" />
-          <e p="Hash" t="Include">
-            <e p="GaSymMultivectorHash.cs" t="Include" />
-          </e>
-          <e p="IGaSymMultivector.cs" t="Include" />
-          <e p="Intermediate" t="Include">
-            <e p="GaSymMultivectorTempArray.cs" t="Include" />
-            <e p="GaSymMultivectorTempHash.cs" t="Include" />
-            <e p="GaSymMultivectorTempTree.cs" t="Include" />
-            <e p="IGaSymMultivectorTemp.cs" t="Include" />
-          </e>
-          <e p="Tree" t="Include">
-            <e p="GaTreeMultivector.cs" t="Include" />
-            <e p="GaTreeMultivectorLeaf.cs" t="Include" />
-            <e p="GaTreeMultivectorNode.cs" t="Include" />
-            <e p="GaTreeMultivectorUtils.cs" t="Include" />
-            <e p="IGaTreeMultivectorNode.cs" t="Include" />
-            <e p="IGaTreeMultivectorParentNode.cs" t="Include" />
-          </e>
-        </e>
-        <e p="obj" t="ExcludeRecursive" />
-        <e p="packages.config" t="Include" />
-        <e p="Products" t="Include">
-          <e p="Euclidean" t="Include">
-            <e p="GaSymEuclideanAcp.cs" t="Include" />
-            <e p="GaSymEuclideanCp.cs" t="Include" />
-            <e p="GaSymEuclideanFdp.cs" t="Include" />
-            <e p="GaSymEuclideanGp.cs" t="Include" />
-            <e p="GaSymEuclideanHip.cs" t="Include" />
-            <e p="GaSymEuclideanLcp.cs" t="Include" />
-            <e p="GaSymEuclideanRcp.cs" t="Include" />
-            <e p="GaSymEuclideanSp.cs" t="Include" />
-          </e>
-          <e p="GaSymBilinearProduct.cs" t="Include" />
-          <e p="GaSymBilinearProductCba.cs" t="Include" />
-          <e p="GaSymBilinearProductEuclidean.cs" t="Include" />
-          <e p="GaSymBilinearProductOrthogonal.cs" t="Include" />
-          <e p="GaSymBilinearProductOrthonormal.cs" t="Include" />
-          <e p="GaSymOp.cs" t="Include" />
-          <e p="GaSymProductsUtils.cs" t="Include" />
-          <e p="IGaSymBilinearOrthogonalProduct.cs" t="Include" />
-          <e p="Orthogonal" t="Include">
-            <e p="GaSymOrthogonalAcp.cs" t="Include" />
-            <e p="GaSymOrthogonalCp.cs" t="Include" />
-            <e p="GaSymOrthogonalFdp.cs" t="Include" />
-            <e p="GaSymOrthogonalGp.cs" t="Include" />
-            <e p="GaSymOrthogonalHip.cs" t="Include" />
-            <e p="GaSymOrthogonalLcp.cs" t="Include" />
-            <e p="GaSymOrthogonalRcp.cs" t="Include" />
-            <e p="GaSymOrthogonalSp.cs" t="Include" />
-          </e>
-          <e p="Orthonormal" t="Include">
-            <e p="GaSymOrthonormalAcp.cs" t="Include" />
-            <e p="GaSymOrthonormalCp.cs" t="Include" />
-            <e p="GaSymOrthonormalFdp.cs" t="Include" />
-            <e p="GaSymOrthonormalGp.cs" t="Include" />
-            <e p="GaSymOrthonormalHip.cs" t="Include" />
-            <e p="GaSymOrthonormalLcp.cs" t="Include" />
-            <e p="GaSymOrthonormalRcp.cs" t="Include" />
-            <e p="GaSymOrthonormalSp.cs" t="Include" />
-          </e>
-        </e>
-        <e p="Properties" t="Include">
-          <e p="AssemblyInfo.cs" t="Include" />
-        </e>
-        <e p="Rendering" t="Include">
-          <e p="GraphViz" t="Include">
-            <e p="GaSymGraphVizRenderer.cs" t="Include" />
-          </e>
-          <e p="LaTeX" t="Include">
-            <e p="GaSymLaTeXRenderer.cs" t="Include" />
-          </e>
-          <e p="RenderingUtils.cs" t="Include" />
-        </e>
-      </e>
       <e p="GMac" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -2247,6 +2692,9 @@
           <e p="Validators" t="Include">
             <e p="GaBilinearProductsValidator.cs" t="Include" />
             <e p="GaBladeOperationsValidator.cs" t="Include" />
+            <e p="GaGeometricProductValidator.cs" t="Include" />
+            <e p="GaMetricBilinearProductsValidator.cs" t="Include" />
+            <e p="GaMetricTrilinearProductsValidator.cs" t="Include" />
             <e p="GaUnilinearMapsValidator.cs" t="Include" />
             <e p="GMacMathValidator.cs" t="Include" />
           </e>
@@ -2283,19 +2731,38 @@
         <e p="app.config" t="Include" />
         <e p="Benchmarks" t="Include">
           <e p="Numeric" t="Include">
-            <e p="Benchmark1.cs" t="Include" />
-            <e p="Benchmark10.cs" t="Include" />
-            <e p="Benchmark11.cs" t="Include" />
             <e p="Benchmark12.cs" t="Include" />
             <e p="Benchmark13.cs" t="Include" />
-            <e p="Benchmark2.cs" t="Include" />
-            <e p="Benchmark3.cs" t="Include" />
-            <e p="Benchmark4.cs" t="Include" />
-            <e p="Benchmark5.cs" t="Include" />
             <e p="Benchmark6.cs" t="Include" />
             <e p="Benchmark7.cs" t="Include" />
-            <e p="Benchmark8.cs" t="Include" />
-            <e p="Benchmark9.cs" t="Include" />
+            <e p="BilinearProducts" t="Include">
+              <e p="Benchmark1.cs" t="Include" />
+              <e p="Benchmark10.cs" t="Include" />
+              <e p="Benchmark11.cs" t="Include" />
+              <e p="Benchmark12.cs" t="Include" />
+              <e p="Benchmark14.cs" t="Include" />
+              <e p="Benchmark15.cs" t="Include" />
+              <e p="Benchmark2.cs" t="Include" />
+              <e p="Benchmark3.cs" t="Include" />
+              <e p="Benchmark4.cs" t="Include" />
+              <e p="Benchmark5.cs" t="Include" />
+              <e p="Benchmark6.cs" t="Include" />
+              <e p="Benchmark7.cs" t="Include" />
+              <e p="Benchmark8.cs" t="Include" />
+              <e p="Benchmark9.cs" t="Include" />
+            </e>
+            <e p="Outermorphisms" t="Include">
+              <e p="Benchmark1.cs" t="Include" />
+              <e p="Benchmark2.cs" t="Include" />
+              <e p="Benchmark3.cs" t="Include" />
+              <e p="Benchmark4.cs" t="Include" />
+              <e p="Benchmark5.cs" t="Include" />
+              <e p="Benchmark6.cs" t="Include" />
+              <e p="Benchmark7.cs" t="Include" />
+            </e>
+            <e p="TrilinearProducts" t="Include">
+              <e p="Benchmark1.cs" t="Include" />
+            </e>
           </e>
           <e p="Symbolic" t="Include">
             <e p="GMacSymbolicBenchmark1.cs" t="Include" />
@@ -2348,12 +2815,18 @@
               <e p="Sample3.cs" t="Include" />
             </e>
           </e>
+          <e p="Parsing" t="Include" />
           <e p="Validations" t="Include">
             <e p="GaBilinearProductsValidation.cs" t="Include" />
             <e p="GaBladeOperationsValidation.cs" t="Include" />
+            <e p="GaGeometricProductValidation.cs" t="Include" />
+            <e p="GaMetricBilinearProductsValidation.cs" t="Include" />
+            <e p="GaMetricTrilinearProductsValidation.cs" t="Include" />
             <e p="GaMultivectorValidation.cs" t="Include" />
             <e p="GaOutermorphismValidation.cs" t="Include" />
+            <e p="GaSandwichProductValidation.cs" t="Include" />
             <e p="GaUnilinearMapsValidation.cs" t="Include" />
+            <e p="GaVersorValidation.cs" t="Include" />
           </e>
           <e p="Visualizations" t="Include">
             <e p="Numeric" t="Include">
@@ -2667,7 +3140,102 @@
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive">
-        <e p="Magick.NET-Q8-x64.7.15.0\runtimes\win-x64\native\Magick.Native-Q8-x64.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\cef.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\cef_100_percent.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\cef_200_percent.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\cef_extensions.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\chrome_elf.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\d3dcompiler_47.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\devtools_resources.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\icudtl.dat" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\libcef.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\libEGL.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\libGLESv2.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\am.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ar.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\bg.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\bn.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ca.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\cs.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\da.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\de.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\el.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\en-GB.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\en-US.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\es-419.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\es.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\et.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\fa.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\fi.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\fil.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\fr.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\gu.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\he.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\hi.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\hr.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\hu.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\id.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\it.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ja.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\kn.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ko.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\lt.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\lv.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ml.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\mr.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ms.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\nb.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\nl.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\pl.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\pt-BR.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\pt-PT.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ro.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ru.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\sk.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\sl.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\sr.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\sv.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\sw.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\ta.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\te.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\th.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\tr.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\uk.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\vi.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\zh-CN.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\locales\zh-TW.pak" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\README.txt" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\snapshot_blob.bin" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\swiftshader\libEGL.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\swiftshader\libGLESv2.dll" t="Include" />
+        <e p="cef.redist.x64.84.4.1\CEF\v8_context_snapshot.bin" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.BrowserSubprocess.Core.pdb" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.BrowserSubprocess.exe" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.BrowserSubprocess.pdb" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.Core.dll" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.Core.pdb" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.Core.xml" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.dll" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.pdb" t="Include" />
+        <e p="CefSharp.Common.84.4.10\CefSharp\x64\CefSharp.XML" t="Include" />
+        <e p="CefSharp.WinForms.84.4.10\CefSharp\x64\CefSharp.WinForms.dll" t="Include" />
+        <e p="CefSharp.WinForms.84.4.10\CefSharp\x64\CefSharp.WinForms.pdb" t="Include" />
+        <e p="CefSharp.WinForms.84.4.10\CefSharp\x64\CefSharp.WinForms.XML" t="Include" />
+        <e p="Magick.NET-Q8-x64.7.22.0\runtimes\win-x64\native\Magick.Native-Q8-x64.dll" t="Include" />
+        <e p="Microsoft.Diagnostics.Tracing.TraceEvent.2.0.59\lib\native\amd64" t="Include">
+          <e p="KernelTraceControl.dll" t="Include" />
+          <e p="msdia140.dll" t="Include" />
+        </e>
+        <e p="Microsoft.Diagnostics.Tracing.TraceEvent.2.0.59\lib\native\x86" t="Include">
+          <e p="KernelTraceControl.dll" t="Include" />
+          <e p="KernelTraceControl.Win61.dll" t="Include" />
+          <e p="msdia140.dll" t="Include" />
+        </e>
+        <e p="Microsoft.Diagnostics.Tracing.TraceEvent.2.0.59\lib\net45\OSExtensions.dll" t="Include" />
+        <e p="Microsoft.Diagnostics.Tracing.TraceEvent.2.0.59\lib\netstandard1.6\Dia2Lib.dll" t="Include" />
+        <e p="Microsoft.Diagnostics.Tracing.TraceEvent.2.0.59\lib\netstandard1.6\TraceReloggerLib.dll" t="Include" />
+        <e p="NUnit3TestAdapter.3.17.0\build\net35\nunit.engine.core.dll" t="Include" />
       </e>
     </e>
     <e p="D:\Projects\Active\GraphicsComposerLib\GraphicsComposerLib" t="IncludeRecursive">
@@ -2730,6 +3298,7 @@
       <e p="GraphicsComposerLib.csproj" t="IncludeRecursive" />
       <e p="GraphicsPrimitiveType3D.cs" t="Include" />
       <e p="GraphicsUtils.cs" t="Include" />
+      <e p="locales" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="OpenSCAD" t="Include" />
       <e p="packages.config" t="Include" />
@@ -3119,6 +3688,7 @@
           <e p="SvgValueZoomAndPan.cs" t="Include" />
         </e>
       </e>
+      <e p="swiftshader" t="Include" />
       <e p="Xeogl" t="Include">
         <e p="Camera" t="Include">
           <e p="XeoglCamera.cs" t="Include" />
@@ -3232,23 +3802,13 @@
       </e>
     </e>
     <e p="D:\Projects\Active\TextComposerLib\TextComposerLib" t="IncludeRecursive">
-      <e p="app.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
-      <e p="Code" t="Include" />
-      <e p="Data" t="Include" />
+      <e p="Class1.cs" t="Include" />
       <e p="Files" t="Include">
         <e p="FilesComposer_ClassDiagram.cd" t="Include" />
         <e p="TextFileComposer.cs" t="Include" />
         <e p="TextFilesComposer.cs" t="Include" />
-        <e p="UI" t="Include">
-          <e p="FormFilesComposer.cs" t="Include" />
-          <e p="FormFilesComposer.Designer.cs" t="Include" />
-          <e p="FormFilesComposer.resx" t="Include" />
-        </e>
       </e>
-      <e p="FormNotificationMessage.cs" t="Include" />
-      <e p="FormNotificationMessage.designer.cs" t="Include" />
-      <e p="FormNotificationMessage.resx" t="Include" />
       <e p="Logs" t="Include">
         <e p="EventLog" t="Include">
           <e p="EventLogComposer.cs" t="Include" />
@@ -3261,20 +3821,19 @@
           <e p="ProgressComposerEvents.cs" t="Include" />
           <e p="ProgressComposerHistory.cs" t="Include" />
           <e p="ProgressUtils.cs" t="Include" />
-          <e p="UI" t="Include">
-            <e p="FormProgress.cs" t="Include" />
-            <e p="FormProgress.Designer.cs" t="Include" />
-            <e p="FormProgress.resx" t="Include" />
+          <e p="UI" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="x64" t="Include">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="TextComposerLib.AssemblyInfo.cs" t="Include" />
+            </e>
           </e>
         </e>
       </e>
-      <e p="obj" t="ExcludeRecursive" />
-      <e p="packages.config" t="Include" />
-      <e p="Properties" t="Include">
-        <e p="AssemblyInfo.cs" t="Include" />
-        <e p="Resources.Designer.cs" t="Include" />
-        <e p="Resources.resx" t="Include" />
-      </e>
+      <e p="Program.cs" t="Include" />
       <e p="Settings" t="Include">
         <e p="SettingsComposer.cs" t="Include" />
         <e p="SettingsUtils.cs" t="Include" />
@@ -3333,20 +3892,7 @@
           <e p="PtcLineSegment.cs" t="Include" />
           <e p="PtcParameter.cs" t="Include" />
           <e p="StringSequenceTemplate.cs" t="Include" />
-          <e p="UI" t="Include">
-            <e p="FormEditTemplate.cs" t="Include" />
-            <e p="FormEditTemplate.Designer.cs" t="Include" />
-            <e p="FormEditTemplate.resx" t="Include" />
-            <e p="FormImportTemplateFromText.cs" t="Include" />
-            <e p="FormImportTemplateFromText.Designer.cs" t="Include" />
-            <e p="FormImportTemplateFromText.resx" t="Include" />
-            <e p="FormNewTemplate.cs" t="Include" />
-            <e p="FormNewTemplate.Designer.cs" t="Include" />
-            <e p="FormNewTemplate.resx" t="Include" />
-            <e p="FormTemplateComposerEditor.cs" t="Include" />
-            <e p="FormTemplateComposerEditor.Designer.cs" t="Include" />
-            <e p="FormTemplateComposerEditor.resx" t="Include" />
-          </e>
+          <e p="UI" t="Include" />
           <e p="UniqueNameFactory.cs" t="Include" />
         </e>
         <e p="Region" t="Include">
@@ -3407,6 +3953,26 @@
         <e p="TextExpressionVisitor.cs" t="Include" />
         <e p="TextExpressionVisitor_ClassDiagram.cd" t="Include" />
       </e>
+    </e>
+    <e p="D:\Projects\Active\TextComposerLib\TextComposerLib.UI.WinForms" t="IncludeRecursive">
+      <e p="app.config" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Form1.cs" t="Include" />
+      <e p="Form1.Designer.cs" t="Include" />
+      <e p="FormNotificationMessage.cs" t="Include" />
+      <e p="FormNotificationMessage.designer.cs" t="Include" />
+      <e p="FormNotificationMessage.resx" t="Include" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+        <e p="Resources.Designer.cs" t="Include" />
+        <e p="Resources.resx" t="Include" />
+        <e p="Settings.Designer.cs" t="Include" />
+        <e p="Settings.settings" t="Include" />
+      </e>
+      <e p="TextComposerLib.UI.WinForms.csproj" t="IncludeRecursive" />
       <e p="UserInterface" t="Include">
         <e p="FormSamples.cs" t="Include" />
         <e p="FormSamples.Designer.cs" t="Include" />
@@ -3414,6 +3980,26 @@
         <e p="ISampleTasksTreeNode.cs" t="Include" />
         <e p="SampleTask.cs" t="Include" />
         <e p="SampleTasksCollection.cs" t="Include" />
+        <e p="UI" t="Include">
+          <e p="FormEditTemplate.cs" t="Include" />
+          <e p="FormEditTemplate.Designer.cs" t="Include" />
+          <e p="FormEditTemplate.resx" t="Include" />
+          <e p="FormFilesComposer.cs" t="Include" />
+          <e p="FormFilesComposer.Designer.cs" t="Include" />
+          <e p="FormFilesComposer.resx" t="Include" />
+          <e p="FormImportTemplateFromText.cs" t="Include" />
+          <e p="FormImportTemplateFromText.Designer.cs" t="Include" />
+          <e p="FormImportTemplateFromText.resx" t="Include" />
+          <e p="FormNewTemplate.cs" t="Include" />
+          <e p="FormNewTemplate.Designer.cs" t="Include" />
+          <e p="FormNewTemplate.resx" t="Include" />
+          <e p="FormProgress.cs" t="Include" />
+          <e p="FormProgress.Designer.cs" t="Include" />
+          <e p="FormProgress.resx" t="Include" />
+          <e p="FormTemplateComposerEditor.cs" t="Include" />
+          <e p="FormTemplateComposerEditor.Designer.cs" t="Include" />
+          <e p="FormTemplateComposerEditor.resx" t="Include" />
+        </e>
       </e>
     </e>
   </component>

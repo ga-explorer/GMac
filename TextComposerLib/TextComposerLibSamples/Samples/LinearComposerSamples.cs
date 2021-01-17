@@ -9,7 +9,7 @@ namespace TextComposerLibSamples.Samples
             var myClassName = "MyClass";
             var baseClassName = "BaseClass";
 
-            var composer = new LinearComposer()
+            var composer = new LinearTextComposer()
             {
                 LineHeadersSeparator = "  "
             };

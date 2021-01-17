@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeometricAlgebraSymbolicsLibSamples.GAPoT;
 
 namespace GeometricAlgebraSymbolicsLibSamples
@@ -11,7 +7,9 @@ namespace GeometricAlgebraSymbolicsLibSamples
     {
         static void Main(string[] args)
         {
-            Sample4.Execute();
+            RotorsSequenceSample.Execute();
+            //GramSchmidtRotation3DSample.Execute();
+            //FbdFrameSample.Execute();
 
             Console.WriteLine();
             Console.WriteLine(@"Press any key to exit...");

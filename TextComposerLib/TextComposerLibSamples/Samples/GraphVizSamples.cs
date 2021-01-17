@@ -1,7 +1,4 @@
 ﻿using System;
-using TextComposerLib.Diagrams.GraphViz.Dot;
-using TextComposerLib.Diagrams.GraphViz.Dot.Value;
-using TextComposerLib.Diagrams.GraphViz.UI;
 
 namespace TextComposerLibSamples.Samples
 {

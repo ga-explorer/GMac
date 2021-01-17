@@ -56,14 +56,18 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+    <Reference Include="Irony, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraSymbolicsLib\packages\Irony.NetCore.1.1.11\lib\netstandard2.0\Irony.dll</HintPath>
     </Reference>
-    <Reference Include="Irony.Interpreter, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Irony.Interpreter.1.1.0\lib\net40\Irony.Interpreter.dll</HintPath>
+    <Reference Include="Irony.Interpreter, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometricAlgebraSymbolicsLib\packages\Irony.Interpreter.NetCore.1.1.11\lib\netstandard2.0\Irony.Interpreter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,13 +80,8 @@
     <Compile Include="Frames\E2D.cs" />
     <Compile Include="Frames\E3D.cs" />
     <Compile Include="Frames\Hga4D.cs" />
-    <Compile Include="GAPoT\ParsingSample1.cs" />
-    <Compile Include="GAPoT\ParsingSample2.cs" />
-    <Compile Include="GAPoT\Sample2.cs" />
-    <Compile Include="GAPoT\Sample3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GAPoT\Sample1.cs" />
     <Compile Include="Structures\LineSegment3D.cs" />
     <Compile Include="Structures\Point3D.cs" />
     <Compile Include="Structures\Sphere3D.cs" />
@@ -107,10 +106,12 @@
       <Name>TextComposerLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.csproj">
-      <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>
+      <Project>{7863ef1a-4032-4db5-801f-e72fac6f8bd6}</Project>
       <Name>GeometricAlgebraNumericsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GAPoT\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp;
+using GeometricAlgebraStructuresLib.GuidedBinaryTraversal;
 
 namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms
 {
@@ -64,15 +65,15 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms
 
 
 
-        public override bool TosHasChild0()
-        {
-            return MultivectorStack.TosHasChild0();
-        }
+        //public override bool TosHasChild0()
+        //{
+        //    return MultivectorStack.TosHasChild0();
+        //}
 
-        public override bool TosHasChild1()
-        {
-            return MultivectorStack.TosHasChild1();
-        }
+        //public override bool TosHasChild1()
+        //{
+        //    return MultivectorStack.TosHasChild1();
+        //}
 
 
         public override void PushRootData()
@@ -97,27 +98,50 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms
             TosIndex--;
         }
 
-        public override void PushDataOfChild0()
+        public override bool TosHasChild(int childIndex)
         {
-            MultivectorStack.PushDataOfChild0();
-
-            TosIndex++;
-
-            TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId0;
-            KVectorArray[TosIndex] = GetTosChildKVector0();
+            return MultivectorStack.TosHasChild(childIndex);
         }
 
-        public override void PushDataOfChild1()
+        public override void PushDataOfChild(int childIndex)
         {
-            MultivectorStack.PushDataOfChild1();
-
+            MultivectorStack.PushDataOfChild(childIndex);
             TosIndex++;
-
             TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId1;
-            KVectorArray[TosIndex] = GetTosChildKVector1();
+
+            if ((childIndex & 1) == 0)
+            {
+                IdArray[TosIndex] = TosChildId0;
+                KVectorArray[TosIndex] = GetTosChildKVector0();
+            }
+            else
+            {
+                IdArray[TosIndex] = TosChildId1;
+                KVectorArray[TosIndex] = GetTosChildKVector1();
+            }
         }
+
+        //public override void PushDataOfChild0()
+        //{
+        //    MultivectorStack.PushDataOfChild0();
+
+        //    TosIndex++;
+
+        //    TreeDepthArray[TosIndex] = TosTreeDepth - 1;
+        //    IdArray[TosIndex] = TosChildId0;
+        //    KVectorArray[TosIndex] = GetTosChildKVector0();
+        //}
+
+        //public override void PushDataOfChild1()
+        //{
+        //    MultivectorStack.PushDataOfChild1();
+
+        //    TosIndex++;
+
+        //    TreeDepthArray[TosIndex] = TosTreeDepth - 1;
+        //    IdArray[TosIndex] = TosChildId1;
+        //    KVectorArray[TosIndex] = GetTosChildKVector1();
+        //}
 
         public IEnumerable<Tuple<double, GaNumDarKVector>> TraverseForScaledKVectors()
         {
@@ -141,11 +165,11 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms
                     continue;
                 }
 
-                if (TosHasChild1())
-                    PushDataOfChild1();
+                if (TosHasChild(1))
+                    PushDataOfChild(1);
 
-                if (TosHasChild0())
-                    PushDataOfChild0();
+                if (TosHasChild(0))
+                    PushDataOfChild(0);
 
                 //var stackSize = opStack.SizeInBytes();
                 //if (sizeCounter < stackSize) sizeCounter = stackSize;
@@ -172,11 +196,11 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms
                     continue;
                 }
 
-                if (TosHasChild1())
-                    PushDataOfChild1();
+                if (TosHasChild(1))
+                    PushDataOfChild(1);
 
-                if (TosHasChild0())
-                    PushDataOfChild0();
+                if (TosHasChild(0))
+                    PushDataOfChild(0);
             }
         }
     }

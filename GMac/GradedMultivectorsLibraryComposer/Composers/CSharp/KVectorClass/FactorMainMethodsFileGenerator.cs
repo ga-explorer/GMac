@@ -1,5 +1,5 @@
 ﻿using System;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Structured;

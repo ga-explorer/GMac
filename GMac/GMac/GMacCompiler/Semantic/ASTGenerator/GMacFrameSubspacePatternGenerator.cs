@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CodeComposerLib.Irony.SourceCode;
 using DataStructuresLib;
 using DataStructuresLib.BooleanPattern;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Syntax;
 using Irony.Parsing;
@@ -121,7 +121,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                         Int32.TryParse(indexText, out var index) && 
                         _frame.IsValidBasisBladeGradeIndex(grade, index)
                         )
-                        AddBasisBladeId(GaNumFrameUtils.BasisBladeId(grade, index));
+                        AddBasisBladeId(GaFrameUtils.BasisBladeId(grade, index));
 
                     else
                         CompilationLog.RaiseGeneratorError<int>("Basis blades set not recognized", node);
@@ -212,7 +212,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             //Add the remaining basis blades to the GA subspace
             for (var idIndex = 1; idIndex <= subspaceDimension - 1; idIndex++)
             {
-                var id = GaNumFrameUtils.ComposeGaSubspaceBasisBladeId(basisVectorsList, idIndex);
+                var id = GaFrameUtils.ComposeGaSubspaceBasisBladeId(basisVectorsList, idIndex);
 
                 AddBasisBladeId(id);
             }

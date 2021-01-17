@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
 using DataStructuresLib.Basic;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms;
 using GeometricAlgebraNumericsLib.Maps.Unilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
@@ -11,6 +10,7 @@ using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp;
 using GeometricAlgebraNumericsLib.Structures.BinaryTraversal;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
+using GeometricAlgebraStructuresLib.Frames;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Outermorphisms

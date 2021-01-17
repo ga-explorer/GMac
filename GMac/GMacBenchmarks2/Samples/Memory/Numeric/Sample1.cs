@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 using GMacBenchmarks2.Samples.Computations;
 using TextComposerLib.Text.Linear;
 

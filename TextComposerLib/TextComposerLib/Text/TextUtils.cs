@@ -62,7 +62,7 @@ namespace TextComposerLib.Text
         {
             var s = new StringBuilder();
 
-            var itemSeparator = separator ?? String.Empty;
+            var itemSeparator = separator ?? string.Empty;
 
             var flag = false;
             foreach (var item in items)
@@ -73,6 +73,38 @@ namespace TextComposerLib.Text
                     flag = true;
 
                 s.Append(item);
+            }
+
+            return s.ToString();
+        }
+
+        public static string Concatenate(this IEnumerable<string> items, string separator, int maxLineLength)
+        {
+            var s = new StringBuilder();
+
+            var itemSeparator = separator ?? string.Empty;
+
+            var lineLength = 0;
+            var flag = false;
+            foreach (var item in items)
+            {
+                if (flag)
+                {
+                    s.Append(itemSeparator);
+                    lineLength += itemSeparator.Length;
+                }
+                else
+                    flag = true;
+
+                if (lineLength > maxLineLength)
+                {
+                    lineLength = 0;
+                    s.AppendLine();
+                }
+
+                s.Append(item);
+
+                lineLength += item.Length;
             }
 
             return s.ToString();

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Structures.BinaryTraversal;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 using TextComposerLib.Text.Linear;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
@@ -83,7 +83,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             get
             {
                 id.BasisBladeGradeIndex(out var grade, out var index);
-                return this[grade, index];
+
+                var kVectorArray = 
+                    GradedScalarValuesArray[grade];
+
+                if (kVectorArray.IsNullOrEmpty())
+                    return 0;
+
+                return kVectorArray[index];
             }
         }
 
@@ -91,9 +98,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             get
             {
-                var kVectorArray = GradedScalarValuesArray[grade];
+                var kVectorArray = 
+                    GradedScalarValuesArray[grade];
 
-                if (kVectorArray == null)
+                if (kVectorArray.IsNullOrEmpty())
                     return 0;
 
                 return kVectorArray[index];
@@ -128,7 +136,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                     .Select((a, i) => Tuple.Create(i, a))
                     .All(t =>
                         t.Item2.IsNullOrEmpty() ||
-                        t.Item2.Count == GaNumFrameUtils.KvSpaceDimension(kVectorsArray.Count - 1, t.Item1)
+                        t.Item2.Count == GaFrameUtils.KvSpaceDimension(kVectorsArray.Count - 1, t.Item1)
                     )
             );
 
@@ -147,13 +155,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 for (var index = 0; index < kVectorArray.Count; index++)
                     yield return new GaTerm<double>(
-                        GaNumFrameUtils.BasisBladeId(grade, index),
+                        GaFrameUtils.BasisBladeId(grade, index),
                         kVectorArray[index]
                     );
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
             var scalarValuesArray =
                 GradedScalarValuesArray[grade];
@@ -163,7 +171,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
             for (var index = 0; index < scalarValuesArray.Count; index++)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GaFrameUtils.BasisBladeId(grade, index),
                     scalarValuesArray[index]
                 );
         }
@@ -183,14 +191,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                     if (!value.IsNearZero())
                         yield return new GaTerm<double>(
-                            GaNumFrameUtils.BasisBladeId(grade, index),
+                            GaFrameUtils.BasisBladeId(grade, index),
                             value
                         );
                 }
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
             var scalarValuesArray = GradedScalarValuesArray[grade];
 
@@ -203,7 +211,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 if (!value.IsNearZero())
                     yield return new GaTerm<double>(
-                        GaNumFrameUtils.BasisBladeId(grade, index),
+                        GaFrameUtils.BasisBladeId(grade, index),
                         value
                     );
             }
@@ -220,7 +228,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                     continue;
 
                 for (var index = 0; index < kVectorArray.Count; index++)
-                    yield return GaNumFrameUtils.BasisBladeId(grade, index);
+                    yield return GaFrameUtils.BasisBladeId(grade, index);
             }
         }
 
@@ -235,7 +243,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 for (var index = 0; index < kVectorArray.Count; index++)
                     if (!kVectorArray[index].IsNearZero())
-                        yield return GaNumFrameUtils.BasisBladeId(grade, index);
+                        yield return GaFrameUtils.BasisBladeId(grade, index);
             }
         }
 
@@ -281,7 +289,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return !GradedScalarValuesArray[grade].IsNullOrEmpty();
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return !GradedScalarValuesArray[grade].IsNullOrEmpty();
         }
@@ -485,7 +493,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                     if (!value.IsNearZero())
                         scalarValues.Add(
-                            GaNumFrameUtils.BasisBladeId(grade, index),
+                            GaFrameUtils.BasisBladeId(grade, index),
                             value
                         );
                 }

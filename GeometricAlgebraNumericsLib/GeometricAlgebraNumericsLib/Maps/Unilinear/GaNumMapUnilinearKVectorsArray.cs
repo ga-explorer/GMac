@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
+using GeometricAlgebraStructuresLib.Frames;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear

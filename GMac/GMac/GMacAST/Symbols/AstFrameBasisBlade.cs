@@ -5,7 +5,7 @@ using CodeComposerLib.Irony.Semantic.Expression.Value;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib;
 using DataStructuresLib.SimpleTree;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Multivectors;
@@ -347,13 +347,13 @@ namespace GMac.GMacAST.Symbols
         internal AstFrameBasisBlade(GMacFrameMultivector mvType, int grade, int index)
         {
             AssociatedMultivector = mvType;
-            BasisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
+            BasisBladeId = GaFrameUtils.BasisBladeId(grade, index);
         }
 
         internal AstFrameBasisBlade(GMacFrame frame, int grade, int index)
         {
             AssociatedMultivector = frame.MultivectorType;
-            BasisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
+            BasisBladeId = GaFrameUtils.BasisBladeId(grade, index);
         }
     }
 }

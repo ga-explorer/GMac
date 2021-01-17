@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -41,7 +41,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                         continue;
 
                     foreach (var index in scalarValues.Keys)
-                        yield return GaNumFrameUtils.BasisBladeId(grade, index);
+                        yield return GaFrameUtils.BasisBladeId(grade, index);
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
                 foreach (var pair in scalarValues)
                     yield return new KeyValuePair<int, T>(
-                        GaNumFrameUtils.BasisBladeId(grade, pair.Key),
+                        GaFrameUtils.BasisBladeId(grade, pair.Key),
                         pair.Value
                     );
             }
@@ -124,7 +124,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
                 foreach (var pair in scalarValues)
                     yield return new KeyValuePair<int, T>(
-                        GaNumFrameUtils.BasisBladeId(grade, pair.Key),
+                        GaFrameUtils.BasisBladeId(grade, pair.Key),
                         pair.Value
                     );
             }

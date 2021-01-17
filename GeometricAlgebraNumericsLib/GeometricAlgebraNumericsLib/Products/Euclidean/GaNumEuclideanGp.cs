@@ -1,8 +1,8 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products.Euclidean
 {
@@ -43,7 +43,7 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
             return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
-                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d
+                GaFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d
             );
         }
 
@@ -51,7 +51,7 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
         {
             var idXor12 = id1 ^ id2;
             var value = 
-                (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3)) 
+                (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3)) 
                     ? -1 : 1;
 
             return GaNumTerm.Create(TargetGaSpaceDimension, idXor12 ^ id3, value);
@@ -61,7 +61,7 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
         {
             var idXor23 = id2 ^ id3;
             var value =
-                (GaNumFrameUtils.IsNegativeEGp(id1, idXor23) != GaNumFrameUtils.IsNegativeEGp(id2, id3))
+                (GaFrameUtils.IsNegativeEGp(id1, idXor23) != GaFrameUtils.IsNegativeEGp(id2, id3))
                     ? -1 : 1;
 
             return GaNumTerm.Create(TargetGaSpaceDimension, id1 ^ idXor23, value);

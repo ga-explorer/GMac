@@ -1,6 +1,6 @@
 ﻿using System;
 using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacAPI.Binding;
 using GMac.GMacAPI.CodeGen;
 using GMac.GMacAPI.Target;

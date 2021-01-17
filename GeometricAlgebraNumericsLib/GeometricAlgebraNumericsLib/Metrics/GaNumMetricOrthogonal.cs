@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Metrics
 {
@@ -64,7 +64,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
                     basisSignaturesMultivector.SetTerm(1 << m, basisVectorSignature);
             }
 
-            var idsSeq = GaNumFrameUtils.BasisBladeIDsSortedByGrade(VSpaceDimension, 2);
+            var idsSeq = GaFrameUtils.BasisBladeIDsSortedByGrade(VSpaceDimension, 2);
             foreach (var id in idsSeq)
             {
                 id.SplitBySmallestBasisVectorId(out var id1, out var id2);
@@ -108,7 +108,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
 
             return new GaTerm<double>(
                 id1 ^ id2,
-                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -metricValue : metricValue
+                GaFrameUtils.IsNegativeEGp(id1, id2) ? -metricValue : metricValue
             );
         }
 
@@ -118,7 +118,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
 
             return new GaTerm<double>(
                 id1 ^ id2,
-                GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -metricValue : metricValue
+                GaFrameUtils.IsNegativeEGp(id1, id2) ? -metricValue : metricValue
             );
         }
 
@@ -127,7 +127,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
             var idXor12 = id1 ^ id2;
             var metricValue = this[id1 & id2] * this[idXor12 & id3];
 
-            if (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+            if (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                 metricValue = -metricValue;
 
             return new GaTerm<double>(idXor12 ^ id3, metricValue);
@@ -138,7 +138,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
             var idXor12 = id1 ^ id2;
             var metricValue = scalingFactor * this[id1 & id2] * this[idXor12 & id3];
 
-            if (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+            if (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                 metricValue = -metricValue;
 
             return new GaTerm<double>(idXor12 ^ id3, metricValue);

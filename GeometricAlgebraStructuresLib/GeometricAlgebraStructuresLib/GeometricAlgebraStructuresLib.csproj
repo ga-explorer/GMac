@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Storage\GaMultivectorStorageFactory.cs" />
+    <Compile Remove="Maps\لإقهمهىثشق\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="4.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Maps\لإقهمهىثشق\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Maps\لإقهمهىثشق\**" />
+  </ItemGroup>
+
+</Project>

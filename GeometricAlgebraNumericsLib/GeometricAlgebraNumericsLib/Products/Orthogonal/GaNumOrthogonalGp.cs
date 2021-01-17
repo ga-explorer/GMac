@@ -1,9 +1,9 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products.Orthogonal
 {
@@ -44,7 +44,7 @@ namespace GeometricAlgebraNumericsLib.Products.Orthogonal
             return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
-                GaNumFrameUtils.IsNegativeEGp(id1, id2)
+                GaFrameUtils.IsNegativeEGp(id1, id2)
                     ? -OrthogonalMetric[id1 & id2]
                     : OrthogonalMetric[id1 & id2]
             );
@@ -55,7 +55,7 @@ namespace GeometricAlgebraNumericsLib.Products.Orthogonal
             var idXor12 = id1 ^ id2;
             var value = OrthogonalMetric[id1 & id2] * OrthogonalMetric[idXor12 & id3];
 
-            if (GaNumFrameUtils.IsNegativeEGp(id1, id2) != GaNumFrameUtils.IsNegativeEGp(idXor12, id3))
+            if (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                 value = -value;
 
             return GaNumTerm.Create(TargetGaSpaceDimension, idXor12 ^ id3, value);
@@ -66,7 +66,7 @@ namespace GeometricAlgebraNumericsLib.Products.Orthogonal
             var idXor23 = id2 ^ id3;
             var value = OrthogonalMetric[id1 & idXor23] * OrthogonalMetric[id2 & id3];
 
-            if (GaNumFrameUtils.IsNegativeEGp(id1, idXor23) != GaNumFrameUtils.IsNegativeEGp(id2, id3))
+            if (GaFrameUtils.IsNegativeEGp(id1, idXor23) != GaFrameUtils.IsNegativeEGp(id2, id3))
                 value = -value;
 
             return GaNumTerm.Create(TargetGaSpaceDimension, id1 ^ idXor23, value);

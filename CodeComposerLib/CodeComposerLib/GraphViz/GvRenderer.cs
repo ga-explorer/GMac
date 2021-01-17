@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -79,12 +80,12 @@ namespace CodeComposerLib.GraphViz
             = new GvRenderer("osage", true, true);
 
 
-        /// <summary>
-        /// ImageConverter object used to convert byte arrays containing JPEG or PNG file images into 
-        /// Bitmap objects. This is static and only gets instantiated once.
-        /// </summary>
-        private static ImageConverter ImageConverter { get; } 
-            = new ImageConverter();
+        ///// <summary>
+        ///// ImageConverter object used to convert byte arrays containing JPEG or PNG file images into 
+        ///// Bitmap objects. This is static and only gets instantiated once.
+        ///// </summary>
+        //private static ImageConverter ImageConverter { get; } 
+        //    = new ImageConverter();
 
         /// <summary>
         /// Method that uses the ImageConverter object in .Net Framework to convert a byte array, 
@@ -95,7 +96,11 @@ namespace CodeComposerLib.GraphViz
         /// <returns>Bitmap object if it works, else exception is thrown</returns>
         private static Bitmap GetImageFromByteArray(byte[] byteArray)
         {
-            var bm = (Bitmap)ImageConverter.ConvertFrom(byteArray);
+            var tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+
+            var bm = (Bitmap)tc.ConvertFrom(byteArray);
+
+            //var bm = (Bitmap)ImageConverter.ConvertFrom(byteArray);
 
             if (bm != null && (
                 bm.HorizontalResolution != (int)bm.HorizontalResolution ||
@@ -257,7 +262,7 @@ namespace CodeComposerLib.GraphViz
         /// <param name="dotSourceText"></param>
         /// <param name="returnType"></param>
         /// <returns></returns>
-        private byte[] RenderGraph(string dotSourceText, GvOutputFormat returnType)
+        public byte[] RenderGraph(string dotSourceText, GvOutputFormat returnType)
         {
             _errorsList.Clear();
 

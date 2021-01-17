@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -32,7 +32,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         public IEnumerable<int> Keys
             => KVectorScalarValues.Keys.Select(
-                index => GaNumFrameUtils.BasisBladeId(KVectorGrade, index)
+                index => GaFrameUtils.BasisBladeId(KVectorGrade, index)
             );
 
         public IEnumerable<T> Values 
@@ -76,7 +76,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             return KVectorScalarValues
                 .Select(
                     p => new KeyValuePair<int, T>(
-                        GaNumFrameUtils.BasisBladeId(KVectorGrade, p.Key),
+                        GaFrameUtils.BasisBladeId(KVectorGrade, p.Key),
                         p.Value
                     )
                 )
@@ -88,7 +88,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             return KVectorScalarValues
                 .Select(
                     p => new KeyValuePair<int, T>(
-                        GaNumFrameUtils.BasisBladeId(KVectorGrade, p.Key),
+                        GaFrameUtils.BasisBladeId(KVectorGrade, p.Key),
                         p.Value
                     )
                 )

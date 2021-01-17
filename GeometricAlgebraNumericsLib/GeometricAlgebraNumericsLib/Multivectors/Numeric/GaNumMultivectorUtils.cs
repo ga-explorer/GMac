@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Rendering.LaTeX;
 using GeometricAlgebraNumericsLib.Structures;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees.NodeInfo;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 {
     public static class GaNumMultivectorUtils
     {
         public static GaMultivectorMutableImplementation DefaultTempMultivectorKind { get; set; } 
-            = GaMultivectorMutableImplementation.Array;
+            = GaMultivectorMutableImplementation.DenseArrayRepresentation;
 
         public static bool DisableCompactifyMultivectors { get; set; } = false;
 
@@ -35,7 +35,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public static double[] GetKVectorPartValues(this IGaNumMultivector mv, int grade)
         {
-            var n = GaNumFrameUtils.KvSpaceDimension(mv.VSpaceDimension, grade);
+            var n = GaFrameUtils.KvSpaceDimension(mv.VSpaceDimension, grade);
             var array = new double[n];
 
             for (var i = 0; i < n; i++)
@@ -200,10 +200,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
             for (var grade = 0; grade <= mv1.VSpaceDimension; grade++)
             {
-                if (!mv1.ContainsStoredKVector(grade) || !mv2.ContainsStoredKVector(grade)) 
+                if (!mv1.ContainsStoredTermOfGrade(grade) || !mv2.ContainsStoredTermOfGrade(grade)) 
                     continue;
 
-                var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(mv1.VSpaceDimension, grade);
+                var kvSpaceDim = GaFrameUtils.KvSpaceDimension(mv1.VSpaceDimension, grade);
 
                 for (var index = 0; index < kvSpaceDim; index++)
                     result += mv1[grade, index] * mv2[grade, index];

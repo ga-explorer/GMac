@@ -5,6 +5,7 @@ using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraNumericsLib.Products.Orthogonal;
+using GeometricAlgebraStructuresLib.Frames;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GeometricAlgebraNumericsLib.Frames

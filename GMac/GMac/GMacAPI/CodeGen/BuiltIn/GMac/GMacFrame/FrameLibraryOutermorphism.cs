@@ -1,5 +1,5 @@
 ﻿using System;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using TextComposerLib.Text.Structured;
@@ -19,7 +19,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             for (var index = 1; index <= frameInfo.VSpaceDimension; index++)
             {
-                var id = GaNumFrameUtils.BasisVectorId(index - 1);
+                var id = GaFrameUtils.BasisVectorId(index - 1);
 
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
@@ -37,7 +37,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
                 for (var index = 0; index < kvSpaceDim; index++)
                 {
-                    int id = GaNumFrameUtils.BasisBladeId(grade, index);
+                    int id = GaFrameUtils.BasisBladeId(grade, index);
 
                     id.SplitBySmallestBasisVectorId(out var id1, out var id2);
 
@@ -99,7 +99,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             for (var index = 2; index <= frameInfo.VSpaceDimension; index++)
             {
-                var id = GaNumFrameUtils.BasisVectorId(index - 1);
+                var id = GaFrameUtils.BasisVectorId(index - 1);
 
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
@@ -139,13 +139,13 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
             {
                 componentsText.Clear();
 
-                var id1 = GaNumFrameUtils.BasisBladeId(1, index1 - 1);
+                var id1 = GaFrameUtils.BasisBladeId(1, index1 - 1);
 
                 commandsList.AddFixedCode("let newOm.ImageV" + index1 + " = Multivector(");
 
                 for (var index2 = 1; index2 <= frameInfo.VSpaceDimension; index2++)
                 {
-                    var id2 = GaNumFrameUtils.BasisBladeId(1, index2 - 1);
+                    var id2 = GaFrameUtils.BasisBladeId(1, index2 - 1);
 
                     componentsText.Add("    #E" + id2 + "# = om.ImageV" + index2 + ".#E" + id1 + "#");
                 }

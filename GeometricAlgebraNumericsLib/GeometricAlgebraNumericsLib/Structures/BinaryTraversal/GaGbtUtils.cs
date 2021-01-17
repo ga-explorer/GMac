@@ -1,6 +1,6 @@
-﻿using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Metrics;
+﻿using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 {
@@ -66,7 +66,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             var node2 = (IGaGbtNode1<double>)node.GbtNode2;
 
             var scalarValue = node1.Value * node2.Value;
-            if (GaNumFrameUtils.IsNegativeEGp(id1, id2))
+            if (GaFrameUtils.IsNegativeEGp(id1, id2))
                 scalarValue = -scalarValue;
 
             return new GaTerm<double>(id1 ^ id2, scalarValue);
@@ -81,7 +81,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             var node2 = (IGaGbtNode1<double>)node.GbtNode2;
 
             var scalarValue = scalingFactor * node1.Value * node2.Value;
-            if (GaNumFrameUtils.IsNegativeEGp(id1, id2))
+            if (GaFrameUtils.IsNegativeEGp(id1, id2))
                 scalarValue = -scalarValue;
 
             return new GaTerm<double>(id1 ^ id2, scalarValue);

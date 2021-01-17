@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacCompiler.Semantic.ASTConstants;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Structured;
@@ -74,11 +74,11 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
 
             GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.Negative, grade => true);
 
-            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.Reverse, GaNumFrameUtils.GradeHasNegativeReverse);
+            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.Reverse, GaFrameUtils.GradeHasNegativeReverse);
 
-            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.GradeInvolution, GaNumFrameUtils.GradeHasNegativeGradeInv);
+            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.GradeInvolution, GaFrameUtils.GradeHasNegativeGradeInv);
 
-            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.CliffordConjugate, GaNumFrameUtils.GradeHasNegativeCliffConj);
+            GenerateMainInvolutionFunction(DefaultMacro.EuclideanUnary.CliffordConjugate, GaFrameUtils.GradeHasNegativeCliffConj);
 
             GenerateKVectorFileFinishCode();
 

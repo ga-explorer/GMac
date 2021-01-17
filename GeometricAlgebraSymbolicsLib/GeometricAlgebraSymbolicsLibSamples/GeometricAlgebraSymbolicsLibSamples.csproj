@@ -55,11 +55,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Irony, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Irony.1.1.0\lib\net40\Irony.dll</HintPath>
+    <Reference Include="Irony, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.NetCore.1.1.11\lib\netstandard2.0\Irony.dll</HintPath>
     </Reference>
-    <Reference Include="Irony.Interpreter, Version=1.1.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Irony.Interpreter.1.1.0\lib\net40\Irony.Interpreter.dll</HintPath>
+    <Reference Include="Irony.Interpreter, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Irony.Interpreter.NetCore.1.1.11\lib\netstandard2.0\Irony.Interpreter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,12 +71,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GAPoT\ClarkeRotation3DSample.cs" />
+    <Compile Include="GAPoT\ClarkeRotation5DSample.cs" />
+    <Compile Include="GAPoT\ClarkeRotation6DSample.cs" />
+    <Compile Include="GAPoT\FbdFrameSample.cs" />
+    <Compile Include="GAPoT\GramSchmidtRotation3DSample.cs" />
+    <Compile Include="GAPoT\RotorsSequence4DSample.cs" />
+    <Compile Include="GAPoT\RotorsSequenceSample.cs" />
+    <Compile Include="GAPoT\ClarkeRotationNDSample.cs" />
     <Compile Include="GAPoT\ParsingSample1.cs" />
     <Compile Include="GAPoT\ParsingSample2.cs" />
+    <Compile Include="GAPoT\ParsingSample3.cs" />
     <Compile Include="GAPoT\Sample1.cs" />
     <Compile Include="GAPoT\Sample2.cs" />
     <Compile Include="GAPoT\Sample3.cs" />
     <Compile Include="GAPoT\Sample4.cs" />
+    <Compile Include="GAPoT\Sample5.cs" />
+    <Compile Include="GAPoT\Sample6.cs" />
+    <Compile Include="GAPoT\ClarkeRotation4DSample.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,9 +109,9 @@
       <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
       <Name>TextComposerLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.csproj">
+    <ProjectReference Include="..\GeometricAlgebraSymbolicsLib.Framework\GeometricAlgebraSymbolicsLib.Framework.csproj">
       <Project>{08858423-589f-4e23-9ea5-72ecedf3177b}</Project>
-      <Name>GeometricAlgebraSymbolicsLib</Name>
+      <Name>GeometricAlgebraSymbolicsLib.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

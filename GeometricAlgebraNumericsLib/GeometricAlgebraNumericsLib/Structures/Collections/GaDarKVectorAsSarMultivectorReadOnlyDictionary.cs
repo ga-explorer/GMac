@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -72,7 +72,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             for (var index = 0; index < Count; index++)
             {
                 yield return new KeyValuePair<int, T>(
-                    GaNumFrameUtils.BasisBladeId(KVectorGrade, index),
+                    GaFrameUtils.BasisBladeId(KVectorGrade, index),
                     KVectorValues[index]
                 );
             }
@@ -83,7 +83,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             for (var index = 0; index < Count; index++)
             {
                 yield return new KeyValuePair<int, T>(
-                    GaNumFrameUtils.BasisBladeId(KVectorGrade, index),
+                    GaFrameUtils.BasisBladeId(KVectorGrade, index),
                     KVectorValues[index]
                 );
             }

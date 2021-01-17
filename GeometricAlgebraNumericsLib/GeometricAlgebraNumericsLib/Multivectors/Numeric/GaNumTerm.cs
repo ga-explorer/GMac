@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Structures.BinaryTraversal;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 {
@@ -45,7 +45,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             => BasisBladeId.BasisBladeGrade();
 
         public int KvSpaceDimension
-            => GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, Grade);
+            => GaFrameUtils.KvSpaceDimension(VSpaceDimension, Grade);
 
         public IReadOnlyList<double> ScalarValuesArray
             => new SingleItemReadOnlyList<double>(KvSpaceDimension, BasisBladeId.BasisBladeIndex(), ScalarValue);
@@ -57,7 +57,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             get
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 return (id == BasisBladeId) ? ScalarValue : 0.0d;
             }
@@ -88,7 +88,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             yield return new GaTerm<double>(BasisBladeId, ScalarValue);
         }
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
             if (BasisBladeId.BasisBladeGrade() == grade)
                 yield return new GaTerm<double>(BasisBladeId, ScalarValue);
@@ -100,7 +100,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 yield return new GaTerm<double>(BasisBladeId, ScalarValue);
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
             if (BasisBladeId.BasisBladeGrade() == grade && !ScalarValue.IsNearZero())
                 yield return new GaTerm<double>(BasisBladeId, ScalarValue);
@@ -132,7 +132,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public int GetBasisBladeId(int index)
         {
-            return GaNumFrameUtils.BasisBladeId(Grade, index);
+            return GaFrameUtils.BasisBladeId(Grade, index);
         }
 
         public int GetBasisBladeIndex(int id)
@@ -172,10 +172,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override bool ContainsStoredTerm(int grade, int index)
         {
-            return BasisBladeId == GaNumFrameUtils.BasisBladeId(grade, index);
+            return BasisBladeId == GaFrameUtils.BasisBladeId(grade, index);
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return BasisBladeId.BasisBladeGrade() == grade;
         }
@@ -211,7 +211,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             BasisBladeId.BasisBladeGradeIndex(out var grade, out var index);
 
             var scalarValues = new SingleItemReadOnlyList<double>(
-                GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade),
+                GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade),
                 index,
                 ScalarValue
             );
@@ -246,7 +246,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override bool TryGetValue(int grade, int index, out double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (id == BasisBladeId)
             {
@@ -272,7 +272,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (id == BasisBladeId)
             {
@@ -292,7 +292,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 return GaNumDarKVector.CreateZero(VSpaceDimension, grade);
 
             var scalarValues = new SingleItemReadOnlyList<double>(
-                GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade),
+                GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade),
                 termIndex,
                 ScalarValue
             );
@@ -321,7 +321,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             BasisBladeId.BasisBladeGradeIndex(out var termGrade, out var termIndex);
 
             var scalarValues = new SingleItemReadOnlyList<double>(
-                GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, termGrade),
+                GaFrameUtils.KvSpaceDimension(VSpaceDimension, termGrade),
                 termIndex,
                 ScalarValue
             );

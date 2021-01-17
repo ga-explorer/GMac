@@ -1,7 +1,7 @@
-﻿using GeometricAlgebraNumericsLib.Frames;
-using GeometricAlgebraNumericsLib.Maps.Unilinear;
+﻿using GeometricAlgebraNumericsLib.Maps.Unilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Outermorphisms;
+using GeometricAlgebraStructuresLib.Frames;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace GMac.GMacMath.Validators

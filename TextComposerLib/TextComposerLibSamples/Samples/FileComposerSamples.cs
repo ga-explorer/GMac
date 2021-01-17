@@ -6,7 +6,7 @@ namespace TextComposerLibSamples.Samples
     {
         internal static string Task1()
         {
-            var composer = new FilesComposer();
+            var composer = new TextFilesComposer();
 
             composer
                 .SelectFolder("Folder1")

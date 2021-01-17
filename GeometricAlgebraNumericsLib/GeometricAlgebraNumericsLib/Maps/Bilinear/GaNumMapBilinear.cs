@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
+using GeometricAlgebraStructuresLib.Maps;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 {
-    public abstract class GaNumMapBilinear : GaNumMap, IGaNumMapBilinear
+    public abstract class GaNumMapBilinear : GaMap, IGaNumMapBilinear
     {
         public abstract int DomainVSpaceDimension { get; }
 
@@ -85,8 +86,8 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             for (var index1 = 0; index1 < DomainVSpaceDimension; index1++)
             for (var index2 = 0; index2 < DomainVSpaceDimension; index2++)
             {
-                var id1 = GaNumFrameUtils.BasisBladeId(1, index1);
-                var id2 = GaNumFrameUtils.BasisBladeId(1, index2);
+                var id1 = GaFrameUtils.BasisBladeId(1, index1);
+                var id2 = GaFrameUtils.BasisBladeId(1, index2);
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrEmpty())

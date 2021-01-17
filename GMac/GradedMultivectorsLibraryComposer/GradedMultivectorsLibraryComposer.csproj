@@ -329,9 +329,17 @@
       <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>
       <Name>GeometricAlgebraNumericsLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.csproj">
+    <ProjectReference Include="..\..\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib.csproj">
+      <Project>{c27c6e13-4db7-4430-acb4-1a500f42d494}</Project>
+      <Name>GeometricAlgebraStructuresLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.Framework\GeometricAlgebraSymbolicsLib.Framework.csproj">
       <Project>{08858423-589f-4e23-9ea5-72ecedf3177b}</Project>
-      <Name>GeometricAlgebraSymbolicsLib</Name>
+      <Name>GeometricAlgebraSymbolicsLib.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TextComposerLib\TextComposerLib.UI.WinForms\TextComposerLib.UI.WinForms.csproj">
+      <Project>{b599fd82-2921-48d8-acbb-5df40b799a94}</Project>
+      <Name>TextComposerLib.UI.WinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj">
       <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>

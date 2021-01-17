@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Products;
 using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
@@ -700,12 +700,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroOp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroOp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -720,7 +720,7 @@ namespace GeometricAlgebraNumericsLib.Products
                 {
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -733,12 +733,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroELcp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroELcp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -751,12 +751,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroERcp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroERcp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -769,12 +769,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroESp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroESp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -787,12 +787,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroEFdp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroEFdp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -805,12 +805,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroEHip(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroEHip(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -823,12 +823,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroEAcp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroEAcp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -841,12 +841,12 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroECp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroECp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     var value =
                         term1.ScalarValue * term2.ScalarValue *
-                        (GaNumFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
+                        (GaFrameUtils.IsNegativeEGp(term1.BasisBladeId, term2.BasisBladeId) ? -1.0d : 1.0d);
 
                     yield return new GaTerm<double>(term1.BasisBladeId ^ term2.BasisBladeId, value);
                 }
@@ -873,7 +873,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroELcp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroELcp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);
@@ -887,7 +887,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroERcp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroERcp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);
@@ -901,7 +901,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroESp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroESp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);
@@ -915,7 +915,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroEFdp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroEFdp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);
@@ -929,7 +929,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroEHip(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroEHip(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);
@@ -943,7 +943,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroEAcp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroEAcp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);
@@ -957,7 +957,7 @@ namespace GeometricAlgebraNumericsLib.Products
             {
                 foreach (var term2 in mv2.GetNonZeroTerms())
                 {
-                    if (!GaNumFrameUtils.IsNonZeroECp(term1.BasisBladeId, term2.BasisBladeId))
+                    if (!GaFrameUtils.IsNonZeroECp(term1.BasisBladeId, term2.BasisBladeId))
                         continue;
 
                     yield return metric.ScaledGp(term1.BasisBladeId, term2.BasisBladeId, term1.ScalarValue * term2.ScalarValue);

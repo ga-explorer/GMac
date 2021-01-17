@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 {
@@ -25,8 +25,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override double this[int grade, int index]
         {
-            get => _scalarValuesArray[GaNumFrameUtils.BasisBladeId(grade, index)];
-            set => _scalarValuesArray[GaNumFrameUtils.BasisBladeId(grade, index)] = value;
+            get => _scalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)];
+            set => _scalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)] = value;
         }
 
 
@@ -86,7 +86,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool TryGetValue(int grade, int index, out double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (id < 0 || id >= GaSpaceDimension)
             {
@@ -112,7 +112,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             if (id < 0 || id >= GaSpaceDimension)
             {
@@ -136,13 +136,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 (value, id) => new GaTerm<double>(id, value)
             );
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
             var kvSpaceDim = GetKvSpaceDimension(grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 yield return new GaTerm<double>(id, _scalarValuesArray[id]);
             }
@@ -159,13 +159,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             }
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
             var kvSpaceDim = GetKvSpaceDimension(grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 var value = _scalarValuesArray[id];
 
@@ -210,12 +210,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override bool ContainsStoredTerm(int grade, int index)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return (id >= 0 && id < GaSpaceDimension);
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return (grade >= 0 && grade <= VSpaceDimension);
         }
@@ -249,7 +249,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
             for (var index = 0; index < kvSpaceDim; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 var value = _scalarValuesArray[id];
 
@@ -284,7 +284,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             var scalarValues = new double[kvSpaceDim];
 
             for (var index = 0; index < kvSpaceDim; index++)
-                scalarValues[index] = _scalarValuesArray[GaNumFrameUtils.BasisBladeId(grade, index)];
+                scalarValues[index] = _scalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)];
 
             return new GaNumDarKVector(VSpaceDimension, grade, scalarValues);
         }
@@ -297,7 +297,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             for (var index = 0; index < kvSpaceDim; index++)
             {
                 var value = 
-                    _scalarValuesArray[GaNumFrameUtils.BasisBladeId(grade, index)];
+                    _scalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)];
 
                 if (!value.IsNearZero())
                     scalarValues.Add(index, value);
@@ -381,7 +381,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 var scalarValues = new double[kvSpaceDim];
 
                 for (var index = 0; index < kvSpaceDim; index++)
-                    scalarValues[index] = _scalarValuesArray[GaNumFrameUtils.BasisBladeId(grade, index)];
+                    scalarValues[index] = _scalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)];
 
                 kVectorsArray[grade] = scalarValues;
             }
@@ -439,7 +439,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory SetTerm(int grade, int index, double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             _scalarValuesArray[id] = value;
 
@@ -470,7 +470,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
             for (var index = 0; index < kvSpaceDimension; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 _scalarValuesArray[id] = scalarValuesList[index];
             }
@@ -487,7 +487,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
             for (var index = 0; index < kvSpaceDimension; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 _scalarValuesArray[id] = scalingFactor * scalarValuesList[index];
             }
@@ -499,7 +499,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         {
             foreach (var pair in scalarValuesList)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, pair.Key);
+                var id = GaFrameUtils.BasisBladeId(grade, pair.Key);
 
                 _scalarValuesArray[id] = pair.Value;
             }
@@ -511,7 +511,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         {
             foreach (var pair in scalarValuesList)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, pair.Key);
+                var id = GaFrameUtils.BasisBladeId(grade, pair.Key);
 
                 _scalarValuesArray[id] = scalingFactor * pair.Value;
             }
@@ -529,7 +529,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory AddTerm(int grade, int index, double value)
         {
-            var id = GaNumFrameUtils.BasisBladeId(grade, index);
+            var id = GaFrameUtils.BasisBladeId(grade, index);
 
             _scalarValuesArray[id] += value;
 
@@ -576,7 +576,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
             for (var index = 0; index < kvSpaceDimension; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 _scalarValuesArray[id] += scalarValuesList[index];
             }
@@ -593,7 +593,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
             for (var index = 0; index < kvSpaceDimension; index++)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, index);
+                var id = GaFrameUtils.BasisBladeId(grade, index);
 
                 _scalarValuesArray[id] += scalingFactor * scalarValuesList[index];
             }
@@ -605,7 +605,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         {
             foreach (var pair in scalarValuesList)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, pair.Key);
+                var id = GaFrameUtils.BasisBladeId(grade, pair.Key);
 
                 _scalarValuesArray[id] += pair.Value;
             }
@@ -617,7 +617,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         {
             foreach (var pair in scalarValuesList)
             {
-                var id = GaNumFrameUtils.BasisBladeId(grade, pair.Key);
+                var id = GaFrameUtils.BasisBladeId(grade, pair.Key);
 
                 _scalarValuesArray[id] += scalingFactor * pair.Value;
             }

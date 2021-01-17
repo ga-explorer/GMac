@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props" Condition="Exists('..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props')" />
-  <Import Project="..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props" Condition="Exists('..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props')" />
-  <Import Project="..\..\GMac\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props" Condition="Exists('..\..\GMac\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props')" />
-  <Import Project="..\..\GMac\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props" Condition="Exists('..\..\GMac\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props')" />
+  <Import Project="..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.props" Condition="Exists('..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.props')" />
+  <Import Project="..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props" Condition="Exists('..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props')" />
+  <Import Project="..\..\GMac\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props" Condition="Exists('..\..\GMac\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props')" />
+  <Import Project="..\..\GMac\packages\cef.redist.x64.84.4.1\build\cef.redist.x64.props" Condition="Exists('..\..\GMac\packages\cef.redist.x64.84.4.1\build\cef.redist.x64.props')" />
+  <Import Project="..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props" Condition="Exists('..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props')" />
+  <Import Project="..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props" Condition="Exists('..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props')" />
+  <Import Project="..\..\GeometryComposerLib\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props" Condition="Exists('..\..\GeometryComposerLib\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props')" />
+  <Import Project="..\..\GeometryComposerLib\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props" Condition="Exists('..\..\GeometryComposerLib\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props')" />
   <Import Project="..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.props" Condition="Exists('..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.props')" />
   <Import Project="..\..\CEMSim\packages\CefSharp.Common.75.1.143\build\CefSharp.Common.props" Condition="Exists('..\..\CEMSim\packages\CefSharp.Common.75.1.143\build\CefSharp.Common.props')" />
   <Import Project="..\..\CEMSim\packages\cef.redist.x86.75.1.14\build\cef.redist.x86.props" Condition="Exists('..\..\CEMSim\packages\cef.redist.x86.75.1.14\build\cef.redist.x86.props')" />
@@ -68,21 +72,25 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fizzler, Version=1.1.21209.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
-      <HintPath>..\..\GMac\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
+    <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
+      <HintPath>..\..\GeometryComposerLib\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET-Q8-x64, Version=7.22.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec">
+      <HintPath>..\..\GMac\packages\Magick.NET-Q8-x64.7.22.0\lib\net40\Magick.NET-Q8-x64.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Magick.NET-Q8-x64, Version=7.15.5.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
-      <HintPath>..\..\GMac\packages\Magick.NET-Q8-x64.7.15.5\lib\net40\Magick.NET-Q8-x64.dll</HintPath>
+    <Reference Include="Magick.NET.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec">
+      <HintPath>..\..\GMac\packages\Magick.NET.Core.5.0.0\lib\net40\Magick.NET.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MathNet.Numerics, Version=4.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\MeshComposerLib\packages\MathNet.Numerics.4.9.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    <Reference Include="MathNet.Numerics, Version=4.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\GMac\packages\MathNet.Numerics.4.12.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="MathNet.Spatial, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\MeshComposerLib\packages\MathNet.Spatial.0.5.0\lib\net461\MathNet.Spatial.dll</HintPath>
+    <Reference Include="MathNet.Spatial, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\GMac\packages\MathNet.Spatial.0.6.0\lib\net461\MathNet.Spatial.dll</HintPath>
     </Reference>
-    <Reference Include="Svg, Version=3.0.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
-      <HintPath>..\..\GMac\packages\Svg.3.0.102\lib\net452\Svg.dll</HintPath>
+    <Reference Include="Svg, Version=3.1.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\..\GMac\packages\Svg.3.1.1\lib\net452\Svg.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -591,18 +599,28 @@
     <Error Condition="!Exists('..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.props'))" />
     <Error Condition="!Exists('..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.targets'))" />
     <Error Condition="!Exists('..\..\CEMSim\packages\Magick.NET-Q8-x64.7.15.0\build\net40\Magick.NET-Q8-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\CEMSim\packages\Magick.NET-Q8-x64.7.15.0\build\net40\Magick.NET-Q8-x64.targets'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets'))" />
-    <Error Condition="!Exists('..\..\GMac\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\cef.redist.x64.79.1.36\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\cef.redist.x86.79.1.36\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\..\GeometryComposerLib\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GeometryComposerLib\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\cef.redist.x64.84.4.1\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\cef.redist.x64.84.4.1\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\..\GMac\packages\Magick.NET-Q8-x64.7.22.0\build\net40\Magick.NET-Q8-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\GMac\packages\Magick.NET-Q8-x64.7.22.0\build\net40\Magick.NET-Q8-x64.targets'))" />
   </Target>
   <Import Project="..\..\CEMSim\packages\CefSharp.Common.75.1.143\build\CefSharp.Common.targets" Condition="Exists('..\..\CEMSim\packages\CefSharp.Common.75.1.143\build\CefSharp.Common.targets')" />
   <Import Project="..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.targets" Condition="Exists('..\..\CEMSim\packages\CefSharp.WinForms.75.1.143\build\CefSharp.WinForms.targets')" />
   <Import Project="..\..\CEMSim\packages\Magick.NET-Q8-x64.7.15.0\build\net40\Magick.NET-Q8-x64.targets" Condition="Exists('..\..\CEMSim\packages\Magick.NET-Q8-x64.7.15.0\build\net40\Magick.NET-Q8-x64.targets')" />
-  <Import Project="..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets" Condition="Exists('..\..\GMac\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets')" />
-  <Import Project="..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets" Condition="Exists('..\..\GMac\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets')" />
-  <Import Project="..\..\GMac\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets" Condition="Exists('..\..\GMac\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets')" />
+  <Import Project="..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets" Condition="Exists('..\..\GeometryComposerLib\packages\CefSharp.Common.79.1.360\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets" Condition="Exists('..\..\GeometryComposerLib\packages\CefSharp.WinForms.79.1.360\build\CefSharp.WinForms.targets')" />
+  <Import Project="..\..\GeometryComposerLib\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets" Condition="Exists('..\..\GeometryComposerLib\packages\Magick.NET-Q8-x64.7.15.5\build\net40\Magick.NET-Q8-x64.targets')" />
+  <Import Project="..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets" Condition="Exists('..\..\GMac\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.targets" Condition="Exists('..\..\GMac\packages\CefSharp.WinForms.84.4.10\build\CefSharp.WinForms.targets')" />
+  <Import Project="..\..\GMac\packages\Magick.NET-Q8-x64.7.22.0\build\net40\Magick.NET-Q8-x64.targets" Condition="Exists('..\..\GMac\packages\Magick.NET-Q8-x64.7.22.0\build\net40\Magick.NET-Q8-x64.targets')" />
 </Project>

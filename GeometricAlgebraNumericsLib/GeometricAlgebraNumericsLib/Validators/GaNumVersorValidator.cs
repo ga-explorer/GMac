@@ -1,9 +1,4 @@
-﻿using GeometricAlgebraNumericsLib.Multivectors.GAPoT;
-using GeometricAlgebraNumericsLib.Multivectors.Numeric;
-using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
-using GeometricAlgebraNumericsLib.Products;
-
-namespace GeometricAlgebraNumericsLib.Validators
+﻿namespace GeometricAlgebraNumericsLib.Validators
 {
     //public sealed class GaNumVersorValidator : GaNumValidator
     //{

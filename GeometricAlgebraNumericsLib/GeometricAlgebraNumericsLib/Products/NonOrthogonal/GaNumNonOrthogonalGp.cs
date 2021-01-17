@@ -1,9 +1,9 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products.NonOrthogonal
 {
@@ -53,7 +53,7 @@ namespace GeometricAlgebraNumericsLib.Products.NonOrthogonal
                                     basisTerm1.ScalarValue * basisTerm2.ScalarValue *
                                     NonOrthogonalMetric.BaseMetric.GetBasisBladeSignature(basisTerm1.BasisBladeId & basisTerm2.BasisBladeId);
 
-                                if (GaNumFrameUtils.IsNegativeEGp(basisTerm1.BasisBladeId, basisTerm2.BasisBladeId))
+                                if (GaFrameUtils.IsNegativeEGp(basisTerm1.BasisBladeId, basisTerm2.BasisBladeId))
                                     scalar = -scalar;
 
                                 resultMv.AddTerm(id, scalar);
@@ -93,7 +93,7 @@ namespace GeometricAlgebraNumericsLib.Products.NonOrthogonal
                                     basisTerm1.ScalarValue * basisTerm2.ScalarValue *
                                     NonOrthogonalMetric.BaseMetric.GetBasisBladeSignature(basisTerm1.BasisBladeId & basisTerm2.BasisBladeId);
 
-                                if (GaNumFrameUtils.IsNegativeEGp(basisTerm1.BasisBladeId, basisTerm2.BasisBladeId))
+                                if (GaFrameUtils.IsNegativeEGp(basisTerm1.BasisBladeId, basisTerm2.BasisBladeId))
                                     scalar = -scalar;
 
                                 resultMv.AddTerm(id, scalar);

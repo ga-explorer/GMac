@@ -24,11 +24,11 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
                     continue;
                 }
 
-                if (stack.TosHasChild1())
-                    stack.PushDataOfChild1();
+                if (stack.TosHasChild(1))
+                    stack.PushDataOfChild(1);
 
-                if (stack.TosHasChild0())
-                    stack.PushDataOfChild0();
+                if (stack.TosHasChild(0))
+                    stack.PushDataOfChild(0);
             }
         }
 
@@ -51,11 +51,11 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
                     continue;
                 }
 
-                if (stack.TosHasChild1())
-                    stack.PushDataOfChild1();
+                if (stack.TosHasChild(1))
+                    stack.PushDataOfChild(1);
 
-                if (stack.TosHasChild0())
-                    stack.PushDataOfChild0();
+                if (stack.TosHasChild(0))
+                    stack.PushDataOfChild(0);
             }
         }
     }

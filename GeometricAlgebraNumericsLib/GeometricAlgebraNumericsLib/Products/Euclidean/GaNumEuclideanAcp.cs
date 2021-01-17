@@ -1,8 +1,8 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products.Euclidean
 {
@@ -42,8 +42,8 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
             return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 id1 ^ id2,
-                GaNumFrameUtils.IsNonZeroEAcp(id1, id2)
-                    ? (GaNumFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d)
+                GaFrameUtils.IsNonZeroEAcp(id1, id2)
+                    ? (GaFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d)
                     : 0.0d
             );
         }

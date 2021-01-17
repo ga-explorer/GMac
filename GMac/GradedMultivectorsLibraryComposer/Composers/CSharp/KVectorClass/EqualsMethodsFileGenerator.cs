@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Structured;
 

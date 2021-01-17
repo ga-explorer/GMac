@@ -100,8 +100,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
         /// </summary>
         /// <param name="grade"></param>
         /// <returns></returns>
-        bool ContainsStoredKVector(int grade);
-
+        bool ContainsStoredTermOfGrade(int grade);
 
         /// <summary>
         /// Try to get the given term if stored in this multivector
@@ -120,7 +119,6 @@ namespace GeometricAlgebraNumericsLib.Multivectors
         /// <returns></returns>
         bool TryGetTerm(int grade, int index, out GaTerm<T> term);
 
-
         /// <summary>
         /// Get all terms currently stored inside this factory
         /// </summary>
@@ -132,7 +130,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
         /// </summary>
         /// <param name="grade"></param>
         /// <returns></returns>
-        IEnumerable<GaTerm<T>> GetStoredTerms(int grade);
+        IEnumerable<GaTerm<T>> GetStoredTermsOfGrade(int grade);
 
         /// <summary>
         /// Get all non-zero terms currently stored inside this factory
@@ -145,6 +143,6 @@ namespace GeometricAlgebraNumericsLib.Multivectors
         /// </summary>
         /// <param name="grade"></param>
         /// <returns></returns>
-        IEnumerable<GaTerm<T>> GetNonZeroTerms(int grade);
+        IEnumerable<GaTerm<T>> GetNonZeroTermsOfGrade(int grade);
     }
 }

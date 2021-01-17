@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -13,13 +13,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public int Count { get; }
 
         public T this[int index]
-            => DarValues[GaNumFrameUtils.BasisBladeId(Grade, index)];
+            => DarValues[GaFrameUtils.BasisBladeId(Grade, index)];
 
 
         internal GaDarMultivectorAsDarKVectorReadOnlyList(int grade, IReadOnlyList<T> darValues)
         {
             Grade = grade;
-            Count = GaNumFrameUtils.KvSpaceDimension(darValues.Count.ToVSpaceDimension(), grade);
+            Count = GaFrameUtils.KvSpaceDimension(darValues.Count.ToVSpaceDimension(), grade);
             DarValues = darValues;
         }
 

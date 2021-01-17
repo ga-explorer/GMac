@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using DataStructuresLib.Collections;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Structures.BinaryTraversal;
 using GeometricAlgebraNumericsLib.Structures.Collections;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 {
@@ -49,7 +49,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public IReadOnlyList<double> ScalarValuesArray { get; }
 
         public int KvSpaceDimension
-            => GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, Grade);
+            => GaFrameUtils.KvSpaceDimension(VSpaceDimension, Grade);
 
         public override double this[int id]
         {
@@ -86,7 +86,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             Debug.Assert(
                 scalarValues.All(p => 
-                    p.Key >= 0 && p.Key < GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade)
+                    p.Key >= 0 && p.Key < GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
                 )
             );
 
@@ -98,7 +98,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public int GetBasisBladeId(int index)
         {
-            return GaNumFrameUtils.BasisBladeId(Grade, index);
+            return GaFrameUtils.BasisBladeId(Grade, index);
         }
 
         public int GetBasisBladeIndex(int id)
@@ -216,11 +216,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             return ScalarValuesDictionary
                 .Select(p =>
-                    new GaTerm<double>(GaNumFrameUtils.BasisBladeId(Grade, p.Key), p.Value)
+                    new GaTerm<double>(GaFrameUtils.BasisBladeId(Grade, p.Key), p.Value)
                 );
         }
 
-        public override IEnumerable<GaTerm<double>> GetStoredTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetStoredTermsOfGrade(int grade)
         {
             return Grade == grade
                 ? GetStoredTerms()
@@ -232,11 +232,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return ScalarValuesDictionary
                 .Where(p => !p.Value.IsNearZero())
                 .Select(p =>
-                    new GaTerm<double>(GaNumFrameUtils.BasisBladeId(Grade, p.Key), p.Value)
+                    new GaTerm<double>(GaFrameUtils.BasisBladeId(Grade, p.Key), p.Value)
                 );
         }
 
-        public override IEnumerable<GaTerm<double>> GetNonZeroTerms(int grade)
+        public override IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade)
         {
             return Grade == grade
                 ? GetNonZeroTerms()
@@ -247,7 +247,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override IEnumerable<int> GetStoredTermIds()
         {
             return ScalarValuesDictionary.Select(p =>
-                GaNumFrameUtils.BasisBladeId(Grade, p.Key)
+                GaFrameUtils.BasisBladeId(Grade, p.Key)
             );
         }
 
@@ -256,7 +256,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return ScalarValuesDictionary
                 .Where(p => !p.Value.IsNearZero())
                 .Select(p =>
-                    GaNumFrameUtils.BasisBladeId(Grade, p.Key)
+                    GaFrameUtils.BasisBladeId(Grade, p.Key)
                 );
         }
 
@@ -311,7 +311,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             if (Grade == grade && ScalarValuesDictionary.TryGetValue(index, out var value))
             {
-                term = new GaTerm<double>(GaNumFrameUtils.BasisBladeId(grade, index), value);
+                term = new GaTerm<double>(GaFrameUtils.BasisBladeId(grade, index), value);
                 return true;
             }
 
@@ -351,7 +351,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return (ScalarValuesDictionary.Count > 0) ? (1 << Grade) : 0;
         }
 
-        public override bool ContainsStoredKVector(int grade)
+        public override bool ContainsStoredTermOfGrade(int grade)
         {
             return grade == Grade && ScalarValuesDictionary.Count > 0;
         }

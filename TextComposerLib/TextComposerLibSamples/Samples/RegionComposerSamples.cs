@@ -77,7 +77,7 @@ Fixed Line 4
             //composer.JoinSlotTagsBeginMarker.MarkerText = @"//{";
             //composer.JoinSlotTagsEndMarker.MarkerText = @"//}";
 
-            var linearComposer = new LinearComposer();
+            var linearComposer = new LinearTextComposer();
 
             linearComposer
                 .AppendLine("Template Text:")

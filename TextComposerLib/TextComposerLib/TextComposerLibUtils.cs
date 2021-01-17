@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Windows.Forms;
 using TextComposerLib.Settings;
 
 namespace TextComposerLib
@@ -21,7 +20,7 @@ namespace TextComposerLib
             //Define settings file for TextComposerLib
             Settings.FilePath =
                 Path.Combine(
-                    Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty,
+                    Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? string.Empty,
                     "TextComposerLibSettings.xml");
 
             //Try reading settings file

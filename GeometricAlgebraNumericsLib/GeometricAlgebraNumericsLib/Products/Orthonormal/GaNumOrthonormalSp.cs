@@ -1,9 +1,9 @@
 ﻿using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products.Orthonormal
 {
@@ -43,8 +43,8 @@ namespace GeometricAlgebraNumericsLib.Products.Orthonormal
             return GaNumTerm.Create(
                 TargetGaSpaceDimension,
                 0,
-                GaNumFrameUtils.IsNonZeroESp(id1, id2)
-                    ? (GaNumFrameUtils.IsNegativeEGp(id1, id1)
+                GaFrameUtils.IsNonZeroESp(id1, id2)
+                    ? (GaFrameUtils.IsNegativeEGp(id1, id1)
                         ? -OrthonormalMetric[id1]
                         : OrthonormalMetric[id1])
                     : 0.0d

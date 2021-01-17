@@ -1,29 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Interop.MATLAB
 {
-    public static class MatlabUtils
+    public static class GaNumMatlabUtils
     {
-        public static MatlabSparseColumnMatrixData GetMatlabSparseColumnMatrixData(this IEnumerable<GaTerm<double>> termsList, int vSpaceDim)
+        public static GaNumMatlabSparseMatrixData GetMatlabSparseColumnMatrixData(this IEnumerable<GaTerm<double>> termsList, int vSpaceDim)
         {
             return GetMatlabSparseColumnMatrixData( 
                 termsList.SumAsSarMultivector(vSpaceDim)
             );
         }
 
-        public static MatlabSparseColumnMatrixData GetMatlabSparseColumnMatrixData(this IGaNumMultivector mv)
+        public static GaNumMatlabSparseMatrixData GetMatlabSparseColumnMatrixData(this IGaNumMultivector mv)
         {
             var termsArray = mv
                 .GetStoredTerms()
                 .OrderBy(t => t.BasisBladeId)
                 .ToArray();
 
-            var result = new MatlabSparseColumnMatrixData(
+            var result = GaNumMatlabSparseMatrixData.CreateColumnMatrix(
                 mv.GaSpaceDimension,
                 termsArray.Length
             );
@@ -44,49 +44,49 @@ namespace GeometricAlgebraNumericsLib.Interop.MATLAB
         }
 
 
-        public static IEnumerable<GaTerm<double>> GetNumTerms(this MatlabSparseColumnMatrixData matrixData)
+        public static IEnumerable<GaTerm<double>> GetNumTerms(this GaNumMatlabSparseMatrixData matrixData)
         {
             for (var i = 0; i < matrixData.ItemsCount; i++)
                 yield return new GaTerm<double>(
-                    matrixData.IndicesArray[i] - 1, //MATLAB array indices start at 1 not 0
+                    matrixData.RowIndicesArray[i] - 1, //MATLAB array indices start at 1 not 0
                     matrixData.ValuesArray[i]
                 );
         }
 
 
-        public static GaNumDarMultivector CreateNumDarMultivector(this MatlabSparseColumnMatrixData matrixData)
+        public static GaNumDarMultivector CreateNumDarMultivector(this GaNumMatlabSparseMatrixData matrixData)
         {
             return matrixData
                 .GetNumTerms()
                 .SumAsDarMultivector(
-                    matrixData.MaxSize.ToVSpaceDimension()
+                    matrixData.RowsCount.ToVSpaceDimension()
                 );
         }
 
-        public static GaNumSarMultivector CreateNumSarMultivector(this MatlabSparseColumnMatrixData matrixData)
+        public static GaNumSarMultivector CreateNumSarMultivector(this GaNumMatlabSparseMatrixData matrixData)
         {
             return matrixData
                 .GetNumTerms()
                 .SumAsSarMultivector(
-                    matrixData.MaxSize.ToVSpaceDimension()
+                    matrixData.RowsCount.ToVSpaceDimension()
                 );
         }
 
-        public static GaNumDgrMultivector CreateNumDgrMultivector(this MatlabSparseColumnMatrixData matrixData)
+        public static GaNumDgrMultivector CreateNumDgrMultivector(this GaNumMatlabSparseMatrixData matrixData)
         {
             return matrixData
                 .GetNumTerms()
                 .SumAsDgrMultivector(
-                    matrixData.MaxSize.ToVSpaceDimension()
+                    matrixData.RowsCount.ToVSpaceDimension()
                 );
         }
 
-        public static GaNumSgrMultivector CreateNumSgrMultivector(this MatlabSparseColumnMatrixData matrixData)
+        public static GaNumSgrMultivector CreateNumSgrMultivector(this GaNumMatlabSparseMatrixData matrixData)
         {
             return matrixData
                 .GetNumTerms()
                 .SumAsSgrMultivector(
-                    matrixData.MaxSize.ToVSpaceDimension()
+                    matrixData.RowsCount.ToVSpaceDimension()
                 );
         }
     }

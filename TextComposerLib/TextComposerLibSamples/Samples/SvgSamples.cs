@@ -1,10 +1,4 @@
 ﻿using System.Drawing;
-using TextComposerLib.Diagrams;
-using TextComposerLib.Diagrams.SVG;
-using TextComposerLib.Diagrams.SVG.Compositions.Grids;
-using TextComposerLib.Diagrams.SVG.Elements.Containers;
-using TextComposerLib.Diagrams.SVG.Elements.Shape;
-using TextComposerLib.Diagrams.SVG.Values;
 
 namespace TextComposerLibSamples.Samples
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CodeComposerLib.SyntaxTree;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAPI.CodeGen;
 using GMac.GMacAST.Symbols;

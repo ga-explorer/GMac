@@ -8,7 +8,7 @@ namespace TextComposerLibSamples.Samples
     {
         internal static string Task1()
         {
-            var composer = new ParametricComposer("<", ">")
+            var composer = new ParametricTextComposer("<", ">")
             {
                 AlignMultiLineParameterValues = true
             };
@@ -79,7 +79,7 @@ namespace TextComposerLibSamples.Samples
 
         internal static string Task2()
         {
-            var composerCollection = new ParametricComposerCollection();
+            var composerCollection = new ParametricTextComposerCollection();
 
             composerCollection.Parse(
 @"
@@ -108,21 +108,21 @@ end declare_class
 
             var declarePropertyComposer = composerCollection["declare_property"];
 
-            var propertiesComposer = new ListComposer
+            var propertiesComposer = new ListTextComposer
             {
                 declarePropertyComposer.GenerateUsing("double", "X"),
                 declarePropertyComposer.GenerateUsing("double", "Y"),
                 declarePropertyComposer.GenerateUsing("double", "Z")
             };
 
-            var paramsComposer = new ListComposer(", ")
+            var paramsComposer = new ListTextComposer(", ")
             {
                 ActiveItemPrefix = "double "
             };
 
             paramsComposer.AddRange("x", "y", "z");
 
-            var codeComposer = new ListComposer(Environment.NewLine)
+            var codeComposer = new ListTextComposer(Environment.NewLine)
             {
                 ActiveItemSuffix = ";"
             };

@@ -9,6 +9,7 @@ using CodeComposerLib.MathML.Elements.Tokens;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
 using TextComposerLib.Text.Linear;
 
 namespace GMacProjects.TextComposers

@@ -1,4 +1,5 @@
 ﻿using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.GuidedBinaryTraversal;
 
 namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
 {
@@ -57,16 +58,15 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
         }
 
 
-        public override bool TosHasChild0()
-        {
-            return TosChildActiveGradesBitPattern0 != 0;
-        }
+        //public override bool TosHasChild0()
+        //{
+        //    return TosChildActiveGradesBitPattern0 != 0;
+        //}
 
-        public override bool TosHasChild1()
-        {
-            return TosChildActiveGradesBitPattern1 != 0;
-        }
-
+        //public override bool TosHasChild1()
+        //{
+        //    return TosChildActiveGradesBitPattern1 != 0;
+        //}
 
         public override void PushRootData()
         {
@@ -96,24 +96,50 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
             TosIndex--;
         }
 
-        public override void PushDataOfChild0()
+        public override bool TosHasChild(int childIndex)
         {
-            TosIndex++;
-
-            TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId0;
-            ActiveGradesBitMask0Array[TosIndex] = TosActiveGradesBitMask0 >> 1;
-            ActiveGradesBitMask1Array[TosIndex] = TosActiveGradesBitMask1;
+            return (childIndex & 1) == 0
+                ? (TosChildActiveGradesBitPattern0 != 0)
+                : (TosChildActiveGradesBitPattern1 != 0);
         }
 
-        public override void PushDataOfChild1()
+        public override void PushDataOfChild(int childIndex)
         {
             TosIndex++;
-
             TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId1;
-            ActiveGradesBitMask0Array[TosIndex] = TosActiveGradesBitMask0;
-            ActiveGradesBitMask1Array[TosIndex] = TosActiveGradesBitMask1 << 1;
+
+            if ((childIndex & 1) == 0)
+            {
+                IdArray[TosIndex] = TosChildId0;
+                ActiveGradesBitMask0Array[TosIndex] = TosActiveGradesBitMask0 >> 1;
+                ActiveGradesBitMask1Array[TosIndex] = TosActiveGradesBitMask1;
+            }
+            else
+            {
+                IdArray[TosIndex] = TosChildId1;
+                ActiveGradesBitMask0Array[TosIndex] = TosActiveGradesBitMask0;
+                ActiveGradesBitMask1Array[TosIndex] = TosActiveGradesBitMask1 << 1;
+            }
         }
+
+        //public override void PushDataOfChild0()
+        //{
+        //    TosIndex++;
+
+        //    TreeDepthArray[TosIndex] = TosTreeDepth - 1;
+        //    IdArray[TosIndex] = TosChildId0;
+        //    ActiveGradesBitMask0Array[TosIndex] = TosActiveGradesBitMask0 >> 1;
+        //    ActiveGradesBitMask1Array[TosIndex] = TosActiveGradesBitMask1;
+        //}
+
+        //public override void PushDataOfChild1()
+        //{
+        //    TosIndex++;
+
+        //    TreeDepthArray[TosIndex] = TosTreeDepth - 1;
+        //    IdArray[TosIndex] = TosChildId1;
+        //    ActiveGradesBitMask0Array[TosIndex] = TosActiveGradesBitMask0;
+        //    ActiveGradesBitMask1Array[TosIndex] = TosActiveGradesBitMask1 << 1;
+        //}
     }
 }

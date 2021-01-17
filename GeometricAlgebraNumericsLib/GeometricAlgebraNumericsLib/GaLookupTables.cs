@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib
 {
@@ -113,8 +113,8 @@ namespace GeometricAlgebraNumericsLib
             const int maxDim = 13;
 
             var maxVSpaceDim = 
-                GaNumFrameUtils.MaxVSpaceDimension < maxDim
-                    ? GaNumFrameUtils.MaxVSpaceDimension 
+                GaFrameUtils.MaxVSpaceDimension < maxDim
+                    ? GaFrameUtils.MaxVSpaceDimension 
                     : maxDim;
 
             var maxGaSpaceDim = (c << maxVSpaceDim);
@@ -129,7 +129,7 @@ namespace GeometricAlgebraNumericsLib
                 Parallel.For(
                     0, 
                     maxGaSpaceDim, 
-                    id2 => { bitArray[id2] = GaNumFrameUtils.ComputeIsNegativeEGp(n, id2); }
+                    id2 => { bitArray[id2] = GaFrameUtils.ComputeIsNegativeEGp(n, id2); }
                 );
 
                 IsNegativeEgpLookupTables[id1] = bitArray;
@@ -142,8 +142,8 @@ namespace GeometricAlgebraNumericsLib
             const int maxDim = 20;
 
             var maxVSpaceDim =
-                GaNumFrameUtils.MaxVSpaceDimension < maxDim
-                    ? GaNumFrameUtils.MaxVSpaceDimension
+                GaFrameUtils.MaxVSpaceDimension < maxDim
+                    ? GaFrameUtils.MaxVSpaceDimension
                     : maxDim;
 
             var gaSpaceDim = (c << maxVSpaceDim);
@@ -158,7 +158,7 @@ namespace GeometricAlgebraNumericsLib
                 Parallel.For(
                     0,
                     gaSpaceDim,
-                    id2 => { bitArray[id2] = GaNumFrameUtils.ComputeIsNegativeEGp(id1, id2); }
+                    id2 => { bitArray[id2] = GaFrameUtils.ComputeIsNegativeEGp(id1, id2); }
                 );
 
                 IsNegativeVectorEgpLookupTables[index1] = bitArray;
@@ -169,9 +169,9 @@ namespace GeometricAlgebraNumericsLib
         {
             const int c = 1;
 
-            var gaSpaceDim = (c << GaNumFrameUtils.MaxVSpaceDimension);
+            var gaSpaceDim = (c << GaFrameUtils.MaxVSpaceDimension);
             var maxId = gaSpaceDim - 1;
-            var gradeCount = new int[GaNumFrameUtils.MaxVSpaceDimension + 1];
+            var gradeCount = new int[GaFrameUtils.MaxVSpaceDimension + 1];
 
             //Initialize all tables
             IdToGradeTable = new int[gaSpaceDim];
@@ -179,7 +179,7 @@ namespace GeometricAlgebraNumericsLib
             IsNegativeReverseTable = new BitArray(gaSpaceDim);
             IsNegativeGradeInvTable = new BitArray(gaSpaceDim);
             IsNegativeCliffConjTable = new BitArray(gaSpaceDim);
-            GradeIndexToIdTable = new List<int[]>(GaNumFrameUtils.MaxVSpaceDimension);
+            GradeIndexToIdTable = new List<int[]>(GaFrameUtils.MaxVSpaceDimension);
             
             for (var id = 0; id <= maxId; id++)
             {
@@ -206,7 +206,7 @@ namespace GeometricAlgebraNumericsLib
             }
 
             //Calculate inverse index table: (grade, index) to ID table
-            gradeCount = new int[GaNumFrameUtils.MaxVSpaceDimension + 1];
+            gradeCount = new int[GaFrameUtils.MaxVSpaceDimension + 1];
 
             for (var id = 0; id <= maxId; id++)
             {
@@ -216,7 +216,7 @@ namespace GeometricAlgebraNumericsLib
                 gradeCount[grade] += 1;
 
                 if (gradeCount[grade] == 1)
-                    GradeIndexToIdTable.Add(new int[Choose(GaNumFrameUtils.MaxVSpaceDimension, grade)]);
+                    GradeIndexToIdTable.Add(new int[Choose(GaFrameUtils.MaxVSpaceDimension, grade)]);
 
                 GradeIndexToIdTable[grade][index] = id;
             }
@@ -228,8 +228,8 @@ namespace GeometricAlgebraNumericsLib
             const int minVSpaceDim = 12;
 
             var maxVSpaceDim =
-                GaNumFrameUtils.MaxVSpaceDimension < maxDim
-                    ? GaNumFrameUtils.MaxVSpaceDimension
+                GaFrameUtils.MaxVSpaceDimension < maxDim
+                    ? GaFrameUtils.MaxVSpaceDimension
                     : maxDim;
 
             //var maxGaSpaceDim = (1 << maxVSpaceDim);
@@ -245,7 +245,7 @@ namespace GeometricAlgebraNumericsLib
                     var lookupTable = new int[Choose(vSpaceDim, grade + 1)][];
 
                     var resultIdsList =
-                        GaNumFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
+                        GaFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
 
                     var lookupTableIndex = 0;
                     foreach (var id in resultIdsList)

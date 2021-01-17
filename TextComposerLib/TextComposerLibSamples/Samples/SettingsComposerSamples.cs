@@ -7,7 +7,7 @@ namespace TextComposerLibSamples.Samples
     {
         internal static string Task1()
         {
-            var textComposer = new LinearComposer();
+            var textComposer = new LinearTextComposer();
 
             var settings1 = new SettingsComposer();
 
@@ -35,7 +35,7 @@ namespace TextComposerLibSamples.Samples
 
         internal static string Task2()
         {
-            var textComposer = new LinearComposer();
+            var textComposer = new LinearTextComposer();
 
             var defaultsDict = new SettingsComposer();
             defaultsDict["key1"] = "Default Value1";

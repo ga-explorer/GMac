@@ -6,6 +6,7 @@ using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Products;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib
 {
@@ -452,7 +453,7 @@ namespace GeometricAlgebraNumericsLib
         public GaTerm<double> GetNumTerm(int grade, int index)
         {
             return new GaTerm<double>(
-                GaNumFrameUtils.BasisBladeId(grade, index),
+                GaFrameUtils.BasisBladeId(grade, index),
                 GetScalar()
             );
         }
@@ -460,7 +461,7 @@ namespace GeometricAlgebraNumericsLib
         public GaTerm<double> GetNumTerm(int grade, int index, double maxValue)
         {
             return new GaTerm<double>(
-                GaNumFrameUtils.BasisBladeId(grade, index),
+                GaFrameUtils.BasisBladeId(grade, index),
                 GetScalar(maxValue)
             );
         }
@@ -468,7 +469,7 @@ namespace GeometricAlgebraNumericsLib
         public GaTerm<double> GetNumTerm(int grade, int index, double minValue, double maxValue)
         {
             return new GaTerm<double>(
-                GaNumFrameUtils.BasisBladeId(grade, index),
+                GaFrameUtils.BasisBladeId(grade, index),
                 GetScalar(minValue, maxValue)
             );
         }
@@ -641,33 +642,33 @@ namespace GeometricAlgebraNumericsLib
 
         public IEnumerable<GaTerm<double>> GetNumFullKVectorTerms(int vSpaceDim, int grade)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index), 
+                    GaFrameUtils.BasisBladeId(grade, index), 
                     GetScalar()
                 );
         }
 
         public IEnumerable<GaTerm<double>> GetNumFullKVectorTerms(int vSpaceDim, int grade, double maxValue)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index), 
+                    GaFrameUtils.BasisBladeId(grade, index), 
                     GetScalar(maxValue)
                 );
         }
 
         public IEnumerable<GaTerm<double>> GetNumFullKVectorTerms(int vSpaceDim, int grade, double minValue, double maxValue)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
 
             for (var index = 0; index < kvSpaceDim; index++)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index), 
+                    GaFrameUtils.BasisBladeId(grade, index), 
                     GetScalar(minValue, maxValue)
                 );
         }
@@ -712,39 +713,39 @@ namespace GeometricAlgebraNumericsLib
 
         public IEnumerable<GaTerm<double>> GetNumSparseKVectorTerms(int vSpaceDim, int grade)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             var termsCount = GetInteger(kvSpaceDim);
             var indexList = GetUniqueIntegers(termsCount, kvSpaceDim - 1);
 
             foreach (var index in indexList)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GaFrameUtils.BasisBladeId(grade, index),
                     GetScalar()
                 );
         }
 
         public IEnumerable<GaTerm<double>> GetNumSparseKVectorTerms(int vSpaceDim, int grade, double maxValue)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             var termsCount = GetInteger(kvSpaceDim);
             var indexList = GetUniqueIntegers(termsCount, kvSpaceDim - 1);
 
             foreach (var index in indexList)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GaFrameUtils.BasisBladeId(grade, index),
                     GetScalar(maxValue)
                 );
         }
 
         public IEnumerable<GaTerm<double>> GetNumSparseKVectorTerms(int vSpaceDim, int grade, double minValue, double maxValue)
         {
-            var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            var kvSpaceDim = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             var termsCount = GetInteger(kvSpaceDim);
             var indexList = GetUniqueIntegers(termsCount, kvSpaceDim - 1);
 
             foreach (var index in indexList)
                 yield return new GaTerm<double>(
-                    GaNumFrameUtils.BasisBladeId(grade, index),
+                    GaFrameUtils.BasisBladeId(grade, index),
                     GetScalar(minValue, maxValue)
                 );
         }

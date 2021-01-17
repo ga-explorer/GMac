@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Hash;
@@ -87,7 +87,7 @@ namespace GMacBenchmarks2.Samples.Computations.Symbolic
         private static MarkdownTable CreateTable(int n)
         {
             var gaSpaceDim = n.ToGaSpaceDimension();
-            var idsList = GaNumFrameUtils.BasisBladeIDs(n).ToArray();
+            var idsList = GaFrameUtils.BasisBladeIDs(n).ToArray();
 
             var mdOverheadTable = new MarkdownTable();
             var firstColumn = mdOverheadTable.AddColumn("op", MarkdownTableColumnAlignment.Left);

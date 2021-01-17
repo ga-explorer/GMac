@@ -1,5 +1,5 @@
 ﻿using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMacBenchmarks2.Samples.Computations;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Parametric;
@@ -47,7 +47,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
         {
             var composer = new LinearTextComposer();
 
-            var outputIdsList = GaNumFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
+            var outputIdsList = GaFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
 
             var firstIdFlag = true;
             foreach (var id in outputIdsList)
@@ -68,7 +68,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
                     var id2 = id ^ id1;
                     var index2 = id2.BasisBladeIndex();
 
-                    var sign = GaNumFrameUtils.IsNegativeEGp(id1, id2);
+                    var sign = GaFrameUtils.IsNegativeEGp(id1, id2);
 
                     if (firstIndexFlag)
                     {

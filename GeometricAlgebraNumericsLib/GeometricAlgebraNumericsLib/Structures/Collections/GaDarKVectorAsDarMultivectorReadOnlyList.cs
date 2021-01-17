@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -33,7 +33,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             Debug.Assert(
                 vSpaceDim.IsValidVSpaceDimension() &&
                 grade >= 0 && grade <= vSpaceDim &&
-                kVectorScalarValues.Count == GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade)
+                kVectorScalarValues.Count == GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
             );
 
             VSpaceDimension = vSpaceDim;
@@ -48,7 +48,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             Debug.Assert(
                 vSpaceDim.IsValidVSpaceDimension() &&
                 grade >= 0 && grade <= vSpaceDim &&
-                kVectorScalarValues.Count == GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade)
+                kVectorScalarValues.Count == GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
             );
 
             VSpaceDimension = vSpaceDim;

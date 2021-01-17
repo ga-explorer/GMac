@@ -4,7 +4,7 @@ using System.Linq;
 using CodeComposerLib.Irony.Semantic.Expression;
 using CodeComposerLib.Irony.Semantic.Expression.ValueAccess;
 using CodeComposerLib.Irony.Semantic.Symbol;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacCompiler.Semantic.AST.Extensions;

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
+using GeometricAlgebraStructuresLib.Frames;
 using NUnit.Framework;
 
 namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
@@ -187,7 +187,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
 
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
-                var kvSpaceDim = GaNumFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+                var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
                 for (var index = 0; index < kvSpaceDim; index++)
                 {

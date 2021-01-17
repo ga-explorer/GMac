@@ -1,15 +1,27 @@
-﻿using System.IO;
-using System.Windows.Forms;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using TextComposerLib.Settings;
 
 namespace CodeComposerLib
 {
     public static class CodeComposerLibUtils
     {
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                var codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                var uri = new UriBuilder(codeBase);
+                var path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
         private static SettingsComposer SettingsDefaults { get; }
             = new SettingsComposer();
 
-        internal static SettingsComposer Settings { get; }
+        public static SettingsComposer Settings { get; }
             = new SettingsComposer(SettingsDefaults);
 
 
@@ -21,7 +33,7 @@ namespace CodeComposerLib
             //Define settings file for TextComposerLib
             Settings.FilePath =
                 Path.Combine(
-                    Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty,
+                    Path.GetDirectoryName(AssemblyDirectory) ?? string.Empty,
                     "CodeComposerLib.xml");
 
             //Try reading settings file

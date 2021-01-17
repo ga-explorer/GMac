@@ -1,6 +1,4 @@
-﻿using TextComposerLib.Code.Languages.CSharp;
-
-namespace TextComposerLibSamples.Samples
+﻿namespace TextComposerLibSamples.Samples
 {
     public static class CodeComposersSamples
     {

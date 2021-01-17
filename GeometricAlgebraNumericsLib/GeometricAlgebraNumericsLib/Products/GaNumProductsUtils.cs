@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
@@ -81,25 +81,25 @@ namespace GeometricAlgebraNumericsLib.Products
                 return GaNumDarKVector.CreateScalar(mv1.VSpaceDimension, 1);
 
             var scalarValuesLength = 
-                GaNumFrameUtils.KvSpaceDimension(mv1.VSpaceDimension, mv1.Grade + mv2.Grade);
+                GaFrameUtils.KvSpaceDimension(mv1.VSpaceDimension, mv1.Grade + mv2.Grade);
 
             var scalarValues = new double[scalarValuesLength];
 
             for (var index1 = 0; index1 < mv1.StoredTermsCount; index1++)
             {
-                var id1 = GaNumFrameUtils.BasisBladeId(mv1.Grade, index1);
+                var id1 = GaFrameUtils.BasisBladeId(mv1.Grade, index1);
                 var value1 = mv1.ScalarValuesArray[index1];
 
                 for (var index2 = 0; index2 < mv2.StoredTermsCount; index2++)
                 {
-                    var id2 = GaNumFrameUtils.BasisBladeId(mv2.Grade, index2);
+                    var id2 = GaFrameUtils.BasisBladeId(mv2.Grade, index2);
 
                     if ((id1 & id2) == 0)
                     {
                         var value2 = mv2.ScalarValuesArray[index2];
 
                         var index = (id1 | id2).BasisBladeIndex();
-                        var value = GaNumFrameUtils.IsNegativeEGp(id1, id2)
+                        var value = GaFrameUtils.IsNegativeEGp(id1, id2)
                             ? (-value1 * value2)
                             : (value1 * value2);
 

@@ -1,5 +1,6 @@
 ﻿using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
+using GeometricAlgebraStructuresLib.GuidedBinaryTraversal;
 
 namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
 {
@@ -34,17 +35,6 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
         }
 
 
-        public override bool TosHasChild0()
-        {
-            return TosBtrNode.HasChildNode0;
-        }
-
-        public override bool TosHasChild1()
-        {
-            return TosBtrNode.HasChildNode1;
-        }
-
-
         public override void PushRootData()
         {
             TosIndex = 0;
@@ -71,22 +61,28 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
             TosIndex--;
         }
 
-        public override void PushDataOfChild0()
+        public override bool TosHasChild(int childIndex)
         {
-            TosIndex++;
-
-            TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId0;
-            BtrNodeArray[TosIndex] = TosBtrNode.ChildNode0;
+            return (childIndex & 1) == 0
+                ? TosBtrNode.HasChildNode0
+                : TosBtrNode.HasChildNode1;
         }
 
-        public override void PushDataOfChild1()
+        public override void PushDataOfChild(int childIndex)
         {
             TosIndex++;
-
             TreeDepthArray[TosIndex] = TosTreeDepth - 1;
-            IdArray[TosIndex] = TosChildId1;
-            BtrNodeArray[TosIndex] = TosBtrNode.ChildNode1;
+
+            if ((childIndex & 1) == 0)
+            {
+                IdArray[TosIndex] = TosChildId0;
+                BtrNodeArray[TosIndex] = TosBtrNode.ChildNode0;
+            }
+            else
+            {
+                IdArray[TosIndex] = TosChildId1;
+                BtrNodeArray[TosIndex] = TosBtrNode.ChildNode1;
+            }
         }
     }
 }

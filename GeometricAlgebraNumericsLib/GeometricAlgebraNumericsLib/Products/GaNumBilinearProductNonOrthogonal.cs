@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Products
 {
@@ -40,8 +40,8 @@ namespace GeometricAlgebraNumericsLib.Products
             for (var index1 = 0; index1 < DomainVSpaceDimension; index1++)
             for (var index2 = 0; index2 < DomainVSpaceDimension2; index2++)
             {
-                var id1 = GaNumFrameUtils.BasisBladeId(1, index1);
-                var id2 = GaNumFrameUtils.BasisBladeId(1, index2);
+                var id1 = GaFrameUtils.BasisBladeId(1, index1);
+                var id2 = GaFrameUtils.BasisBladeId(1, index2);
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrEmpty())

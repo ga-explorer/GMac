@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
@@ -17,7 +17,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public int Count { get; }
 
         public T this[int index]
-            => SarValues.TryGetValue(GaNumFrameUtils.BasisBladeId(KVectorGrade, index), out var value) 
+            => SarValues.TryGetValue(GaFrameUtils.BasisBladeId(KVectorGrade, index), out var value) 
                 ? value : DefaultValue;
 
 
@@ -26,7 +26,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
             DefaultValue = default;
-            Count = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            Count = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             SarValues = sarValues;
         }
 
@@ -35,7 +35,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
             DefaultValue = defaultValue;
-            Count = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            Count = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             SarValues = sarValues;
         }
 

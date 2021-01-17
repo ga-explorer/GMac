@@ -2,8 +2,8 @@
 {
     public enum GaMultivectorMutableImplementation
     {
-        Array,
+        DenseArrayRepresentation,
         Hash,
-        Tree
+        SparseArrayRepresentation
     }
 }

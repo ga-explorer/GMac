@@ -2,7 +2,7 @@
 using CodeComposerLib.GraphViz.Dot;
 using CodeComposerLib.GraphViz.Dot.Value;
 using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMac.GMacAST.Symbols;
 
 

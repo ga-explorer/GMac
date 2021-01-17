@@ -10,6 +10,7 @@ using GeometricAlgebraNumericsLib.Metrics;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Outermorphisms;
 using GeometricAlgebraNumericsLib.Products;
+using GeometricAlgebraStructuresLib.Frames;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
@@ -23,7 +24,7 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         private static void VerifyVSpaceDim(int vSpaceDim, int minVSpaceDim = 1)
         {
-            if (vSpaceDim < minVSpaceDim || vSpaceDim > GaNumFrameUtils.MaxVSpaceDimension)
+            if (vSpaceDim < minVSpaceDim || vSpaceDim > GaFrameUtils.MaxVSpaceDimension)
                 throw new GaNumericsException("Invalid vector space dimension");
         }
 
@@ -208,7 +209,7 @@ namespace GeometricAlgebraNumericsLib.Frames
             var psgCount = 0;
             var nsgCount = 0;
             var s = new StringBuilder();
-            var sigList = new List<bool>(GaNumFrameUtils.MaxVSpaceDimension);
+            var sigList = new List<bool>(GaFrameUtils.MaxVSpaceDimension);
 
             //Convert the string signature into a list of integers with values of 1 and -1.
             foreach (var c in frameSigSignList)
@@ -256,8 +257,8 @@ namespace GeometricAlgebraNumericsLib.Frames
         {
             var psgCount = 0;
             var nsgCount = 0;
-            var sigList = new List<bool>(GaNumFrameUtils.MaxVSpaceDimension);
-            var frameSig = new StringBuilder(GaNumFrameUtils.MaxVSpaceDimension);
+            var sigList = new List<bool>(GaFrameUtils.MaxVSpaceDimension);
+            var frameSig = new StringBuilder(GaFrameUtils.MaxVSpaceDimension);
 
             //Convert the string signature into a list of integers with values of 1 and -1.
             foreach (var s in frameSigList)
@@ -455,7 +456,7 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         public abstract int VSpaceDimension { get; }
 
-        public int MaxBasisBladeId => GaNumFrameUtils.MaxBasisBladeId(VSpaceDimension);
+        public int MaxBasisBladeId => GaFrameUtils.MaxBasisBladeId(VSpaceDimension);
 
         public int GaSpaceDimension => VSpaceDimension.ToGaSpaceDimension();
 

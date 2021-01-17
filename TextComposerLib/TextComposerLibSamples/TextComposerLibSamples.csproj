@@ -86,8 +86,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj">
+      <Project>{52834d87-7593-4e6e-a9b0-dbaede8ce6da}</Project>
+      <Name>DataStructuresLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TextComposerLib\TextComposerLib.csproj">
-      <Project>{52b7a16f-e6c5-4ded-a4b8-9ea6751eab1b}</Project>
+      <Project>{7d81ff84-ed6b-4713-8d7e-a47b26e992d4}</Project>
       <Name>TextComposerLib</Name>
     </ProjectReference>
   </ItemGroup>

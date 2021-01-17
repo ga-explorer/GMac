@@ -1,5 +1,5 @@
 ﻿using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 using GMacBenchmarks2.Samples.Computations;
 using TextComposerLib.Text.Linear;
 
@@ -50,7 +50,7 @@ namespace GMacBenchmarks2.Samples.Generators
 
         private void GenerateForGrade(int vSpaceDim, int grade)
         {
-            var resultArrayLength = GaNumFrameUtils.KvSpaceDimension(vSpaceDim, grade + 1);
+            var resultArrayLength = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade + 1);
             
             _codeComposer
                 .AppendAtNewLine("private static GaNumKVector VectorKVectorOp_")
@@ -66,7 +66,7 @@ namespace GMacBenchmarks2.Samples.Generators
                 .AppendLine()
                 .Append("var ");
 
-            var resultIdsList = GaNumFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
+            var resultIdsList = GaFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade + 1);
             foreach (var id in resultIdsList)
             {
                 var index = id.BasisBladeIndex();
@@ -79,7 +79,7 @@ namespace GMacBenchmarks2.Samples.Generators
                     var id2 = id ^ id1;
                     var index2 = id2.BasisBladeIndex();
 
-                    var sign = GaNumFrameUtils.IsNegativeEGp(id1, id2) 
+                    var sign = GaFrameUtils.IsNegativeEGp(id1, id2) 
                         ? "-" : "+";
 
                     _codeComposer

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors
 {
@@ -32,7 +32,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
 
         public GaTerm(int grade, int index, T scalarValue)
         {
-            BasisBladeId = GaNumFrameUtils.BasisBladeId(grade, index);
+            BasisBladeId = GaFrameUtils.BasisBladeId(grade, index);
             ScalarValue = scalarValue;
         }
 

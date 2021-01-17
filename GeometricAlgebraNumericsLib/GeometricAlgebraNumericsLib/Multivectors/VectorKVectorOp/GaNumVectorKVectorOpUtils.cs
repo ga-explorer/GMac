@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Exceptions;
-using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
 {
@@ -48,13 +48,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
         public static GaNumDarKVector ComputeOp(this IGaNumVector vector, IGaNumKVector kVector)
         {
             var resultScalarValues = new double[
-                GaNumFrameUtils.KvSpaceDimension(vector.VSpaceDimension, 1 + kVector.Grade)
+                GaFrameUtils.KvSpaceDimension(vector.VSpaceDimension, 1 + kVector.Grade)
             ];
 
             var maxId = vector.GaSpaceDimension - 1;
             for (var index2 = 0; index2 < kVector.StoredTermsCount; index2++)
             {
-                var id2 = GaNumFrameUtils.BasisBladeId(kVector.Grade, index2);
+                var id2 = GaFrameUtils.BasisBladeId(kVector.Grade, index2);
                 var value2 = kVector.ScalarValuesArray[index2];
 
                 if (value2 == 0)
@@ -67,7 +67,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
                     var value1 = vector.ScalarValuesArray[index1];
 
                     var index = (id1 | id2).BasisBladeIndex();
-                    var value = GaNumFrameUtils.IsNegativeVectorEGp(index1, id2)
+                    var value = GaFrameUtils.IsNegativeVectorEGp(index1, id2)
                         ? (-value1 * value2)
                         : (value1 * value2);
 

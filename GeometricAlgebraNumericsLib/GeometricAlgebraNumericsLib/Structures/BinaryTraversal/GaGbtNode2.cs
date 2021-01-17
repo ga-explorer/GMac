@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using DataStructuresLib;
-using GeometricAlgebraNumericsLib.Frames;
+using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 {
@@ -45,28 +45,28 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 
 
         public bool IsNonZeroOp
-            => GaNumFrameUtils.IsNonZeroOp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroOp(Id1, Id2);
 
         public bool IsNonZeroESp
-            => GaNumFrameUtils.IsNonZeroESp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroESp(Id1, Id2);
 
         public bool IsNonZeroELcp
-            => GaNumFrameUtils.IsNonZeroELcp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroELcp(Id1, Id2);
 
         public bool IsNonZeroERcp
-            => GaNumFrameUtils.IsNonZeroERcp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroERcp(Id1, Id2);
 
         public bool IsNonZeroEFdp
-            => GaNumFrameUtils.IsNonZeroEFdp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroEFdp(Id1, Id2);
 
         public bool IsNonZeroEHip
-            => GaNumFrameUtils.IsNonZeroEHip(Id1, Id2);
+            => GaFrameUtils.IsNonZeroEHip(Id1, Id2);
 
         public bool IsNonZeroEAcp
-            => GaNumFrameUtils.IsNonZeroEAcp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroEAcp((int)Id1, (int)Id2);
 
         public bool IsNonZeroECp
-            => GaNumFrameUtils.IsNonZeroECp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroECp((int)Id1, (int)Id2);
 
 
         public ulong ChildIdXor00
@@ -211,28 +211,28 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 
 
         public bool IsNonZeroOp
-            => GaNumFrameUtils.IsNonZeroOp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroOp(Id1, Id2);
 
         public bool IsNonZeroESp
-            => GaNumFrameUtils.IsNonZeroESp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroESp(Id1, Id2);
 
         public bool IsNonZeroELcp
-            => GaNumFrameUtils.IsNonZeroELcp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroELcp(Id1, Id2);
 
         public bool IsNonZeroERcp
-            => GaNumFrameUtils.IsNonZeroERcp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroERcp(Id1, Id2);
 
         public bool IsNonZeroEFdp
-            => GaNumFrameUtils.IsNonZeroEFdp(Id1, Id2);
+            => GaFrameUtils.IsNonZeroEFdp(Id1, Id2);
 
         public bool IsNonZeroEHip
-            => GaNumFrameUtils.IsNonZeroEHip(Id1, Id2);
+            => GaFrameUtils.IsNonZeroEHip(Id1, Id2);
 
         public bool IsNonZeroEAcp
-            => GaNumFrameUtils.IsNonZeroEAcp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroEAcp((int)Id1, (int)Id2);
 
         public bool IsNonZeroECp
-            => GaNumFrameUtils.IsNonZeroECp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroECp((int)Id1, (int)Id2);
 
 
         public ulong ChildIdXor00
