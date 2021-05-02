@@ -1,4 +1,4 @@
-﻿namespace TextComposerLib.UserInterface
+﻿namespace TextComposerLib.UI.WinForms.UserInterface
 {
     public interface ISampleTasksTreeNode
     {

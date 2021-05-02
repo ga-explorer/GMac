@@ -38,7 +38,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         [Params(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)]
         public int VSpaceDim { get; set; }
 
-        public int GaSpaceDim
+        public ulong GaSpaceDim
             => VSpaceDim.ToGaSpaceDimension();
 
         public IGaNumMapBilinear ProductOrtho { get; set; }

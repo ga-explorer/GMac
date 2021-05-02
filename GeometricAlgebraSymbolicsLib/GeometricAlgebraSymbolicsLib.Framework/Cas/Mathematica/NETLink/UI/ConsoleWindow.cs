@@ -9,11 +9,11 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Windows.Forms;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
-namespace Wolfram.NETLink.UI {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.UI {
 
 /// <summary>
 /// A Form that displays text written to the standard streams Console.Out and/or Console.Error.

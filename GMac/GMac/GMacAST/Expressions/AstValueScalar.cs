@@ -1,6 +1,6 @@
 ﻿using CodeComposerLib.Irony.Semantic.Expression.Value;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GMac.GMacAST.Expressions
 {

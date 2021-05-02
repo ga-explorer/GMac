@@ -1,6 +1,6 @@
 ﻿using DataStructuresLib.SimpleTree;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAST.Expressions;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAST
 {

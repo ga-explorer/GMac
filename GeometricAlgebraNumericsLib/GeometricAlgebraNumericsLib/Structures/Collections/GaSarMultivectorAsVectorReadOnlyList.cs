@@ -7,23 +7,23 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
     {
         public T DefaultValue { get; }
 
-        public IReadOnlyDictionary<int, T> SarValues { get; }
+        public IReadOnlyDictionary<ulong, T> SarValues { get; }
 
         public int Count { get; }
 
         public T this[int index]
-            => SarValues.TryGetValue(1 << index, out var value)
+            => SarValues.TryGetValue(1UL << index, out var value)
                 ? value : DefaultValue;
 
 
-        public GaSarMultivectorAsVectorReadOnlyList(int count, IReadOnlyDictionary<int, T> sarValues)
+        public GaSarMultivectorAsVectorReadOnlyList(int count, IReadOnlyDictionary<ulong, T> sarValues)
         {
             Count = count;
             DefaultValue = default;
             SarValues = sarValues;
         }
 
-        public GaSarMultivectorAsVectorReadOnlyList(int count, T defaultValue, IReadOnlyDictionary<int, T> sarValues)
+        public GaSarMultivectorAsVectorReadOnlyList(int count, T defaultValue, IReadOnlyDictionary<ulong, T> sarValues)
         {
             Count = count;
             DefaultValue = defaultValue;
@@ -34,13 +34,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public IEnumerator<T> GetEnumerator()
         {
             for (var index = 0; index < Count; index++)
-                yield return SarValues[1 << index];
+                yield return SarValues[1UL << index];
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             for (var index = 0; index < Count; index++)
-                yield return SarValues[1 << index];
+                yield return SarValues[1UL << index];
         }
     }
 }

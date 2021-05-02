@@ -4,8 +4,8 @@ using System.Linq;
 using DataStructuresLib.Dictionary;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using TextComposerLib.Text;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -38,6 +38,46 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return biVector;
         }
 
+        public static GaPoTSymBiversor operator +(GaPoTSymBiversor v1, Expr v2)
+        {
+            var biVector = new GaPoTSymBiversor();
+
+            biVector.AddTerms(v1._termsDictionary.Values);
+            biVector.AddTerm(0, 0, v2);
+
+            return biVector;
+        }
+
+        public static GaPoTSymBiversor operator +(Expr v1, GaPoTSymBiversor v2)
+        {
+            var biVector = new GaPoTSymBiversor();
+
+            biVector.AddTerm(0, 0, v1);
+            biVector.AddTerms(v2._termsDictionary.Values);
+
+            return biVector;
+        }
+
+        public static GaPoTSymBiversor operator -(GaPoTSymBiversor v1, Expr v2)
+        {
+            var biVector = new GaPoTSymBiversor();
+
+            biVector.AddTerms(v1._termsDictionary.Values);
+            biVector.AddTerm(0, 0, Mfs.Minus[v2]);
+
+            return biVector;
+        }
+
+        public static GaPoTSymBiversor operator -(Expr v1, GaPoTSymBiversor v2)
+        {
+            var biVector = new GaPoTSymBiversor();
+
+            biVector.AddTerm(0, 0, v1);
+            biVector.AddTerms(v2._termsDictionary.Values.Select(t => -t));
+
+            return biVector;
+        }
+
         public static GaPoTSymBiversor operator *(GaPoTSymBiversor v, Expr s)
         {
             return new GaPoTSymBiversor(
@@ -59,6 +99,11 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             );
         }
 
+        public static GaPoTSymBiversor operator /(Expr s, GaPoTSymBiversor v)
+        {
+            return s * v.Inverse();
+        }
+
 
         private readonly Dictionary2Keys<int, GaPoTSymBiversorTerm> _termsDictionary
             = new Dictionary2Keys<int, GaPoTSymBiversorTerm>();
@@ -76,7 +121,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Where(t => t.TermId1 == id1 && t.TermId2 == id2)
                     .Select(v => v.Value)
                     .ToArray()
-                ).GaPoTSymSimplify();
+                ).Evaluate();
             }
         }
 
@@ -102,7 +147,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 _termsDictionary[id1, id2] = new GaPoTSymBiversorTerm(
                     id1,
                     id2,
-                    Mfs.Plus[oldTerm.Value, term.Value].GaPoTSymSimplify()
+                    Mfs.Plus[oldTerm.Value, term.Value].Evaluate()
                 );
             else
                 _termsDictionary.Add(id1, id2, term);
@@ -138,7 +183,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 .Values
                 .Select(v => v.Value)
                 .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
         public Expr GetTermValue(int id1, int id2)
@@ -151,7 +196,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 .Where(t => t.TermId1 == id1 && t.TermId2 == id2)
                 .Select(v => v.Value)
                 .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
         public GaPoTSymBiversorTerm GetTerm(int id1, int id2)
@@ -159,6 +204,11 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             var value = GetTermValue(id1, id2);
 
             return new GaPoTSymBiversorTerm(id1, id2, value);
+        }
+
+        public Expr GetScalar()
+        {
+            return GetTermValue(0, 0);
         }
         
         public Expr GetActiveTotal()
@@ -169,7 +219,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 .Where(t => t.IsScalar)
                 .Select(v => v.Value)
                 .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
         public Expr GetNonActiveTotal()
@@ -180,7 +230,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Where(t => t.IsNonScalar)
                     .Select(v => v.Value)
                     .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
         public Expr GetReactiveTotal()
@@ -191,7 +241,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Where(t => t.IsPhasor)
                     .Select(v => v.Value)
                     .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
         public Expr GetReactiveFundamentalTotal()
@@ -202,7 +252,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 .Where(t => t.TermId1 == 1 && t.TermId2 == 2)
                 .Select(v => v.Value)
                 .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
         public Expr GetHarmTotal()
@@ -213,7 +263,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 .Where(t => t.IsNonScalar && (t.TermId1 != 1 || t.TermId2 != 2))
                 .Select(v => v.Value)
                 .ToArray()
-            ).GaPoTSymSimplify();
+            ).Evaluate();
         }
 
 
@@ -223,6 +273,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             return new GaPoTSymBiversor(
                 _termsDictionary.Values.Where(t => t.TermId1 == id1 && t.TermId2 == id2)
+            );
+        }
+
+        public GaPoTSymBiversor GetBivectorPart()
+        {
+            return new GaPoTSymBiversor(
+                _termsDictionary.Values.Where(t => t.IsNonScalar)
             );
         }
 
@@ -300,7 +357,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Select(t => Mfs.Times[t.Value, t.Value])
                     .ToArray();
 
-            return Mfs.Sqrt[Mfs.SumExpr(termsArray)].GaPoTSymSimplify();
+            return Mfs.Sqrt[Mfs.SumExpr(termsArray)].Evaluate();
         }
 
         public Expr Norm2()
@@ -311,7 +368,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Select(t => Mfs.Times[t.Value, t.Value])
                     .ToArray();
 
-            return Mfs.SumExpr(termsArray).GaPoTSymSimplify();
+            return Mfs.SumExpr(termsArray).Evaluate();
         }
 
         public GaPoTSymBiversor Inverse()
@@ -328,6 +385,16 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Values
                     .Select(t => t.ScaledReverse(value))
             );
+        }
+
+        public GaPoTSymBiversor DivideByNorm()
+        {
+            return this / Norm();
+        }
+
+        public GaPoTSymBiversor DivideByNorm2()
+        {
+            return this / Norm2();
         }
 
         public GaPoTSymVector Gp(GaPoTSymVector v)
@@ -350,8 +417,11 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public string TermsToText()
         {
-            var termsArray = 
-                GetTerms().ToArray();
+            var termsArray = GetTerms()
+                .Where(t => !t.Value.IsZero())
+                .OrderBy(t => t.TermId1)
+                .ThenBy(t => t.TermId2)
+                .ToArray();
 
             return termsArray.Length == 0
                 ? "0"
@@ -366,8 +436,11 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public string TermsToLaTeX()
         {
-            var termsArray = 
-                GetTerms().ToArray();
+            var termsArray = GetTerms()
+                .Where(t => !t.Value.IsZero())
+                .OrderBy(t => t.TermId1)
+                .ThenBy(t => t.TermId2)
+                .ToArray();
 
             return termsArray.Length == 0
                 ? "0"

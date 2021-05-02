@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Wolfram.NETLink.Internal
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal
 {
 
     /// <summary>

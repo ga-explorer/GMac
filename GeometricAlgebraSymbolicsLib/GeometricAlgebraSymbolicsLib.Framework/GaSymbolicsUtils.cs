@@ -9,10 +9,10 @@ using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Frames;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Products;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib
 {
@@ -107,13 +107,13 @@ namespace GeometricAlgebraSymbolicsLib
             {
                 id.SplitBySmallestBasisVectorId(out var id1, out var id2);
 
-                var bvs1 = bbsList.GetLeafValue(vSpaceDim, (ulong)id1);
+                var bvs1 = bbsList.GetLeafValue(vSpaceDim, id1);
                 if (bvs1 == 0) continue;
 
-                var bvs2 = bbsList.GetLeafValue(vSpaceDim, (ulong)id2);
+                var bvs2 = bbsList.GetLeafValue(vSpaceDim, id2);
                 if (bvs2 == 0) continue;
 
-                bbsList.SetLeafValue(vSpaceDim, (ulong)id, bvs1 * bvs2);
+                bbsList.SetLeafValue(vSpaceDim, id, bvs1 * bvs2);
             }
 
             return bbsList;
@@ -140,13 +140,13 @@ namespace GeometricAlgebraSymbolicsLib
             {
                 id.SplitBySmallestBasisVectorId(out var id1, out var id2);
 
-                var bvs1 = bbsList.GetLeafValue(vSpaceDim, (ulong)id1);
+                var bvs1 = bbsList.GetLeafValue(vSpaceDim, id1);
                 if (bvs1 == 0.0d) continue;
 
-                var bvs2 = bbsList.GetLeafValue(vSpaceDim, (ulong)id2);
+                var bvs2 = bbsList.GetLeafValue(vSpaceDim, id2);
                 if (bvs2 == 0.0d) continue;
 
-                bbsList.SetLeafValue(vSpaceDim, (ulong)id, bvs1 * bvs2);
+                bbsList.SetLeafValue(vSpaceDim, id, bvs1 * bvs2);
             }
 
             return bbsList;
@@ -171,7 +171,7 @@ namespace GeometricAlgebraSymbolicsLib
 
         public static GaSymMultivector ToSymbolic(this GaNumSarMultivector mv)
         {
-            var resultMv = GaSymMultivector.CreateZero(mv.GaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZero(mv.VSpaceDimension);
 
             foreach (var term in mv.GetNonZeroTerms())
                 resultMv.SetTermCoef(term.BasisBladeId, term.ScalarValue.ToExpr());
@@ -315,39 +315,43 @@ namespace GeometricAlgebraSymbolicsLib
         }
 
 
-        public static GaSymMultivector GetSymMultivectorFull(this GaRandomGenerator randomGenerator, int gaSpaceDim)
+        public static GaSymMultivector GetSymMultivectorFull(this GaRandomGenerator randomGenerator, int vSpaceDim)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = 1UL << vSpaceDim;
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
-            for (var basisBladeId = 0; basisBladeId < gaSpaceDim; basisBladeId++)
+            for (var basisBladeId = 0UL; basisBladeId < gaSpaceDim; basisBladeId++)
                 mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar());
 
             return mv;
         }
 
-        public static GaSymMultivector GetSymMultivectorFull(this GaRandomGenerator randomGenerator, int gaSpaceDim, double maxValue)
+        public static GaSymMultivector GetSymMultivectorFull(this GaRandomGenerator randomGenerator, int vSpaceDim, double maxValue)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = 1UL << vSpaceDim;
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
-            for (var basisBladeId = 0; basisBladeId < gaSpaceDim; basisBladeId++)
+            for (var basisBladeId = 0UL; basisBladeId < gaSpaceDim; basisBladeId++)
                 mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar(maxValue));
 
             return mv;
         }
 
-        public static GaSymMultivector GetSymMultivectorFull(this GaRandomGenerator randomGenerator, int gaSpaceDim, double minValue, double maxValue)
+        public static GaSymMultivector GetSymMultivectorFull(this GaRandomGenerator randomGenerator, int vSpaceDim, double minValue, double maxValue)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
 
-            for (var basisBladeId = 0; basisBladeId < gaSpaceDim; basisBladeId++)
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
+
+            for (var basisBladeId = 0UL; basisBladeId < gaSpaceDim; basisBladeId++)
                 mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar(minValue, maxValue));
 
             return mv;
         }
 
-        public static GaSymMultivector GetSymMultivectorByTerms(this GaRandomGenerator randomGenerator, int gaSpaceDim, params int[] basisBladeIDs)
+        public static GaSymMultivector GetSymMultivectorByTerms(this GaRandomGenerator randomGenerator, int vSpaceDim, params ulong[] basisBladeIDs)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             foreach (var basisBladeId in basisBladeIDs)
                 mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar());
@@ -355,9 +359,9 @@ namespace GeometricAlgebraSymbolicsLib
             return mv;
         }
 
-        public static GaSymMultivector GetSymMultivectorByTerms(this GaRandomGenerator randomGenerator, int gaSpaceDim, IEnumerable<int> basisBladeIDs)
+        public static GaSymMultivector GetSymMultivectorByTerms(this GaRandomGenerator randomGenerator, int vSpaceDim, IEnumerable<ulong> basisBladeIDs)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             foreach (var basisBladeId in basisBladeIDs)
                 mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar());
@@ -365,9 +369,9 @@ namespace GeometricAlgebraSymbolicsLib
             return mv;
         }
 
-        public static GaSymMultivector GetSymMultivectorByGrades(this GaRandomGenerator randomGenerator, int gaSpaceDim, params int[] grades)
+        public static GaSymMultivector GetSymMultivectorByGrades(this GaRandomGenerator randomGenerator, int vSpaceDim, params int[] grades)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             var basisBladeIDs =
                 GaFrameUtils.BasisBladeIDsOfGrades(
@@ -381,38 +385,50 @@ namespace GeometricAlgebraSymbolicsLib
             return mv;
         }
 
-        public static GaSymMultivector GetSymMultivector(this GaRandomGenerator randomGenerator, int gaSpaceDim)
+        public static GaSymMultivector GetSymMultivector(this GaRandomGenerator randomGenerator, int vSpaceDim)
         {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+
             //Randomly select the number of terms in the multivector
-            var termsCount = randomGenerator.GetInteger(gaSpaceDim - 1);
+            var termsCount = randomGenerator.GetInteger((int)gaSpaceDim - 1);
 
             //Randomly select the terms basis blades in the multivectors
-            var basisBladeIDs = randomGenerator.GetRangePermutation(gaSpaceDim - 1).Take(termsCount);
+            var basisBladeIDs = randomGenerator
+                .GetRangePermutation((int)gaSpaceDim - 1)
+                .Take(termsCount)
+                .Select(id => (ulong)id);
 
             //Randomly generate the multivector's coefficients
-            return randomGenerator.GetSymMultivectorByTerms(gaSpaceDim, basisBladeIDs);
+            return randomGenerator.GetSymMultivectorByTerms(vSpaceDim, basisBladeIDs);
         }
 
-        public static GaSymMultivector GetSymMultivector(this GaRandomGenerator randomGenerator, int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivector GetSymMultivector(this GaRandomGenerator randomGenerator, int vSpaceDim, string baseCoefName)
         {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+
             //Randomly select the number of terms in the multivector
-            var termsCount = randomGenerator.GetInteger(gaSpaceDim - 1);
+            var termsCount = randomGenerator.GetInteger((int)gaSpaceDim - 1);
 
             //Randomly select the terms basis blades in the multivectors
-            var basisBladeIDs = randomGenerator.GetRangePermutation(gaSpaceDim - 1).Take(termsCount);
+            var basisBladeIDs = randomGenerator
+                .GetRangePermutation((int)gaSpaceDim - 1)
+                .Take(termsCount)
+                .Select(id => (ulong)id);
 
             //Generate the multivector's symbolic coefficients
-            return GaSymMultivector.CreateSymbolic(gaSpaceDim, baseCoefName, basisBladeIDs);
+            return GaSymMultivector.CreateSymbolic(vSpaceDim, baseCoefName, basisBladeIDs);
         }
 
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int vSpaceDim, string baseCoefName)
         {
+            var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
+
             //Randomly select the number of terms in the multivector
-            var basisBladeId = randomGenerator.GetInteger(gaSpaceDim - 1);
+            var basisBladeId = (ulong)randomGenerator.GetInteger((int)gaSpaceDim - 1);
 
             //Generate the multivector's symbolic coefficients
-            return GaSymMultivector.CreateSymbolicTerm(gaSpaceDim, baseCoefName, basisBladeId);
+            return GaSymMultivector.CreateSymbolicTerm(vSpaceDim, baseCoefName, basisBladeId);
         }
 
 
@@ -607,36 +623,36 @@ namespace GeometricAlgebraSymbolicsLib
         }
 
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int basisBladeId)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int vSpaceDim, ulong basisBladeId)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar());
 
             return mv;
         }
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int basisBladeId, double maxValue)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int vSpaceDim, ulong basisBladeId, double maxValue)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar(maxValue));
 
             return mv;
         }
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int basisBladeId, double minValue, double maxValue)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int vSpaceDim, ulong basisBladeId, double minValue, double maxValue)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             mv.SetTermCoef(basisBladeId, randomGenerator.GetSymbolicScalar(minValue, maxValue));
 
             return mv;
         }
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int grade, int index)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int vSpaceDim, int grade, ulong index)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             var basisBladeId = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -645,9 +661,9 @@ namespace GeometricAlgebraSymbolicsLib
             return mv;
         }
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int grade, int index, double maxValue)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int vSpaceDim, int grade, ulong index, double maxValue)
         {
-            var mv = GaSymMultivector.CreateZero(gaSpaceDim);
+            var mv = GaSymMultivector.CreateZero(vSpaceDim);
 
             var basisBladeId = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -656,7 +672,7 @@ namespace GeometricAlgebraSymbolicsLib
             return mv;
         }
 
-        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int grade, int index, double minValue, double maxValue)
+        public static GaSymMultivector GetSymTerm(this GaRandomGenerator randomGenerator, int gaSpaceDim, int grade, ulong index, double minValue, double maxValue)
         {
             var mv = GaSymMultivector.CreateZero(gaSpaceDim);
 
@@ -837,7 +853,7 @@ namespace GeometricAlgebraSymbolicsLib
             GaSymMultivector mv;
 
             do
-                mv = randomGenerator.GetSymVector(frame.GaSpaceDimension);
+                mv = randomGenerator.GetSymVector(frame.VSpaceDimension);
             while (!frame.Norm2(mv).IsZero());
 
             return mv;

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 
-namespace TextComposerLib.Files.UI
+namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     partial class FormFilesComposer
     {

@@ -5,11 +5,11 @@ namespace GeometricAlgebraStructuresLib.Multivectors
 {
     public sealed class GaTerm<T> : IGaTerm<T>
     {
-        public int Id { get; }
+        public ulong Id { get; }
 
         public int Grade { get; }
 
-        public int Index { get; }
+        public ulong Index { get; }
 
         public T Scalar { get; }
 
@@ -20,7 +20,7 @@ namespace GeometricAlgebraStructuresLib.Multivectors
             => true;
 
 
-        public GaTerm(int basisBladeGrade, int basisBladeIndex, T scalarValue)
+        public GaTerm(int basisBladeGrade, ulong basisBladeIndex, T scalarValue)
         {
             Id = GaFrameUtils.BasisBladeId(basisBladeGrade, basisBladeIndex);
             Grade = basisBladeGrade;
@@ -28,7 +28,7 @@ namespace GeometricAlgebraStructuresLib.Multivectors
             Scalar = scalarValue;
         }
 
-        public GaTerm(int basisBladeId, T scalarValue)
+        public GaTerm(ulong basisBladeId, T scalarValue)
         {
             Id = basisBladeId;
             basisBladeId.BasisBladeGradeIndex(out var basisBladeGrade, out var basisBladeIndex);
@@ -37,6 +37,22 @@ namespace GeometricAlgebraStructuresLib.Multivectors
             Scalar = scalarValue;
         }
         
+        public GaTerm(IGaTerm<T> term, T scalarValue)
+        {
+            Id = term.Id;
+            Grade = term.Grade;
+            Index = term.Index;
+            Scalar = scalarValue;
+        }
+        
+        public GaTerm(IGaTerm<T> term)
+        {
+            Id = term.Id;
+            Grade = term.Grade;
+            Index = term.Index;
+            Scalar = term.Scalar;
+        }
+
 
         public IGaTerm<T> GetCopy(T newScalar)
         {

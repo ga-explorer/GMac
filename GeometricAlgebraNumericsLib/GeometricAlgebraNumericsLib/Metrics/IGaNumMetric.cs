@@ -4,6 +4,6 @@
     {
         int VSpaceDimension { get; }
 
-        int GaSpaceDimension { get; }
+        ulong GaSpaceDimension { get; }
     }
 }

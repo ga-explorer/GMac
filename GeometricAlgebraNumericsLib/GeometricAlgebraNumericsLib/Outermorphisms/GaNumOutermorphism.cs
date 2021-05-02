@@ -40,17 +40,17 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
         public double Determinant 
             => _basisVectorMappingsArray.Op()[0];
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
         {
             get
             {
                 if (id1 == 0)
-                    return GaNumTerm.CreateScalar(TargetGaSpaceDimension,1);
+                    return GaNumTerm.CreateScalar(TargetVSpaceDimension,1);
 
                 if (id1.IsBasicPattern())
                     return _basisVectorMappingsArray[id1.BasisBladeIndex()];
 
-                return _basisVectorMappingsArray.PickUsingPattern(id1).ToArray().Op();
+                return _basisVectorMappingsArray.PickUsingPattern((int)id1).ToArray().Op();
             }
         }
         
@@ -202,7 +202,7 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
 
             var opStack = new Stack<GaNumDarKVector>(DomainVSpaceDimension);
             opStack.Push(
-                GaNumDarKVector.CreateScalar(TargetGaSpaceDimension, 1)
+                GaNumDarKVector.CreateScalar(TargetVSpaceDimension, 1)
             );
 
             var depthStack = new Stack<int>(DomainVSpaceDimension);
@@ -302,16 +302,16 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
         }
         
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            var mvStack = new Stack<Tuple<int, int>>();
+            var mvStack = new Stack<Tuple<ulong, int>>();
             mvStack.Push(
-                Tuple.Create(0, DomainVSpaceDimension)
+                Tuple.Create(0UL, DomainVSpaceDimension)
             );
 
             var opStack = new Stack<GaNumDarKVector>();
             opStack.Push(
-                GaNumDarKVector.CreateScalar(TargetGaSpaceDimension, 1)
+                GaNumDarKVector.CreateScalar(TargetVSpaceDimension, 1)
             );
 
             while (mvStack.Count > 0)
@@ -334,7 +334,7 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
                     _basisVectorMappingsArray[mvNode.Item2 - 1];
 
                 mvStack.Push(Tuple.Create(
-                    mvNode.Item1 | (1 << childNodeTreeDepth), 
+                    mvNode.Item1 | (1UL << childNodeTreeDepth), 
                     childNodeTreeDepth
                 ));
                 opStack.Push(basisVectorMv.Op(opNode));
@@ -347,10 +347,10 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
             }
         }
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisVectorMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisVectorMaps()
         {
             return _basisVectorMappingsArray.Select(
-                (mv, i) => Tuple.Create(i, (IGaNumMultivector) mv)
+                (mv, i) => Tuple.Create((ulong)i, (IGaNumMultivector) mv)
             );
         }
     }

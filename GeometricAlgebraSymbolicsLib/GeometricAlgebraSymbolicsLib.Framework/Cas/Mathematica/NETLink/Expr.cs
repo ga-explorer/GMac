@@ -18,11 +18,11 @@
 
 
 using System;
-using System.Runtime.Serialization;
 using System.Diagnostics;
-using Wolfram.NETLink.Internal;
+using System.Runtime.Serialization;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// A representation of arbitrary <i>Mathematica</i> expressions in .NET.

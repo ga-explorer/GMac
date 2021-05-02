@@ -24,7 +24,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <returns></returns>
         public static GaNumSarMultivector CreateZero(int vSpaceDim)
         {
-            var scalarValues = new Dictionary<int, double>();
+            var scalarValues = new Dictionary<ulong, double>();
 
             return new GaNumSarMultivector(vSpaceDim, scalarValues);
         }
@@ -36,9 +36,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="id"></param>
         /// <param name="scalarValue"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateTerm(int vSpaceDim, int id, double scalarValue)
+        public static GaNumSarMultivector CreateTerm(int vSpaceDim, ulong id, double scalarValue)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {id, scalarValue}
             };
@@ -54,9 +54,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <returns></returns>
         public static GaNumSarMultivector CreateBasisVector(int vSpaceDim, int index)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
-                {1 << index, 1.0d}
+                {1UL << index, 1.0d}
             };
 
             return new GaNumSarMultivector(vSpaceDim, scalarValues);
@@ -68,9 +68,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="vSpaceDim"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateBasisBlade(int vSpaceDim, int id)
+        public static GaNumSarMultivector CreateBasisBlade(int vSpaceDim, ulong id)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {id, 1.0d}
             };
@@ -78,9 +78,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return new GaNumSarMultivector(vSpaceDim, scalarValues);
         }
 
-        public static GaNumSarMultivector CreateBasisBlade(int vSpaceDim, int grade, int index)
+        public static GaNumSarMultivector CreateBasisBlade(int vSpaceDim, int grade, ulong index)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {GaFrameUtils.BasisBladeId(grade, index), 1.0d}
             };
@@ -96,7 +96,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <returns></returns>
         public static GaNumSarMultivector CreateScalar(int vSpaceDim, double scalarValue)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {0, scalarValue}
             };
@@ -111,7 +111,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <returns></returns>
         public static GaNumSarMultivector CreateUnitScalar(int vSpaceDim)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {0, 1.0d}
             };
@@ -127,7 +127,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <returns></returns>
         public static GaNumSarMultivector CreatePseudoscalar(int vSpaceDim, double scalarValue)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {vSpaceDim.ToGaSpaceDimension() - 1, scalarValue}
             };
@@ -142,7 +142,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="matrix"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateFromColumn(Matrix matrix, int col)
+        public static GaNumSarMultivector CreateFromColumn(Matrix matrix, ulong col)
         {
             Debug.Assert(matrix.RowCount.IsValidGaSpaceDimension());
 
@@ -150,10 +150,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
             for (var row = 0; row < matrix.RowCount; row++)
             {
-                var scalarValue = matrix[row, col];
+                var scalarValue = matrix[row, (int)col];
 
                 if (scalarValue != 0.0d)
-                    mv.AddTerm(row, scalarValue);
+                    mv.AddTerm((ulong)row, scalarValue);
             }
 
             return mv.GetSarMultivector();
@@ -166,7 +166,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="matrix"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateFromRow(Matrix matrix, int row)
+        public static GaNumSarMultivector CreateFromRow(Matrix matrix, ulong row)
         {
             Debug.Assert(matrix.ColumnCount.IsValidGaSpaceDimension());
 
@@ -174,7 +174,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
             for (var col = 0; col < matrix.ColumnCount; col++)
             {
-                var scalarValue = matrix[row, col];
+                var scalarValue = matrix[(int)row, col];
 
                 if (scalarValue != 0.0d)
                     mv.AddTerm(row, scalarValue);
@@ -190,7 +190,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="matrix"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateFromColumn(double[,] matrix, int col)
+        public static GaNumSarMultivector CreateFromColumn(double[,] matrix, ulong col)
         {
             var rows = matrix.GetLength(0);
 
@@ -203,7 +203,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 var scalarValue = matrix[row, col];
 
                 if (scalarValue != 0.0d)
-                    mv.AddTerm(row, matrix[row, col]);
+                    mv.AddTerm((ulong)row, matrix[row, col]);
             }
 
             return mv.GetSarMultivector();
@@ -216,7 +216,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="matrix"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateFromRow(double[,] matrix, int row)
+        public static GaNumSarMultivector CreateFromRow(double[,] matrix, ulong row)
         {
             var cols = matrix.GetLength(1);
 
@@ -242,14 +242,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="matrix"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateVectorFromColumn(Matrix matrix, int col)
+        public static GaNumSarMultivector CreateVectorFromColumn(Matrix matrix, ulong col)
         {
             var vSpaceDim = matrix.RowCount;
 
             var mv = new GaNumSarMultivectorFactory(vSpaceDim);
 
             for (var row = 0; row < matrix.RowCount; row++)
-                mv.AddTerm(1, row, matrix[row, col]);
+                mv.AddTerm(1, (ulong)row, matrix[row, (int)col]);
 
             return mv.GetSarMultivector();
         }
@@ -261,14 +261,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="matrix"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateVectorFromRow(Matrix matrix, int row)
+        public static GaNumSarMultivector CreateVectorFromRow(Matrix matrix, ulong row)
         {
             var vSpaceDim = matrix.ColumnCount;
 
             var mv = new GaNumSarMultivectorFactory(vSpaceDim);
 
             for (var col = 0; col < matrix.ColumnCount; col++)
-                mv.AddTerm(1, col, matrix[row, col]);
+                mv.AddTerm(1, (ulong)col, matrix[(int)row, col]);
 
             return mv.GetSarMultivector();
         }
@@ -280,7 +280,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="exprArray"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateVectorFromColumn(double[,] exprArray, int col)
+        public static GaNumSarMultivector CreateVectorFromColumn(double[,] exprArray, ulong col)
         {
             var rowsCount = exprArray.GetLength(0);
             var vSpaceDim = rowsCount;
@@ -288,7 +288,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             var mv = new GaNumSarMultivectorFactory(vSpaceDim);
 
             for (var row = 0; row < rowsCount; row++)
-                mv.AddTerm(1, row, exprArray[row, col]);
+                mv.AddTerm(1, (ulong)row, exprArray[row, col]);
 
             return mv.GetSarMultivector();
         }
@@ -300,7 +300,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         /// <param name="exprArray"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        public static GaNumSarMultivector CreateVectorFromRow(double[,] exprArray, int row)
+        public static GaNumSarMultivector CreateVectorFromRow(double[,] exprArray, ulong row)
         {
             var colsCount = exprArray.GetLength(1);
             var vSpaceDim = colsCount;
@@ -308,7 +308,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             var mv = new GaNumSarMultivectorFactory(vSpaceDim);
 
             for (var col = 0; col < colsCount; col++)
-                mv.AddTerm(1, col, exprArray[row, col]);
+                mv.AddTerm(1, (ulong)col, exprArray[row, col]);
 
             return mv.GetSarMultivector();
         }
@@ -326,7 +326,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             var mv = new GaNumSarMultivectorFactory(vSpaceDim);
 
             for (var index = 0; index < scalars.Length; index++)
-                mv.AddTerm(1, index, scalars[index]);
+                mv.AddTerm(1, (ulong)index, scalars[index]);
 
             return mv.GetSarMultivector();
         }
@@ -363,13 +363,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public IReadOnlyDictionary<int, double> ScalarValuesDictionary { get; }
+        public IReadOnlyDictionary<ulong, double> ScalarValuesDictionary { get; }
 
-        public override double this[int grade, int index] 
+        public override double this[int grade, ulong index] 
             => ScalarValuesDictionary.TryGetValue(GaFrameUtils.BasisBladeId(grade, index), out var scalarValue) 
                 ? scalarValue : 0.0d;
 
-        public override double this[int id] =>
+        public override double this[ulong id] =>
             ScalarValuesDictionary.TryGetValue(id, out var scalarValue) 
                 ? scalarValue : 0.0d;
 
@@ -377,12 +377,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             => ScalarValuesDictionary.Count;
 
 
-        internal GaNumSarMultivector(int vSpaceDim, IReadOnlyDictionary<int, double> scalarValuesDictionary)
+        internal GaNumSarMultivector(int vSpaceDim, IReadOnlyDictionary<ulong, double> scalarValuesDictionary)
             : base(vSpaceDim)
         {
             Debug.Assert(
                 scalarValuesDictionary.All(p => 
-                    p.Key >= 0 && p.Key < GaSpaceDimension
+                    p.Key < GaSpaceDimension
                 )
             );
 
@@ -418,13 +418,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             return ScalarValuesDictionary
                 .Select(pair => pair.Key);
         }
 
-        public override IEnumerable<int> GetNonZeroTermIds()
+        public override IEnumerable<ulong> GetNonZeroTermIds()
         {
             return ScalarValuesDictionary
                 .Where(pair => !pair.Value.IsNearZero())
@@ -445,19 +445,19 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override bool TryGetValue(int id, out double value)
+        public override bool TryGetValue(ulong id, out double value)
         {
             return ScalarValuesDictionary.TryGetValue(id, out value);
         }
 
-        public override bool TryGetValue(int grade, int index, out double value)
+        public override bool TryGetValue(int grade, ulong index, out double value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return ScalarValuesDictionary.TryGetValue(id, out value);
         }
 
-        public override bool TryGetTerm(int id, out GaTerm<double> term)
+        public override bool TryGetTerm(ulong id, out GaTerm<double> term)
         {
             if (ScalarValuesDictionary.TryGetValue(id, out var value))
             {
@@ -469,7 +469,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
+        public override bool TryGetTerm(int grade, ulong index, out GaTerm<double> term)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -489,17 +489,17 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return ScalarValuesDictionary.Count == 0;
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
-            return id >= 0 && id < GaSpaceDimension &&
+            return id < GaSpaceDimension &&
                    ScalarValuesDictionary.ContainsKey(id);
         }
 
-        public override bool ContainsStoredTerm(int grade, int index)
+        public override bool ContainsStoredTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
-            return id >= 0 && id < GaSpaceDimension &&
+            return id < GaSpaceDimension &&
                    ScalarValuesDictionary.ContainsKey(id);
         }
 
@@ -546,7 +546,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override GaNumDarMultivector GetDarMultivector()
         {
             var scalarValues =
-                new SparseReadOnlyList<double>(GaSpaceDimension, ScalarValuesDictionary);
+                new SparseReadOnlyListUInt64<double>((int)GaSpaceDimension, ScalarValuesDictionary);
 
             return new GaNumDarMultivector(scalarValues);
         }
@@ -575,7 +575,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override GaNumSgrMultivector GetSgrMultivector()
         {
-            var kVectorsArray = new Dictionary<int, double>[VSpaceDimension + 1];
+            var kVectorsArray = new Dictionary<ulong, double>[VSpaceDimension + 1];
 
             var termsList =
                 ScalarValuesDictionary
@@ -586,7 +586,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 term.Key.BasisBladeGradeIndex(out var grade, out var index);
 
                 if (kVectorsArray[grade] == null)
-                    kVectorsArray[grade] = new Dictionary<int, double>();
+                    kVectorsArray[grade] = new Dictionary<ulong, double>();
 
                 kVectorsArray[grade].Add(index, term.Value);
             }
@@ -619,7 +619,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             var scalarValues = new double[VSpaceDimension];
 
             for (var index = 0; index < VSpaceDimension; index++)
-                if (ScalarValuesDictionary.TryGetValue(1 << index, out var value))
+                if (ScalarValuesDictionary.TryGetValue(1UL << index, out var value))
                     scalarValues[index] = value;
 
             return GaNumVector.Create(scalarValues);

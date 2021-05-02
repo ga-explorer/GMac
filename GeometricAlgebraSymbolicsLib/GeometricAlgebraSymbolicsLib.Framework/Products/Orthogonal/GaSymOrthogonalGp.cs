@@ -15,9 +15,9 @@ namespace GeometricAlgebraSymbolicsLib.Products.Orthogonal
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2)
         {
-            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             tempMultivector.SetTermCoef(
                 id1 ^ id2,
@@ -35,14 +35,14 @@ namespace GeometricAlgebraSymbolicsLib.Products.Orthogonal
 
             return
                 GaSymMultivector
-                    .CreateZeroTemp(TargetGaSpaceDimension)
+                    .CreateZeroTemp(TargetVSpaceDimension)
                     .AddFactors(mv1.GetBiTermsForGp(mv2, OrthogonalMetric));
         }
 
-        public override GaSymMultivectorTerm MapToTerm(int id1, int id2)
+        public override GaSymMultivectorTerm MapToTerm(ulong id1, ulong id2)
         {
             return GaSymMultivectorTerm.CreateTerm(
-                TargetGaSpaceDimension,
+                TargetVSpaceDimension,
                 id1 ^ id2,
                 GaFrameUtils.IsNegativeEGp(id1, id2)
                     ? Mfs.Minus[OrthogonalMetric[id1 & id2]]

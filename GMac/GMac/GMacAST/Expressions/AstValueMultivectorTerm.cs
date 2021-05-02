@@ -1,10 +1,10 @@
 ﻿using CodeComposerLib.Irony.Semantic.Expression.Value;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Expressions
 {
@@ -25,7 +25,7 @@ namespace GMac.GMacAST.Expressions
                         GMacValueMultivector.Create(
                             AssociatedFrameMultivector,
                             GaSymMultivector.CreateTerm(
-                                AssociatedFrameMultivector.ParentFrame.GaSpaceDimension,
+                                AssociatedFrameMultivector.ParentFrame.VSpaceDimension,
                                 TermBasisBladeId,
                                 TermCoef.Value
                                 )
@@ -52,7 +52,7 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// The basis blade ID of this multivector term
         /// </summary>
-        public int TermBasisBladeId { get; }
+        public ulong TermBasisBladeId { get; }
 
         /// <summary>
         /// The basis blade grade of this multivector term
@@ -62,7 +62,7 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// The basis blade index of this multivector term
         /// </summary>
-        public int TermBasisBladeIndex => TermBasisBladeId.BasisBladeIndex();
+        public ulong TermBasisBladeIndex => TermBasisBladeId.BasisBladeIndex();
 
         /// <summary>
         /// The basis blade scalar coefficient symbolic scalar of this multivector term
@@ -116,7 +116,7 @@ namespace GMac.GMacAST.Expressions
         public AstValueMultivector ToMultivectorValue => AssociatedMultivectorValue.ToAstValueMultivector();
 
 
-        internal AstValueMultivectorTerm(GMacFrameMultivector mvClass, int termId, ValuePrimitive<MathematicaScalar> coef)
+        internal AstValueMultivectorTerm(GMacFrameMultivector mvClass, ulong termId, ValuePrimitive<MathematicaScalar> coef)
         {
             AssociatedFrameMultivector = mvClass;
             TermBasisBladeId = termId;

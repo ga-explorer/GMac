@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using GeometricAlgebraSymbolicsLib.Applications.GAPoT;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
 
 namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
@@ -24,9 +25,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             var normU = mvU.Norm2();
             var normI = mvI.Norm2();
-            var normUI = Mfs.Times[normU, normI].GaPoTSymExpand();
-            var normM = mvM.Norm2().GaPoTSymExpand();
-            var normDiff = Mfs.Subtract[normUI, normM].GaPoTSymSimplify();
+            var normUI = Mfs.Times[normU, normI].Expand();
+            var normM = mvM.Norm2().Expand();
+            var normDiff = Mfs.Subtract[normUI, normM].Evaluate();
 
             Console.WriteLine(@"Display multivector terms in LaTeX form");
             Console.WriteLine($@"U = {mvU.TermsToLaTeX()}");

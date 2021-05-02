@@ -15,7 +15,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
         public int VSpaceDimension { get; } 
             = 10;
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => VSpaceDimension.ToGaSpaceDimension();
 
 
@@ -69,7 +69,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
 
             if (mvKind == "term")
                 return _randomGenerator
-                    .GetNumTerm(_randomGenerator.GetInteger(GaSpaceDimension - 1))
+                    .GetNumTerm((ulong)_randomGenerator.GetInteger((int)GaSpaceDimension - 1))
                     .ToNumTerm(VSpaceDimension);
 
             return null;

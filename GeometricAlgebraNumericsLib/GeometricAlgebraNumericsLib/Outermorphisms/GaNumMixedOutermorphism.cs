@@ -53,12 +53,12 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
             }
         }
         
-        public override IGaNumMultivector this[int id]
+        public override IGaNumMultivector this[ulong id]
         {
             get
             {
-                if (id == 0)
-                    return GaNumTerm.CreateScalar(TargetGaSpaceDimension, 1);
+                if (id == 0UL)
+                    return GaNumTerm.CreateScalar(TargetVSpaceDimension, 1);
 
                 var idTuple = SplitId(id);
 
@@ -151,10 +151,10 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
         }
 
 
-        public Tuple<int, int> SplitId(int id)
+        public Tuple<ulong, ulong> SplitId(ulong id)
         {
-            return new Tuple<int, int>(
-                id & ((1 << SplitAt) - 1),
+            return new Tuple<ulong, ulong>(
+                id & ((1UL << SplitAt) - 1),
                 id >> SplitAt
             );
         }
@@ -194,7 +194,7 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
             if (DomainVSpaceDimension <= SplitAt)
             {
@@ -204,15 +204,15 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
                 yield break;
             }
 
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var basisBladeMv = this[id];
                 if (!ReferenceEquals(basisBladeMv, null))
-                    yield return new Tuple<int, IGaNumMultivector>(id, basisBladeMv);
+                    yield return new Tuple<ulong, IGaNumMultivector>(id, basisBladeMv);
             }
         }
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisVectorMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisVectorMaps()
         {
             if (DomainVSpaceDimension <= SplitAt)
                 return _subMap1.BasisVectorMaps();

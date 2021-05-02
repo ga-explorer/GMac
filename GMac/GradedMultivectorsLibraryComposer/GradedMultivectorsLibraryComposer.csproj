@@ -164,7 +164,7 @@
     <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGPDual\EGPDual_331.cs" />
     <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGPDual\EGPDual_333.cs" />
     <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGP\EGP_000.cs" />
-    <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGP\EGP_011.cs" />
+    <Compile Include="Outputs\CSharp\Ega3D\EGP_011.cs" />
     <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGP\EGP_022.cs" />
     <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGP\EGP_033.cs" />
     <Compile Include="Outputs\CSharp\Ega3D\KVectors\EGP\EGP_101.cs" />

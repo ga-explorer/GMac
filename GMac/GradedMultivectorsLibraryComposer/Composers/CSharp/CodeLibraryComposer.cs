@@ -197,7 +197,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp
         //    return baseName + "_" + grade.ToString("X1");
         //}
 
-        internal string BasisBladeIdToTargetArrayItem(string arrayVarName, int basisBladeId)
+        internal string BasisBladeIdToTargetArrayItem(string arrayVarName, ulong basisBladeId)
         {
             return
                 new StringBuilder()
@@ -757,7 +757,7 @@ end
             }
         }
 
-        private void GenerateFactorMethod(int inGrade, int inId, AstMacro gmacMacroInfo)
+        private void GenerateFactorMethod(int inGrade, ulong inId, AstMacro gmacMacroInfo)
         {
             CodeFilesComposer.DownFolder("Factor");
 
@@ -793,7 +793,7 @@ end
             CodeFilesComposer.UnselectActiveFile();
 
             for (var inGrade = 2; inGrade <= CurrentFrame.VSpaceDimension; inGrade++)
-                for (var inIndex = 0; inIndex < CurrentFrame.KvSpaceDimension(inGrade); inIndex++)
+                for (var inIndex = 0UL; inIndex < CurrentFrame.KvSpaceDimension(inGrade); inIndex++)
                 {
                     var inId = CurrentFrame.BasisBladeId(inGrade, inIndex);
 

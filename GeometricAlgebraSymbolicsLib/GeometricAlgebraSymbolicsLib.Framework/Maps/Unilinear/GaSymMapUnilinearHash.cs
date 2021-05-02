@@ -35,14 +35,14 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1]
+        public override IGaSymMultivector this[ulong id1]
         {
             get
             {
                 _basisBladeMaps.TryGetValue(id1, out var basisBladeMv);
 
                 return basisBladeMv
-                       ?? GaSymMultivector.CreateZero(TargetGaSpaceDimension);
+                       ?? GaSymMultivector.CreateZero(TargetVSpaceDimension);
 
             }
         }
@@ -67,7 +67,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearHash SetBasisBladeMap(int basisBladeId, IGaSymMultivector targetMv)
+        public GaSymMapUnilinearHash SetBasisBladeMap(ulong basisBladeId, IGaSymMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -76,19 +76,19 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearHash RemoveBasisBladesMap(int id1)
+        public GaSymMapUnilinearHash RemoveBasisBladesMap(ulong id1)
         {
             _basisBladeMaps.Remove(id1);
             return this;
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
             _basisBladeMaps.TryGetValue(id1, out var basisBladeMv);
 
             return basisBladeMv?.ToTempMultivector() 
-                   ?? GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+                   ?? GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
         }
 
         public override IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1)
@@ -96,7 +96,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term1 in mv1.NonZeroExprTerms)
             {
@@ -117,13 +117,13 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return tempMultivector;
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
             return 
                 _basisBladeMaps
                     .Where(p => !p.Value.IsNullOrZero())
                     .Select(
-                        pair => new Tuple<int, IGaSymMultivector>(pair.Key, pair.Value)
+                        pair => new Tuple<ulong, IGaSymMultivector>(pair.Key, pair.Value)
                         );
         }
     }

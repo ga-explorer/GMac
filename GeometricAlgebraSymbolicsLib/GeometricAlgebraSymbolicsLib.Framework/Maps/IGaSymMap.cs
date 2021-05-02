@@ -6,6 +6,6 @@ namespace GeometricAlgebraSymbolicsLib.Maps
     {
         int TargetVSpaceDimension { get; }
 
-        int TargetGaSpaceDimension { get; }
+        ulong TargetGaSpaceDimension { get; }
     }
 }

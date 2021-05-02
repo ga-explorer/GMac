@@ -22,13 +22,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
     /// </summary>
     public sealed class GaNumMapBilinearCoefSums : GaNumMapBilinear
     {
-        private sealed class GaNumMapBilinearCoefSumsTerm : IEnumerable<Tuple<int, int, double>>
+        private sealed class GaNumMapBilinearCoefSumsTerm : IEnumerable<Tuple<ulong, ulong, double>>
         {
-            private readonly List<Tuple<int, int, double>> _factorsList
-                = new List<Tuple<int, int, double>>();
+            private readonly List<Tuple<ulong, ulong, double>> _factorsList
+                = new List<Tuple<ulong, ulong, double>>();
 
 
-            public int TargetBasisBladeId { get; private set; }
+            public ulong TargetBasisBladeId { get; private set; }
 
             public IEnumerable<string> TermsText
             {
@@ -50,13 +50,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             }
 
 
-            internal GaNumMapBilinearCoefSumsTerm(int basisBladeId)
+            internal GaNumMapBilinearCoefSumsTerm(ulong basisBladeId)
             {
                 TargetBasisBladeId = basisBladeId;
             }
 
 
-            public double this[int domainBasisBladeId1, int domainBasisBladeId2]
+            public double this[ulong domainBasisBladeId1, ulong domainBasisBladeId2]
                 => _factorsList
                     .FirstOrDefault(
                         factor => 
@@ -79,7 +79,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 return this;
             }
 
-            internal GaNumMapBilinearCoefSumsTerm AddFactor(int domainBasisBladeId1, int domainBasisBladeId2, bool isNegative = false)
+            internal GaNumMapBilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId1, ulong domainBasisBladeId2, bool isNegative = false)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -91,7 +91,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 return this;
             }
 
-            internal GaNumMapBilinearCoefSumsTerm AddFactor(int domainBasisBladeId1, int domainBasisBladeId2, double factor)
+            internal GaNumMapBilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId1, ulong domainBasisBladeId2, double factor)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -103,7 +103,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 return this;
             }
 
-            internal GaNumMapBilinearCoefSumsTerm RemoveFactor(int domainBasisBladeId1, int domainBasisBladeId2)
+            internal GaNumMapBilinearCoefSumsTerm RemoveFactor(ulong domainBasisBladeId1, ulong domainBasisBladeId2)
             {
                 var index = _factorsList.FindIndex(
                     factor =>
@@ -117,7 +117,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 return this;
             }
 
-            public IEnumerator<Tuple<int, int, double>> GetEnumerator()
+            public IEnumerator<Tuple<ulong, ulong, double>> GetEnumerator()
             {
                 return _factorsList.GetEnumerator();
             }
@@ -170,8 +170,8 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         }
 
 
-        private readonly GaSparseTable1D<int, GaNumMapBilinearCoefSumsTerm> _coefSumsTable
-            = new GaSparseTable1D<int, GaNumMapBilinearCoefSumsTerm>();
+        private readonly GaSparseTable1D<ulong, GaNumMapBilinearCoefSumsTerm> _coefSumsTable
+            = new GaSparseTable1D<ulong, GaNumMapBilinearCoefSumsTerm>();
 
 
         public override int TargetVSpaceDimension { get; }
@@ -181,7 +181,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         public int FactorsCount 
             => _coefSumsTable.Select(t => t.Value.Count()).Sum();
 
-        public override IGaNumMultivector this[int domainBasisBladeId1, int domainBasisBladeId2]
+        public override IGaNumMultivector this[ulong domainBasisBladeId1, ulong domainBasisBladeId2]
         {
             get
             {
@@ -223,7 +223,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var resultMv = new GaNumDgrMultivectorFactory(TargetGaSpaceDimension);
+                var resultMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var terms in _coefSumsTable.Values)
                     resultMv.AddTerm(
@@ -250,7 +250,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         }
 
 
-        public GaNumMapBilinearCoefSums SetBasisBladesMap(int domainBasisBladeId1, int domainBasisBladeId2, IGaNumMultivector targetMv)
+        public GaNumMapBilinearCoefSums SetBasisBladesMap(ulong domainBasisBladeId1, ulong domainBasisBladeId2, IGaNumMultivector targetMv)
         {
             Debug.Assert(targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -260,7 +260,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId1, int domainBasisBladeId2, bool isNegative = false)
+        public GaNumMapBilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId1, ulong domainBasisBladeId2, bool isNegative = false)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -273,7 +273,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearCoefSums SetFactor(int termId, int domainBasisBladeId1, int domainBasisBladeId2, double factorValue)
+        public GaNumMapBilinearCoefSums SetFactor(ulong termId, ulong domainBasisBladeId1, ulong domainBasisBladeId2, double factorValue)
         {
             if (!_coefSumsTable.TryGetValue(termId, out var sum))
             {
@@ -286,7 +286,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearCoefSums RemoveFactor(int targetBasisBladeId, int domainBasisBladeId1, int domainBasisBladeId2)
+        public GaNumMapBilinearCoefSums RemoveFactor(ulong targetBasisBladeId, ulong domainBasisBladeId1, ulong domainBasisBladeId2)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
                 return this;
@@ -296,7 +296,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearCoefSums RemoveFactors(int targetBasisBladeId)
+        public GaNumMapBilinearCoefSums RemoveFactors(ulong targetBasisBladeId)
         {
             _coefSumsTable.Remove(targetBasisBladeId);
 
@@ -304,7 +304,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         }
 
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
             //var bilinearMap =
             //    GaNumMapBilinearTree.Create(
@@ -327,13 +327,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             //    }
             //}
 
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-                for (var id2 = 0; id2 < DomainGaSpaceDimension; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+                for (var id2 = 0UL; id2 < DomainGaSpaceDimension; id2++)
                 {
                     var mv = this[id1, id2];
 
                     if (!mv.IsNullOrEmpty())
-                        yield return new Tuple<int, int, IGaNumMultivector>(id1, id2, mv);
+                        yield return new Tuple<ulong, ulong, IGaNumMultivector>(id1, id2, mv);
                 }
         }
 

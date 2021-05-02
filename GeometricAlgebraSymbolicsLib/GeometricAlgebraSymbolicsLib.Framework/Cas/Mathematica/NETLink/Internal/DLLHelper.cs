@@ -9,15 +9,14 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
-using System.CodeDom;
-using System.CodeDom.Compiler;
 using Microsoft.CSharp;
 
-
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// This class creates dynamically-defined calls to DLL functions needed by the Mathematica function DefineDLLFunction.

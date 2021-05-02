@@ -1,5 +1,5 @@
-﻿using GMac.GMacAST.Expressions;
-using Wolfram.NETLink;
+﻿using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
+using GMac.GMacAST.Expressions;
 
 namespace GMac.GMacAPI.CodeBlock
 {

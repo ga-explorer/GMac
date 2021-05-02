@@ -95,7 +95,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
 
                 var frame = ((GMacFrameMultivector)parentStep.AccessStepType).ParentFrame;
 
-                return "#" + frame.BasisBladeName(c.AccessKey) + "#";
+                return "#" + frame.BasisBladeName((ulong)c.AccessKey) + "#";
             }
 
             var stepByKeyList = accessStep as ValueAccessStepByKeyList<int>;
@@ -109,7 +109,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
                 var s = new StringBuilder();
 
                 foreach (var id in c.AccessKeyList)
-                    s.Append(frame.BasisBladeName(id)).Append(", ");
+                    s.Append(frame.BasisBladeName((ulong)id)).Append(", ");
 
                 s.Length = s.Length - 2;
 
@@ -227,7 +227,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
                     var idList =
                         partialMvFlag
                             ? ((ValueAccessStepByKeyList<int>)rootValueAccess.LastAccessStep).AccessKeyList
-                            : Enumerable.Range(0, mvType.ParentFrame.GaSpaceDimension);
+                            : Enumerable.Range(0, mvType.ParentFrame.VSpaceDimension);
 
                     var childValueAccessList =
                         idList
@@ -388,7 +388,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
 
                     foreach (var id in mvValue.SymbolicMultivector.NonZeroBasisBladeIds)
                     {
-                        if (!ReferenceEquals(idsList, null) && !idsList.Contains(id))
+                        if (!ReferenceEquals(idsList, null) && !idsList.Contains((int)id))
                             continue;
 
                         var childValueAccess =
@@ -496,7 +496,7 @@ namespace GMac.GMacCompiler.Semantic.AST.Extensions
                     {
                         var id = pair.Key;
 
-                        if (!ReferenceEquals(idsList, null) && !idsList.Contains(id))
+                        if (!ReferenceEquals(idsList, null) && !idsList.Contains((int)id))
                             continue;
 
                         var childValueAccess =

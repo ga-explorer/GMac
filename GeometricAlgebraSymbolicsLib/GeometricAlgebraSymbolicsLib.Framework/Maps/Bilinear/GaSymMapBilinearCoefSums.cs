@@ -8,6 +8,7 @@ using GeometricAlgebraNumericsLib.Structures;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
@@ -15,7 +16,6 @@ using GeometricAlgebraSymbolicsLib.Products;
 using TextComposerLib.Text;
 using TextComposerLib.Text.Markdown.Tables;
 using TextComposerLib.Text.Structured;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
 {
@@ -25,13 +25,13 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
     /// </summary>
     public sealed class GaSymMapBilinearCoefSums : GaSymMapBilinear
     {
-        internal sealed class GaSymMapBilinearCoefSumsTerm : IEnumerable<Tuple<int, int, Expr>>
+        internal sealed class GaSymMapBilinearCoefSumsTerm : IEnumerable<Tuple<ulong, ulong, Expr>>
         {
-            private readonly List<Tuple<int, int, Expr>> _factorsList
-                = new List<Tuple<int, int, Expr>>();
+            private readonly List<Tuple<ulong, ulong, Expr>> _factorsList
+                = new List<Tuple<ulong, ulong, Expr>>();
 
 
-            public int TargetBasisBladeId { get; private set; }
+            public ulong TargetBasisBladeId { get; private set; }
 
             public IEnumerable<string> TermsText
             {
@@ -52,7 +52,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
                 }
             }
 
-            public Expr this[int domainBasisBladeId1, int domainBasisBladeId2]
+            public Expr this[ulong domainBasisBladeId1, ulong domainBasisBladeId2]
                 => _factorsList
                        .FirstOrDefault(
                            factor =>
@@ -82,7 +82,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             }
 
 
-            internal GaSymMapBilinearCoefSumsTerm(int basisBladeId)
+            internal GaSymMapBilinearCoefSumsTerm(ulong basisBladeId)
             {
                 TargetBasisBladeId = basisBladeId;
             }
@@ -116,7 +116,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
                 return this;
             }
 
-            internal GaSymMapBilinearCoefSumsTerm AddFactor(int domainBasisBladeId1, int domainBasisBladeId2, bool isNegative = false)
+            internal GaSymMapBilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId1, ulong domainBasisBladeId2, bool isNegative = false)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -128,7 +128,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
                 return this;
             }
 
-            internal GaSymMapBilinearCoefSumsTerm AddFactor(int domainBasisBladeId1, int domainBasisBladeId2, Expr factorValue)
+            internal GaSymMapBilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId1, ulong domainBasisBladeId2, Expr factorValue)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -140,7 +140,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
                 return this;
             }
 
-            internal GaSymMapBilinearCoefSumsTerm RemoveFactor(int domainBasisBladeId1, int domainBasisBladeId2)
+            internal GaSymMapBilinearCoefSumsTerm RemoveFactor(ulong domainBasisBladeId1, ulong domainBasisBladeId2)
             {
                 var index = _factorsList.FindIndex(
                     factor =>
@@ -154,7 +154,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
                 return this;
             }
 
-            public IEnumerator<Tuple<int, int, Expr>> GetEnumerator()
+            public IEnumerator<Tuple<ulong, ulong, Expr>> GetEnumerator()
             {
                 return _factorsList.GetEnumerator();
             }
@@ -206,15 +206,15 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
         }
 
 
-        private readonly GaSparseTable1D<int, GaSymMapBilinearCoefSumsTerm> _coefSumsTable
-            = new GaSparseTable1D<int, GaSymMapBilinearCoefSumsTerm>();
+        private readonly GaSparseTable1D<ulong, GaSymMapBilinearCoefSumsTerm> _coefSumsTable
+            = new GaSparseTable1D<ulong, GaSymMapBilinearCoefSumsTerm>();
 
 
         public override int TargetVSpaceDimension { get; }
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1, int id2] 
+        public override IGaSymMultivector this[ulong id1, ulong id2] 
             => MapToTemp(id1, id2).ToMultivector();
 
 
@@ -231,7 +231,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
         }
 
 
-        public GaSymMapBilinearCoefSums SetBasisBladesMap(int domainBasisBladeId1, int domainBasisBladeId2, IGaSymMultivector targetMv)
+        public GaSymMapBilinearCoefSums SetBasisBladesMap(ulong domainBasisBladeId1, ulong domainBasisBladeId2, IGaSymMultivector targetMv)
         {
             Debug.Assert(targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -241,7 +241,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return this;
         }
 
-        public GaSymMapBilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId1, int domainBasisBladeId2, bool isNegative = false)
+        public GaSymMapBilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId1, ulong domainBasisBladeId2, bool isNegative = false)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -254,7 +254,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return this;
         }
 
-        public GaSymMapBilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId1, int domainBasisBladeId2, Expr factorValue)
+        public GaSymMapBilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId1, ulong domainBasisBladeId2, Expr factorValue)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -267,7 +267,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return this;
         }
 
-        public GaSymMapBilinearCoefSums RemoveFactor(int targetBasisBladeId, int domainBasisBladeId1, int domainBasisBladeId2)
+        public GaSymMapBilinearCoefSums RemoveFactor(ulong targetBasisBladeId, ulong domainBasisBladeId1, ulong domainBasisBladeId2)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
                 return this;
@@ -278,9 +278,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int domainBasisBladeId1, int domainBasisBladeId2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong domainBasisBladeId1, ulong domainBasisBladeId2)
         {
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var terms in _coefSumsTable.Values)
                 resultMv.AddFactor(
@@ -296,7 +296,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var termValue in _coefSumsTable.Values)
                 resultMv.AddFactor(
@@ -307,15 +307,15 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return resultMv;
         }
 
-        public override IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-            for (var id2 = 0; id2 < DomainGaSpaceDimension; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+            for (var id2 = 0UL; id2 < DomainGaSpaceDimension; id2++)
             {
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, int, IGaSymMultivector>(id1, id2, mv);
+                    yield return new Tuple<ulong, ulong, IGaSymMultivector>(id1, id2, mv);
             }
         }
 

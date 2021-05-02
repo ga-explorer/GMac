@@ -15,22 +15,22 @@ namespace GeometricAlgebraNumericsLib.Products
         public int TargetVSpaceDimension
             => Metric.VSpaceDimension;
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => Metric.GaSpaceDimension;
 
         public int DomainVSpaceDimension
             => Metric.VSpaceDimension;
 
-        public int DomainGaSpaceDimension
+        public ulong DomainGaSpaceDimension
             => Metric.GaSpaceDimension;
 
         public int DomainVSpaceDimension2
             => Metric.VSpaceDimension;
 
-        public int DomainGaSpaceDimension2
+        public ulong DomainGaSpaceDimension2
             => Metric.GaSpaceDimension;
 
-        public abstract IGaNumMultivector this[int id1, int id2] { get; }
+        public abstract IGaNumMultivector this[ulong id1, ulong id2] { get; }
 
         public abstract GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2] { get; }
 
@@ -95,9 +95,9 @@ namespace GeometricAlgebraNumericsLib.Products
         }
 
 
-        public abstract IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps();
+        public abstract IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps();
 
-        public abstract IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisVectorsMaps();
+        public abstract IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisVectorsMaps();
 
 
         protected GaNumBilinearProduct(GaNumMapBilinearAssociativity associativity)

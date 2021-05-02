@@ -10,36 +10,36 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         public int DomainVSpaceDimension1 { get; }
 
-        public int DomainGaSpaceDimension1
+        public ulong DomainGaSpaceDimension1
             => DomainVSpaceDimension1.ToGaSpaceDimension();
 
         public int DomainVSpaceDimension2 { get; }
 
-        public int DomainGaSpaceDimension2
+        public ulong DomainGaSpaceDimension2
             => DomainVSpaceDimension2.ToGaSpaceDimension();
 
         public int DomainVSpaceDimension3 { get; }
 
-        public int DomainGaSpaceDimension3
+        public ulong DomainGaSpaceDimension3
             => DomainVSpaceDimension3.ToGaSpaceDimension();
 
         public int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
-        public GaNumMultivectorBinaryTree2D this[int id1]
+        public GaNumMultivectorBinaryTree2D this[ulong id1]
         {
             get
             {
-                RootNode.TryGetLeafValue(DomainGaSpaceDimension1, (ulong)id1, out var mvTree1D);
+                RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D);
 
                 return mvTree1D;
             }
             set =>
                 RootNode.SetLeafValue(
-                    DomainGaSpaceDimension1, 
-                    (ulong)id1,
+                    DomainVSpaceDimension1, 
+                    id1,
                     value ?? new GaNumMultivectorBinaryTree2D(
                         DomainVSpaceDimension2,
                         DomainVSpaceDimension3,
@@ -52,13 +52,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                RootNode.TryGetLeafValue(DomainGaSpaceDimension1, (ulong)id1, out var mvTree1D);
+                RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D);
 
                 return mvTree1D[id2];
             }
             set
             {
-                if (!RootNode.TryGetLeafValue(DomainGaSpaceDimension1, (ulong)id1, out var mvTree1D) || ReferenceEquals(mvTree1D, null))
+                if (!RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D) || ReferenceEquals(mvTree1D, null))
                 {
                     mvTree1D = new GaNumMultivectorBinaryTree2D(
                         DomainVSpaceDimension2,
@@ -66,7 +66,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                         TargetVSpaceDimension
                     );
 
-                    RootNode.SetLeafValue(DomainGaSpaceDimension1, (ulong)id1, mvTree1D);
+                    RootNode.SetLeafValue(DomainVSpaceDimension1, (ulong)id1, mvTree1D);
                 }
 
                 mvTree1D[id2] = value;
@@ -77,13 +77,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                RootNode.TryGetLeafValue(DomainGaSpaceDimension1, (ulong)id1, out var mvTree1D);
+                RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D);
 
                 return mvTree1D[id2, id3];
             }
             set
             {
-                if (!RootNode.TryGetLeafValue(DomainGaSpaceDimension1, (ulong)id1, out var mvTree1D) || ReferenceEquals(mvTree1D, null))
+                if (!RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D) || ReferenceEquals(mvTree1D, null))
                 {
                     mvTree1D = new GaNumMultivectorBinaryTree2D(
                         DomainVSpaceDimension2,
@@ -91,18 +91,18 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                         TargetVSpaceDimension
                     );
 
-                    RootNode.SetLeafValue(DomainGaSpaceDimension1, (ulong)id1, mvTree1D);
+                    RootNode.SetLeafValue(DomainVSpaceDimension1, (ulong)id1, mvTree1D);
                 }
 
                 mvTree1D[id2, id3] = value;
             }
         }
 
-        public double this[int id1, int id2, int id3, int id4]
+        public double this[ulong id1, ulong id2, ulong id3, ulong id4]
         {
             get
             {
-                if (RootNode.TryGetLeafValue(DomainGaSpaceDimension1, (ulong)id1, out var mvTree1D) && ! ReferenceEquals(mvTree1D, null))
+                if (RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D) && ! ReferenceEquals(mvTree1D, null))
                     return mvTree1D[id2, id3, id4];
 
                 return 0.0d;

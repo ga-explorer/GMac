@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -34,6 +33,22 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             for (var i = 0; i < vectorsCount; i++)
             {
                 var vector = new GaPoTSymVector().AddTerm(i + 1, Expr.INT_ONE);
+                
+                frame.AppendVector(vector);
+            }
+            
+            return frame;
+        }
+        
+        public static GaPoTSymFrame CreateShiftedBasisFrame(int vectorsCount, int offset)
+        {
+            var frame = new GaPoTSymFrame();
+
+            for (var i = 0; i < vectorsCount; i++)
+            {
+                var index = (i + offset) % vectorsCount;
+
+                var vector = new GaPoTSymVector().AddTerm(index + 1, Expr.INT_ONE);
                 
                 frame.AppendVector(vector);
             }
@@ -117,13 +132,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 frameVectorsArray[vectorIndex1] = new GaPoTSymVector();
                 frameVectorsArray[vectorIndex2] = new GaPoTSymVector();
                 
-                frameVectorsArray[vectorIndex1].SetTerm(1, $"{s}".GaPoTSymSimplify());
+                frameVectorsArray[vectorIndex1].SetTerm(1, $"{s}".SimplifyToExpr());
                 
                 for (var i = 1; i < m; i++)
                 {
                     var angle = $"2 * Pi * {k + 1} * {i} / {m}";
-                    var cosAngle = $"{s} * Cos[{angle}]".GaPoTSymSimplify();
-                    var sinAngle = $"{s} * Sin[{angle}]".GaPoTSymSimplify();
+                    var cosAngle = $"{s} * Cos[{angle}]".SimplifyToExpr();
+                    var sinAngle = $"{s} * Sin[{angle}]".SimplifyToExpr();
                     
                     frameVectorsArray[vectorIndex1].SetTerm(i + 1, cosAngle);
                     frameVectorsArray[vectorIndex2].SetTerm(i + 1, sinAngle);
@@ -133,7 +148,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             //Fill the last column
             frameVectorsArray[m - 1] = new GaPoTSymVector();
 
-            var v = $"1 / Sqrt[{m}]".GaPoTSymSimplify();
+            var v = $"1 / Sqrt[{m}]".SimplifyToExpr();
             for (var i = 0; i < m; i++)
             {
                 frameVectorsArray[m - 1].SetTerm(i + 1, v);
@@ -164,13 +179,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 frameVectorsArray[vectorIndex1] = new GaPoTSymVector();
                 frameVectorsArray[vectorIndex2] = new GaPoTSymVector();
                 
-                frameVectorsArray[vectorIndex1].SetTerm(1, $"{s}".GaPoTSymSimplify());
+                frameVectorsArray[vectorIndex1].SetTerm(1, $"{s}".SimplifyToExpr());
                 
                 for (var i = 1; i < m; i++)
                 {
                     var angle = $"2 * Pi * ({k + 1}) * ({i}) / ({m})";
-                    var cosAngle = $"{s} * Cos[{angle}]".GaPoTSymSimplify();
-                    var sinAngle = $"{s} * Sin[{angle}]".GaPoTSymSimplify();
+                    var cosAngle = $"{s} * Cos[{angle}]".SimplifyToExpr();
+                    var sinAngle = $"{s} * Sin[{angle}]".SimplifyToExpr();
                     
                     frameVectorsArray[vectorIndex1].SetTerm(i + 1, cosAngle);
                     frameVectorsArray[vectorIndex2].SetTerm(i + 1, sinAngle);
@@ -181,8 +196,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             frameVectorsArray[m - 2] = new GaPoTSymVector();
             frameVectorsArray[m - 1] = new GaPoTSymVector();
 
-            var v0 = $"1 / Sqrt[{m}]".GaPoTSymSimplify();
-            var v1 = $"-1 / Sqrt[{m}]".GaPoTSymSimplify();
+            var v0 = $"1 / Sqrt[{m}]".SimplifyToExpr();
+            var v1 = $"-1 / Sqrt[{m}]".SimplifyToExpr();
 
             for (var i = 0; i < m; i++)
             {
@@ -237,32 +252,59 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return CreateGramSchmidtFrame(vectorsCount, 0, out kirchhoffFrame);
         }
 
+        public static GaPoTSymFrame CreateGramSchmidtFrame(int vectorsCount, int refVectorIndex)
+        {
+            return CreateGramSchmidtFrame(vectorsCount, refVectorIndex, out _);
+        }
+
         public static GaPoTSymFrame CreateGramSchmidtFrame(int vectorsCount, int refVectorIndex, out GaPoTSymFrame kirchhoffFrame)
         {
             kirchhoffFrame = CreateKirchhoffFrame(vectorsCount, refVectorIndex);
+            
+            var cFrame = kirchhoffFrame.GetOrthogonalFrame(true);
 
             var uPseudoScalar = new GaPoTSymMultivector()
                 .SetTerm(
-                    (1 << vectorsCount) - 1, 
+                    (1UL << vectorsCount) - 1,
                     Expr.INT_ONE
                 );
-            
-            var cFrame = kirchhoffFrame.GetOrthogonalFrame(true);
-            
+
+            //cFrame.PrependVector(
+            //    GaPoTSymVector.CreateUnitAutoVector(vectorsCount)
+            //);
+
             cFrame.AppendVector(
                 -GaPoTSymUtils
                     .OuterProduct(cFrame)
                     .Gp(uPseudoScalar.CliffordConjugate())
                     .GetVectorPart()
+                    .FullSimplifyScalars()
             );
 
-            Debug.Assert(
-                cFrame.IsOrthonormal()
-            );
+            //cFrame.PrependVector(
+            //    GaPoTSymUtils
+            //        .OuterProduct(cFrame)
+            //        .Gp(uPseudoScalar.Reverse())
+            //        .GetVectorPart()
+            //        .FullSimplifyScalars()
+            //);
 
-            Debug.Assert(
-                CreateBasisFrame(vectorsCount).HasSameHandedness(cFrame)
-            );
+            var cPseudoScalar =
+                cFrame.GetPseudoScalar().MapScalars(e => e.FullSimplify());
+
+            //Console.WriteLine($"U frame pseudo-scalar: {uPseudoScalar}");
+            //Console.WriteLine();
+
+            //Console.WriteLine($"C frame pseudo-scalar: {cPseudoScalar}");
+            //Console.WriteLine();
+
+            //Debug.Assert(
+            //    cFrame.IsOrthonormal()
+            //);
+
+            //Debug.Assert(
+            //    CreateBasisFrame(vectorsCount).HasSameHandedness(cFrame)
+            //);
 
             return cFrame;
         }
@@ -272,7 +314,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         /// </summary>
         /// <param name="vectorsCount"></param>
         /// <returns></returns>
-        public static GaPoTSymFrame CreateFbdFrame(int vectorsCount)
+        public static GaPoTSymFrame CreateHyperVectorsFrame(int vectorsCount)
         {
             var n = vectorsCount;
             var fbdMatrix = new Expr[n - 1, n];
@@ -282,8 +324,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 var k1 = (n - i - 1).ToExpr();
                 var k2 = (n - i).ToExpr();
 
-                var c1 = Mfs.Sqrt[Mfs.Divide[k1, k2]].GaPoTSymSimplify();
-                var c2 = Mfs.Divide[Expr.INT_MINUSONE, Mfs.Sqrt[Mfs.Times[k1, k2]]].GaPoTSymSimplify();
+                var c1 = Mfs.Sqrt[Mfs.Divide[k1, k2]].Evaluate();
+                var c2 = Mfs.Divide[Expr.INT_MINUSONE, Mfs.Sqrt[Mfs.Times[k1, k2]]].Evaluate();
 
                 fbdMatrix[i, i] = c1;
 
@@ -413,14 +455,14 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 var dii = Mfs.Subtract[
                     v1.DotProduct(v1), 
                     Expr.INT_ONE
-                ].GaPoTSymSimplify();
+                ].FullSimplify();
 
                 if (!dii.IsZero()) 
                     return false;
 
                 for (var j = i + 1; j < Count; j++)
                 {
-                    var dij = v1.DotProduct(_vectorsList[j]);
+                    var dij = v1.DotProduct(_vectorsList[j]).FullSimplify();
 
                     if (!dij.IsZero())
                         return false;
@@ -432,7 +474,10 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public bool HasSameHandedness(GaPoTSymFrame targetFrame)
         {
-            var s = GetPseudoScalar() - targetFrame.GetPseudoScalar();
+            var ps1 = GetPseudoScalar();
+            var ps2 = targetFrame.GetPseudoScalar();
+
+            var s = (ps1 - ps2).FullSimplifyScalars();
 
             return s.IsZero();
         }
@@ -509,65 +554,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return ipm;
         }
 
-        /// <summary>
-        /// Find a sequence of simple rotors to transform this frame to another
-        /// Both frames must be orthonormal with the same handedness and size
-        /// </summary>
-        /// <param name="targetFrame"></param>
-        /// <returns></returns>
-        public IEnumerable<GaPoTSymMultivector> GetRotorsToFrame(GaPoTSymFrame targetFrame)
-        {
-            Debug.Assert(targetFrame.Count == Count);
-            Debug.Assert(IsOrthonormal() && targetFrame.IsOrthonormal());
-            Debug.Assert(HasSameHandedness(targetFrame));
-
-            var inputFrame = new GaPoTSymVector[Count];
-
-            for (var i = 0; i < Count; i++)
-                inputFrame[i] = _vectorsList[i];
-            
-            for (var i = 0; i < Count - 1; i++)
-            {
-                var rotor = 
-                    inputFrame[i].GetRotorToVector(targetFrame[i]);
-
-                yield return rotor;
-
-                for (var j = i + 1; j < Count; j++)
-                    inputFrame[j] = inputFrame[j].ApplyRotor(rotor);
-            }
-        }
-
-        public IEnumerable<GaPoTSymMultivector> GetRotorsToFrame(GaPoTSymFrame targetFrame, params int[] basisRotationOrderList)
-        {
-            Debug.Assert(targetFrame.Count == Count);
-            Debug.Assert(IsOrthonormal() && targetFrame.IsOrthonormal());
-            Debug.Assert(HasSameHandedness(targetFrame));
-            Debug.Assert(GaPoTSymUtils.ValidateIndexPermutationList(basisRotationOrderList));
-
-            var inputFrame = new GaPoTSymVector[Count];
-
-            for (var i = 0; i < Count; i++)
-                inputFrame[i] = _vectorsList[i];
-            
-            for (var i = 0; i < Count - 1; i++)
-            {
-                var vectorIndex = basisRotationOrderList[i];
-
-                var rotor = 
-                    inputFrame[vectorIndex].GetRotorToVector(targetFrame[vectorIndex]);
-
-                yield return rotor;
-
-                for (var j = i + 1; j < Count; j++)
-                {
-                    var vectorIndex1 = basisRotationOrderList[j];
-
-                    inputFrame[vectorIndex1] = inputFrame[vectorIndex1].ApplyRotor(rotor);
-                }
-            }
-        }
-
+        
         public IEnumerable<Expr> GetAnglesToFrame(GaPoTSymFrame targetFrame)
         {
             Debug.Assert(targetFrame.Count == Count);

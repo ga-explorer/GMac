@@ -5,12 +5,12 @@ namespace GeometricAlgebraStructuresLib.Multivectors
 {
     public sealed class GaGradedTerm<T> : IGaTerm<T>
     {
-        public int Id 
+        public ulong Id 
             => GaFrameUtils.BasisBladeId(Grade, Index);
 
         public int Grade { get; }
 
-        public int Index { get; }
+        public ulong Index { get; }
 
         public T Scalar { get; }
 
@@ -21,7 +21,7 @@ namespace GeometricAlgebraStructuresLib.Multivectors
             => true;
 
 
-        public GaGradedTerm(int basisBladeGrade, int basisBladeIndex, T scalarValue)
+        public GaGradedTerm(int basisBladeGrade, ulong basisBladeIndex, T scalarValue)
         {
             Grade = basisBladeGrade;
             Index = basisBladeIndex;

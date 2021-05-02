@@ -1,6 +1,6 @@
 using System;
 
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// Summary description for IMathLinkAPIProvider.

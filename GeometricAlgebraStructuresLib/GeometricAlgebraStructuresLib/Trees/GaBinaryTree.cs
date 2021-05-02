@@ -11,11 +11,11 @@ namespace GeometricAlgebraStructuresLib.Trees
     /// index with fixed number of levels.  
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class GaBinaryTree<T> : IReadOnlyList<T>
+    public sealed class GaBinaryTree<T> : IReadOnlyDictionary<ulong, T>
     {
         private readonly List<Tuple<int, int>> _internalNodesList;
 
-        private readonly IReadOnlyList<int> _leafNodeIDsList;
+        private readonly IReadOnlyList<ulong> _leafNodeIDsList;
 
         private T[] _leafNodeValuesArray;
 
@@ -28,7 +28,7 @@ namespace GeometricAlgebraStructuresLib.Trees
         public int Count
             => _leafNodeIDsList.Count;
 
-        public T this[int id] 
+        public T this[ulong id] 
         { 
             get =>
                 TryGetLeafNodeIndex(id, out var index)
@@ -43,6 +43,12 @@ namespace GeometricAlgebraStructuresLib.Trees
             }
         }
 
+        public IEnumerable<ulong> Keys 
+            => _leafNodeIDsList;
+
+        public IEnumerable<T> Values
+            => _leafNodeValuesArray;
+
         public int RootNodeIndex
             => 0;
 
@@ -50,7 +56,7 @@ namespace GeometricAlgebraStructuresLib.Trees
             => _internalNodesList[0];
 
 
-        public GaBinaryTree(int treeDepth, IReadOnlyList<int> leafNodeIDsList)
+        public GaBinaryTree(int treeDepth, IReadOnlyList<ulong> leafNodeIDsList)
         {
             TreeDepth = treeDepth;
             _leafNodeIDsList = leafNodeIDsList;
@@ -60,7 +66,17 @@ namespace GeometricAlgebraStructuresLib.Trees
             ConstructIndexTree();
         }
 
-        public GaBinaryTree(int treeDepth, IReadOnlyDictionary<int, T> leafNodes)
+        public GaBinaryTree(int treeDepth, IReadOnlyDictionary<ulong, T> leafNodes)
+        {
+            TreeDepth = treeDepth;
+            _leafNodeIDsList = leafNodes.Keys.ToArray();
+            _leafNodeValuesArray = leafNodes.Values.ToArray();
+            _internalNodesList = new List<Tuple<int, int>>(_leafNodeIDsList.Count);
+
+            ConstructIndexTree();
+        }
+        
+        public GaBinaryTree(int treeDepth, IDictionary<ulong, T> leafNodes)
         {
             TreeDepth = treeDepth;
             _leafNodeIDsList = leafNodes.Keys.ToArray();
@@ -70,17 +86,7 @@ namespace GeometricAlgebraStructuresLib.Trees
             ConstructIndexTree();
         }
 
-        public GaBinaryTree(int treeDepth, IDictionary<int, T> leafNodes)
-        {
-            TreeDepth = treeDepth;
-            _leafNodeIDsList = leafNodes.Keys.ToArray();
-            _leafNodeValuesArray = leafNodes.Values.ToArray();
-            _internalNodesList = new List<Tuple<int, int>>(_leafNodeIDsList.Count);
-
-            ConstructIndexTree();
-        }
-
-        public GaBinaryTree(int treeDepth, IReadOnlyList<int> leafNodeIDsList, IReadOnlyCollection<T> leafNodeValuesList)
+        public GaBinaryTree(int treeDepth, IReadOnlyList<ulong> leafNodeIDsList, IReadOnlyCollection<T> leafNodeValuesList)
         {
             if (leafNodeIDsList.Count != leafNodeValuesList.Count)
                 throw new InvalidOperationException();
@@ -92,6 +98,7 @@ namespace GeometricAlgebraStructuresLib.Trees
 
             ConstructIndexTree();
         }
+        
 
         public GaBinaryTree(GaBinaryTree<T> binaryTree)
         {
@@ -113,7 +120,7 @@ namespace GeometricAlgebraStructuresLib.Trees
             for (var i = 0; i < Count; i++)
             {
                 var id = _leafNodeIDsList[i];
-                var bitMask = 1 << (TreeDepth - 1);
+                var bitMask = 1UL << (TreeDepth - 1);
                 var index = 0;
 
                 while (bitMask != 1)
@@ -184,15 +191,15 @@ namespace GeometricAlgebraStructuresLib.Trees
             return _internalNodesList[index];
         }
 
-        public Tuple<int, T> GetLeafNodeByIndex(int index)
+        public Tuple<ulong, T> GetLeafNodeByIndex(int index)
         {
-            return new Tuple<int, T>(
+            return new Tuple<ulong, T>(
                 _leafNodeIDsList[index],
                 _leafNodeValuesArray[index]
             );
         }
 
-        public int GetLeafNodeIdByIndex(int index)
+        public ulong GetLeafNodeIdByIndex(int index)
         {
             return _leafNodeIDsList[index];
         }
@@ -209,12 +216,12 @@ namespace GeometricAlgebraStructuresLib.Trees
             return this;
         }
         
-        public bool TryGetLeafNodeIndex(int id, out int index)
+        public bool TryGetLeafNodeIndex(ulong id, out int index)
         {
-            var bitMask = 1 << (TreeDepth - 1);
+            var bitMask = 1UL << (TreeDepth - 1);
             index = 0;
 
-            while (bitMask != 1)
+            while (bitMask != 1UL)
             {
                 var (childIndex0, childIndex1) = _internalNodesList[index];
 
@@ -268,7 +275,12 @@ namespace GeometricAlgebraStructuresLib.Trees
             return true;
         }
 
-        public bool TryGetValue(int id, out T value)
+        public bool ContainsKey(ulong key)
+        {
+            return ContainsId(key);
+        }
+
+        public bool TryGetValue(ulong id, out T value)
         {
             if (TryGetLeafNodeIndex(id, out var index))
             {
@@ -280,7 +292,7 @@ namespace GeometricAlgebraStructuresLib.Trees
             return false;
         }
 
-        public bool TryGetLeafNodeIndexValue(int id, out int index, out T value)
+        public bool TryGetLeafNodeIndexValue(ulong id, out int index, out T value)
         {
             if (TryGetLeafNodeIndex(id, out index))
             {
@@ -292,9 +304,9 @@ namespace GeometricAlgebraStructuresLib.Trees
             return false;
         }
         
-        public bool ContainsId(int id)
+        public bool ContainsId(ulong id)
         {
-            var bitMask = 1 << (TreeDepth - 1);
+            var bitMask = 1UL << (TreeDepth - 1);
             var index = 0;
 
             while (bitMask != 1)
@@ -335,24 +347,24 @@ namespace GeometricAlgebraStructuresLib.Trees
             return true;
         }
 
-        public IEnumerable<int> GetLeafNodeIDs()
+        public IEnumerable<ulong> GetLeafNodeIDs()
         {
             return _leafNodeIDsList;
         }
         
-        public IEnumerable<KeyValuePair<int, T>> GetLeafNodes()
+        public IEnumerable<KeyValuePair<ulong, T>> GetLeafNodes()
         {
             for (var i = 0; i < Count; i++)
-                yield return new KeyValuePair<int, T>(
+                yield return new KeyValuePair<ulong, T>(
                     _leafNodeIDsList[i], 
                     _leafNodeValuesArray[i]
                 );
         }
 
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
-            return ((IEnumerable<T>)_leafNodeValuesArray).GetEnumerator();
+            return GetLeafNodes().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

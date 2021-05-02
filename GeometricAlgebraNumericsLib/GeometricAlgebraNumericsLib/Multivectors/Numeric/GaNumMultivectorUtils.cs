@@ -28,7 +28,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             var array = new double[mv.VSpaceDimension];
 
             for (var i = 0; i < mv.VSpaceDimension; i++)
-                array[i] = mv[1, i];
+                array[i] = mv[1, (ulong)i];
 
             return array;
         }
@@ -38,7 +38,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             var n = GaFrameUtils.KvSpaceDimension(mv.VSpaceDimension, grade);
             var array = new double[n];
 
-            for (var i = 0; i < n; i++)
+            for (var i = 0UL; i < n; i++)
                 array[i] = mv[grade, i];
 
             return array;
@@ -162,7 +162,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 if (node1.IsLeafNode)
                 {
-                    result += node1.Value * mv2[(int)node2.Id];
+                    result += node1.Value * mv2[node2.Id];
 
                     continue;
                 }
@@ -205,7 +205,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 var kvSpaceDim = GaFrameUtils.KvSpaceDimension(mv1.VSpaceDimension, grade);
 
-                for (var index = 0; index < kvSpaceDim; index++)
+                for (var index = 0UL; index < kvSpaceDim; index++)
                     result += mv1[grade, index] * mv2[grade, index];
             }
 
@@ -263,11 +263,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 return fullMv;
 
             //It's a full multivector containing a single term
-            var term = mv.GetNonZeroTerms().FirstOrDefault();
+            var term = mv.GetNonZeroTerms().First();
             return GaNumTerm.Create(mv.VSpaceDimension, term.BasisBladeId, term.ScalarValue);
         }
 
-        public static GaNumMultivectorHashTable1D Compactify(this GaSparseTable1D<int, GaNumSarMultivector> mvTable)
+        public static GaNumMultivectorHashTable1D Compactify(this GaSparseTable1D<ulong, GaNumSarMultivector> mvTable)
         {
             var resultTable = new GaNumMultivectorHashTable1D();
 
@@ -288,7 +288,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             var scalarValuesArray = new double[mv.GaSpaceDimension];
 
-            for (var id = 0; id < mv.GaSpaceDimension; id++)
+            for (var id = 0UL; id < mv.GaSpaceDimension; id++)
                 scalarValuesArray[id] = mv[id];
 
             return scalarValuesArray;
@@ -431,7 +431,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public static bool IsEqualTo(this IGaNumMultivector mv1, IGaNumMultivector mv2)
         {
-            var termsDictionary = new Dictionary<int, double>();
+            var termsDictionary = new Dictionary<ulong, double>();
 
             foreach (var term in mv1.GetStoredTerms())
             {

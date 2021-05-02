@@ -15,13 +15,13 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
         }
 
 
-        private void GenerateNegativeFunction(int kvSpaceDim)
+        private void GenerateNegativeFunction(ulong kvSpaceDim)
         {
             var caseTemplate = Templates["negative_case"];
 
             var casesText = new ListTextComposer("," + Environment.NewLine);
 
-            for (var i = 0; i < kvSpaceDim; i++)
+            for (var i = 0UL; i < kvSpaceDim; i++)
                 casesText.Add(caseTemplate, "num", i);
 
             TextComposer.AppendAtNewLine(

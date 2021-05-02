@@ -18,25 +18,25 @@ namespace GeometricAlgebraStructuresLib.Storage
             => ScalarsTree.Count;
 
 
-        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IReadOnlyList<int> idsList)
+        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IReadOnlyList<ulong> idsList)
             : base(vSpaceDimension, scalarDomain)
         {
             ScalarsTree = new GaBinaryTree<T>(vSpaceDimension, idsList);
         }
 
-        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IReadOnlyDictionary<int, T> leafNodes)
+        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IReadOnlyDictionary<ulong, T> leafNodes)
             : base(vSpaceDimension, scalarDomain)
         {
             ScalarsTree = new GaBinaryTree<T>(vSpaceDimension, leafNodes);
         }
 
-        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IDictionary<int, T> leafNodes)
+        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IDictionary<ulong, T> leafNodes)
             : base(vSpaceDimension, scalarDomain)
         {
             ScalarsTree = new GaBinaryTree<T>(vSpaceDimension, leafNodes);
         }
 
-        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IReadOnlyList<int> idsList, IReadOnlyCollection<T> leafNodeValuesList)
+        public GaMvsBinaryTree(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IReadOnlyList<ulong> idsList, IReadOnlyCollection<T> leafNodeValuesList)
             : base(vSpaceDimension, scalarDomain)
         {
             ScalarsTree = new GaBinaryTree<T>(vSpaceDimension, idsList, leafNodeValuesList);
@@ -49,27 +49,27 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
         
         
-        public override T GetTermScalar(int id)
+        public override T GetTermScalar(ulong id)
         {
             return ScalarsTree.TryGetValue(id, out var value) 
                 ? value 
                 : ScalarDomain.GetZero();
         }
 
-        public override bool TryGetTermScalar(int id, out T value)
+        public override bool TryGetTermScalar(ulong id, out T value)
         {
             return ScalarsTree.TryGetValue(id, out value);
         }
 
 
-        public override IGaMultivectorStorage<T> SetTermScalar(int basisBladeId, T value)
+        public override IGaMultivectorStorage<T> SetTermScalar(ulong basisBladeId, T value)
         {
             ScalarsTree[basisBladeId] = value;
 
             return this;
         }
 
-        public override IGaMultivectorStorage<T> AddTerm(int id, T value)
+        public override IGaMultivectorStorage<T> AddTerm(ulong id, T value)
         {
             if (!ScalarsTree.TryGetLeafNodeIndexValue(id, out var index, out var scalar))
                 throw new IndexOutOfRangeException();
@@ -83,7 +83,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
 
-        public override IGaMultivectorStorage<T> RemoveTerm(int id)
+        public override IGaMultivectorStorage<T> RemoveTerm(ulong id)
         {
             if (!ScalarsTree.TryGetLeafNodeIndex(id, out var index))
                 return this;
@@ -105,7 +105,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTermIfZero(int id, bool nearZeroFlag = false)
+        public override IGaMultivectorStorage<T> RemoveTermIfZero(ulong id, bool nearZeroFlag = false)
         {
             if (!nearZeroFlag)
                 return this;
@@ -166,11 +166,11 @@ namespace GeometricAlgebraStructuresLib.Storage
         public override bool IsZero(bool nearZeroFlag = false)
         {
             return nearZeroFlag
-                ? ScalarsTree.All(scalar => ScalarDomain.IsNearZero(scalar))
-                : ScalarsTree.All(scalar => ScalarDomain.IsZero(scalar));
+                ? ScalarsTree.Values.All(scalar => ScalarDomain.IsNearZero(scalar))
+                : ScalarsTree.Values.All(scalar => ScalarDomain.IsZero(scalar));
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
             return ScalarsTree.ContainsId(id);
         }
@@ -182,7 +182,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Any(id => id.BasisBladeGrade() == grade);
         }
 
-        public override bool CanStoreTerm(int id)
+        public override bool CanStoreTerm(ulong id)
         {
             return ScalarsTree.ContainsId(id);
         }
@@ -200,15 +200,15 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .GetLeafNodeIDs()
                 .Count(id => id.BasisBladeGrade() == grade);
 
-            return count == GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            return (ulong)count == GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
         }
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             return ScalarsTree.GetLeafNodeIDs();
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<T, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodes()
@@ -216,7 +216,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(term => term.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, int, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodeIDs()
@@ -228,7 +228,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 });
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<ulong, T, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodes()
@@ -236,7 +236,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(term => term.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, T, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodes()
@@ -249,7 +249,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(term => term.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIdsOfGrade(int grade)
+        public override IEnumerable<ulong> GetStoredTermIdsOfGrade(int grade)
         {
             return ScalarsTree
                 .GetLeafNodeIDs()
@@ -258,10 +258,10 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IEnumerable<T> GetStoredTermScalars()
         {
-            return ScalarsTree;
+            return ScalarsTree.Values;
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodes()
@@ -269,7 +269,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(term => term.Value);
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, T, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodes()
@@ -277,7 +277,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(term => term.Value);
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<int, ulong, T, bool> selectionFilter)
         {
             return ScalarsTree
                 .GetLeafNodes()
@@ -316,11 +316,11 @@ namespace GeometricAlgebraStructuresLib.Storage
         public override int GetStoredZeroTermsCount(bool nearZeroFlag = false)
         {
             return nearZeroFlag
-                ? ScalarsTree.Count(scalar => ScalarDomain.IsNearZero(scalar))
-                : ScalarsTree.Count(scalar => ScalarDomain.IsZero(scalar));
+                ? ScalarsTree.Values.Count(scalar => ScalarDomain.IsNearZero(scalar))
+                : ScalarsTree.Values.Count(scalar => ScalarDomain.IsZero(scalar));
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
         {
             return nearZeroFlag
                 ? ScalarsTree
@@ -333,7 +333,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     .Select(term => term.Key);
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
         {
             return nearZeroFlag
                 ? ScalarsTree
@@ -349,8 +349,8 @@ namespace GeometricAlgebraStructuresLib.Storage
         public override int GetNonZeroTermsCount(bool nearZeroFlag = false)
         {
             return nearZeroFlag
-                ? ScalarsTree.Count(scalar => ScalarDomain.IsNotNearZero(scalar))
-                : ScalarsTree.Count(scalar => ScalarDomain.IsNotZero(scalar));
+                ? ScalarsTree.Values.Count(scalar => ScalarDomain.IsNotNearZero(scalar))
+                : ScalarsTree.Values.Count(scalar => ScalarDomain.IsNotZero(scalar));
         }
 
         public override IReadOnlyDictionary<int, int> GetNonZeroTermsCountPerGrade(bool nearZeroFlag = false)
@@ -401,7 +401,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return ScalarsTree;
         }
 
-        public override GaMvsTerm<T> GetTermStorage(int id, bool getCopy = false)
+        public override GaMvsTerm<T> GetTermStorage(ulong id, bool getCopy = false)
         {
             var storage = new GaMvsTerm<T>(VSpaceDimension, ScalarDomain, id);
 
@@ -586,17 +586,17 @@ namespace GeometricAlgebraStructuresLib.Storage
             throw new NotImplementedException();
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<ulong, T, T> mappingFunc)
         {
             throw new NotImplementedException();
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, ulong, T, T> mappingFunc)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public override IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
             throw new NotImplementedException();
         }

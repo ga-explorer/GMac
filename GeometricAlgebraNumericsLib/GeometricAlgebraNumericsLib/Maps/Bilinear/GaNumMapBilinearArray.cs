@@ -67,17 +67,17 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         //    }
         //}
 
-        public override IGaNumMultivector this[int id1, int id2]
+        public override IGaNumMultivector this[ulong id1, ulong id2]
         {
             get
             {
                 var map = _basisBladesMaps[id1];
 
                 if (ReferenceEquals(map, null))
-                    return GaNumTerm.CreateZero(TargetGaSpaceDimension);
+                    return GaNumTerm.CreateZero(TargetVSpaceDimension);
 
                 return map[id2]
-                       ?? GaNumTerm.CreateZero(TargetGaSpaceDimension);
+                       ?? GaNumTerm.CreateZero(TargetVSpaceDimension);
             }
         }
         
@@ -232,7 +232,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         }
 
 
-        public GaNumMapBilinearArray SetBasisBladesMap(int basisBladeId1, int basisBladeId2, IGaNumMultivector targetMv)
+        public GaNumMapBilinearArray SetBasisBladesMap(ulong basisBladeId1, ulong basisBladeId2, IGaNumMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -258,22 +258,22 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         }
 
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-                for (var id2 = 0; id2 < DomainGaSpaceDimension; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+                for (var id2 = 0UL; id2 < DomainGaSpaceDimension; id2++)
                 {
                     var mv = this[id1, id2];
 
                     if (!mv.IsNullOrEmpty())
-                        yield return new Tuple<int, int, IGaNumMultivector>(id1, id2, mv);
+                        yield return new Tuple<ulong, ulong, IGaNumMultivector>(id1, id2, mv);
                 }
         }
 
 
         public override string ToString()
         {
-            var tableText = new TableComposer(TargetGaSpaceDimension, TargetGaSpaceDimension);
+            var tableText = new TableComposer((int)TargetGaSpaceDimension, (int)TargetGaSpaceDimension);
             var basisBladeIds = GaFrameUtils.BasisBladeIDs(TargetVSpaceDimension).ToArray();
 
             foreach (var basisBladeId in basisBladeIds)
@@ -282,8 +282,8 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                 tableText.RowsInfo[basisBladeId].Header = basisBladeId.BasisBladeName();
             }
 
-            for (var basisBladeId1 = 0; basisBladeId1 < TargetGaSpaceDimension; basisBladeId1++)
-                for (var basisBladeId2 = 0; basisBladeId2 < TargetGaSpaceDimension; basisBladeId2++)
+            for (var basisBladeId1 = 0UL; basisBladeId1 < TargetGaSpaceDimension; basisBladeId1++)
+                for (var basisBladeId2 = 0UL; basisBladeId2 < TargetGaSpaceDimension; basisBladeId2++)
                 {
                     var mv = this[basisBladeId1, basisBladeId2];
                     if (!mv.IsNullOrEmpty())

@@ -5,11 +5,11 @@ using GeometricAlgebraNumericsLib.Structures;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees.NodeInfo;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Metrics;
 using GeometricAlgebraSymbolicsLib.Multivectors.Hash;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
 using GeometricAlgebraSymbolicsLib.Multivectors.Tree;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {
@@ -39,8 +39,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         nodeInfo.Value1,
                         nodeInfo.Value2
                     );
@@ -94,8 +94,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         nodeInfo.Value1,
                         nodeInfo.Value2
                     );
@@ -141,8 +141,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         nodeInfo.Value1,
                         nodeInfo.Value2
                     );
@@ -180,8 +180,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         nodeInfo.Value1,
                         nodeInfo.Value2
                     );
@@ -227,8 +227,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         nodeInfo.Value1,
                         nodeInfo.Value2
                     );
@@ -298,8 +298,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         node1.Value,
                         node2.Value,
                         metricNode.Value
@@ -377,8 +377,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         node1.Value,
                         node2.Value,
                         metricNode.Value
@@ -430,8 +430,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         node1.Value,
                         node2.Value,
                         metricNode.Value
@@ -496,8 +496,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 if (nodeInfo.IsLeafNode)
                 {
                     yield return new GaSymMultivectorBiTerm(
-                        (int)nodeInfo.Id1,
-                        (int)nodeInfo.Id2,
+                        nodeInfo.Id1,
+                        nodeInfo.Id2,
                         node1.Value,
                         node2.Value,
                         metricNode.Value
@@ -562,7 +562,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         }
 
 
-        public static GaSymMultivector SetTerms(this GaSymMultivector mv, IEnumerable<KeyValuePair<int, Expr>> terms)
+        public static GaSymMultivector SetTerms(this GaSymMultivector mv, IEnumerable<KeyValuePair<ulong, Expr>> terms)
         {
             foreach (var term in terms)
                 mv.SetTermCoef(term.Key, term.Value);
@@ -577,14 +577,14 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 var coef = termsMv[id].Expression;
 
                 if (!coef.IsNullOrZero())
-                    mv.SetTermCoef(id, coef);
+                    mv.SetTermCoef((ulong)id, coef);
             }
 
             return mv;
         }
 
 
-        public static IGaSymMultivectorTemp SetTerms(this IGaSymMultivectorTemp tempMv, IEnumerable<KeyValuePair<int, Expr>> terms)
+        public static IGaSymMultivectorTemp SetTerms(this IGaSymMultivectorTemp tempMv, IEnumerable<KeyValuePair<ulong, Expr>> terms)
         {
             foreach (var term in terms)
                 tempMv.SetTermCoef(term.Key, term.Value);
@@ -615,14 +615,14 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 var coef = termsMv[id].Expression;
 
                 if (!coef.IsNullOrZero())
-                    tempMv.SetTermCoef(id, coef);
+                    tempMv.SetTermCoef((ulong)id, coef);
             }
 
             return tempMv;
         }
 
 
-        public static IGaSymMultivectorTemp AddFactors(this IGaSymMultivectorTemp tempMv, Expr scalar, IEnumerable<KeyValuePair<int, Expr>> terms)
+        public static IGaSymMultivectorTemp AddFactors(this IGaSymMultivectorTemp tempMv, Expr scalar, IEnumerable<KeyValuePair<ulong, Expr>> terms)
         {
             foreach (var term in terms)
                 tempMv.AddFactor(term.Key, Mfs.Times[term.Value, scalar]);
@@ -730,7 +730,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             if (ReferenceEquals(mv, null))
                 return null;
 
-            var tempMv = GaSymMultivector.CreateZeroTemp(mv.GaSpaceDimension);
+            var tempMv = GaSymMultivector.CreateZeroTemp(mv.VSpaceDimension);
 
             foreach (var term in mv.NonZeroExprTerms)
                 tempMv.SetTermCoef(term.Key, term.Value);
@@ -795,7 +795,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             if (mv.IsZero())
                 return returnZeroMvAsNull
                     ? null
-                    : GaSymMultivectorTerm.CreateZero(mv.GaSpaceDimension);
+                    : GaSymMultivectorTerm.CreateZero(mv.VSpaceDimension);
 
             //If it's a non-zero term return it as is
             var termMv = mv as GaSymMultivectorTerm;
@@ -814,10 +814,10 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
             //It's a full multivector containing a single term
             var term = mv.NonZeroExprTerms.FirstOrDefault();
-            return GaSymMultivectorTerm.CreateTerm(mv.GaSpaceDimension, term.Key, term.Value);
+            return GaSymMultivectorTerm.CreateTerm(mv.VSpaceDimension, term.Key, term.Value);
         }
 
-        public static GaSymMultivectorHashTable1D Compactify(this GaSparseTable1D<int, GaSymMultivector> mvTable)
+        public static GaSymMultivectorHashTable1D Compactify(this GaSparseTable1D<ulong, GaSymMultivector> mvTable)
         {
             var resultTable = new GaSymMultivectorHashTable1D();
 

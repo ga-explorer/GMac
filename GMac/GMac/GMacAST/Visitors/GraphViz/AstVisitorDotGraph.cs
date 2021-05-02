@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,7 +18,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
 
 
         internal AstVisitorDotGraph()
-            : base(DotGraphType.Directed, String.Empty)
+            : base(DotGraphType.Directed, string.Empty)
         {
             IconsPath = Path.Combine(
                 Path.GetDirectoryName(Application.ExecutablePath) ?? "", 
@@ -47,7 +46,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
             if (astType.IsValidStructureType)
                 return "Structure";
 
-            return String.Empty;
+            return string.Empty;
         }
 
 

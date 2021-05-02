@@ -20,7 +20,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
 
             var maxIndex = CurrentFrame.KvSpaceDimension(grade) - 1;
 
-            for (var index = 1; index < maxIndex; index++)
+            for (var index = 1UL; index < maxIndex; index++)
                 casesText.Add(
                     Templates["maxcoefid_case"],
                     "index", index,
@@ -42,7 +42,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
         {
             var casesText = new ListTextComposer(Environment.NewLine);
 
-            for (var index = 1; index < CurrentFrame.KvSpaceDimension(grade); index++)
+            for (var index = 1UL; index < CurrentFrame.KvSpaceDimension(grade); index++)
                 casesText.Add(
                     Templates["factorgrade_case"].GenerateUsing(
                         CurrentFrame.BasisBladeId(grade, index)

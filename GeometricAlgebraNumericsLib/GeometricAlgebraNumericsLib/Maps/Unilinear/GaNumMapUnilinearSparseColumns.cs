@@ -26,7 +26,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 );
         }
 
-        public static GaNumMapUnilinearSparseColumns Create(IGaNumMapUnilinear linearMap, IEnumerable<int> idsList)
+        public static GaNumMapUnilinearSparseColumns Create(IGaNumMapUnilinear linearMap, IEnumerable<ulong> idsList)
         {
             var table = new GaNumMapUnilinearSparseColumns(
                 linearMap.DomainVSpaceDimension,
@@ -53,7 +53,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
         {
             get
             {
@@ -129,7 +129,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearSparseColumns SetColumn(int columnId, IGaNumMultivector columnMv)
+        public GaNumMapUnilinearSparseColumns SetColumn(ulong columnId, IGaNumMultivector columnMv)
         {
             Debug.Assert(ReferenceEquals(columnMv, null) || columnMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -138,21 +138,21 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearSparseColumns RemoveColumn(int id1)
+        public GaNumMapUnilinearSparseColumns RemoveColumn(ulong id1)
         {
             _columnMultivectors.Remove(id1);
             return this;
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
             return
                 _columnMultivectors
                     .Where(p => !p.Value.IsNullOrEmpty())
                     .Select(
-                        pair => new Tuple<int, IGaNumMultivector>(pair.Key, pair.Value)
-                        );
+                        pair => new Tuple<ulong, IGaNumMultivector>(pair.Key, pair.Value)
+                    );
         }
     }
 }

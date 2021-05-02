@@ -48,9 +48,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1, int id2] 
+        public override IGaSymMultivector this[ulong id1, ulong id2] 
             => MapToTemp(id1, id2)?.ToMultivector()
-               ?? GaSymMultivector.CreateZero(TargetGaSpaceDimension);
+               ?? GaSymMultivector.CreateZero(TargetVSpaceDimension);
 
 
         private GaSymMapBilinearCombined(int targetVSpaceDim)
@@ -87,9 +87,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2)
         {
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term in _termsList)
                 resultMv.AddFactors(
@@ -105,7 +105,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term in _termsList)
                 resultMv.AddFactors(
@@ -116,15 +116,15 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return resultMv;
         }
 
-        public override IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-            for (var id2 = 0; id2 < DomainGaSpaceDimension; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+            for (var id2 = 0UL; id2 < DomainGaSpaceDimension; id2++)
             {
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, int, IGaSymMultivector>(id1, id2, mv);
+                    yield return new Tuple<ulong, ulong, IGaSymMultivector>(id1, id2, mv);
             }
         }
     }

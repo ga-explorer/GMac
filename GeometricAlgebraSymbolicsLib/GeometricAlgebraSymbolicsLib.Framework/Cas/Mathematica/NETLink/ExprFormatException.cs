@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// The exception thrown by the "AsXXX" methods of the <see cref="Expr"/> class (e.g.,

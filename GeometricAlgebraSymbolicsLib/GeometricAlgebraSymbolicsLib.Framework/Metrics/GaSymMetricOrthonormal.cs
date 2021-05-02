@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Metrics
 {
-    public class GaSymMetricOrthonormal : IReadOnlyList<int>, IGaSymMetricOrthogonal
+    public class GaSymMetricOrthonormal 
+        : IReadOnlyList<int>, IGaSymMetricOrthogonal
     {
         public static GaSymMetricOrthonormal Create(IReadOnlyList<int> basisVectorsSignaturesList)
         {
@@ -29,7 +30,7 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
             {
                 id.SplitBySmallestBasisVectorId(out var id1, out var id2);
 
-                bbsList[id] = bbsList[id1] * bbsList[id2];
+                bbsList[(int)id] = bbsList[(int)id1] * bbsList[(int)id2];
             }
 
             return bbsList;
@@ -41,8 +42,8 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
         public int VSpaceDimension
             => _bitArray.Count.ToVSpaceDimension();
 
-        public int GaSpaceDimension
-            => _bitArray.Count;
+        public ulong GaSpaceDimension
+            => (ulong)_bitArray.Count;
 
         public int Count
             => _bitArray.Count;
@@ -62,24 +63,24 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
         private GaSymMetricOrthonormal(int vSpaceDim)
         {
-            _bitArray = new BitArray(vSpaceDim.ToGaSpaceDimension());
+            _bitArray = new BitArray((int)vSpaceDim.ToGaSpaceDimension());
         }
 
 
-        public Expr GetExprSignature(int id)
+        public Expr GetExprSignature(ulong id)
         {
-            return _bitArray[id] ? Expr.INT_MINUSONE : Expr.INT_ONE;
+            return _bitArray[(int)id] ? Expr.INT_MINUSONE : Expr.INT_ONE;
         }
 
-        public MathematicaScalar GetSignature(int id)
+        public MathematicaScalar GetSignature(ulong id)
         {
-            return _bitArray[id] ? GaSymbolicsUtils.Constants.MinusOne : GaSymbolicsUtils.Constants.One;
+            return _bitArray[(int)id] ? GaSymbolicsUtils.Constants.MinusOne : GaSymbolicsUtils.Constants.One;
         }
 
         public IEnumerator<int> GetEnumerator()
         {
-            for (var i = 0; i < GaSpaceDimension; i++)
-                yield return this[i];
+            for (var i = 0UL; i < GaSpaceDimension; i++)
+                yield return this[(int)i];
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression
 {

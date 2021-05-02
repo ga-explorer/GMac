@@ -38,7 +38,7 @@ namespace GeometricAlgebraStructuresLib.GuidedBinaryTraversal.Multivectors
 
             if (TosTreeDepth == 0)
             {
-                TosValue = MultivectorStorage.GetTermScalar((int)TosId);
+                TosValue = MultivectorStorage.GetTermScalar(TosId);
             }
 
             TosIndex--;

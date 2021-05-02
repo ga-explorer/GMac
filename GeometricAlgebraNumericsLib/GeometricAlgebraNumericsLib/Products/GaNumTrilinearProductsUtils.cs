@@ -33,7 +33,7 @@ namespace GeometricAlgebraNumericsLib.Products
 
                 if (node.IsLeafNode())
                 {
-                    var term = metric.Gp((int)node.Id1, (int)node.Id2, (int)node.Id3);
+                    var term = metric.Gp(node.Id1, node.Id2, node.Id3);
 
                     resultMv.AddTerm(
                         term.BasisBladeId, 
@@ -117,7 +117,7 @@ namespace GeometricAlgebraNumericsLib.Products
 
                 if (node.IsLeafNode())
                 {
-                    var term = metric.Gp((int)node.Id1, (int)node.Id2, (int)node.Id3);
+                    var term = metric.Gp(node.Id1, node.Id2, node.Id3);
 
                     resultMv.AddTerm(
                         term.BasisBladeId,
@@ -193,7 +193,7 @@ namespace GeometricAlgebraNumericsLib.Products
 
                     if (node.IsLeafNode())
                     {
-                        var term = metric.Gp((int)node.Id1, (int)node.Id2, (int)node.Id3);
+                        var term = metric.Gp(node.Id1, node.Id2, node.Id3);
 
                         array[term.BasisBladeId.BasisBladeIndex(), basisVectorIndex] +=
                             term.ScalarValue * node.GetValuesProduct();

@@ -6,35 +6,36 @@ using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
-    public sealed class GaDarVectorAsSarMultivectorReadOnlyDictionary<T> : IReadOnlyDictionary<int, T>
+    public sealed class GaDarVectorAsSarMultivectorReadOnlyDictionary<T> 
+        : IReadOnlyDictionary<ulong, T>
     {
         public IReadOnlyList<T> VectorValues { get; }
 
         public int Count
             => VectorValues.Count;
 
-        public IEnumerable<int> Keys
-            => Enumerable.Range(0, Count).Select(index => 1 << index);
+        public IEnumerable<ulong> Keys
+            => Enumerable.Range(0, Count).Select(index => 1UL << index);
 
         public IEnumerable<T> Values
             => VectorValues;
 
-        public bool ContainsKey(int key)
+        public bool ContainsKey(ulong key)
         {
             key.BasisBladeGradeIndex(out var grade, out var index);
 
-            return grade == 1 && index < VectorValues.Count;
+            return grade == 1 && index < (ulong)VectorValues.Count;
         }
 
 
-        public T this[int id]
+        public T this[ulong id]
         {
             get
             {
                 id.BasisBladeGradeIndex(out var grade, out var index);
 
                 if (grade == 1)
-                    return VectorValues[index];
+                    return VectorValues[(int)index];
 
                 throw new KeyNotFoundException();
             }
@@ -49,13 +50,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         }
 
 
-        public bool TryGetValue(int key, out T value)
+        public bool TryGetValue(ulong key, out T value)
         {
             key.BasisBladeGradeIndex(out var grade, out var index);
 
             if (grade == 1)
             {
-                value = VectorValues[index];
+                value = VectorValues[(int)index];
                 return true;
             }
 
@@ -63,10 +64,10 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             return false;
         }
 
-        public IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
             return VectorValues.Select((t, index) => 
-                new KeyValuePair<int, T>(1 << index, t)
+                new KeyValuePair<ulong, T>(1UL << index, t)
             ).GetEnumerator();
         }
 

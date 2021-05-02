@@ -11,7 +11,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Wolfram.NETLink.UI {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.UI {
 
 /// <summary>
 /// A PictureBox subclass intended for displaying images of <i>Mathematica</i> graphics and typeset expressions.

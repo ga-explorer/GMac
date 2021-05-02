@@ -2,11 +2,11 @@
 {
     public interface IGaTerm<T>
     {
-        int Id { get; }
+        ulong Id { get; }
 
         int Grade { get; }
 
-        int Index { get; }
+        ulong Index { get; }
 
         T Scalar { get; }
         

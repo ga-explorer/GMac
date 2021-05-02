@@ -44,7 +44,7 @@ namespace GMac.GMacAST.Expressions
         /// <summary>
         /// The basis blade IDs used in this constructor
         /// </summary>
-        public IEnumerable<int> UsedBasisBladesIds
+        public IEnumerable<ulong> UsedBasisBladesIds
         {
             get
             {

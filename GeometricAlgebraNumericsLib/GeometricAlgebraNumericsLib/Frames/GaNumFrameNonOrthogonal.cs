@@ -107,7 +107,7 @@ namespace GeometricAlgebraNumericsLib.Frames
             return InnerProductMatrix[basisVectorIndex, basisVectorIndex];
         }
 
-        public override GaNumSarMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(ulong id)
         {
             var basisBlade = GaNumSarMultivector.CreateBasisBlade(VSpaceDimension, id);
 

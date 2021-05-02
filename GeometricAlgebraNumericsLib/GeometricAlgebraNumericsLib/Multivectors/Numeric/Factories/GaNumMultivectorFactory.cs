@@ -13,24 +13,26 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
     {
         public int VSpaceDimension { get; private set; }
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => VSpaceDimension.ToGaSpaceDimension();
 
         public abstract int StoredTermsCount { get; }
 
 
-        public abstract double this[int id] { get; set; }
+        public abstract double this[ulong id] { get; set; }
 
-        public abstract double this[int grade, int index] { get; set; }
+        public abstract double this[int grade, ulong index] { get; set; }
 
 
-        public abstract bool TryGetValue(int id, out double value);
+        public abstract bool TryGetValue(ulong id, out double value);
 
-        public abstract bool TryGetValue(int grade, int index, out double value);
+        public abstract bool TryGetValue(int grade, ulong index, out double value);
 
-        public abstract bool TryGetTerm(int id, out GaTerm<double> term);
+        public abstract IEnumerable<ulong> GetStoredTermIds();
 
-        public abstract bool TryGetTerm(int grade, int index, out GaTerm<double> term);
+        public abstract bool TryGetTerm(ulong id, out GaTerm<double> term);
+
+        public abstract bool TryGetTerm(int grade, ulong index, out GaTerm<double> term);
 
 
         public abstract bool IsEmpty();
@@ -44,7 +46,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public int GetKvSpaceDimension(int grade)
+        public ulong GetKvSpaceDimension(int grade)
         {
             return GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
         }
@@ -86,18 +88,16 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         public abstract IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade);
 
 
-        public abstract IEnumerable<int> GetStoredTermIds();
-
-        public abstract IEnumerable<int> GetNonZeroTermIds();
+        public abstract IEnumerable<ulong> GetNonZeroTermIds();
 
         public abstract IEnumerable<double> GetStoredTermScalars();
 
         public abstract IEnumerable<double> GetNonZeroTermScalars();
 
 
-        public abstract bool ContainsStoredTerm(int id);
+        public abstract bool ContainsStoredTerm(ulong id);
 
-        public abstract bool ContainsStoredTerm(int grade, int index);
+        public abstract bool ContainsStoredTerm(int grade, ulong index);
 
         public abstract bool ContainsStoredTermOfGrade(int grade);
 
@@ -253,9 +253,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         public abstract GaNumMultivectorFactory CopyToFactory();
 
 
-        public abstract GaNumMultivectorFactory SetTerm(int id, double value);
+        public abstract GaNumMultivectorFactory SetTerm(ulong id, double value);
 
-        public abstract GaNumMultivectorFactory SetTerm(int grade, int index, double value);
+        public abstract GaNumMultivectorFactory SetTerm(int grade, ulong index, double value);
 
         public abstract GaNumMultivectorFactory SetTerm(GaTerm<double> term);
 
@@ -283,9 +283,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public abstract GaNumMultivectorFactory SetKVector(int grade, double scalingFactor, IReadOnlyList<double> scalarValuesList);
 
-        public abstract GaNumMultivectorFactory SetKVector(int grade, IEnumerable<KeyValuePair<int, double>> scalarValuesList);
+        public abstract GaNumMultivectorFactory SetKVector(int grade, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList);
 
-        public abstract GaNumMultivectorFactory SetKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<int, double>> scalarValuesList);
+        public abstract GaNumMultivectorFactory SetKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList);
 
 
         public GaNumMultivectorFactory SetKVector(GaNumDarKVector kvector)
@@ -334,9 +334,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public abstract GaNumMultivectorFactory AddTerm(int id, double value);
+        public abstract GaNumMultivectorFactory AddTerm(ulong id, double value);
 
-        public abstract GaNumMultivectorFactory AddTerm(int grade, int index, double value);
+        public abstract GaNumMultivectorFactory AddTerm(int grade, ulong index, double value);
 
         public abstract GaNumMultivectorFactory AddTerm(GaTerm<double> term);
 
@@ -352,9 +352,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public abstract GaNumMultivectorFactory AddKVector(int grade, double scalingFactor, IReadOnlyList<double> scalarValuesList);
 
-        public abstract GaNumMultivectorFactory AddKVector(int grade, IEnumerable<KeyValuePair<int, double>> scalarValuesList);
+        public abstract GaNumMultivectorFactory AddKVector(int grade, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList);
 
-        public abstract GaNumMultivectorFactory AddKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<int, double>> scalarValuesList);
+        public abstract GaNumMultivectorFactory AddKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList);
 
 
         public GaNumMultivectorFactory AddKVector(GaNumDarKVector kvector)
@@ -416,8 +416,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public abstract GaNumMultivectorFactory ApplyMapping(Func<double, double> mappingFunc);
 
-        public abstract GaNumMultivectorFactory ApplyMapping(Func<int, double, double> mappingFunc);
+        public abstract GaNumMultivectorFactory ApplyMapping(Func<ulong, double, double> mappingFunc);
 
-        public abstract GaNumMultivectorFactory ApplyMapping(Func<int, int, double, double> mappingFunc);
+        public abstract GaNumMultivectorFactory ApplyMapping(Func<int, ulong, double, double> mappingFunc);
     }
 }

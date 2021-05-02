@@ -18,19 +18,19 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
     {
         public static GaNumSarKVector CreateZero(int vSpaceDim, int grade)
         {
-            var scalarValues = new Dictionary<int, double>();
+            var scalarValues = new Dictionary<ulong, double>();
 
             return new GaNumSarKVector(vSpaceDim, grade, scalarValues);
         }
 
-        public static GaNumSarKVector Create(int vSpaceDim, int grade, IReadOnlyDictionary<int, double> scalarValues)
+        public static GaNumSarKVector Create(int vSpaceDim, int grade, IReadOnlyDictionary<ulong, double> scalarValues)
         {
             return new GaNumSarKVector(vSpaceDim, grade, scalarValues);
         }
 
         public static GaNumSarKVector CreateScalar(int vSpaceDim, double value)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {0, value}
             };
@@ -44,14 +44,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public int MaxStoredGrade
             => Grade;
 
-        public IReadOnlyDictionary<int, double> ScalarValuesDictionary { get; }
+        public IReadOnlyDictionary<ulong, double> ScalarValuesDictionary { get; }
 
         public IReadOnlyList<double> ScalarValuesArray { get; }
 
-        public int KvSpaceDimension
+        public ulong KvSpaceDimension
             => GaFrameUtils.KvSpaceDimension(VSpaceDimension, Grade);
 
-        public override double this[int id]
+        public override double this[ulong id]
         {
             get
             {
@@ -65,7 +65,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             }
         }
 
-        public override double this[int grade, int index]
+        public override double this[int grade, ulong index]
         {
             get
             {
@@ -81,27 +81,27 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             => ScalarValuesDictionary.Count;
 
 
-        internal GaNumSarKVector(int vSpaceDim, int grade, IReadOnlyDictionary<int, double> scalarValues)
+        internal GaNumSarKVector(int vSpaceDim, int grade, IReadOnlyDictionary<ulong, double> scalarValues)
             : base(vSpaceDim)
         {
             Debug.Assert(
                 scalarValues.All(p => 
-                    p.Key >= 0 && p.Key < GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
+                    p.Key < GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
                 )
             );
 
             Grade = grade;
             ScalarValuesDictionary = scalarValues;
-            ScalarValuesArray = new SparseReadOnlyList<double>(vSpaceDim, scalarValues);
+            ScalarValuesArray = new SparseULongReadOnlyList<double>(vSpaceDim, scalarValues);
         }
 
 
-        public int GetBasisBladeId(int index)
+        public ulong GetBasisBladeId(ulong index)
         {
             return GaFrameUtils.BasisBladeId(Grade, index);
         }
 
-        public int GetBasisBladeIndex(int id)
+        public ulong GetBasisBladeIndex(ulong id)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -149,14 +149,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return GetStoredTermScalars().All(v => v.IsNearZero());
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
             return Grade == grade && ScalarValuesDictionary.ContainsKey(index);
         }
 
-        public override bool ContainsStoredTerm(int grade, int index)
+        public override bool ContainsStoredTerm(int grade, ulong index)
         {
             return Grade == grade && ScalarValuesDictionary.ContainsKey(index);
         }
@@ -189,7 +189,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override GaNumSgrMultivector GetSgrMultivector()
         {
-            var kVectorsArray = new IReadOnlyDictionary<int, double>[VSpaceDimension + 1];
+            var kVectorsArray = new IReadOnlyDictionary<ulong, double>[VSpaceDimension + 1];
 
             kVectorsArray[Grade] = ScalarValuesDictionary;
 
@@ -244,14 +244,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             return ScalarValuesDictionary.Select(p =>
                 GaFrameUtils.BasisBladeId(Grade, p.Key)
             );
         }
 
-        public override IEnumerable<int> GetNonZeroTermIds()
+        public override IEnumerable<ulong> GetNonZeroTermIds()
         {
             return ScalarValuesDictionary
                 .Where(p => !p.Value.IsNearZero())
@@ -273,7 +273,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override bool TryGetValue(int id, out double value)
+        public override bool TryGetValue(ulong id, out double value)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -284,7 +284,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetValue(int grade, int index, out double value)
+        public override bool TryGetValue(int grade, ulong index, out double value)
         {
             if (Grade == grade)
                 return ScalarValuesDictionary.TryGetValue(index, out value);
@@ -293,7 +293,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetTerm(int id, out GaTerm<double> term)
+        public override bool TryGetTerm(ulong id, out GaTerm<double> term)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -307,7 +307,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
+        public override bool TryGetTerm(int grade, ulong index, out GaTerm<double> term)
         {
             if (Grade == grade && ScalarValuesDictionary.TryGetValue(index, out var value))
             {

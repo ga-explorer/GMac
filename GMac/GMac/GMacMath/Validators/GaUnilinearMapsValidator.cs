@@ -31,7 +31,8 @@ namespace GMac.GMacMath.Validators
 
         public int VSpaceDimension { get; set; } = 6;
 
-        public int GaSpaceDimension => VSpaceDimension.ToGaSpaceDimension();
+        public ulong GaSpaceDimension 
+            => VSpaceDimension.ToGaSpaceDimension();
 
 
         private void ValidateNumericOutermorphisms()

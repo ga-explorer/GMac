@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CodeComposerLib.GraphViz.UserInterface;
+using CodeComposerLib.UI.WinForms.GraphViz.UserInterface;
 using GMac.GMacAPI.Binding;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAPI.CodeGen.SingleMacro;
@@ -72,7 +72,7 @@ namespace GMac.GMacIDE
         {
             var result = true;
 
-            textBoxDisplay.Text = String.Empty;
+            textBoxDisplay.Text = string.Empty;
 
             BindingTextData.Clear();
 

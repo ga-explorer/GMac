@@ -10,14 +10,14 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
         public static Stack<IGaGbtNode1<double>> CreateStack(IReadOnlyList<GaNumVector> basisVectorMappingsList, IGaNumMultivector multivector)
         {
             var treeDepth = multivector.VSpaceDimension;
-            var targetGaSpaceDimension = basisVectorMappingsList[0].GaSpaceDimension;
+            var targetVSpaceDimension = basisVectorMappingsList[0].VSpaceDimension;
             var activeGradesBitPattern = (ulong)multivector.GetStoredGradesBitPattern();
             var activeGradesBitMask = (1ul << (treeDepth + 2)) - 1;
 
             var rootNode = new GaGbtJarMultivectorOutermorphismNode(
                 treeDepth,
                 basisVectorMappingsList,
-                GaNumDarKVector.CreateScalar(targetGaSpaceDimension, 1),
+                GaNumDarKVector.CreateScalar(targetVSpaceDimension, 1),
                 multivector,
                 0,
                 activeGradesBitPattern,
@@ -43,7 +43,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             => Id | (1ul << (TreeDepth - 1));
 
         public double Value
-            => TreeDepth == 0 ? Multivector[(int)Id] : 0;
+            => TreeDepth == 0 ? Multivector[Id] : 0;
 
         public IReadOnlyList<GaNumVector> BasisVectorMappingsList { get; }
 
@@ -64,11 +64,11 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             => ActiveGradesBitPattern & ActiveGradesBitMask0 & (ActiveGradesBitMask1 << 1);
 
 
-        private GaGbtJarMultivectorOutermorphismNode(int treeDepth, IReadOnlyList<GaNumVector> MappingsList, GaNumDarKVector kVector, IGaNumMultivector multivector, ulong id, ulong pattern, ulong mask0, ulong mask1)
+        private GaGbtJarMultivectorOutermorphismNode(int treeDepth, IReadOnlyList<GaNumVector> mappingsList, GaNumDarKVector kVector, IGaNumMultivector multivector, ulong id, ulong pattern, ulong mask0, ulong mask1)
         {
             Debug.Assert((pattern & mask0 & mask1) > 0);
 
-            BasisVectorMappingsList = MappingsList;
+            BasisVectorMappingsList = mappingsList;
             KVector = kVector;
             Multivector = multivector;
 

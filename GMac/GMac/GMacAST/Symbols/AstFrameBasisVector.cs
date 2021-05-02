@@ -8,10 +8,10 @@ using DataStructuresLib.SimpleTree;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAST.Expressions;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacScripting;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Symbols
 {
@@ -99,7 +99,7 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// The ID of this basis vector taken as a basis blade
         /// </summary>
-        public int BasisBladeId => ParentFrame.BasisBladeId(1, AssociatedBasisVector.BasisVectorIndex);
+        public ulong BasisBladeId => ParentFrame.BasisBladeId(1, AssociatedBasisVector.BasisVectorIndex);
 
         /// <summary>
         /// The grade of this basis vector (always 1)
@@ -109,7 +109,7 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// The index of this basis vector
         /// </summary>
-        public int Index => AssociatedBasisVector.BasisVectorIndex;
+        public ulong Index => AssociatedBasisVector.BasisVectorIndex;
 
         /// <summary>
         /// The binary indexed name of this basis vector
@@ -140,7 +140,8 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// Returns a list of basis blade IDs that contain this basis vector
         /// </summary>
-        public IEnumerable<int> ParentBasisBladeIDs => ParentFrame.BasisBladeIDsContaining(1, AssociatedBasisVector.BasisVectorIndex);
+        public IEnumerable<ulong> ParentBasisBladeIDs 
+            => ParentFrame.BasisBladeIDsContaining(1, AssociatedBasisVector.BasisVectorIndex);
 
         /// <summary>
         /// Returns a list of basis blades that contain this basis vector

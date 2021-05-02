@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TextComposerLib.UserInterface
+namespace TextComposerLib.UI.WinForms.UserInterface
 {
     public partial class FormSamples : Form
     {

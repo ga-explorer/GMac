@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace GMac.GMacCompiler.Semantic.ASTConstants
@@ -172,13 +171,13 @@ namespace GMac.GMacCompiler.Semantic.ASTConstants
         /// </summary>
         public bool IsMetricIndependent { get; private set; }
 
-        public bool HasSymbol => String.IsNullOrEmpty(OpSymbol) == false;
+        public bool HasSymbol => string.IsNullOrEmpty(OpSymbol) == false;
 
 
         private GMacOpInfo(string opName, string opSymbol, bool isBinary)
         {
             OpName = opName;
-            OpSymbol = opSymbol ?? String.Empty;
+            OpSymbol = opSymbol ?? string.Empty;
             IsBinary = isBinary;
             IsMetricIndependent = true;
         }

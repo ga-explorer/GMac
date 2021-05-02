@@ -555,7 +555,7 @@ namespace GMac.GMacCompiler.Semantic.ASTDebug
                     subspace
                     .SubspaceSignaturePattern
                     .TrueIndexes
-                    .Select(id => subspace.ParentFrame.BasisBladeName(id))
+                    .Select(id => subspace.ParentFrame.BasisBladeName((ulong)id))
                     )
                 );
 

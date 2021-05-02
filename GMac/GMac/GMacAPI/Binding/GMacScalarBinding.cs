@@ -2,10 +2,10 @@
 using CodeComposerLib.Irony.Semantic.Expression.Value;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
 using TextComposerLib.Text.Parametric;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Binding
 {

@@ -33,14 +33,14 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
 
-        public override T GetTermScalar(int basisBladeId)
+        public override T GetTermScalar(ulong basisBladeId)
         {
             return ScalarsArray[basisBladeId];
         }
 
-        public override bool TryGetTermScalar(int id, out T value)
+        public override bool TryGetTermScalar(ulong id, out T value)
         {
-            if (id >= 0 && id < GaSpaceDimension)
+            if (id < GaSpaceDimension)
             {
                 value = ScalarsArray[id];
                 return true;
@@ -50,21 +50,21 @@ namespace GeometricAlgebraStructuresLib.Storage
             return false;
         }
 
-        public override IGaMultivectorStorage<T> SetTermScalar(int id, T value)
+        public override IGaMultivectorStorage<T> SetTermScalar(ulong id, T value)
         {
             ScalarsArray[id] = value;
 
             return this;
         }
 
-        public override IGaMultivectorStorage<T> AddTerm(int id, T value)
+        public override IGaMultivectorStorage<T> AddTerm(ulong id, T value)
         {
             ScalarsArray[id] = ScalarDomain.Add(ScalarsArray[id], value);
 
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTerm(int basisBladeId)
+        public override IGaMultivectorStorage<T> RemoveTerm(ulong basisBladeId)
         {
             ScalarsArray[basisBladeId] = ScalarDomain.GetZero();
 
@@ -82,7 +82,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTermIfZero(int id, bool nearZeroFlag = false)
+        public override IGaMultivectorStorage<T> RemoveTermIfZero(ulong id, bool nearZeroFlag = false)
         {
             if (ScalarDomain.IsNearZero(ScalarsArray[id]))
                 ScalarsArray[id] = ScalarDomain.GetZero();
@@ -92,7 +92,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> RemoveZeroTerms(bool nearZeroFlag = false)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
                 if (ScalarDomain.IsNearZero(ScalarsArray[id]))
                     ScalarsArray[id] = ScalarDomain.GetZero();
             
@@ -132,9 +132,9 @@ namespace GeometricAlgebraStructuresLib.Storage
                 : ScalarsArray.All(ScalarDomain.IsZero);
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
-            return id >= 0 && id < GaSpaceDimension;
+            return id < GaSpaceDimension;
         }
 
         public override bool ContainsStoredTermOfGrade(int grade)
@@ -142,9 +142,9 @@ namespace GeometricAlgebraStructuresLib.Storage
             return grade >= 0 && grade <= VSpaceDimension;
         }
 
-        public override bool CanStoreTerm(int id)
+        public override bool CanStoreTerm(ulong id)
         {
-            return id >= 0 && id < GaSpaceDimension;
+            return id < GaSpaceDimension;
         }
 
         public override bool CanStoreSomeTermsOfGrade(int grade)
@@ -161,11 +161,14 @@ namespace GeometricAlgebraStructuresLib.Storage
         {
             return new GaBinaryTree<T>(
                 VSpaceDimension, 
-                Enumerable.Range(0, GaSpaceDimension).ToArray()
+                Enumerable
+                    .Range(0, (int)GaSpaceDimension)
+                    .Select(id => (ulong)id)
+                    .ToArray()
             );
         }
 
-        public override GaMvsTerm<T> GetTermStorage(int id, bool getCopy = false)
+        public override GaMvsTerm<T> GetTermStorage(ulong id, bool getCopy = false)
         {
             return new GaMvsTerm<T>(VSpaceDimension, ScalarDomain, id)
             {
@@ -194,7 +197,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
             var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
             
-            for (var index = 0; index < kvSpaceDimension; index++)
+            for (var index = 0UL; index < kvSpaceDimension; index++)
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
                 
@@ -210,7 +213,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
             var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
             
-            for (var index = 0; index < kvSpaceDimension; index++)
+            for (var index = 0UL; index < kvSpaceDimension; index++)
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
                 var scalar = ScalarsArray[id];
@@ -230,7 +233,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override GaMvsBinaryTree<T> GetBinaryTreeStorage(bool getCopy = false)
         {
-            var termsDictionary = (IDictionary<int, T>)GetNonZeroTerms().ToDictionary(
+            var termsDictionary = (IDictionary<ulong, T>)GetNonZeroTerms().ToDictionary(
                     t => t.Id,
                     t => t.Scalar
                 );
@@ -242,14 +245,16 @@ namespace GeometricAlgebraStructuresLib.Storage
             );
         }
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
-            return Enumerable.Range(0, GaSpaceDimension);
+            return Enumerable
+                .Range(0, (int)GaSpaceDimension)
+                .Select(id => (ulong)id);
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<T, bool> selectionFilter)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -258,21 +263,21 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, int, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
                 var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                for (var index = 0; index < kvSpaceDimension; index++)
+                for (var index = 0UL; index < kvSpaceDimension; index++)
                     if (selectionFilter(grade, index))
                         yield return GaFrameUtils.BasisBladeId(grade, index);
             }
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<ulong, T, bool> selectionFilter)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -281,13 +286,13 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
                 var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                for (var index = 0; index < kvSpaceDimension; index++)
+                for (var index = 0UL; index < kvSpaceDimension; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     var scalar = ScalarsArray[id];
@@ -298,18 +303,18 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<int> GetStoredTermIdsOfGrade(int grade)
+        public override IEnumerable<ulong> GetStoredTermIdsOfGrade(int grade)
         {
             var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
             
             return Enumerable
-                .Range(0, kvSpaceDimension)
-                .Select(index => GaFrameUtils.BasisBladeId(grade, index));
+                .Range(0, (int)kvSpaceDimension)
+                .Select(index => GaFrameUtils.BasisBladeId(grade, (ulong)index));
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -318,11 +323,11 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
         {
             var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-            for (var index = 0; index < kvSpaceDimension; index++)
+            for (var index = 0UL; index < kvSpaceDimension; index++)
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
                 var scalar = ScalarsArray[id];
@@ -344,11 +349,12 @@ namespace GeometricAlgebraStructuresLib.Storage
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<int> GetNonZeroTermIds(bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetNonZeroTermIds(bool nearZeroFlag = false)
         {
             return Enumerable
-                .Range(0, GaSpaceDimension)
-                .Where(id => ScalarDomain.IsZero(ScalarsArray[id]));
+                .Range(0, (int)GaSpaceDimension)
+                .Where(id => ScalarDomain.IsZero(ScalarsArray[id]))
+                .Select(id => (ulong)id);
         }
 
         public override IEnumerable<T> GetStoredTermScalars()
@@ -356,16 +362,16 @@ namespace GeometricAlgebraStructuresLib.Storage
             return ScalarsArray;
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, bool> selectionFilter)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
                 if (selectionFilter(id))
                     yield return ScalarsArray[id];
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, T, bool> selectionFilter)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -374,13 +380,13 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<int, ulong, T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
                 var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                for (var index = 0; index < kvSpaceDimension; index++)
+                for (var index = 0UL; index < kvSpaceDimension; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     var scalar = ScalarsArray[id];
@@ -395,7 +401,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         {
             var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-            for (var index = 0; index < kvSpaceDimension; index++)
+            for (var index = 0UL; index < kvSpaceDimension; index++)
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
                 var scalar = ScalarsArray[id];
@@ -413,7 +419,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         public override IEnumerable<IGaTerm<T>> GetStoredTerms()
         {
             return ScalarsArray.Select(
-                (scalarValue, id) => new GaUniformTerm<T>(id, scalarValue)
+                (scalarValue, id) => new GaUniformTerm<T>((ulong)id, scalarValue)
             );
         }
 
@@ -434,7 +440,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         public override IEnumerable<IGaTerm<T>> GetNonZeroTerms(bool nearZeroFlag = false)
         {
             return ScalarsArray.Select(
-                (scalarValue, id) => new GaUniformTerm<T>(id, scalarValue)
+                (scalarValue, id) => new GaUniformTerm<T>((ulong)id, scalarValue)
             ).Where(term => !ScalarDomain.IsZero(term.Scalar));
         }
 
@@ -451,9 +457,9 @@ namespace GeometricAlgebraStructuresLib.Storage
             return Enumerable.Range(0, VSpaceDimension + 1);
         }
 
-        public override int GetStoredGradesBitPattern()
+        public override ulong GetStoredGradesBitPattern()
         {
-            return (1 << (VSpaceDimension + 1)) - 1;
+            return (1UL << (VSpaceDimension + 1)) - 1;
         }
 
         public override GaMvsDenseArray<T> GetDenseArrayStorage(bool getCopy = false)
@@ -472,7 +478,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         {
             var storage = new GaMvsSparseArray<T>(VSpaceDimension, ScalarDomain);
 
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
                 
@@ -493,7 +499,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 
                 var scalarValuesArray = new T[kvSpaceDimension];
 
-                for (var index = 0; index < kvSpaceDimension; index++)
+                for (var index = 0UL; index < kvSpaceDimension; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     
@@ -514,9 +520,9 @@ namespace GeometricAlgebraStructuresLib.Storage
             {
                 var kvSpaceDimension = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
                 
-                var scalarValuesDictionary = new Dictionary<int, T>();
+                var scalarValuesDictionary = new Dictionary<ulong, T>();
 
-                for (var index = 0; index < kvSpaceDimension; index++)
+                for (var index = 0UL; index < kvSpaceDimension; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     var scalar = ScalarsArray[id];
@@ -538,7 +544,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> ApplyReverse()
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 if (id.BasisBladeIdHasNegativeReverse())
                     ScalarsArray[id] = ScalarDomain.Negative(ScalarsArray[id]);
@@ -549,7 +555,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> ApplyGradeInv()
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 if (id.BasisBladeIdHasNegativeGradeInv())
                     ScalarsArray[id] = ScalarDomain.Negative(ScalarsArray[id]);
@@ -560,7 +566,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> ApplyCliffConj()
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 if (id.BasisBladeIdHasNegativeCliffConj())
                     ScalarsArray[id] = ScalarDomain.Negative(ScalarsArray[id]);
@@ -571,7 +577,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> ApplyNegative()
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -583,7 +589,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> ApplyScaling(T scalingFactor)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -595,7 +601,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public override IGaMultivectorStorage<T> ApplyMapping(Func<T, T> mappingFunc)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -605,9 +611,9 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<ulong, T, T> mappingFunc)
         {
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 var scalar = ScalarsArray[id];
 
@@ -617,13 +623,13 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, ulong, T, T> mappingFunc)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
                 var count = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                for (var index = 0; index < count; index++)
+                for (var index = 0UL; index < count; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     var scalar = ScalarsArray[id];
@@ -635,10 +641,10 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public override IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
             return ScalarsArray.Select(
-                (t, i) => new KeyValuePair<int, T>(i, t)
+                (t, i) => new KeyValuePair<ulong, T>((ulong)i, t)
             ).GetEnumerator();
         }
     }

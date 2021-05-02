@@ -4,11 +4,11 @@ using CodeComposerLib.Irony.Semantic.Expression.Value;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Binding
 {

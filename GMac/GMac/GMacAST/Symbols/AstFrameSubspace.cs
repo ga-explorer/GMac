@@ -42,7 +42,7 @@ namespace GMac.GMacAST.Symbols
                     AssociatedSubspace
                     .SubspaceSignaturePattern
                     .TrueIndexes
-                    .Select(GaFrameUtils.BasisBladeGrade)
+                    .Select(id => ((ulong)id).BasisBladeGrade())
                     .Distinct()
                     .OrderBy(grade => grade);
             }
@@ -61,7 +61,7 @@ namespace GMac.GMacAST.Symbols
                     AssociatedSubspace
                     .SubspaceSignaturePattern
                     .TrueIndexes
-                    .Select(id => new AstFrameBasisBlade(subspace.ParentFrame, id));
+                    .Select(id => new AstFrameBasisBlade(subspace.ParentFrame, (ulong)id));
             } 
         }
 

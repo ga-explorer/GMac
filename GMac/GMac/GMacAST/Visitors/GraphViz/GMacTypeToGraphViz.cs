@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CodeComposerLib.GraphViz.Dot;
 using CodeComposerLib.GraphViz.Dot.Value;
 
@@ -20,14 +19,14 @@ namespace GMac.GMacAST.Visitors.GraphViz
 
         public void Visit(AstType astType)
         {
-            if (String.IsNullOrEmpty(_parentNodeName))
+            if (string.IsNullOrEmpty(_parentNodeName))
             {
                 Graph.SetRankDir(DotRankDirection.LeftToRight);
             }
 
             var node = Graph.AddNode(Graph.NewNodeName());
 
-            if (String.IsNullOrEmpty(_memberName))
+            if (string.IsNullOrEmpty(_memberName))
                 node.SetLabel(
                     Graph.Table(
                         Graph.SelectIconName(astType),
@@ -43,7 +42,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
                         )
                     );
 
-            if (String.IsNullOrEmpty(_parentNodeName) == false)
+            if (string.IsNullOrEmpty(_parentNodeName) == false)
             {
                 Graph.AddEdge(_parentNodeName, node.NodeName);
             }

@@ -8,10 +8,10 @@ using DataStructuresLib.SimpleTree;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacAST.Expressions;
 using GMac.GMacCompiler.Semantic.AST;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Symbols
 {
@@ -58,7 +58,7 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// The Basis Blade ID
         /// </summary>
-        public int BasisBladeId { get; }
+        public ulong BasisBladeId { get; }
 
         public override bool IsValid 
             => AssociatedMultivector != null &&
@@ -92,7 +92,7 @@ namespace GMac.GMacAST.Symbols
             => new SimpleTreeBranchDictionaryByIndex<Expr>
             {
                 {
-                    BasisBladeId, 
+                    (int)BasisBladeId, 
                     "#E" + BasisBladeId + "#", 
                     AssociatedFrame.GMacRootAst.ScalarType.TypeSignature,
                     GaSymbolicsUtils.Constants.ExprOne
@@ -145,7 +145,7 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// The zero-based index of this basis blade among the basis blades of the same grade
         /// </summary>
-        public int Index 
+        public ulong Index 
             => BasisBladeId.BasisBladeIndex();
 
         /// <summary>
@@ -200,14 +200,14 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// The basis vectors ID's whose outer product gives this basis blade
         /// </summary>
-        public IEnumerable<int> BasisVectorIDs 
+        public IEnumerable<ulong> BasisVectorIDs 
             => BasisBladeId.GetBasicPatterns();
 
         /// <summary>
         /// The basis vectors indexes whose outer product gives this basis blade
         /// </summary>
-        public IEnumerable<int> BasisVectorIndexes 
-            => BasisBladeId.PatternToPositions();
+        public IEnumerable<ulong> BasisVectorIndexes 
+            => BasisBladeId.PatternToPositions().Select(i => (ulong)i);
 
         /// <summary>
         /// The basis vectors whose outer product gives this basis blade
@@ -230,7 +230,7 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// Returns a list of basis blade IDs that contain this basis blade
         /// </summary>
-        public IEnumerable<int> ParentBasisBladeIDs 
+        public IEnumerable<ulong> ParentBasisBladeIDs 
             => ParentFrame.BasisBladeIDsContaining(BasisBladeId);
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace GMac.GMacAST.Symbols
         {
             return 
                 IsVector 
-                ? ParentFrame.BasisVectorFromIndex(BasisBladeId.FirstOneBitPosition()) 
+                ? ParentFrame.BasisVectorFromIndex((ulong)BasisBladeId.FirstOneBitPosition()) 
                 : null;
         }
 
@@ -296,7 +296,7 @@ namespace GMac.GMacAST.Symbols
                 GMacValueMultivector.Create(
                         AssociatedFrame.MultivectorType,
                         GaSymMultivector.CreateBasisBlade(
-                            AssociatedFrame.GaSpaceDimension,
+                            AssociatedFrame.VSpaceDimension,
                             BasisBladeId
                             )
                     )
@@ -332,25 +332,25 @@ namespace GMac.GMacAST.Symbols
         }
 
         
-        internal AstFrameBasisBlade(GMacFrameMultivector mvType, int id)
+        internal AstFrameBasisBlade(GMacFrameMultivector mvType, ulong id)
         {
             AssociatedMultivector = mvType;
             BasisBladeId = id;
         }
 
-        internal AstFrameBasisBlade(GMacFrame frame, int id)
+        internal AstFrameBasisBlade(GMacFrame frame, ulong id)
         {
             AssociatedMultivector = frame.MultivectorType;
             BasisBladeId = id;
         }
 
-        internal AstFrameBasisBlade(GMacFrameMultivector mvType, int grade, int index)
+        internal AstFrameBasisBlade(GMacFrameMultivector mvType, int grade, ulong index)
         {
             AssociatedMultivector = mvType;
             BasisBladeId = GaFrameUtils.BasisBladeId(grade, index);
         }
 
-        internal AstFrameBasisBlade(GMacFrame frame, int grade, int index)
+        internal AstFrameBasisBlade(GMacFrame frame, int grade, ulong index)
         {
             AssociatedMultivector = frame.MultivectorType;
             BasisBladeId = GaFrameUtils.BasisBladeId(grade, index);

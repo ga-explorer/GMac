@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
+using CodeComposerLib.GraphViz;
 using CodeComposerLib.GraphViz.Dot;
 
-namespace CodeComposerLib.GraphViz.UserInterface
+namespace CodeComposerLib.UI.WinForms.GraphViz.UserInterface
 {
     public partial class FormGraphVizEditor : Form
     {

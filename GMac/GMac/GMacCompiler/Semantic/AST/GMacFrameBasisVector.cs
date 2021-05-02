@@ -14,7 +14,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <summary>
         /// The zero-based index of the basis vector in the frame. If the frame has n basis vectors the index is an integer between 0 and n - 1
         /// </summary>
-        internal int BasisVectorIndex { get; }
+        internal ulong BasisVectorIndex { get; }
 
         /// <summary>
         /// The scalar signature of the basis vector (the inner product of this beais vector by itself)
@@ -30,7 +30,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// If the frame has n basis vectors and k is a basis vector index between 0 and (n - 1)
         /// the ID is the iteger 2 ^ k
         /// </summary>
-        internal int BasisVectorId => 1 << BasisVectorIndex;
+        internal ulong BasisVectorId => 1UL << (int)BasisVectorIndex;
 
         /// <summary>
         /// The parent frame of this basis vector
@@ -40,7 +40,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         internal GMacAst GMacRootAst => (GMacAst)RootAst;
 
 
-        internal GMacFrameBasisVector(string basisVectorName, GMacFrame parentFrame, int basisVectorIndex, MathematicaScalar signature)
+        internal GMacFrameBasisVector(string basisVectorName, GMacFrame parentFrame, ulong basisVectorIndex, MathematicaScalar signature)
             : base(basisVectorName, parentFrame.ChildScope, RoleNames.FrameBasisVector, parentFrame.MultivectorType)
         {
             BasisVectorIndex = basisVectorIndex;

@@ -4,6 +4,6 @@ namespace GeometricAlgebraSymbolicsLib.Products
 {
     public interface IGaSymBilinearOrthogonalProduct
     {
-        GaSymMultivectorTerm MapToTerm(int id1, int id2);
+        GaSymMultivectorTerm MapToTerm(ulong id1, ulong id2);
     }
 }

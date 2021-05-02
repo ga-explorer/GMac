@@ -12,6 +12,16 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 {
     public static class GaNumMultivectorFactoryUtils
     {
+        public static IReadOnlyDictionary<ulong, double> GetNegative(this IReadOnlyDictionary<ulong, double> scalarValues)
+        {
+            var dict = new Dictionary<ulong, double>(scalarValues.Count);
+
+            foreach (var pair in scalarValues)
+                dict.Add(pair.Key, pair.Value);
+
+            return dict;
+        }
+
         public static IReadOnlyDictionary<int, double> GetNegative(this IReadOnlyDictionary<int, double> scalarValues)
         {
             var dict = new Dictionary<int, double>(scalarValues.Count);
@@ -22,9 +32,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return dict;
         }
 
-        public static IReadOnlyList<IReadOnlyDictionary<int, double>> ToSgrKVectorsList(this IEnumerable<Dictionary<int, double>> kVectors)
+        public static IReadOnlyList<IReadOnlyDictionary<ulong, double>> ToSgrKVectorsList(this IEnumerable<Dictionary<ulong, double>> kVectors)
         {
-            return kVectors.Cast<IReadOnlyDictionary<int, double>>().ToArray();
+            return kVectors.Cast<IReadOnlyDictionary<ulong, double>>().ToArray();
         }
 
 
@@ -93,8 +103,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         public static GaNumDarMultivector CreateDarMultivector(this GaTerm<double> term, int vSpaceDim)
         {
             var scalarValues = new SingleItemReadOnlyList<double>(
-                vSpaceDim.ToGaSpaceDimension(),
-                term.BasisBladeId,
+                (int)vSpaceDim.ToGaSpaceDimension(),
+                (int)term.BasisBladeId,
                 term.ScalarValue
             );
 
@@ -108,8 +118,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             var kVectorsArray = new IReadOnlyList<double>[vSpaceDim + 1];
 
             kVectorsArray[grade] = new SingleItemReadOnlyList<double>(
-                GaFrameUtils.KvSpaceDimension(vSpaceDim, grade),
-                index,
+                (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, grade),
+                (int)index,
                 term.ScalarValue
             );
 
@@ -118,7 +128,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public static GaNumSarMultivector CreateSarMultivector(this GaTerm<double> term, int vSpaceDim)
         {
-            var scalarValues = new Dictionary<int, double>
+            var scalarValues = new Dictionary<ulong, double>
             {
                 {term.BasisBladeId, term.ScalarValue}
             };
@@ -128,10 +138,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public static GaNumSgrMultivector CreateSgrMultivector(this GaTerm<double> term, int vSpaceDim)
         {
-            var kVectors = new Dictionary<int, double>[vSpaceDim + 1];
+            var kVectors = new Dictionary<ulong, double>[vSpaceDim + 1];
 
             for (var grade = 0; grade <= vSpaceDim; grade++)
-                kVectors[grade] = new Dictionary<int, double>();
+                kVectors[grade] = new Dictionary<ulong, double>();
 
             kVectors[1].Add(term.BasisBladeId, term.ScalarValue);
             
@@ -145,8 +155,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             term.BasisBladeId.BasisBladeGradeIndex(out var grade, out var index);
 
             var scalarValues = new SingleItemReadOnlyList<double>(
-                GaFrameUtils.KvSpaceDimension(vSpaceDim, grade),
-                index,
+                (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, grade),
+                (int)index,
                 term.ScalarValue
             );
 

@@ -13,7 +13,7 @@ namespace GMacBenchmarks2.Benchmarks.Symbolic
 
             for (var id1 = 0; id1 < 1024; id1++)
                 for (var id2 = 0; id2 < 1024; id2++)
-                    flag = flag | GaFrameUtils.IsNegativeEGp(id1, id2);
+                    flag = flag | GaFrameUtils.IsNegativeEGp((ulong)id1, (ulong)id2);
 
             return flag;
         }

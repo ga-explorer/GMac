@@ -79,7 +79,7 @@ namespace GeometricAlgebraStructuresLib.GuidedBinaryTraversal.Multivectors
             }
             else
             {
-                TosValue = MultivectorStorage.GetTermScalar((int)TosId);
+                TosValue = MultivectorStorage.GetTermScalar(TosId);
             }
 
             TosIndex--;

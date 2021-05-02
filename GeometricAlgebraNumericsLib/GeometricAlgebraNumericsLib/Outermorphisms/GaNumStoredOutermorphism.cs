@@ -222,7 +222,7 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
         public double Determinant 
             => _multivectorsMap[TargetGaSpaceDimension - 1][0];
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
             => _multivectorsMap[id1];
 
         public override GaNumSarMultivector this[GaNumSarMultivector mv1]
@@ -283,14 +283,14 @@ namespace GeometricAlgebraNumericsLib.Outermorphisms
         }
         
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
             return _multivectorsMap.BasisBladeMaps();
         }
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisVectorMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisVectorMaps()
         {
-            for (var index = 0; index < DomainVSpaceDimension; index++)
+            for (var index = 0UL; index < (ulong)DomainVSpaceDimension; index++)
             {
                 var mv = GaNumSarMultivector.CreateFromColumn(VectorsMappingMatrix, index);
 

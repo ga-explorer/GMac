@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 {
@@ -53,9 +53,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1] 
+        public override IGaSymMultivector this[ulong id1] 
             => MapToTemp(id1)?.ToMultivector() 
-               ?? GaSymMultivector.CreateZero(TargetGaSpaceDimension);
+               ?? GaSymMultivector.CreateZero(TargetVSpaceDimension);
 
 
         private GaSymMapUnilinearCombined(int targetVSpaceDim)
@@ -105,9 +105,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term in _termsList)
                 resultMv.AddFactors(
@@ -123,7 +123,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term in _termsList)
                 resultMv.AddFactors(
@@ -134,12 +134,12 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return resultMv;
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
             return
                 Enumerable
-                    .Range(0, DomainGaSpaceDimension)
-                    .Select(id => new Tuple<int, IGaSymMultivector>(id, this[id]))
+                    .Range(0, DomainVSpaceDimension)
+                    .Select(id => new Tuple<ulong, IGaSymMultivector>((ulong)id, this[(ulong) id]))
                     .Where(t => !t.Item2.IsNullOrZero());
         }
     }

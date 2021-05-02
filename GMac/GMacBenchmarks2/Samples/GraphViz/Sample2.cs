@@ -29,13 +29,13 @@ namespace GMacBenchmarks2.Samples.GraphViz
                     .Create(
                         vSpaceDim,
                         3,
-                        Enumerable.Repeat(1.0d, GaFrameUtils.KvSpaceDimension(vSpaceDim, 3))
+                        Enumerable.Repeat(1.0d, (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, 3))
                     )
                     .GetSarMultivector();
 
             var mv2 =
                 GaNumDarKVector
-                    .Create(gaSpaceDim, 4, Enumerable.Repeat(1.0d, GaFrameUtils.KvSpaceDimension(vSpaceDim, 4)))
+                    .Create(gaSpaceDim, 4, Enumerable.Repeat(1.0d, (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, 4)))
                     .GetSarMultivector();
 
             var mv = mv1;// + mv2;

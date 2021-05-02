@@ -129,7 +129,7 @@ namespace GeometricAlgebraNumericsLib
                 Parallel.For(
                     0, 
                     maxGaSpaceDim, 
-                    id2 => { bitArray[id2] = GaFrameUtils.ComputeIsNegativeEGp(n, id2); }
+                    id2 => { bitArray[id2] = GaFrameUtils.ComputeIsNegativeEGp((ulong)n, (ulong)id2); }
                 );
 
                 IsNegativeEgpLookupTables[id1] = bitArray;
@@ -158,7 +158,7 @@ namespace GeometricAlgebraNumericsLib
                 Parallel.For(
                     0,
                     gaSpaceDim,
-                    id2 => { bitArray[id2] = GaFrameUtils.ComputeIsNegativeEGp(id1, id2); }
+                    id2 => { bitArray[id2] = GaFrameUtils.ComputeIsNegativeEGp((ulong)id1, (ulong)id2); }
                 );
 
                 IsNegativeVectorEgpLookupTables[index1] = bitArray;
@@ -255,12 +255,12 @@ namespace GeometricAlgebraNumericsLib
 
                         foreach (var index1 in indexList1)
                         {
-                            var id1 = 1 << index1;
+                            var id1 = 1UL << index1;
                             var id2 = id ^ id1;
                             var index2 = id2.BasisBladeIndex();
 
                             lookupTableItems.Add(index1);
-                            lookupTableItems.Add(index2);
+                            lookupTableItems.Add((int)index2);
                         }
 
                         lookupTable[lookupTableIndex] = lookupTableItems.ToArray();

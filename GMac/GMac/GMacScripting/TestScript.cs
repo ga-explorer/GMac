@@ -39,9 +39,9 @@ namespace GMac.GMacScripting
             {
                 Execute($" declare v{i} : Multivector ");
 
-                for (var id = 1; id < frame.GaSpaceDimension; id = id << 1)
+                for (var id = 1UL; id < frame.GaSpaceDimension; id = id << 1)
                     Execute(string.Format("let v{0} = v{0} + Multivector(#E{1}# = '1')", i, id));
-                    //Ipr.Exec(String.Format("let v{0} = v{0} + Multivector(#E{1}# = 'v{0}c{1}')", i, id));
+                //Ipr.Exec(String.Format("let v{0} = v{0} + Multivector(#E{1}# = 'v{0}c{1}')", i, id));
             }
 
             //Ipr.Exec("let v = v1 op v2 op v3 op v4 op v5 ");

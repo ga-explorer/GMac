@@ -3,8 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
+using TextComposerLib.Text.Parametric;
 
-namespace TextComposerLib.Text.Parametric.UI
+namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     public partial class FormEditTemplate : Form
     {

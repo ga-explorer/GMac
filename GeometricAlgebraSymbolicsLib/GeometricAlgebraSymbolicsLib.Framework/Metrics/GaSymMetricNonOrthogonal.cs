@@ -21,7 +21,7 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
         public int VSpaceDimension => BaseFrame.VSpaceDimension;
 
-        public int GaSpaceDimension => BaseFrame.GaSpaceDimension;
+        public ulong GaSpaceDimension => BaseFrame.GaSpaceDimension;
 
         public ISymbolicMatrix BaseFrameIpm => BaseFrame.Ipm;
 

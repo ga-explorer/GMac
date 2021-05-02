@@ -177,7 +177,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
         {
             var membersText = new ListTextComposer("," + Environment.NewLine);
 
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 membersText.Add(
                     Templates["structure_member"],
                     "name", "ImageE" + id,
@@ -210,7 +210,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
         private void GenerateConstants(AstFrame frameInfo)
         {
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 ActiveFileTextComposer.Append(
                     Templates["constant"],
                     "frame", frameInfo.Name,

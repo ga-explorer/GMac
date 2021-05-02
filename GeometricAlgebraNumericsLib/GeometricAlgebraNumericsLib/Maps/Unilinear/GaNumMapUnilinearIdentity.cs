@@ -23,7 +23,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         public override int TargetVSpaceDimension
             => _vSpaceDimension;
 
-        public override IGaNumMultivector this[int id1] 
+        public override IGaNumMultivector this[ulong id1] 
             => GaNumSarMultivector.CreateBasisBlade(TargetVSpaceDimension, id1);
 
         public override GaNumSarMultivector this[GaNumSarMultivector mv]
@@ -41,7 +41,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override Matrix GetMappingMatrix()
         {
-            InternalMappingMatrix = DiagonalMatrix.CreateIdentity(DomainGaSpaceDimension);
+            InternalMappingMatrix = DiagonalMatrix.CreateIdentity((int)DomainGaSpaceDimension);
 
             return InternalMappingMatrix;
         }
@@ -62,12 +62,12 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            return Enumerable.Range(0, TargetGaSpaceDimension)
-                .Select(id => new Tuple<int, IGaNumMultivector>(
-                    id,
-                    GaNumSarMultivector.CreateBasisBlade(TargetVSpaceDimension, id)
+            return Enumerable.Range(0, (int)TargetGaSpaceDimension)
+                .Select(id => new Tuple<ulong, IGaNumMultivector>(
+                    (ulong)id,
+                    GaNumSarMultivector.CreateBasisBlade(TargetVSpaceDimension, (ulong)id)
                 ));
         }
     }

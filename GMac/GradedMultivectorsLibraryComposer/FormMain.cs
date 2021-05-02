@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using TextComposerLib.Files.UI;
+using TextComposerLib.UI.WinForms.UserInterface.UI;
 
 namespace GradedMultivectorsLibraryComposer
 {

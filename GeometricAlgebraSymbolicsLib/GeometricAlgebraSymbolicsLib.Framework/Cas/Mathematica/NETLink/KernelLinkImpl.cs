@@ -12,10 +12,9 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using Wolfram.NETLink.Internal;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal;
 
-
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <exclude/>
 /// <summary>

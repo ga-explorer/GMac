@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAPI.Binding;
 using GMac.GMacAPI.CodeBlock;
-using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator
 {

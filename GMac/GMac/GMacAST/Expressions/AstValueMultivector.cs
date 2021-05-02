@@ -69,12 +69,13 @@ namespace GMac.GMacAST.Expressions
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AstValueScalar this[int id] => new AstValueScalar(AssociatedMultivectorValue[id]);
+        public AstValueScalar this[ulong id] 
+            => new AstValueScalar(AssociatedMultivectorValue[id]);
 
         /// <summary>
         /// The basis blade IDs used in this value
         /// </summary>
-        public IEnumerable<int> ActiveIDs 
+        public IEnumerable<ulong> ActiveIDs 
             => AssociatedMultivectorValue
                 .SymbolicMultivector
                 .BasisBladeIds;

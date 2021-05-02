@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Metrics
 {
-    public class GaSymMetricOrthogonal : IReadOnlyList<Expr>, IGaSymMetricOrthogonal
+    public class GaSymMetricOrthogonal : IGaSymMetricOrthogonal
     {
         public static GaSymMetricOrthogonal Create(IReadOnlyList<MathematicaScalar> basisVectorsSignaturesList)
         {
@@ -24,7 +23,7 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
                 if (bvs.IsNullOrZero()) continue;
 
-                bbsList[1 << m] = bvs;
+                bbsList[1UL << m] = bvs;
             }
 
             var idsSeq = GaFrameUtils.BasisBladeIDsSortedByGrade(vSpaceDim, 2);
@@ -57,7 +56,7 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
                 if (bvs.IsNullOrZero()) continue;
 
-                bbsList[1 << m] = bvs;
+                bbsList[1UL << m] = bvs;
             }
 
             var idsSeq = GaFrameUtils.BasisBladeIDsSortedByGrade(vSpaceDim, 2);
@@ -82,17 +81,14 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => VSpaceDimension.ToGaSpaceDimension();
 
-        public int Count 
-            => VSpaceDimension.ToGaSpaceDimension();
-
-        public Expr this[int index]
+        public Expr this[ulong index]
         {
             get
             {
-                RootNode.TryGetLeafValue(VSpaceDimension, (ulong) index, out var value);
+                RootNode.TryGetLeafValue(VSpaceDimension, index, out var value);
 
                 return value ?? Expr.INT_ZERO;
             }
@@ -101,7 +97,7 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
                 var node = RootNode;
                 for (var i = VSpaceDimension - 1; i > 0; i--)
                 {
-                    var bitPattern = (1 << i) & index;
+                    var bitPattern = (1UL << i) & index;
                     node = node.GetOrAddInternalChildNode(bitPattern != 0);
                 }
 
@@ -118,21 +114,9 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
         }
 
 
-        public MathematicaScalar GetSignature(int id)
+        public MathematicaScalar GetSignature(ulong id)
         {
             return this[id].ToMathematicaScalar();
-        }
-
-        public IEnumerator<Expr> GetEnumerator()
-        {
-            //TODO: This is not the most efficient way
-            for (var i = 0; i < GaSpaceDimension; i++)
-                yield return this[i];
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

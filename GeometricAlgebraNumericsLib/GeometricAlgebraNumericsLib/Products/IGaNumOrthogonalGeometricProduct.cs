@@ -11,7 +11,7 @@ namespace GeometricAlgebraNumericsLib.Products
         /// <param name="id2"></param>
         /// <param name="id3"></param>
         /// <returns></returns>
-        GaNumTerm MapToTermLa(int id1, int id2, int id3);
+        GaNumTerm MapToTermLa(ulong id1, ulong id2, ulong id3);
 
         /// <summary>
         /// Compute the geometric product of 3 basis blades b1 gp (b2 gp b3)
@@ -20,6 +20,6 @@ namespace GeometricAlgebraNumericsLib.Products
         /// <param name="id2"></param>
         /// <param name="id3"></param>
         /// <returns></returns>
-        GaNumTerm MapToTermRa(int id1, int id2, int id3);
+        GaNumTerm MapToTermRa(ulong id1, ulong id2, ulong id3);
     }
 }

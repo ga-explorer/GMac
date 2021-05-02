@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace CodeComposerLib.GraphViz.UserInterface
+namespace CodeComposerLib.UI.WinForms.GraphViz.UserInterface
 {
     partial class FormImageDisplay
     {

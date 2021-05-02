@@ -48,14 +48,14 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1, int id2]
+        public override IGaSymMultivector this[ulong id1, ulong id2]
         {
             get
             {
-                _basisBladesMaps.TryGetLeafValue((ulong)id1, (ulong)id2, out var mv);
+                _basisBladesMaps.TryGetLeafValue(id1, id2, out var mv);
 
                 return mv
-                       ?? GaSymMultivectorTerm.CreateZero(TargetGaSpaceDimension);
+                       ?? GaSymMultivectorTerm.CreateZero(TargetVSpaceDimension);
             }
         }
 
@@ -90,7 +90,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return this;
         }
 
-        public GaSymMapBilinearTree SetBasisBladesMap(int id1, int id2, IGaSymMultivector targetMv)
+        public GaSymMapBilinearTree SetBasisBladesMap(ulong id1, ulong id2, IGaSymMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -99,18 +99,18 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             if (ReferenceEquals(targetMv, null))
                 return this;
 
-            _basisBladesMaps.SetLeafValue((ulong)id1, (ulong)id2, targetMv);
+            _basisBladesMaps.SetLeafValue(id1, id2, targetMv);
 
             return this;
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2)
         {
-            _basisBladesMaps.TryGetLeafValue((ulong)id1, (ulong)id2, out var mv);
+            _basisBladesMaps.TryGetLeafValue(id1, id2, out var mv);
 
             return mv?.ToTempMultivector()
-                   ?? GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+                   ?? GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
         }
 
         public override IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1, GaSymMultivector mv2)
@@ -118,7 +118,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var tempMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             var mapNodeStack = _basisBladesMaps.CreateNodesStack();
 
@@ -184,14 +184,14 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return tempMv;
         }
 
-        public override IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps()
         {
             return _basisBladesMaps
                 .LeafValuePairs
                 .Where(pair => !pair.Item3.IsNullOrZero())
-                .Select(pair => new Tuple<int, int, IGaSymMultivector>(
-                    (int)pair.Item1,
-                    (int)pair.Item2,
+                .Select(pair => new Tuple<ulong, ulong, IGaSymMultivector>(
+                    pair.Item1,
+                    pair.Item2,
                     pair.Item3
                 ));
         }

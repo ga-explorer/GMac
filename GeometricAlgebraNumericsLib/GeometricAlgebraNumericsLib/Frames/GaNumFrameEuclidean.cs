@@ -77,9 +77,9 @@ namespace GeometricAlgebraNumericsLib.Frames
             throw new IndexOutOfRangeException();
         }
 
-        public override GaNumSarMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(ulong id)
         {
-            if (id >= 0 && id < GaSpaceDimension)
+            if (id < GaSpaceDimension)
                 return GaNumSarMultivector.CreateScalar(VSpaceDimension, 1.0d);
 
             throw new IndexOutOfRangeException();

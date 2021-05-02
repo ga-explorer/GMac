@@ -6,7 +6,8 @@ using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
-    public sealed class GaDarKVectorAsSarMultivectorReadOnlyDictionary<T> : IReadOnlyDictionary<int, T>
+    public sealed class GaDarKVectorAsSarMultivectorReadOnlyDictionary<T> 
+        : IReadOnlyDictionary<ulong, T>
     {
         public IReadOnlyList<T> KVectorValues { get; }
 
@@ -17,26 +18,26 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public int Count 
             => KVectorValues.Count;
 
-        public IEnumerable<int> Keys 
-            => Enumerable.Range(0, Count).Select(index => 1 << index);
+        public IEnumerable<ulong> Keys 
+            => Enumerable.Range(0, Count).Select(index => 1UL << index);
 
         public IEnumerable<T> Values 
             => KVectorValues;
 
-        public bool ContainsKey(int key)
+        public bool ContainsKey(ulong key)
         {
             return key.BasisBladeGrade() == KVectorGrade;
         }
 
 
-        public T this[int id]
+        public T this[ulong id]
         {
             get
             {
                 id.BasisBladeGradeIndex(out var grade, out var index);
 
                 if (grade == KVectorGrade) 
-                    return KVectorValues[index];
+                    return KVectorValues[(int)index];
 
                 throw new KeyNotFoundException();
             }
@@ -53,13 +54,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         }
 
 
-        public bool TryGetValue(int key, out T value)
+        public bool TryGetValue(ulong key, out T value)
         {
             key.BasisBladeGradeIndex(out var grade, out var index);
 
             if (grade == KVectorGrade)
             {
-                value = KVectorValues[index];
+                value = KVectorValues[(int)index];
                 return true;
             }
 
@@ -67,12 +68,12 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             return false;
         }
 
-        public IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
             for (var index = 0; index < Count; index++)
             {
-                yield return new KeyValuePair<int, T>(
-                    GaFrameUtils.BasisBladeId(KVectorGrade, index),
+                yield return new KeyValuePair<ulong, T>(
+                    GaFrameUtils.BasisBladeId(KVectorGrade, (ulong)index),
                     KVectorValues[index]
                 );
             }
@@ -82,8 +83,8 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             for (var index = 0; index < Count; index++)
             {
-                yield return new KeyValuePair<int, T>(
-                    GaFrameUtils.BasisBladeId(KVectorGrade, index),
+                yield return new KeyValuePair<ulong, T>(
+                    GaFrameUtils.BasisBladeId(KVectorGrade, (ulong)index),
                     KVectorValues[index]
                 );
             }

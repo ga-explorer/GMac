@@ -81,14 +81,14 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             InnerProductMatrix = MathematicaMatrix.CreateDiagonal(v);
         }
 
-        public override MathematicaScalar BasisVectorSignature(int basisVectorIndex)
+        public override MathematicaScalar BasisVectorSignature(ulong basisVectorIndex)
         {
-            return BasisVectorsSignatures[basisVectorIndex];
+            return BasisVectorsSignatures[(int)basisVectorIndex];
         }
 
-        public override GaSymMultivector BasisBladeSignature(int id)
+        public override GaSymMultivector BasisBladeSignature(ulong id)
         {
-            return GaSymMultivector.CreateScalar(GaSpaceDimension, OrthogonalMetric[id]);
+            return GaSymMultivector.CreateScalar(VSpaceDimension, OrthogonalMetric[id]);
         }
     }
 }

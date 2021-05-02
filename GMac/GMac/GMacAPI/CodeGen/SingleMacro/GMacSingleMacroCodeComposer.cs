@@ -134,7 +134,7 @@ namespace GMac.GMacAPI.CodeGen.SingleMacro
 
                 targetNaming.SetMultivectorParameters(
                     valueAccess,
-                    id => BasisBladeIdToCode(parentName, id)
+                    id => BasisBladeIdToCode(parentName, (int)id)
                 );
             }
 

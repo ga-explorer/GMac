@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace DataStructuresLib
 {
@@ -111,25 +111,7 @@ namespace DataStructuresLib
 
             return onesCount;
         }
-
-        /// <summary>
-        /// Count the number of ones in the given bit pattern
-        /// </summary>
-        /// <param name="bitPattern"></param>
-        /// <returns></returns>
-        public static int CountOnes(this ulong bitPattern)
-        {
-            var onesCount = 0;
-
-            while (bitPattern > 0)
-            {
-                bitPattern &= bitPattern - 1; // clear the least significant bit set
-                onesCount++;
-            }
-
-            return onesCount;
-        }
-
+        
         /// <summary>
         /// Returns the bit position of the first one bit in the given pattern. If the pattern is zero this
         /// returns -1.
@@ -258,9 +240,9 @@ namespace DataStructuresLib
         public static int SetBitsToZeroAt(this int bitPattern, IEnumerable<int> bitPositions)
         {
             var bitMask = bitPositions.Aggregate(
-                    0,
-                    (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
-                    );
+                0,
+                (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
+            );
 
             return bitPattern & ~bitMask;
         }
@@ -274,9 +256,9 @@ namespace DataStructuresLib
         public static int SetBitsToZeroAt(this int bitPattern, params int[] bitPositions)
         {
             var bitMask = bitPositions.Aggregate(
-                    0,
-                    (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
-                    );
+                0,
+                (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
+            );
 
             return bitPattern & ~bitMask;
         }
@@ -301,9 +283,9 @@ namespace DataStructuresLib
         public static int SetBitsToOneAt(this int bitPattern, IEnumerable<int> bitPositions)
         {
             var bitMask = bitPositions.Aggregate(
-                    0,
-                    (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
-                    );
+                0,
+                (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
+            );
 
             return bitPattern | bitMask;
         }
@@ -317,9 +299,9 @@ namespace DataStructuresLib
         public static int SetBitsToOneAt(this int bitPattern, params int[] bitPositions)
         {
             var bitMask = bitPositions.Aggregate(
-                    0,
-                    (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
-                    );
+                0,
+                (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
+            );
 
             return bitPattern | bitMask;
         }
@@ -333,10 +315,10 @@ namespace DataStructuresLib
         /// <returns></returns>
         public static int SetBitAt(this int bitPattern, int bitPosition, bool value)
         {
-            return 
+            return
                 value
-                ? bitPattern | (1 << bitPosition) 
-                : bitPattern & ~(1 << bitPosition);
+                    ? bitPattern | (1 << bitPosition)
+                    : bitPattern & ~(1 << bitPosition);
         }
 
         /// <summary>
@@ -358,11 +340,11 @@ namespace DataStructuresLib
         /// <returns></returns>
         public static int InvertBitsAt(this int bitPattern, IEnumerable<int> bitPositions)
         {
-            return 
+            return
                 bitPositions.Aggregate(
-                    bitPattern, 
+                    bitPattern,
                     (current, bitPosition) => current ^ (1 << bitPosition)
-                    );
+                );
         }
 
         /// <summary>
@@ -377,7 +359,7 @@ namespace DataStructuresLib
                 bitPositions.Aggregate(
                     bitPattern,
                     (current, bitPosition) => current ^ (1 << bitPosition)
-                    );
+                );
         }
 
 
@@ -400,14 +382,24 @@ namespace DataStructuresLib
         /// <returns></returns>
         public static int ReverseBits(this int bitPattern, int bitsCount)
         {
-            var resultPattern = 0;
-            for (var i = 0; i < bitsCount; i++)
+            Debug.Assert(
+                bitsCount > 0 &&
+                bitPattern < (1 << (bitsCount + 1))
+            );
+
+            var result = 0;
+
+            var i = bitsCount - 1;
+            while (bitPattern != 0)
             {
-                resultPattern = (resultPattern << 1) | (bitPattern & 1);
+                if ((bitPattern & 1) != 0)
+                    result |= (1 << i);
+
+                i--;
                 bitPattern >>= 1;
             }
 
-            return resultPattern;
+            return result;
         }
 
 
@@ -421,7 +413,7 @@ namespace DataStructuresLib
         {
             UInt32 t = (1u << bitsCount) - 1;
 
-            return (int)t;
+            return (int) t;
         }
 
         /// <summary>
@@ -481,9 +473,11 @@ namespace DataStructuresLib
         /// <returns></returns>
         public static int NextPermutation(this int bitPattern)
         {
-            var tempPattern = (bitPattern | (bitPattern - 1)) + 1;  
+            var tempPattern = (bitPattern | (bitPattern - 1)) + 1;
+            var tempPattern1 = tempPattern & -tempPattern;
+            var tempPattern2 = bitPattern & -bitPattern;
 
-            return tempPattern | ((((tempPattern & -tempPattern) / (bitPattern & -bitPattern)) >> 1) - 1);            
+            return tempPattern | (((tempPattern1 / tempPattern2) >> 1) - 1);
         }
 
         /// <summary>
@@ -688,31 +682,7 @@ namespace DataStructuresLib
 
             //return s.ToString();
         }
-
-        /// <summary>
-        /// Converts the given bit pattern into a string of '1' and '0' characters with the MSB at the 
-        /// first character and the LSB at the last character
-        /// </summary>
-        /// <param name="bitPattern"></param>
-        /// <param name="bitsCount"></param>
-        /// <returns></returns>
-        public static string PatternToString(this ulong bitPattern, int bitsCount)
-        {
-            var s = new StringBuilder(bitsCount);
-
-            for (var i = bitsCount - 1; i >= 0; i--)
-                s.Append((bitPattern & (1ul << i)) == 0 ? '0' : '1');
-
-            return s.ToString();
-        }
-
-        public static string PatternToStringPadRight(this ulong bitPattern, int bitsCount, int leftBitsCount, char paddingChar = '-')
-        {
-            var s = bitPattern.PatternToString(bitsCount);
-
-            return s.Substring(0, bitsCount - leftBitsCount).PadRight(bitsCount, paddingChar);
-        }
-
+        
         /// <summary>
         /// Picks elements of the given sequence based on the given pattern.
         /// For example new [] {"a", "b", "c", "d"}.PickUsingPattern(9) gives the sequence {"a", "d"}.
@@ -727,8 +697,8 @@ namespace DataStructuresLib
 
             return
                 items
-                .Take(MaxBitPosition)
-                .Where(item => ((1 << (bitPosition++)) & bitPattern) != 0);
+                    .Take(MaxBitPosition)
+                    .Where(item => ((1 << (bitPosition++)) & bitPattern) != 0);
         }
 
 
@@ -744,20 +714,20 @@ namespace DataStructuresLib
 
             return
                 boolsSeq
-                .Take(MaxBitPosition)
-                .Aggregate(
-                    0,
-                    (currentBitPattern, item) =>
-                    {
-                        var newPattern = 
-                            item 
-                            ? ((1 << bitPosistion) | currentBitPattern) 
-                            : currentBitPattern;
+                    .Take(MaxBitPosition)
+                    .Aggregate(
+                        0,
+                        (currentBitPattern, item) =>
+                        {
+                            var newPattern =
+                                item
+                                    ? ((1 << bitPosistion) | currentBitPattern)
+                                    : currentBitPattern;
 
-                        bitPosistion++;
+                            bitPosistion++;
 
-                        return newPattern;
-                    }
+                            return newPattern;
+                        }
                     );
         }
 
@@ -773,20 +743,20 @@ namespace DataStructuresLib
 
             return
                 boolsSeq
-                .Take(MaxBitPosition)
-                .Aggregate(
-                    0,
-                    (currentBitPattern, item) =>
-                    {
-                        var newPattern =
-                            item
-                            ? ((1 << bitPosistion) | currentBitPattern)
-                            : currentBitPattern;
+                    .Take(MaxBitPosition)
+                    .Aggregate(
+                        0,
+                        (currentBitPattern, item) =>
+                        {
+                            var newPattern =
+                                item
+                                    ? ((1 << bitPosistion) | currentBitPattern)
+                                    : currentBitPattern;
 
-                        bitPosistion++;
+                            bitPosistion++;
 
-                        return newPattern;
-                    }
+                            return newPattern;
+                        }
                     );
         }
 
@@ -797,11 +767,11 @@ namespace DataStructuresLib
         /// <returns></returns>
         public static int PositionsToPattern(this IEnumerable<int> bitPositions)
         {
-            return 
+            return
                 bitPositions.Aggregate(
-                    0, 
+                    0,
                     (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
-                    );
+                );
         }
 
         /// <summary>
@@ -815,7 +785,7 @@ namespace DataStructuresLib
                 bitPositions.Aggregate(
                     0,
                     (currentBitPattern, bitPosition) => currentBitPattern | (1 << bitPosition)
-                    );
+                );
         }
 
         /// <summary>
@@ -957,10 +927,9 @@ namespace DataStructuresLib
             var count = (1 << bitPositions.Length) - 1;
 
             for (var p = 1; p < count; p++)
-                yield return
-                    bitPositions
-                    .PickUsingPattern(p)
-                    .PositionsToPattern();
+                yield return PositionsToPattern(
+                    bitPositions.PickUsingPattern(p)
+                );
 
             //The original pattern is a sub-pattern of itself
             yield return bitPattern;
@@ -983,7 +952,9 @@ namespace DataStructuresLib
             var count = (1 << bitPositions.Length) - 1;
 
             for (var p = 1; p < count; p++)
-                yield return bitPositions.PickUsingPattern(p).PositionsToPattern();
+                yield return PositionsToPattern(
+                    bitPositions.PickUsingPattern(p)
+                );
         }
 
         /// <summary>
@@ -1120,12 +1091,13 @@ namespace DataStructuresLib
         /// <param name="bitPattern"></param>
         /// <param name="zeroElement"></param>
         /// <returns></returns>
-        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern, string zeroElement)
+        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern,
+            string zeroElement)
         {
             return
                 bitPattern == 0
-                ? zeroElement
-                : PickUsingPattern(stringsList, bitPattern).ConcatenateText();
+                    ? zeroElement
+                    : PickUsingPattern(stringsList, bitPattern).ConcatenateText();
         }
 
         /// <summary>
@@ -1135,10 +1107,11 @@ namespace DataStructuresLib
         /// <param name="bitPatternsList"></param>
         /// <param name="zeroElement"></param>
         /// <returns></returns>
-        public static IEnumerable<string> ConcatenateUsingPatterns(this IEnumerable<string> stringsList, IEnumerable<int> bitPatternsList, string zeroElement)
+        public static IEnumerable<string> ConcatenateUsingPatterns(this IEnumerable<string> stringsList,
+            IEnumerable<int> bitPatternsList, string zeroElement)
         {
             return bitPatternsList.Select(
-                bitPattern => 
+                bitPattern =>
                     stringsList.ConcatenateUsingPattern(bitPattern, zeroElement)
             );
         }
@@ -1151,12 +1124,13 @@ namespace DataStructuresLib
         /// <param name="separator"></param>
         /// <param name="zeroElement"></param>
         /// <returns></returns>
-        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern, string zeroElement, string separator)
+        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern,
+            string zeroElement, string separator)
         {
-            return 
-                bitPattern == 0 
-                ? zeroElement 
-                : PickUsingPattern(stringsList, bitPattern).ConcatenateText(separator);
+            return
+                bitPattern == 0
+                    ? zeroElement
+                    : PickUsingPattern(stringsList, bitPattern).ConcatenateText(separator);
         }
 
         /// <summary>
@@ -1169,12 +1143,13 @@ namespace DataStructuresLib
         /// <param name="finalPrefix"></param>
         /// <param name="finalSuffix"></param>
         /// <returns></returns>
-        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern, string zeroElement, string separator, string finalPrefix, string finalSuffix)
+        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern,
+            string zeroElement, string separator, string finalPrefix, string finalSuffix)
         {
             return
                 bitPattern == 0
-                ? zeroElement
-                : PickUsingPattern(stringsList, bitPattern).ConcatenateText(separator, finalPrefix, finalSuffix);
+                    ? zeroElement
+                    : PickUsingPattern(stringsList, bitPattern).ConcatenateText(separator, finalPrefix, finalSuffix);
         }
 
         /// <summary>
@@ -1189,94 +1164,15 @@ namespace DataStructuresLib
         /// <param name="itemPrefix"></param>
         /// <param name="itemSuffix"></param>
         /// <returns></returns>
-        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern, string zeroElement, string separator, string finalPrefix, string finalSuffix, string itemPrefix, string itemSuffix)
+        public static string ConcatenateUsingPattern(this IEnumerable<string> stringsList, int bitPattern,
+            string zeroElement, string separator, string finalPrefix, string finalSuffix, string itemPrefix,
+            string itemSuffix)
         {
             return
                 bitPattern == 0
-                ? zeroElement
-                : PickUsingPattern(stringsList, bitPattern).ConcatenateText(separator, finalPrefix, finalSuffix, itemPrefix, itemSuffix);
-        }
-
-        public static string ConcatenateText(this IEnumerable<string> items)
-        {
-            var s = new StringBuilder();
-
-            foreach (var item in items)
-                s.Append(item);
-
-            return s.ToString();
-        }
-
-        public static string ConcatenateText(this IEnumerable<string> items, string separator)
-        {
-            var s = new StringBuilder();
-
-            var itemSeparator = separator ?? String.Empty;
-
-            var flag = false;
-            foreach (var item in items)
-            {
-                if (flag)
-                    s.Append(itemSeparator);
-                else
-                    flag = true;
-
-                s.Append(item);
-            }
-
-            return s.ToString();
-        }
-
-        public static string ConcatenateText(this IEnumerable<string> items, string separator, string finalPrefix, string finalSuffix)
-        {
-            var s = new StringBuilder();
-
-            if (String.IsNullOrEmpty(finalPrefix) == false)
-                s.Append(finalPrefix);
-
-            var itemSeparator = separator ?? String.Empty;
-
-            var flag = false;
-            foreach (var item in items)
-            {
-                if (flag)
-                    s.Append(itemSeparator);
-                else
-                    flag = true;
-
-                s.Append(item);
-            }
-
-            if (String.IsNullOrEmpty(finalSuffix) == false)
-                s.Append(finalSuffix);
-
-            return s.ToString();
-        }
-
-        public static string ConcatenateText(this IEnumerable<string> items, string separator, string finalPrefix, string finalSuffix, string itemPrefix, string itemSuffix)
-        {
-            var s = new StringBuilder();
-
-            if (String.IsNullOrEmpty(finalPrefix) == false)
-                s.Append(finalPrefix);
-
-            var itemSeparator = separator ?? String.Empty;
-
-            var flag = false;
-            foreach (var item in items)
-            {
-                if (flag)
-                    s.Append(itemSeparator);
-                else
-                    flag = true;
-
-                s.Append(itemPrefix).Append(item).Append(itemSuffix);
-            }
-
-            if (String.IsNullOrEmpty(finalSuffix) == false)
-                s.Append(finalSuffix);
-
-            return s.ToString();
+                    ? zeroElement
+                    : PickUsingPattern(stringsList, bitPattern)
+                        .ConcatenateText(separator, finalPrefix, finalSuffix, itemPrefix, itemSuffix);
         }
     }
 }

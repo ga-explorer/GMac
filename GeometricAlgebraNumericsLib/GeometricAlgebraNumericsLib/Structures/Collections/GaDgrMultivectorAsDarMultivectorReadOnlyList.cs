@@ -16,13 +16,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                id.BasisBladeGradeIndex(out var grade, out var index);
+                ((ulong)id).BasisBladeGradeIndex(out var grade, out var index);
 
                 var scalarValues = KVectorsList[grade];
 
                 return scalarValues == null 
                     ? DefaultValue
-                    : scalarValues[index];
+                    : scalarValues[(int)index];
             }
         }
 
@@ -30,14 +30,14 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         internal GaDgrMultivectorAsDarMultivectorReadOnlyList(IReadOnlyList<IReadOnlyList<T>> kVectorsArray)
         {
             DefaultValue = default;
-            Count = (kVectorsArray.Count - 1).ToGaSpaceDimension();
+            Count = (int)(kVectorsArray.Count - 1).ToGaSpaceDimension();
             KVectorsList = kVectorsArray;
         }
 
         internal GaDgrMultivectorAsDarMultivectorReadOnlyList(T defaultValue, IReadOnlyList<IReadOnlyList<T>> kVectorsArray)
         {
             DefaultValue = defaultValue;
-            Count = (kVectorsArray.Count - 1).ToGaSpaceDimension();
+            Count = (int)(kVectorsArray.Count - 1).ToGaSpaceDimension();
             KVectorsList = kVectorsArray;
         }
 

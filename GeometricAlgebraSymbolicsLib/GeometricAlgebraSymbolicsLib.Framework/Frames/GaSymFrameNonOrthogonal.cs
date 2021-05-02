@@ -100,14 +100,14 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             throw new NotImplementedException();
         }
 
-        public override MathematicaScalar BasisVectorSignature(int basisVectorIndex)
+        public override MathematicaScalar BasisVectorSignature(ulong basisVectorIndex)
         {
-            return InnerProductMatrix[basisVectorIndex, basisVectorIndex];
+            return InnerProductMatrix[(int)basisVectorIndex, (int)basisVectorIndex];
         }
 
-        public override GaSymMultivector BasisBladeSignature(int id)
+        public override GaSymMultivector BasisBladeSignature(ulong id)
         {
-            var basisBlade = GaSymMultivector.CreateBasisBlade(GaSpaceDimension, id);
+            var basisBlade = GaSymMultivector.CreateBasisBlade(VSpaceDimension, id);
 
             var sig = Gp[basisBlade, basisBlade];
 

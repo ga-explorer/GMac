@@ -55,7 +55,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         public int TargetMultivectorTermsCount
             => _basisBladesMaps.Sum(p => p.Item3.StoredTermsCount);
 
-        public override IGaNumMultivector this[int id1, int id2]
+        public override IGaNumMultivector this[ulong id1, ulong id2]
         {
             get
             {
@@ -138,7 +138,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearHash SetBasisBladesMap(int id1, int id2, IGaNumMultivector value)
+        public GaNumMapBilinearHash SetBasisBladesMap(ulong id1, ulong id2, IGaNumMultivector value)
         {
             Debug.Assert(ReferenceEquals(value, null) || value.VSpaceDimension == TargetVSpaceDimension);
 
@@ -147,21 +147,21 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearHash RemoveBasisBladesMap(int id1, int id2)
+        public GaNumMapBilinearHash RemoveBasisBladesMap(ulong id1, ulong id2)
         {
             _basisBladesMaps.Remove(id1, id2);
             return this;
         }
 
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
             return _basisBladesMaps.Where(p => !p.Item3.IsNullOrEmpty());
         }
 
         public override string ToString()
         {
-            var tableText = new TableComposer(TargetGaSpaceDimension, TargetGaSpaceDimension);
+            var tableText = new TableComposer((int)TargetGaSpaceDimension, (int)TargetGaSpaceDimension);
             var basisBladeIds = GaFrameUtils.BasisBladeIDs(TargetVSpaceDimension).ToArray();
 
             foreach (var basisBladeId in basisBladeIds)

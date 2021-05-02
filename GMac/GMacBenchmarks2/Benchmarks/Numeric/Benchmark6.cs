@@ -15,7 +15,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
         private GaRandomGenerator _randGen;
         private GaNumFrame _frame;
         private GaNumSarMultivector _mv1;
-        private Dictionary<int, double> _mv2;
+        private Dictionary<ulong, double> _mv2;
 
         private GaNumSarMultivector _mv3;
 
@@ -38,9 +38,9 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
         public double[] ReadTermsFromDictionary()
         {
             return Enumerable
-                .Range(0, _frame.GaSpaceDimension)
+                .Range(0, (int)_frame.GaSpaceDimension)
                 .Select(id => 
-                    _mv2.TryGetValue(id, out var value) ? value : 0.0d
+                    _mv2.TryGetValue((ulong)id, out var value) ? value : 0.0d
                 ).ToArray();
         }
 
@@ -48,20 +48,20 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
         public double[] ReadTermsFromTree()
         {
             return Enumerable
-                .Range(0, _frame.GaSpaceDimension)
-                .Select(id => _mv1[id]).ToArray();
+                .Range(0, (int)_frame.GaSpaceDimension)
+                .Select(id => _mv1[(ulong)id]).ToArray();
         }
 
         [Benchmark]
         public void WriteTermsToDictionary()
         {
             _mv2.Clear();
-            foreach (var id in Enumerable.Range(0, _frame.GaSpaceDimension))
+            foreach (var id in Enumerable.Range(0, (int)_frame.GaSpaceDimension))
             {
-                if (_mv2.ContainsKey(id))
-                    _mv2[id] = 1;
+                if (_mv2.ContainsKey((ulong)id))
+                    _mv2[(ulong)id] = 1;
                 else
-                    _mv2.Add(id, 1);
+                    _mv2.Add((ulong)id, 1);
             }
         }
 

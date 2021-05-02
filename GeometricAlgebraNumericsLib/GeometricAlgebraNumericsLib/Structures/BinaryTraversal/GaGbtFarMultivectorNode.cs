@@ -25,7 +25,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             => Id | (1ul << (TreeDepth - 1));
 
         public double Value 
-            => TreeDepth == 0 ? Multivector[(int)Id] : 0;
+            => TreeDepth == 0 ? Multivector[Id] : 0;
 
         public IGaNumMultivector Multivector { get; }
 

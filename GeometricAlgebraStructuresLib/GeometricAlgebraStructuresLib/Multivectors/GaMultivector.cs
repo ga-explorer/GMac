@@ -10,18 +10,18 @@ namespace GeometricAlgebraStructuresLib.Multivectors
         public int VSpaceDimension 
             => Storage.VSpaceDimension;
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => Storage.GaSpaceDimension;
         
         public IGaMultivectorStorage<T> Storage { get; }
 
-        public T this[int id]
+        public T this[ulong id]
         {
             get => Storage.GetTermScalar(id);
             set => Storage.SetTermScalar(id, value);
         }
 
-        public T this[int grade, int index]
+        public T this[int grade, ulong index]
         {
             get => Storage.GetTermScalar(grade, index);
             set => Storage.SetTermScalar(grade, index, value);

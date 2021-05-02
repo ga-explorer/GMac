@@ -1,7 +1,7 @@
 ﻿using CodeComposerLib.Irony.Semantic.Type;
 using CodeComposerLib.Languages.GMacDSL;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using TextComposerLib.Text.Linear;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Target.GMacDSL
 {

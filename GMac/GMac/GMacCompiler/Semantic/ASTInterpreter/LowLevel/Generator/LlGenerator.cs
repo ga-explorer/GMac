@@ -186,7 +186,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
                 return GMacValueMultivector.Create(
                     mvType,
                     GaSymMultivector.CreateScalar(
-                        mvType.ParentFrame.GaSpaceDimension,
+                        mvType.ParentFrame.VSpaceDimension,
                         scalarValue
                         )
                     );

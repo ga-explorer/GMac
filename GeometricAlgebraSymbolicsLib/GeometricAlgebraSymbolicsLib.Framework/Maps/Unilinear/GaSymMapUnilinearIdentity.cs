@@ -25,8 +25,8 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         public override int TargetVSpaceDimension
             => _vSpaceDimension;
 
-        public override IGaSymMultivector this[int id1] 
-            => GaSymMultivector.CreateBasisBlade(TargetGaSpaceDimension, id1);
+        public override IGaSymMultivector this[ulong id1] 
+            => GaSymMultivector.CreateBasisBlade(TargetVSpaceDimension, id1);
 
 
         private GaSymMapUnilinearIdentity(int vSpaceDim)
@@ -37,7 +37,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         protected override void ComputeMappingMatrix()
         {
-            InternalMappingMatrix = new GaSymMatrixIdentity(DomainGaSpaceDimension);
+            InternalMappingMatrix = new GaSymMatrixIdentity((int)DomainGaSpaceDimension);
         }
 
 
@@ -57,9 +57,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
-            return GaSymMultivector.CreateBasisBladeTemp(TargetGaSpaceDimension, id1);
+            return GaSymMultivector.CreateBasisBladeTemp(TargetVSpaceDimension, id1);
         }
 
         public override IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1)
@@ -70,12 +70,12 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return mv1.ToTempMultivector();
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
-            return Enumerable.Range(0, TargetGaSpaceDimension)
-                .Select(id => new Tuple<int, IGaSymMultivector>(
-                    id,
-                    GaSymMultivector.CreateBasisBlade(TargetGaSpaceDimension, id)
+            return Enumerable.Range(0, (int)TargetGaSpaceDimension)
+                .Select(id => new Tuple<ulong, IGaSymMultivector>(
+                    (ulong) id,
+                    GaSymMultivector.CreateBasisBlade(TargetVSpaceDimension, (ulong) id)
                 ));
         }
     }

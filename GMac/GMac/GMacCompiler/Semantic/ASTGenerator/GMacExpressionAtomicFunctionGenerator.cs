@@ -272,7 +272,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                                 GMacExpressionGenerator.Translate(BasicExpressionGenerator, rhsNode)
                                 );
 
-                        operands.AddOperand(basisBladeId, rhsExpr);
+                        operands.AddOperand((ulong)basisBladeId, rhsExpr);
 
                         i = i + 1;
                     }
@@ -326,7 +326,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                                     GMacExpressionGenerator.Translate(BasicExpressionGenerator, rhsNode)
                                     );
 
-                            operands.AddOperand(basisBladeId, rhsExpr);
+                            operands.AddOperand((ulong)basisBladeId, rhsExpr);
                         }
                         else
                             return CompilationLog.RaiseGeneratorError<ILanguageExpression>("Expecting a list of basis blade assignments as input to the multivector construction", node);

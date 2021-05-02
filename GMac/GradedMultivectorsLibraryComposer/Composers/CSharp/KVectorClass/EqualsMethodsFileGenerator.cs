@@ -14,13 +14,13 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
         }
 
 
-        private void GenerateEqualsFunction(int kvSpaceDim)
+        private void GenerateEqualsFunction(ulong kvSpaceDim)
         {
             var caseTemplate = Templates["equals_case"];
 
             var casesText = new ListTextComposer(Environment.NewLine);
 
-            for (var i = 0; i < kvSpaceDim; i++)
+            for (var i = 0UL; i < kvSpaceDim; i++)
                 casesText.Add(caseTemplate, "num", i);
 
             TextComposer.AppendAtNewLine(

@@ -24,15 +24,15 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        private readonly Dictionary<int, GaNumSarMultivector> _rowMultivectors
-            = new Dictionary<int, GaNumSarMultivector>();
+        private readonly Dictionary<ulong, GaNumSarMultivector> _rowMultivectors
+            = new Dictionary<ulong, GaNumSarMultivector>();
 
 
         public override int TargetVSpaceDimension { get; }
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
         {
             get
             {
@@ -109,7 +109,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearSparseRows SetRow(int rowId, GaNumSarMultivector rowMv)
+        public GaNumMapUnilinearSparseRows SetRow(ulong rowId, GaNumSarMultivector rowMv)
         {
             if (rowMv.IsNullOrEmpty())
             {
@@ -151,7 +151,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         //    return this;
         //}
 
-        public GaNumMapUnilinearSparseRows RemoveRow(int id)
+        public GaNumMapUnilinearSparseRows RemoveRow(ulong id)
         {
             _rowMultivectors.Remove(id);
 
@@ -159,9 +159,9 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var mv = this[id];
 

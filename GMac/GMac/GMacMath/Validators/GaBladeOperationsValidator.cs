@@ -18,8 +18,8 @@ namespace GMac.GMacMath.Validators
             ReportComposer.AppendHeader("Grades: <" + grade1 + ", " + grade2 + ">", 2);
 
             //Initialize blades with random integer coefficients
-            var mv1 = RandomGenerator.GetSymBlade(SymbolicFrame.GaSpaceDimension, grade1);
-            var mv2 = RandomGenerator.GetSymBlade(SymbolicFrame.GaSpaceDimension, grade2);
+            var mv1 = RandomGenerator.GetSymBlade(SymbolicFrame.VSpaceDimension, grade1);
+            var mv2 = RandomGenerator.GetSymBlade(SymbolicFrame.VSpaceDimension, grade2);
 
             //Compute their geometric product
             var mvGp = SymbolicFrame.Gp[mv1, mv2];

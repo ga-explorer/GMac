@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using CodeComposerLib.LaTeX;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -13,7 +14,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 t.TermId1, 
                 t.TermId2, 
-                Mfs.Minus[t.Value].GaPoTSymSimplify()
+                Mfs.Minus[t.Value].Evaluate()
             );
         }
 
@@ -25,7 +26,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 t1.TermId1, 
                 t1.TermId2, 
-                Mfs.Plus[t1.Value, t2.Value].GaPoTSymSimplify()
+                Mfs.Plus[t1.Value, t2.Value].Evaluate()
             );
         }
 
@@ -37,7 +38,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 t1.TermId1, 
                 t1.TermId2, 
-                Mfs.Subtract[t1.Value, t2.Value].GaPoTSymSimplify()
+                Mfs.Subtract[t1.Value, t2.Value].Evaluate()
             );
         }
 
@@ -46,7 +47,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 t.TermId1, 
                 t.TermId2, 
-                Mfs.Times[t.Value, s].GaPoTSymSimplify()
+                Mfs.Times[t.Value, s].Evaluate()
             );
         }
 
@@ -55,7 +56,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 t.TermId1, 
                 t.TermId2, 
-                Mfs.Times[s, t.Value].GaPoTSymSimplify()
+                Mfs.Times[s, t.Value].Evaluate()
             );
         }
 
@@ -64,7 +65,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 t.TermId1, 
                 t.TermId2, 
-                Mfs.Divide[t.Value, s].GaPoTSymSimplify()
+                Mfs.Divide[t.Value, s].Evaluate()
             );
         }
 
@@ -112,14 +113,19 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             {
                 TermId1 = id2;
                 TermId2 = id1;
-                Value = Mfs.Minus[value].GaPoTSymSimplify();
+                Value = Mfs.Minus[value].Evaluate();
             }
         }
 
 
+        public Expr Norm()
+        {
+            return Mfs.Abs[Value].Evaluate();
+        }
+
         public Expr Norm2()
         {
-            return Mfs.Times[Value, Value].GaPoTSymSimplify();
+            return Mfs.Times[Value, Value].Evaluate();
         }
 
         public GaPoTSymBiversorTerm Reverse()
@@ -129,7 +135,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 : new GaPoTSymBiversorTerm(
                     TermId1, 
                     TermId2, 
-                    Mfs.Minus[Value].GaPoTSymSimplify()
+                    Mfs.Minus[Value].Evaluate()
                 );
         }
 
@@ -142,7 +148,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymBiversorTerm(
                 TermId1, 
                 TermId2, 
-                value.GaPoTSymSimplify()
+                value.Evaluate()
             );
         }
 
@@ -151,7 +157,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             if (TermId1 == TermId2)
                 return new GaPoTSymMultivectorTerm(0, Value);
 
-            var idsPattern = (1 << (TermId1 - 1)) + (1 << (TermId2 - 1));
+            var idsPattern = (1UL << (TermId1 - 1)) + (1UL << (TermId2 - 1));
 
             return new GaPoTSymMultivectorTerm(
                 idsPattern,
@@ -174,7 +180,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             // if (Value.IsZero())
             //     return "0";
 
-            var valueText = Value.GetLaTeX().LaTeXMathAddParentheses();
+            var valueText = Value.GetLaTeX().LaTeXMathRoundParentheses();
             var basisText = $"{TermId1},{TermId2}".GetLaTeXBasisName();
 
             return IsScalar

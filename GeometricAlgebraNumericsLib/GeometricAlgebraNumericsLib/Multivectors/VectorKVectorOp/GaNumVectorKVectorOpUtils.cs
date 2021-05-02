@@ -52,10 +52,10 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
             ];
 
             var maxId = vector.GaSpaceDimension - 1;
-            for (var index2 = 0; index2 < kVector.StoredTermsCount; index2++)
+            for (var index2 = 0UL; index2 < (ulong)kVector.StoredTermsCount; index2++)
             {
                 var id2 = GaFrameUtils.BasisBladeId(kVector.Grade, index2);
-                var value2 = kVector.ScalarValuesArray[index2];
+                var value2 = kVector.ScalarValuesArray[(int)index2];
 
                 if (value2 == 0)
                     continue;
@@ -63,11 +63,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
                 var indexList = (id2 ^ maxId).PatternToPositions();
                 foreach (var index1 in indexList)
                 {
-                    var id1 = 1 << index1;
+                    var id1 = 1UL << index1;
                     var value1 = vector.ScalarValuesArray[index1];
 
                     var index = (id1 | id2).BasisBladeIndex();
-                    var value = GaFrameUtils.IsNegativeVectorEGp(index1, id2)
+                    var value = GaFrameUtils.IsNegativeVectorEGp((ulong)index1, id2)
                         ? (-value1 * value2)
                         : (value1 * value2);
 

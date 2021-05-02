@@ -63,10 +63,10 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             => GaFrameUtils.IsNonZeroEHip(Id1, Id2);
 
         public bool IsNonZeroEAcp
-            => GaFrameUtils.IsNonZeroEAcp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroEAcp(Id1, Id2);
 
         public bool IsNonZeroECp
-            => GaFrameUtils.IsNonZeroECp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroECp(Id1, Id2);
 
 
         public ulong ChildIdXor00
@@ -229,10 +229,10 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             => GaFrameUtils.IsNonZeroEHip(Id1, Id2);
 
         public bool IsNonZeroEAcp
-            => GaFrameUtils.IsNonZeroEAcp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroEAcp(Id1, Id2);
 
         public bool IsNonZeroECp
-            => GaFrameUtils.IsNonZeroECp((int)Id1, (int)Id2);
+            => GaFrameUtils.IsNonZeroECp(Id1, Id2);
 
 
         public ulong ChildIdXor00

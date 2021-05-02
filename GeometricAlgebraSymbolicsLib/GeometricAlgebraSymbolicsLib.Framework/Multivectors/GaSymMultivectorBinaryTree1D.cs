@@ -10,32 +10,32 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public int DomainVSpaceDimension { get; }
 
-        public int DomainGaSpaceDimension
+        public ulong DomainGaSpaceDimension
             => DomainVSpaceDimension.ToGaSpaceDimension();
 
         public int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
-        public IGaSymMultivector this[int id1]
+        public IGaSymMultivector this[ulong id1]
         {
             get
             {
-                RootNode.TryGetLeafValue(DomainVSpaceDimension, (ulong) id1, out var mv);
+                RootNode.TryGetLeafValue(DomainVSpaceDimension, id1, out var mv);
 
                 return mv;
             }
             set =>
                 RootNode.SetLeafValue(
                     DomainVSpaceDimension, 
-                    (ulong)id1, 
-                    value ?? GaSymMultivector.CreateZero(TargetGaSpaceDimension)
+                    id1, 
+                    value ?? GaSymMultivector.CreateZero(TargetVSpaceDimension)
                 );
         }
 
-        public MathematicaScalar this[int id1, int id2] 
-            => RootNode.TryGetLeafValue(DomainVSpaceDimension, (ulong) id1, out var mv)
+        public MathematicaScalar this[ulong id1, ulong id2] 
+            => RootNode.TryGetLeafValue(DomainVSpaceDimension, id1, out var mv)
                 ? (mv[id2]?.ToMathematicaScalar() ?? GaSymbolicsUtils.Constants.Zero)
                 : GaSymbolicsUtils.Constants.Zero;
 

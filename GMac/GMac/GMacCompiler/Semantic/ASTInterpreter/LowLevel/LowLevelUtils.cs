@@ -7,9 +7,9 @@ using CodeComposerLib.Irony.Semantic.Type;
 using CodeComposerLib.SyntaxTree.Expressions;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacCompiler.Semantic.AST.Extensions;
 using GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator;
-using Wolfram.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel
 {

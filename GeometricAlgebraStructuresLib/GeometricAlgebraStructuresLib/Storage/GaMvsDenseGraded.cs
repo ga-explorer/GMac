@@ -42,7 +42,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return scalarsArray;
         }
 
-        public override T GetTermScalar(int grade, int index)
+        public override T GetTermScalar(int grade, ulong index)
         {
             var scalarValues = GradedScalarsArrays[grade];
             
@@ -52,7 +52,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return scalarValues[index];
         }
 
-        public override bool TryGetTermScalar(int grade, int index, out T value)
+        public override bool TryGetTermScalar(int grade, ulong index, out T value)
         {
             var scalarValues = GradedScalarsArrays[grade];
 
@@ -66,7 +66,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return true;
         }
 
-        public override IGaMultivectorStorage<T> SetTermScalar(int grade, int index, T value)
+        public override IGaMultivectorStorage<T> SetTermScalar(int grade, ulong index, T value)
         {
             var scalarValues = GetKVectorScalarsArray(grade);
                 
@@ -75,7 +75,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> AddTerm(int grade, int index, T value)
+        public override IGaMultivectorStorage<T> AddTerm(int grade, ulong index, T value)
         {
             var scalarValues = GetKVectorScalarsArray(grade);
             
@@ -84,7 +84,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTerm(int grade, int index)
+        public override IGaMultivectorStorage<T> RemoveTerm(int grade, ulong index)
         {
             var scalarValues = GradedScalarsArrays[grade];
 
@@ -103,7 +103,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTermIfZero(int grade, int index, bool nearZeroFlag = false)
+        public override IGaMultivectorStorage<T> RemoveTermIfZero(int grade, ulong index, bool nearZeroFlag = false)
         {
             var scalarValuesArray = GradedScalarsArrays[grade];
             
@@ -189,14 +189,14 @@ namespace GeometricAlgebraStructuresLib.Storage
                     .All(s => ScalarDomain.IsZero(s));
         }
 
-        public override bool ContainsStoredTerm(int grade, int index)
+        public override bool ContainsStoredTerm(int grade, ulong index)
         {
             var scalarValues = GradedScalarsArrays[grade];
 
             if (scalarValues.IsNullOrEmpty())
                 return false;
 
-            return index >= 0 && index < scalarValues.Length;
+            return index < (ulong)scalarValues.Length;
         }
 
         public override bool ContainsStoredTermOfGrade(int grade)
@@ -204,11 +204,11 @@ namespace GeometricAlgebraStructuresLib.Storage
             return !GradedScalarsArrays[grade].IsNullOrEmpty();
         }
 
-        public override bool CanStoreTerm(int grade, int index)
+        public override bool CanStoreTerm(int grade, ulong index)
         {
             return 
                 grade >= 0 && grade <= VSpaceDimension &&
-                index >= 0 && index < GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+                index < GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
         }
 
         public override bool CanStoreSomeTermsOfGrade(int grade)
@@ -221,7 +221,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return grade >= 0 && grade <= VSpaceDimension;
         }
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             var gradesList = GetStoredGrades();
 
@@ -229,12 +229,12 @@ namespace GeometricAlgebraStructuresLib.Storage
             {
                 var count = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                for (var index = 0; index < count; index++)
+                for (var index = 0UL; index < count; index++)
                     yield return GaFrameUtils.BasisBladeId(grade, index);
             }
         }
 
-        public override IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices()
+        public override IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices()
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -243,12 +243,12 @@ namespace GeometricAlgebraStructuresLib.Storage
                 if (scalarValues.IsNullOrEmpty())
                     continue;
                 
-                for (var index = 0; index < scalarValues.Length; index++)
-                    yield return new Tuple<int, int>(grade, index);
+                for (var index = 0UL; index < (ulong)scalarValues.Length; index++)
+                    yield return new Tuple<int, ulong>(grade, index);
             }
         }
 
-        public override IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<T, bool> selectionFilter)
+        public override IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -257,13 +257,13 @@ namespace GeometricAlgebraStructuresLib.Storage
                 if (scalarValues.IsNullOrEmpty())
                     continue;
                 
-                for (var index = 0; index < scalarValues.Length; index++)
+                for (var index = 0UL; index < (ulong)scalarValues.Length; index++)
                     if (selectionFilter(scalarValues[index]))
-                        yield return new Tuple<int, int>(grade, index);
+                        yield return new Tuple<int, ulong>(grade, index);
             }
         }
 
-        public override IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, bool> selectionFilter)
+        public override IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<ulong, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -272,17 +272,17 @@ namespace GeometricAlgebraStructuresLib.Storage
                 if (scalarValues.IsNullOrEmpty())
                     continue;
                 
-                for (var index = 0; index < scalarValues.Length; index++)
+                for (var index = 0UL; index < (ulong)scalarValues.Length; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     
                     if (selectionFilter(id))
-                        yield return new Tuple<int, int>(grade, index);
+                        yield return new Tuple<int, ulong>(grade, index);
                 }
             }
         }
 
-        public override IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<ulong, T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -291,17 +291,18 @@ namespace GeometricAlgebraStructuresLib.Storage
                 if (scalarValues.IsNullOrEmpty())
                     continue;
                 
-                for (var index = 0; index < scalarValues.Length; index++)
+                for (var index = 0UL; index < (ulong)scalarValues.Length; index++)
                 {
                     var id = GaFrameUtils.BasisBladeId(grade, index);
                     
                     if (selectionFilter(id, scalarValues[index]))
-                        yield return new Tuple<int, int>(grade, index);
+                        yield return new Tuple<int, ulong>(grade, index);
                 }
             }
         }
 
-        public override IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(
+            Func<int, ulong, T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -310,19 +311,19 @@ namespace GeometricAlgebraStructuresLib.Storage
                 if (scalarValues.IsNullOrEmpty())
                     continue;
                 
-                for (var index = 0; index < scalarValues.Length; index++)
+                for (var index = 0UL; index < (ulong)scalarValues.Length; index++)
                     if (selectionFilter(grade, index, scalarValues[index]))
-                        yield return new Tuple<int, int>(grade, index);
+                        yield return new Tuple<int, ulong>(grade, index);
             }
         }
 
-        public override IEnumerable<int> GetStoredTermIndicesOfGrade(int grade)
+        public override IEnumerable<ulong> GetStoredTermIndicesOfGrade(int grade)
         {
             var scalarValues = GradedScalarsArrays[grade];
 
             return scalarValues.IsNullOrEmpty()
-                ? Enumerable.Empty<int>()
-                : Enumerable.Range(0, scalarValues.Length);
+                ? Enumerable.Empty<ulong>()
+                : Enumerable.Range(0, scalarValues.Length).Select(id => (ulong)id);
         }
 
         public override IEnumerable<T> GetStoredTermScalars()
@@ -332,7 +333,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .SelectMany(a => a);
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -343,7 +344,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 
                 for (var index = 0; index < scalarValues.Length; index++)
                 {
-                    var id = GaFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, (ulong)index);
                     
                     if (selectionFilter(id))
                         yield return scalarValues[index];
@@ -351,7 +352,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -362,7 +363,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 
                 for (var index = 0; index < scalarValues.Length; index++)
                 {
-                    var id = GaFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, (ulong)index);
                     var scalar = scalarValues[index];
                     
                     if (selectionFilter(id, scalar))
@@ -371,7 +372,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             }
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<int, ulong, T, bool> selectionFilter)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -384,7 +385,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 {
                     var scalar = scalarValues[index];
                     
-                    if (selectionFilter(grade, index, scalar))
+                    if (selectionFilter(grade, (ulong)index, scalar))
                         yield return scalar;
                 }
             }
@@ -409,7 +410,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     continue;
                 
                 for (var index = 0; index < scalarValues.Length; index++)
-                    yield return new GaGradedTerm<T>(grade, index, scalarValues[index]);
+                    yield return new GaGradedTerm<T>(grade, (ulong)index, scalarValues[index]);
             }
         }
 
@@ -421,7 +422,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 yield break;
                 
             for (var index = 0; index < scalarValues.Length; index++)
-                yield return new GaGradedTerm<T>(grade, index, scalarValues[index]);
+                yield return new GaGradedTerm<T>(grade, (ulong)index, scalarValues[index]);
         }
 
         public override int GetStoredZeroTermsCount(bool nearZeroFlag = false)
@@ -437,7 +438,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     .Count(s => ScalarDomain.IsZero(s));
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
         {
             var scalarValues = GradedScalarsArrays[grade];
             
@@ -448,17 +449,17 @@ namespace GeometricAlgebraStructuresLib.Storage
             {
                 for (var index = 0; index < scalarValues.Length; index++)
                     if (ScalarDomain.IsNearZero(scalarValues[index]))
-                        yield return GaFrameUtils.BasisBladeId(grade, index);
+                        yield return GaFrameUtils.BasisBladeId(grade, (ulong)index);
             }
             else
             {
                 for (var index = 0; index < scalarValues.Length; index++)
                     if (ScalarDomain.IsZero(scalarValues[index]))
-                        yield return GaFrameUtils.BasisBladeId(grade, index);
+                        yield return GaFrameUtils.BasisBladeId(grade, (ulong)index);
             }
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
         {
             var scalarValues = GradedScalarsArrays[grade];
             
@@ -469,13 +470,13 @@ namespace GeometricAlgebraStructuresLib.Storage
             {
                 for (var index = 0; index < scalarValues.Length; index++)
                     if (ScalarDomain.IsNearZero(scalarValues[index]))
-                        yield return index;
+                        yield return (ulong)index;
             }
             else
             {
                 for (var index = 0; index < scalarValues.Length; index++)
                     if (ScalarDomain.IsZero(scalarValues[index]))
-                        yield return index;
+                        yield return (ulong)index;
             }
         }
 
@@ -511,7 +512,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     var scalar = scalarValues[index];
                     
                     if (ScalarDomain.IsNearZero(scalar))
-                        yield return new GaGradedTerm<T>(grade, index, scalar);
+                        yield return new GaGradedTerm<T>(grade, (ulong)index, scalar);
                 }
             }
             else
@@ -521,7 +522,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     var scalar = scalarValues[index];
                     
                     if (ScalarDomain.IsZero(scalar))
-                        yield return new GaGradedTerm<T>(grade, index, scalar);
+                        yield return new GaGradedTerm<T>(grade, (ulong)index, scalar);
                 }
             }
         }
@@ -539,7 +540,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             );
         }
 
-        public override GaMvsTerm<T> GetTermStorage(int grade, int index, bool getCopy = false)
+        public override GaMvsTerm<T> GetTermStorage(int grade, ulong index, bool getCopy = false)
         {
             var scalarValues = GradedScalarsArrays[grade];
 
@@ -594,7 +595,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 var scalar = scalarValues[index];
                     
                 if (!ScalarDomain.IsZero(scalar))
-                    storage.ScalarsDictionary.Add(index, scalar);
+                    storage.ScalarsDictionary.Add((ulong)index, scalar);
             }
 
             return storage;
@@ -644,7 +645,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
                 for (var index = 0; index < scalarValues.Length; index++)
                 {
-                    var id = GaFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, (ulong)index);
 
                     storage.ScalarsArray[id] = scalarValues[index];
                 }
@@ -666,7 +667,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
                 for (var index = 0; index < scalarValues.Length; index++)
                 {
-                    var id = GaFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, (ulong)index);
 
                     storage.ScalarsDictionary.Add(id, scalarValues[index]);
                 }
@@ -718,7 +719,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     var scalar = scalarValues[index];
                     
                     if (ScalarDomain.IsNotZero(scalar))
-                        targetScalarValuesDictionary.Add(index, scalar);
+                        targetScalarValuesDictionary.Add((ulong)index, scalar);
                 }
             }
             
@@ -835,7 +836,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<ulong, T, T> mappingFunc)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -846,7 +847,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
                 for (var index = 0; index < scalarValues.Length; index++)
                 {
-                    var id = GaFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, (ulong)index);
                     
                     scalarValues[index] = mappingFunc(id, scalarValues[index]);
                 }
@@ -855,7 +856,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, ulong, T, T> mappingFunc)
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -865,7 +866,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     continue;
 
                 for (var index = 0; index < scalarValues.Length; index++)
-                    scalarValues[index] = mappingFunc(grade, index, scalarValues[index]);
+                    scalarValues[index] = mappingFunc(grade, (ulong)index, scalarValues[index]);
             }
 
             return this;
@@ -878,7 +879,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     yield return i;
         }
 
-        public override IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public override IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -888,7 +889,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     continue;
 
                 for (var index = 0; index < scalarValues.Length; index++)
-                    yield return new KeyValuePair<int, T>(index, scalarValues[index]);
+                    yield return new KeyValuePair<ulong, T>((ulong)index, scalarValues[index]);
             }
         }
     }

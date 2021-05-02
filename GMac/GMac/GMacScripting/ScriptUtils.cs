@@ -3,8 +3,8 @@ using CodeComposerLib.Irony.Semantic.Expression.Value;
 using CodeComposerLib.SyntaxTree.Expressions;
 using DataStructuresLib.SimpleTree;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacCompiler.Semantic.AST;
-using Wolfram.NETLink;
 
 namespace GMac.GMacScripting
 {
@@ -21,7 +21,7 @@ namespace GMac.GMacScripting
             var tree = new SimpleTreeBranchDictionaryByIndex<Expr>();
 
             foreach (var pair in value.SymbolicMultivector.NonZeroExprTerms)
-                tree.Add(pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value);
+                tree.Add((int)pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value);
 
             return tree;
         }
@@ -74,7 +74,7 @@ namespace GMac.GMacScripting
             var tree = new SimpleTreeBranchDictionaryByIndex<string>();
 
             foreach (var pair in value.SymbolicMultivector.NonZeroExprTerms)
-                tree.Add(pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value.ToString());
+                tree.Add((int)pair.Key, "#E" + pair.Key + "#", scalarTypeName, pair.Value.ToString());
 
             return tree;
         }

@@ -38,8 +38,8 @@ namespace GMacBenchmarks2.Samples.Computations.Symbolic
             //var randGen = new GMacRandomGenerator(10);
             //var mvA = randGen.GetSymbolicMultivector(Frame.GaSpaceDimension, "A");
             //var mvB = randGen.GetSymbolicMultivector(Frame.GaSpaceDimension, "B");
-            var mvA = GaSymMultivector.CreateSymbolic(Frame.GaSpaceDimension, "A");
-            var mvB = GaSymMultivector.CreateSymbolic(Frame.GaSpaceDimension, "B");
+            var mvA = GaSymMultivector.CreateSymbolic(Frame.VSpaceDimension, "A");
+            var mvB = GaSymMultivector.CreateSymbolic(Frame.VSpaceDimension, "B");
 
             LogComposer
                 .AppendAtNewLine("A = ")

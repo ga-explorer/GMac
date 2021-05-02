@@ -88,7 +88,7 @@ namespace GeometricAlgebraNumericsLib.Products
 
         public IGaNumMapBilinear BaseProductMap { get; }
 
-        public override IGaNumMultivector this[int id1, int id2]
+        public override IGaNumMultivector this[ulong id1, ulong id2]
         {
             get
             {
@@ -136,10 +136,10 @@ namespace GeometricAlgebraNumericsLib.Products
         }
 
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-            for (var id2 = 0; id2 < DomainGaSpaceDimension2; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+            for (var id2 = 0UL; id2 < DomainGaSpaceDimension2; id2++)
             {
                 var mv = this[id1, id2];
 
@@ -148,17 +148,17 @@ namespace GeometricAlgebraNumericsLib.Products
             }
         }
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisVectorsMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisVectorsMaps()
         {
             for (var index1 = 0; index1 < DomainVSpaceDimension; index1++)
             for (var index2 = 0; index2 < DomainVSpaceDimension2; index2++)
             {
-                var id1 = GaFrameUtils.BasisBladeId(1, index1);
-                var id2 = GaFrameUtils.BasisBladeId(1, index2);
+                var id1 = GaFrameUtils.BasisBladeId(1, (ulong)index1);
+                var id2 = GaFrameUtils.BasisBladeId(1, (ulong)index2);
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrEmpty())
-                    yield return new Tuple<int, int, IGaNumMultivector>(index1, index2, mv);
+                    yield return new Tuple<ulong, ulong, IGaNumMultivector>((ulong)index1, (ulong)index2, mv);
             }
         }
     }

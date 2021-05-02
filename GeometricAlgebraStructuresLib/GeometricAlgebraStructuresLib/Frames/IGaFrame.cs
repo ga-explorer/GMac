@@ -4,9 +4,9 @@
     {
         int VSpaceDimension { get; }
 
-        int GaSpaceDimension { get; }
+        ulong GaSpaceDimension { get; }
 
-        int MaxBasisBladeId { get; }
+        ulong MaxBasisBladeId { get; }
 
         int GradesCount { get; }
     }

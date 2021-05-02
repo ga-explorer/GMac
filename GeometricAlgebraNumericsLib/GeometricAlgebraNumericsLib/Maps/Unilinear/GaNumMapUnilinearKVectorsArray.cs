@@ -36,9 +36,6 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             var targetVSpaceDim =
                 linearVectorMapsMatrix.RowCount;
 
-            var targetGaSpaceDim =
-                targetVSpaceDim.ToGaSpaceDimension();
-
             var omMap = Create(
                 linearVectorMapsMatrix.ColumnCount,
                 linearVectorMapsMatrix.RowCount
@@ -47,10 +44,10 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             //Add unit scalar as the image of the 0-basis blade
             omMap.SetBasisBladeMap(
                 0,
-                GaNumDarKVector.CreateScalar(targetGaSpaceDim, 1)
+                GaNumDarKVector.CreateScalar(targetVSpaceDim, 1)
             );
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaNumDarKVector basisBladeImage;
 
@@ -91,7 +88,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
             => _basisBladeMaps[id1]
                ?? GaNumDarKVector.CreateScalar(TargetVSpaceDimension, 0);
 
@@ -161,18 +158,18 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public GaNumMapUnilinearKVectorsArray ClearBasisBladesMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
                 _basisBladeMaps[id] = null;
 
             return this;
         }
 
-        public GaNumDarKVector GetBasisBladeMap(int basisBladeId)
+        public GaNumDarKVector GetBasisBladeMap(ulong basisBladeId)
         {
             return _basisBladeMaps[basisBladeId];
         }
 
-        public GaNumMapUnilinearKVectorsArray SetBasisBladeMap(int basisBladeId, GaNumDarKVector targetMv)
+        public GaNumMapUnilinearKVectorsArray SetBasisBladeMap(ulong basisBladeId, GaNumDarKVector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -181,7 +178,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearKVectorsArray RemoveBasisBladesMap(int id1)
+        public GaNumMapUnilinearKVectorsArray RemoveBasisBladesMap(ulong id1)
         {
             _basisBladeMaps[id1] = null;
 
@@ -189,14 +186,14 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var basisBladeMv = _basisBladeMaps[id];
 
                 if (!ReferenceEquals(basisBladeMv, null))
-                    yield return new Tuple<int, IGaNumMultivector>(id, basisBladeMv);
+                    yield return new Tuple<ulong, IGaNumMultivector>(id, basisBladeMv);
             }
         }
     }

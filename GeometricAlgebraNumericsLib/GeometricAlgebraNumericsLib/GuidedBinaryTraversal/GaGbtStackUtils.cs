@@ -43,8 +43,8 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal
                 if (stack.TosIsLeaf)
                 {
                     yield return GaNumTerm.Create(
-                        stack.Multivector.GaSpaceDimension,
-                        (int)stack.TosId,
+                        stack.Multivector.VSpaceDimension,
+                        stack.TosId,
                         stack.TosValue
                     );
 

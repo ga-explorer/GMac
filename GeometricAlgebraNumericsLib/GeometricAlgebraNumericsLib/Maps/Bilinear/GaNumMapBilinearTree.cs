@@ -58,14 +58,14 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         //        .SelectMany(v => v.RootNode.LeafValues.Select(t => t.NonZeroTerms.Count()))
         //        .Sum();
 
-        public override IGaNumMultivector this[int id1, int id2]
+        public override IGaNumMultivector this[ulong id1, ulong id2]
         {
             get
             {
-                BasisBladesMapTree.TryGetLeafValue((ulong)id1, (ulong)id2, out var mv);
+                BasisBladesMapTree.TryGetLeafValue(id1, id2, out var mv);
 
                 return mv
-                       ?? GaNumTerm.CreateZero(TargetGaSpaceDimension);
+                       ?? GaNumTerm.CreateZero(TargetVSpaceDimension);
             }
         }
 
@@ -168,8 +168,8 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
                     if (mapNode.IsLeafNode)
                     {
                         var scalar = 
-                            mv1[(int)mvNodeInfo.Id1] * 
-                            mv2[(int)mvNodeInfo.Id2];
+                            mv1[mvNodeInfo.Id1] * 
+                            mv2[mvNodeInfo.Id2];
 
                         tempMv.AddTerms(scalar, mapNode.Value);
 
@@ -248,7 +248,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             return this;
         }
 
-        public GaNumMapBilinearTree SetBasisBladesMap(int id1, int id2, IGaNumMultivector targetMv)
+        public GaNumMapBilinearTree SetBasisBladesMap(ulong id1, ulong id2, IGaNumMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -257,20 +257,20 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
             if (ReferenceEquals(targetMv, null))
                 return this;
 
-            BasisBladesMapTree.SetLeafValue((ulong)id1, (ulong)id2, targetMv);
+            BasisBladesMapTree.SetLeafValue(id1, id2, targetMv);
 
             return this;
         }
 
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
             return BasisBladesMapTree
                 .LeafValuePairs
                 .Where(pair => !pair.Item3.IsNullOrEmpty())
-                .Select(pair => new Tuple<int, int, IGaNumMultivector>(
-                    (int)pair.Item1,
-                    (int)pair.Item2,
+                .Select(pair => new Tuple<ulong, ulong, IGaNumMultivector>(
+                    pair.Item1,
+                    pair.Item2,
                     pair.Item3
                 ));
         }

@@ -40,7 +40,7 @@ namespace GMacBenchmarks2.Samples.Computations.Symbolic
             
 
             for (var i = 0; i < 10; i++)
-                mvList.Add(randGen.GetSymMultivector(Frame.GaSpaceDimension));
+                mvList.Add(randGen.GetSymMultivector(Frame.VSpaceDimension));
 
             //var mvA = GaMultivector.CreateSymbolic(Frame.GaSpaceDimension, "A");
             //var mvB = GaMultivector.CreateSymbolic(Frame.GaSpaceDimension, "B");

@@ -17,11 +17,11 @@ namespace GeometricAlgebraNumericsLib.Metrics
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
         public int Count
-            => VSpaceDimension.ToGaSpaceDimension();
+            => (int)VSpaceDimension.ToGaSpaceDimension();
 
         public IReadOnlyList<double> BasisVectorsSignatures { get; }
 
@@ -29,7 +29,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         {
             get
             {
-                if (index < 0 || index >= GaSpaceDimension)
+                if (index < 0 || index >= (int)GaSpaceDimension)
                     throw new IndexOutOfRangeException();
 
                 return 1;
@@ -49,12 +49,12 @@ namespace GeometricAlgebraNumericsLib.Metrics
             return 1.0d;
         }
 
-        public double GetBasisBladeSignature(int id)
+        public double GetBasisBladeSignature(ulong id)
         {
             return 1.0d;
         }
 
-        public GaTerm<double> Gp(int id1, int id2)
+        public GaTerm<double> Gp(ulong id1, ulong id2)
         {
             return new GaTerm<double>(
                 id1 ^ id2,
@@ -62,7 +62,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
             );
         }
 
-        public GaTerm<double> ScaledGp(int id1, int id2, double scalingFactor)
+        public GaTerm<double> ScaledGp(ulong id1, ulong id2, double scalingFactor)
         {
             return new GaTerm<double>(
                 id1 ^ id2,
@@ -70,7 +70,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
             );
         }
 
-        public GaTerm<double> Gp(int id1, int id2, int id3)
+        public GaTerm<double> Gp(ulong id1, ulong id2, ulong id3)
         {
             var idXor12 = id1 ^ id2;
             var value =
@@ -80,7 +80,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
             return new GaTerm<double>(idXor12 ^ id3, value);
         }
 
-        public GaTerm<double> ScaledGp(int id1, int id2, int id3, double scalingFactor)
+        public GaTerm<double> ScaledGp(ulong id1, ulong id2, ulong id3, double scalingFactor)
         {
             var idXor12 = id1 ^ id2;
             var value =
@@ -92,12 +92,12 @@ namespace GeometricAlgebraNumericsLib.Metrics
 
         public IEnumerator<int> GetEnumerator()
         {
-            return Enumerable.Repeat(1, GaSpaceDimension).GetEnumerator();
+            return Enumerable.Repeat(1, (int)GaSpaceDimension).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Enumerable.Repeat(1, GaSpaceDimension).GetEnumerator();
+            return Enumerable.Repeat(1, (int)GaSpaceDimension).GetEnumerator();
         }
     }
 }

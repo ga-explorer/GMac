@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TextComposerLib
+namespace TextComposerLib.UI.WinForms
 {
     public partial class FormNotificationMessage : Form
     {

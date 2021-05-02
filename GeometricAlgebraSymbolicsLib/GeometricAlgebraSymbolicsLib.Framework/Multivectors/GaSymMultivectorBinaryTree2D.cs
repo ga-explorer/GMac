@@ -10,31 +10,31 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public int DomainVSpaceDimension1 { get; }
 
-        public int DomainGaSpaceDimension1
+        public ulong DomainGaSpaceDimension1
             => DomainVSpaceDimension1.ToGaSpaceDimension();
 
         public int DomainVSpaceDimension2 { get; }
 
-        public int DomainGaSpaceDimension2
+        public ulong DomainGaSpaceDimension2
             => DomainVSpaceDimension2.ToGaSpaceDimension();
 
         public int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
-        public GaSymMultivectorBinaryTree1D this[int id1]
+        public GaSymMultivectorBinaryTree1D this[ulong id1]
         {
             get
             {
-                RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong) id1, out var mvTree1D);
+                RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D);
 
                 return mvTree1D;
             }
             set =>
                 RootNode.SetLeafValue(
                     DomainVSpaceDimension1, 
-                    (ulong)id1, 
+                    id1, 
                     value ?? new GaSymMultivectorBinaryTree1D(
                         DomainVSpaceDimension2, 
                         TargetVSpaceDimension
@@ -42,35 +42,35 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 );
         }
 
-        public IGaSymMultivector this[int id1, int id2]
+        public IGaSymMultivector this[ulong id1, ulong id2]
         {
             get
             {
-                RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong) id1, out var mvTree1D);
+                RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D);
 
                 return mvTree1D[id2];
             }
             set
             {
-                if (!RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D) || ReferenceEquals(mvTree1D, null))
+                if (!RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D) || ReferenceEquals(mvTree1D, null))
                 {
                     mvTree1D = new GaSymMultivectorBinaryTree1D(
                         DomainVSpaceDimension2, 
                         TargetVSpaceDimension
                         );
 
-                    RootNode.SetLeafValue(DomainVSpaceDimension1, (ulong)id1, mvTree1D);
+                    RootNode.SetLeafValue(DomainVSpaceDimension1, id1, mvTree1D);
                 }
 
                 mvTree1D[id2] = value;
             }
         }
 
-        public MathematicaScalar this[int id1, int id2, int id3]
+        public MathematicaScalar this[ulong id1, ulong id2, ulong id3]
         {
             get
             {
-                if (RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D))
+                if (RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D))
                     return mvTree1D[id2, id3] ?? GaSymbolicsUtils.Constants.Zero;
 
                 return GaSymbolicsUtils.Constants.Zero;

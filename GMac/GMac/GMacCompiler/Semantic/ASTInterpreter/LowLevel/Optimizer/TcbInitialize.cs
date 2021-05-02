@@ -24,9 +24,9 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 
         private readonly LlDataTable _dataTable;
 
-        private string _lastUsedVarName = String.Empty;
+        private string _lastUsedVarName = string.Empty;
 
-        private int _computationOrder = Int32.MaxValue;
+        private int _computationOrder = int.MaxValue;
 
         private readonly List<string> _activeItemsList = new List<string>();
 
@@ -116,7 +116,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
             //All its RHS items must be added to the list of active items
             _activeItemsList.AddRange(rhsExpr.GetLowLevelVariablesNames());
 
-            if (String.Compare(item.ItemName, _lastUsedVarName, StringComparison.Ordinal) > 0)
+            if (string.Compare(item.ItemName, _lastUsedVarName, StringComparison.Ordinal) > 0)
                 _lastUsedVarName = item.ItemName;
         }
 
@@ -147,7 +147,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
             //All its RHS items must be added to the list of active items
             _activeItemsList.AddRange(rhsExpr.GetLowLevelVariablesNames());
 
-            if (String.Compare(item.ItemName, _lastUsedVarName, StringComparison.Ordinal) > 0)
+            if (string.Compare(item.ItemName, _lastUsedVarName, StringComparison.Ordinal) > 0)
                 _lastUsedVarName = item.ItemName;
         }
 
@@ -156,7 +156,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
         /// </summary>
         private void AddComputedVariables()
         {
-            _computationOrder = Int32.MaxValue;
+            _computationOrder = int.MaxValue;
 
             CodeBlock.ComputedVariables.Clear();
 
@@ -175,7 +175,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 
         protected override void BeginProcessing()
         {
-            _lastUsedVarName = String.Empty;
+            _lastUsedVarName = string.Empty;
 
             AddInputVariables();
 

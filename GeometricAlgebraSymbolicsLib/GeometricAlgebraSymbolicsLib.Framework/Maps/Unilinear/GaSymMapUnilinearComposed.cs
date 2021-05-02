@@ -54,7 +54,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         public IEnumerable<IGaSymMapUnilinear> Mappings 
             => _mappingsList;
 
-        public override IGaSymMultivector this[int id1]
+        public override IGaSymMultivector this[ulong id1]
         {
             get
             {
@@ -68,7 +68,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
         
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
             var resultMv = _mappingsList[0][id1].ToMultivector();
 
@@ -146,12 +146,12 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return _mappingsList[_mappingsList.Count - 1].MapToTemp(resultMv);
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
             return 
                 Enumerable
-                .Range(0, DomainGaSpaceDimension)
-                .Select(id => new Tuple<int, IGaSymMultivector>(id, this[id]))
+                .Range(0, (int)DomainGaSpaceDimension)
+                .Select(id => new Tuple<ulong, IGaSymMultivector>((ulong)id, this[(ulong) id]))
                 .Where(t => !t.Item2.IsNullOrZero());
         }
     }

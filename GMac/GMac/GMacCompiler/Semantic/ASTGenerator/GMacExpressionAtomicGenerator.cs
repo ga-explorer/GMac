@@ -1,5 +1,4 @@
-﻿using System;
-using CodeComposerLib.Irony.Semantic.Expression;
+﻿using CodeComposerLib.Irony.Semantic.Expression;
 using CodeComposerLib.Irony.Semantic.Expression.Value;
 using CodeComposerLib.Irony.SourceCode;
 using GeometricAlgebraSymbolicsLib;
@@ -66,13 +65,13 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         {
             var numberText = node.FindTokenAndGetText();
 
-            if (Int32.TryParse(numberText, out var intNumber))
+            if (int.TryParse(numberText, out var intNumber))
                 return ValuePrimitive<MathematicaScalar>.Create(
                     GMacRootAst.ScalarType,
                     MathematicaScalar.Create(GaSymbolicsUtils.Cas, intNumber)
                     );
 
-            if (Double.TryParse(numberText, out var doubleNumber))
+            if (double.TryParse(numberText, out var doubleNumber))
                 return ValuePrimitive<MathematicaScalar>.Create(
                     GMacRootAst.ScalarType, 
                     MathematicaScalar.Create(GaSymbolicsUtils.Cas, doubleNumber)

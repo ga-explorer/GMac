@@ -8,34 +8,34 @@ using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using TextComposerLib.Text.Structured;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
 {
     public sealed class GaSymMultivectorHash : ISymbolicVector, IGaSymMultivector
     {
-        public static GaSymMultivectorHash CreateTerm(int gaSpaceDim, int id, MathematicaScalar coef)
+        public static GaSymMultivectorHash CreateTerm(ulong gaSpaceDim, ulong id, MathematicaScalar coef)
         {
             return new GaSymMultivectorHash(gaSpaceDim) {[id] = coef.Expression};
         }
 
-        public static GaSymMultivectorHash CreateBasisBlade(int gaSpaceDim, int id)
+        public static GaSymMultivectorHash CreateBasisBlade(ulong gaSpaceDim, ulong id)
         {
             return new GaSymMultivectorHash(gaSpaceDim) {[id] = Expr.INT_ONE};
         }
 
-        public static GaSymMultivectorHash CreateScalar(int gaSpaceDim, MathematicaScalar coef)
+        public static GaSymMultivectorHash CreateScalar(ulong gaSpaceDim, MathematicaScalar coef)
         {
             return new GaSymMultivectorHash(gaSpaceDim) {[0] = coef.Expression};
         }
 
-        public static GaSymMultivectorHash CreatePseudoscalar(int gaSpaceDim, MathematicaScalar coef)
+        public static GaSymMultivectorHash CreatePseudoscalar(ulong gaSpaceDim, MathematicaScalar coef)
         {
             return new GaSymMultivectorHash(gaSpaceDim) {[gaSpaceDim - 1] = coef.Expression};
         }
 
-        public static GaSymMultivectorHash CreateZero(int gaSpaceDim)
+        public static GaSymMultivectorHash CreateZero(ulong gaSpaceDim)
         {
             return new GaSymMultivectorHash(gaSpaceDim);
         }
@@ -60,16 +60,16 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             return resultMv;
         }
 
-        public static GaSymMultivectorHash CreateSymbolic(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivectorHash CreateSymbolic(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolic(
                 gaSpaceDim, 
                 baseCoefName, 
-                Enumerable.Range(0, gaSpaceDim)
+                Enumerable.Range(0, (int)gaSpaceDim).Select(i => (ulong)i)
                 );
         }
 
-        public static GaSymMultivectorHash CreateSymbolicVector(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivectorHash CreateSymbolicVector(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolic(
                 gaSpaceDim,
@@ -78,7 +78,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             );
         }
 
-        public static GaSymMultivectorHash CreateSymbolicKVector(int gaSpaceDim, string baseCoefName, int grade)
+        public static GaSymMultivectorHash CreateSymbolicKVector(ulong gaSpaceDim, string baseCoefName, int grade)
         {
             return CreateSymbolic(
                 gaSpaceDim,
@@ -87,7 +87,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             );
         }
 
-        public static GaSymMultivectorHash CreateSymbolicTerm(int gaSpaceDim, string baseCoefName, int id)
+        public static GaSymMultivectorHash CreateSymbolicTerm(ulong gaSpaceDim, string baseCoefName, ulong id)
         {
             var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
 
@@ -100,17 +100,17 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             };
         }
 
-        public static GaSymMultivectorHash CreateSymbolicScalar(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivectorHash CreateSymbolicScalar(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolicTerm(gaSpaceDim, baseCoefName, 0);
         }
 
-        public static GaSymMultivectorHash CreateSymbolicPseudoscalar(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivectorHash CreateSymbolicPseudoscalar(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolicTerm(gaSpaceDim, baseCoefName, gaSpaceDim - 1);
         }
 
-        public static GaSymMultivectorHash CreateSymbolic(int gaSpaceDim, string baseCoefName, IEnumerable<int> idsList)
+        public static GaSymMultivectorHash CreateSymbolic(ulong gaSpaceDim, string baseCoefName, IEnumerable<ulong> idsList)
         {
             var resultMv = new GaSymMultivectorHash(gaSpaceDim);
             var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
@@ -141,7 +141,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
         public static GaSymMultivectorHash operator +(GaSymMultivectorHash mv1, GaSymMultivectorHash mv2)
         {
             var resultMv = GaSymMultivector.CreateCopyTemp(
-                mv1.GaSpaceDimension, 
+                mv1.VSpaceDimension, 
                 mv1.NonZeroExprTerms
             );
 
@@ -154,7 +154,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
         public static GaSymMultivectorHash operator -(GaSymMultivectorHash mv1, GaSymMultivectorHash mv2)
         {
             var resultMv = GaSymMultivector.CreateCopyTemp(
-                mv1.GaSpaceDimension, 
+                mv1.VSpaceDimension, 
                 mv1.NonZeroExprTerms
             );
 
@@ -169,7 +169,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             return s.IsNullOrZero()
                 ? CreateZero(mv1.GaSpaceDimension)
                 : GaSymMultivector
-                    .CreateZeroTemp(mv1.GaSpaceDimension)
+                    .CreateZeroTemp(mv1.VSpaceDimension)
                     .AddFactors(s.Expression, mv1)
                     .ToHashMultivector();
         }
@@ -179,7 +179,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             return s.IsNullOrZero()
                 ? CreateZero(mv1.GaSpaceDimension)
                 : GaSymMultivector
-                    .CreateZeroTemp(mv1.GaSpaceDimension)
+                    .CreateZeroTemp(mv1.VSpaceDimension)
                     .AddFactors(s.Expression, mv1)
                     .ToHashMultivector();
         }
@@ -189,20 +189,20 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             var sInv = GaSymbolicsUtils.Constants.One / s;
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(sInv.Expression, mv1)
                 .ToHashMultivector();
         }
 
 
-        private Dictionary<int, Expr> _internalDictionary =
-            new Dictionary<int, Expr>();
+        private Dictionary<ulong, Expr> _internalDictionary =
+            new Dictionary<ulong, Expr>();
 
 
-        public IEnumerable<int> BasisBladeIds 
+        public IEnumerable<ulong> BasisBladeIds 
             => _internalDictionary.Keys;
 
-        public IEnumerable<int> NonZeroBasisBladeIds
+        public IEnumerable<ulong> NonZeroBasisBladeIds
             => _internalDictionary
                 .Where(p => !p.Value.IsNullOrZero())
                 .Select(p => p.Key);
@@ -225,7 +225,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
         public MathematicaInterface CasInterface { get; }
@@ -240,13 +240,13 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             => CasInterface.Constants;
 
         public int Size 
-            => GaSpaceDimension;
+            => (int)GaSpaceDimension;
 
         MathematicaScalar ISymbolicVector.this[int index]
         {
             get
             {
-                _internalDictionary.TryGetValue(index, out var value);
+                _internalDictionary.TryGetValue((ulong)index, out var value);
 
                 return ReferenceEquals(value, null)
                     ? GaSymbolicsUtils.Constants.Zero
@@ -254,7 +254,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             }
         }
 
-        public Expr this[int grade, int index]
+        public Expr this[int grade, ulong index]
         {
             get
             {
@@ -266,11 +266,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             }
         }
 
-        public Expr this[int index]
+        public Expr this[ulong index]
         {
             get
             {
-                Debug.Assert(index >= 0 && index < GaSpaceDimension);
+                Debug.Assert(index < GaSpaceDimension);
 
                 return 
                     _internalDictionary.TryGetValue(index, out var value) 
@@ -280,7 +280,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
 
             set
             {
-                Debug.Assert(index >= 0 && index < GaSpaceDimension);
+                Debug.Assert(index < GaSpaceDimension);
 
                 if (value.IsNullOrZero())
                 {
@@ -297,34 +297,34 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             }
         }
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms
             => _internalDictionary
                 .Select(
-                    p => new KeyValuePair<int, MathematicaScalar>(
+                    p => new KeyValuePair<ulong, MathematicaScalar>(
                         p.Key, 
                         p.Value.ToMathematicaScalar()
                     )
                 );
 
-        public IEnumerable<KeyValuePair<int, Expr>> ExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms
             => _internalDictionary;
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms
             => _internalDictionary
                 .Where(p => !p.Value.IsNullOrZero())
                 .Select(
-                    p => new KeyValuePair<int, MathematicaScalar>(
+                    p => new KeyValuePair<ulong, MathematicaScalar>(
                         p.Key,
                         p.Value.ToMathematicaScalar()
                     )
                 );
 
-        public IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms 
+        public IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms 
             => _internalDictionary
                 .Where(p => !p.Value.IsNullOrZero());
 
 
-        private GaSymMultivectorHash(int gaSpaceDim)
+        private GaSymMultivectorHash(ulong gaSpaceDim)
         {
             CasInterface = GaSymbolicsUtils.Cas;
             VSpaceDimension = gaSpaceDim.ToVSpaceDimension();
@@ -402,9 +402,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
         }
 
 
-        public void Add(int key, MathematicaScalar value)
+        public void Add(ulong key, MathematicaScalar value)
         {
-            if (!(key >= 0 && key < GaSpaceDimension))
+            if (key >= GaSpaceDimension)
                 throw new IndexOutOfRangeException();
 
             if (ReferenceEquals(value, null))
@@ -414,9 +414,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
                 _internalDictionary.Add(key, value.Expression);
         }
 
-        private void Add(int key, Expr value)
+        private void Add(ulong key, Expr value)
         {
-            if (!(key >= 0 && key < GaSpaceDimension))
+            if (key >= GaSpaceDimension)
                 throw new IndexOutOfRangeException();
 
             if (ReferenceEquals(value, null))
@@ -426,19 +426,19 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
                 _internalDictionary.Add(key, value);
         }
 
-        public bool ContainsKey(int key)
+        public bool ContainsKey(ulong key)
         {
             return _internalDictionary.ContainsKey(key);
         }
 
-        public ICollection<int> Keys => _internalDictionary.Keys;
+        public ICollection<ulong> Keys => _internalDictionary.Keys;
 
-        public bool Remove(int key)
+        public bool Remove(ulong key)
         {
             return _internalDictionary.Remove(key);
         }
 
-        public bool TryGetValue(int key, out MathematicaScalar value)
+        public bool TryGetValue(ulong key, out MathematicaScalar value)
         {
             if (_internalDictionary.TryGetValue(key, out var expr))
             {
@@ -450,9 +450,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             return false;
         }
 
-        public void Add(KeyValuePair<int, MathematicaScalar> item)
+        public void Add(KeyValuePair<ulong, MathematicaScalar> item)
         {
-            if (!(item.Key >= 0 && item.Key < GaSpaceDimension))
+            if (item.Key >= GaSpaceDimension)
                 throw new IndexOutOfRangeException();
 
             if (ReferenceEquals(item.Value, null))
@@ -467,12 +467,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             _internalDictionary.Clear();
         }
 
-        public bool Contains(KeyValuePair<int, MathematicaScalar> item)
+        public bool Contains(KeyValuePair<ulong, MathematicaScalar> item)
         {
             throw new NotImplementedException();
         }
 
-        public void CopyTo(KeyValuePair<int, MathematicaScalar>[] array, int arrayIndex)
+        public void CopyTo(KeyValuePair<ulong, MathematicaScalar>[] array, int arrayIndex)
         {
             throw new NotImplementedException();
         }
@@ -481,7 +481,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
 
         public bool IsReadOnly => false;
 
-        public IEnumerator<KeyValuePair<int, Expr>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, Expr>> GetEnumerator()
         {
             return NonZeroExprTerms.GetEnumerator();
         }
@@ -537,7 +537,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
             return resultMv;
         }
 
-        public bool ContainsBasisBlade(int id)
+        public bool ContainsBasisBlade(ulong id)
         {
             return _internalDictionary.ContainsKey(id);
         }
@@ -545,12 +545,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
         public bool IsTemp 
             => false;
 
-        public int TermsCount 
-            => _internalDictionary.Count;
+        public ulong TermsCount 
+            => (ulong)_internalDictionary.Count;
 
         public void Simplify()
         {
-            var newDict = new Dictionary<int, Expr>();
+            var newDict = new Dictionary<ulong, Expr>();
 
             foreach (var term in _internalDictionary)
             {
@@ -585,12 +585,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Hash
 
         public GaSymMultivector ToMultivector()
         {
-            return GaSymMultivector.CreateCopy(GaSpaceDimension, NonZeroExprTerms);
+            return GaSymMultivector.CreateCopy(VSpaceDimension, NonZeroExprTerms);
         }
 
         public GaSymMultivector GetVectorPart()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             foreach (var id in GaFrameUtils.BasisVectorIDs(VSpaceDimension))
             {

@@ -51,7 +51,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
         {
             get
             {
@@ -144,12 +144,12 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
             return
                 Enumerable
-                    .Range(0, DomainGaSpaceDimension)
-                    .Select(id => new Tuple<int, IGaNumMultivector>(id, this[id]))
+                    .Range(0, (int)DomainGaSpaceDimension)
+                    .Select(id => new Tuple<ulong, IGaNumMultivector>((ulong)id, this[(ulong) id]))
                     .Where(t => !t.Item2.IsNullOrEmpty());
         }
     }

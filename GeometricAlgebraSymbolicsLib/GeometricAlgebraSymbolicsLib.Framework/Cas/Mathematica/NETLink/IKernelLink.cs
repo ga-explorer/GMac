@@ -12,8 +12,7 @@
 using System;
 using System.Drawing;
 
-
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// The link interface that most programmers will use.

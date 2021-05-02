@@ -13,7 +13,8 @@ namespace CodeComposerLib.Irony.Semantic.Expression.Basic
         /// <summary>
         /// The dictionary of operands for this list
         /// </summary>
-        public Dictionary<int, ILanguageExpressionAtomic> OperandsDictionary { get; } = new Dictionary<int, ILanguageExpressionAtomic>();
+        public Dictionary<ulong, ILanguageExpressionAtomic> OperandsDictionary { get; } 
+            = new Dictionary<ulong, ILanguageExpressionAtomic>();
 
 
         private OperandsByIndex()
@@ -21,7 +22,7 @@ namespace CodeComposerLib.Irony.Semantic.Expression.Basic
         }
 
 
-        public void ChangeOperand(int opIndex, ILanguageExpressionAtomic opExpr)
+        public void ChangeOperand(ulong opIndex, ILanguageExpressionAtomic opExpr)
         {
             if (OperandsDictionary[opIndex].ExpressionType.IsSameType(opExpr.ExpressionType))
                 OperandsDictionary[opIndex] = opExpr;
@@ -34,7 +35,7 @@ namespace CodeComposerLib.Irony.Semantic.Expression.Basic
         /// </summary>
         /// <param name="opIndex">The index of the operand</param>
         /// <param name="opExpr">The RHS expression of the operand</param>
-        public void AddOperand(int opIndex, ILanguageExpressionAtomic opExpr)
+        public void AddOperand(ulong opIndex, ILanguageExpressionAtomic opExpr)
         {
             OperandsDictionary.Add(opIndex, opExpr);
         }

@@ -18,7 +18,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public static GaNumDarMultivector CreateZero(int vSpaceDim)
         {
             return new GaNumDarMultivector(
-                new EmptyReadOnlyList<double>(vSpaceDim.ToGaSpaceDimension())
+                new EmptyReadOnlyList<double>((int)vSpaceDim.ToGaSpaceDimension())
             );
         }
 
@@ -65,11 +65,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public IReadOnlyList<double> ScalarValuesArray { get; }
 
-        public override double this[int id]
-            => ScalarValuesArray[id];
+        public override double this[ulong id]
+            => ScalarValuesArray[(int)id];
 
-        public override double this[int grade, int index]
-            => ScalarValuesArray[GaFrameUtils.BasisBladeId(grade, index)];
+        public override double this[int grade, ulong index]
+            => ScalarValuesArray[(int)GaFrameUtils.BasisBladeId(grade, index)];
 
         public override int StoredTermsCount 
             => ScalarValuesArray.Count;
@@ -89,16 +89,16 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
-            return id >= 0 && id <= GaSpaceDimension;
+            return id <= GaSpaceDimension;
         }
 
-        public override bool ContainsStoredTerm(int grade, int index)
+        public override bool ContainsStoredTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
-            return id >= 0 && id <= GaSpaceDimension;
+            return id <= GaSpaceDimension;
         }
 
         public override bool ContainsStoredTermOfGrade(int grade)
@@ -109,7 +109,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override IEnumerable<GaTerm<double>> GetStoredTerms()
         {
-            var id = 0;
+            var id = 0UL;
             foreach (var value in ScalarValuesArray)
             {
                 yield return new GaTerm<double>(id, value);
@@ -122,17 +122,17 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-            for (var index = 0; index < kvSpaceDim; index++)
+            for (var index = 0UL; index < kvSpaceDim; index++)
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
 
-                yield return new GaTerm<double>(id, ScalarValuesArray[id]);
+                yield return new GaTerm<double>(id, ScalarValuesArray[(int)id]);
             }
         }
 
         public override IEnumerable<GaTerm<double>> GetNonZeroTerms()
         {
-            var id = 0;
+            var id = 0UL;
             foreach (var value in ScalarValuesArray)
             {
                 if (!value.IsNearZero())
@@ -146,11 +146,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         {
             var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-            for (var index = 0; index < kvSpaceDim; index++)
+            for (var index = 0UL; index < kvSpaceDim; index++)
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
 
-                var value = ScalarValuesArray[id];
+                var value = ScalarValuesArray[(int)id];
 
                 if (!value.IsNearZero())
                     yield return new GaTerm<double>(id, value);
@@ -158,14 +158,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
-            return Enumerable.Range(0, GaSpaceDimension);
+            return Enumerable.Range(0, (int)GaSpaceDimension).Select(id => (ulong)id);
         }
 
-        public override IEnumerable<int> GetNonZeroTermIds()
+        public override IEnumerable<ulong> GetNonZeroTermIds()
         {
-            var id = 0;
+            var id = 0UL;
             foreach (var value in ScalarValuesArray)
             {
                 if (!value.IsNearZero())
@@ -186,11 +186,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override bool TryGetValue(int id, out double value)
+        public override bool TryGetValue(ulong id, out double value)
         {
-            if (id >= 0 && id < GaSpaceDimension)
+            if (id < GaSpaceDimension)
             {
-                value = ScalarValuesArray[id];
+                value = ScalarValuesArray[(int)id];
                 return true;
             }
 
@@ -198,13 +198,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetValue(int grade, int index, out double value)
+        public override bool TryGetValue(int grade, ulong index, out double value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
-            if (id >= 0 && id < GaSpaceDimension)
+            if (id < GaSpaceDimension)
             {
-                value = ScalarValuesArray[id];
+                value = ScalarValuesArray[(int)id];
                 return true;
             }
 
@@ -212,11 +212,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetTerm(int id, out GaTerm<double> term)
+        public override bool TryGetTerm(ulong id, out GaTerm<double> term)
         {
-            if (id >= 0 && id < GaSpaceDimension)
+            if (id < GaSpaceDimension)
             {
-                term = new GaTerm<double>(id, ScalarValuesArray[id]);
+                term = new GaTerm<double>(id, ScalarValuesArray[(int)id]);
                 return true;
             }
 
@@ -224,13 +224,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return false;
         }
 
-        public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
+        public override bool TryGetTerm(int grade, ulong index, out GaTerm<double> term)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
-            if (id >= 0 && id < GaSpaceDimension)
+            if (id < GaSpaceDimension)
             {
-                term = new GaTerm<double>(id, ScalarValuesArray[id]);
+                term = new GaTerm<double>(id, ScalarValuesArray[(int)id]);
                 return true;
             }
 
@@ -280,11 +280,11 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override GaNumSarMultivector GetSarMultivector()
         {
-            var scalarValues = new Dictionary<int, double>();
+            var scalarValues = new Dictionary<ulong, double>();
 
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
-                var value = ScalarValuesArray[id];
+                var value = ScalarValuesArray[(int)id];
 
                 if (!value.IsNearZero())
                     scalarValues.Add(id, value);
@@ -295,14 +295,14 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public override GaNumSgrMultivector GetSgrMultivector()
         {
-            var kVectorsArray = new Dictionary<int, double>[VSpaceDimension + 1];
+            var kVectorsArray = new Dictionary<ulong, double>[VSpaceDimension + 1];
 
             foreach (var term in GetNonZeroTerms())
             {
                 term.BasisBladeId.BasisBladeGradeIndex(out var grade, out var index);
 
                 if (kVectorsArray[grade] == null)
-                    kVectorsArray[grade] = new Dictionary<int, double>();
+                    kVectorsArray[grade] = new Dictionary<ulong, double>();
 
                 kVectorsArray[grade].Add(index, term.ScalarValue);
             }

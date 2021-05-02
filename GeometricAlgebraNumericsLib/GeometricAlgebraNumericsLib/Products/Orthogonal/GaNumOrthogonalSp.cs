@@ -38,15 +38,15 @@ namespace GeometricAlgebraNumericsLib.Products.Orthogonal
         }
 
 
-        public override GaNumTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(ulong id1, ulong id2)
         {
             return GaNumTerm.Create(
-                TargetGaSpaceDimension,
+                TargetVSpaceDimension,
                 0,
                 GaFrameUtils.IsNonZeroESp(id1, id2)
                     ? (GaFrameUtils.IsNegativeEGp(id1, id1)
-                        ? -OrthogonalMetric[id1]
-                        : OrthogonalMetric[id1])
+                        ? -OrthogonalMetric[(int)id1]
+                        : OrthogonalMetric[(int)id1])
                     : 0.0d
             );
         }

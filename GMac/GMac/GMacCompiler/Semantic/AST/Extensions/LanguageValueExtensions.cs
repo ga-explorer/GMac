@@ -6,7 +6,7 @@ using CodeComposerLib.Irony.Semantic.Type;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GMac.GMacCompiler.Semantic.AST.Extensions
 {

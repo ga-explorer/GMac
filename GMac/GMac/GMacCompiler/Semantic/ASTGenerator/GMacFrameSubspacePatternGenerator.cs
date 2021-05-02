@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeComposerLib.Irony.SourceCode;
 using DataStructuresLib;
 using DataStructuresLib.BooleanPattern;
@@ -64,7 +63,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         {
             SetContext(context);
             _frame = frame;
-            _generatedBooleanPattern = new MutableBooleanPattern(frame.GaSpaceDimension, false);
+            _generatedBooleanPattern = new MutableBooleanPattern((int)frame.GaSpaceDimension, false);
         }
 
 
@@ -86,7 +85,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             {
                 case 'E':
                 {
-                    if (Int32.TryParse(identName.Substring(1), out var id) && _frame.IsValidBasisBladeId(id))
+                    if (int.TryParse(identName.Substring(1), out var id) && _frame.IsValidBasisBladeId((ulong)id))
                         AddBasisBladeId(id);
 
                     else
@@ -98,7 +97,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                 {
                     var id = identName.Substring(1).StringToPattern();
 
-                    if (_frame.IsValidBasisBladeId(id))
+                    if (_frame.IsValidBasisBladeId((ulong)id))
                         AddBasisBladeId(id);
 
                     else
@@ -117,11 +116,11 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     var indexText = identName.Substring(pos + 1);
 
                     if (
-                        Int32.TryParse(gradeText, out var grade) && 
-                        Int32.TryParse(indexText, out var index) && 
-                        _frame.IsValidBasisBladeGradeIndex(grade, index)
+                        int.TryParse(gradeText, out var grade) && 
+                        int.TryParse(indexText, out var index) && 
+                        _frame.IsValidBasisBladeGradeIndex(grade, (ulong)index)
                         )
-                        AddBasisBladeId(GaFrameUtils.BasisBladeId(grade, index));
+                        AddBasisBladeId((int)GaFrameUtils.BasisBladeId(grade, (ulong)index));
 
                     else
                         CompilationLog.RaiseGeneratorError<int>("Basis blades set not recognized", node);
@@ -144,7 +143,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             else
             {
                 if (_frame.LookupBasisVector(identName, out var basisVector))
-                    AddBasisBladeId(basisVector.BasisVectorId);
+                    AddBasisBladeId((int)basisVector.BasisVectorId);
 
                 else
                     translate_PredefinedBasisBladeIDs(identName, node);
@@ -160,7 +159,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             else if (node.ChildNodes.Count > 1)
             {
                 var basisVectorsList = new List<GMacFrameBasisVector>(node.ChildNodes.Count);
-                var basisBladeId = 0;
+                var basisBladeId = 0UL;
 
                 foreach (var nodeIdentifier in node.ChildNodes)
                 {
@@ -176,7 +175,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
                     basisBladeId = basisBladeId | basisVector.BasisVectorId;
                 }
 
-                AddBasisBladeId(basisBladeId);
+                AddBasisBladeId((int)basisBladeId);
             }
             else
             {
@@ -189,7 +188,7 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             var nodeIdentifierList = node.ChildNodes[0];
 
             //Create the set of unique spanning vectors for the GA subspace
-            var basisVectorsList = new List<int>(nodeIdentifierList.ChildNodes.Count);
+            var basisVectorsList = new List<ulong>(nodeIdentifierList.ChildNodes.Count);
 
             foreach (var nodeIdentifier in nodeIdentifierList.ChildNodes)
             {
@@ -212,9 +211,9 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
             //Add the remaining basis blades to the GA subspace
             for (var idIndex = 1; idIndex <= subspaceDimension - 1; idIndex++)
             {
-                var id = GaFrameUtils.ComposeGaSubspaceBasisBladeId(basisVectorsList, idIndex);
+                var id = GaFrameUtils.ComposeGaSubspaceBasisBladeId(basisVectorsList, (ulong)idIndex);
 
-                AddBasisBladeId(id);
+                AddBasisBladeId((int)id);
             }
         }
 

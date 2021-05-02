@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using CodeComposerLib.Irony.Semantic.Type;
 
@@ -42,7 +41,7 @@ namespace GMac.GMacCompiler.Semantic.AST
 
         internal bool HasFrameRootSymbol => ReferenceEquals(RootSymbol as GMacFrame, null) == false;
 
-        internal string RootSymbolAccessName => HasRootSymbol ? RootSymbol.SymbolAccessName : String.Empty;
+        internal string RootSymbolAccessName => HasRootSymbol ? RootSymbol.SymbolAccessName : string.Empty;
 
 
         internal GMacAstSymbolsCache(GMacAst rootAst)

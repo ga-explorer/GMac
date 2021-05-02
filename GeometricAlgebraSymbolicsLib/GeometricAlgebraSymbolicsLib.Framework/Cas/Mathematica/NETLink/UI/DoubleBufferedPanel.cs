@@ -10,8 +10,7 @@
 
 using System.Windows.Forms;
 
-
-namespace Wolfram.NETLink.UI {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.UI {
 
 /// <summary>
 /// A simple class intended to be used from <i>Mathematica</i> for flicker-free drawing in
@@ -44,7 +43,7 @@ public class DoubleBufferedPanel : Panel {
     protected override void OnPaint(PaintEventArgs e) {
         try {
             base.OnPaint(e);
-        } catch (Wolfram.NETLink.MathematicaNotReadyException) {}
+        } catch (MathematicaNotReadyException) {}
     }
 
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using TextComposerLib.Text.Parametric;
 
-namespace TextComposerLib.Text.Parametric.UI
+namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     public partial class FormTemplateComposerEditor : Form
     {

@@ -19,8 +19,8 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1]
-            => GaSymMultivector.CreateFromColumn(InternalMappingMatrix, id1);
+        public override IGaSymMultivector this[ulong id1]
+            => GaSymMultivector.CreateFromColumn(InternalMappingMatrix, (int)id1);
 
 
         private GaSymMapUnilinearMatrix(ISymbolicMatrix mappingMatrix)
@@ -31,9 +31,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
-            var columnVector = InternalMappingMatrix.GetColumn(id1);
+            var columnVector = InternalMappingMatrix.GetColumn((int)id1);
 
             return GaSymMultivector.CreateCopyTemp(columnVector);
         }
@@ -45,9 +45,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return GaSymMultivector.CreateCopyTemp(columnVector);
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var mv = this[id];
 

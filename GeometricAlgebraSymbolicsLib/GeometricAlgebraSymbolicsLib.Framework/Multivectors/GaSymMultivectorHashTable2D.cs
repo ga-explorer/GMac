@@ -2,7 +2,7 @@
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {
-    public class GaSymMultivectorHashTable2D : GaSparseTable2D<int, int, IGaSymMultivector>
+    public class GaSymMultivectorHashTable2D : GaSparseTable2D<ulong, ulong, IGaSymMultivector>
     {
         public override bool IsDefaultValue(IGaSymMultivector value)
         {

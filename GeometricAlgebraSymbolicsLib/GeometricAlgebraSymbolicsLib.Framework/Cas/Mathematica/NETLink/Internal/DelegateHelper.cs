@@ -9,11 +9,11 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Collections;
 
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// A utility class used internally for creating delegate types that call back to Mathematica.

@@ -14,7 +14,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
         }
 
 
-        private void GenerateIsZeroFunction(int kvSpaceDim)
+        private void GenerateIsZeroFunction(ulong kvSpaceDim)
         {
             var t1 = Templates["iszero"];
             var t2 = Templates["iszero_case"];
@@ -23,7 +23,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
             var iszeroCasesText = new ListTextComposer(" ||" + Environment.NewLine);
             var trimCoefsCasesText = new ListTextComposer("," + Environment.NewLine);
 
-            for (var i = 0; i < kvSpaceDim; i++)
+            for (var i = 0UL; i < kvSpaceDim; i++)
             {
                 iszeroCasesText.Add(t2, "num", i);
                 trimCoefsCasesText.Add(t3, "num", i);

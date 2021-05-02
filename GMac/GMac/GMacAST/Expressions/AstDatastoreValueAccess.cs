@@ -38,7 +38,7 @@ namespace GMac.GMacAST.Expressions
         {
             get
             {
-                if (AssociatedValueAccess.IsFullAccess) return String.Empty;
+                if (AssociatedValueAccess.IsFullAccess) return string.Empty;
 
                 var name = ValueAccessName;
 
@@ -225,7 +225,7 @@ namespace GMac.GMacAST.Expressions
             if (ReferenceEquals(lastStep, null))
                 return null;
 
-            return new AstFrameBasisBlade(mvType.ParentFrame, lastStep.AccessKey);
+            return new AstFrameBasisBlade(mvType.ParentFrame, (ulong)lastStep.AccessKey);
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace GMac.GMacAST.Expressions
                 lastStep
                 .AccessKeyList
                 .Select(
-                    id => new AstFrameBasisBlade(mvType.ParentFrame, id)
+                    id => new AstFrameBasisBlade(mvType.ParentFrame, (ulong)id)
                     );
         }
 
@@ -322,7 +322,7 @@ namespace GMac.GMacAST.Expressions
 
             return new Tuple<AstDatastoreValueAccess, AstFrameBasisBlade>(
                 new AstDatastoreValueAccess(newValueAccess),
-                new AstFrameBasisBlade(frame, id)
+                new AstFrameBasisBlade(frame, (ulong)id)
                 );
         }
 
@@ -344,7 +344,7 @@ namespace GMac.GMacAST.Expressions
 
             return new Tuple<AstDatastoreValueAccess, List<AstFrameBasisBlade>>(
                 new AstDatastoreValueAccess(newValueAccess),
-                idsList.Select(id => new AstFrameBasisBlade(frame, id)).ToList()
+                idsList.Select(id => new AstFrameBasisBlade(frame, (ulong)id)).ToList()
                 );
         }
 
@@ -371,7 +371,7 @@ namespace GMac.GMacAST.Expressions
             {
                 var frame = TypeAsFrameMultivector.ParentFrame;
 
-                var newIdsList = idsList.Where(id => frame.IsValidBasisBladeId(id)).ToArray();
+                var newIdsList = idsList.Where(id => frame.IsValidBasisBladeId((ulong)id)).ToArray();
 
                 if (newIdsList.Length == 0) return null;
 
@@ -432,7 +432,7 @@ namespace GMac.GMacAST.Expressions
                     .Append(
                         ValueAccessStepByKeyList<int>.Create(
                             AssociatedValueAccess.ExpressionType,
-                            idsList
+                            idsList.Select(id => (int)id)
                             )
                         )
                     .ToAstDatastoreValueAccess();
@@ -448,7 +448,7 @@ namespace GMac.GMacAST.Expressions
 
                 var oldIdsList = AssociatedValueAccess.GetBasisBladeIdsList();
 
-                var newIdsList = idsList.Where(id => oldIdsList.Contains(id)).ToArray();
+                var newIdsList = idsList.Where(id => oldIdsList.Contains((int)id)).ToArray();
 
                 if (newIdsList.Length == 0) return null;
 
@@ -458,7 +458,7 @@ namespace GMac.GMacAST.Expressions
                     .Append(
                         ValueAccessStepByKeyList<int>.Create(
                             AssociatedValueAccess.ExpressionType,
-                            newIdsList
+                            newIdsList.Select(id => (int)id)
                             )
                         )
                     .ToAstDatastoreValueAccess();
@@ -482,7 +482,7 @@ namespace GMac.GMacAST.Expressions
 
                 if (frame.IsValidGrade(grade) == false) return null;
 
-                var idsList = frame.BasisBladeIDsOfGrade(grade, indexList);
+                var idsList = frame.BasisBladeIDsOfGrade(grade, indexList.Select(id => (ulong)id));
 
                 return
                     AssociatedValueAccess
@@ -490,7 +490,7 @@ namespace GMac.GMacAST.Expressions
                     .Append(
                         ValueAccessStepByKeyList<int>.Create(
                             AssociatedValueAccess.ExpressionType,
-                            idsList
+                            idsList.Select(id => (int)id)
                             )
                         )
                     .ToAstDatastoreValueAccess();
@@ -502,11 +502,11 @@ namespace GMac.GMacAST.Expressions
 
                 if (frame.IsValidGrade(grade) == false) return null;
 
-                var idsList = frame.BasisBladeIDsOfGrade(grade, indexList);
+                var idsList = frame.BasisBladeIDsOfGrade(grade, indexList.Select(id => (ulong)id));
 
                 var oldIdsList = AssociatedValueAccess.GetBasisBladeIdsList();
 
-                var newIdsList = idsList.Where(id => oldIdsList.Contains(id)).ToArray();
+                var newIdsList = idsList.Where(id => oldIdsList.Contains((int)id)).ToArray();
 
                 if (newIdsList.Length == 0) return null;
 
@@ -516,7 +516,7 @@ namespace GMac.GMacAST.Expressions
                     .Append(
                         ValueAccessStepByKeyList<int>.Create(
                             AssociatedValueAccess.ExpressionType,
-                            newIdsList
+                            newIdsList.Select(id => (int)id)
                             )
                         )
                     .ToAstDatastoreValueAccess();

@@ -14,10 +14,10 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
     {
         internal int InputGrade { get; }
 
-        internal int InputId { get; }
+        internal ulong InputId { get; }
 
 
-        internal FactorMethodFileGenerator(CodeLibraryComposer libGen, int inGrade, int inId, AstMacro gmacMacroInfo)
+        internal FactorMethodFileGenerator(CodeLibraryComposer libGen, int inGrade, ulong inId, AstMacro gmacMacroInfo)
             : base(libGen, gmacMacroInfo)
         {
             InputGrade = inGrade;

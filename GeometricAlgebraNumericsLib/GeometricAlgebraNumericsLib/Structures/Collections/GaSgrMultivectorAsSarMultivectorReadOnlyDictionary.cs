@@ -6,13 +6,13 @@ using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraNumericsLib.Structures.Collections
 {
-    public sealed class GaSgrMultivectorAsSarMultivectorReadOnlyDictionary<T> : IReadOnlyDictionary<int, T>
+    public sealed class GaSgrMultivectorAsSarMultivectorReadOnlyDictionary<T> : IReadOnlyDictionary<ulong, T>
     {
-        public IReadOnlyList<IReadOnlyDictionary<int, T>> KVectorsList { get; }
+        public IReadOnlyList<IReadOnlyDictionary<ulong, T>> KVectorsList { get; }
 
         public int Count { get; }
 
-        public T this[int id]
+        public T this[ulong id]
         {
             get
             {
@@ -28,7 +28,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             }
         }
 
-        public IEnumerable<int> Keys
+        public IEnumerable<ulong> Keys
         {
             get
             {
@@ -62,14 +62,14 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         }
 
 
-        internal GaSgrMultivectorAsSarMultivectorReadOnlyDictionary(IReadOnlyList<IReadOnlyDictionary<int, T>> kVectorsArray)
+        internal GaSgrMultivectorAsSarMultivectorReadOnlyDictionary(IReadOnlyList<IReadOnlyDictionary<ulong, T>> kVectorsArray)
         {
-            Count = (kVectorsArray.Count - 1).ToGaSpaceDimension();
+            Count = (int)(kVectorsArray.Count - 1).ToGaSpaceDimension();
             KVectorsList = kVectorsArray;
         }
 
 
-        public bool ContainsKey(int key)
+        public bool ContainsKey(ulong key)
         {
             key.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -79,7 +79,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             return !scalarValues.IsNullOrEmpty() && scalarValues.ContainsKey(index);
         }
 
-        public bool TryGetValue(int key, out T value)
+        public bool TryGetValue(ulong key, out T value)
         {
             key.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -94,7 +94,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         }
 
-        public IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
             for (var grade = 0; grade < KVectorsList.Count; grade++)
             {
@@ -105,7 +105,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                     continue;
 
                 foreach (var pair in scalarValues)
-                    yield return new KeyValuePair<int, T>(
+                    yield return new KeyValuePair<ulong, T>(
                         GaFrameUtils.BasisBladeId(grade, pair.Key),
                         pair.Value
                     );
@@ -123,7 +123,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                     continue;
 
                 foreach (var pair in scalarValues)
-                    yield return new KeyValuePair<int, T>(
+                    yield return new KeyValuePair<ulong, T>(
                         GaFrameUtils.BasisBladeId(grade, pair.Key),
                         pair.Value
                     );

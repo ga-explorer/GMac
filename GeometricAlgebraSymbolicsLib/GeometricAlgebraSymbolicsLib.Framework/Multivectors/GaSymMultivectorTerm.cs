@@ -3,46 +3,46 @@ using System.Collections.Generic;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {
     public sealed class GaSymMultivectorTerm : IGaSymMultivector
     {
-        public static GaSymMultivectorTerm CreateTerm(int gaSpaceDim, int id, Expr coef)
+        public static GaSymMultivectorTerm CreateTerm(int vSpaceDim, ulong id, Expr coef)
         {
-            return new GaSymMultivectorTerm(gaSpaceDim, id, coef);
+            return new GaSymMultivectorTerm(vSpaceDim, id, coef);
         }
 
-        public static GaSymMultivectorTerm CreateScalar(int gaSpaceDim, Expr coef)
+        public static GaSymMultivectorTerm CreateScalar(int vSpaceDim, Expr coef)
         {
-            return new GaSymMultivectorTerm(gaSpaceDim, 0, coef);
+            return new GaSymMultivectorTerm(vSpaceDim, 0, coef);
         }
 
-        public static GaSymMultivectorTerm CreateZero(int gaSpaceDim)
+        public static GaSymMultivectorTerm CreateZero(int vSpaceDim)
         {
-            return new GaSymMultivectorTerm(gaSpaceDim, 0, Expr.INT_ZERO);
+            return new GaSymMultivectorTerm(vSpaceDim, 0, Expr.INT_ZERO);
         }
 
-        public static GaSymMultivectorTerm CreateBasisBlade(int gaSpaceDim, int id)
+        public static GaSymMultivectorTerm CreateBasisBlade(int vSpaceDim, ulong id)
         {
-            return new GaSymMultivectorTerm(gaSpaceDim, id);
+            return new GaSymMultivectorTerm(vSpaceDim, id);
         }
 
 
-        public int TermId { get; }
+        public ulong TermId { get; }
 
         public Expr TermCoef { get; set; }
 
-        public int VSpaceDimension
-            => GaSpaceDimension.ToVSpaceDimension();
+        public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension { get; }
+        public ulong GaSpaceDimension 
+            => VSpaceDimension.ToGaSpaceDimension();
 
-        public Expr this[int id]
+        public Expr this[ulong id]
             => (id == TermId) ? TermCoef : Expr.INT_ZERO;
 
-        public Expr this[int grade, int index]
+        public Expr this[int grade, ulong index]
         {
             get
             {
@@ -52,12 +52,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             }
         }
 
-        public IEnumerable<int> BasisBladeIds
+        public IEnumerable<ulong> BasisBladeIds
         {
             get { yield return TermId; }
         }
 
-        public IEnumerable<int> NonZeroBasisBladeIds
+        public IEnumerable<ulong> NonZeroBasisBladeIds
         {
             get { if (!TermCoef.IsZero()) yield return TermId; }
         }
@@ -91,62 +91,62 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             }
         }
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms
         {
             get
             {
-                yield return new KeyValuePair<int, MathematicaScalar>(
+                yield return new KeyValuePair<ulong, MathematicaScalar>(
                     TermId, 
                     TermCoef.ToMathematicaScalar()
                 );
             }
         }
 
-        public IEnumerable<KeyValuePair<int, Expr>> ExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms
         {
             get
             {
-                yield return new KeyValuePair<int, Expr>(TermId, TermCoef ?? Expr.INT_ZERO);
+                yield return new KeyValuePair<ulong, Expr>(TermId, TermCoef ?? Expr.INT_ZERO);
             }
         }
 
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms
         {
             get
             {
                 if (!TermCoef.IsNullOrZero())
-                    yield return new KeyValuePair<int, MathematicaScalar>(
+                    yield return new KeyValuePair<ulong, MathematicaScalar>(
                         TermId, 
                         TermCoef.ToMathematicaScalar()
                     );
             }
         }
 
-        public IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms
         {
             get
             {
                 if (!TermCoef.IsNullOrZero())
-                    yield return new KeyValuePair<int, Expr>(TermId, TermCoef);
+                    yield return new KeyValuePair<ulong, Expr>(TermId, TermCoef);
             }
         }
 
         public bool IsTemp => false;
 
-        public int TermsCount => 1;
+        public ulong TermsCount => 1;
 
 
-        private GaSymMultivectorTerm(int gaSpaceDim, int id)
+        private GaSymMultivectorTerm(int vSpaceDim, ulong id)
         {
-            GaSpaceDimension = gaSpaceDim;
+            VSpaceDimension = vSpaceDim;
             TermId = id;
             TermCoef = Expr.INT_ONE;
         }
 
-        private GaSymMultivectorTerm(int gaSpaceDim, int id, Expr coef)
+        private GaSymMultivectorTerm(int vSpaceDim, ulong id, Expr coef)
         {
-            GaSpaceDimension = gaSpaceDim;
+            VSpaceDimension = vSpaceDim;
             TermId = id;
             TermCoef = coef;
         }
@@ -172,7 +172,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return TermCoef.IsEqualZero(GaSymbolicsUtils.Cas);
         }
 
-        public bool ContainsBasisBlade(int id)
+        public bool ContainsBasisBlade(ulong id)
         {
             return id == TermId;
         }
@@ -203,13 +203,13 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         public GaSymMultivector ToMultivector()
         {
             return TermCoef.IsZero()
-                ? GaSymMultivector.CreateZero(GaSpaceDimension)
-                : GaSymMultivector.CreateTerm(GaSpaceDimension, TermId, TermCoef);
+                ? GaSymMultivector.CreateZero(VSpaceDimension)
+                : GaSymMultivector.CreateTerm(VSpaceDimension, TermId, TermCoef);
         }
 
         public GaSymMultivector GetVectorPart()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             if (TermId.BasisBladeGrade() == 1)
                 mv.SetTermCoef(TermId, TermCoef);
@@ -217,7 +217,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return mv;
         }
 
-        public IEnumerator<KeyValuePair<int, Expr>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, Expr>> GetEnumerator()
         {
             return NonZeroExprTerms.GetEnumerator();
         }

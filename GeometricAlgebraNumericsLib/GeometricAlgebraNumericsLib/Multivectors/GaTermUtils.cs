@@ -18,7 +18,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
     {
         public static bool ContainsUniqueIDs<T>(this IEnumerable<GaTerm<T>> termsList)
         {
-            var dict = new Dictionary<int, T>();
+            var dict = new Dictionary<ulong, T>();
 
             foreach (var term in termsList)
                 if (dict.ContainsKey(term.BasisBladeId))
@@ -198,9 +198,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors
 
                 var id = basisBladeIdNode.ChildNodes.Count > 0
                     ? basisBladeIdNode.ChildNodes.Select(
-                        n => 1 << (int.Parse(n.FindTokenAndGetText()) - 1)
-                    ).Distinct() .Sum()
-                    : 0;
+                        n => 1UL << (int.Parse(n.FindTokenAndGetText()) - 1)
+                    ).Distinct().Aggregate(0UL, (current, item) => current + item)
+                    : 0UL;
 
                 yield return new GaTerm<double>(id, scalarValue);
             }
@@ -326,7 +326,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
             return btrRootNode
                 .GetNodeInfo(treeDepth, 0)
                 .GetTreeLeafNodesInfo()
-                .Select(node => new GaTerm<double>((int)node.Id, node.Value));
+                .Select(node => new GaTerm<double>(node.Id, node.Value));
         }
 
         public static IEnumerable<GaTerm<double>> GetTerms(this GaBtrInternalNode<double> btrRootNode, int treeDepth)
@@ -336,7 +336,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
             return btrRootNode
                 .GetNodeInfo(treeDepth, 0)
                 .GetTreeLeafNodesInfo()
-                .Select(node => new GaTerm<double>((int)node.Id, node.Value));
+                .Select(node => new GaTerm<double>(node.Id, node.Value));
         }
 
 
@@ -352,7 +352,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
                 var node = btrRootNode;
                 for (var i = vSpaceDim - 1; i > 0; i--)
                 {
-                    var bitPattern = (1 << i) & id;
+                    var bitPattern = (1UL << i) & id;
                     node = node.GetOrAddInternalChildNode(bitPattern != 0);
                 }
 
@@ -376,7 +376,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
             );
         }
 
-        public static IEnumerable<GaTerm<double>> MapUsing(this IEnumerable<GaTerm<double>> termsList, Func<int, double, GaTerm<double>> mappingFunc)
+        public static IEnumerable<GaTerm<double>> MapUsing(this IEnumerable<GaTerm<double>> termsList, Func<ulong, double, GaTerm<double>> mappingFunc)
         {
             return termsList.Select(t =>
                 mappingFunc(
@@ -391,7 +391,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
             return termsList.Select(mappingFunc);
         }
 
-        public static IEnumerable<GaTerm<double>> MapUsing(this IEnumerable<GaTerm<double>> termsList, Func<int, int, double, GaTerm<double>> mappingFunc)
+        public static IEnumerable<GaTerm<double>> MapUsing(this IEnumerable<GaTerm<double>> termsList, Func<int, ulong, double, GaTerm<double>> mappingFunc)
         {
             return termsList.Select(t =>
                 mappingFunc(
@@ -403,7 +403,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors
         }
 
 
-        public static IEnumerable<GaTerm<double>> GaNegative(this IEnumerable<GaTerm<double>> termsList, Func<int, bool> isNegativeFunc)
+        public static IEnumerable<GaTerm<double>> GaNegative(this IEnumerable<GaTerm<double>> termsList, Func<ulong, bool> isNegativeFunc)
         {
             return termsList.Select(t =>
                 new GaTerm<double>(

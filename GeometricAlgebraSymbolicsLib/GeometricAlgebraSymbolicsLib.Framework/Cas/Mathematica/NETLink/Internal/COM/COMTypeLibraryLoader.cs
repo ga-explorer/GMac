@@ -13,8 +13,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 
-
-namespace Wolfram.NETLink.Internal.COM {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal.COM {
 
 /// <summary>
 /// This class takes a COM type library and programmatically builds a .NET interop assembly. 

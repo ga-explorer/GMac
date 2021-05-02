@@ -9,18 +9,18 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
     {
         int DomainVSpaceDimension { get; }
 
-        int DomainGaSpaceDimension { get; }
+        ulong DomainGaSpaceDimension { get; }
 
-        IGaSymMultivector this[int id1, int id2] { get; }
+        IGaSymMultivector this[ulong id1, ulong id2] { get; }
 
         GaSymMultivector this[GaSymMultivector mv1, GaSymMultivector mv2] { get; }
 
-        IGaSymMultivectorTemp MapToTemp(int id1, int id2);
+        IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2);
 
         IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1, GaSymMultivector mv2);
 
-        IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps();
+        IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps();
 
-        IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisVectorsMaps();
+        IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisVectorsMaps();
     }
 }

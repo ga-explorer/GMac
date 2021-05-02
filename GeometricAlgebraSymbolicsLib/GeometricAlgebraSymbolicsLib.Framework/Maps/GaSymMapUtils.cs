@@ -6,6 +6,7 @@ using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Frames;
 using GeometricAlgebraSymbolicsLib.Maps.Bilinear;
@@ -13,14 +14,13 @@ using GeometricAlgebraSymbolicsLib.Maps.Unilinear;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
 using GeometricAlgebraSymbolicsLib.Products;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Maps
 {
     public static class GaSymMapUtils
     {
         #region Unilinear Maps
-        public static Dictionary<int, IGaSymMultivector> ToDictionary(this IGaSymMapUnilinear linearMap)
+        public static Dictionary<ulong, IGaSymMultivector> ToDictionary(this IGaSymMapUnilinear linearMap)
         {
             return linearMap
                 .BasisBladeMaps()
@@ -30,22 +30,22 @@ namespace GeometricAlgebraSymbolicsLib.Maps
         public static IEnumerable<IGaSymMultivector> ToColumnsList(this IGaSymMapUnilinear linearMap)
         {
             return Enumerable
-                .Range(0, linearMap.DomainGaSpaceDimension)
-                .Select(id => linearMap[id]);
+                .Range(0, (int)linearMap.DomainGaSpaceDimension)
+                .Select(id => linearMap[(ulong) id]);
         }
 
         public static IEnumerable<MathematicaScalar[]> ToScalarColumnsList(this IGaSymMapUnilinear linearMap)
         {
             return Enumerable
-                .Range(0, linearMap.DomainGaSpaceDimension)
-                .Select(id => linearMap[id].TermsToArray());
+                .Range(0, (int)linearMap.DomainGaSpaceDimension)
+                .Select(id => linearMap[(ulong) id].TermsToArray());
         }
 
         public static IEnumerable<Expr[]> ToExprScalarColumnsList(this IGaSymMapUnilinear linearMap)
         {
             return Enumerable
-                .Range(0, linearMap.DomainGaSpaceDimension)
-                .Select(id => linearMap[id].TermsToExprArray());
+                .Range(0, (int)linearMap.DomainGaSpaceDimension)
+                .Select(id => linearMap[(ulong) id].TermsToExprArray());
         }
 
         public static Expr[,] ToExprScalarsArray(this IGaSymMapUnilinear linearMap)
@@ -153,10 +153,10 @@ namespace GeometricAlgebraSymbolicsLib.Maps
 
         public static IGaSymMultivectorTemp MapToTemp(this ISymbolicMatrix mappingMatrix, GaSymMultivector mv1)
         {
-            if (mv1.GaSpaceDimension != mappingMatrix.ColumnCount)
+            if (mv1.GaSpaceDimension != (ulong)mappingMatrix.ColumnCount)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var tempMv = GaSymMultivector.CreateZeroTemp(mappingMatrix.RowCount);
+            var tempMv = GaSymMultivector.CreateZeroTemp(mappingMatrix.RowCount.ToVSpaceDimension());
 
             foreach (var term in mv1.NonZeroExprTerms)
             {
@@ -165,8 +165,8 @@ namespace GeometricAlgebraSymbolicsLib.Maps
 
                 for (var row = 0; row < mappingMatrix.RowCount; row++)
                     tempMv.AddFactor(
-                        row, 
-                        Mfs.Times[coef, mappingMatrix[row, id].Expression]
+                        (ulong)row, 
+                        Mfs.Times[coef, mappingMatrix[row, (int)id].Expression]
                     );
             }
 
@@ -273,20 +273,17 @@ namespace GeometricAlgebraSymbolicsLib.Maps
         }
 
 
-        public static Dictionary<int, GaSymMultivector> ToOutermorphismDictionary(this Dictionary<int, IGaSymMultivector> linearVectorMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static Dictionary<ulong, GaSymMultivector> ToOutermorphismDictionary(this Dictionary<ulong, IGaSymMultivector> linearVectorMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var domainGaSpaceDim =
                 domainVSpaceDim.ToGaSpaceDimension();
 
-            var targetGaSpaceDim =
-                targetVSpaceDim.ToGaSpaceDimension();
-
-            var omMapDict = new Dictionary<int, GaSymMultivector>();
+            var omMapDict = new Dictionary<ulong, GaSymMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
-            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetGaSpaceDim));
+            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaSymMultivector basisBladeImage;
 
@@ -296,7 +293,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
                     linearVectorMaps.TryGetValue(id.BasisBladeIndex(), out var mv);
 
                     basisBladeImage = mv?.GetVectorPart()
-                                      ?? GaSymMultivector.CreateZero(targetGaSpaceDim);
+                                      ?? GaSymMultivector.CreateZero(targetVSpaceDim);
                 }
                 else
                 {
@@ -315,22 +312,22 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaSymMultivector> ToOutermorphismDictionary(this IEnumerable<Expr[]> linearVectorMaps)
+        public static Dictionary<ulong, GaSymMultivector> ToOutermorphismDictionary(this IEnumerable<Expr[]> linearVectorMaps)
         {
             var linearVectorMapsArray = linearVectorMaps.ToArray();
 
             var domainGaSpaceDim =
                 linearVectorMapsArray.Length.ToGaSpaceDimension();
 
-            var targetGaSpaceDim =
-                linearVectorMapsArray[0].Length;
+            var targetVSpaceDim =
+                linearVectorMapsArray[0].Length.ToVSpaceDimension();
 
-            var omMapDict = new Dictionary<int, GaSymMultivector>();
+            var omMapDict = new Dictionary<ulong, GaSymMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
-            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetGaSpaceDim));
+            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaSymMultivector basisBladeImage;
 
@@ -358,20 +355,20 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaSymMultivector> ToOutermorphismDictionary(this Expr[,] linearVectorMapsArray)
+        public static Dictionary<ulong, GaSymMultivector> ToOutermorphismDictionary(this Expr[,] linearVectorMapsArray)
         {
             var domainGaSpaceDim =
                 linearVectorMapsArray.GetLength(1).ToGaSpaceDimension();
 
-            var targetGaSpaceDim =
-                linearVectorMapsArray.GetLength(0).ToGaSpaceDimension();
+            var targetVSpaceDim =
+                linearVectorMapsArray.GetLength(0);
 
-            var omMapDict = new Dictionary<int, GaSymMultivector>();
+            var omMapDict = new Dictionary<ulong, GaSymMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
-            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetGaSpaceDim));
+            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaSymMultivector basisBladeImage;
 
@@ -400,20 +397,20 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaSymMultivector> ToOutermorphismDictionary(this ISymbolicMatrix linearVectorMapMatrix)
+        public static Dictionary<ulong, GaSymMultivector> ToOutermorphismDictionary(this ISymbolicMatrix linearVectorMapMatrix)
         {
             var domainGaSpaceDim =
                 linearVectorMapMatrix.ColumnCount.ToGaSpaceDimension();
 
-            var targetGaSpaceDim =
-                linearVectorMapMatrix.RowCount.ToGaSpaceDimension();
+            var targetVSpaceDim =
+                linearVectorMapMatrix.RowCount;
 
-            var omMapDict = new Dictionary<int, GaSymMultivector>();
+            var omMapDict = new Dictionary<ulong, GaSymMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
-            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetGaSpaceDim));
+            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaSymMultivector basisBladeImage;
 
@@ -443,22 +440,22 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaSymMultivector> ToOutermorphismDictionary(this IEnumerable<IGaSymMultivector> linearVectorMaps)
+        public static Dictionary<ulong, GaSymMultivector> ToOutermorphismDictionary(this IEnumerable<IGaSymMultivector> linearVectorMaps)
         {
             var linearVectorMapsArray = linearVectorMaps.ToArray();
 
             var domainGaSpaceDim =
                 linearVectorMapsArray.Length.ToGaSpaceDimension();
 
-            var targetGaSpaceDim =
-                linearVectorMapsArray[0].GaSpaceDimension;
+            var targetVSpaceDim =
+                linearVectorMapsArray[0].VSpaceDimension;
 
-            var omMapDict = new Dictionary<int, GaSymMultivector>();
+            var omMapDict = new Dictionary<ulong, GaSymMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
-            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetGaSpaceDim));
+            omMapDict.Add(0, GaSymMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaSymMultivector basisBladeImage;
 
@@ -547,16 +544,19 @@ namespace GeometricAlgebraSymbolicsLib.Maps
 
         public static GaSymMapUnilinearHash ToHashMap(this ISymbolicMatrix linearMapMatrix)
         {
-            Debug.Assert(linearMapMatrix.RowCount.IsValidGaSpaceDimension() && linearMapMatrix.ColumnCount.IsValidGaSpaceDimension());
+            Debug.Assert(
+                linearMapMatrix.RowCount.IsValidGaSpaceDimension() && 
+                linearMapMatrix.ColumnCount.IsValidGaSpaceDimension()
+            );
 
             var resultMap = GaSymMapUnilinearHash.Create(
                 linearMapMatrix.ColumnCount.ToVSpaceDimension(),
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
-                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, id);
+                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, (int)id);
 
                 if (!mv.IsNullOrZero())
                     resultMap.SetBasisBladeMap(id, mv);
@@ -574,9 +574,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
-                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, id);
+                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, (int)id);
 
                 if (!mv.IsNullOrZero())
                     resultMap.SetBasisBladeMap(id, mv);
@@ -594,9 +594,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
-                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, id);
+                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, (int)id);
 
                 if (!mv.IsNullOrZero())
                     resultMap.SetBasisBladeMap(id, mv);
@@ -614,9 +614,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
-                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, id);
+                var mv = GaSymMultivector.CreateFromColumn(linearMapMatrix, (int)id);
 
                 if (!mv.IsNullOrZero())
                     resultMap.SetBasisBladeMap(id, mv);
@@ -631,7 +631,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
         }
 
 
-        public static GaSymMapUnilinearHash ToHashMap(this Dictionary<int, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaSymMapUnilinearHash ToHashMap(this Dictionary<ulong, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaSymMapUnilinearHash.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -641,7 +641,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return resultMap;
         }
 
-        public static GaSymMapUnilinearTree ToTreeMap(this Dictionary<int, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaSymMapUnilinearTree ToTreeMap(this Dictionary<ulong, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaSymMapUnilinearTree.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -651,7 +651,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return resultMap;
         }
 
-        public static GaSymMapUnilinearArray ToArrayMap(this Dictionary<int, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaSymMapUnilinearArray ToArrayMap(this Dictionary<ulong, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaSymMapUnilinearArray.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -661,7 +661,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return resultMap;
         }
 
-        public static GaSymMapUnilinearCoefSums ToCoefSumsMap(this Dictionary<int, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaSymMapUnilinearCoefSums ToCoefSumsMap(this Dictionary<ulong, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaSymMapUnilinearCoefSums.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -671,7 +671,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
             return resultMap;
         }
 
-        public static GaSymMapUnilinearMatrix ToMatrixMap(this Dictionary<int, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaSymMapUnilinearMatrix ToMatrixMap(this Dictionary<ulong, GaSymMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var targetGaSpaceDim = targetVSpaceDim.ToGaSpaceDimension();
             var zeroMvArray = new Expr[targetGaSpaceDim];
@@ -680,11 +680,11 @@ namespace GeometricAlgebraSymbolicsLib.Maps
                 MathematicaMatrix.CreateFullMatrixFromColumns(
                     GaSymbolicsUtils.Cas,
                     Enumerable
-                        .Range(0, domainVSpaceDim.ToGaSpaceDimension())
+                        .Range(0, (int)domainVSpaceDim.ToGaSpaceDimension())
                         .Select(
                             id =>
                             {
-                                basisBladeMaps.TryGetValue(id, out var mv);
+                                basisBladeMaps.TryGetValue((ulong)id, out var mv);
 
                                 return mv?.TermsToExprArray()
                                        ?? zeroMvArray;

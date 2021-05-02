@@ -39,7 +39,7 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
 
             if (TosTreeDepth == 0)
             {
-                TosValue = Multivector[(int)TosId];
+                TosValue = Multivector[TosId];
             }
 
             TosIndex--;

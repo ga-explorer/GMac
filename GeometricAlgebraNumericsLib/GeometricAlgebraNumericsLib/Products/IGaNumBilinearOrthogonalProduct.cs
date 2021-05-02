@@ -5,6 +5,6 @@ namespace GeometricAlgebraNumericsLib.Products
 {
     public interface IGaNumBilinearOrthogonalProduct : IGaNumMapBilinear
     {
-        GaNumTerm MapToTerm(int id1, int id2);
+        GaNumTerm MapToTerm(ulong id1, ulong id2);
     }
 }

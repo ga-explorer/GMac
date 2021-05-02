@@ -93,8 +93,8 @@ namespace GeometricAlgebraSymbolicsLib.Frames
                 MathematicaScalar.Create(
                     GaSymbolicsUtils.Cas,
                     MaxBasisBladeId.BasisBladeIdHasNegativeReverse()
-                        ? -1.0d / OrthonormalMetric[MaxBasisBladeId]
-                        : 1.0d / OrthonormalMetric[MaxBasisBladeId]
+                        ? -1.0d / OrthonormalMetric[(int)MaxBasisBladeId]
+                        : 1.0d / OrthonormalMetric[(int)MaxBasisBladeId]
                 );
         }
 
@@ -110,9 +110,9 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             InnerProductMatrix = MathematicaMatrix.CreateDiagonal(v);
         }
 
-        public override MathematicaScalar BasisVectorSignature(int basisVectorIndex)
+        public override MathematicaScalar BasisVectorSignature(ulong basisVectorIndex)
         {
-            if (basisVectorIndex >= 0 && basisVectorIndex < VSpaceDimension)
+            if (basisVectorIndex < (ulong)VSpaceDimension)
                 return BasisVectorsSignatures[basisVectorIndex] < 0
                     ? CasConstants.MinusOne
                     : CasConstants.One;
@@ -120,14 +120,14 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             throw new IndexOutOfRangeException();
         }
 
-        public override GaSymMultivector BasisBladeSignature(int id)
+        public override GaSymMultivector BasisBladeSignature(ulong id)
         {
-            if (id < 0 || id >= GaSpaceDimension) 
+            if (id >= GaSpaceDimension)
                 throw new IndexOutOfRangeException();
 
             return GaSymMultivector.CreateScalar(
-                GaSpaceDimension,
-                OrthonormalMetric[id] < 0
+                VSpaceDimension,
+                OrthonormalMetric[(int)id] < 0
                     ? CasConstants.MinusOne 
                     : CasConstants.One
                 );

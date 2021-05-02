@@ -63,10 +63,10 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Products
             => GaFrameUtils.IsNonZeroEHip(TosId1, TosId2);
 
         public bool TosIsNonZeroEAcp
-            => GaFrameUtils.IsNonZeroEAcp((int)TosId1, (int)TosId2);
+            => GaFrameUtils.IsNonZeroEAcp(TosId1, TosId2);
 
         public bool TosIsNonZeroECp
-            => GaFrameUtils.IsNonZeroECp((int)TosId1, (int)TosId2);
+            => GaFrameUtils.IsNonZeroECp(TosId1, TosId2);
 
         public ulong TosChildIdXor00
             => Stack1.TosChildId0 ^ Stack2.TosChildId0;
@@ -118,8 +118,8 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Products
 
         public GaTerm<double> TosGetTermsEGp()
         {
-            var id1 = (int)TosId1;
-            var id2 = (int)TosId2;
+            var id1 = TosId1;
+            var id2 = TosId2;
 
             var value = TosValue1 * TosValue2;
 
@@ -144,8 +144,8 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Products
 
         public GaTerm<double> TosGetTermsGp(double basisBladeSignature)
         {
-            var id1 = (int)TosId1;
-            var id2 = (int)TosId2;
+            var id1 = TosId1;
+            var id2 = TosId2;
 
             var value = TosValue1 * TosValue2 * basisBladeSignature;
 

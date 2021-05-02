@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -15,7 +14,7 @@ namespace GMac.GMacScripting
         {
             get
             {
-                if (String.IsNullOrEmpty(shortcut)) return String.Empty;
+                if (string.IsNullOrEmpty(shortcut)) return string.Empty;
 
                 return
                     _shortcutsDictionary.TryGetValue(shortcut.ToLower(), out var methodName)
@@ -23,11 +22,11 @@ namespace GMac.GMacScripting
             }
             set
             {
-                if (String.IsNullOrEmpty(shortcut)) return;
+                if (string.IsNullOrEmpty(shortcut)) return;
 
                 var command = shortcut.Trim().ToLower();
 
-                if (String.IsNullOrEmpty(shortcut)) return;
+                if (string.IsNullOrEmpty(shortcut)) return;
 
                 if (_shortcutsDictionary.ContainsKey(command))
                     _shortcutsDictionary[command] = value;
@@ -73,7 +72,7 @@ namespace GMac.GMacScripting
                 var key = pair.Substring(idx + 1).Trim().ToLower();
                 var value = pair.Substring(0, idx).Trim().ToLower();
 
-                if (String.IsNullOrEmpty(key) || string.IsNullOrEmpty(value)) continue;
+                if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value)) continue;
 
                 _shortcutsDictionary.Add(key, value);
             }
@@ -145,7 +144,7 @@ namespace GMac.GMacScripting
         {
             var commands =
                 shortcuts.Where(
-                    s => String.IsNullOrEmpty(s) == false && String.IsNullOrEmpty(s.Trim()) == false
+                    s => string.IsNullOrEmpty(s) == false && string.IsNullOrEmpty(s.Trim()) == false
                     )
                 .Select(s => s.ToLower());
 

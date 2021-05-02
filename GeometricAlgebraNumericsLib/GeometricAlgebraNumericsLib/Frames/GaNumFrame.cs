@@ -413,7 +413,7 @@ namespace GeometricAlgebraNumericsLib.Frames
 
             for (var i = 0; i < baseFrame.VSpaceDimension; i++)
             {
-                var id = (1 << i) ^ baseFrame.MaxBasisBladeId;
+                var id = (1UL << i) ^ baseFrame.MaxBasisBladeId;
                 var mv1 = GaNumSarMultivector.CreateTerm(baseFrame.VSpaceDimension, id, 1.0d);
 
                 var mv = baseFrame.Lcp[mv1, mv2];
@@ -456,9 +456,9 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         public abstract int VSpaceDimension { get; }
 
-        public int MaxBasisBladeId => GaFrameUtils.MaxBasisBladeId(VSpaceDimension);
+        public ulong MaxBasisBladeId => GaFrameUtils.MaxBasisBladeId(VSpaceDimension);
 
-        public int GaSpaceDimension => VSpaceDimension.ToGaSpaceDimension();
+        public ulong GaSpaceDimension => VSpaceDimension.ToGaSpaceDimension();
 
         public int GradesCount => VSpaceDimension + 1;
 
@@ -683,7 +683,7 @@ namespace GeometricAlgebraNumericsLib.Frames
 
         public abstract double BasisVectorSignature(int basisVectorIndex);
 
-        public abstract GaNumSarMultivector BasisBladeSignature(int id);
+        public abstract GaNumSarMultivector BasisBladeSignature(ulong id);
 
 
         public GaNumSarMultivector CreateUnitPseudoScalar()

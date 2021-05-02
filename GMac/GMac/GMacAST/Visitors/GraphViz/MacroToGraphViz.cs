@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using CodeComposerLib.GraphViz.Dot;
@@ -288,7 +287,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
         public void Visit(AstUnaryExpression expr)
         {
             var opName =
-                String.IsNullOrEmpty(expr.OperatorSymbol)
+                string.IsNullOrEmpty(expr.OperatorSymbol)
                     ? expr.OperatorName
                     : expr.OperatorSymbol;
 
@@ -337,7 +336,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
         public void Visit(AstBinaryExpression expr)
         {
             var opName =
-                String.IsNullOrEmpty(expr.OperatorSymbol)
+                string.IsNullOrEmpty(expr.OperatorSymbol)
                     ? expr.OperatorName
                     : expr.OperatorSymbol;
 

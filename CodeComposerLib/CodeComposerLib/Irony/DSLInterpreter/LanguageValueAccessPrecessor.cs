@@ -169,13 +169,13 @@ namespace CodeComposerLib.Irony.DSLInterpreter
             {
                 var newOpExpr = ReplaceLValueByExpression(pair.Value, oldLvalue, newExpr);
 
-                newOperands.Add(pair.Key, newOpExpr);
+                newOperands.Add((int)pair.Key, newOpExpr);
             }
 
             oldOperands.OperandsDictionary.Clear();
 
             foreach (var pair in newOperands)
-                oldOperands.AddOperand(pair.Key, pair.Value);
+                oldOperands.AddOperand((ulong)pair.Key, pair.Value);
 
             return oldOperands;
         }

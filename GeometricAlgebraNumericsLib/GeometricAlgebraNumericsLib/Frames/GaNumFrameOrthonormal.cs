@@ -91,7 +91,7 @@ namespace GeometricAlgebraNumericsLib.Frames
 
             UnitPseudoScalarCoef =
                 (MaxBasisBladeId.BasisBladeIdHasNegativeReverse() ? -1.0d : 1.0d) / 
-                OrthonormalMetric[MaxBasisBladeId];
+                OrthonormalMetric[(int)MaxBasisBladeId];
         }
 
         
@@ -114,14 +114,14 @@ namespace GeometricAlgebraNumericsLib.Frames
             throw new IndexOutOfRangeException();
         }
 
-        public override GaNumSarMultivector BasisBladeSignature(int id)
+        public override GaNumSarMultivector BasisBladeSignature(ulong id)
         {
-            if (id < 0 || id >= GaSpaceDimension)
+            if (id >= GaSpaceDimension)
                 throw new IndexOutOfRangeException();
 
             return GaNumSarMultivector.CreateScalar(
                 VSpaceDimension,
-                OrthonormalMetric[id] < 0 ? -1.0d : 1.0d
+                OrthonormalMetric[(int)id] < 0 ? -1.0d : 1.0d
             );
         }
 

@@ -53,7 +53,7 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
 
             if (TosTreeDepth == 0)
             {
-                TosValue = Term[(int)TosId];
+                TosValue = Term[TosId];
             }
 
             TosIndex--;
@@ -62,7 +62,7 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
         public override bool TosHasChild(int childIndex)
         {
             var v = 
-                (1ul << (TosTreeDepth - 1)) & (ulong) Term.BasisBladeId;
+                (1ul << (TosTreeDepth - 1)) & Term.BasisBladeId;
 
             return (childIndex & 1) == 0
                 ? v == 0

@@ -50,8 +50,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
                 Console.WriteLine();
 
                 var rotorsSequence = 
-                    GaPoTSymRotorsSequence.Create(
-                        sourceFrame.GetRotorsToFrame(targetFrame)
+                    GaPoTSymRotorsSequence.CreateFromOrthonormalFrames(
+                        sourceFrame,
+                        targetFrame
                     );
 
                 //if (!rotorsSequence.ValidateRotation(sourceFrame, targetFrame))
@@ -193,8 +194,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             var frame1 = GaPoTSymFrame.CreateGramSchmidtFrame(n).GetSwappedPairsFrame();
             var frame2 = GaPoTSymFrame.CreateClarkeFrame(n);
 
-            var rotorsSequence = GaPoTSymRotorsSequence.Create(
-                frame1.GetRotorsToFrame(frame2)
+            var rotorsSequence = GaPoTSymRotorsSequence.CreateFromOrthonormalFrames(
+                frame1, 
+                frame2
             );
 
             var i = 1;

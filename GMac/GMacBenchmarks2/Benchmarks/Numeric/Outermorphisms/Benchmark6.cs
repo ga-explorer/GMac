@@ -23,7 +23,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.Outermorphisms
         //[Params(3, 4, 5, 6, 7, 8, 9, 10)]
         public int VSpaceDim { get; set; }
 
-        public int GaSpaceDim
+        public ulong GaSpaceDim
             => VSpaceDim.ToGaSpaceDimension();
 
 

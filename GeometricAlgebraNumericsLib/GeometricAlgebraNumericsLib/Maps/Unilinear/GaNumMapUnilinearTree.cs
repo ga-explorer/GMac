@@ -38,18 +38,18 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
         {
             get
             {
                 BasisBladesMapTree.TryGetLeafValue(
                     DomainVSpaceDimension,
-                    (ulong)id1, 
+                    id1, 
                     out var mv
                 );
 
                 return mv 
-                       ?? GaNumTerm.CreateZero(TargetGaSpaceDimension);
+                       ?? GaNumTerm.CreateZero(TargetVSpaceDimension);
             }
         }
 
@@ -114,7 +114,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                     if (node1.IsLeafNode)
                     {
                         tempMv.AddTerms(
-                            mv[(int)node2.Id], 
+                            mv[node2.Id], 
                             node1.Value
                         );
 
@@ -163,7 +163,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearTree SetBasisBladeMap(int basisBladeId, IGaNumMultivector targetMv)
+        public GaNumMapUnilinearTree SetBasisBladeMap(ulong basisBladeId, IGaNumMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -174,7 +174,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
             BasisBladesMapTree.SetLeafValue(
                 DomainVSpaceDimension, 
-                (ulong)basisBladeId, 
+                basisBladeId, 
                 targetMv
             );
 
@@ -182,13 +182,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
         
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
             return BasisBladesMapTree
                 .GetNodeInfo(DomainVSpaceDimension, 0)
                 .GetTreeLeafValuePairs()
                 .Where(pair => !pair.Value.IsNullOrEmpty())
-                .Select(pair => new Tuple<int, IGaNumMultivector>((int)pair.Key, pair.Value));
+                .Select(pair => new Tuple<ulong, IGaNumMultivector>(pair.Key, pair.Value));
         }
     }
 }

@@ -32,8 +32,8 @@ namespace GMacBenchmarks2.Samples.Memory.Numeric
                 var gaSpaceDim = vSpaceDim.ToGaSpaceDimension();
 
                 var mvSize =
-                    Enumerable.Range(0, gaSpaceDim).Select(
-                        id => randGen.GetNumTerm(id).CreateDgrMultivector(vSpaceDim).SizeInBytes()
+                    Enumerable.Range(0, (int)gaSpaceDim).Select(
+                        id => randGen.GetNumTerm((ulong)id).CreateDgrMultivector(vSpaceDim).SizeInBytes()
                     ).Max();
 
                 composer.AppendLine(mvSize);

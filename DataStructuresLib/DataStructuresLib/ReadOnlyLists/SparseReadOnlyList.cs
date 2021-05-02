@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataStructuresLib.SparseArray
+namespace DataStructuresLib.ReadOnlyLists
 {
-    public sealed class SparseArray1D<T>
+    public sealed class SparseReadOnlyList<T>
         : IReadOnlyList<T>
     {
         private readonly Dictionary<int, T> _itemsDictionary
@@ -41,7 +41,7 @@ namespace DataStructuresLib.SparseArray
         }
 
 
-        public SparseArray1D(int count)
+        public SparseReadOnlyList(int count)
         {
             Count = Count;
         }

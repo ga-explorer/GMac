@@ -23,7 +23,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
         public int VSpaceDimension { get; }
             = 10;
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
 
@@ -45,7 +45,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
             //Create random terms with non-unique basis blade IDs
             _termsArray2 =
                 _randomGenerator
-                    .GetNumTerms(VSpaceDimension, VSpaceDimension.ToGaSpaceDimension())
+                    .GetNumTerms(VSpaceDimension, (int)VSpaceDimension.ToGaSpaceDimension())
                     .ToArray();
 
             //Create a multivector from the sum of the random terms with non-unique basis blade IDs
@@ -153,7 +153,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
             var resultMultivector =
                 CreateMultivector(factory, multivectorKind, "copy");
 
-            for (var id = 0; id < GaSpaceDimension; id++)
+            for (var id = 0UL; id < GaSpaceDimension; id++)
             {
                 Assert.IsTrue(
                     resultMultivector[id] == _referenceMultivector1[id]
@@ -177,7 +177,7 @@ namespace GeometricAlgebraNumericsLib.UnitTests.Multivectors
             {
                 var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                for (var index = 0; index < kvSpaceDim; index++)
+                for (var index = 0UL; index < kvSpaceDim; index++)
                 {
                     Assert.IsTrue(
                         resultMultivector[grade, index] == _referenceMultivector1[grade, index]

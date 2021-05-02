@@ -433,7 +433,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
                 var id = ((ValueAccessStepByKey<int>)childValueAccess.LastAccessStep).AccessKey;
 
-                mv.SymbolicMultivector.SetTermCoef(id, scalarValue.Value);
+                mv.SymbolicMultivector.SetTermCoef((ulong)id, scalarValue.Value);
             }
 
             return mv;
@@ -532,8 +532,8 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
                 {
                     var id = ((ValueAccessStepByKey<int>)childValueAccess.LastAccessStep).AccessKey;
 
-                    if (mvValue.SymbolicMultivector.ContainsBasisBlade(id))
-                        DefineTemp(childValueAccess, ProcessRhsValue(mvValue[id]));
+                    if (mvValue.SymbolicMultivector.ContainsBasisBlade((ulong)id))
+                        DefineTemp(childValueAccess, ProcessRhsValue(mvValue[(ulong)id]));
                 }
 
                 return;
@@ -551,7 +551,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.LowLevel.Generator
 
                 //If the low-level output parameter is not defined it's value is ignored
                 if (_hlDictionary.TryGetValue(hlName, out var llDataItem))
-                    llDataItem.SetAssignedRhsValue(ProcessRhsValue(mvValue[id]), _llVarEvaluationOrder++);
+                    llDataItem.SetAssignedRhsValue(ProcessRhsValue(mvValue[(ulong)id]), _llVarEvaluationOrder++);
             }
         }
 

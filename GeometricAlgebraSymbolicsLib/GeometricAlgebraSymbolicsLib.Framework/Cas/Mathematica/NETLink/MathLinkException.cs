@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// The exception thrown by methods in the <see cref="IMathLink"/> and <see cref="IKernelLink"/> interfaces when a link error occurs.

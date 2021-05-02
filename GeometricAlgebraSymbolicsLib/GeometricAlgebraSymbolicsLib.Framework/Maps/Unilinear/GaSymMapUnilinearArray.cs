@@ -33,7 +33,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
             foreach (var id1 in idsList)
             {
-                var resultMv = linearMap[id1];
+                var resultMv = linearMap[(ulong) id1];
 
                 if (!resultMv.IsNullOrZero())
                     table._basisBladeMaps[id1] = resultMv;
@@ -50,9 +50,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1]
+        public override IGaSymMultivector this[ulong id1]
             => _basisBladeMaps[id1]
-                ?? GaSymMultivectorTerm.CreateZero(TargetGaSpaceDimension);
+                ?? GaSymMultivectorTerm.CreateZero(TargetVSpaceDimension);
 
 
         private GaSymMapUnilinearArray(int targetVSpaceDim)
@@ -74,13 +74,13 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         public GaSymMapUnilinearArray ClearBasisBladesMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
                 _basisBladeMaps[id] = null;
 
             return this;
         }
 
-        public GaSymMapUnilinearArray SetBasisBladeMap(int basisBladeId, IGaSymMultivector targetMv)
+        public GaSymMapUnilinearArray SetBasisBladeMap(ulong basisBladeId, IGaSymMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -89,7 +89,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearArray RemoveBasisBladesMap(int id1)
+        public GaSymMapUnilinearArray RemoveBasisBladesMap(ulong id1)
         {
             _basisBladeMaps[id1] = null;
 
@@ -97,7 +97,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
             return _basisBladeMaps[id1].ToTempMultivector();
         }
@@ -107,7 +107,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var tempMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term1 in mv1.NonZeroExprTerms)
             {
@@ -121,13 +121,13 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return tempMv;
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var basisBladeMv = _basisBladeMaps[id];
                 if (!ReferenceEquals(basisBladeMv, null))
-                    yield return new Tuple<int, IGaSymMultivector>(id, basisBladeMv);
+                    yield return new Tuple<ulong, IGaSymMultivector>(id, basisBladeMv);
             }
         }
     }

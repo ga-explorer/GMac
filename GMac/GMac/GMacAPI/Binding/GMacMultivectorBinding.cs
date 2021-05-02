@@ -8,13 +8,13 @@ using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
 using GMac.GMacAST.Symbols;
 using GMac.GMacCompiler.Semantic.AST;
 using TextComposerLib.Text.Parametric;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Binding
 {
@@ -22,7 +22,8 @@ namespace GMac.GMacAPI.Binding
     /// This class represents an abstract binding pattern of a composite sub-component of some 
     /// GMac data-store to a multivector of the same multivector type
     /// </summary>
-    public sealed class GMacMultivectorBinding : IGMacCompositeBinding, IGMacTypedBinding, IEnumerable<KeyValuePair<int, GMacScalarBinding>>
+    public sealed class GMacMultivectorBinding 
+        : IGMacCompositeBinding, IGMacTypedBinding, IEnumerable<KeyValuePair<ulong, GMacScalarBinding>>
     {
         /// <summary>
         /// Create an empty multivector pattern
@@ -128,7 +129,7 @@ namespace GMac.GMacAPI.Binding
             var mvPattern = new GMacMultivectorBinding(subspace.FrameMultivector);
 
             foreach (var id in subspace.AssociatedSubspace.SubspaceSignaturePattern.TrueIndexes)
-                mvPattern.BindCoefToVariable(id);
+                mvPattern.BindCoefToVariable((ulong)id);
 
             return mvPattern;
         }
@@ -159,8 +160,8 @@ namespace GMac.GMacAPI.Binding
         }
 
 
-        private readonly Dictionary<int, GMacScalarBinding> _patternDictionary =
-            new Dictionary<int, GMacScalarBinding>();
+        private readonly Dictionary<ulong, GMacScalarBinding> _patternDictionary =
+            new Dictionary<ulong, GMacScalarBinding>();
 
 
         /// <summary>
@@ -188,7 +189,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs used in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundIDs
+        public IEnumerable<ulong> BoundIDs
         {
             get { return _patternDictionary.Select(pair => pair.Key); }
         }
@@ -196,7 +197,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs used in constant scalar bindings in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundConstantIDs
+        public IEnumerable<ulong> BoundConstantIDs
         {
             get
             {
@@ -210,7 +211,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs used in variable and non-zero constant scalar bindings in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundNonZeroIDs
+        public IEnumerable<ulong> BoundNonZeroIDs
         {
             get
             {
@@ -224,7 +225,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs used in zero constant scalar bindings in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundZeroConstantIDs
+        public IEnumerable<ulong> BoundZeroConstantIDs
         {
             get
             {
@@ -238,7 +239,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs used in non-zero constant scalar bindings in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundNonZeroConstantIDs
+        public IEnumerable<ulong> BoundNonZeroConstantIDs
         {
             get
             {
@@ -252,7 +253,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs used in variable scalar bindings in this binding pattern
         /// </summary>
-        public IEnumerable<int> BoundVariableIDs
+        public IEnumerable<ulong> BoundVariableIDs
         {
             get
             {
@@ -266,14 +267,15 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The basis blade IDs not used in scalar bindings in this binding pattern
         /// </summary>
-        public IEnumerable<int> NotBoundIDs
+        public IEnumerable<ulong> NotBoundIDs
         {
             get
             {
                 return
                     Enumerable
-                    .Range(0, BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.MaxBasisBladeId)
-                    .Where(id => _patternDictionary.ContainsKey(id) == false);
+                    .Range(0, (int)BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.MaxBasisBladeId)
+                    .Where(id => _patternDictionary.ContainsKey((ulong)id) == false)
+                    .Select(id => (ulong)id);
             }
         }
 
@@ -329,7 +331,7 @@ namespace GMac.GMacAPI.Binding
         /// <summary>
         /// The constant bindings in this pattern
         /// </summary>
-        public Dictionary<int, Expr> Constants
+        public Dictionary<ulong, Expr> Constants
         {
             get
             {
@@ -345,7 +347,8 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public GMacScalarBinding this[int id] => _patternDictionary[id];
+        public GMacScalarBinding this[ulong id] 
+            => _patternDictionary[id];
 
         /// <summary>
         /// Gets the scalar binding pattern associated with the given basis blade
@@ -353,7 +356,8 @@ namespace GMac.GMacAPI.Binding
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public GMacScalarBinding this[int grade, int index] => _patternDictionary[GaFrameUtils.BasisBladeId(grade, index)];
+        public GMacScalarBinding this[int grade, ulong index] 
+            => _patternDictionary[GaFrameUtils.BasisBladeId(grade, index)];
 
 
         private GMacMultivectorBinding(AstFrameMultivector patternType)
@@ -375,12 +379,12 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool HasBoundCoef(int id)
+        public bool HasBoundCoef(ulong id)
         {
             return _patternDictionary.ContainsKey(id);
         }
 
-        public bool HasBoundCoef(int grade, int index)
+        public bool HasBoundCoef(int grade, ulong index)
         {
             return _patternDictionary.ContainsKey(GaFrameUtils.BasisBladeId(grade, index));
         }
@@ -391,17 +395,17 @@ namespace GMac.GMacAPI.Binding
         }
 
 
-        public bool ContainsVariable(int id)
+        public bool ContainsVariable(ulong id)
         {
             return _patternDictionary.TryGetValue(id, out var pattern) && pattern.IsVariable;
         }
 
-        public bool ContainsConstant(int id)
+        public bool ContainsConstant(ulong id)
         {
             return _patternDictionary.TryGetValue(id, out var pattern) && pattern.IsConstant;
         }
 
-        public bool ContainsConstant(int id, Expr value)
+        public bool ContainsConstant(ulong id, Expr value)
         {
             return 
                 _patternDictionary.TryGetValue(id, out var pattern) && 
@@ -409,7 +413,7 @@ namespace GMac.GMacAPI.Binding
                 GaSymbolicsUtils.Cas.EvalTrueQ(Mfs.Equal[pattern.ConstantExpr, value]);
         }
 
-        public bool ContainsScalarPattern(int id, GMacScalarBinding scalarPattern)
+        public bool ContainsScalarPattern(ulong id, GMacScalarBinding scalarPattern)
         {
             return 
                 scalarPattern.IsVariable 
@@ -461,21 +465,21 @@ namespace GMac.GMacAPI.Binding
         }
 
         
-        public GMacMultivectorBinding UnBindCoef(int id)
+        public GMacMultivectorBinding UnBindCoef(ulong id)
         {
             _patternDictionary.Remove(id);
 
             return this;
         }
 
-        public GMacMultivectorBinding UnBindCoef(int grade, int index)
+        public GMacMultivectorBinding UnBindCoef(int grade, ulong index)
         {
             _patternDictionary.Remove(GaFrameUtils.BasisBladeId(grade, index));
 
             return this;
         }
 
-        public GMacMultivectorBinding UnBindCoefs(IEnumerable<int> ids)
+        public GMacMultivectorBinding UnBindCoefs(IEnumerable<ulong> ids)
         {
             foreach (var id in ids)
                 _patternDictionary.Remove(id);
@@ -490,7 +494,7 @@ namespace GMac.GMacAPI.Binding
             return this;
         }
 
-        public GMacMultivectorBinding UnBindCoefs(int grade, IEnumerable<int> indexes)
+        public GMacMultivectorBinding UnBindCoefs(int grade, IEnumerable<ulong> indexes)
         {
             foreach (var index in indexes)
                 _patternDictionary.Remove(GaFrameUtils.BasisBladeId(grade, index));
@@ -506,7 +510,7 @@ namespace GMac.GMacAPI.Binding
         /// <param name="id"></param>
         /// <param name="pattern"></param>
         /// <returns></returns>
-        public GMacMultivectorBinding BindCoefToPattern(int id, GMacScalarBinding pattern)
+        public GMacMultivectorBinding BindCoefToPattern(ulong id, GMacScalarBinding pattern)
         {
             if (BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.IsValidBasisBladeId(id) == false)
                 throw new InvalidOperationException("Basis Blade ID not accepted");
@@ -524,7 +528,7 @@ namespace GMac.GMacAPI.Binding
         }
 
 
-        public GMacMultivectorBinding BindCoefToConstant(int id, Expr valueExpr)
+        public GMacMultivectorBinding BindCoefToConstant(ulong id, Expr valueExpr)
         {
             return BindCoefToPattern(
                 id, 
@@ -532,7 +536,7 @@ namespace GMac.GMacAPI.Binding
                 );
         }
 
-        public GMacMultivectorBinding BindCoefToVariable(int id)
+        public GMacMultivectorBinding BindCoefToVariable(ulong id)
         {
             return BindCoefToPattern(
                 id,
@@ -540,7 +544,7 @@ namespace GMac.GMacAPI.Binding
                 );
         }
 
-        public GMacMultivectorBinding BindCoefToConstant(int grade, int index, Expr valueExpr)
+        public GMacMultivectorBinding BindCoefToConstant(int grade, ulong index, Expr valueExpr)
         {
             return BindCoefToPattern(
                 GaFrameUtils.BasisBladeId(grade, index),
@@ -548,7 +552,7 @@ namespace GMac.GMacAPI.Binding
                 );
         }
 
-        public GMacMultivectorBinding BindCoefToVariable(int grade, int index)
+        public GMacMultivectorBinding BindCoefToVariable(int grade, ulong index)
         {
             return BindCoefToPattern(
                 GaFrameUtils.BasisBladeId(grade, index),
@@ -556,7 +560,7 @@ namespace GMac.GMacAPI.Binding
                 );
         }
 
-        public GMacMultivectorBinding BindBasisVectorCoefToConstant(int index, Expr valueExpr)
+        public GMacMultivectorBinding BindBasisVectorCoefToConstant(ulong index, Expr valueExpr)
         {
             return BindCoefToPattern(
                 GaFrameUtils.BasisVectorId(index),
@@ -564,7 +568,7 @@ namespace GMac.GMacAPI.Binding
                 );
         }
 
-        public GMacMultivectorBinding BindBasisVectorCoefToVariable(int index)
+        public GMacMultivectorBinding BindBasisVectorCoefToVariable(ulong index)
         {
             return BindCoefToPattern(
                 GaFrameUtils.BasisVectorId(index),
@@ -581,7 +585,7 @@ namespace GMac.GMacAPI.Binding
             return this;
         }
 
-        public GMacMultivectorBinding BindCoefsToVariables(IEnumerable<int> ids)
+        public GMacMultivectorBinding BindCoefsToVariables(IEnumerable<ulong> ids)
         {
             foreach (var id in ids)
                 BindCoefToVariable(id);
@@ -589,7 +593,7 @@ namespace GMac.GMacAPI.Binding
             return this;
         }
 
-        public GMacMultivectorBinding BindCoefsToVariables(params int[] ids)
+        public GMacMultivectorBinding BindCoefsToVariables(params ulong[] ids)
         {
             foreach (var id in ids)
                 BindCoefToVariable(id);
@@ -597,7 +601,7 @@ namespace GMac.GMacAPI.Binding
             return this;
         }
 
-        public GMacMultivectorBinding BindCoefsToVariables(int grade, IEnumerable<int> indexes)
+        public GMacMultivectorBinding BindCoefsToVariables(int grade, IEnumerable<ulong> indexes)
         {
             foreach (var index in indexes)
                 BindCoefToVariable(grade, index);
@@ -614,7 +618,7 @@ namespace GMac.GMacAPI.Binding
             var kvSpaceDim =
                 GaFrameUtils.KvSpaceDimension(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension, grade);
 
-            for (var index = 0; index < kvSpaceDim; index++)
+            for (var index = 0UL; index < kvSpaceDim; index++)
                 BindCoefToVariable(grade, index);
 
             return this;
@@ -759,9 +763,9 @@ namespace GMac.GMacAPI.Binding
         /// <param name="bindingFunction"></param>
         /// <param name="ignoreNullPatterns"></param>
         /// <returns></returns>
-        public GMacMultivectorBinding BindUsing(Func<int, GMacScalarBinding> bindingFunction, bool ignoreNullPatterns = true)
+        public GMacMultivectorBinding BindUsing(Func<ulong, GMacScalarBinding> bindingFunction, bool ignoreNullPatterns = true)
         {
-            for (var id = 0; id < BaseFrame.GaSpaceDimension; id++)
+            for (var id = 0UL; id < BaseFrame.GaSpaceDimension; id++)
             {
                 var scalarPattern = bindingFunction(id);
 
@@ -781,9 +785,9 @@ namespace GMac.GMacAPI.Binding
         /// <param name="bindingFunction"></param>
         /// <param name="ignoreNullPatterns"></param>
         /// <returns></returns>
-        public GMacMultivectorBinding BindUsing(Func<AstFrame, int, GMacScalarBinding> bindingFunction, bool ignoreNullPatterns = true)
+        public GMacMultivectorBinding BindUsing(Func<AstFrame, ulong, GMacScalarBinding> bindingFunction, bool ignoreNullPatterns = true)
         {
-            for (var id = 0; id < BaseFrame.GaSpaceDimension; id++)
+            for (var id = 0UL; id < BaseFrame.GaSpaceDimension; id++)
             {
                 var scalarPattern = bindingFunction(BaseFrame, id);
 
@@ -805,7 +809,7 @@ namespace GMac.GMacAPI.Binding
         /// <returns></returns>
         public GMacMultivectorBinding BindUsing(Func<AstFrameBasisBlade, GMacScalarBinding> bindingFunction, bool ignoreNullPatterns = true)
         {
-            for (var id = 0; id < BaseFrame.GaSpaceDimension; id++)
+            for (var id = 0UL; id < BaseFrame.GaSpaceDimension; id++)
             {
                 var scalarPattern = bindingFunction(BaseFrame.BasisBlade(id));
 
@@ -841,7 +845,7 @@ namespace GMac.GMacAPI.Binding
             return s.ToString();
         }
 
-        public IEnumerator<KeyValuePair<int, GMacScalarBinding>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, GMacScalarBinding>> GetEnumerator()
         {
             return _patternDictionary.GetEnumerator();
         }
@@ -908,7 +912,7 @@ namespace GMac.GMacAPI.Binding
         public AstValueMultivector ToValue(StringSequenceTemplate varNameTemplate)
         {
             var mv = GaSymMultivector.CreateZero(
-                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension
                 );
 
             foreach (var pair in _patternDictionary)
@@ -927,12 +931,12 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         /// <param name="basisBladeToVarName"></param>
         /// <returns></returns>
-        public AstValueMultivector ToValue(Func<int, string> basisBladeToVarName)
+        public AstValueMultivector ToValue(Func<ulong, string> basisBladeToVarName)
         {
             //var frameInfo = new AstFrame(MultivectorType.AssociatedFrameMultivector.ParentFrame);
 
             var mv = GaSymMultivector.CreateZero(
-                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension
                 );
 
             foreach (var pair in _patternDictionary)
@@ -957,12 +961,12 @@ namespace GMac.GMacAPI.Binding
         /// </summary>
         /// <param name="basisBladeToVarName"></param>
         /// <returns></returns>
-        public AstValueMultivector ToValue(Func<AstFrame, int, string> basisBladeToVarName)
+        public AstValueMultivector ToValue(Func<AstFrame, ulong, string> basisBladeToVarName)
         {
             var frameInfo = new AstFrame(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame);
 
             var mv = GaSymMultivector.CreateZero(
-                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension
                 );
 
             foreach (var pair in _patternDictionary)
@@ -992,7 +996,7 @@ namespace GMac.GMacAPI.Binding
             var frameInfo = new AstFrame(BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame);
 
             var mv = GaSymMultivector.CreateZero(
-                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.GaSpaceDimension
+                BaseFrameMultivector.AssociatedFrameMultivector.ParentFrame.VSpaceDimension
                 );
 
             foreach (var pair in _patternDictionary)

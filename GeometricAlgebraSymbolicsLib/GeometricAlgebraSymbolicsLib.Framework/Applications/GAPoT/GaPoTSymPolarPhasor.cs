@@ -4,7 +4,7 @@ using System.Linq;
 using CodeComposerLib.LaTeX;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -14,7 +14,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymPolarPhasor(
                 p.Id, 
-                Mfs.Minus[p.Magnitude].GaPoTSymSimplify(),
+                Mfs.Minus[p.Magnitude].Evaluate(),
                 p.Phase
             );
         }
@@ -39,7 +39,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymPolarPhasor(
                 p.Id, 
-                Mfs.Times[p.Magnitude, s].GaPoTSymSimplify(),
+                Mfs.Times[p.Magnitude, s].Evaluate(),
                 p.Phase
             );
         }
@@ -48,7 +48,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymPolarPhasor(
                 p.Id, 
-                Mfs.Times[s, p.Magnitude].GaPoTSymSimplify(),
+                Mfs.Times[s, p.Magnitude].Evaluate(),
                 p.Phase
             );
         }
@@ -57,7 +57,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymPolarPhasor(
                 p.Id, 
-                Mfs.Divide[p.Magnitude, s].GaPoTSymSimplify(),
+                Mfs.Divide[p.Magnitude, s].Evaluate(),
                 p.Phase
             );
         }
@@ -103,20 +103,20 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public Expr Norm()
         {
-            return Mfs.Abs[Magnitude].GaPoTSymSimplify();
+            return Mfs.Abs[Magnitude].Evaluate();
         }
 
         public Expr Norm2()
         {
-            return Mfs.Times[Magnitude, Magnitude].GaPoTSymSimplify();
+            return Mfs.Times[Magnitude, Magnitude].Evaluate();
         }
 
         public GaPoTSymRectPhasor ToRectPhasor()
         {
             return new GaPoTSymRectPhasor(
                 Id,
-                Mfs.Times[Magnitude, Mfs.Cos[Phase]].GaPoTSymSimplify(),
-                Mfs.Times[Magnitude, Mfs.Sin[Phase]].GaPoTSymSimplify()
+                Mfs.Times[Magnitude, Mfs.Cos[Phase]].Evaluate(),
+                Mfs.Times[Magnitude, Mfs.Sin[Phase]].Evaluate()
             );
         }
 
@@ -139,8 +139,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             var i1 = Id;
             var i2 = Id + 1;
 
-            var magnitudeText = Magnitude.GetLaTeX().LaTeXMathAddParentheses();
-            var phaseText = Phase.GetLaTeX().LaTeXMathAddParentheses();
+            var magnitudeText = Magnitude.GetLaTeX().LaTeXMathRoundParentheses();
+            var phaseText = Phase.GetLaTeX().LaTeXMathRoundParentheses();
             var basisText1 = $"{i1},{i2}".GetLaTeXBasisName();
             var basisText2 = $"{i1}".GetLaTeXBasisName();
 

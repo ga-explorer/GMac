@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CodeComposerLib.GraphViz.UserInterface
+namespace CodeComposerLib.UI.WinForms.GraphViz.UserInterface
 {
     public partial class FormImageDisplay : Form
     {

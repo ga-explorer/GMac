@@ -6,6 +6,7 @@ using CodeComposerLib.Irony.Semantic.Command;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib;
 using GeometricAlgebraSymbolicsLib;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAPI.Binding;
 using GMac.GMacAST;
 using GMac.GMacAST.Commands;
@@ -20,7 +21,6 @@ using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 using TextComposerLib.Text.Parametric;
 using TextComposerLib.Text.Structured;
-using Wolfram.NETLink;
 
 namespace GMac.GMacScripting
 {
@@ -1028,7 +1028,7 @@ namespace GMac.GMacScripting
             return pattern.ToValue(varNameTemplate);
         }
 
-        public AstValueMultivector SubspaceToMultivector(string subspaceName, Func<int, string> basisBladeToVarName)
+        public AstValueMultivector SubspaceToMultivector(string subspaceName, Func<ulong, string> basisBladeToVarName)
         {
             var subspaceInfo = Subspace(subspaceName);
 
@@ -1039,7 +1039,7 @@ namespace GMac.GMacScripting
             return pattern.ToValue(basisBladeToVarName);
         }
 
-        public AstValueMultivector SubspaceToMultivector(string subspaceName, Func<AstFrame, int, string> basisBladeToVarName)
+        public AstValueMultivector SubspaceToMultivector(string subspaceName, Func<AstFrame, ulong, string> basisBladeToVarName)
         {
             var subspaceInfo = Subspace(subspaceName);
 

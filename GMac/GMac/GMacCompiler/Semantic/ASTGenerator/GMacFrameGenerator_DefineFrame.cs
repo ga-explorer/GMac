@@ -58,18 +58,18 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         /// <returns></returns>
         private GMacFrameSubspace DefineDefaultSubspaces_Even(GMacFrame frame)
         {
-            var idsList = new List<int>(frame.GaSpaceDimension);
+            var idsList = new List<int>((int)frame.GaSpaceDimension);
 
             for (var grade = 0; grade <= frame.VSpaceDimension; grade = grade + 2)
             {
                 var basisCount = GaFrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
 
-                for (var index = 0; index < basisCount; index++)
-                    idsList.Add(GaFrameUtils.BasisBladeId(grade, index));
+                for (var index = 0UL; index < basisCount; index++)
+                    idsList.Add((int)GaFrameUtils.BasisBladeId(grade, index));
             }
 
             const string subspaceName = "Even";
-            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes(frame.GaSpaceDimension, idsList);
+            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes((int)frame.GaSpaceDimension, idsList);
 
             var subspace = frame.DefineSubspace(subspaceName, subspaceSignature);
 
@@ -84,18 +84,18 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         /// <returns></returns>
         private GMacFrameSubspace DefineDefaultSubspaces_Odd(GMacFrame frame)
         {
-            var idsList = new List<int>(frame.GaSpaceDimension);
+            var idsList = new List<int>((int)frame.GaSpaceDimension);
 
             for (var grade = 1; grade <= frame.VSpaceDimension; grade = grade + 2)
             {
                 var basisCount = GaFrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
 
-                for (var index = 0; index < basisCount; index++)
-                    idsList.Add(GaFrameUtils.BasisBladeId(grade, index));
+                for (var index = 0UL; index < basisCount; index++)
+                    idsList.Add((int)GaFrameUtils.BasisBladeId(grade, index));
             }
 
             const string subspaceName = "Odd";
-            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes(frame.GaSpaceDimension, idsList);
+            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes((int)frame.GaSpaceDimension, idsList);
 
             var subspace = frame.DefineSubspace(subspaceName, subspaceSignature);
 
@@ -110,12 +110,12 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         private void DefineDefaultSubspaces_KVectors(GMacFrame frame, int grade, string subspaceName)
         {
             var basisCount = GaFrameUtils.KvSpaceDimension(frame.VSpaceDimension, grade);
-            var idsList = new List<int>(basisCount);
+            var idsList = new List<int>((int)basisCount);
 
-            for (var index = 0; index < basisCount; index++)
-                idsList.Add(GaFrameUtils.BasisBladeId(grade, index));
+            for (var index = 0UL; index < basisCount; index++)
+                idsList.Add((int)GaFrameUtils.BasisBladeId(grade, index));
 
-            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes(frame.GaSpaceDimension, idsList);
+            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes((int)frame.GaSpaceDimension, idsList);
 
             var subspace = frame.DefineSubspace(subspaceName, subspaceSignature);
 
@@ -143,10 +143,10 @@ namespace GMac.GMacCompiler.Semantic.ASTGenerator
         /// <returns></returns>
         private GMacFrameSubspace DefineDefaultSubspaces_FullGA(GMacFrame frame)
         {
-            var idsList = Enumerable.Range(0, frame.GaSpaceDimension).ToList();
+            var idsList = Enumerable.Range(0, (int)frame.GaSpaceDimension).ToList();
 
             const string subspaceName = "GA";
-            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes(frame.GaSpaceDimension, idsList);
+            var subspaceSignature = BooleanPattern.CreateFromTrueIndexes((int)frame.GaSpaceDimension, idsList);
 
             var subspace = frame.DefineSubspace(subspaceName, subspaceSignature);
 

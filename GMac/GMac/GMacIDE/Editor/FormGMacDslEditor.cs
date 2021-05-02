@@ -8,7 +8,7 @@ using CodeComposerLib.Irony.Semantic.Symbol;
 using CodeComposerLib.Irony.SourceCode;
 using FastColoredTextBoxNS;
 using GMac.GMacAPI.CodeGen;
-using GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct;
+using GMac.GMacAPI.CodeGen.BuiltIn.CSharp;
 using GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame;
 using GMac.GMacAST;
 using GMac.GMacCompiler;
@@ -17,7 +17,7 @@ using GMac.GMacIDE.AstExplorer;
 using GMac.GMacIDE.CodeGen;
 using GMac.GMacIDE.Scripting;
 using GMac.GMacIDE.Tools;
-using TextComposerLib;
+using TextComposerLib.UI.WinForms;
 
 namespace GMac.GMacIDE.Editor
 {
@@ -165,7 +165,7 @@ namespace GMac.GMacIDE.Editor
                 !ReferenceEquals(_dslProject, null) &&
                 _dslProject.ContainsSourceFiles;
 
-            Text = @"GMac Compiler IDE" + (SourceCodeTextEditor.IsChanged ? @" (*)" : String.Empty);
+            Text = @"GMac Compiler IDE" + (SourceCodeTextEditor.IsChanged ? @" (*)" : string.Empty);
         }
 
         private void UpdateInterface_SourceFilesList()
@@ -485,7 +485,7 @@ namespace GMac.GMacIDE.Editor
             textBoxOutputLog.Text +=
                 endCompilationTime.ToLongTimeString() +
                 @" End Compilation " +
-                (_dslCompiler.CompilationLog.HasErrors ? @"with errors " : String.Empty) +
+                (_dslCompiler.CompilationLog.HasErrors ? @"with errors " : string.Empty) +
                 @"after " +
                 (endCompilationTime - startCompilationTime) +
                 Environment.NewLine;

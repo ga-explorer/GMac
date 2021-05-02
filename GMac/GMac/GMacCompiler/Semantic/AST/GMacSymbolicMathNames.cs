@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib.Dictionary;
 
@@ -35,13 +34,13 @@ namespace GMac.GMacCompiler.Semantic.AST
             {
                 return 
                     _namesDictionary.TryGetValue(symbolAccessName, out var mathName) 
-                    ? mathName : String.Empty;
+                    ? mathName : string.Empty;
             }
             set
             {
                 var mathName = value.Trim();
 
-                if (String.IsNullOrEmpty(mathName))
+                if (string.IsNullOrEmpty(mathName))
                 {
                     _namesDictionary.Remove(symbolAccessName);
                     return;
@@ -62,14 +61,14 @@ namespace GMac.GMacCompiler.Semantic.AST
 
                 return
                     _namesDictionary.TryGetValue(symbolAccessName, out var mathName)
-                    ? mathName : String.Empty;
+                    ? mathName : string.Empty;
             }
             set
             {
                 var symbolAccessName = symbol.SymbolAccessName;
                 var mathName = value.Trim();
 
-                if (String.IsNullOrEmpty(mathName))
+                if (string.IsNullOrEmpty(mathName))
                 {
                     _namesDictionary.Remove(symbolAccessName);
                     return;

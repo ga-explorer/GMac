@@ -11,7 +11,7 @@
 
 using System;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 // I don't really like the interface to Marks. There is no encapsulation (their ctors and dtors do nothing,
 // and they are manipulated entirely by MathLinks.

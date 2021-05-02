@@ -44,7 +44,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         public int VSpaceDim { get; set; }
             //= 12;
 
-        public int GaSpaceDim 
+        public ulong GaSpaceDim 
             => VSpaceDim.ToGaSpaceDimension();
 
 
@@ -62,7 +62,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
                 _frameOrtho.SetProductsImplementation(GaBilinearProductImplementation.Computed);
             }
 
-            var factor = 1;
+            var factor = 1UL;
             _termsArray1 = new GaNumSarMultivector[GaSpaceDim / factor];
             _termsArray2 = new GaNumSarMultivector[GaSpaceDim / factor];
 
@@ -72,7 +72,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
                 _mappedTermsArray2 = new GaNumSarMultivector[GaSpaceDim / factor];
             }
 
-            for (var id = 0; id < GaSpaceDim; id += factor)
+            for (var id = 0UL; id < GaSpaceDim; id += factor)
             {
                 var idx = id / factor;
 

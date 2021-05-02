@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 
-namespace MeshComposerLib.Graphics.Xeogl
+namespace GraphicsComposerLib.Xeogl
 {
     public partial class FormXeoglRendering : Form
     {

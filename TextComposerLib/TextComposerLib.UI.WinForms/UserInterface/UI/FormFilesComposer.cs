@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TextComposerLib.Files;
 
-namespace TextComposerLib.Files.UI
+namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     public partial class FormFilesComposer : Form
     {

@@ -10,133 +10,133 @@ using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {
     public sealed class GaSymMultivector : IGaSymMultivector, ISymbolicVector
     {
-        public static IGaSymMultivectorTemp CreateZeroTemp(int gaSpaceDim)
+        public static IGaSymMultivectorTemp CreateZeroTemp(int vSpaceDim)
         {
             switch (GaSymMultivectorUtils.DefaultTempMultivectorKind)
             {
                 case GaMultivectorMutableImplementation.Hash:
-                    return GaSymMultivectorTempHash.Create(gaSpaceDim);
+                    return GaSymMultivectorTempHash.Create(vSpaceDim);
 
                 case GaMultivectorMutableImplementation.SparseArrayRepresentation:
-                    return GaSymMultivectorTempTree.Create(gaSpaceDim);
+                    return GaSymMultivectorTempTree.Create(vSpaceDim);
             }
 
-            return GaSymMultivectorTempArray.Create(gaSpaceDim);
+            return GaSymMultivectorTempArray.Create(vSpaceDim);
         }
 
         public static IGaSymMultivectorTemp CreateCopyTemp(GaSymMultivector mv)
         {
-            return CreateZeroTemp(mv.GaSpaceDimension).SetTerms(mv);
+            return CreateZeroTemp(mv.VSpaceDimension).SetTerms(mv);
         }
 
-        public static IGaSymMultivectorTemp CreateCopyTemp(int gaSpaceDim, IEnumerable<KeyValuePair<int, Expr>> termsList)
+        public static IGaSymMultivectorTemp CreateCopyTemp(int vSpaceDim, IEnumerable<KeyValuePair<ulong, Expr>> termsList)
         {
-            return CreateZeroTemp(gaSpaceDim).SetTerms(termsList);
+            return CreateZeroTemp(vSpaceDim).SetTerms(termsList);
         }
 
-        public static IGaSymMultivectorTemp CreateBasisBladeTemp(int gaSpaceDim, int id)
+        public static IGaSymMultivectorTemp CreateBasisBladeTemp(int vSpaceDim, ulong id)
         {
-            return CreateZeroTemp(gaSpaceDim).SetTermCoef(id, Expr.INT_ONE);
+            return CreateZeroTemp(vSpaceDim).SetTermCoef(id, Expr.INT_ONE);
         }
 
         public static IGaSymMultivectorTemp CreateCopyTemp(ISymbolicVector v)
         {
-            return CreateZeroTemp(v.Size).SetTerms(v);
+            return CreateZeroTemp(v.Size.ToVSpaceDimension()).SetTerms(v);
         }
 
 
-        public static GaSymMultivector CreateZero(int gaSpaceDim)
+        public static GaSymMultivector CreateZero(int vSpaceDim)
         {
-            return new GaSymMultivector(gaSpaceDim);
+            return new GaSymMultivector(vSpaceDim);
         }
 
-        public static GaSymMultivector CreateTerm(int gaSpaceDim, int id, MathematicaScalar coef)
+        public static GaSymMultivector CreateTerm(int vSpaceDim, ulong id, MathematicaScalar coef)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(id, coef.Expression);
         }
 
-        public static GaSymMultivector CreateTerm(int gaSpaceDim, int id, Expr coef)
+        public static GaSymMultivector CreateTerm(int vSpaceDim, ulong id, Expr coef)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(id, coef);
         }
 
-        public static GaSymMultivector CreateBasisBlade(int gaSpaceDim, int id)
+        public static GaSymMultivector CreateBasisBlade(int vSpaceDim, ulong id)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(id, Expr.INT_ONE);
         }
 
-        public static GaSymMultivector CreateBasisVector(int vaSpaceDim, int index)
+        public static GaSymMultivector CreateBasisVector(int vSpaceDim, ulong index)
         {
-            var id = 1 << index;
-            var resultMv = new GaSymMultivector(vaSpaceDim.ToGaSpaceDimension());
+            var id = 1UL << (int)index;
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(id, Expr.INT_ONE);
         }
 
-        public static GaSymMultivector CreateScalar(int gaSpaceDim, MathematicaScalar coef)
+        public static GaSymMultivector CreateScalar(int vSpaceDim, MathematicaScalar coef)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(0, coef.Expression);
         }
 
-        public static GaSymMultivector CreateUnitScalar(int gaSpaceDim)
+        public static GaSymMultivector CreateUnitScalar(int vSpaceDim)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(0, Expr.INT_ONE);
         }
 
-        public static GaSymMultivector CreateScalar(int gaSpaceDim, Expr coef)
+        public static GaSymMultivector CreateScalar(int vSpaceDim, Expr coef)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             return resultMv.SetTermCoef(0, coef);
         }
 
-        public static GaSymMultivector CreatePseudoscalar(int gaSpaceDim, MathematicaScalar coef)
+        public static GaSymMultivector CreatePseudoscalar(int vSpaceDim, MathematicaScalar coef)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
-            return resultMv.SetTermCoef(gaSpaceDim - 1, coef.Expression);
+            return resultMv.SetTermCoef((1UL << vSpaceDim) - 1, coef.Expression);
         }
 
         public static GaSymMultivector CreateCopy(GaSymMultivector mv)
         {
-            var resultMv = new GaSymMultivector(mv.GaSpaceDimension);
+            var resultMv = new GaSymMultivector(mv.VSpaceDimension);
 
             resultMv.TermsTree.FillFromTree(mv.TermsTree);
 
             return resultMv;
         }
 
-        public static GaSymMultivector CreateCopy(int gaSpaceDim, IEnumerable<KeyValuePair<int, Expr>> termsList)
+        public static GaSymMultivector CreateCopy(int vSpaceDim, IEnumerable<KeyValuePair<ulong, Expr>> termsList)
         {
-            return CreateZero(gaSpaceDim).SetTerms(termsList);
+            return CreateZero(vSpaceDim).SetTerms(termsList);
         }
 
         public static GaSymMultivector CreateCopy(ISymbolicVector v)
         {
-            return CreateZero(v.Size).SetTerms(v);
+            return CreateZero(v.Size.ToVSpaceDimension()).SetTerms(v);
         }
 
         public static GaSymMultivector CreateCopy(GaBtrInternalNode<Expr> termsTree)
         {
-            var gaSpaceDimension = termsTree.GetTreeDepth().ToGaSpaceDimension();
-            var resultMv = new GaSymMultivector(gaSpaceDimension);
+            var vSpaceDimension = termsTree.GetTreeDepth();
+            var resultMv = new GaSymMultivector(vSpaceDimension);
 
             resultMv.TermsTree.FillFromTree(termsTree);
 
@@ -145,7 +145,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector CreateMapped(GaSymMultivector mv, Func<MathematicaScalar, MathematicaScalar> scalarMap)
         {
-            var resultMv = CreateZero(mv.GaSpaceDimension);
+            var resultMv = CreateZero(mv.VSpaceDimension);
 
             foreach (var term in mv.NonZeroTerms)
                 resultMv.SetTermCoef(term.Key, scalarMap(term.Value));
@@ -155,7 +155,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector CreateMapped(GaSymMultivector mv, Func<Expr, Expr> scalarMap)
         {
-            var resultMv = CreateZero(mv.GaSpaceDimension);
+            var resultMv = CreateZero(mv.VSpaceDimension);
 
             foreach (var term in mv.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, scalarMap(term.Value));
@@ -163,36 +163,37 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return resultMv;
         }
 
-        public static GaSymMultivector CreateSymbolic(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivector CreateSymbolic(int vSpaceDim, string baseCoefName)
         {
             return CreateSymbolic(
-                gaSpaceDim,
+                vSpaceDim,
                 baseCoefName,
-                Enumerable.Range(0, gaSpaceDim)
-                );
+                Enumerable.Range(0, (int)vSpaceDim.ToGaSpaceDimension()).Select(i => (ulong)i)
+            );
         }
 
         public static GaSymMultivector CreateFromColumn(ISymbolicMatrix matrix, int col)
         {
-            Debug.Assert(matrix.RowCount.IsValidGaSpaceDimension());
+            var vSpaceDim = matrix.RowCount.ToVSpaceDimension();
+            var gaSpaceDim = (ulong)matrix.RowCount;
 
-            var mv = new GaSymMultivector(matrix.RowCount);
+            var mv = new GaSymMultivector(vSpaceDim);
 
-            for (var index = 0; index < matrix.RowCount; index++)
-                mv.SetTermCoef(index, matrix[index, col]);
+            for (var id = 0UL; id < gaSpaceDim; id++)
+                mv.SetTermCoef(id, matrix[(int)id, col]);
 
             return mv;
         }
 
         public static GaSymMultivector CreateFromColumn(Expr[,] exprArray, int col)
         {
-            var rows = exprArray.GetLength(0);
+            var rows = (ulong)exprArray.GetLength(0);
 
             Debug.Assert(rows.IsValidGaSpaceDimension());
 
-            var mv = new GaSymMultivector(rows);
+            var mv = new GaSymMultivector(rows.ToVSpaceDimension());
 
-            for (var row = 0; row < rows; row++)
+            for (var row = 0UL; row < rows; row++)
             {
                 var expr = exprArray[row, col];
 
@@ -203,15 +204,15 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return mv;
         }
 
-        public static GaSymMultivector CreateFromRow(Expr[,] exprArray, int row)
+        public static GaSymMultivector CreateFromRow(Expr[,] exprArray, ulong row)
         {
-            var cols = exprArray.GetLength(1);
+            var cols = (ulong)exprArray.GetLength(1);
 
             Debug.Assert(cols.IsValidGaSpaceDimension());
 
-            var mv = new GaSymMultivector(cols);
+            var mv = new GaSymMultivector(cols.ToVSpaceDimension());
 
-            for (var col = 0; col < cols; col++)
+            for (var col = 0UL; col < cols; col++)
             {
                 var expr = exprArray[row, col];
 
@@ -222,90 +223,87 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return mv;
         }
 
-        public static GaSymMultivector CreateVectorFromColumn(ISymbolicMatrix matrix, int col)
+        public static GaSymMultivector CreateVectorFromColumn(ISymbolicMatrix matrix, ulong col)
         {
-            var gaSpaceDim = matrix.RowCount.ToGaSpaceDimension();
+            var vSpaceDim = matrix.RowCount;
 
-            var mv = new GaSymMultivector(gaSpaceDim);
+            var mv = new GaSymMultivector(vSpaceDim);
 
             for (var row = 0; row < matrix.RowCount; row++)
-                mv.SetTermCoef(1, row, matrix[row, col]);
+                mv.SetTermCoef(1, (ulong)row, matrix[row, (int)col]);
 
             return mv;
         }
 
-        public static GaSymMultivector CreateVectorFromColumn(Expr[,] matrix, int col)
+        public static GaSymMultivector CreateVectorFromColumn(Expr[,] matrix, ulong col)
         {
             var rowsCount = matrix.GetLength(0);
-            var gaSpaceDim = rowsCount.ToGaSpaceDimension();
 
-            var mv = new GaSymMultivector(gaSpaceDim);
+            var mv = new GaSymMultivector(rowsCount);
 
             for (var row = 0; row < rowsCount; row++)
-                mv.SetTermCoef(1, row, matrix[row, col]);
+                mv.SetTermCoef(1, (ulong)row, matrix[row, col]);
 
             return mv;
         }
 
         public static GaSymMultivector CreateVectorFromScalars(params Expr[] exprScalars)
         {
-            var gaSpaceDim = exprScalars.Length.ToGaSpaceDimension();
+            var vSpaceDim = exprScalars.Length;
 
-            var mv = new GaSymMultivector(gaSpaceDim);
+            var mv = new GaSymMultivector(vSpaceDim);
 
             for (var index = 0; index < exprScalars.Length; index++)
-                mv.SetTermCoef(1, index, exprScalars[index]);
+                mv.SetTermCoef(1, (ulong)index, exprScalars[index]);
 
             return mv;
         }
 
         public static GaSymMultivector CreateVectorFromScalars(params string[] exprTextScalars)
         {
-            var gaSpaceDim = exprTextScalars.Length.ToGaSpaceDimension();
+            var vSpaceDim = exprTextScalars.Length;
 
-            var mv = new GaSymMultivector(gaSpaceDim);
+            var mv = new GaSymMultivector(vSpaceDim);
 
             for (var index = 0; index < exprTextScalars.Length; index++)
-                mv.SetTermCoef(1, index, exprTextScalars[index].ToExpr(GaSymbolicsUtils.Cas));
+                mv.SetTermCoef(1, (ulong)index, exprTextScalars[index].ToExpr(GaSymbolicsUtils.Cas));
 
             return mv;
         }
 
         public static GaSymMultivector CreateVectorFromRow(ISymbolicMatrix matrix, int row)
         {
-            var gaSpaceDim = matrix.ColumnCount.ToGaSpaceDimension();
+            var vSpaceDim = matrix.ColumnCount;
 
-            var mv = new GaSymMultivector(gaSpaceDim);
+            var mv = new GaSymMultivector(vSpaceDim);
 
             for (var col = 0; col < matrix.ColumnCount; col++)
-                mv.SetTermCoef(1, col, matrix[row, col]);
+                mv.SetTermCoef(1, (ulong)col, matrix[row, col]);
 
             return mv;
         }
 
-        public static GaSymMultivector CreateSymbolicVector(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivector CreateSymbolicVector(int vSpaceDim, string baseCoefName)
         {
             return CreateSymbolic(
-                gaSpaceDim,
+                vSpaceDim,
                 baseCoefName,
-                GaFrameUtils.BasisBladeIDsOfGrade(gaSpaceDim.ToVSpaceDimension(), 1)
+                GaFrameUtils.BasisBladeIDsOfGrade(vSpaceDim.ToVSpaceDimension(), 1)
             );
         }
 
-        public static GaSymMultivector CreateSymbolicKVector(int gaSpaceDim, string baseCoefName, int grade)
+        public static GaSymMultivector CreateSymbolicKVector(int vSpaceDim, string baseCoefName, int grade)
         {
             return CreateSymbolic(
-                gaSpaceDim,
+                vSpaceDim,
                 baseCoefName,
-                GaFrameUtils.BasisBladeIDsOfGrade(gaSpaceDim.ToVSpaceDimension(), grade)
+                GaFrameUtils.BasisBladeIDsOfGrade(vSpaceDim, grade)
             );
         }
 
-        public static GaSymMultivector CreateSymbolicTerm(int gaSpaceDim, string baseCoefName, int id)
+        public static GaSymMultivector CreateSymbolicTerm(int vSpaceDim, string baseCoefName, ulong id)
         {
-            var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
-
-            return new GaSymMultivector(gaSpaceDim)
+            return new GaSymMultivector(vSpaceDim)
                 .SetTermCoef(
                     id,
                     MathematicaScalar.CreateSymbol(
@@ -314,20 +312,19 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                     ));
         }
 
-        public static GaSymMultivector CreateSymbolicScalar(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivector CreateSymbolicScalar(int vSpaceDim, string baseCoefName)
         {
-            return CreateSymbolicTerm(gaSpaceDim, baseCoefName, 0);
+            return CreateSymbolicTerm(vSpaceDim, baseCoefName, 0);
         }
 
-        public static GaSymMultivector CreateSymbolicPseudoscalar(int gaSpaceDim, string baseCoefName)
+        public static GaSymMultivector CreateSymbolicPseudoscalar(int vSpaceDim, string baseCoefName)
         {
-            return CreateSymbolicTerm(gaSpaceDim, baseCoefName, gaSpaceDim - 1);
+            return CreateSymbolicTerm(vSpaceDim, baseCoefName, (1UL << vSpaceDim) - 1);
         }
 
-        public static GaSymMultivector CreateSymbolic(int gaSpaceDim, string baseCoefName, IEnumerable<int> idsList)
+        public static GaSymMultivector CreateSymbolic(int vSpaceDim, string baseCoefName, IEnumerable<ulong> idsList)
         {
-            var resultMv = new GaSymMultivector(gaSpaceDim);
-            var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
+            var resultMv = new GaSymMultivector(vSpaceDim);
 
             foreach (var id in idsList)
                 resultMv.SetTermCoef(
@@ -343,7 +340,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator -(GaSymMultivector mv)
         {
-            var resultMv = CreateZero(mv.GaSpaceDimension);
+            var resultMv = CreateZero(mv.VSpaceDimension);
 
             foreach (var term in mv.NonZeroTerms)
                 resultMv.SetTermCoef(term.Key, -term.Value);
@@ -373,9 +370,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(GaSymMultivector mv1, MathematicaScalar s)
         {
-            if (s.IsNullOrZero()) return CreateZero(mv1.GaSpaceDimension);
+            if (s.IsNullOrZero()) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s.Expression]);
@@ -385,9 +382,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(GaSymMultivector mv1, Expr s)
         {
-            if (s.IsNullOrZero()) return CreateZero(mv1.GaSpaceDimension);
+            if (s.IsNullOrZero()) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s]);
@@ -397,9 +394,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(GaSymMultivector mv1, double s)
         {
-            if (Math.Abs(s) <= 0.0d) return CreateZero(mv1.GaSpaceDimension);
+            if (Math.Abs(s) <= 0.0d) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s.ToExpr()]);
@@ -409,9 +406,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(GaSymMultivector mv1, int s)
         {
-            if (s == 0) return CreateZero(mv1.GaSpaceDimension);
+            if (s == 0) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s.ToExpr()]);
@@ -421,9 +418,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(Expr s, GaSymMultivector mv1)
         {
-            if (s.IsNullOrZero()) return CreateZero(mv1.GaSpaceDimension);
+            if (s.IsNullOrZero()) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s]);
@@ -433,9 +430,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(double s, GaSymMultivector mv1)
         {
-            if (Math.Abs(s) <= 0.0d) return CreateZero(mv1.GaSpaceDimension);
+            if (Math.Abs(s) <= 0.0d) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s.ToExpr()]);
@@ -445,9 +442,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(int s, GaSymMultivector mv1)
         {
-            if (s == 0) return CreateZero(mv1.GaSpaceDimension);
+            if (s == 0) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s.ToExpr()]);
@@ -457,9 +454,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator *(MathematicaScalar s, GaSymMultivector mv1)
         {
-            if (s.IsNullOrZero()) return CreateZero(mv1.GaSpaceDimension);
+            if (s.IsNullOrZero()) return CreateZero(mv1.VSpaceDimension);
 
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Times[term.Value, s.Expression]);
@@ -469,7 +466,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator /(GaSymMultivector mv1, MathematicaScalar s)
         {
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Divide[term.Value, s.Expression]);
@@ -479,7 +476,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator /(GaSymMultivector mv1, Expr s)
         {
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Divide[term.Value, s]);
@@ -489,7 +486,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator /(GaSymMultivector mv1, double s)
         {
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Divide[term.Value, s.ToExpr()]);
@@ -499,7 +496,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public static GaSymMultivector operator /(GaSymMultivector mv1, int s)
         {
-            var resultMv = CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = CreateZeroTemp(mv1.VSpaceDimension);
 
             foreach (var term in mv1.NonZeroExprTerms)
                 resultMv.SetTermCoef(term.Key, Mfs.Divide[term.Value, s.ToExpr()]);
@@ -511,21 +508,21 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         internal GaBtrInternalNode<Expr> TermsTree { get; }
 
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => VSpaceDimension.ToGaSpaceDimension();
 
-        public IEnumerable<int> BasisBladeIds
+        public IEnumerable<ulong> BasisBladeIds
             => TermsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodeIDs()
-                .Select(k => (int) k);
+                .Select(k => k);
 
-        public IEnumerable<int> NonZeroBasisBladeIds
+        public IEnumerable<ulong> NonZeroBasisBladeIds
             => TermsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodesInfo()
                 .Where(nodeInfo => !nodeInfo.Value.IsNullOrZero())
-                .Select(nodeInfo => (int)nodeInfo.Id);
+                .Select(nodeInfo => nodeInfo.Id);
 
         public int VSpaceDimension { get; }
 
@@ -538,7 +535,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         public MathematicaConstants CasConstants => CasInterface.Constants;
 
         public int Size 
-            => GaSpaceDimension;
+            => (int)GaSpaceDimension;
 
         MathematicaScalar ISymbolicVector.this[int id] 
             => TermsTree.GetLeafValue(VSpaceDimension, (ulong)id)?.ToMathematicaScalar() 
@@ -547,14 +544,14 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         public bool IsTemp
             => false;
 
-        public int TermsCount
-            => TermsTree.GetTreeLeafNodes().Count();
+        public ulong TermsCount
+            => (ulong)TermsTree.GetTreeLeafNodes().LongCount();
 
-        public Expr this[int grade, int index] 
+        public Expr this[int grade, ulong index] 
             => this[GaFrameUtils.BasisBladeId(grade, index)];
 
-        public Expr this[int id] 
-            => TermsTree.GetLeafValue(VSpaceDimension, (ulong)id)
+        public Expr this[ulong id] 
+            => TermsTree.GetLeafValue(VSpaceDimension, id)
                ?? Expr.INT_ZERO;
 
         public IEnumerable<MathematicaScalar> BasisBladeScalars 
@@ -579,56 +576,56 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             .Where(value => !value.IsNullOrZero())
             .Select(value => value);
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms
             => TermsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeNodesInfo()
                 .Select(
-                    pair => new KeyValuePair<int, MathematicaScalar>(
-                        (int)pair.Id, 
+                    pair => new KeyValuePair<ulong, MathematicaScalar>(
+                        pair.Id, 
                         pair.Value?.ToMathematicaScalar() ?? GaSymbolicsUtils.Constants.Zero
                         )
                     );
 
-        public IEnumerable<KeyValuePair<int, Expr>> ExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms
             => TermsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeNodesInfo()
                 .Select(
-                    pair => new KeyValuePair<int, Expr>(
-                        (int)pair.Id,
+                    pair => new KeyValuePair<ulong, Expr>(
+                        pair.Id,
                         pair.Value ?? Expr.INT_ZERO
                     )
                 );
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms
             => TermsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeNodesInfo()
                 .Where(pair => !pair.Value.IsNullOrZero())
                 .Select(
-                    pair => new KeyValuePair<int, MathematicaScalar>(
-                        (int)pair.Id, 
+                    pair => new KeyValuePair<ulong, MathematicaScalar>(
+                        pair.Id, 
                         pair.Value.ToMathematicaScalar()
                         )
                     );
 
-        public IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms
             => TermsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeNodesInfo()
                 .Where(pair => !pair.Value.IsNullOrZero())
                 .Select(
-                    pair => new KeyValuePair<int, Expr>(
-                        (int)pair.Id,
+                    pair => new KeyValuePair<ulong, Expr>(
+                        pair.Id,
                         pair.Value ?? Expr.INT_ZERO
                     )
                 );
 
-        private GaSymMultivector(int gaSpaceDim)
+        private GaSymMultivector(int vSpaceDim)
         {
             CasInterface = GaSymbolicsUtils.Cas;
-            VSpaceDimension = gaSpaceDim.ToVSpaceDimension();
+            VSpaceDimension = vSpaceDim;
             TermsTree = new GaBtrInternalNode<Expr>();
         }
 
@@ -694,9 +691,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return this;
         }
 
-        public bool ContainsBasisBlade(int id)
+        public bool ContainsBasisBlade(ulong id)
         {
-            return TermsTree.ContainsLeafNodeId(VSpaceDimension, (ulong)id);
+            return TermsTree.ContainsLeafNodeId(VSpaceDimension, id);
         }
 
         public void Simplify()
@@ -741,7 +738,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             throw new NotImplementedException();
         }
 
-        public IEnumerator<KeyValuePair<int, Expr>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, Expr>> GetEnumerator()
         {
             return NonZeroExprTerms.GetEnumerator();
         }
@@ -759,7 +756,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return this;
         }
 
-        public GaSymMultivector AddFactor(int grade, int index, MathematicaScalar coef)
+        public GaSymMultivector AddFactor(int grade, ulong index, MathematicaScalar coef)
         {
             return AddFactor(
                 GaFrameUtils.BasisBladeId(grade, index),
@@ -767,12 +764,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 );
         }
 
-        public GaSymMultivector AddFactor(int id, MathematicaScalar coef)
+        public GaSymMultivector AddFactor(ulong id, MathematicaScalar coef)
         {
             return AddFactor(id, coef.Expression);
         }
 
-        public GaSymMultivector AddFactor(int grade, int index, Expr coef)
+        public GaSymMultivector AddFactor(int grade, ulong index, Expr coef)
         {
             return AddFactor(
                 GaFrameUtils.BasisBladeId(grade, index),
@@ -780,12 +777,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             );
         }
 
-        public GaSymMultivector AddFactor(int id, Expr coef)
+        public GaSymMultivector AddFactor(ulong id, Expr coef)
         {
             var node = TermsTree;
             for (var i = VSpaceDimension - 1; i > 0; i--)
             {
-                var bitPattern = (1 << i) & id;
+                var bitPattern = (1UL << i) & id;
                 node = node.GetOrAddInternalChildNode(bitPattern != 0);
             }
 
@@ -807,14 +804,14 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return this;
         }
 
-        public GaSymMultivector AddFactor(int id, bool isNegative, Expr coef)
+        public GaSymMultivector AddFactor(ulong id, bool isNegative, Expr coef)
         {
             var deltaValue = isNegative ? Mfs.Minus[coef] : coef;
 
             var node = TermsTree;
             for (var i = VSpaceDimension - 1; i > 0; i--)
             {
-                var bitPattern = (1 << i) & id;
+                var bitPattern = (1UL << i) & id;
                 node = node.GetOrAddInternalChildNode(bitPattern != 0);
             }
 
@@ -836,7 +833,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             return this;
         }
 
-        public GaSymMultivector SetTermCoef(int grade, int index, MathematicaScalar coef)
+        public GaSymMultivector SetTermCoef(int grade, ulong index, MathematicaScalar coef)
         {
             return SetTermCoef(
                 GaFrameUtils.BasisBladeId(grade, index),
@@ -844,12 +841,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
                 );
         }
 
-        public GaSymMultivector SetTermCoef(int id, MathematicaScalar coef)
+        public GaSymMultivector SetTermCoef(ulong id, MathematicaScalar coef)
         {
             return SetTermCoef(id, coef.Expression);
         }
 
-        public GaSymMultivector SetTermCoef(int grade, int index, Expr coef)
+        public GaSymMultivector SetTermCoef(int grade, ulong index, Expr coef)
         {
             return SetTermCoef(
                 GaFrameUtils.BasisBladeId(grade, index),
@@ -857,7 +854,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             );
         }
 
-        public GaSymMultivector SetTermCoef(int id, bool isNegative, Expr coef)
+        public GaSymMultivector SetTermCoef(ulong id, bool isNegative, Expr coef)
         {
             return SetTermCoef(
                 id,
@@ -865,12 +862,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             );
         }
 
-        public GaSymMultivector SetTermCoef(int id, Expr coef)
+        public GaSymMultivector SetTermCoef(ulong id, Expr coef)
         {
             var node = TermsTree;
             for (var i = VSpaceDimension - 1; i > 0; i--)
             {
-                var bitPattern = (1 << i) & id;
+                var bitPattern = (1UL << i) & id;
                 node = node.GetOrAddInternalChildNode(bitPattern != 0);
             }
 
@@ -887,19 +884,19 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         }
 
 
-        public KeyValuePair<int, MathematicaScalar> GetTerm(int id)
+        public KeyValuePair<ulong, MathematicaScalar> GetTerm(ulong id)
         {
-            return new KeyValuePair<int, MathematicaScalar>(id, this[id].ToMathematicaScalar());
+            return new KeyValuePair<ulong, MathematicaScalar>(id, this[id].ToMathematicaScalar());
         }
 
-        public KeyValuePair<int, Expr> GetExprTerm(int id)
+        public KeyValuePair<ulong, Expr> GetExprTerm(ulong id)
         {
-            return new KeyValuePair<int, Expr>(id, this[id]);
+            return new KeyValuePair<ulong, Expr>(id, this[id]);
         }
 
-        public GaSymMultivector GetPartById(Func<int, bool> idSelectionFunc)
+        public GaSymMultivector GetPartById(Func<ulong, bool> idSelectionFunc)
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroTerms.Where(t => idSelectionFunc(t.Key)))
                 resultMv.SetTermCoef(term.Key, term.Value);
@@ -909,7 +906,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector GetPartByGrade(Func<int, bool> gradeSelectionFunc)
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroTerms.Where(t => gradeSelectionFunc(t.Key.BasisBladeGrade())))
                 resultMv.SetTermCoef(term.Key, term.Value);
@@ -919,7 +916,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector GetVectorPart()
         {
-            var mv = CreateZero(GaSpaceDimension);
+            var mv = CreateZero(VSpaceDimension);
 
             foreach (var id in GaFrameUtils.BasisVectorIDs(VSpaceDimension))
             {
@@ -933,7 +930,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector GetKVectorPart(int grade)
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             if (grade < 0 || grade > VSpaceDimension)
                 return resultMv;
@@ -946,7 +943,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector GetEvenPart()
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroTerms.Where(t => (t.Key.BasisBladeGrade() & 1) == 0))
                 resultMv.SetTermCoef(term.Key, term.Value);
@@ -956,7 +953,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector GetOddPart()
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroTerms.Where(t => (t.Key.BasisBladeGrade() & 1) == 1))
                 resultMv.SetTermCoef(term.Key, term.Value);
@@ -969,18 +966,18 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             var columnVector = new Expr[VSpaceDimension];
 
             for (var index = 0; index < VSpaceDimension; index++)
-                columnVector[index] = this[1, index];
+                columnVector[index] = this[1, (ulong)index];
 
             return columnVector;
         }
 
         public Expr[] KVectorPartToColumnVector(int grade)
         {
-            var columnVectorLength = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
+            var columnVectorLength = (int)GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
             var columnVector = new Expr[columnVectorLength];
 
             for (var index = 0; index < columnVectorLength; index++)
-                columnVector[index] = this[grade, index];
+                columnVector[index] = this[grade, (ulong)index];
 
             return columnVector;
         }
@@ -1005,7 +1002,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
                 if (kVectorsList.TryGetValue(grade, out var mv) == false)
                 {
-                    mv = new GaSymMultivector(GaSpaceDimension);
+                    mv = new GaSymMultivector(VSpaceDimension);
 
                     kVectorsList.Add(grade, mv);
                 }
@@ -1020,7 +1017,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector Reverse()
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroExprTerms)
                 resultMv.SetTermCoef(
@@ -1034,7 +1031,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector GradeInv()
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroExprTerms)
                 resultMv.SetTermCoef(
@@ -1048,7 +1045,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         public GaSymMultivector CliffConj()
         {
-            var resultMv = new GaSymMultivector(GaSpaceDimension);
+            var resultMv = new GaSymMultivector(VSpaceDimension);
 
             foreach (var term in NonZeroExprTerms)
                 resultMv.SetTermCoef(

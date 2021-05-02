@@ -51,7 +51,7 @@ public sealed class InteractiveScript : IGMacScript
 
         private static string TranslateSquareBracketCommand(string commandText)
         {
-            if (String.IsNullOrEmpty(commandText)) return String.Empty;
+            if (string.IsNullOrEmpty(commandText)) return string.Empty;
 
             var parts = commandText.Split(new[] { "|>" }, StringSplitOptions.None);
 
@@ -76,7 +76,7 @@ public sealed class InteractiveScript : IGMacScript
 
         private static string TranslateAngleBracketCommand(string commandText)
         {
-            if (String.IsNullOrEmpty(commandText)) return String.Empty;
+            if (string.IsNullOrEmpty(commandText)) return string.Empty;
 
             var parts = commandText.Split(new[] { "|>" }, StringSplitOptions.None);
 
@@ -214,7 +214,7 @@ public sealed class InteractiveScript : IGMacScript
 
         private string GenerateScriptCode(string scriptCode)
         {
-            if (String.IsNullOrEmpty(scriptCode.Trim())) return String.Empty;
+            if (string.IsNullOrEmpty(scriptCode.Trim())) return string.Empty;
 
             var processCode = TranslateSquareBracketCommands(scriptCode);
 

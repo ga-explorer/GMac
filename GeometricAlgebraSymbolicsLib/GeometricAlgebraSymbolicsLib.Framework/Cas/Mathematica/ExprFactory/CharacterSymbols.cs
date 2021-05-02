@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory
 {

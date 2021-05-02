@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 
-namespace CodeComposerLib.GraphViz.UserInterface
+namespace CodeComposerLib.UI.WinForms.GraphViz.UserInterface
 {
     partial class FormGraphVizEditor
     {

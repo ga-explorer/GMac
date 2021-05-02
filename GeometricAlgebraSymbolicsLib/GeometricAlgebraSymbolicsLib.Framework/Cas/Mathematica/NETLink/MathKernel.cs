@@ -12,8 +12,7 @@ using System;
 using System.Collections;
 using System.Drawing;
 
-
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /************ 
 
@@ -656,7 +655,7 @@ public class MathKernel : System.ComponentModel.Component {
         /// </summary>
         MathML,
         /// <summary>
-        /// An <see cref="Wolfram.NETLink.Expr"/>.
+        /// An <see cref="NETLink.Expr"/>.
         /// </summary>
         Expr
     }

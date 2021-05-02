@@ -69,7 +69,7 @@ namespace GMac.GMacAST.Visitors.GraphViz
             {
                 var n = frame.KvSpaceDimension(grade);
 
-                for (var index = 0; index < n; index++)
+                for (var index = 0UL; index < n; index++)
                 {
                     var basisBlade = frame.BasisBlade(grade, index);
 

@@ -38,10 +38,10 @@ namespace GeometricAlgebraNumericsLib.Products
         }
 
 
-        public override GaNumTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(ulong id1, ulong id2)
         {
             return GaNumTerm.Create(
-                TargetGaSpaceDimension,
+                TargetVSpaceDimension,
                 id1 ^ id2,
                 GaFrameUtils.IsNonZeroOp(id1, id2)
                     ? (GaFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d)

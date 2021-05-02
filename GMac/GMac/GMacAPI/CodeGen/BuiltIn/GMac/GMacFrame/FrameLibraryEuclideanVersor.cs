@@ -22,7 +22,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                 commandsList.AddRange(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newOm.ImageV" + index,
-                        "v egp " + frameInfo.BasisVectorFromIndex(index - 1).AccessName + " egp vi"
+                        "v egp " + frameInfo.BasisVectorFromIndex((ulong)index - 1).AccessName + " egp vi"
                         ),
 
                     GMacDslSyntaxFactory.AssignToLocalVariable(

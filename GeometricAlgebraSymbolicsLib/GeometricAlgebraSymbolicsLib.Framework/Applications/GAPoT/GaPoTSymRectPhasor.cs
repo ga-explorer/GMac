@@ -4,7 +4,7 @@ using System.Diagnostics;
 using CodeComposerLib.LaTeX;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -14,8 +14,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymRectPhasor(
                 p.Id,
-                Mfs.Minus[p.XValue].GaPoTSymSimplify(),
-                Mfs.Minus[p.YValue].GaPoTSymSimplify()
+                Mfs.Minus[p.XValue].Evaluate(),
+                Mfs.Minus[p.YValue].Evaluate()
             );
         }
 
@@ -26,8 +26,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             return new GaPoTSymRectPhasor(
                 p1.Id,
-                Mfs.Plus[p1.XValue, p2.XValue].GaPoTSymSimplify(),
-                Mfs.Plus[p1.YValue, p2.YValue].GaPoTSymSimplify()
+                Mfs.Plus[p1.XValue, p2.XValue].Evaluate(),
+                Mfs.Plus[p1.YValue, p2.YValue].Evaluate()
             );
         }
 
@@ -38,8 +38,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             return new GaPoTSymRectPhasor(
                 p1.Id,
-                Mfs.Subtract[p1.XValue, p2.XValue].GaPoTSymSimplify(),
-                Mfs.Subtract[p1.YValue, p2.YValue].GaPoTSymSimplify()
+                Mfs.Subtract[p1.XValue, p2.XValue].Evaluate(),
+                Mfs.Subtract[p1.YValue, p2.YValue].Evaluate()
             );
         }
 
@@ -47,8 +47,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymRectPhasor(
                 p.Id,
-                Mfs.Times[p.XValue, s].GaPoTSymSimplify(),
-                Mfs.Times[p.YValue, s].GaPoTSymSimplify()
+                Mfs.Times[p.XValue, s].Evaluate(),
+                Mfs.Times[p.YValue, s].Evaluate()
             );
         }
 
@@ -56,8 +56,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymRectPhasor(
                 p.Id,
-                Mfs.Times[s, p.XValue].GaPoTSymSimplify(),
-                Mfs.Times[s, p.YValue].GaPoTSymSimplify()
+                Mfs.Times[s, p.XValue].Evaluate(),
+                Mfs.Times[s, p.YValue].Evaluate()
             );
         }
 
@@ -65,8 +65,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymRectPhasor(
                 p.Id,
-                Mfs.Divide[p.XValue, s].GaPoTSymSimplify(),
-                Mfs.Divide[p.YValue, s].GaPoTSymSimplify()
+                Mfs.Divide[p.XValue, s].Evaluate(),
+                Mfs.Divide[p.YValue, s].Evaluate()
             );
         }
 
@@ -113,7 +113,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             if (!YValue.IsZero())
                 yield return new GaPoTSymVectorTerm(
                     Id + 1,
-                    Mfs.Minus[YValue].GaPoTSymSimplify()
+                    Mfs.Minus[YValue].Evaluate()
                 );
         }
 
@@ -122,7 +122,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return Mfs.Sqrt[Mfs.Plus[
                 Mfs.Times[XValue, XValue],
                 Mfs.Times[YValue, YValue]
-            ]].GaPoTSymSimplify();
+            ]].Evaluate();
         }
 
         public Expr Norm2()
@@ -130,7 +130,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return Mfs.Plus[
                 Mfs.Times[XValue, XValue],
                 Mfs.Times[YValue, YValue]
-            ].GaPoTSymSimplify();
+            ].Evaluate();
         }
 
         public GaPoTSymPolarPhasor ToPolarPhasor()
@@ -139,10 +139,10 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 Mfs.Sqrt[Mfs.Plus[
                     Mfs.Times[XValue, XValue],
                     Mfs.Times[YValue, YValue]
-                ]].GaPoTSymSimplify();
+                ]].Evaluate();
 
             var phase = 
-                Mfs.ArcTan[XValue, YValue].GaPoTSymSimplify();
+                Mfs.ArcTan[XValue, YValue].Evaluate();
 
             return new GaPoTSymPolarPhasor(Id, magnitude, phase);
         }
@@ -166,8 +166,8 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             var i1 = Id;
             var i2 = Id + 1;
 
-            var xValueText = XValue.GetLaTeX().LaTeXMathAddParentheses();
-            var yValueText = YValue.GetLaTeX().LaTeXMathAddParentheses();
+            var xValueText = XValue.GetLaTeX().LaTeXMathRoundParentheses();
+            var yValueText = YValue.GetLaTeX().LaTeXMathRoundParentheses();
             var basisText1 = $"{i1},{i2}".GetLaTeXBasisName();
             var basisText2 = $"{i1}".GetLaTeXBasisName();
 

@@ -48,7 +48,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1, int id2]
+        public override IGaNumMultivector this[ulong id1, ulong id2]
         {
             get
             {
@@ -139,15 +139,15 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
         }
 
 
-        public override IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-                for (var id2 = 0; id2 < DomainGaSpaceDimension; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+                for (var id2 = 0UL; id2 < DomainGaSpaceDimension; id2++)
                 {
                     var mv = this[id1, id2];
 
                     if (!mv.IsNullOrEmpty())
-                        yield return new Tuple<int, int, IGaNumMultivector>(id1, id2, mv);
+                        yield return new Tuple<ulong, ulong, IGaNumMultivector>(id1, id2, mv);
                 }
         }
     }

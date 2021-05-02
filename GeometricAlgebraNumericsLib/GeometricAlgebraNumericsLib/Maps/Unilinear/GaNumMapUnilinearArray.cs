@@ -33,7 +33,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
             foreach (var id1 in idsList)
             {
-                var resultMv = linearMap[id1];
+                var resultMv = linearMap[(ulong) id1];
 
                 if (!resultMv.IsNullOrEmpty())
                     table._basisBladeMaps[id1] = resultMv;
@@ -50,9 +50,9 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override int TargetVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1] 
+        public override IGaNumMultivector this[ulong id1] 
             => _basisBladeMaps[id1]
-                ?? GaNumTerm.CreateZero(TargetGaSpaceDimension);
+                ?? GaNumTerm.CreateZero(TargetVSpaceDimension);
 
         public override GaNumSarMultivector this[GaNumSarMultivector mv]
         {
@@ -118,13 +118,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public GaNumMapUnilinearArray ClearBasisBladesMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
                 _basisBladeMaps[id] = null;
 
             return this;
         }
 
-        public GaNumMapUnilinearArray SetBasisBladeMap(int basisBladeId, IGaNumMultivector targetMv)
+        public GaNumMapUnilinearArray SetBasisBladeMap(ulong basisBladeId, IGaNumMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -133,7 +133,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearArray RemoveBasisBladesMap(int id1)
+        public GaNumMapUnilinearArray RemoveBasisBladesMap(ulong id1)
         {
             _basisBladeMaps[id1] = null;
 
@@ -141,13 +141,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var basisBladeMv = _basisBladeMaps[id];
                 if (!ReferenceEquals(basisBladeMv, null))
-                    yield return new Tuple<int, IGaNumMultivector>(id, basisBladeMv);
+                    yield return new Tuple<ulong, IGaNumMultivector>(id, basisBladeMv);
             }
         }
     }

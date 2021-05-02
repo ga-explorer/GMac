@@ -1,10 +1,10 @@
 ﻿using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Metrics;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Products.Orthonormal
 {
@@ -16,9 +16,9 @@ namespace GeometricAlgebraSymbolicsLib.Products.Orthonormal
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2)
         {
-            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             if (GaFrameUtils.IsNonZeroESp(id1, id2))
                 tempMultivector.SetTermCoef(
@@ -37,17 +37,17 @@ namespace GeometricAlgebraSymbolicsLib.Products.Orthonormal
 
             return
                 GaSymMultivector
-                    .CreateZeroTemp(TargetGaSpaceDimension)
+                    .CreateZeroTemp(TargetVSpaceDimension)
                     .AddFactors(
                         mv1.GetBiTermsForESp(mv2),
                         OrthonormalMetric
                     );
         }
 
-        public override GaSymMultivectorTerm MapToTerm(int id1, int id2)
+        public override GaSymMultivectorTerm MapToTerm(ulong id1, ulong id2)
         {
             return GaSymMultivectorTerm.CreateTerm(
-                TargetGaSpaceDimension,
+                TargetVSpaceDimension,
                 0,
                 GaFrameUtils.IsNonZeroESp(id1, id2)
                     ? (GaFrameUtils.IsNegativeEGp(id1, id1)

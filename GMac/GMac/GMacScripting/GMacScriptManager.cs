@@ -264,7 +264,7 @@ namespace GMac.GMacScripting
             OpenedNamespaces = new List<string>(openedNamespaces);
             ScriptText = scriptText;
             ScriptClassMembersText = membersText;
-            ScriptCode = String.Empty;
+            ScriptCode = string.Empty;
             _gmacScriptInstance = null;
 
             this.ResetProgress();

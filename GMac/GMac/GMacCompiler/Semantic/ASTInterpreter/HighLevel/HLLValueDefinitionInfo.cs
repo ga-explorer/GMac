@@ -43,7 +43,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.HighLevel
         /// <summary>
         /// True if this l-value definition is not the first one for this l-value
         /// </summary>
-        public bool HasPreviousSsaFormName => !String.IsNullOrEmpty(PreviousSsaFormName);
+        public bool HasPreviousSsaFormName => !string.IsNullOrEmpty(PreviousSsaFormName);
 
         /// <summary>
         /// The name associated with the previous definition for this l-value

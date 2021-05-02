@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Text;
 using CodeComposerLib.Irony.Semantic.Expression.ValueAccess;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAST.Expressions;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.CodeBlock
 {

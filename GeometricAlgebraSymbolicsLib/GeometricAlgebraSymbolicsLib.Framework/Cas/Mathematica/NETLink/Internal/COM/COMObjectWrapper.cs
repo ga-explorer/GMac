@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Wolfram.NETLink.Internal.COM {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal.COM {
 
 /// <summary>
 /// Associates a .NET interface with a raw COM object (Sytem.__ComObject). When the COM object is sent to

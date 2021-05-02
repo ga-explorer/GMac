@@ -6,13 +6,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
     {
         int Grade { get; }
 
-        int KvSpaceDimension { get; }
+        ulong KvSpaceDimension { get; }
 
         IReadOnlyList<double> ScalarValuesArray { get; }
 
-        int GetBasisBladeId(int index);
+        ulong GetBasisBladeId(ulong index);
 
-        int GetBasisBladeIndex(int id);
+        ulong GetBasisBladeIndex(ulong id);
 
         GaNumDarKVector ToDarKVector();
 

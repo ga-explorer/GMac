@@ -22,7 +22,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        double GetBasisBladeSignature(int id);
+        double GetBasisBladeSignature(ulong id);
 
         /// <summary>
         /// Compute the geometric product of two basis blades
@@ -30,7 +30,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
-        GaTerm<double> Gp(int id1, int id2);
+        GaTerm<double> Gp(ulong id1, ulong id2);
 
         /// <summary>
         /// Compute the geometric product of two basis blades
@@ -39,7 +39,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         /// <param name="id2"></param>
         /// <param name="scalingFactor"></param>
         /// <returns></returns>
-        GaTerm<double> ScaledGp(int id1, int id2, double scalingFactor);
+        GaTerm<double> ScaledGp(ulong id1, ulong id2, double scalingFactor);
 
         /// <summary>
         /// Compute the geometric product of three basis blades
@@ -48,7 +48,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
         /// <param name="id2"></param>
         /// <param name="id3"></param>
         /// <returns></returns>
-        GaTerm<double> Gp(int id1, int id2, int id3);
+        GaTerm<double> Gp(ulong id1, ulong id2, ulong id3);
 
         /// <summary>
         /// Compute the geometric product of three basis blades
@@ -58,6 +58,6 @@ namespace GeometricAlgebraNumericsLib.Metrics
         /// <param name="id3"></param>
         /// <param name="scalingFactor"></param>
         /// <returns></returns>
-        GaTerm<double> ScaledGp(int id1, int id2, int id3, double scalingFactor);
+        GaTerm<double> ScaledGp(ulong id1, ulong id2, ulong id3, double scalingFactor);
     }
 }

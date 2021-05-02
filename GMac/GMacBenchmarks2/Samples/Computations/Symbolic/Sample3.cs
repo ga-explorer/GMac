@@ -76,8 +76,8 @@ namespace GMacBenchmarks2.Samples.Computations.Symbolic
                 //var randGen = new GMacRandomGenerator(10);
                 var mvList = new List<GaSymMultivector>();
 
-                mvList.Add(GaSymMultivector.CreateSymbolic(Frame.GaSpaceDimension, "A"));
-                mvList.Add(GaSymMultivector.CreateSymbolic(Frame.GaSpaceDimension, "B"));
+                mvList.Add(GaSymMultivector.CreateSymbolic(Frame.VSpaceDimension, "A"));
+                mvList.Add(GaSymMultivector.CreateSymbolic(Frame.VSpaceDimension, "B"));
 
                 //var treeMvList = mvList.Select(mv => mv.ToTreeMultivector()).ToList();
 

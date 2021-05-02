@@ -92,12 +92,12 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <summary>
         /// Get the GA space dimension of the frame
         /// </summary>
-        public int GaSpaceDimension => (1 << VSpaceDimension);
+        public ulong GaSpaceDimension => (1UL << VSpaceDimension);
 
         /// <summary>
         /// The maximum possible basis blade ID for this frame
         /// </summary>
-        public int MaxBasisBladeId => (1 << VSpaceDimension) - 1;
+        public ulong MaxBasisBladeId => (1UL << VSpaceDimension) - 1;
 
         /// <summary>
         /// The number of grades in this frame
@@ -142,12 +142,17 @@ namespace GMac.GMacCompiler.Semantic.AST
             return BasisVectorNames.ConcatenateUsingPattern(basisBladeId, "E0", "^");
         }
 
-        public string BasisBladeName(int grade, int index)
+        public string BasisBladeName(ulong basisBladeId)
+        {
+            return BasisVectorNames.ConcatenateUsingPattern(basisBladeId, "E0", "^");
+        }
+
+        public string BasisBladeName(int grade, ulong index)
         {
             return BasisVectorNames.ConcatenateUsingPattern(GaFrameUtils.BasisBladeId(grade, index), "E0", "^");
         }
 
-        public string BasisBladeName(int basisBladeId, BasisBladeFormat nameFormat)
+        public string BasisBladeName(ulong basisBladeId, BasisBladeFormat nameFormat)
         {
             switch (nameFormat)
             {
@@ -165,7 +170,7 @@ namespace GMac.GMacCompiler.Semantic.AST
             }
         }
 
-        public string BasisBladeName(int grade, int index, BasisBladeFormat nameFormat)
+        public string BasisBladeName(int grade, ulong index, BasisBladeFormat nameFormat)
         {
             switch (nameFormat)
             {
@@ -236,7 +241,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         /// <returns></returns>
         internal GMacFrameBasisVector DefineBasisVector(string symbolName)
         {
-            var basisVectorIndex = FrameBasisVectors.Count();
+            var basisVectorIndex = (ulong)FrameBasisVectors.Count();
 
             var signature = SymbolicFrame.BasisVectorSignature(basisVectorIndex);
 

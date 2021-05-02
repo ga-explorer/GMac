@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -17,9 +19,127 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             //);
         }
 
+        public static GaPoTSymRotorsSequence Create(params GaPoTSymMultivector[] rotorsList)
+        {
+            return new GaPoTSymRotorsSequence(rotorsList);
+        }
+
         public static GaPoTSymRotorsSequence Create(IEnumerable<GaPoTSymMultivector> rotorsList)
         {
             return new GaPoTSymRotorsSequence(rotorsList);
+        }
+
+        public static GaPoTSymRotorsSequence CreateFromOrthonormalFrames(GaPoTSymFrame sourceFrame, GaPoTSymFrame targetFrame, bool fullRotorsFlag = false)
+        {
+            Debug.Assert(targetFrame.Count == sourceFrame.Count);
+            Debug.Assert(sourceFrame.IsOrthonormal() && targetFrame.IsOrthonormal());
+            //Debug.Assert(sourceFrame.HasSameHandedness(targetFrame));
+
+            var rotorsSequence = new GaPoTSymRotorsSequence();
+
+            var sourceFrameVectors = sourceFrame.ToArray();
+
+            var n = fullRotorsFlag 
+                ? sourceFrame.Count 
+                : sourceFrame.Count - 1;
+
+            for (var i = 0; i < n; i++)
+            {
+                var sourceVector = sourceFrameVectors[i];
+                var targetVector = targetFrame[i];
+
+                var rotor = GaPoTSymMultivector.CreateSimpleRotor(
+                    sourceVector, 
+                    targetVector
+                );
+
+                rotorsSequence.AppendRotor(rotor);
+
+                for (var j = i + 1; j < sourceFrame.Count; j++)
+                    sourceFrameVectors[j] = sourceFrameVectors[j].ApplyRotor(rotor);
+            }
+
+            return rotorsSequence;
+        }
+
+        public static GaPoTSymRotorsSequence CreateFromOrthonormalFrames(GaPoTSymFrame sourceFrame, GaPoTSymFrame targetFrame, int[] sequenceArray)
+        {
+            Debug.Assert(targetFrame.Count == sourceFrame.Count);
+            Debug.Assert(sourceFrame.IsOrthonormal() && targetFrame.IsOrthonormal());
+            Debug.Assert(sourceFrame.HasSameHandedness(targetFrame));
+
+            Debug.Assert(sequenceArray.Length == sourceFrame.Count - 1);
+            Debug.Assert(sequenceArray.Min() >= 0);
+            Debug.Assert(sequenceArray.Max() < sourceFrame.Count);
+            Debug.Assert(sequenceArray.Distinct().Count() == sourceFrame.Count - 1);
+
+            var rotorsSequence = new GaPoTSymRotorsSequence();
+
+            var sourceFrameVectors = sourceFrame.ToArray();
+            
+            for (var i = 0; i < sourceFrame.Count - 1; i++)
+            {
+                var vectorIndex = sequenceArray[i];
+
+                var sourceVector = sourceFrameVectors[vectorIndex];
+                var targetVector = targetFrame[vectorIndex];
+
+                var rotor = GaPoTSymMultivector.CreateSimpleRotor(
+                    sourceVector, 
+                    targetVector
+                );
+
+                rotorsSequence.AppendRotor(rotor);
+
+                for (var j = i + 1; j < sourceFrame.Count; j++)
+                    sourceFrameVectors[j] = sourceFrameVectors[j].ApplyRotor(rotor);
+            }
+
+            return rotorsSequence;
+        }
+
+        public static GaPoTSymRotorsSequence CreateFromFrames(int baseSpaceDimensions, GaPoTSymFrame sourceFrame, GaPoTSymFrame targetFrame)
+        {
+            Debug.Assert(targetFrame.Count == sourceFrame.Count);
+            //Debug.Assert(IsOrthonormal() && targetFrame.IsOrthonormal());
+            //Debug.Assert(sourceFrame.HasSameHandedness(targetFrame));
+
+            var rotorsSequence = new GaPoTSymRotorsSequence();
+
+            var pseudoScalar = 
+                GaPoTSymMultivector.CreateTerm(
+                    (1UL << baseSpaceDimensions) - 1, 
+                    Expr.INT_ONE
+                );
+
+            var sourceFrameVectors = sourceFrame.ToArray();
+            var targetFrameVectors = targetFrame.ToArray();
+            
+            for (var i = 0; i < sourceFrame.Count - 1; i++)
+            {
+                var sourceVector = sourceFrameVectors[i];
+                var targetVector = targetFrameVectors[i];
+
+                var rotor = GaPoTSymMultivector.CreateSimpleRotor(
+                    sourceVector, 
+                    targetVector
+                );
+
+                rotorsSequence.AppendRotor(rotor);
+
+                pseudoScalar = targetVector.ToMultivector().Lcp(pseudoScalar.Inverse());
+
+                for (var j = i + 1; j < sourceFrame.Count; j++)
+                {
+                    sourceFrameVectors[j] = 
+                        sourceFrameVectors[j].ApplyRotor(rotor).GetProjectionOnBlade(pseudoScalar);
+
+                    targetFrameVectors[j] =
+                        targetFrameVectors[j].GetProjectionOnBlade(pseudoScalar);
+                }
+            }
+
+            return rotorsSequence;
         }
 
 
@@ -95,6 +215,33 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymRotorsSequence(
                 _rotorsList.Skip(startIndex).Take(count)
             );
+        }
+
+        public GaPoTSymRotorsSequence JoinRotorPairs()
+        {
+            var rotorsSequence = new GaPoTSymRotorsSequence();
+
+            var pairsCount = 
+                _rotorsList.Count % 2 == 0
+                    ? _rotorsList.Count / 2
+                    : (_rotorsList.Count - 1) / 2;
+
+            for (var i = 0; i < pairsCount; i++)
+            {
+                var rotor1 = _rotorsList[2 * i];
+                var rotor2 = _rotorsList[2 * i + 1];
+
+                rotorsSequence.AppendRotor(
+                    rotor2.Gp(rotor1)
+                );
+            }
+
+            if (_rotorsList.Count % 2 == 1)
+                rotorsSequence.AppendRotor(
+                    _rotorsList[_rotorsList.Count - 1]
+                );
+
+            return rotorsSequence;
         }
 
         public IEnumerable<GaPoTSymVector> GetRotations(GaPoTSymVector vector)
@@ -194,6 +341,35 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 .GetMatrix(rowsCount)
                 .ToArrayExpr();
         }
+
+        public GaPoTSymRotorsSequence Reverse()
+        {
+            var rotorsSequence = new GaPoTSymRotorsSequence();
+
+            foreach (var rotor in _rotorsList)
+                rotorsSequence.PrependRotor(rotor.Reverse());
+
+            return rotorsSequence;
+        }
+
+        public string ToLaTeXEquationsArrays(string rotorsName, string basisName)
+        {
+            var textComposer = new StringBuilder();
+
+            for (var i = 0; i < Count; i++)
+            {
+                var rotorEquation = this[i].ToLaTeXEquationsArray(
+                    $"{rotorsName}_{{{i + 1}}}", 
+                    basisName
+                );
+
+                textComposer.AppendLine(rotorEquation);
+                textComposer.AppendLine();
+            }
+
+            return textComposer.ToString();
+        }
+
 
         public IEnumerator<GaPoTSymMultivector> GetEnumerator()
         {

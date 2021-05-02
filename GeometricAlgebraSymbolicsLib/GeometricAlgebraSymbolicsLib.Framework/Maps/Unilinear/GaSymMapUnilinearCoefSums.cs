@@ -6,23 +6,23 @@ using System.Text;
 using GeometricAlgebraNumericsLib.Structures;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
 using TextComposerLib.Text.Structured;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 {
     public sealed class GaSymMapUnilinearCoefSums : GaSymMapUnilinear
     {
-        private sealed class GaSymMapUnilinearCoefSumsTerm : IEnumerable<Tuple<int, Expr>>
+        private sealed class GaSymMapUnilinearCoefSumsTerm : IEnumerable<Tuple<ulong, Expr>>
         {
-            private readonly List<Tuple<int, Expr>> _factorsList
-                = new List<Tuple<int, Expr>>();
+            private readonly List<Tuple<ulong, Expr>> _factorsList
+                = new List<Tuple<ulong, Expr>>();
 
 
-            public int TargetBasisBladeId { get; private set; }
+            public ulong TargetBasisBladeId { get; private set; }
 
             public IEnumerable<string> TermsText
             {
@@ -41,7 +41,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                 }
             }
 
-            public Expr this[int domainBasisBladeId]
+            public Expr this[ulong domainBasisBladeId]
                 => _factorsList
                        .FirstOrDefault(
                            factor =>
@@ -58,7 +58,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                     );
 
 
-            internal GaSymMapUnilinearCoefSumsTerm(int targetBasisBladeId)
+            internal GaSymMapUnilinearCoefSumsTerm(ulong targetBasisBladeId)
             {
                 TargetBasisBladeId = targetBasisBladeId;
             }
@@ -71,7 +71,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                 return this;
             }
 
-            internal GaSymMapUnilinearCoefSumsTerm AddFactor(int domainBasisBladeId, bool isNegative = false)
+            internal GaSymMapUnilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId, bool isNegative = false)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -82,7 +82,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                 return this;
             }
 
-            internal GaSymMapUnilinearCoefSumsTerm AddFactor(int domainBasisBladeId, Expr factor)
+            internal GaSymMapUnilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId, Expr factor)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -93,7 +93,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                 return this;
             }
 
-            internal GaSymMapUnilinearCoefSumsTerm RemoveFactor(int domainBasisBladeId)
+            internal GaSymMapUnilinearCoefSumsTerm RemoveFactor(ulong domainBasisBladeId)
             {
                 var index = _factorsList.FindIndex(
                     factor =>
@@ -106,7 +106,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                 return this;
             }
 
-            public IEnumerator<Tuple<int, Expr>> GetEnumerator()
+            public IEnumerator<Tuple<ulong, Expr>> GetEnumerator()
             {
                 return _factorsList.GetEnumerator();
             }
@@ -148,15 +148,15 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
         
 
-        private readonly GaSparseTable1D<int, GaSymMapUnilinearCoefSumsTerm> _coefSumsTable
-            = new GaSparseTable1D<int, GaSymMapUnilinearCoefSumsTerm>();
+        private readonly GaSparseTable1D<ulong, GaSymMapUnilinearCoefSumsTerm> _coefSumsTable
+            = new GaSparseTable1D<ulong, GaSymMapUnilinearCoefSumsTerm>();
 
 
         public override int TargetVSpaceDimension { get; }
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1] 
+        public override IGaSymMultivector this[ulong id1] 
             => MapToTemp(id1).ToMultivector();
 
 
@@ -173,7 +173,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public GaSymMapUnilinearCoefSums SetBasisBladeMap(int basisBladeId, IGaSymMultivector targetMv)
+        public GaSymMapUnilinearCoefSums SetBasisBladeMap(ulong basisBladeId, IGaSymMultivector targetMv)
         {
             if (ReferenceEquals(targetMv, null))
                 return this;
@@ -184,7 +184,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId, bool isNegative = false)
+        public GaSymMapUnilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId, bool isNegative = false)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -197,7 +197,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId, Expr factorValue)
+        public GaSymMapUnilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId, Expr factorValue)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -210,7 +210,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearCoefSums RemoveFactor(int targetBasisBladeId, int domainBasisBladeId)
+        public GaSymMapUnilinearCoefSums RemoveFactor(ulong targetBasisBladeId, ulong domainBasisBladeId)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
                 return this;
@@ -220,7 +220,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return this;
         }
 
-        public GaSymMapUnilinearCoefSums RemoveFactors(int targetBasisBladeId)
+        public GaSymMapUnilinearCoefSums RemoveFactors(ulong targetBasisBladeId)
         {
             _coefSumsTable.Remove(targetBasisBladeId);
 
@@ -228,9 +228,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
-            var mv1 = GaSymMultivector.CreateBasisBlade(TargetGaSpaceDimension, id1);
+            var mv1 = GaSymMultivector.CreateBasisBlade(TargetVSpaceDimension, id1);
 
             return MapToTemp(mv1);
         }
@@ -240,7 +240,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var termValue in _coefSumsTable.Values)
                 resultMv.AddFactor(
@@ -251,14 +251,14 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return resultMv;
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
             {
                 var mv = this[id1];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, IGaSymMultivector>(id1, mv);
+                    yield return new Tuple<ulong, IGaSymMultivector>(id1, mv);
             }
         }
     }

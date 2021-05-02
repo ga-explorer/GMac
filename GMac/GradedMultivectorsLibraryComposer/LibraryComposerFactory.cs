@@ -6,7 +6,7 @@ using GMac.GMacAST;
 using GMac.GMacCompiler;
 using GradedMultivectorsLibraryComposer.Composers.CSharp;
 using TextComposerLib.Files;
-using TextComposerLib.Logs.Progress.UI;
+using TextComposerLib.UI.WinForms.UserInterface.UI;
 
 namespace GradedMultivectorsLibraryComposer
 {

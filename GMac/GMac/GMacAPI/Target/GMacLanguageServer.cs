@@ -5,11 +5,11 @@ using CodeComposerLib.Languages.CSharp;
 using CodeComposerLib.Languages.Excel;
 using CodeComposerLib.Languages.GMacDSL;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAPI.Target.Cpp;
 using GMac.GMacAPI.Target.CSharp;
 using GMac.GMacAPI.Target.Excel;
 using GMac.GMacAPI.Target.GMacDSL;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Target
 {

@@ -23,10 +23,10 @@ namespace GeometricAlgebraNumericsLib.Rendering.LaTeX
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => VSpaceDimension.ToGaSpaceDimension();
 
-        public int MaxBasisBladeId 
+        public ulong MaxBasisBladeId 
             => GaSpaceDimension - 1;
 
         public int GradesCount 
@@ -66,19 +66,19 @@ namespace GeometricAlgebraNumericsLib.Rendering.LaTeX
         }
 
 
-        private string FormatBasisBlade(int basisBladeId, IReadOnlyList<string> basisNamesArray, GaLaTeXBasisBladeForm basisBladeForm)
+        private string FormatBasisBlade(ulong basisBladeId, IReadOnlyList<string> basisNamesArray, GaLaTeXBasisBladeForm basisBladeForm)
         {
             if (!this.IsValidBasisBladeId(basisBladeId))
                 return "Invalid basis blade id " + basisBladeId;
 
             if (basisBladeForm == GaLaTeXBasisBladeForm.BasisBlade)
-                return basisNamesArray[basisBladeId];
+                return basisNamesArray[(int)basisBladeId];
 
             if (basisBladeId == 0)
                 return @"\mathfrak{1}";
 
             var basisVectors =
-                basisNamesArray.PickUsingPattern(basisBladeId).ToArray();
+                basisNamesArray.PickUsingPattern((int)basisBladeId).ToArray();
 
             if (basisBladeForm == GaLaTeXBasisBladeForm.BasisVectorsGeometricProduct)
                 return basisVectors.Concatenate();
@@ -95,7 +95,7 @@ namespace GeometricAlgebraNumericsLib.Rendering.LaTeX
         public string FormatBasisVectors()
         {
             return Enumerable.Range(0, VSpaceDimension - 1)
-                .Select(i => FormatBasisBlade(1 << i))
+                .Select(i => FormatBasisBlade(1UL << i))
                 .Concatenate(
                     ",",
                     @"\left\langle ",
@@ -103,7 +103,7 @@ namespace GeometricAlgebraNumericsLib.Rendering.LaTeX
                 );
         }
 
-        public string FormatBasisBlade(int basisBladeId)
+        public string FormatBasisBlade(ulong basisBladeId)
         {
             return FormatBasisBlade(basisBladeId, _basisNames, BasisBladeForm);
         }
@@ -145,7 +145,7 @@ namespace GeometricAlgebraNumericsLib.Rendering.LaTeX
 
         public string FormatPoTMultivector(IGaNumMultivector mv, int vSpaceDim1, int vSpaceDim2)
         {
-            var mask1 = (1 << vSpaceDim1) - 1;
+            var mask1 = (1UL << vSpaceDim1) - 1;
             var mask2 = ~mask1;
 
             var gaPoTBasisVectorNames = "abcdefghijklmnopqrstuvwxyz"
@@ -195,7 +195,7 @@ namespace GeometricAlgebraNumericsLib.Rendering.LaTeX
             return RenderMathToImage(FormatBasisVectors());
         } 
 
-        public Image RenderBasisBlade(int basisBladeId)
+        public Image RenderBasisBlade(ulong basisBladeId)
         {
             return RenderMathToImage(FormatBasisBlade(basisBladeId));
         } 

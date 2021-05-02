@@ -17,9 +17,9 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         private GaRandomGenerator _randGen;
         private GaNumFrame _frame;
 
-        private int _factor = 8;
+        private ulong _factor = 8;
 
-        public int MultivectorsCount
+        public ulong MultivectorsCount
             => GaSpaceDim / _factor;
 
         private GaNumSarMultivector[] _treeMultivectors1;
@@ -33,7 +33,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         public int VSpaceDim { get; set; }
         //= 12;
 
-        public int GaSpaceDim
+        public ulong GaSpaceDim
             => VSpaceDim.ToGaSpaceDimension();
 
         public IGaNumMapBilinear Product { get; set; }
@@ -53,7 +53,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
             _gradedMultivectors1 = new GaNumDgrMultivector[MultivectorsCount];
             _gradedMultivectors2 = new GaNumDgrMultivector[MultivectorsCount];
 
-            for (var id = 0; id < MultivectorsCount; id++)
+            for (var id = 0UL; id < MultivectorsCount; id++)
             {
                 _treeMultivectors1[id] = _randGen.GetNumTerm(id * _factor).CreateSarMultivector(VSpaceDim);
                 _treeMultivectors2[id] = _randGen.GetNumTerm(id * _factor).CreateSarMultivector(VSpaceDim);
@@ -74,8 +74,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         {
             GaNumSarMultivector mv = null;
 
-            for (var id1 = 0; id1 < MultivectorsCount; id1++)
-            for (var id2 = 0; id2 < MultivectorsCount; id2++)
+            for (var id1 = 0UL; id1 < MultivectorsCount; id1++)
+            for (var id2 = 0UL; id2 < MultivectorsCount; id2++)
                 mv = Product[_treeMultivectors1[id1], _treeMultivectors2[id2]];
 
             return mv;
@@ -86,8 +86,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         {
             GaNumDgrMultivector mv = null;
 
-            for (var id1 = 0; id1 < MultivectorsCount; id1++)
-            for (var id2 = 0; id2 < MultivectorsCount; id2++)
+            for (var id1 = 0UL; id1 < MultivectorsCount; id1++)
+            for (var id2 = 0UL; id2 < MultivectorsCount; id2++)
                 mv = Product[_gradedMultivectors1[id1], _gradedMultivectors2[id2]];
 
             return mv;

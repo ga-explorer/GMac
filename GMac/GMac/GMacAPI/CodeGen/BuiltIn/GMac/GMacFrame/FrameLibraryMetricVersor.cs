@@ -21,7 +21,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                 commandsList.AddRange(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newOm.ImageV" + index,
-                        "v gp " + frameInfo.BasisVectorFromIndex(index - 1).AccessName + " gp vi"
+                        "v gp " + frameInfo.BasisVectorFromIndex((ulong)index - 1).AccessName + " gp vi"
                         ),
 
                     GMacDslSyntaxFactory.AssignToLocalVariable(

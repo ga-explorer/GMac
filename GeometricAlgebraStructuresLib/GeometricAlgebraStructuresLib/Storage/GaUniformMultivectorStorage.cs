@@ -16,8 +16,8 @@ namespace GeometricAlgebraStructuresLib.Storage
         
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension 
-            => 1 << VSpaceDimension;
+        public ulong GaSpaceDimension 
+            => 1UL << VSpaceDimension;
         
         public abstract int StoredTermsCount { get; }
 
@@ -31,9 +31,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
 
-        public abstract T GetTermScalar(int id);
+        public abstract T GetTermScalar(ulong id);
 
-        public virtual T GetTermScalar(int grade, int index)
+        public virtual T GetTermScalar(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -41,12 +41,12 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
         
-        public virtual IGaTerm<T> GetTerm(int id)
+        public virtual IGaTerm<T> GetTerm(ulong id)
         {
             return new GaUniformTerm<T>(id, GetTermScalar(id));
         }
 
-        public virtual IGaTerm<T> GetTerm(int grade, int index)
+        public virtual IGaTerm<T> GetTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -54,9 +54,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
 
-        public abstract bool TryGetTermScalar(int id, out T value);
+        public abstract bool TryGetTermScalar(ulong id, out T value);
 
-        public virtual bool TryGetTermScalar(int grade, int index, out T value)
+        public virtual bool TryGetTermScalar(int grade, ulong index, out T value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -64,7 +64,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
         
         
-        public virtual bool TryGetTerm(int id, out IGaTerm<T> term)
+        public virtual bool TryGetTerm(ulong id, out IGaTerm<T> term)
         {
             if (TryGetTermScalar(id, out var value))
             {
@@ -76,7 +76,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return false;
         }
 
-        public virtual bool TryGetTerm(int grade, int index, out IGaTerm<T> term)
+        public virtual bool TryGetTerm(int grade, ulong index, out IGaTerm<T> term)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
             
@@ -91,9 +91,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
         
-        public abstract IGaMultivectorStorage<T> SetTermScalar(int id, T value);
+        public abstract IGaMultivectorStorage<T> SetTermScalar(ulong id, T value);
         
-        public virtual IGaMultivectorStorage<T> SetTermScalar(int grade, int index, T value)
+        public virtual IGaMultivectorStorage<T> SetTermScalar(int grade, ulong index, T value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -121,7 +121,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
         
-        public virtual bool TrySetTermScalar(int id, T value)
+        public virtual bool TrySetTermScalar(ulong id, T value)
         {
             if (!CanStoreTerm(id)) 
                 return false;
@@ -131,7 +131,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return true;
         }
 
-        public virtual bool TrySetTermScalar(int grade, int index, T value)
+        public virtual bool TrySetTermScalar(int grade, ulong index, T value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -146,7 +146,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         
         public virtual IGaMultivectorStorage<T> SetKVector(int grade, IReadOnlyList<T> scalarValuesList)
         {
-            var index = 0;
+            var index = 0UL;
             foreach (var scalar in scalarValuesList)
             {
                 SetTermScalar(grade, index, scalar);
@@ -159,7 +159,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public virtual IGaMultivectorStorage<T> SetKVector(int grade, T scalingFactor, IReadOnlyList<T> scalarValuesList)
         {
-            var index = 0;
+            var index = 0UL;
             foreach (var scalar in scalarValuesList)
             {
                 SetTermScalar(grade, index, ScalarDomain.Times(scalingFactor, scalar));
@@ -170,7 +170,8 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> SetKVector(int grade, IEnumerable<KeyValuePair<int, T>> scalarValuesList)
+        public virtual IGaMultivectorStorage<T> SetKVector(int grade,
+            IEnumerable<KeyValuePair<ulong, T>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 SetTermScalar(grade, pair.Key, pair.Value);
@@ -178,7 +179,8 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> SetKVector(int grade, T scalingFactor, IEnumerable<KeyValuePair<int, T>> scalarValuesList)
+        public virtual IGaMultivectorStorage<T> SetKVector(int grade, T scalingFactor,
+            IEnumerable<KeyValuePair<ulong, T>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 SetTermScalar(grade, pair.Key, ScalarDomain.Times(scalingFactor, pair.Value));
@@ -219,9 +221,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
         
-        public abstract IGaMultivectorStorage<T> AddTerm(int id, T value);
+        public abstract IGaMultivectorStorage<T> AddTerm(ulong id, T value);
         
-        public virtual IGaMultivectorStorage<T> AddTerm(int grade, int index, T value)
+        public virtual IGaMultivectorStorage<T> AddTerm(int grade, ulong index, T value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -263,7 +265,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
         
-        public virtual bool TryAddTerm(int id, T value)
+        public virtual bool TryAddTerm(ulong id, T value)
         {
             if (!CanStoreTerm(id)) 
                 return false;
@@ -273,7 +275,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return true;
         }
 
-        public virtual bool TryAddTerm(int grade, int index, T value)
+        public virtual bool TryAddTerm(int grade, ulong index, T value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -288,7 +290,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         
         public virtual IGaMultivectorStorage<T> AddKVector(int grade, IReadOnlyList<T> scalarValuesList)
         {
-            var index = 0;
+            var index = 0UL;
             foreach (var scalar in scalarValuesList)
             {
                 AddTerm(grade, index, scalar);
@@ -301,7 +303,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public virtual IGaMultivectorStorage<T> AddKVector(int grade, T scalingFactor, IReadOnlyList<T> scalarValuesList)
         {
-            var index = 0;
+            var index = 0UL;
             foreach (var scalar in scalarValuesList)
             {
                 AddTerm(grade, index, ScalarDomain.Times(scalingFactor, scalar));
@@ -312,7 +314,8 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> AddKVector(int grade, IEnumerable<KeyValuePair<int, T>> scalarValuesList)
+        public virtual IGaMultivectorStorage<T> AddKVector(int grade,
+            IEnumerable<KeyValuePair<ulong, T>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 AddTerm(grade, pair.Key, pair.Value);
@@ -320,7 +323,8 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> AddKVector(int grade, T scalingFactor, IEnumerable<KeyValuePair<int, T>> scalarValuesList)
+        public virtual IGaMultivectorStorage<T> AddKVector(int grade, T scalingFactor,
+            IEnumerable<KeyValuePair<ulong, T>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 AddTerm(grade, pair.Key, ScalarDomain.Times(scalingFactor, pair.Value));
@@ -361,16 +365,16 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
         
-        public abstract IGaMultivectorStorage<T> RemoveTerm(int id);
+        public abstract IGaMultivectorStorage<T> RemoveTerm(ulong id);
 
-        public virtual IGaMultivectorStorage<T> RemoveTerm(int grade, int index)
+        public virtual IGaMultivectorStorage<T> RemoveTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return RemoveTerm(id);
         }
 
-        public virtual IGaMultivectorStorage<T> RemoveTerms(IEnumerable<int> idsList)
+        public virtual IGaMultivectorStorage<T> RemoveTerms(IEnumerable<ulong> idsList)
         {
             foreach (var id in idsList)
                 RemoveTerm(id);
@@ -378,7 +382,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> RemoveTerms(int grade, IEnumerable<int> indexList)
+        public virtual IGaMultivectorStorage<T> RemoveTerms(int grade, IEnumerable<ulong> indexList)
         {
             foreach (var index in indexList)
                 RemoveTerm(grade, index);
@@ -397,7 +401,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<int, bool> selectionFilter)
+        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<ulong, bool> selectionFilter)
         {
             var idsList = 
                 GetStoredTermIds(selectionFilter).ToArray();
@@ -408,7 +412,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<int, int, bool> selectionFilter)
+        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<int, ulong, bool> selectionFilter)
         {
             var idsList = 
                 GetStoredTermIds(selectionFilter).ToArray();
@@ -419,7 +423,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<int, T, bool> selectionFilter)
+        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<ulong, T, bool> selectionFilter)
         {
             var idsList = 
                 GetStoredTermIds(selectionFilter).ToArray();
@@ -430,7 +434,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<int, int, T, bool> selectionFilter)
+        public virtual IGaMultivectorStorage<T> RemoveTerms(Func<int, ulong, T, bool> selectionFilter)
         {
             var idsList = 
                 GetStoredTermIds(selectionFilter).ToArray();
@@ -444,9 +448,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         public abstract IGaMultivectorStorage<T> RemoveTermsOfGrade(int grade);
 
         
-        public abstract IGaMultivectorStorage<T> RemoveTermIfZero(int id, bool nearZeroFlag = false);
+        public abstract IGaMultivectorStorage<T> RemoveTermIfZero(ulong id, bool nearZeroFlag = false);
 
-        public virtual IGaMultivectorStorage<T> RemoveTermIfZero(int grade, int index, bool nearZeroFlag = false)
+        public virtual IGaMultivectorStorage<T> RemoveTermIfZero(int grade, ulong index, bool nearZeroFlag = false)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -465,9 +469,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         public abstract bool IsZero(bool nearZeroFlag = false);
 
         
-        public abstract bool ContainsStoredTerm(int id);
+        public abstract bool ContainsStoredTerm(ulong id);
 
-        public virtual bool ContainsStoredTerm(int grade, int index)
+        public virtual bool ContainsStoredTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -477,9 +481,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         public abstract bool ContainsStoredTermOfGrade(int grade);
 
         
-        public abstract bool CanStoreTerm(int id);
+        public abstract bool CanStoreTerm(ulong id);
 
-        public virtual bool CanStoreTerm(int grade, int index)
+        public virtual bool CanStoreTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -491,95 +495,96 @@ namespace GeometricAlgebraStructuresLib.Storage
         public abstract bool CanStoreAllTermsOfGrade(int grade);
 
         
-        public abstract IEnumerable<int> GetStoredTermIds();
+        public abstract IEnumerable<ulong> GetStoredTermIds();
 
-        public abstract IEnumerable<int> GetStoredTermIds(Func<T, bool> selectionFilter);
+        public abstract IEnumerable<ulong> GetStoredTermIds(Func<T, bool> selectionFilter);
 
-        public virtual IEnumerable<int> GetStoredTermIds(Func<int, bool> selectionFilter)
+        public virtual IEnumerable<ulong> GetStoredTermIds(Func<ulong, bool> selectionFilter)
         {
             return GetStoredTermIds().Where(selectionFilter);
         }
 
-        public abstract IEnumerable<int> GetStoredTermIds(Func<int, int, bool> selectionFilter);
+        public abstract IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, bool> selectionFilter);
 
-        public abstract IEnumerable<int> GetStoredTermIds(Func<int, T, bool> selectionFilter);
+        public abstract IEnumerable<ulong> GetStoredTermIds(Func<ulong, T, bool> selectionFilter);
         
-        public abstract IEnumerable<int> GetStoredTermIds(Func<int, int, T, bool> selectionFilter);
+        public abstract IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, T, bool> selectionFilter);
 
-        public abstract IEnumerable<int> GetStoredTermIdsOfGrade(int grade);
+        public abstract IEnumerable<ulong> GetStoredTermIdsOfGrade(int grade);
 
         
-        public virtual IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices()
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices()
         {
             return GetStoredTermIds().Select(id =>
             {
                 id.BasisBladeGradeIndex(out var grade, out var index);
                 
-                return new Tuple<int, int>(grade, index);
+                return new Tuple<int, ulong>(grade, index);
             });
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<T, bool> selectionFilter)
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<T, bool> selectionFilter)
         {
             return GetStoredTermIds(selectionFilter).Select(
                 id =>
                 {
                     id.BasisBladeGradeIndex(out var grade, out var index);
 
-                    return new Tuple<int, int>(grade, index);
+                    return new Tuple<int, ulong>(grade, index);
                 }
             );
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, bool> selectionFilter)
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<ulong, bool> selectionFilter)
         {
             return GetStoredTermIds(selectionFilter).Select(
                 id =>
                 {
                     id.BasisBladeGradeIndex(out var grade, out var index);
 
-                    return new Tuple<int, int>(grade, index);
+                    return new Tuple<int, ulong>(grade, index);
                 }
             );
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, int, bool> selectionFilter)
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<int, ulong, bool> selectionFilter)
         {
             return GetStoredTermIds(selectionFilter).Select(
                 id =>
                 {
                     id.BasisBladeGradeIndex(out var grade, out var index);
 
-                    return new Tuple<int, int>(grade, index);
+                    return new Tuple<int, ulong>(grade, index);
                 }
             );
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, T, bool> selectionFilter)
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<ulong, T, bool> selectionFilter)
         {
             return GetStoredTermIds(selectionFilter).Select(
                 id =>
                 {
                     id.BasisBladeGradeIndex(out var grade, out var index);
 
-                    return new Tuple<int, int>(grade, index);
+                    return new Tuple<int, ulong>(grade, index);
                 }
             );
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, int, T, bool> selectionFilter)
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(
+            Func<int, ulong, T, bool> selectionFilter)
         {
             return GetStoredTermIds(selectionFilter).Select(
                 id =>
                 {
                     id.BasisBladeGradeIndex(out var grade, out var index);
 
-                    return new Tuple<int, int>(grade, index);
+                    return new Tuple<int, ulong>(grade, index);
                 }
             );
         }
 
-        public virtual IEnumerable<int> GetStoredTermIndicesOfGrade(int grade)
+        public virtual IEnumerable<ulong> GetStoredTermIndicesOfGrade(int grade)
         {
             return GetStoredTermIdsOfGrade(grade)
                 .Select(id => id.BasisBladeIndex());
@@ -593,11 +598,11 @@ namespace GeometricAlgebraStructuresLib.Storage
             return GetStoredTermScalars().Where(selectionFilter);
         }
 
-        public abstract IEnumerable<T> GetStoredTermScalars(Func<int, bool> selectionFilter);
+        public abstract IEnumerable<T> GetStoredTermScalars(Func<ulong, bool> selectionFilter);
 
-        public abstract IEnumerable<T> GetStoredTermScalars(Func<int, T, bool> selectionFilter);
+        public abstract IEnumerable<T> GetStoredTermScalars(Func<ulong, T, bool> selectionFilter);
 
-        public abstract IEnumerable<T> GetStoredTermScalars(Func<int, int, T, bool> selectionFilter);
+        public abstract IEnumerable<T> GetStoredTermScalars(Func<int, ulong, T, bool> selectionFilter);
 
         public abstract IEnumerable<T> GetStoredTermScalarsOfGrade(int grade);
 
@@ -611,28 +616,28 @@ namespace GeometricAlgebraStructuresLib.Storage
             );
         }
 
-        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, bool> selectionFilter)
+        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<ulong, bool> selectionFilter)
         {
             return GetStoredTerms().Where(t => 
                 selectionFilter(t.Id)
             );
         }
 
-        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, int, bool> selectionFilter)
+        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, ulong, bool> selectionFilter)
         {
             return GetStoredTerms().Where(t => 
                 selectionFilter(t.Grade, t.Index)
             );
         }
 
-        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, T, bool> selectionFilter)
+        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<ulong, T, bool> selectionFilter)
         {
             return GetStoredTerms().Where(t => 
                 selectionFilter(t.Id, t.Scalar)
             );
         }
 
-        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, int, T, bool> selectionFilter)
+        public virtual IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, ulong, T, bool> selectionFilter)
         {
             return GetStoredTerms().Where(t => 
                 selectionFilter(t.Grade, t.Index, t.Scalar)
@@ -646,48 +651,48 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public abstract IEnumerable<int> GetStoredGrades();
 
-        public virtual int GetStoredGradesBitPattern()
+        public virtual ulong GetStoredGradesBitPattern()
         {
             var gradesList = GetStoredGrades();
 
             return gradesList.Aggregate(
-                0, 
-                (current, grade) => current | (1 << grade)
+                0UL, 
+                (current, grade) => current | (1UL << grade)
             );
         }
 
         
-        public virtual IEnumerable<int> GetStoredZeroTermIds(bool nearZeroFlag = false)
+        public virtual IEnumerable<ulong> GetStoredZeroTermIds(bool nearZeroFlag = false)
         {
             return nearZeroFlag 
                 ? GetStoredTermIds(ScalarDomain.IsNearZero)
                 : GetStoredTermIds(ScalarDomain.IsZero);
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetStoredZeroTermGradeIndices(bool nearZeroFlag = false)
+        public virtual IEnumerable<Tuple<int, ulong>> GetStoredZeroTermGradeIndices(bool nearZeroFlag = false)
         {
             return nearZeroFlag 
                 ? GetStoredTermGradeIndices(ScalarDomain.IsNearZero)
                 : GetStoredTermGradeIndices(ScalarDomain.IsZero);
         }
 
-        public abstract IEnumerable<int> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false);
+        public abstract IEnumerable<ulong> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false);
 
-        public abstract IEnumerable<int> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false);
+        public abstract IEnumerable<ulong> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false);
 
         public abstract int GetNonZeroTermsCount(bool nearZeroFlag = false);
 
         public abstract IReadOnlyDictionary<int, int> GetNonZeroTermsCountPerGrade(bool nearZeroFlag = false);
 
 
-        public virtual IEnumerable<int> GetNonZeroTermIds(bool nearZeroFlag = false)
+        public virtual IEnumerable<ulong> GetNonZeroTermIds(bool nearZeroFlag = false)
         {
             return nearZeroFlag 
                 ? GetStoredTermIds(ScalarDomain.IsNotNearZero)
                 : GetStoredTermIds(ScalarDomain.IsNotZero);
         }
 
-        public virtual IEnumerable<Tuple<int, int>> GetNonZeroTermGradeIndices(bool nearZeroFlag = false)
+        public virtual IEnumerable<Tuple<int, ulong>> GetNonZeroTermGradeIndices(bool nearZeroFlag = false)
         {
             return nearZeroFlag 
                 ? GetStoredTermGradeIndices(ScalarDomain.IsNotNearZero)
@@ -713,9 +718,9 @@ namespace GeometricAlgebraStructuresLib.Storage
         
         public abstract GaBinaryTree<T> GetBinaryTree();
 
-        public abstract GaMvsTerm<T> GetTermStorage(int id, bool getCopy = false);
+        public abstract GaMvsTerm<T> GetTermStorage(ulong id, bool getCopy = false);
 
-        public virtual GaMvsTerm<T> GetTermStorage(int grade, int index, bool getCopy = false)
+        public virtual GaMvsTerm<T> GetTermStorage(int grade, ulong index, bool getCopy = false)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -761,7 +766,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 };
             }
 
-            if (termsCount == GaSpaceDimension)
+            if ((ulong)termsCount == GaSpaceDimension)
                 return GetDenseArrayStorage(getCopy);
 
             if (gradesCount == 1)
@@ -785,12 +790,12 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public abstract IGaMultivectorStorage<T> ApplyMapping(Func<T, T> mappingFunc);
 
-        public abstract IGaMultivectorStorage<T> ApplyMapping(Func<int, T, T> mappingFunc);
+        public abstract IGaMultivectorStorage<T> ApplyMapping(Func<ulong, T, T> mappingFunc);
 
-        public abstract IGaMultivectorStorage<T> ApplyMapping(Func<int, int, T, T> mappingFunc);
+        public abstract IGaMultivectorStorage<T> ApplyMapping(Func<int, ulong, T, T> mappingFunc);
 
         
-        public abstract IEnumerator<KeyValuePair<int, T>> GetEnumerator();
+        public abstract IEnumerator<KeyValuePair<ulong, T>> GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
         {

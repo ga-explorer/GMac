@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace GeometricAlgebraNumericsLib.Structures
 {
-    public sealed class GaHashTable2D<T> : IEnumerable<Tuple<int, int, T>>
+    public sealed class GaHashTable2D<T> : IEnumerable<Tuple<ulong, ulong, T>>
     {
         private readonly Dictionary<ulong, T> _dictionary =
             new Dictionary<ulong, T>();
@@ -13,17 +13,17 @@ namespace GeometricAlgebraNumericsLib.Structures
         public Func<T, bool> IsDefaultValue { get; }
 
 
-        public T this[int key1, int key2]
+        public T this[ulong key1, ulong key2]
         {
             get
             {
-                _dictionary.TryGetValue((ulong)key1 + ((ulong)key2 << 32), out var value);
+                _dictionary.TryGetValue(key1 + (key2 << 32), out var value);
 
                 return value;
             }
             set
             {
-                var key = (ulong)key1 + ((ulong)key2 << 32);
+                var key = key1 + (key2 << 32);
 
                 if (IsDefaultValue(value))
                 {
@@ -40,11 +40,11 @@ namespace GeometricAlgebraNumericsLib.Structures
 
         public int Count => _dictionary.Count;
 
-        public IEnumerable<Tuple<int, int>> Keys 
+        public IEnumerable<Tuple<ulong, ulong>> Keys 
             => _dictionary.Keys.Select(
                 key => Tuple.Create(
-                    (int) (key & int.MaxValue),
-                    (int) ((key >> 32) & int.MaxValue)
+                    (key & int.MaxValue),
+                    ((key >> 32) & int.MaxValue)
                 ));
 
         public ICollection<T> Values 
@@ -62,29 +62,29 @@ namespace GeometricAlgebraNumericsLib.Structures
             _dictionary.Clear();
         }
 
-        public bool ContainsKey(int key1, int key2)
+        public bool ContainsKey(ulong key1, ulong key2)
         {
-            return _dictionary.ContainsKey((ulong)key1 + ((ulong)key2 << 32));
+            return _dictionary.ContainsKey(key1 + (key2 << 32));
         }
 
-        public bool TryGetValue(int key1, int key2, out T value)
+        public bool TryGetValue(ulong key1, ulong key2, out T value)
         {
-            return _dictionary.TryGetValue((ulong)key1 + ((ulong)key2 << 32), out value);
+            return _dictionary.TryGetValue(key1 + (key2 << 32), out value);
         }
 
-        public GaHashTable2D<T> Remove(int key1, int key2)
+        public GaHashTable2D<T> Remove(ulong key1, ulong key2)
         {
-            _dictionary.Remove((ulong)key1 + ((ulong)key2 << 32));
+            _dictionary.Remove(key1 + (key2 << 32));
 
             return this;
         }
 
-        public IEnumerator<Tuple<int, int, T>> GetEnumerator()
+        public IEnumerator<Tuple<ulong, ulong, T>> GetEnumerator()
         {
             return _dictionary.Select(
                 pair => Tuple.Create(
-                    (int)(pair.Key & int.MaxValue),
-                    (int)((pair.Key >> 32) & int.MaxValue),
+                    (pair.Key & int.MaxValue),
+                    ((pair.Key >> 32) & int.MaxValue),
                     pair.Value
                 )).GetEnumerator();
         }
@@ -93,8 +93,8 @@ namespace GeometricAlgebraNumericsLib.Structures
         {
             return _dictionary.Select(
                 pair => Tuple.Create(
-                    (int)(pair.Key & int.MaxValue),
-                    (int)((pair.Key >> 32) & int.MaxValue),
+                    (pair.Key & int.MaxValue),
+                    ((pair.Key >> 32) & int.MaxValue),
                     pair.Value
                 )).GetEnumerator();
         }

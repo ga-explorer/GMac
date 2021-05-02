@@ -20,9 +20,9 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         private GaNumFrameNonOrthogonal _frame;
         private GaNumFrame _frameOrtho;
 
-        private int _factor = 8;
+        private ulong _factor = 8;
 
-        public int TermsCount 
+        public ulong TermsCount 
             => GaSpaceDim / _factor;
 
         private GaNumSarMultivector[] _terms1;
@@ -39,7 +39,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         public int VSpaceDim { get; set; }
         //= 12;
 
-        public int GaSpaceDim
+        public ulong GaSpaceDim
             => VSpaceDim.ToGaSpaceDimension();
 
         public IGaNumMapBilinear ProductOrtho { get; set; }
@@ -64,7 +64,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
             _mappedTerms2 = new GaNumSarMultivector[TermsCount];
             _mappedTermResults = new GaNumSarMultivector[TermsCount, TermsCount];
 
-            for (var id = 0; id < TermsCount; id++)
+            for (var id = 0UL; id < TermsCount; id++)
             {
                 _terms1[id] = _randGen.GetNumTerm(id * _factor).CreateSarMultivector(VSpaceDim);
                 _terms2[id] = _randGen.GetNumTerm(id * _factor).CreateSarMultivector(VSpaceDim);
@@ -82,8 +82,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
             ProductOrtho = _frameOrtho.Sp;
             ProductNonOrtho = _frame.Sp;
 
-            for (var id1 = 0; id1 < TermsCount; id1++)
-            for (var id2 = 0; id2 < TermsCount; id2++)
+            for (var id1 = 0UL; id1 < TermsCount; id1++)
+            for (var id2 = 0UL; id2 < TermsCount; id2++)
                 _mappedTermResults[id1, id2] = ProductOrtho[
                     _mappedTerms1[id1],
                     _mappedTerms2[id2]
@@ -96,8 +96,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         {
             GaNumSarMultivector mv = null;
 
-            for (var id1 = 0; id1 < TermsCount; id1++)
-            for (var id2 = 0; id2 < TermsCount; id2++)
+            for (var id1 = 0UL; id1 < TermsCount; id1++)
+            for (var id2 = 0UL; id2 < TermsCount; id2++)
                 mv = ProductNonOrtho[_terms1[id1], _terms2[id2]];
 
             return mv;
@@ -109,8 +109,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
             GaNumSarMultivector mv1 = null;
             GaNumSarMultivector mv2 = null;
 
-            for (var id1 = 0; id1 < TermsCount; id1++)
-            for (var id2 = 0; id2 < TermsCount; id2++)
+            for (var id1 = 0UL; id1 < TermsCount; id1++)
+            for (var id2 = 0UL; id2 < TermsCount; id2++)
             {
                 mv1 = _frame.ThisToBaseFrameCba[_terms1[id1]];
                 mv2 = _frame.ThisToBaseFrameCba[_terms2[id2]];
@@ -124,8 +124,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         {
             GaNumSarMultivector mv = null;
 
-            for (var id1 = 0; id1 < TermsCount; id1++)
-            for (var id2 = 0; id2 < TermsCount; id2++)
+            for (var id1 = 0UL; id1 < TermsCount; id1++)
+            for (var id2 = 0UL; id2 < TermsCount; id2++)
                 mv = ProductOrtho[_mappedTerms1[id1], _mappedTerms2[id2]];
 
             return mv;
@@ -136,8 +136,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         {
             GaNumSarMultivector mv = null;
 
-            for (var id1 = 0; id1 < TermsCount; id1++)
-            for (var id2 = 0; id2 < TermsCount; id2++)
+            for (var id1 = 0UL; id1 < TermsCount; id1++)
+            for (var id2 = 0UL; id2 < TermsCount; id2++)
                 mv = _frame.BaseFrameToThisCba[_mappedTermResults[id1, id2]];
 
             return mv;

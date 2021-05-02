@@ -9,9 +9,9 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Wolfram.NETLink.Internal;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// MathLinkFactory is the class that is used to construct objects of the various link interfaces

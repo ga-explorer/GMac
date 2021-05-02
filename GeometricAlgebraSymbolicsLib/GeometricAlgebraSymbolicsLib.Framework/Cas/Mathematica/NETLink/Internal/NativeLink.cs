@@ -12,7 +12,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// NativeLink is an IMathLink implementation that communicates with the MathLink library.

@@ -7,9 +7,12 @@ namespace GeometricAlgebraSymbolicsLibSamples
     {
         static void Main(string[] args)
         {
-            RotorsSequenceSample.Execute();
-            //GramSchmidtRotation3DSample.Execute();
-            //FbdFrameSample.Execute();
+            //RotorsSequenceSample.Execute();
+            //GramSchmidtRotationSample.Execute();
+            //HyperVectorsFrameSample.Execute();
+            SimpleKirchhoffRotationSample.Execute1();
+            //OrthogonalRotorsDecompositionSample.Execute();
+            //ValidationSample1.Execute();
 
             Console.WriteLine();
             Console.WriteLine(@"Press any key to exit...");

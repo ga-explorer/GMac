@@ -17,13 +17,13 @@ namespace GMac.GMacMath.Validators
 
             var gp = (IGaNumOrthogonalGeometricProduct) NumericFrame.Gp;
 
-            for (var id1 = 0; id1 < NumericFrame.GaSpaceDimension; id1++)
+            for (var id1 = 0UL; id1 < NumericFrame.GaSpaceDimension; id1++)
             {
-                for (var id2 = 0; id2 < NumericFrame.GaSpaceDimension; id2++)
+                for (var id2 = 0UL; id2 < NumericFrame.GaSpaceDimension; id2++)
                 {
                     var gp12 = gp.MapToTerm(id1, id2);
 
-                    for (var id3 = 0; id3 < NumericFrame.GaSpaceDimension; id3++)
+                    for (var id3 = 0UL; id3 < NumericFrame.GaSpaceDimension; id3++)
                     {
                         var gp123la = gp.MapToTermLa(id1, id2, id3);
                         var gp123ra = gp.MapToTermRa(id1, id2, id3);

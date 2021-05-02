@@ -54,9 +54,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             return null;
         }
 
-        public static IGaTreeMultivectorNode GetChild(this IGaTreeMultivectorNode mv, int index)
+        public static IGaTreeMultivectorNode GetChild(this IGaTreeMultivectorNode mv, ulong index)
         {
-            return (index & 1) == 0
+            return (index & 1UL) == 0
                 ? mv.GetRightChild()
                 : mv.GetLeftChild();
         }
@@ -232,9 +232,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             return null;
         }
 
-        public static GaTreeMultivectorNode GetOrSetChildToInternalNode(this IGaTreeMultivectorNode mv, int index)
+        public static GaTreeMultivectorNode GetOrSetChildToInternalNode(this IGaTreeMultivectorNode mv, ulong index)
         {
-            return (index & 1) == 0
+            return (index & 1UL) == 0
                 ? mv.GetOrSetRightChildToInternalNode()
                 : mv.GetOrSetLeftChildToInternalNode();
         }
@@ -318,9 +318,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             return null;
         }
 
-        public static GaTreeMultivectorLeaf GetOrSetChildToLeafNode(this IGaTreeMultivectorNode mv, int index, MathematicaScalar value)
+        public static GaTreeMultivectorLeaf GetOrSetChildToLeafNode(this IGaTreeMultivectorNode mv, ulong index, MathematicaScalar value)
         {
-            return (index & 1) == 0
+            return (index & 1UL) == 0
                 ? mv.GetOrSetRightChildToLeafNode(value)
                 : mv.GetOrSetLeftChildToLeafNode(value);
         }
@@ -328,31 +328,31 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
         #endregion
 
         #region Outer Product Tree Algorithm
-        private static IEnumerable<int> OpOneLevel(List<int> inputList, bool bitFlag)
+        private static IEnumerable<ulong> OpOneLevel(List<ulong> inputList, bool bitFlag)
         {
             if (inputList.Count == 0)
                 return bitFlag
-                    ? new List<int> { 1, 0 }
-                    : new List<int> { 0 };
+                    ? new List<ulong> { 1UL, 0UL }
+                    : new List<ulong> { 0UL };
 
             return bitFlag
                 ? OpAddBitList(inputList, true, false)
                 : OpAddBitList(inputList, false);
         }
 
-        private static IEnumerable<int> OpAddBitList(IEnumerable<int> inputList, bool bitFlagA)
+        private static IEnumerable<ulong> OpAddBitList(IEnumerable<ulong> inputList, bool bitFlagA)
         {
             return inputList.Select(
-                i => (i << 1) | (bitFlagA ? 1 : 0)
-                );
+                i => (i << 1) | (bitFlagA ? 1UL : 0UL)
+            );
         }
 
-        private static IEnumerable<int> OpAddBitList(IEnumerable<int> inputList, bool bitFlagA, bool bitFlagB)
+        private static IEnumerable<ulong> OpAddBitList(IEnumerable<ulong> inputList, bool bitFlagA, bool bitFlagB)
         {
             foreach (var i in inputList)
             {
-                yield return (i << 1) | (bitFlagA ? 1 : 0);
-                yield return (i << 1) | (bitFlagB ? 1 : 0);
+                yield return (i << 1) | (bitFlagA ? 1UL : 0UL);
+                yield return (i << 1) | (bitFlagB ? 1UL : 0UL);
             }
         }
 
@@ -383,13 +383,13 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             if (mv1.GaSpaceDimension != mv2.GaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.VSpaceDimension);
 
             var signList = OpSign(mv1.VSpaceDimension);
 
-            for (var basisBladeId = 0; basisBladeId < mv1.GaSpaceDimension; basisBladeId++)
+            for (var basisBladeId = 0UL; basisBladeId < mv1.GaSpaceDimension; basisBladeId++)
             {
-                var indexList = new List<int>();
+                var indexList = new List<ulong>();
 
                 indexList =
                     basisBladeId
@@ -420,7 +420,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
         #endregion
 
         #region Geometric Product Tree Algorithm
-        private static void GpSign(List<bool> signList, int coefId, bool currentSign, bool comp, int level, int maxLevel)
+        private static void GpSign(List<bool> signList, ulong coefId, bool currentSign, bool comp, int level, int maxLevel)
         {
             if (level == maxLevel)
                 signList.Add(currentSign);
@@ -441,7 +441,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             }
         }
 
-        private static List<bool> GpSign(int vSpaceDim, int coefId)
+        private static List<bool> GpSign(int vSpaceDim, ulong coefId)
         {
             var signList = new List<bool>();
 
@@ -455,11 +455,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             if (mv1.GaSpaceDimension != mv2.GaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.VSpaceDimension);
 
-            var indexList = Enumerable.Range(0, mv1.GaSpaceDimension).Reverse().ToList();
+            var indexList = Enumerable.Range(0, (int)mv1.GaSpaceDimension).Select(i => (ulong)i).Reverse().ToList();
 
-            for (var k = 0; k < mv1.GaSpaceDimension; k++)
+            for (var k = 0UL; k < mv1.GaSpaceDimension; k++)
             {
                 var coefId = k.ReverseBits(mv1.VSpaceDimension);
                 var signList = GpSign(mv1.VSpaceDimension, coefId);
@@ -471,7 +471,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 
                     resultMv.AddFactor(
                         coefId,
-                        signList[mv1.GaSpaceDimension - index - 1],
+                        signList[(int)(mv1.GaSpaceDimension - index - 1)],
                         Mfs.Times[mv1[id1], mv2[id2]]
                     );
                 }
@@ -485,11 +485,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             if (mv1.GaSpaceDimension != mv2.GaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.VSpaceDimension);
 
-            var indexList = Enumerable.Range(0, mv1.GaSpaceDimension).Reverse().ToList();
+            var indexList = Enumerable.Range(0, (int)mv1.GaSpaceDimension).Select(i => (ulong)i).Reverse().ToList();
 
-            for (var k = 0; k < mv1.GaSpaceDimension; k++)
+            for (var k = 0UL; k < mv1.GaSpaceDimension; k++)
             {
                 var coefId = k.ReverseBits(mv1.VSpaceDimension);
                 var signList = GpSign(mv1.VSpaceDimension, coefId);
@@ -501,8 +501,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 
                     resultMv.AddFactor(
                         coefId,
-                        signList[mv1.GaSpaceDimension - index - 1],
-                        Mfs.Times[metricScalarsList[id1 & id2].ToExpr(), mv1[id1], mv2[id2]]
+                        signList[(int)(mv1.GaSpaceDimension - index - 1)],
+                        Mfs.Times[metricScalarsList[(int)(id1 & id2)].ToExpr(), mv1[id1], mv2[id2]]
                     );
                 }
             }
@@ -515,11 +515,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             if (mv1.GaSpaceDimension != mv2.GaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.GaSpaceDimension);
+            var resultMv = GaSymMultivector.CreateZeroTemp(mv1.VSpaceDimension);
 
-            var indexList = Enumerable.Range(0, mv1.GaSpaceDimension).Reverse().ToList();
+            var indexList = Enumerable.Range(0, (int)mv1.GaSpaceDimension).Select(i => (ulong)i).Reverse().ToList();
 
-            for (var k = 0; k < mv1.GaSpaceDimension; k++)
+            for (var k = 0UL; k < mv1.GaSpaceDimension; k++)
             {
                 var coefId = k.ReverseBits(mv1.VSpaceDimension);
                 var signList = GpSign(mv1.VSpaceDimension, coefId);
@@ -531,8 +531,8 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 
                     resultMv.AddFactor(
                         coefId, 
-                        signList[mv1.GaSpaceDimension - index - 1],
-                        Mfs.Times[metricScalarsList[id1 & id2].Expression, mv1[id1], mv2[id2]]
+                        signList[(int)(mv1.GaSpaceDimension - index - 1)],
+                        Mfs.Times[metricScalarsList[(int)(id1 & id2)].Expression, mv1[id1], mv2[id2]]
                     );
                 }
             }

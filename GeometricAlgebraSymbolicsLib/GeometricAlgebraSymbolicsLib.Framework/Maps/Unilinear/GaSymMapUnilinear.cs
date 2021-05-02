@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 {
@@ -15,10 +15,10 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
 
         public abstract int DomainVSpaceDimension { get; }
 
-        public int DomainGaSpaceDimension
+        public ulong DomainGaSpaceDimension
             => DomainVSpaceDimension.ToGaSpaceDimension();
 
-        public IGaSymMultivector this[int grade1, int index1]
+        public IGaSymMultivector this[int grade1, ulong index1]
             => this[GaFrameUtils.BasisBladeId(grade1, index1)];
 
         public ISymbolicMatrix MappingMatrix
@@ -37,19 +37,19 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         {
             var matrixItems = new Expr[TargetGaSpaceDimension, DomainGaSpaceDimension];
 
-            for (var col = 0; col < DomainGaSpaceDimension; col++)
+            for (var col = 0UL; col < DomainGaSpaceDimension; col++)
             {
                 var mv = this[col];
 
                 if (mv.IsNullOrZero())
                 {
-                    for (var row = 0; row < TargetGaSpaceDimension; row++)
+                    for (var row = 0UL; row < TargetGaSpaceDimension; row++)
                         matrixItems[row, col] = Expr.INT_ZERO;
 
                     continue;
                 }
 
-                for (var row = 0; row < TargetGaSpaceDimension; row++)
+                for (var row = 0UL; row < TargetGaSpaceDimension; row++)
                 {
                     var scalar = mv[row];
 
@@ -74,7 +74,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
                 DomainVSpaceDimension
             );
 
-            for (var id = 0; id < TargetGaSpaceDimension; id++)
+            for (var id = 0UL; id < TargetGaSpaceDimension; id++)
             {
                 var mv = GaSymMultivector.CreateFromRow(exprArray, id);
 
@@ -96,25 +96,25 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         }
 
 
-        public abstract IGaSymMultivector this[int id1] { get; }
+        public abstract IGaSymMultivector this[ulong id1] { get; }
 
         public GaSymMultivector this[GaSymMultivector mv1]
             => MapToTemp(mv1).ToMultivector();
 
-        public abstract IGaSymMultivectorTemp MapToTemp(int id1);
+        public abstract IGaSymMultivectorTemp MapToTemp(ulong id1);
 
         public abstract IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1);
 
-        public abstract IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps();
+        public abstract IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps();
 
-        public virtual IEnumerable<Tuple<int, IGaSymMultivector>> BasisVectorMaps()
+        public virtual IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisVectorMaps()
         {
-            for (var index = 0; index < DomainVSpaceDimension; index++)
+            for (var index = 0UL; index < (ulong)DomainVSpaceDimension; index++)
             {
                 var mv = this[GaFrameUtils.BasisBladeId(1, index)];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, IGaSymMultivector>(index, mv);
+                    yield return new Tuple<ulong, IGaSymMultivector>(index, mv);
             }
         }
     }

@@ -11,9 +11,9 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using Wolfram.NETLink.Internal.COM;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal.COM;
 
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// This class knows how to deal with CallPackets, which are requests to invoke .NET/Link specific functionality,

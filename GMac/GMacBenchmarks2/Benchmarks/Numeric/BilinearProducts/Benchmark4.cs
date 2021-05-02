@@ -32,7 +32,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.BilinearProducts
         [Params(3, 4, 5, 6, 7, 8, 9, 10)]
         public int VSpaceDimension { get; set; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
         public Func<IGaNumMultivector, IGaNumMultivector, IEnumerable<GaTerm<double>>> Product { get; set; }

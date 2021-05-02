@@ -22,12 +22,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
-        public abstract double this[int grade, int index] { get; }
+        public abstract double this[int grade, ulong index] { get; }
 
-        public abstract double this[int id] { get; }
+        public abstract double this[ulong id] { get; }
 
         public abstract int StoredTermsCount { get; }
 
@@ -63,9 +63,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public abstract bool IsEmpty();
 
-        public abstract bool ContainsStoredTerm(int id);
+        public abstract bool ContainsStoredTerm(ulong id);
 
-        public abstract bool ContainsStoredTerm(int grade, int index);
+        public abstract bool ContainsStoredTerm(int grade, ulong index);
 
         public abstract bool ContainsStoredTermOfGrade(int grade);
 
@@ -82,22 +82,22 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public abstract IEnumerable<GaTerm<double>> GetNonZeroTermsOfGrade(int grade);
 
-        public abstract IEnumerable<int> GetStoredTermIds();
+        public abstract IEnumerable<ulong> GetStoredTermIds();
 
-        public abstract IEnumerable<int> GetNonZeroTermIds();
+        public abstract IEnumerable<ulong> GetNonZeroTermIds();
 
         public abstract IEnumerable<double> GetStoredTermScalars();
 
         public abstract IEnumerable<double> GetNonZeroTermScalars();
 
 
-        public abstract bool TryGetValue(int id, out double value);
+        public abstract bool TryGetValue(ulong id, out double value);
 
-        public abstract bool TryGetValue(int grade, int index, out double value);
+        public abstract bool TryGetValue(int grade, ulong index, out double value);
 
-        public abstract bool TryGetTerm(int id, out GaTerm<double> term);
+        public abstract bool TryGetTerm(ulong id, out GaTerm<double> term);
 
-        public abstract bool TryGetTerm(int grade, int index, out GaTerm<double> term);
+        public abstract bool TryGetTerm(int grade, ulong index, out GaTerm<double> term);
 
 
         public abstract IGaGbtNode1<double> GetGbtRootNode();

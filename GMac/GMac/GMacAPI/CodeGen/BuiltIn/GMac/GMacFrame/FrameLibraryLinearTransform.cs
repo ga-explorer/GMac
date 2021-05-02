@@ -19,7 +19,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                     GMacDslSyntaxFactory.AssignToLocalVariable("imageMv", "mv.#E0# * tr.ImageE0")
                     );
 
-            for (var id = 1; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 1UL; id <= frameInfo.MaxBasisBladeId; id++)
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable("imageMv", "imageMv + mv.#E" + id + "# * tr.ImageE" + id)
                     );
@@ -51,13 +51,13 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             var componentsText = new ListTextComposer("," + Environment.NewLine);
 
-            for (var id1 = 0; id1 <= frameInfo.MaxBasisBladeId; id1++)
+            for (var id1 = 0UL; id1 <= frameInfo.MaxBasisBladeId; id1++)
             {
                 componentsText.Clear();
 
                 commandsList.AddFixedCode("let newTr.ImageE" + id1 + " = Multivector(");
 
-                for (var id2 = 0; id2 <= frameInfo.MaxBasisBladeId; id2++)
+                for (var id2 = 0UL; id2 <= frameInfo.MaxBasisBladeId; id2++)
                     componentsText.Add("    #E" + id2 + "# = tr.ImageE" + id2 + ".#E" + id1 + "#");
 
                 commandsList.AddFixedCode(componentsText.ToString());
@@ -86,7 +86,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                     GMacDslSyntaxFactory.EmptyLine()
                     );
 
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newTr.ImageE" + id,
@@ -119,7 +119,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                     GMacDslSyntaxFactory.EmptyLine()
                     );
 
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newTr.ImageE" + id,
@@ -152,7 +152,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                     GMacDslSyntaxFactory.EmptyLine()
                     );
 
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newTr.ImageE" + id,
@@ -185,7 +185,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                     GMacDslSyntaxFactory.EmptyLine()
                     );
 
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newTr.ImageE" + id,
@@ -218,7 +218,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                     GMacDslSyntaxFactory.EmptyLine()
                     );
 
-            for (var id = 0; id <= frameInfo.MaxBasisBladeId; id++)
+            for (var id = 0UL; id <= frameInfo.MaxBasisBladeId; id++)
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
                         "newTr.ImageE" + id,

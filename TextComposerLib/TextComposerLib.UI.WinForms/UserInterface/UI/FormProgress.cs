@@ -6,8 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using TextComposerLib.Logs.Progress;
 
-namespace TextComposerLib.Logs.Progress.UI
+namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     public partial class FormProgress : Form
     {

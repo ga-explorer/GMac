@@ -34,7 +34,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1, int id2, int id3]
+        public override IGaNumMultivector this[ulong id1, ulong id2, ulong id3]
         {
             get
             {
@@ -65,7 +65,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
             return this;
         }
 
-        public GaNumMapTrilinearHash SetBasisBladesMap(int id1, int id2, int id3, IGaNumMultivector value)
+        public GaNumMapTrilinearHash SetBasisBladesMap(ulong id1, ulong id2, ulong id3, IGaNumMultivector value)
         {
             Debug.Assert(ReferenceEquals(value, null) || value.VSpaceDimension == TargetVSpaceDimension);
 
@@ -74,7 +74,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
             return this;
         }
 
-        public GaNumMapTrilinearHash RemoveBasisBladesMap(int id1, int id2, int id3)
+        public GaNumMapTrilinearHash RemoveBasisBladesMap(ulong id1, ulong id2, ulong id3)
         {
             _basisBladesMaps.Remove(id1, id2, id3);
             return this;
@@ -123,7 +123,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
             }
         }
 
-        public override IEnumerable<Tuple<int, int, int, IGaNumMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, ulong, IGaNumMultivector>> BasisBladesMaps()
         {
             foreach (var pair in _basisBladesMaps)
             {
@@ -133,7 +133,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Trilinear
                 var mv = pair.Value;
 
                 if (!mv.IsNullOrEmpty())
-                    yield return new Tuple<int, int, int, IGaNumMultivector>(id1, id2, id3, mv);
+                    yield return new Tuple<ulong, ulong, ulong, IGaNumMultivector>(id1, id2, id3, mv);
             }
         }
     }

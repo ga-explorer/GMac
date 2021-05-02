@@ -77,9 +77,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             //Find a simple rotor to get c1 from u1
             var rotor1 = 
-                u1.GetRotorToVector(c1).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
-                );
+                GaPoTSymMultivector
+                    .CreateSimpleRotor(u1, c1)
+                    .MapScalars(e => Mfs.ToRadicals[e].Evaluate());
             
             //Make sure this is a rotor
             Console.WriteLine($@"rotor1 = {rotor1.TermsToLaTeX()}");
@@ -102,9 +102,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             
             //Find a simple rotor to get c2 from u2_1
             var rotor2 = 
-                u2_1.GetRotorToVector(c2).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
-                );
+                GaPoTSymMultivector
+                    .CreateSimpleRotor(u2_1, c2)
+                    .MapScalars(e => Mfs.ToRadicals[e].Evaluate());
             
             //Make sure this is a rotor
             Console.WriteLine($@"rotor2 = {rotor2.TermsToLaTeX()}");
@@ -141,9 +141,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             
             //Find a simple rotor to get c3 from u3_2
             var rotor3 = 
-                u3_2.GetRotorToVector(c3).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
-                );
+                GaPoTSymMultivector
+                    .CreateSimpleRotor(u3_2, c3)
+                    .MapScalars(e => Mfs.ToRadicals[e].Evaluate());
             
             //Make sure this is a rotor
             Console.WriteLine($@"rotor3 = {rotor3.TermsToLaTeX()}");
@@ -166,9 +166,10 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             
             //Compute final rotor as rotor3 gp rotor2 gp rotor1
             var rotor = 
-                rotor3.Gp(rotor2).Gp(rotor1).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
-                );
+                rotor3
+                    .Gp(rotor2)
+                    .Gp(rotor1)
+                    .MapScalars(e => Mfs.ToRadicals[e].Evaluate());
             
             //Make sure this is a rotor
             Console.WriteLine($@"rotor = {rotor.TermsToLaTeX()}");

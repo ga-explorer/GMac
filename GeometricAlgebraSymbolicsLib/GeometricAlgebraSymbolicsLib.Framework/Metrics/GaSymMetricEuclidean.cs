@@ -16,17 +16,17 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
         public int Count
-            => VSpaceDimension.ToGaSpaceDimension();
+            => (int)VSpaceDimension.ToGaSpaceDimension();
 
         public int this[int index]
         {
             get
             {
-                if (index < 0 || index >= GaSpaceDimension)
+                if (index < 0 || index >= (int)GaSpaceDimension)
                     throw new IndexOutOfRangeException();
 
                 return 1;
@@ -42,12 +42,12 @@ namespace GeometricAlgebraSymbolicsLib.Metrics
 
         public IEnumerator<int> GetEnumerator()
         {
-            return Enumerable.Repeat(1, GaSpaceDimension).GetEnumerator();
+            return Enumerable.Repeat(1, (int)GaSpaceDimension).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Enumerable.Repeat(1, GaSpaceDimension).GetEnumerator();
+            return Enumerable.Repeat(1, (int)GaSpaceDimension).GetEnumerator();
         }
     }
 }

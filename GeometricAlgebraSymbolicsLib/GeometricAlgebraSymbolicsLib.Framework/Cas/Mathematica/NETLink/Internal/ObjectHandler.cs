@@ -9,14 +9,13 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Reflection;
-using System.Collections;
 using System.Runtime.InteropServices;
-using Wolfram.NETLink.Internal.COM;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal.COM;
 
-
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// The class that knows about object references. It stores them, knows how to send them to Mathematica and read them

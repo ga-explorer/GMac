@@ -10,7 +10,7 @@ namespace GeometricAlgebraStructuresLib.Samples.Structures
         {
             var treeDepth = 8;
 
-            var dict = new Dictionary<int, int>
+            var dict = new Dictionary<ulong, int>
             {
                 //{0, 0},
                 {1, 1},
@@ -24,7 +24,7 @@ namespace GeometricAlgebraStructuresLib.Samples.Structures
 
             var indexedList = new GaBinaryTree<int>(
                 treeDepth, 
-                (IDictionary<int, int>)dict
+                (IDictionary<ulong, int>)dict
             );
 
             Console.WriteLine(indexedList.ToString());

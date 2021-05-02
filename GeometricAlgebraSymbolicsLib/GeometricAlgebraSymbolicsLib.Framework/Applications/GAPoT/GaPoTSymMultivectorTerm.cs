@@ -5,18 +5,18 @@ using System.Linq;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using TextComposerLib.Text;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
     public sealed class GaPoTSymMultivectorTerm
     {
-        public static GaPoTSymVectorTerm operator -(GaPoTSymMultivectorTerm term)
+        public static GaPoTSymMultivectorTerm operator -(GaPoTSymMultivectorTerm term)
         {
-            return new GaPoTSymVectorTerm(
+            return new GaPoTSymMultivectorTerm(
                 term.IDsPattern, 
-                Mfs.Minus[term.Value].GaPoTSymSimplify()
+                Mfs.Minus[term.Value].Evaluate()
             );
         }
 
@@ -27,7 +27,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             return new GaPoTSymMultivectorTerm(
                 t1.IDsPattern, 
-                Mfs.Plus[t1.Value, t2.Value].GaPoTSymSimplify()
+                Mfs.Plus[t1.Value, t2.Value].Evaluate()
             );
         }
 
@@ -38,7 +38,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             return new GaPoTSymMultivectorTerm(
                 t1.IDsPattern, 
-                Mfs.Subtract[t1.Value, t2.Value].GaPoTSymSimplify()
+                Mfs.Subtract[t1.Value, t2.Value].Evaluate()
             );
         }
 
@@ -46,7 +46,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymMultivectorTerm(
                 t.IDsPattern,
-                Mfs.Times[t.Value, s].GaPoTSymSimplify()
+                Mfs.Times[t.Value, s].Evaluate()
             );
         }
 
@@ -54,7 +54,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymMultivectorTerm(
                 t.IDsPattern,
-                Mfs.Times[s, t.Value].GaPoTSymSimplify()
+                Mfs.Times[s, t.Value].Evaluate()
             );
         }
 
@@ -62,18 +62,18 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             return new GaPoTSymMultivectorTerm(
                 t.IDsPattern,
-                Mfs.Divide[t.Value, s].GaPoTSymSimplify()
+                Mfs.Divide[t.Value, s].Evaluate()
             );
         }
 
         
         
-        public int IDsPattern { get; }
+        public ulong IDsPattern { get; }
 
         public Expr Value { get; set; }
 
 
-        public GaPoTSymMultivectorTerm(int idsPattern)
+        public GaPoTSymMultivectorTerm(ulong idsPattern)
         {
             Debug.Assert(idsPattern >= 0);
 
@@ -81,7 +81,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             Value = Expr.INT_ZERO;
         }
 
-        public GaPoTSymMultivectorTerm(int idsPattern, Expr value)
+        public GaPoTSymMultivectorTerm(ulong idsPattern, Expr value)
         {
             Debug.Assert(idsPattern >= 0);
 
@@ -110,18 +110,28 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         }
 
 
+        public Expr Norm()
+        {
+            return Mfs.Abs[Value].Evaluate();
+        }
+
+        public Expr Norm2()
+        {
+            return Mfs.Times[Value, Value].Evaluate();
+        }
+
         public GaPoTSymMultivectorTerm Op(GaPoTSymMultivectorTerm term2)
         {
             var term1 = this;
 
             var idsPattern = term1.IDsPattern ^ term2.IDsPattern;
-            var value = Mfs.Times[term1.Value, term2.Value].GaPoTSymSimplify();
+            var value = Mfs.Times[term1.Value, term2.Value].Evaluate();
 
             if (!GaFrameUtils.IsNonZeroOp(term1.IDsPattern, term2.IDsPattern) || value.IsZero())
                 return new GaPoTSymMultivectorTerm(0, Expr.INT_ZERO);
 
             if (GaFrameUtils.ComputeIsNegativeEGp(term1.IDsPattern, term2.IDsPattern))
-                value = Mfs.Minus[value].GaPoTSymSimplify();
+                value = Mfs.Minus[value].Evaluate();
 
             return new GaPoTSymMultivectorTerm(idsPattern, value);
         }
@@ -131,13 +141,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             var term1 = this;
 
             var idsPattern = term1.IDsPattern ^ term2.IDsPattern;
-            var value = Mfs.Times[term1.Value, term2.Value].GaPoTSymSimplify();
+            var value = Mfs.Times[term1.Value, term2.Value].Evaluate();
 
             if (!GaFrameUtils.IsNonZeroELcp(term1.IDsPattern, term2.IDsPattern) || value.IsZero())
                 return new GaPoTSymMultivectorTerm(idsPattern, Expr.INT_ZERO);
 
             if (GaFrameUtils.ComputeIsNegativeEGp(term1.IDsPattern, term2.IDsPattern))
-                value = Mfs.Minus[value].GaPoTSymSimplify();
+                value = Mfs.Minus[value].Evaluate();
 
             return new GaPoTSymMultivectorTerm(idsPattern, value);
         }
@@ -147,13 +157,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             var term1 = this;
 
             var idsPattern = term1.IDsPattern ^ term2.IDsPattern;
-            var value = Mfs.Times[term1.Value, term2.Value].GaPoTSymSimplify();
+            var value = Mfs.Times[term1.Value, term2.Value].Evaluate();
 
             if (!GaFrameUtils.IsNonZeroELcp(term1.IDsPattern, term2.IDsPattern) || value.IsZero())
                 return new GaPoTSymMultivectorTerm(idsPattern, Expr.INT_ZERO);
 
             if (GaFrameUtils.ComputeIsNegativeEGp(term1.IDsPattern, term2.IDsPattern))
-                value = Mfs.Minus[value].GaPoTSymSimplify();
+                value = Mfs.Minus[value].Evaluate();
 
             return new GaPoTSymMultivectorTerm(idsPattern, value);
         }
@@ -163,13 +173,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             var term1 = this;
 
             var idsPattern = term1.IDsPattern ^ term2.IDsPattern;
-            var value = Mfs.Times[term1.Value, term2.Value].GaPoTSymSimplify();
+            var value = Mfs.Times[term1.Value, term2.Value].Evaluate();
 
             if (value.IsZero())
                 return new GaPoTSymMultivectorTerm(idsPattern, Expr.INT_ZERO);
 
             if (GaFrameUtils.ComputeIsNegativeEGp(term1.IDsPattern, term2.IDsPattern))
-                value = Mfs.Minus[value].GaPoTSymSimplify();
+                value = Mfs.Minus[value].Evaluate();
 
             return new GaPoTSymMultivectorTerm(idsPattern, value);
         }
@@ -179,7 +189,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return new GaPoTSymMultivectorTerm(
                 IDsPattern, 
                 IDsPattern.BasisBladeIdHasNegativeReverse()
-                    ? Mfs.Minus[Value] 
+                    ? Mfs.Minus[Value].Evaluate() 
                     : Value
             );
         }
@@ -208,12 +218,16 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             var value = 
                 IDsPattern.BasisBladeIdHasNegativeReverse() 
-                    ? Mfs.Times[Mfs.Minus[Value], s].GaPoTSymSimplify() 
-                    : Mfs.Times[Value, s].GaPoTSymSimplify();
+                    ? Mfs.Times[Mfs.Minus[Value], s].Evaluate() 
+                    : Mfs.Times[Value, s].Evaluate();
             
             return new GaPoTSymMultivectorTerm(IDsPattern, value);
         }
-        
+
+        public GaPoTSymMultivectorTerm Round(int places)
+        {
+            return new GaPoTSymMultivectorTerm(IDsPattern, Value.Round(places));
+        }        
 
         public GaPoTSymVectorTerm ToVectorTerm()
         {

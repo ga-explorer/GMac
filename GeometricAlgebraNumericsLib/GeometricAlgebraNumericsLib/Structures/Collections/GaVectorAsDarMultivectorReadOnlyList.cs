@@ -17,9 +17,9 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                id.BasisBladeGradeIndex(out var grade, out var index);
+                ((ulong)id).BasisBladeGradeIndex(out var grade, out var index);
 
-                return grade == 1 ? VectorValues[index] : DefaultValue;
+                return grade == 1 ? VectorValues[(int)index] : DefaultValue;
             }
         }
 
@@ -29,7 +29,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             Debug.Assert(vectorScalarValues.Count.IsValidVSpaceDimension());
 
             DefaultValue = default;
-            Count = vectorScalarValues.Count.ToGaSpaceDimension();
+            Count = (int)vectorScalarValues.Count.ToGaSpaceDimension();
             VectorValues = vectorScalarValues;
         }
 
@@ -38,7 +38,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             Debug.Assert(vectorScalarValues.Count.IsValidVSpaceDimension());
 
             DefaultValue = defaultValue;
-            Count = vectorScalarValues.Count.ToGaSpaceDimension();
+            Count = (int)vectorScalarValues.Count.ToGaSpaceDimension();
             VectorValues = vectorScalarValues;
         }
 

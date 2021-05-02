@@ -27,11 +27,11 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
 
             var coefsText = new ListTextComposer(", ");
 
-            for (var index = 0; index < kvDim; index++)
+            for (var index = 0UL; index < kvDim; index++)
             {
                 coefsText.Clear();
 
-                for (var i = 0; i < kvDim; i++)
+                for (var i = 0UL; i < kvDim; i++)
                     coefsText.Add((i == index) ? "1.0D" : "0.0D");
 
                 declaresText.Add(
@@ -52,7 +52,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
         {
             var namesText = new ListTextComposer(", ") { ActiveItemSuffix = "\"", ActiveItemPrefix = "\"" };
 
-            for (var index = 0; index < CurrentFrame.KvSpaceDimension(grade); index++)
+            for (var index = 0UL; index < CurrentFrame.KvSpaceDimension(grade); index++)
                 namesText.Add(
                     CurrentFrame.BasisBlade(grade, index).IndexedName
                     );

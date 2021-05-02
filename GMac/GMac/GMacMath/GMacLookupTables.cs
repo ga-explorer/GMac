@@ -65,7 +65,7 @@ namespace GMac.GMacMath
                 
                 //Calculate the sign of the geometric product of basis blades
                 for (var id2 = 0; id2 <= maxId; id2++)
-                    if (GaFrameUtils.IsNegativeEGp(id1, id2))
+                    if (GaFrameUtils.IsNegativeEGp((ulong)id1, (ulong)id2))
                         IsNegativeEGpTable.Set(GMacMathUtils.JoinIDs(id1, id2), true);
 
                 //stopWatch.Stop();

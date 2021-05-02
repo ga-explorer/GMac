@@ -7,8 +7,8 @@ using DataStructuresLib;
 using GeometricAlgebraNumericsLib.Rendering;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Rendering
 {

@@ -1,6 +1,6 @@
 ﻿using GeometricAlgebraNumericsLib.Structures;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {

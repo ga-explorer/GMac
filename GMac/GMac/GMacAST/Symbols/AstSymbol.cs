@@ -222,7 +222,7 @@ namespace GMac.GMacAST.Symbols
 
                 var mathName = root.SymbolicMathNames[AssociatedSymbol];
 
-                return String.IsNullOrEmpty(mathName) ? AssociatedSymbol.ObjectName : mathName;
+                return string.IsNullOrEmpty(mathName) ? AssociatedSymbol.ObjectName : mathName;
             }
         }
 

@@ -12,34 +12,34 @@ namespace GeometricAlgebraNumericsLib.Frames.QCGA
             = GaNumFrame.CreateQuadricConformal();
 
 
-        public static int e1Id => 1;
-        public static int e2Id => 1 << 1;
-        public static int e3Id => 1 << 2;
+        public static ulong e1Id => 1;
+        public static ulong e2Id => 1 << 1;
+        public static ulong e3Id => 1 << 2;
 
-        public static int no1Id => 1 << 3;
-        public static int no2Id => 1 << 4;
-        public static int no3Id => 1 << 5;
-        public static int no4Id => 1 << 6;
-        public static int no5Id => 1 << 7;
-        public static int no6Id => 1 << 8;
+        public static ulong no1Id => 1 << 3;
+        public static ulong no2Id => 1 << 4;
+        public static ulong no3Id => 1 << 5;
+        public static ulong no4Id => 1 << 6;
+        public static ulong no5Id => 1 << 7;
+        public static ulong no6Id => 1 << 8;
 
-        public static int ni1Id => 1 << 9;
-        public static int ni2Id => 1 << 10;
-        public static int ni3Id => 1 << 11;
-        public static int ni4Id => 1 << 12;
-        public static int ni5Id => 1 << 13;
-        public static int ni6Id => 1 << 14;
+        public static ulong ni1Id => 1 << 9;
+        public static ulong ni2Id => 1 << 10;
+        public static ulong ni3Id => 1 << 11;
+        public static ulong ni4Id => 1 << 12;
+        public static ulong ni5Id => 1 << 13;
+        public static ulong ni6Id => 1 << 14;
 
-        public static int IeId 
+        public static ulong IeId 
             => e1Id | e2Id | e3Id;
 
-        public static int InoId 
+        public static ulong InoId 
             => no1Id | no2Id | no3Id | no4Id | no5Id | no6Id;
 
-        public static int IniId 
+        public static ulong IniId 
             => ni1Id | ni2Id | ni3Id | ni4Id | ni5Id | ni6Id;
 
-        public static int IId 
+        public static ulong IId 
             => e1Id | e2Id | e3Id | 
                no1Id | no2Id | no3Id | no4Id | no5Id | no6Id |
                ni1Id | ni2Id | ni3Id | ni4Id | ni5Id | ni6Id;

@@ -33,7 +33,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.Outermorphisms
         public int VSpaceDim { get; set; }
         //= 12;
 
-        public int GaSpaceDim
+        public ulong GaSpaceDim
             => VSpaceDim.ToGaSpaceDimension();
 
 
@@ -58,7 +58,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.Outermorphisms
             _omMatrix = GaNumStoredOutermorphism.CreateMatrix(matrix);
 
             _termsArray = new GaNumDgrMultivector[GaSpaceDim];
-            for (var id = 0; id < GaSpaceDim; id++)
+            for (var id = 0UL; id < GaSpaceDim; id++)
             {
                 _termsArray[id] = 
                     _randGen
@@ -87,7 +87,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.Outermorphisms
         {
             GaNumDgrMultivector mv = null;
 
-            for (var id1 = 0; id1 < GaSpaceDim; id1++)
+            for (var id1 = 0UL; id1 < GaSpaceDim; id1++)
                 mv = _omComputed[_termsArray[id1]];
 
             return mv;

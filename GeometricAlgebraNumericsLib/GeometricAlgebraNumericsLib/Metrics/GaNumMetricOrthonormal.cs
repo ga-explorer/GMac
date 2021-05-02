@@ -47,14 +47,14 @@ namespace GeometricAlgebraNumericsLib.Metrics
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
         public int Count
-            => VSpaceDimension.ToGaSpaceDimension();
+            => (int)VSpaceDimension.ToGaSpaceDimension();
 
         public double this[int index]
-            => GetBasisBladeSignature(index);
+            => GetBasisBladeSignature((ulong)index);
 
 
         private GaNumMetricOrthonormal(IEnumerable<bool> basisVectorsSignaturesList)
@@ -75,7 +75,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
                 var basisVectorSignature = BasisVectorsSignatures[m];
 
                 if (basisVectorSignature != 0.0d)
-                    basisSignaturesMultivector.SetTerm(1 << m, basisVectorSignature);
+                    basisSignaturesMultivector.SetTerm(1UL << m, basisVectorSignature);
             }
 
             var idsSeq = GaFrameUtils.BasisBladeIDsSortedByGrade(VSpaceDimension, 2);
@@ -99,7 +99,7 @@ namespace GeometricAlgebraNumericsLib.Metrics
             return BasisVectorsSignatures[1 << index];
         }
 
-        public double GetBasisBladeSignature(int id)
+        public double GetBasisBladeSignature(ulong id)
         {
             var signature = 1.0d;
 
@@ -116,9 +116,9 @@ namespace GeometricAlgebraNumericsLib.Metrics
             return signature;
         }
 
-        public GaTerm<double> Gp(int id1, int id2)
+        public GaTerm<double> Gp(ulong id1, ulong id2)
         {
-            var metricValue = this[id1 & id2];
+            var metricValue = GetBasisBladeSignature(id1 & id2);
 
             return new GaTerm<double>(
                 id1 ^ id2,
@@ -126,9 +126,9 @@ namespace GeometricAlgebraNumericsLib.Metrics
             );
         }
 
-        public GaTerm<double> ScaledGp(int id1, int id2, double scalingFactor)
+        public GaTerm<double> ScaledGp(ulong id1, ulong id2, double scalingFactor)
         {
-            var metricValue = scalingFactor * this[id1 & id2];
+            var metricValue = scalingFactor * GetBasisBladeSignature(id1 & id2);
 
             return new GaTerm<double>(
                 id1 ^ id2,
@@ -136,10 +136,12 @@ namespace GeometricAlgebraNumericsLib.Metrics
             );
         }
 
-        public GaTerm<double> Gp(int id1, int id2, int id3)
+        public GaTerm<double> Gp(ulong id1, ulong id2, ulong id3)
         {
             var idXor12 = id1 ^ id2;
-            var metricValue = this[id1 & id2] * this[idXor12 & id3];
+            var metricValue = 
+                GetBasisBladeSignature(id1 & id2) * 
+                GetBasisBladeSignature(idXor12 & id3);
 
             if (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                 metricValue = -metricValue;
@@ -147,10 +149,13 @@ namespace GeometricAlgebraNumericsLib.Metrics
             return new GaTerm<double>(idXor12 ^ id3, metricValue);
         }
 
-        public GaTerm<double> ScaledGp(int id1, int id2, int id3, double scalingFactor)
+        public GaTerm<double> ScaledGp(ulong id1, ulong id2, ulong id3, double scalingFactor)
         {
             var idXor12 = id1 ^ id2;
-            var metricValue = scalingFactor * this[id1 & id2] * this[idXor12 & id3];
+            var metricValue = 
+                scalingFactor * 
+                GetBasisBladeSignature(id1 & id2) * 
+                GetBasisBladeSignature(idXor12 & id3);
 
             if (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3))
                 metricValue = -metricValue;
@@ -161,8 +166,8 @@ namespace GeometricAlgebraNumericsLib.Metrics
         public IEnumerator<double> GetEnumerator()
         {
             //TODO: This is not the most efficient way
-            for (var i = 0; i < GaSpaceDimension; i++)
-                yield return this[i];
+            for (var i = 0UL; i < GaSpaceDimension; i++)
+                yield return GetBasisBladeSignature(i);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -4,6 +4,6 @@
     {
         int Grade { get; }
         
-        int KvSpaceDimension { get; }
+        ulong KvSpaceDimension { get; }
     }
 }

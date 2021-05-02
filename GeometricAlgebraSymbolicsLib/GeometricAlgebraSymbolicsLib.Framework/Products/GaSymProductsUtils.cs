@@ -12,7 +12,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.ToMultivector().GetBiTermsForOp(mv2.ToMultivector()))
                 .ToMultivector();
         }
@@ -23,7 +23,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForOp(mv2))
                 .ToMultivector();
         }
@@ -34,7 +34,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForEGp(mv2))
                 .ToMultivector();
         }
@@ -45,7 +45,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForESp(mv2))
                 .ToMultivector();
         }
@@ -56,7 +56,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForELcp(mv2))
                 .ToMultivector();
         }
@@ -67,7 +67,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForERcp(mv2))
                 .ToMultivector();
         }
@@ -78,7 +78,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForEFdp(mv2))
                 .ToMultivector();
         }
@@ -89,7 +89,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForEHip(mv2))
                 .ToMultivector();
         }
@@ -100,7 +100,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForEAcp(mv2))
                 .ToMultivector();
         }
@@ -111,7 +111,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
                 throw new GaSymbolicsException("Multivector size mismatch");
 
             return GaSymMultivector
-                .CreateZeroTemp(mv1.GaSpaceDimension)
+                .CreateZeroTemp(mv1.VSpaceDimension)
                 .AddFactors(mv1.GetBiTermsForECp(mv2))
                 .ToMultivector();
         }

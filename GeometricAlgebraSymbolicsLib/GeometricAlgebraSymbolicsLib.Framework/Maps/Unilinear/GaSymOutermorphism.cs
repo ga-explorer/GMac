@@ -199,7 +199,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
         public MathematicaScalar Determinant
             => _multivectorsMap[TargetGaSpaceDimension - 1][0].ToMathematicaScalar();
 
-        public override IGaSymMultivector this[int id1]
+        public override IGaSymMultivector this[ulong id1]
             => _multivectorsMap[id1];
 
 
@@ -251,7 +251,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             );
         }
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1)
         {
             return _multivectorsMap.MapToTemp(id1);
         }
@@ -261,19 +261,19 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Unilinear
             return _multivectorsMap.MapToTemp(mv1);
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisBladeMaps()
         {
             return _multivectorsMap.BasisBladeMaps();
         }
 
-        public override IEnumerable<Tuple<int, IGaSymMultivector>> BasisVectorMaps()
+        public override IEnumerable<Tuple<ulong, IGaSymMultivector>> BasisVectorMaps()
         {
             for (var index = 0; index < DomainVSpaceDimension; index++)
             {
                 var mv = GaSymMultivector.CreateFromColumn(VectorsMappingMatrix, index);
 
                 if (!mv.IsNullOrZero())
-                    yield return Tuple.Create(index, (IGaSymMultivector)mv);
+                    yield return Tuple.Create((ulong)index, (IGaSymMultivector)mv);
             }
         }
     }

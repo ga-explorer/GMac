@@ -9,7 +9,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// Represents a special type of link known as a loopback link.

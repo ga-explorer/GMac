@@ -13,7 +13,7 @@ namespace GeometricAlgebraStructuresLib.Storage
     public class GaMvsSparseArray<T> 
         : GaUniformMultivectorStorage<T>
     {
-        public IDictionary<int, T> ScalarsDictionary { get; private set; }
+        public IDictionary<ulong, T> ScalarsDictionary { get; private set; }
 
         public override int StoredTermsCount
             => ScalarsDictionary.Count;
@@ -22,23 +22,23 @@ namespace GeometricAlgebraStructuresLib.Storage
         public GaMvsSparseArray(int vSpaceDimension, IGaScalarDomain<T> scalarDomain)
             : base(vSpaceDimension, scalarDomain)
         {
-            ScalarsDictionary = new Dictionary<int, T>();
+            ScalarsDictionary = new Dictionary<ulong, T>();
         }
 
-        public GaMvsSparseArray(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IDictionary<int, T> scalarsDictionary)
+        public GaMvsSparseArray(int vSpaceDimension, IGaScalarDomain<T> scalarDomain, IDictionary<ulong, T> scalarsDictionary)
             : base(vSpaceDimension, scalarDomain)
         {
             ScalarsDictionary = scalarsDictionary;
         }
 
 
-        public override T GetTermScalar(int basisBladeId)
+        public override T GetTermScalar(ulong basisBladeId)
         {
             return ScalarsDictionary.TryGetValue(basisBladeId, out var value) 
                 ? value : ScalarDomain.GetZero();
         }
 
-        public override bool TryGetTermScalar(int id, out T value)
+        public override bool TryGetTermScalar(ulong id, out T value)
         {
             if (ScalarsDictionary.TryGetValue(id, out value))
                 return true;
@@ -48,7 +48,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
 
-        public override IGaMultivectorStorage<T> SetTermScalar(int id, T value)
+        public override IGaMultivectorStorage<T> SetTermScalar(ulong id, T value)
         {
             if (ScalarsDictionary.ContainsKey(id))
                 ScalarsDictionary[id] = value;
@@ -58,7 +58,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> AddTerm(int id, T value)
+        public override IGaMultivectorStorage<T> AddTerm(ulong id, T value)
         {
             Debug.Assert(!ReferenceEquals(value, null));
             
@@ -70,7 +70,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTerm(int basisBladeId)
+        public override IGaMultivectorStorage<T> RemoveTerm(ulong basisBladeId)
         {
             ScalarsDictionary.Remove(basisBladeId);
 
@@ -90,7 +90,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> RemoveTermIfZero(int id, bool nearZeroFlag = false)
+        public override IGaMultivectorStorage<T> RemoveTermIfZero(ulong id, bool nearZeroFlag = false)
         {
             if (!ScalarsDictionary.TryGetValue(id, out var scalar))
                 return this;
@@ -154,7 +154,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 : ScalarsDictionary.Values.All(scalar => ScalarDomain.IsZero(scalar));
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
             return ScalarsDictionary.ContainsKey(id);
         }
@@ -165,9 +165,9 @@ namespace GeometricAlgebraStructuresLib.Storage
             return ScalarsDictionary.Keys.Any(id => id.BasisBladeGrade() == grade);
         }
 
-        public override bool CanStoreTerm(int id)
+        public override bool CanStoreTerm(ulong id)
         {
-            return id >= 0 && id < GaSpaceDimension;
+            return id < GaSpaceDimension;
         }
 
         public override bool CanStoreSomeTermsOfGrade(int grade)
@@ -186,7 +186,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return new GaBinaryTree<T>(VSpaceDimension, ScalarsDictionary);
         }
 
-        public override GaMvsTerm<T> GetTermStorage(int id, bool getCopy = false)
+        public override GaMvsTerm<T> GetTermStorage(ulong id, bool getCopy = false)
         {
             var storage = new GaMvsTerm<T>(VSpaceDimension, ScalarDomain, id);
 
@@ -340,7 +340,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         {
             var idsList = ScalarsDictionary
                 .Keys
-                .Where(id => id.GradeHasNegativeReverse());
+                .Where(id => id.BasisBladeIdHasNegativeReverse());
 
             foreach (var id in idsList)
                 ScalarsDictionary[id] = ScalarDomain.Negative(ScalarsDictionary[id]);
@@ -352,7 +352,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         {
             var idsList = ScalarsDictionary
                 .Keys
-                .Where(id => id.GradeHasNegativeGradeInv());
+                .Where(id => id.BasisBladeIdHasNegativeGradeInv());
 
             foreach (var id in idsList)
                 ScalarsDictionary[id] = ScalarDomain.Negative(ScalarsDictionary[id]);
@@ -364,7 +364,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         {
             var idsList = ScalarsDictionary
                 .Keys
-                .Where(id => id.GradeHasNegativeCliffConj());
+                .Where(id => id.BasisBladeIdHasNegativeCliffConj());
 
             foreach (var id in idsList)
                 ScalarsDictionary[id] = ScalarDomain.Negative(ScalarsDictionary[id]);
@@ -402,7 +402,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<ulong, T, T> mappingFunc)
         {
             var idsList = ScalarsDictionary.Keys;
 
@@ -412,7 +412,7 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, int, T, T> mappingFunc)
+        public override IGaMultivectorStorage<T> ApplyMapping(Func<int, ulong, T, T> mappingFunc)
         {
             var idsList = ScalarsDictionary.Keys;
 
@@ -426,19 +426,19 @@ namespace GeometricAlgebraStructuresLib.Storage
             return this;
         }
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             return ScalarsDictionary.Keys;
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<T, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p => selectionFilter(p.Value))
                 .Select(p => p.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, int, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p =>
@@ -450,14 +450,14 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(p => p.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<ulong, T, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p => selectionFilter(p.Key, p.Value))
                 .Select(p => p.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIds(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, T, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p =>
@@ -469,7 +469,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Select(p => p.Key);
         }
 
-        public override IEnumerable<int> GetStoredTermIdsOfGrade(int grade)
+        public override IEnumerable<ulong> GetStoredTermIdsOfGrade(int grade)
         {
             return ScalarsDictionary
                 .Keys
@@ -481,21 +481,21 @@ namespace GeometricAlgebraStructuresLib.Storage
             return ScalarsDictionary.Values;
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p => selectionFilter(p.Key))
                 .Select(p => p.Value);
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<ulong, T, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p => selectionFilter(p.Key, p.Value))
                 .Select(p => p.Value);
         }
 
-        public override IEnumerable<T> GetStoredTermScalars(Func<int, int, T, bool> selectionFilter)
+        public override IEnumerable<T> GetStoredTermScalars(Func<int, ulong, T, bool> selectionFilter)
         {
             return ScalarsDictionary
                 .Where(p =>
@@ -546,7 +546,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     .Count(scalar => ScalarDomain.IsZero(scalar));
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false)
         {
             return nearZeroFlag
                 ? ScalarsDictionary
@@ -557,7 +557,7 @@ namespace GeometricAlgebraStructuresLib.Storage
                     .Select(p => p.Key);
         }
 
-        public override IEnumerable<int> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
+        public override IEnumerable<ulong> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false)
         {
             return nearZeroFlag
                 ? ScalarsDictionary
@@ -610,9 +610,9 @@ namespace GeometricAlgebraStructuresLib.Storage
                 .Distinct();
         }
 
-        public override IEnumerator<KeyValuePair<int, T>> GetEnumerator()
+        public override IEnumerator<KeyValuePair<ulong, T>> GetEnumerator()
         {
-            return ((IEnumerable<KeyValuePair<int, T>>)ScalarsDictionary).GetEnumerator();
+            return ScalarsDictionary.GetEnumerator();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
     {
         public T DefaultValue { get; }
 
-        public IReadOnlyList<IReadOnlyDictionary<int, T>> KVectorsList { get; }
+        public IReadOnlyList<IReadOnlyDictionary<ulong, T>> KVectorsList { get; }
 
         public int Count { get; }
 
@@ -16,7 +16,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                id.BasisBladeGradeIndex(out var grade, out var index);
+                ((ulong)id).BasisBladeGradeIndex(out var grade, out var index);
 
                 var scalarValues = KVectorsList[grade];
 
@@ -28,17 +28,17 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         }
 
 
-        internal GaSgrMultivectorAsDarMultivectorReadOnlyList(IReadOnlyList<IReadOnlyDictionary<int, T>> kVectorsArray)
+        internal GaSgrMultivectorAsDarMultivectorReadOnlyList(IReadOnlyList<IReadOnlyDictionary<ulong, T>> kVectorsArray)
         {
             DefaultValue = default;
-            Count = (kVectorsArray.Count - 1).ToGaSpaceDimension();
+            Count = (int)(kVectorsArray.Count - 1).ToGaSpaceDimension();
             KVectorsList = kVectorsArray;
         }
 
-        internal GaSgrMultivectorAsDarMultivectorReadOnlyList(T defaultValue, IReadOnlyList<IReadOnlyDictionary<int, T>> kVectorsArray)
+        internal GaSgrMultivectorAsDarMultivectorReadOnlyList(T defaultValue, IReadOnlyList<IReadOnlyDictionary<ulong, T>> kVectorsArray)
         {
             DefaultValue = defaultValue;
-            Count = (kVectorsArray.Count - 1).ToGaSpaceDimension();
+            Count = (int)(kVectorsArray.Count - 1).ToGaSpaceDimension();
             KVectorsList = kVectorsArray;
         }
 

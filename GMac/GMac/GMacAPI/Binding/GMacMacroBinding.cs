@@ -7,6 +7,7 @@ using DataStructuresLib;
 using GeometricAlgebraSymbolicsLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAPI.CodeBlock;
 using GMac.GMacAST;
 using GMac.GMacAST.Expressions;
@@ -20,7 +21,6 @@ using TextComposerLib;
 using TextComposerLib.Logs.Progress;
 using TextComposerLib.Text;
 using TextComposerLib.Text.Linear;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAPI.Binding
 {

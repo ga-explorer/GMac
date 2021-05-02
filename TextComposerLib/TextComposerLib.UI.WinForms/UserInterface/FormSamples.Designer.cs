@@ -1,4 +1,4 @@
-﻿namespace TextComposerLib.UserInterface
+﻿namespace TextComposerLib.UI.WinForms.UserInterface
 {
     partial class FormSamples
     {

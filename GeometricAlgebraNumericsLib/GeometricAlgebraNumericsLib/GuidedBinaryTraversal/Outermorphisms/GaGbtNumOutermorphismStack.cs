@@ -32,10 +32,10 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms
 
         public int TargetVSpaceDimension { get; }
 
-        public int DomainGaSpaceDimension 
+        public ulong DomainGaSpaceDimension 
             => DomainVSpaceDimension.ToGaSpaceDimension();
 
-        public int TargetGaSpaceDimension 
+        public ulong TargetGaSpaceDimension 
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
         public IReadOnlyList<GaNumVector> BasisVectorsMappingsList { get; }

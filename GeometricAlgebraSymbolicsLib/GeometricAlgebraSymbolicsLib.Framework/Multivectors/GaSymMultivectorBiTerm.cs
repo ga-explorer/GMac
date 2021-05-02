@@ -1,14 +1,14 @@
 ﻿using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {
     public class GaSymMultivectorBiTerm
     {
-        public int Id1 { get; }
+        public ulong Id1 { get; }
 
-        public int Id2 { get; }
+        public ulong Id2 { get; }
 
         public Expr Value1 { get; }
 
@@ -22,10 +22,10 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
         public Expr TotalProduct
             => Mfs.Times[Value1, Value2, MetricValue];
 
-        public int IdAnd
+        public ulong IdAnd
             => Id1 & Id2;
 
-        public int IdXor
+        public ulong IdXor
             => Id1 ^ Id2;
 
         public bool IsNegativeEGp
@@ -56,7 +56,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             => GaFrameUtils.IsNonZeroECp(Id1, Id2);
 
 
-        internal GaSymMultivectorBiTerm(int id1, int id2, Expr value1, Expr value2)
+        internal GaSymMultivectorBiTerm(ulong id1, ulong id2, Expr value1, Expr value2)
         {
             Id1 = id1;
             Id2 = id2;
@@ -65,7 +65,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
             MetricValue = Expr.INT_ONE;
         }
 
-        internal GaSymMultivectorBiTerm(int id1, int id2, Expr coef1, Expr coef2, Expr metricValue)
+        internal GaSymMultivectorBiTerm(ulong id1, ulong id2, Expr coef1, Expr coef2, Expr metricValue)
         {
             Id1 = id1;
             Id2 = id2;

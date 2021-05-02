@@ -16,7 +16,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps
 
         public abstract int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
 

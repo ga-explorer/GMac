@@ -12,8 +12,7 @@
 using System.Collections;
 using System.Threading;
 
-
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// StdLink is a container for some methods and state related to the link back to the kernel.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DataStructuresLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExpressionTree
 {

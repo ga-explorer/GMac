@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using GeometricAlgebraSymbolicsLib.Applications.GAPoT;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 {
@@ -144,13 +144,13 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
                 frame[vectorIndex1] = new GaPoTSymVector();
                 frame[vectorIndex2] = new GaPoTSymVector();
                 
-                frame[vectorIndex1].SetTerm(1, $"{s}".GaPoTSymSimplify());
+                frame[vectorIndex1].SetTerm(1, $"{s}".SimplifyToExpr());
                 
                 for (var i = 1; i < m; i++)
                 {
                     var angle = $"2 * Pi * {(k + 1).ToString()} * {i.ToString()} / {m.ToString()}";
-                    var cosAngle = $"{s} * Cos[{angle}]".GaPoTSymSimplify();
-                    var sinAngle = $"{s} * Sin[{angle}]".GaPoTSymSimplify();
+                    var cosAngle = $"{s} * Cos[{angle}]".SimplifyToExpr();
+                    var sinAngle = $"{s} * Sin[{angle}]".SimplifyToExpr();
                     
                     frame[vectorIndex1].SetTerm(i + 1, cosAngle);
                     frame[vectorIndex2].SetTerm(i + 1, sinAngle);
@@ -160,7 +160,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Fill the last column
             frame[m - 1] = new GaPoTSymVector();
 
-            var v = $"1 / Sqrt[{m}]".GaPoTSymSimplify();
+            var v = $"1 / Sqrt[{m}]".SimplifyToExpr();
             for (var i = 0; i < m; i++)
             {
                 frame[m - 1].SetTerm(i + 1, v);
@@ -176,8 +176,8 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             var rk0 = $"Power[-1, {k}] / Sqrt[{k}]";
             var rk1 = $"Power[-1, {k + 1}] / Sqrt[{k + 1}]";
             
-            var cosAngle = $"Sqrt[(1 - {rk1}) / 2]".GaPoTSymSimplify();
-            var sinAngle = $"{rk0} * Sqrt[(1 + {rk1}) / 2]".GaPoTSymSimplify();
+            var cosAngle = $"Sqrt[(1 - {rk1}) / 2]".SimplifyToExpr();
+            var sinAngle = $"{rk0} * Sqrt[(1 + {rk1}) / 2]".SimplifyToExpr();
 
             var uVector1 = new GaPoTSymVector(
                 Enumerable
@@ -200,7 +200,10 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             CreateFrames();
 
-            _rotorSequence = GaPoTSymRotorsSequence.Create(_uFrame.GetRotorsToFrame(_cFrame));
+            _rotorSequence = GaPoTSymRotorsSequence.CreateFromOrthonormalFrames(
+                _uFrame, 
+                _cFrame
+            );
 
             //var rotatedFrames = _rotorSequence.GetRotations(_uFrame);
 

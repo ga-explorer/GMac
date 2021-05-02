@@ -64,7 +64,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.VectorKVectorOp
                 var firstIndexFlag = true;
                 foreach (var index1 in indexList1)
                 {
-                    var id1 = 1 << index1;
+                    var id1 = 1UL << index1;
                     var id2 = id ^ id1;
                     var index2 = id2.BasisBladeIndex();
 

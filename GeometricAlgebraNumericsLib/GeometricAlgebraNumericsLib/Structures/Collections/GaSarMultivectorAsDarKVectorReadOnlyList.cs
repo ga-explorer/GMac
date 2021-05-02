@@ -8,7 +8,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
     {
         public T DefaultValue { get; }
 
-        public IReadOnlyDictionary<int, T> SarValues { get; }
+        public IReadOnlyDictionary<ulong, T> SarValues { get; }
 
         public int VSpaceDimension { get; }
 
@@ -17,25 +17,25 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public int Count { get; }
 
         public T this[int index]
-            => SarValues.TryGetValue(GaFrameUtils.BasisBladeId(KVectorGrade, index), out var value) 
+            => SarValues.TryGetValue(GaFrameUtils.BasisBladeId(KVectorGrade, (ulong)index), out var value) 
                 ? value : DefaultValue;
 
 
-        public GaSarMultivectorAsDarKVectorReadOnlyList(int vSpaceDim, int grade, IReadOnlyDictionary<int, T> sarValues)
+        public GaSarMultivectorAsDarKVectorReadOnlyList(int vSpaceDim, int grade, IReadOnlyDictionary<ulong, T> sarValues)
         {
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
             DefaultValue = default;
-            Count = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            Count = (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             SarValues = sarValues;
         }
 
-        public GaSarMultivectorAsDarKVectorReadOnlyList(int vSpaceDim, int grade, T defaultValue, IReadOnlyDictionary<int, T> sarValues)
+        public GaSarMultivectorAsDarKVectorReadOnlyList(int vSpaceDim, int grade, T defaultValue, IReadOnlyDictionary<ulong, T> sarValues)
         {
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
             DefaultValue = defaultValue;
-            Count = GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
+            Count = (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, grade);
             SarValues = sarValues;
         }
 

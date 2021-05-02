@@ -20,7 +20,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
         [Params(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)]
         public int VSpaceDim { get; set; }
 
-        public int GaSpaceDim 
+        public ulong GaSpaceDim 
             => VSpaceDim.ToGaSpaceDimension();
 
 
@@ -36,15 +36,15 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
             //_bitArray = new BitArray(GaSpaceDim * GaSpaceDim);
             _bitArrays = new BitArray[GaSpaceDim];
 
-            for (var id1 = 0; id1 < GaSpaceDim; id1++)
+            for (var id1 = 0UL; id1 < GaSpaceDim; id1++)
             {
-                var bitArray = new BitArray(GaSpaceDim);
+                var bitArray = new BitArray((int)GaSpaceDim);
 
-                for (var id2 = 0; id2 < GaSpaceDim; id2++)
+                for (var id2 = 0UL; id2 < GaSpaceDim; id2++)
                 {
                     var value = GaFrameUtils.IsNegativeEGp(id1, id2);
 
-                    bitArray[id2] = value;
+                    bitArray[(int)id2] = value;
                     //_bitArray[(id1 << VSpaceDim) | id1] = value;
                 }
 
@@ -61,8 +61,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
         {
             var result = false;
 
-            for (var id1 = 0; id1 < GaSpaceDim; id1++)
-                for (var id2 = 0; id2 < GaSpaceDim; id2++)
+            for (var id1 = 0UL; id1 < GaSpaceDim; id1++)
+                for (var id2 = 0UL; id2 < GaSpaceDim; id2++)
                     result = GaFrameUtils.ComputeIsNegativeEGp(id1, id2);
 
             return result;
@@ -73,8 +73,8 @@ namespace GMacBenchmarks2.Benchmarks.Numeric
         {
             var result = false;
 
-            for (var id1 = 0; id1 < GaSpaceDim; id1++)
-                for (var id2 = 0; id2 < GaSpaceDim; id2++)
+            for (var id1 = 0UL; id1 < GaSpaceDim; id1++)
+                for (var id2 = 0UL; id2 < GaSpaceDim; id2++)
                     result = GaFrameUtils.IsNegativeEGp(id1, id2);
                     //result = _bitArrays[id1][id2];
 

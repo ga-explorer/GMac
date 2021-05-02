@@ -87,12 +87,12 @@ namespace GeometricAlgebraNumericsLib.Products
 
             for (var index1 = 0; index1 < mv1.StoredTermsCount; index1++)
             {
-                var id1 = GaFrameUtils.BasisBladeId(mv1.Grade, index1);
+                var id1 = GaFrameUtils.BasisBladeId(mv1.Grade, (ulong)index1);
                 var value1 = mv1.ScalarValuesArray[index1];
 
                 for (var index2 = 0; index2 < mv2.StoredTermsCount; index2++)
                 {
-                    var id2 = GaFrameUtils.BasisBladeId(mv2.Grade, index2);
+                    var id2 = GaFrameUtils.BasisBladeId(mv2.Grade, (ulong)index2);
 
                     if ((id1 & id2) == 0)
                     {

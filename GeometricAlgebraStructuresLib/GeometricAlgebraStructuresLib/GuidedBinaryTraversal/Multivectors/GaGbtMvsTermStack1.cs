@@ -41,7 +41,7 @@ namespace GeometricAlgebraStructuresLib.GuidedBinaryTraversal.Multivectors
 
             if (TosTreeDepth == 0)
             {
-                TosValue = TermStorage.GetTermScalar((int)TosId);
+                TosValue = TermStorage.GetTermScalar(TosId);
             }
 
             TosIndex--;
@@ -50,7 +50,7 @@ namespace GeometricAlgebraStructuresLib.GuidedBinaryTraversal.Multivectors
         public override bool TosHasChild(int childIndex)
         {
             var v = 
-                (1ul << (TosTreeDepth - 1)) & (ulong) TermStorage.Id;
+                (1ul << (TosTreeDepth - 1)) & TermStorage.Id;
 
             return (childIndex & 1) == 0
                 ? v == 0

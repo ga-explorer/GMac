@@ -38,33 +38,33 @@ namespace GeometricAlgebraNumericsLib.Products.Euclidean
         }
 
 
-        public override GaNumTerm MapToTerm(int id1, int id2)
+        public override GaNumTerm MapToTerm(ulong id1, ulong id2)
         {
             return GaNumTerm.Create(
-                TargetGaSpaceDimension,
+                TargetVSpaceDimension,
                 id1 ^ id2,
                 GaFrameUtils.IsNegativeEGp(id1, id2) ? -1.0d : 1.0d
             );
         }
 
-        public GaNumTerm MapToTermLa(int id1, int id2, int id3)
+        public GaNumTerm MapToTermLa(ulong id1, ulong id2, ulong id3)
         {
             var idXor12 = id1 ^ id2;
             var value = 
                 (GaFrameUtils.IsNegativeEGp(id1, id2) != GaFrameUtils.IsNegativeEGp(idXor12, id3)) 
                     ? -1 : 1;
 
-            return GaNumTerm.Create(TargetGaSpaceDimension, idXor12 ^ id3, value);
+            return GaNumTerm.Create(TargetVSpaceDimension, idXor12 ^ id3, value);
         }
 
-        public GaNumTerm MapToTermRa(int id1, int id2, int id3)
+        public GaNumTerm MapToTermRa(ulong id1, ulong id2, ulong id3)
         {
             var idXor23 = id2 ^ id3;
             var value =
                 (GaFrameUtils.IsNegativeEGp(id1, idXor23) != GaFrameUtils.IsNegativeEGp(id2, id3))
                     ? -1 : 1;
 
-            return GaNumTerm.Create(TargetGaSpaceDimension, id1 ^ idXor23, value);
+            return GaNumTerm.Create(TargetVSpaceDimension, id1 ^ idXor23, value);
         }
     }
 }

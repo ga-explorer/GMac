@@ -97,7 +97,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
         }
 
 
-        public override IGaSymMultivector this[int id1, int id2]
+        public override IGaSymMultivector this[ulong id1, ulong id2]
         {
             get
             {
@@ -111,7 +111,7 @@ namespace GeometricAlgebraSymbolicsLib.Products
         }
         
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2)
         {
             var baseMv1 = NonOrthogonalMetric.DerivedToBaseCba[id1].ToMultivector();
             var baseMv2 = NonOrthogonalMetric.DerivedToBaseCba[id2].ToMultivector();
@@ -131,30 +131,30 @@ namespace GeometricAlgebraSymbolicsLib.Products
             return NonOrthogonalMetric.BaseToDerivedCba.MapToTemp(baseMv);
         }
 
-        public override IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-            for (var id2 = 0; id2 < DomainGaSpaceDimension2; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+            for (var id2 = 0UL; id2 < DomainGaSpaceDimension2; id2++)
             {
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, int, IGaSymMultivector>(id1, id2, mv);
+                    yield return new Tuple<ulong, ulong, IGaSymMultivector>(id1, id2, mv);
             }
         }
 
-        public override IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisVectorsMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisVectorsMaps()
         {
             for (var index1 = 0; index1 < DomainVSpaceDimension; index1++)
             for (var index2 = 0; index2 < DomainVSpaceDimension2; index2++)
             {
-                var id1 = GaFrameUtils.BasisBladeId(1, index1);
-                var id2 = GaFrameUtils.BasisBladeId(1, index2);
+                var id1 = GaFrameUtils.BasisBladeId(1, (ulong)index1);
+                var id2 = GaFrameUtils.BasisBladeId(1, (ulong)index2);
 
                 var mv = this[id1, id2];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, int, IGaSymMultivector>(index1, index2, mv);
+                    yield return new Tuple<ulong, ulong, IGaSymMultivector>((ulong)index1, (ulong)index2, mv);
             }
         }
     }

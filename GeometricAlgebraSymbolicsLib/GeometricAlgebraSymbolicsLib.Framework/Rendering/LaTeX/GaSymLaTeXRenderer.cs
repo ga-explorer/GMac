@@ -3,9 +3,9 @@ using System.Drawing;
 using System.IO;
 using GeometricAlgebraNumericsLib.Rendering.LaTeX;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using TextComposerLib.Text;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Rendering.LaTeX
 {
@@ -22,7 +22,7 @@ namespace GeometricAlgebraSymbolicsLib.Rendering.LaTeX
         }
 
 
-        public string FormatTerm(int id, Expr coef)
+        public string FormatTerm(ulong id, Expr coef)
         {
             var basisBlade = FormatBasisBlade(id);
             var scalar = GaSymbolicsUtils.Cas.Connection.EvaluateToString(

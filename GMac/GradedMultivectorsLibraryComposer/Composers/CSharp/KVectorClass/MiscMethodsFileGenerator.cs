@@ -66,7 +66,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
                 );
         }
 
-        private void GenerateMiscFunctions(int kvSpaceDim)
+        private void GenerateMiscFunctions(ulong kvSpaceDim)
         {
             //This code can be replaced using ListTextBuilderCollection and ParametricTextBuilderCollection
             //objects. See GenerateMainMiscFunctions() in this file for an example
@@ -78,7 +78,7 @@ namespace GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass
             var subtCasesText = new ListTextComposer("," + Environment.NewLine);
             var timesCasesText = new ListTextComposer("," + Environment.NewLine);
 
-            for (var index = 0; index < kvSpaceDim; index++)
+            for (var index = 0UL; index < kvSpaceDim; index++)
             {
                 addCasesText.Add(addCasesTemplate, "index", index);
                 subtCasesText.Add(subtCasesTemplate, "index", index);

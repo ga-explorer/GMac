@@ -1,7 +1,7 @@
 using System;
-using Wolfram.NETLink.Internal;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// Contains the <see cref="MathDelegate.CreateDelegate">CreateDelegate</see> method, which creates

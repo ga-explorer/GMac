@@ -18,7 +18,7 @@ namespace GeometricAlgebraNumericsLib.Maps
     public static class GaNumMapUtils
     {
         #region Unilinear Maps
-        public static Dictionary<int, IGaNumMultivector> ToDictionary(this IGaNumMapUnilinear linearMap)
+        public static Dictionary<ulong, IGaNumMultivector> ToDictionary(this IGaNumMapUnilinear linearMap)
         {
             return linearMap
                 .BasisBladeMaps()
@@ -28,15 +28,15 @@ namespace GeometricAlgebraNumericsLib.Maps
         public static IEnumerable<IGaNumMultivector> ToColumnsList(this IGaNumMapUnilinear linearMap)
         {
             return Enumerable
-                .Range(0, linearMap.DomainGaSpaceDimension)
-                .Select(id => linearMap[id]);
+                .Range(0, (int)linearMap.DomainGaSpaceDimension)
+                .Select(id => linearMap[(ulong) id]);
         }
 
         public static IEnumerable<double[]> ToScalarColumnsList(this IGaNumMapUnilinear linearMap)
         {
             return Enumerable
-                .Range(0, linearMap.DomainGaSpaceDimension)
-                .Select(id => linearMap[id].GetDenseScalarValuesArray());
+                .Range(0, (int)linearMap.DomainGaSpaceDimension)
+                .Select(id => linearMap[(ulong) id].GetDenseScalarValuesArray());
         }
 
         public static double[,] ToScalarsArray(this IGaNumMapUnilinear linearMap)
@@ -61,7 +61,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return resultArray;
         }
 
-        public static IEnumerable<Tuple<int, int, double>> GetIndexedScalarValues(this IGaNumMapUnilinear linearMap)
+        public static IEnumerable<Tuple<ulong, ulong, double>> GetIndexedScalarValues(this IGaNumMapUnilinear linearMap)
         {
             foreach (var (colIndex, basisBladeMappingMv) in linearMap.BasisBladeMaps())
             {
@@ -70,7 +70,7 @@ namespace GeometricAlgebraNumericsLib.Maps
                     var rowIndex = term.BasisBladeId;
                     var scalarValue = term.ScalarValue;
 
-                    yield return new Tuple<int, int, double>(
+                    yield return new Tuple<ulong, ulong, double>(
                         rowIndex,
                         colIndex,
                         scalarValue
@@ -89,9 +89,9 @@ namespace GeometricAlgebraNumericsLib.Maps
         public static SparseMatrix ToSparseMatrix(this IGaNumMapUnilinear linearMap)
         {
             return SparseMatrix.OfIndexed(
-                linearMap.TargetGaSpaceDimension,
-                linearMap.DomainGaSpaceDimension,
-                linearMap.GetIndexedScalarValues()
+                (int)linearMap.TargetGaSpaceDimension,
+                (int)linearMap.DomainGaSpaceDimension,
+                linearMap.GetIndexedScalarValues().Select(t => new Tuple<int, int, double>((int)t.Item1, (int)t.Item2, t.Item3))
             );
         }
 
@@ -147,7 +147,7 @@ namespace GeometricAlgebraNumericsLib.Maps
 
         public static GaNumSarMultivector MapMultivector(this Matrix mappingMatrix, IGaNumMultivector mv1)
         {
-            if (mv1.GaSpaceDimension != mappingMatrix.ColumnCount)
+            if (mv1.GaSpaceDimension != (ulong)mappingMatrix.ColumnCount)
                 throw new GaNumericsException("Multivector size mismatch");
 
             var resultMv = new GaNumSarMultivectorFactory(mappingMatrix.RowCount.ToVSpaceDimension());
@@ -155,14 +155,14 @@ namespace GeometricAlgebraNumericsLib.Maps
             if (mappingMatrix is SparseMatrix)
             {
                 var vector = Vector.Build.SparseOfIndexed(
-                    mv1.GaSpaceDimension,
-                    mv1.GetStoredTerms().Select(p => Tuple.Create(p.BasisBladeId, p.ScalarValue))
+                    (int)mv1.GaSpaceDimension,
+                    mv1.GetStoredTerms().Select(p => Tuple.Create((int)p.BasisBladeId, p.ScalarValue))
                 );
 
                 vector = mappingMatrix.Multiply(vector);
 
                 foreach (var (id, value) in vector.EnumerateIndexed()) 
-                    resultMv.SetTerm(id, value);
+                    resultMv.SetTerm((ulong)id, value);
             }
             else
             {
@@ -173,8 +173,8 @@ namespace GeometricAlgebraNumericsLib.Maps
 
                     for (var row = 0; row < mappingMatrix.RowCount; row++)
                         resultMv.AddTerm(
-                            row, 
-                            mappingMatrix[row, id] * scalarValue
+                            (ulong)row, 
+                            mappingMatrix[row, (int)id] * scalarValue
                         );
                 }
             }
@@ -184,7 +184,7 @@ namespace GeometricAlgebraNumericsLib.Maps
 
         public static GaNumDgrMultivector MapMultivector(this Matrix mappingMatrix, GaNumDgrMultivector mv1)
         {
-            if (mv1.GaSpaceDimension != mappingMatrix.ColumnCount)
+            if (mv1.GaSpaceDimension != (ulong)mappingMatrix.ColumnCount)
                 throw new GaNumericsException("Multivector size mismatch");
 
             var resultMv = new GaNumDgrMultivectorFactory(mappingMatrix.RowCount.ToVSpaceDimension());
@@ -192,14 +192,14 @@ namespace GeometricAlgebraNumericsLib.Maps
             if (mappingMatrix is SparseMatrix)
             {
                 var vector = Vector.Build.SparseOfIndexed(
-                    mv1.GaSpaceDimension,
-                    mv1.GetStoredTerms().Select(p => Tuple.Create(p.BasisBladeId, p.ScalarValue))
+                    (int)mv1.GaSpaceDimension,
+                    mv1.GetStoredTerms().Select(p => Tuple.Create((int)p.BasisBladeId, p.ScalarValue))
                 );
 
                 vector = mappingMatrix.Multiply(vector);
 
                 foreach (var (id, value) in vector.EnumerateIndexed())
-                    resultMv.SetTerm(id, value);
+                    resultMv.SetTerm((ulong)id, value);
             }
             else
             {
@@ -210,8 +210,8 @@ namespace GeometricAlgebraNumericsLib.Maps
 
                     for (var row = 0; row < mappingMatrix.RowCount; row++)
                         resultMv.AddTerm(
-                            row,
-                            mappingMatrix[row, id] * scalarValue
+                            (ulong)row,
+                            mappingMatrix[row, (int)id] * scalarValue
                         );
                 }
             }
@@ -319,7 +319,7 @@ namespace GeometricAlgebraNumericsLib.Maps
         //}
 
 
-        public static Dictionary<int, GaNumDarKVector> ToOutermorphismDictionary(this Dictionary<int, GaNumVector> basisVectorMappings, int domainVSpaceDim, int targetVSpaceDim)
+        public static Dictionary<ulong, GaNumDarKVector> ToOutermorphismDictionary(this Dictionary<ulong, GaNumVector> basisVectorMappings, int domainVSpaceDim, int targetVSpaceDim)
         {
             var domainGaSpaceDim =
                 domainVSpaceDim.ToGaSpaceDimension();
@@ -327,12 +327,12 @@ namespace GeometricAlgebraNumericsLib.Maps
             var targetGaSpaceDim =
                 targetVSpaceDim.ToGaSpaceDimension();
 
-            var omMapDict = new Dictionary<int, GaNumDarKVector>();
+            var omMapDict = new Dictionary<ulong, GaNumDarKVector>();
 
             //Add unit scalar as the image of the 0-basis blade
-            omMapDict.Add(0, GaNumDarKVector.CreateScalar(targetGaSpaceDim, 1));
+            omMapDict.Add(0, GaNumDarKVector.CreateScalar(targetVSpaceDim, 1));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaNumDarKVector basisBladeImage;
 
@@ -361,7 +361,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, IGaNumKVector> ToOutermorphismDictionary(this IEnumerable<IGaNumMultivector> linearVectorMaps)
+        public static Dictionary<ulong, IGaNumKVector> ToOutermorphismDictionary(this IEnumerable<IGaNumMultivector> linearVectorMaps)
         {
             var linearVectorMapsArray = linearVectorMaps.ToArray();
 
@@ -371,12 +371,12 @@ namespace GeometricAlgebraNumericsLib.Maps
             var domainGaSpaceDim = domainVSpaceDim.ToGaSpaceDimension();
             var targetGaSpaceDim = targetVSpaceDim.ToGaSpaceDimension();
 
-            var omMapDict = new Dictionary<int, IGaNumKVector>();
+            var omMapDict = new Dictionary<ulong, IGaNumKVector>();
 
             //Add unit scalar as the image of the 0-basis blade
             omMapDict.Add(0, GaNumDarKVector.CreateScalar(targetVSpaceDim, 1));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 IGaNumKVector basisBladeImage;
 
@@ -403,7 +403,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaNumSarMultivector> ToOutermorphismDictionary(this IEnumerable<double[]> linearVectorMaps)
+        public static Dictionary<ulong, GaNumSarMultivector> ToOutermorphismDictionary(this IEnumerable<double[]> linearVectorMaps)
         {
             var linearVectorMapsArray = linearVectorMaps.ToArray();
 
@@ -415,12 +415,12 @@ namespace GeometricAlgebraNumericsLib.Maps
 
             var targetVSpaceDim = targetGaSpaceDim.ToVSpaceDimension();
 
-            var omMapDict = new Dictionary<int, GaNumSarMultivector>();
+            var omMapDict = new Dictionary<ulong, GaNumSarMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
             omMapDict.Add(0, GaNumSarMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaNumSarMultivector basisBladeImage;
 
@@ -448,7 +448,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaNumSarMultivector> ToOutermorphismDictionary(this double[,] linearVectorMapsArray)
+        public static Dictionary<ulong, GaNumSarMultivector> ToOutermorphismDictionary(this double[,] linearVectorMapsArray)
         {
             var domainGaSpaceDim =
                 linearVectorMapsArray.GetLength(1).ToGaSpaceDimension();
@@ -458,12 +458,12 @@ namespace GeometricAlgebraNumericsLib.Maps
 
             var targetVSpaceDim = targetGaSpaceDim.ToVSpaceDimension();
 
-            var omMapDict = new Dictionary<int, GaNumSarMultivector>();
+            var omMapDict = new Dictionary<ulong, GaNumSarMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
             omMapDict.Add(0, GaNumSarMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaNumSarMultivector basisBladeImage;
 
@@ -492,7 +492,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return omMapDict;
         }
 
-        public static Dictionary<int, GaNumSarMultivector> ToOutermorphismDictionary(this Matrix linearVectorMapsMatrix)
+        public static Dictionary<ulong, GaNumSarMultivector> ToOutermorphismDictionary(this Matrix linearVectorMapsMatrix)
         {
             var domainGaSpaceDim =
                 linearVectorMapsMatrix.ColumnCount.ToGaSpaceDimension();
@@ -502,12 +502,12 @@ namespace GeometricAlgebraNumericsLib.Maps
 
             var targetVSpaceDim = targetGaSpaceDim.ToVSpaceDimension();
 
-            var omMapDict = new Dictionary<int, GaNumSarMultivector>();
+            var omMapDict = new Dictionary<ulong, GaNumSarMultivector>();
 
             //Add unit scalar as the image of the 0-basis blade
             omMapDict.Add(0, GaNumSarMultivector.CreateUnitScalar(targetVSpaceDim));
 
-            for (var id = 1; id <= domainGaSpaceDim - 1; id++)
+            for (var id = 1UL; id <= domainGaSpaceDim - 1; id++)
             {
                 GaNumSarMultivector basisBladeImage;
 
@@ -618,7 +618,7 @@ namespace GeometricAlgebraNumericsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
                 var mv = GaNumSarMultivector.CreateFromColumn(linearMapMatrix, id);
 
@@ -638,7 +638,7 @@ namespace GeometricAlgebraNumericsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var rowId = 0; rowId < linearMapMatrix.RowCount; rowId++)
+            for (var rowId = 0UL; rowId < (ulong)linearMapMatrix.RowCount; rowId++)
             {
                 var mv = GaNumSarMultivector.CreateFromRow(linearMapMatrix, rowId);
 
@@ -658,7 +658,7 @@ namespace GeometricAlgebraNumericsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
                 var mv = GaNumSarMultivector.CreateFromColumn(linearMapMatrix, id);
 
@@ -678,7 +678,7 @@ namespace GeometricAlgebraNumericsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
                 var mv = GaNumSarMultivector.CreateFromColumn(linearMapMatrix, id);
 
@@ -698,7 +698,7 @@ namespace GeometricAlgebraNumericsLib.Maps
                 linearMapMatrix.RowCount.ToVSpaceDimension()
             );
 
-            for (var id = 0; id < linearMapMatrix.ColumnCount; id++)
+            for (var id = 0UL; id < (ulong)linearMapMatrix.ColumnCount; id++)
             {
                 var mv = GaNumSarMultivector.CreateFromColumn(linearMapMatrix, id);
 
@@ -715,7 +715,7 @@ namespace GeometricAlgebraNumericsLib.Maps
         }
 
 
-        public static GaNumMapUnilinearSparseColumns ToSparseColumnsMap(this Dictionary<int, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaNumMapUnilinearSparseColumns ToSparseColumnsMap(this Dictionary<ulong, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaNumMapUnilinearSparseColumns.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -735,7 +735,7 @@ namespace GeometricAlgebraNumericsLib.Maps
         //    return resultMap;
         //}
 
-        public static GaNumMapUnilinearTree ToTreeMap(this Dictionary<int, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaNumMapUnilinearTree ToTreeMap(this Dictionary<ulong, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaNumMapUnilinearTree.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -745,7 +745,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return resultMap;
         }
 
-        public static GaNumMapUnilinearArray ToArrayMap(this Dictionary<int, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaNumMapUnilinearArray ToArrayMap(this Dictionary<ulong, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaNumMapUnilinearArray.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -755,7 +755,7 @@ namespace GeometricAlgebraNumericsLib.Maps
             return resultMap;
         }
         
-        public static GaNumMapUnilinearCoefSums ToCoefSumsMap(this Dictionary<int, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaNumMapUnilinearCoefSums ToCoefSumsMap(this Dictionary<ulong, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var resultMap = GaNumMapUnilinearCoefSums.Create(domainVSpaceDim, targetVSpaceDim);
 
@@ -765,16 +765,16 @@ namespace GeometricAlgebraNumericsLib.Maps
             return resultMap;
         }
 
-        public static GaNumMapUnilinearMatrix ToDenseMatrixMap(this Dictionary<int, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaNumMapUnilinearMatrix ToDenseMatrixMap(this Dictionary<ulong, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var targetGaSpaceDim = targetVSpaceDim.ToGaSpaceDimension();
             var zeroMvArray = new double[targetGaSpaceDim];
             var columns = Enumerable
-                .Range(0, domainVSpaceDim.ToGaSpaceDimension())
+                .Range(0, (int)domainVSpaceDim.ToGaSpaceDimension())
                 .Select(
                     id =>
                     {
-                        basisBladeMaps.TryGetValue(id, out var mv);
+                        basisBladeMaps.TryGetValue((ulong)id, out var mv);
 
                         return mv?.GetDenseScalarValuesArray()
                                ?? zeroMvArray;
@@ -786,16 +786,16 @@ namespace GeometricAlgebraNumericsLib.Maps
             );
         }
 
-        public static GaNumMapUnilinearMatrix ToSparseMatrixMap(this Dictionary<int, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
+        public static GaNumMapUnilinearMatrix ToSparseMatrixMap(this Dictionary<ulong, GaNumSarMultivector> basisBladeMaps, int domainVSpaceDim, int targetVSpaceDim)
         {
             var targetGaSpaceDim = targetVSpaceDim.ToGaSpaceDimension();
             var zeroMvArray = new double[targetGaSpaceDim];
             var columns = Enumerable
-                .Range(0, domainVSpaceDim.ToGaSpaceDimension())
+                .Range(0, (int)domainVSpaceDim.ToGaSpaceDimension())
                 .Select(
                     id =>
                     {
-                        basisBladeMaps.TryGetValue(id, out var mv);
+                        basisBladeMaps.TryGetValue((ulong)id, out var mv);
 
                         return mv?.GetDenseScalarValuesArray()
                                ?? zeroMvArray;

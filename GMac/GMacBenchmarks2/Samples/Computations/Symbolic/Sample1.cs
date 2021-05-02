@@ -49,7 +49,7 @@ namespace GMacBenchmarks2.Samples.Computations.Symbolic
             public double ArrayOverheadPerTerm => (ArraySize - ScalarsSize) / (double)TermsCount;
 
 
-            public MultivectorSizeInfo(int gaSpaceDim, IEnumerable<int> idsList)
+            public MultivectorSizeInfo(ulong gaSpaceDim, IEnumerable<ulong> idsList)
             {
                 //Construct a multivector and set all its selected terms to the same symbolic scalar
                 var mv = GaSymMultivectorHash.CreateZero(gaSpaceDim);
@@ -121,7 +121,7 @@ namespace GMacBenchmarks2.Samples.Computations.Symbolic
                 "Array"
             );
 
-            for (var termsCount = 1; termsCount < gaSpaceDim; termsCount++)
+            for (var termsCount = 1; termsCount < (int)gaSpaceDim; termsCount++)
             {
                 var sizeInfo = new MultivectorSizeInfo(
                     gaSpaceDim,

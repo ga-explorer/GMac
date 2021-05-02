@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 //using System.Runtime.InteropServices.ComTypes;
 
 
-namespace Wolfram.NETLink.Internal.COM {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal.COM {
 
 /// <summary>
 /// COMDispatchHandler handles calls to the IDispatch interface on "raw" COM objects (i.e., they have type System.__ComObject).

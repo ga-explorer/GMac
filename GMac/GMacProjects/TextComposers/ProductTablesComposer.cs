@@ -22,7 +22,7 @@ namespace GMacProjects.TextComposers
 
             var result = basisVectorSubscripts
                 .ConcatenateUsingPatterns(
-                    Enumerable.Range(0, gaSpaceDim),
+                    Enumerable.Range(0, (int)gaSpaceDim),
                     ""
                 )
                 .Select(n => "e".ToMathMlSubscript(n) as IMathMlElement)
@@ -43,7 +43,7 @@ namespace GMacProjects.TextComposers
         }
 
 
-        private static MathMlRow ToMathMlRow(IGaNumMultivector mv, Func<int, IMathMlElement> getBasisBladeNameFunc)
+        private static MathMlRow ToMathMlRow(IGaNumMultivector mv, Func<ulong, IMathMlElement> getBasisBladeNameFunc)
         {
             var rowElement = MathMlRow.Create();
 
@@ -108,7 +108,7 @@ namespace GMacProjects.TextComposers
             return rowElement;
         }
 
-        public static MathMlTable ComposeMathMlTable(GaNumFrame frame, Func<int, IMathMlElement> getBasisBladeNameFunc)
+        public static MathMlTable ComposeMathMlTable(GaNumFrame frame, Func<ulong, IMathMlElement> getBasisBladeNameFunc)
         {
             var idsList = frame.BasisBladeIDsSortedByGrade().ToArray();
             var gaDim = idsList.Length;
@@ -145,7 +145,7 @@ namespace GMacProjects.TextComposers
             return table;
         }
 
-        public static string ComposeMathMlTableColumns(GaNumFrame frame, Func<int, IMathMlElement> getBasisBladeNameFunc)
+        public static string ComposeMathMlTableColumns(GaNumFrame frame, Func<ulong, IMathMlElement> getBasisBladeNameFunc)
         {
             var textComposer = new LinearTextComposer();
 

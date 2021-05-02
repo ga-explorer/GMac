@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using TextComposerLib.Text;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -19,6 +20,15 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             );
         }
 
+        public static GaPoTSymVector CreateUnitAutoVector(int n)
+        {
+            var d = Mfs.Divide[Expr.INT_ONE, Mfs.Sqrt[n.ToExpr()]].Evaluate();
+
+            return new GaPoTSymVector(
+                Enumerable.Repeat(d, n)
+            );
+        }
+
 
         public static GaPoTSymVector operator -(GaPoTSymVector v)
         {
@@ -27,7 +37,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             foreach (var term in v._termsDictionary.Values)
                 result.SetTerm(
                     term.TermId,
-                    Mfs.Minus[term.Value].GaPoTSymSimplify()
+                    Mfs.Minus[term.Value].Evaluate()
                 );
 
             return result;
@@ -65,7 +75,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             foreach (var term in v2._termsDictionary.Values)
                 result.AddTerm(
                     term.TermId,
-                    Mfs.Minus[term.Value].GaPoTSymSimplify()
+                    Mfs.Minus[term.Value].Evaluate()
                 );
 
             return result;
@@ -87,7 +97,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 foreach (var term2 in v2.GetTerms())
                 {
                     var scalarValue = 
-                        Mfs.Times[term1.Value, term2.Value].GaPoTSymSimplify();
+                        Mfs.Times[term1.Value, term2.Value].Evaluate();
 
                     bivector.AddTerm(
                         term1.TermId, 
@@ -193,7 +203,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             foreach (var term in v._termsDictionary.Values)
                 result.SetTerm(
                     term.TermId,
-                    Mfs.Times[term.Value, s].GaPoTSymSimplify()
+                    Mfs.Times[term.Value, s].Evaluate()
                 );
 
             return result;
@@ -206,10 +216,25 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             foreach (var term in v._termsDictionary.Values)
                 result.SetTerm(
                     term.TermId,
-                    Mfs.Times[s, term.Value].GaPoTSymSimplify()
+                    Mfs.Times[s, term.Value].Evaluate()
                 );
 
             return result;
+        }
+
+        public static GaPoTSymBiversor operator /(GaPoTSymVector v1, GaPoTSymVector v2)
+        {
+            return v1 * v2.Inverse();
+        }
+
+        public static GaPoTSymVector operator /(GaPoTSymBiversor bv1, GaPoTSymVector v2)
+        {
+            return bv1 * v2.Inverse();
+        }
+
+        public static GaPoTSymVector operator /(GaPoTSymVector v1, GaPoTSymBiversor bv2)
+        {
+            return v1 * bv2.Inverse();
         }
 
         public static GaPoTSymVector operator /(GaPoTSymVector v, Expr s)
@@ -219,10 +244,15 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             foreach (var term in v._termsDictionary.Values)
                 result.SetTerm(
                     term.TermId,
-                    Mfs.Divide[term.Value, s].GaPoTSymSimplify()
+                    Mfs.Divide[term.Value, s].Evaluate()
                 );
 
             return result;
+        }
+
+        public static GaPoTSymVector operator /(Expr s, GaPoTSymVector v)
+        {
+            return s * v.Inverse();
         }
 
 
@@ -309,7 +339,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             
             SetTerm(id, x);
 
-            SetTerm(id + 1, Mfs.Minus[y].GaPoTSymSimplify());
+            SetTerm(id + 1, Mfs.Minus[y].Evaluate());
 
             return this;
         }
@@ -320,7 +350,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             Debug.Assert(id > 0);
             
             if (_termsDictionary.ContainsKey(id))
-                _termsDictionary[id].Value = Mfs.Plus[_termsDictionary[id].Value, value].GaPoTSymSimplify();
+                _termsDictionary[id].Value = Mfs.Plus[_termsDictionary[id].Value, value].Evaluate();
             else
                 _termsDictionary.Add(id, new GaPoTSymVectorTerm(id, value));
 
@@ -358,7 +388,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
         {
             AddTerm(id, x);
 
-            AddTerm(id + 1, Mfs.Minus[y].GaPoTSymSimplify());
+            AddTerm(id + 1, Mfs.Minus[y].Evaluate());
 
             return this;
         }
@@ -384,7 +414,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             Debug.Assert(id > 0 && id % 2 == 1);
             
             var x = this[id];
-            var y = Mfs.Minus[this[id + 1]].GaPoTSymSimplify();
+            var y = Mfs.Minus[this[id + 1]].Evaluate();
 
             return new GaPoTSymRectPhasor(id, x, y);
         }
@@ -483,13 +513,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 else
                 {
                     id--;
-                    y = Mfs.Minus[term.Value].GaPoTSymSimplify();
+                    y = Mfs.Minus[term.Value].Evaluate();
                 }
 
                 if (phasorsDict.TryGetValue(id, out var phasor))
                 {
-                    phasor.XValue = Mfs.Plus[phasor.XValue, x].GaPoTSymSimplify();
-                    phasor.YValue = Mfs.Plus[phasor.YValue, y].GaPoTSymSimplify();
+                    phasor.XValue = Mfs.Plus[phasor.XValue, x].Evaluate();
+                    phasor.YValue = Mfs.Plus[phasor.YValue, y].Evaluate();
                 }
                 else
                 {
@@ -513,7 +543,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     );
             }
 
-            return Mfs.SumExpr(resultList.ToArray()).GaPoTSymSimplify();
+            return Mfs.SumExpr(resultList.ToArray()).Evaluate();
         }
 
         public Expr GetAngle(GaPoTSymVector v)
@@ -523,7 +553,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     DotProduct(v), 
                     Mfs.Sqrt[Mfs.Times[Norm2(), v.Norm2()]]
                 ]
-            ].GaPoTSymSimplify();
+            ].Evaluate();
         }
 
         public GaPoTSymMultivector Op(GaPoTSymVector v)
@@ -571,48 +601,32 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return this;
         }
 
+        public GaPoTSymVector MapScalars(Func<Expr, Expr> mappingFunc)
+        {
+            return new GaPoTSymVector(
+                _termsDictionary.Values.Select(
+                    t => new GaPoTSymVectorTerm(t.TermId, mappingFunc(t.Value))
+                )
+            );
+        }
+
+        public GaPoTSymVector FullSimplifyScalars()
+        {
+            return new GaPoTSymVector(
+                _termsDictionary.Values.Select(
+                    t => new GaPoTSymVectorTerm(t.TermId, t.Value.FullSimplify())
+                )
+            );
+        }
+
+        public GaPoTSymVector ScalarsToNumerical()
+        {
+            return MapScalars(e => Mfs.N[e].Evaluate());
+        }
+
         public GaPoTSymMultivector GetRotorToVector(GaPoTSymVector v2)
         {
-            var cosAngle = Mfs.Divide[
-                DotProduct(v2), 
-                Mfs.Sqrt[Mfs.Times[Norm2(), v2.Norm2()]]
-            ].GaPoTSymSimplify();
-
-            if (cosAngle.IsOne())
-                return new GaPoTSymMultivector(new []{ new GaPoTSymMultivectorTerm(0, Expr.INT_ONE) });
-            
-            //TODO: Handle the case for cosAngle == -1
-            if (cosAngle.IsMinusOne())
-                throw new InvalidOperationException(
-                    $"Can't find a unique rotation plane to rotate {TermsToText()} into {v2.TermsToText()}"
-                );
-            
-            var cosHalfAngle = 
-                Mfs.Sqrt[Mfs.Divide[Mfs.Plus[Expr.INT_ONE, cosAngle], 2.ToExpr()]];
-            
-            var sinHalfAngle = 
-                Mfs.Sqrt[Mfs.Divide[Mfs.Subtract[Expr.INT_ONE, cosAngle], 2.ToExpr()]];
-            
-            var rotationBlade = Op(v2);
-
-            var rotationBladeScalar =
-                Mfs.Divide[
-                    sinHalfAngle, 
-                    Mfs.Sqrt[Mfs.Abs[rotationBlade.Gp(rotationBlade).GetTermValue(0)]]
-                ];
-
-            var rotor=  
-                cosHalfAngle - rotationBladeScalar * rotationBlade;
-            
-            //var rotationAngle = Math.Acos(DotProduct(v2) * invNorm1 * invNorm2) / 2;
-            //var unitBlade = rotationBlade.ScaleBy(rotationBladeInvNorm);
-            //var unitBladeNorm = unitBlade.Gp(unitBlade).TermsToText();
-            //var rotor= Math.Cos(rotationAngle) - (rotationBladeInvNorm * Math.Sin(rotationAngle)) * rotationBlade;
-
-            //Normalize rotor
-            //var invRotorNorm = 1.0d / Math.Sqrt(rotor.Gp(rotor.Reverse()).GetTermValue(0));
-            
-            return rotor;
+            return GaPoTSymMultivector.CreateSimpleRotor(this, v2);
         }
         
         public GaPoTSymVector ApplyRotor(GaPoTSymMultivector rotor)
@@ -623,7 +637,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             var mv = r1.Gp(v).Gp(r2);
 
-            return mv.GetVectorPart();
+            return mv.GetVectorPart().FullSimplifyScalars();
         }
 
         public GaPoTSymVector ApplyRotor(GaPoTSymBiversor rotor)
@@ -634,7 +648,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
             var mv = r1.Gp(v).Gp(r2);
 
-            return mv.GetVectorPart();
+            return mv.GetVectorPart().FullSimplifyScalars();
         }
 
         public GaPoTSymVector GetProjectionOnFrame(GaPoTSymFrame frame)
@@ -649,12 +663,12 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 vector += v * frame[i];
             }
 
-            return vector;
+            return vector.FullSimplifyScalars();
         }
 
         public GaPoTSymVector GetProjectionOnBlade(GaPoTSymMultivector blade)
         {
-            return ToMultivector().Lcp(blade).Lcp(blade.Inverse()).GetVectorPart();
+            return ToMultivector().Lcp(blade).Lcp(blade.Inverse()).GetVectorPart().FullSimplifyScalars();
         }
 
         public Expr Norm()
@@ -662,9 +676,9 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return Mfs.Sqrt[Mfs.SumExpr(
             _termsDictionary
                 .Values
-                .Select(p => p.Norm2())
+                .Select(p => Mfs.Times[p.Value, p.Value])
                 .ToArray()
-            )].GaPoTSymSimplify();
+            )].FullSimplify();
         }
 
         public Expr Norm2()
@@ -672,9 +686,19 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return Mfs.SumExpr(
                 _termsDictionary
                 .Values
-                .Select(p => p.Norm2())
+                .Select(p => Mfs.Times[p.Value, p.Value])
                 .ToArray()
-            ).GaPoTSymSimplify();
+            ).FullSimplify();
+        }
+
+        public GaPoTSymVector Round(int places)
+        {
+            return new GaPoTSymVector(
+                _termsDictionary
+                    .Values
+                    .Select(t => t.Round(places))
+                    .Where(t => !t.Value.IsZero())
+            );
         }
 
         public GaPoTSymVector Inverse()
@@ -689,10 +713,20 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             foreach (var term in _termsDictionary.Values)
                 result.SetTerm(
                     term.TermId,
-                    Mfs.Divide[term.Value, norm2].GaPoTSymSimplify()
+                    Mfs.Divide[term.Value, norm2].Evaluate()
                 );
 
             return result;
+        }
+
+        public GaPoTSymVector DivideByNorm()
+        {
+            return this / Norm();
+        }
+
+        public GaPoTSymVector DivideByNorm2()
+        {
+            return this / Norm2();
         }
 
         public GaPoTSymVector OffsetTermIDs(int delta)
@@ -701,6 +735,13 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 _termsDictionary
                     .Values
                     .Select(t => t.OffsetTermId(delta))
+            );
+        }
+
+        public GaPoTSymMultivector ToMultivector()
+        {
+            return new GaPoTSymMultivector(
+                GetTerms().Select(t => t.ToMultivectorTerm())
             );
         }
 
@@ -725,8 +766,10 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public string PolarPhasorsToText()
         {
-            var termsArray = 
-                GeTPolarPhasors().Where(t => !t.IsZero()).ToArray();
+            var termsArray = GeTPolarPhasors()
+                .Where(t => !t.IsZero())
+                .OrderBy(t => t.Id)
+                .ToArray();
 
             return termsArray.Length == 0
                 ? "0"
@@ -735,8 +778,10 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public string RectPhasorsToText()
         {
-            var termsArray = 
-                GeTRectPhasors().Where(t => !t.IsZero()).ToArray();
+            var termsArray = GeTRectPhasors()
+                .Where(t => !t.IsZero())
+                .OrderBy(t => t.Id)
+                .ToArray();
 
             return termsArray.Length == 0
                 ? "0"
@@ -764,8 +809,10 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public string PolarPhasorsToLaTeX()
         {
-            var termsArray = 
-                GeTPolarPhasors().Where(t => !t.IsZero()).ToArray();
+            var termsArray = GeTPolarPhasors()
+                .Where(t => !t.IsZero())
+                .OrderBy(t => t.Id)
+                .ToArray();
 
             return termsArray.Length == 0
                 ? "0"
@@ -774,20 +821,88 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 
         public string RectPhasorsToLaTeX()
         {
-            var termsArray = 
-                GeTRectPhasors().Where(t => !t.IsZero()).ToArray();
+            var termsArray = GeTRectPhasors()
+                .Where(t => !t.IsZero())
+                .OrderBy(t => t.Id)
+                .ToArray();
 
             return termsArray.Length == 0
                 ? "0"
                 : termsArray.Select(t => t.ToLaTeX()).Concatenate(" + ");
         }
 
-
-        public GaPoTSymMultivector ToMultivector()
+        public string ToLaTeXInlineEquation(string multivectorName, string basisName)
         {
-            return new GaPoTSymMultivector(
-                GetTerms().Select(t => t.ToMultivectorTerm())
-            );
+            var textComposer = new StringBuilder();
+
+            textComposer.Append(@"$");
+
+            var termsArray = 
+                _termsDictionary
+                    .Values
+                    .Where(t => !t.IsZero())
+                    .OrderBy(t => t.TermId)
+                    .ToArray();
+
+            if (!string.IsNullOrEmpty(multivectorName))
+                textComposer.AppendLine($@"{multivectorName} = ");
+
+            var j = 0;
+            foreach (var term in termsArray)
+            {
+                var termLaTeX = 
+                    term.ToLaTeX().Replace(@"\sigma_", $"{basisName}_");
+
+                var termText = j == 0
+                    ? $@"{termLaTeX}"
+                    : $@" + {termLaTeX}";
+
+                textComposer.Append(termText);
+
+                j++;
+            }
+
+            textComposer.Append(@"$");
+
+            return textComposer.ToString();
+        }
+
+        public string ToLaTeXDisplayEquation(string multivectorName, string basisName)
+        {
+            var textComposer = new StringBuilder();
+
+            textComposer.AppendLine(@"\[");
+
+            var termsArray = 
+                _termsDictionary
+                    .Values
+                    .Where(t => !t.IsZero())
+                    .OrderBy(t => t.TermId)
+                    .ToArray();
+
+            if (!string.IsNullOrEmpty(multivectorName))
+                textComposer.AppendLine($@"{multivectorName} = ");
+
+            var j = 0;
+            foreach (var term in termsArray)
+            {
+                var termLaTeX = 
+                    term.ToLaTeX().Replace(@"\sigma_", $"{basisName}_");
+
+                var termText = j == 0
+                    ? $@"{termLaTeX}"
+                    : $@" + {termLaTeX}";
+
+                textComposer.Append(termText);
+
+                j++;
+            }
+
+            textComposer
+                .AppendLine()
+                .AppendLine(@"\]");
+
+            return textComposer.ToString();
         }
 
 

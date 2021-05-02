@@ -49,7 +49,7 @@ namespace GMac.GMacCompiler.Semantic.AST
         public ILanguageType ExpressionType => ValueMultivectorType;
 
 
-        internal GMacValueMultivector this[IEnumerable<int> idsList]
+        internal GMacValueMultivector this[IEnumerable<ulong> idsList]
         {
             get
             {
@@ -67,7 +67,7 @@ namespace GMac.GMacCompiler.Semantic.AST
             }
         }
 
-        internal ValuePrimitive<MathematicaScalar> this[int id]
+        internal ValuePrimitive<MathematicaScalar> this[ulong id]
         {
             get
             {
@@ -96,35 +96,35 @@ namespace GMac.GMacCompiler.Semantic.AST
 
         internal static GMacValueMultivector CreateZero(GMacFrameMultivector mvType)
         {
-            var mvCoefs = GaSymMultivector.CreateZero(mvType.ParentFrame.GaSpaceDimension);
+            var mvCoefs = GaSymMultivector.CreateZero(mvType.ParentFrame.VSpaceDimension);
 
             return new GMacValueMultivector(mvType, mvCoefs);
         }
 
-        internal static GMacValueMultivector CreateTerm(GMacFrameMultivector mvType, int id, MathematicaScalar coef)
+        internal static GMacValueMultivector CreateTerm(GMacFrameMultivector mvType, ulong id, MathematicaScalar coef)
         {
-            var mvCoefs = GaSymMultivector.CreateTerm(mvType.ParentFrame.GaSpaceDimension, id, coef);
+            var mvCoefs = GaSymMultivector.CreateTerm(mvType.ParentFrame.VSpaceDimension, id, coef);
 
             return new GMacValueMultivector(mvType, mvCoefs);
         }
 
         internal static GMacValueMultivector CreateScalar(GMacFrameMultivector mvType, MathematicaScalar coef)
         {
-            var mvCoefs = GaSymMultivector.CreateScalar(mvType.ParentFrame.GaSpaceDimension, coef);
+            var mvCoefs = GaSymMultivector.CreateScalar(mvType.ParentFrame.VSpaceDimension, coef);
 
             return new GMacValueMultivector(mvType, mvCoefs);
         }
 
         internal static GMacValueMultivector CreatePseudoScalar(GMacFrameMultivector mvType, MathematicaScalar coef)
         {
-            var mvCoefs = GaSymMultivector.CreatePseudoscalar(mvType.ParentFrame.GaSpaceDimension, coef);
+            var mvCoefs = GaSymMultivector.CreatePseudoscalar(mvType.ParentFrame.VSpaceDimension, coef);
 
             return new GMacValueMultivector(mvType, mvCoefs);
         }
 
-        internal static GMacValueMultivector CreateBasisBlade(GMacFrameMultivector mvType, int id)
+        internal static GMacValueMultivector CreateBasisBlade(GMacFrameMultivector mvType, ulong id)
         {
-            var mvCoefs = GaSymMultivector.CreateBasisBlade(mvType.ParentFrame.GaSpaceDimension, id);
+            var mvCoefs = GaSymMultivector.CreateBasisBlade(mvType.ParentFrame.VSpaceDimension, id);
 
             return new GMacValueMultivector(mvType, mvCoefs);
         }

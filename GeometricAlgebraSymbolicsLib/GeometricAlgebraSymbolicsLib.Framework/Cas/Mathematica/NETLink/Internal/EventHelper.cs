@@ -11,7 +11,7 @@
 using System;
 using System.Reflection;
 
-namespace Wolfram.NETLink.Internal {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal {
 
 /// <summary>
 /// Utility methods used by the Mathematica functions AddEventHandler and RemoveEventHandler.

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeometricAlgebraNumericsLib.Maps;
 using GeometricAlgebraStructuresLib.Multivectors;
 
 namespace GeometricAlgebraStructuresLib.Maps

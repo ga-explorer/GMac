@@ -79,7 +79,7 @@ namespace GeometricAlgebraStructuresLib.GuidedBinaryTraversal.Multivectors
             }
             else
             {
-                TosValue = MultivectorStorage.GetTermScalar((int)TosId);
+                TosValue = MultivectorStorage.GetTermScalar(TosId);
             }
 
             TosIndex--;
@@ -89,11 +89,11 @@ namespace GeometricAlgebraStructuresLib.GuidedBinaryTraversal.Multivectors
         {
             if ((childIndex & 1) == 0)
                 return TosChildActiveGradesBitPattern0 != 0 && (
-                    TosTreeDepth > 1 || MultivectorStorage.ContainsStoredTerm((int)TosChildId0)
+                    TosTreeDepth > 1 || MultivectorStorage.ContainsStoredTerm(TosChildId0)
                 );
 
             return TosChildActiveGradesBitPattern1 != 0 && (
-                TosTreeDepth > 1 || MultivectorStorage.ContainsStoredTerm((int)TosChildId1)
+                TosTreeDepth > 1 || MultivectorStorage.ContainsStoredTerm(TosChildId1)
             );
         }
 

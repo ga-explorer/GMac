@@ -4,8 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GMac.GMacAPI.CodeGen;
 using GMac.GMacAST.Symbols;
-using TextComposerLib.Logs.Progress.UI;
-using TextComposerLib.Files.UI;
+using TextComposerLib.UI.WinForms.UserInterface.UI;
 
 namespace GMac.GMacIDE.CodeGen
 {
@@ -49,8 +48,8 @@ namespace GMac.GMacIDE.CodeGen
                 _astSymbols
                 .Where(
                     item =>
-                        (String.IsNullOrEmpty(roleFilter) || item.RoleName.IndexOf(roleFilter, StringComparison.OrdinalIgnoreCase) >= 0) &&
-                        (String.IsNullOrEmpty(nameFilter) || item.AccessName.IndexOf(nameFilter, StringComparison.OrdinalIgnoreCase) >= 0)
+                        (string.IsNullOrEmpty(roleFilter) || item.RoleName.IndexOf(roleFilter, StringComparison.OrdinalIgnoreCase) >= 0) &&
+                        (string.IsNullOrEmpty(nameFilter) || item.AccessName.IndexOf(nameFilter, StringComparison.OrdinalIgnoreCase) >= 0)
                     )
                 .Select(
                     symbol => 
@@ -122,8 +121,8 @@ namespace GMac.GMacIDE.CodeGen
 
         private void comboBoxGenerators_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxRuleFilter.Text = String.Empty;
-            textBoxNameFilter.Text = String.Empty;
+            textBoxRuleFilter.Text = string.Empty;
+            textBoxNameFilter.Text = string.Empty;
 
             var activeGenerator = comboBoxGenerators.SelectedItem as GMacCodeLibraryComposer;
 
@@ -161,8 +160,8 @@ namespace GMac.GMacIDE.CodeGen
 
         private void buttonShowAll_Click(object sender, EventArgs e)
         {
-            textBoxRuleFilter.Text = String.Empty;
-            textBoxNameFilter.Text = String.Empty;
+            textBoxRuleFilter.Text = string.Empty;
+            textBoxNameFilter.Text = string.Empty;
 
             FillAstItemsList();
         }

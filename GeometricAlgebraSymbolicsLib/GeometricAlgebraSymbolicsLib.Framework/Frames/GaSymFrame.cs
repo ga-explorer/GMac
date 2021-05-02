@@ -6,6 +6,7 @@ using GeometricAlgebraNumericsLib.Products;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Maps;
 using GeometricAlgebraSymbolicsLib.Maps.Bilinear;
@@ -13,7 +14,6 @@ using GeometricAlgebraSymbolicsLib.Metrics;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using TextComposerLib.Text;
 using TextComposerLib.Text.Structured;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Frames
 {
@@ -333,8 +333,8 @@ namespace GeometricAlgebraSymbolicsLib.Frames
 
             for (var i = 0; i < baseFrame.VSpaceDimension; i++)
             {
-                var id = (1 << i) ^ baseFrame.MaxBasisBladeId;
-                var mv1 = GaSymMultivector.CreateTerm(baseFrame.GaSpaceDimension, id, GaSymbolicsUtils.Constants.One);
+                var id = (1UL << i) ^ baseFrame.MaxBasisBladeId;
+                var mv1 = GaSymMultivector.CreateTerm(baseFrame.VSpaceDimension, id, GaSymbolicsUtils.Constants.One);
 
                 var mv = baseFrame.Lcp[mv1, mv2];
 
@@ -384,9 +384,9 @@ namespace GeometricAlgebraSymbolicsLib.Frames
 
         public abstract int VSpaceDimension { get; }
 
-        public int MaxBasisBladeId => GaFrameUtils.MaxBasisBladeId(VSpaceDimension);
+        public ulong MaxBasisBladeId => GaFrameUtils.MaxBasisBladeId(VSpaceDimension);
 
-        public int GaSpaceDimension => VSpaceDimension.ToGaSpaceDimension();
+        public ulong GaSpaceDimension => VSpaceDimension.ToGaSpaceDimension();
 
         public int GradesCount => VSpaceDimension + 1;
 
@@ -602,20 +602,20 @@ namespace GeometricAlgebraSymbolicsLib.Frames
 
         protected abstract void ComputeIpm();
 
-        public abstract MathematicaScalar BasisVectorSignature(int basisVectorIndex);
+        public abstract MathematicaScalar BasisVectorSignature(ulong basisVectorIndex);
 
-        public abstract GaSymMultivector BasisBladeSignature(int id);
+        public abstract GaSymMultivector BasisBladeSignature(ulong id);
 
 
         public GaSymMultivector CreateUnitPseudoScalar()
         {
-            return GaSymMultivector.CreateBasisBlade(GaSpaceDimension, MaxBasisBladeId);
+            return GaSymMultivector.CreateBasisBlade(VSpaceDimension, MaxBasisBladeId);
         }
 
         public GaSymMultivector CreateInverseUnitPseudoScalar()
         {
             //TODO: Review this computation
-            return GaSymMultivector.CreateTerm(GaSpaceDimension, MaxBasisBladeId, UnitPseudoScalarCoef);
+            return GaSymMultivector.CreateTerm(VSpaceDimension, MaxBasisBladeId, UnitPseudoScalarCoef);
         }
 
         public MathematicaScalar Magnitude(GaSymMultivector mv)
@@ -654,7 +654,7 @@ namespace GeometricAlgebraSymbolicsLib.Frames
         /// <param name="oddVersor"></param>
         /// <param name="basisBladeIDs"></param>
         /// <returns></returns>
-        public IEnumerable<GaSymMultivector> OddVersorProduct(GaSymMultivector oddVersor, IEnumerable<int> basisBladeIDs)
+        public IEnumerable<GaSymMultivector> OddVersorProduct(GaSymMultivector oddVersor, IEnumerable<ulong> basisBladeIDs)
         {
             var oddVersorReverse = oddVersor.Reverse();
             var oddVersorNorm2Inverse = 
@@ -665,7 +665,7 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             return basisBladeIDs.Select(id =>
             {
                 var mv = GaSymMultivector.CreateTerm(
-                    GaSpaceDimension,
+                    VSpaceDimension,
                     id,
                     id.BasisBladeIdHasNegativeGradeInv() ? Expr.INT_MINUSONE : Expr.INT_ONE
                 );
@@ -676,13 +676,13 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             });
         }
 
-        public IEnumerable<GaSymMultivector> RotorProduct(GaSymMultivector rotorVersor, IEnumerable<int> basisBladeIDs)
+        public IEnumerable<GaSymMultivector> RotorProduct(GaSymMultivector rotorVersor, IEnumerable<ulong> basisBladeIDs)
         {
             var rotorVersorInverse = rotorVersor.Reverse();
 
             return basisBladeIDs.Select(id =>
             {
-                var mv = GaSymMultivector.CreateBasisBlade(GaSpaceDimension, id);
+                var mv = GaSymMultivector.CreateBasisBlade(VSpaceDimension, id);
 
                 return
                     Gp[Gp[rotorVersor, mv], rotorVersorInverse]
@@ -690,7 +690,7 @@ namespace GeometricAlgebraSymbolicsLib.Frames
             });
         }
 
-        public IEnumerable<GaSymMultivector> EvenVersorProduct(GaSymMultivector evenVersor, IEnumerable<int> basisBladeIDs)
+        public IEnumerable<GaSymMultivector> EvenVersorProduct(GaSymMultivector evenVersor, IEnumerable<ulong> basisBladeIDs)
         {
             var evenVersorReverse = evenVersor.Reverse();
             var evenVersorNorm2Inverse = 
@@ -700,7 +700,7 @@ namespace GeometricAlgebraSymbolicsLib.Frames
 
             return basisBladeIDs.Select(id =>
             {
-                var mv = GaSymMultivector.CreateBasisBlade(GaSpaceDimension, id);
+                var mv = GaSymMultivector.CreateBasisBlade(VSpaceDimension, id);
 
                 return
                     Gp[Gp[evenVersor, mv], evenVersorInverse]

@@ -36,7 +36,7 @@ namespace GMac.GMacMath
                 var value = GMacSystemUtils.Settings["maxVSpaceDimension"];
 
                 MaxVSpaceDimension = 
-                    Int32.TryParse(value, out var i) 
+                    int.TryParse(value, out var i) 
                     ? Math.Max(defaultMaxVSpaceDimension, Math.Min(i, GMacCompilerFeatures.MaxFrameDimension)) 
                     : defaultMaxVSpaceDimension;
             }

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory
 {
@@ -53,6 +53,9 @@ namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory
         public static Mfs D { get; } = new Mfs("D");
         public static Mfs N { get; } = new Mfs("N");
         public static Mfs ArcTan { get; } = new Mfs("ArcTan");
+        public static Mfs Re { get; } = new Mfs("Re");
+        public static Mfs Im { get; } = new Mfs("Im");
+        public static Mfs Round { get; } = new Mfs("Round");
 
         public static Mfs List { get; } = new Mfs("List");
         public static Mfs IdentityMatrix { get; } = new Mfs("IdentityMatrix");

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using GeometricAlgebraSymbolicsLib.Applications.GAPoT;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 {
@@ -59,8 +59,9 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             }
 
             var rotorsSequence = 
-                GaPoTSymRotorsSequence.Create(
-                    sourceFrame.GetRotorsToFrame(targetFrame)
+                GaPoTSymRotorsSequence.CreateFromOrthonormalFrames(
+                    sourceFrame,
+                    targetFrame
                 );
 
             //if (!rotorsSequence.ValidateRotation(sourceFrame, targetFrame))
@@ -125,7 +126,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 
             var uPseudoScalar = GaPoTSymMultivector
                 .CreateZero()
-                .SetTerm((1 << n) - 1, Expr.INT_ONE);
+                .SetTerm((1UL << n) - 1, Expr.INT_ONE);
 
             for (var refVectorIndex = 0; refVectorIndex < 4; refVectorIndex++)
             {

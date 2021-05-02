@@ -11,7 +11,7 @@
 
 using System;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// IMathLink is the low-level interface that is the root of all link objects in .NET/Link.
@@ -1289,7 +1289,7 @@ public interface IMathLink {
 /// Represents the method that will handle the Yield event.
 /// </summary>
 /// <returns>true to force the currently blocked reading call to back out and throw a MathLinkException; false to continue waiting.</returns>
-/// <seealso cref="Wolfram.NETLink.IMathLink.Yield"/>
+/// <seealso cref="IMathLink.Yield"/>
 /// 
 public delegate bool YieldFunction();
 
@@ -1298,7 +1298,7 @@ public delegate bool YieldFunction();
 /// Represents the method that will handle the MessageArrived event.
 /// </summary>
 /// <param name="msgType">The type of message that arrived.</param>
-/// <seealso cref="Wolfram.NETLink.IMathLink.MessageArrived"/>
+/// <seealso cref="IMathLink.MessageArrived"/>
 /// 
 public delegate void MessageHandler(MathLinkMessage msgType);
 

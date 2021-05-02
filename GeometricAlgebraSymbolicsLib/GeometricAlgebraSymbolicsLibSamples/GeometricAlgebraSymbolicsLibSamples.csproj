@@ -74,8 +74,12 @@
     <Compile Include="GAPoT\ClarkeRotation3DSample.cs" />
     <Compile Include="GAPoT\ClarkeRotation5DSample.cs" />
     <Compile Include="GAPoT\ClarkeRotation6DSample.cs" />
-    <Compile Include="GAPoT\FbdFrameSample.cs" />
+    <Compile Include="GAPoT\HyperVectorsFrameSample.cs" />
     <Compile Include="GAPoT\GramSchmidtRotation3DSample.cs" />
+    <Compile Include="GAPoT\GramSchmidtRotation4DSample.cs" />
+    <Compile Include="GAPoT\GramSchmidtRotationSample.cs" />
+    <Compile Include="GAPoT\KirchhoffRotationSample.cs" />
+    <Compile Include="GAPoT\OrthogonalRotorsDecompositionSample.cs" />
     <Compile Include="GAPoT\RotorsSequence4DSample.cs" />
     <Compile Include="GAPoT\RotorsSequenceSample.cs" />
     <Compile Include="GAPoT\ClarkeRotationNDSample.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="GAPoT\Sample5.cs" />
     <Compile Include="GAPoT\Sample6.cs" />
     <Compile Include="GAPoT\ClarkeRotation4DSample.cs" />
+    <Compile Include="GAPoT\Validations\ValidationSample1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +105,10 @@
     <ProjectReference Include="..\..\CodeComposerLib\CodeComposerLib\CodeComposerLib.csproj">
       <Project>{5b86340a-91e4-43f3-a454-c69674144a28}</Project>
       <Name>CodeComposerLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj">
+      <Project>{52834d87-7593-4e6e-a9b0-dbaede8ce6da}</Project>
+      <Name>DataStructuresLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.csproj">
       <Project>{75e86d69-a0bf-478e-b0b5-356776da1b86}</Project>

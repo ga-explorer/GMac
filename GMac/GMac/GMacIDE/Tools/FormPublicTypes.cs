@@ -27,7 +27,7 @@ namespace GMac.GMacIDE.Tools
 
             var nameSpace = listBoxNamespaces.SelectedItem as string;
 
-            if (String.IsNullOrEmpty(nameSpace)) return;
+            if (string.IsNullOrEmpty(nameSpace)) return;
 
             foreach (var pair in NamespacesUtils.PublicClasses(nameSpace))
                 listBoxTypes.Items.Add(pair.Value.Name);
@@ -35,13 +35,13 @@ namespace GMac.GMacIDE.Tools
 
         private void listBoxTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxMembers.Text = String.Empty;
+            textBoxMembers.Text = string.Empty;
 
             var nameSpace = listBoxNamespaces.SelectedItem as string;
 
             var typeName = listBoxTypes.SelectedItem as string;
 
-            if (String.IsNullOrEmpty(nameSpace) || String.IsNullOrEmpty(typeName)) return;
+            if (string.IsNullOrEmpty(nameSpace) || string.IsNullOrEmpty(typeName)) return;
 
             textBoxMembers.Text = 
                 NamespacesUtils

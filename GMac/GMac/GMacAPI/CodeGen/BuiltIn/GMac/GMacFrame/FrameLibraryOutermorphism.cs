@@ -19,7 +19,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             for (var index = 1; index <= frameInfo.VSpaceDimension; index++)
             {
-                var id = GaFrameUtils.BasisVectorId(index - 1);
+                var id = GaFrameUtils.BasisVectorId((ulong)index - 1);
 
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
@@ -35,9 +35,9 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
             {
                 var kvSpaceDim = frameInfo.KvSpaceDimension(grade);
 
-                for (var index = 0; index < kvSpaceDim; index++)
+                for (var index = 0UL; index < kvSpaceDim; index++)
                 {
-                    int id = GaFrameUtils.BasisBladeId(grade, index);
+                    var id = GaFrameUtils.BasisBladeId(grade, index);
 
                     id.SplitBySmallestBasisVectorId(out var id1, out var id2);
 
@@ -99,7 +99,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
 
             for (var index = 2; index <= frameInfo.VSpaceDimension; index++)
             {
-                var id = GaFrameUtils.BasisVectorId(index - 1);
+                var id = GaFrameUtils.BasisVectorId((ulong)index - 1);
 
                 commandsList.Add(
                     GMacDslSyntaxFactory.AssignToLocalVariable(
@@ -139,13 +139,13 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
             {
                 componentsText.Clear();
 
-                var id1 = GaFrameUtils.BasisBladeId(1, index1 - 1);
+                var id1 = GaFrameUtils.BasisBladeId(1, (ulong)index1 - 1);
 
                 commandsList.AddFixedCode("let newOm.ImageV" + index1 + " = Multivector(");
 
                 for (var index2 = 1; index2 <= frameInfo.VSpaceDimension; index2++)
                 {
-                    var id2 = GaFrameUtils.BasisBladeId(1, index2 - 1);
+                    var id2 = GaFrameUtils.BasisBladeId(1, (ulong)index2 - 1);
 
                     componentsText.Add("    #E" + id2 + "# = om.ImageV" + index2 + ".#E" + id1 + "#");
                 }
@@ -180,7 +180,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                 ComposeMacroInputs("om", DefaultStructure.Outermorphism),
                 GMacLanguage.ScalarTypeName,
                 "",
-                String.Format("ApplyOM(om, {0}) sp reverse({0}) / norm2({0})", pseudoScalar)
+                string.Format("ApplyOM(om, {0}) sp reverse({0}) / norm2({0})", pseudoScalar)
                 );
 
             GenerateComment("Compute Euclidean determinant of an outer-morphism");
@@ -191,7 +191,7 @@ namespace GMac.GMacAPI.CodeGen.BuiltIn.GMac.GMacFrame
                 ComposeMacroInputs("om", DefaultStructure.Outermorphism),
                 GMacLanguage.ScalarTypeName,
                 "",
-                String.Format("ApplyOM(om, {0}) esp reverse({0}) / emag2({0})", pseudoScalar)
+                string.Format("ApplyOM(om, {0}) esp reverse({0}) / emag2({0})", pseudoScalar)
                 );
         }
 

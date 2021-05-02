@@ -9,7 +9,7 @@ using GMac.GMacAST.Symbols;
 using TextComposerLib.Files;
 using TextComposerLib.Text.Parametric;
 
-namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp.Direct
+namespace GMac.GMacAPI.CodeGen.BuiltIn.CSharp
 {
     public sealed class GMacDirectCSharpComposer : GMacCodeLibraryComposer
     {
@@ -87,7 +87,7 @@ public Multivector(IEnumerable<double> coefs)
             ActiveFileTextComposer.Append(GetSymbolTargetName(valueInfo.FrameMultivector));
             ActiveFileTextComposer.Append("(");
             
-            for (var id = 0; id < valueInfo.Frame.GaSpaceDimension; id++)
+            for (var id = 0UL; id < valueInfo.Frame.GaSpaceDimension; id++)
             {
                 if (id > 0)
                     ActiveFileTextComposer.Append(", ");
@@ -326,7 +326,7 @@ public Multivector(IEnumerable<double> coefs)
 
                 targetNaming.SetMultivectorParameters(
                     valueAccess,
-                    id => BasisBladeIdToCode(parentName, id)
+                    id => BasisBladeIdToCode(parentName, (int)id)
                     );
             }
 

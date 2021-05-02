@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TextComposerLib.UserInterface
+namespace TextComposerLib.UI.WinForms.UserInterface
 {
     public sealed class SampleTasksCollection : List<ISampleTasksTreeNode>, ISampleTasksTreeNode
     {

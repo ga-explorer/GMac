@@ -13,13 +13,13 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         public int Count { get; }
 
         public T this[int index]
-            => DarValues[GaFrameUtils.BasisBladeId(Grade, index)];
+            => DarValues[(int)GaFrameUtils.BasisBladeId(Grade, (ulong)index)];
 
 
         internal GaDarMultivectorAsDarKVectorReadOnlyList(int grade, IReadOnlyList<T> darValues)
         {
             Grade = grade;
-            Count = GaFrameUtils.KvSpaceDimension(darValues.Count.ToVSpaceDimension(), grade);
+            Count = (int)GaFrameUtils.KvSpaceDimension(darValues.Count.ToVSpaceDimension(), grade);
             DarValues = darValues;
         }
 

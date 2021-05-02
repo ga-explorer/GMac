@@ -70,18 +70,18 @@ namespace GeometricAlgebraSymbolicsLib.Frames
         }
 
 
-        public override MathematicaScalar BasisVectorSignature(int basisVectorIndex)
+        public override MathematicaScalar BasisVectorSignature(ulong basisVectorIndex)
         {
-            if (basisVectorIndex >= 0 && basisVectorIndex < VSpaceDimension)
+            if (basisVectorIndex < (ulong)VSpaceDimension)
                 return CasConstants.One;
 
             throw new IndexOutOfRangeException();
         }
 
-        public override GaSymMultivector BasisBladeSignature(int id)
+        public override GaSymMultivector BasisBladeSignature(ulong id)
         {
-            if (id >= 0 && id < GaSpaceDimension)
-                return GaSymMultivector.CreateScalar(GaSpaceDimension, CasConstants.One);
+            if (id < GaSpaceDimension)
+                return GaSymMultivector.CreateScalar(VSpaceDimension, CasConstants.One);
 
             throw new IndexOutOfRangeException();
         }

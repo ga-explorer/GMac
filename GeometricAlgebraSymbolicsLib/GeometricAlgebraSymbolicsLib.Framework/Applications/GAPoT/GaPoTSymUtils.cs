@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using CodeComposerLib.Irony;
+using DataStructuresLib;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using Irony.Parsing;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
 {
@@ -23,7 +23,7 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
             return $@"\sigma_{{{basisSubscript}}}";
         }
 
-        public static string GetLaTeXNumber(this double value)
+        public static string GetLaTeXSymber(this double value)
         {
             var valueText = value.ToString("G");
 
@@ -60,50 +60,9 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                     .Substring(1, exprText.Length - 2)
                     .Trim();
 
-            var expr = exprText.ToExpr(MathematicaInterface.DefaultCas);
+            var expr = exprText.ToExpr();
 
             return expr;
-        }
-
-        public static Expr GaPoTSymSimplify(this Expr expr)
-        {
-            return expr.FullSimplify(MathematicaInterface.DefaultCas);
-        }
-
-        public static Expr GaPoTSymSimplify(this string exprText)
-        {
-            return $"FullSimplify[{exprText}]".ToExpr(MathematicaInterface.DefaultCas);
-        }
-
-        public static Expr GaPoTSymExpand(this Expr expr)
-        {
-            return expr.Expand(MathematicaInterface.DefaultCas);
-        }
-
-        public static string GaPoTSymEvaluateToString(this Expr expr)
-        {
-            return MathematicaInterface.DefaultCasConnection.EvaluateToString(expr);
-        }
-
-        public static string GetLaTeXDisplayEquation(this Expr expr)
-        {
-            var textComposer = new StringBuilder();
-
-            textComposer.AppendLine(@"\[");
-            textComposer.AppendLine(Mfs.EToString[Mfs.TeXForm[expr]].GaPoTSymEvaluateToString().Trim());
-            textComposer.AppendLine(@"\]");
-
-            return textComposer.ToString();
-        }
-
-        public static string GetLaTeXInlineEquation(this Expr expr)
-        {
-            return "$" + Mfs.EToString[Mfs.TeXForm[expr]].GaPoTSymEvaluateToString().Trim() + "$";
-        }
-
-        public static string GetLaTeX(this Expr expr)
-        {
-            return Mfs.EToString[Mfs.TeXForm[expr]].GaPoTSymEvaluateToString().Trim();
         }
 
         public static bool ValidateIndexPermutationList(params int[] inputList)
@@ -396,6 +355,54 @@ namespace GeometricAlgebraSymbolicsLib.Applications.GAPoT
                 
                 mv1 = mv2;
             }
+        }
+
+        public static void EigenDecomposition(this Expr matrixExpr, out Expr[] values, out Expr[] vectors)
+        {
+            var casInterface = MathematicaInterface.DefaultCas;
+
+            var sysExpr = casInterface[Mfs.Eigensystem[matrixExpr]];
+
+            values = sysExpr.Args[0].Args;
+
+            vectors = sysExpr.Args[1].Args;
+        }
+
+
+        public static GaPoTSymVector TermsToVector(this IEnumerable<GaPoTSymVectorTerm> termsList)
+        {
+            return new GaPoTSymVector(termsList);
+        }
+
+        public static GaPoTSymBiversor TermsToBiversor(this IEnumerable<GaPoTSymBiversorTerm> termsList)
+        {
+            return new GaPoTSymBiversor(termsList);
+        }
+
+        public static GaPoTSymMultivector TermsToMultivector(this IEnumerable<GaPoTSymMultivectorTerm> termsList)
+        {
+            return new GaPoTSymMultivector(termsList);
+        }
+        
+        public static IEnumerable<GaPoTSymMultivectorTerm> OrderByGrade(this IEnumerable<GaPoTSymMultivectorTerm> termsList)
+        {
+            var termsArray = termsList.ToArray();
+            var bitsCount = termsArray.Max(t => t.IDsPattern).LastOneBitPosition() + 1;
+
+            if (bitsCount == 0)
+                return termsArray;
+
+            return termsArray
+                .Where(t => !t.Value.IsZero())
+                .OrderBy(t => t.GetGrade())
+                .ThenByDescending(t => t.IDsPattern.ReverseBits(bitsCount));
+        }
+        
+        public static IEnumerable<GaPoTSymMultivectorTerm> OrderById(this IEnumerable<GaPoTSymMultivectorTerm> termsList)
+        {
+            return termsList
+                .Where(t => !t.Value.IsZero())
+                .OrderBy(t => t.IDsPattern);
         }
     }
 }

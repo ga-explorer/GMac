@@ -115,7 +115,7 @@ namespace GMac.GMacIDE
             var node = new TreeNode("<MULTIVECTOR_VALUE> " + value.ValueMultivectorType.TypeSignature) {Tag = value};
 
             foreach (var pair in value.SymbolicMultivector.Terms)
-                node.Nodes.Add(Visit(value.ValueMultivectorType, pair.Key, pair.Value));
+                node.Nodes.Add(Visit(value.ValueMultivectorType, (int)pair.Key, pair.Value));
 
             return node;
         }
@@ -184,7 +184,7 @@ namespace GMac.GMacIDE
             }
 
             foreach (var pair in operands.OperandsDictionary)
-                node.Nodes.Add(Visit(mvTypeCons.MultivectorType, pair.Key, pair.Value));
+                node.Nodes.Add(Visit(mvTypeCons.MultivectorType, (int)pair.Key, pair.Value));
 
             return node;
         }

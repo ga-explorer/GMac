@@ -132,7 +132,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator
                 return GMacValueMultivector.Create(
                     mvType,
                     GaSymMultivector.CreateScalar(
-                        mvType.ParentFrame.GaSpaceDimension,
+                        mvType.ParentFrame.VSpaceDimension,
                         MathematicaScalar.Create(GaSymbolicsUtils.Cas, intValue)
                         )
                     );
@@ -145,7 +145,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.Evaluator
                 return GMacValueMultivector.Create(
                     mvType,
                     GaSymMultivector.CreateScalar(
-                        mvType.ParentFrame.GaSpaceDimension,
+                        mvType.ParentFrame.VSpaceDimension,
                         scalarValue
                         )
                     );

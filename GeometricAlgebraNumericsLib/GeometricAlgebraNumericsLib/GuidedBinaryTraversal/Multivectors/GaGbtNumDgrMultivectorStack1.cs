@@ -90,7 +90,7 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
             }
             else
             {
-                TosValue = Multivector[(int)TosId];
+                TosValue = Multivector[TosId];
             }
 
             TosIndex--;

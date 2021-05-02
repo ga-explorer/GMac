@@ -13,7 +13,7 @@ namespace GeometricAlgebraStructuresLib.Multivectors
         /// <summary>
         /// The dimension of the Geometric Algebra space of the multivector
         /// </summary>
-        int GaSpaceDimension { get; }
+        ulong GaSpaceDimension { get; }
 
         /// <summary>
         /// The internal storage structure holding the terms of this multivector
@@ -25,7 +25,7 @@ namespace GeometricAlgebraStructuresLib.Multivectors
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T this[int id] { get; }
+        T this[ulong id] { get; }
 
         /// <summary>
         /// Get the scalar value coefficient of the given basis blade
@@ -33,7 +33,7 @@ namespace GeometricAlgebraStructuresLib.Multivectors
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        T this[int grade, int index] { get; }
+        T this[int grade, ulong index] { get; }
 
         /// <summary>
         /// True if this multivector is a single term

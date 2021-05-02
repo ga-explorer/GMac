@@ -5,22 +5,22 @@ using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 {
     public sealed class GaSymMultivectorTempHash : IGaSymMultivectorTemp
     {
-        public static GaSymMultivectorTempHash Create(int gaSpaceDim)
+        public static GaSymMultivectorTempHash Create(int vSpaceDim)
         {
-            return new GaSymMultivectorTempHash(gaSpaceDim);
+            return new GaSymMultivectorTempHash(vSpaceDim);
         }
 
 
-        private readonly Dictionary<int, List<Expr>> _termsDictionary;
+        private readonly Dictionary<ulong, List<Expr>> _termsDictionary;
 
 
-        public Expr this[int id]
+        public Expr this[ulong id]
         {
             get
             {
@@ -32,7 +32,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             }
         }
 
-        public Expr this[int grade, int index]
+        public Expr this[int grade, ulong index]
         {
             get
             {
@@ -46,10 +46,10 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             }
         }
 
-        public IEnumerable<int> BasisBladeIds 
+        public IEnumerable<ulong> BasisBladeIds 
             => _termsDictionary.Keys;
 
-        public IEnumerable<int> NonZeroBasisBladeIds
+        public IEnumerable<ulong> NonZeroBasisBladeIds
             => _termsDictionary
                 .Where(p => !p.Value.Simplify().IsNullOrZero())
                 .Select(p => p.Key);
@@ -75,53 +75,53 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
                 .Select(v => v.Simplify())
                 .Where(v => !v.IsNullOrZero());
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms
             => _termsDictionary
-                .Select(p => new KeyValuePair<int, MathematicaScalar>(
+                .Select(p => new KeyValuePair<ulong, MathematicaScalar>(
                     p.Key,
                     p.Value.Simplify().ToMathematicaScalar()
                 ));
 
-        public IEnumerable<KeyValuePair<int, Expr>> ExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms
             => _termsDictionary
-                .Select(p => new KeyValuePair<int, Expr>(
+                .Select(p => new KeyValuePair<ulong, Expr>(
                     p.Key,
                     p.Value.Simplify()
                 ));
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms
             => _termsDictionary
-                .Select(p => new KeyValuePair<int, MathematicaScalar>(
+                .Select(p => new KeyValuePair<ulong, MathematicaScalar>(
                     p.Key, 
                     p.Value.Simplify().ToMathematicaScalar()
                 ))
                 .Where(p => !p.Value.Expression.IsNullOrZero());
 
-        public IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms 
+        public IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms 
             => _termsDictionary
-            .Select(p => new KeyValuePair<int, Expr>(p.Key, p.Value.Simplify()))
+            .Select(p => new KeyValuePair<ulong, Expr>(p.Key, p.Value.Simplify()))
             .Where(p => !p.Value.IsNullOrZero());
 
         public bool IsTemp 
             => true;
 
-        public int TermsCount 
-            => _termsDictionary.Count;
+        public ulong TermsCount 
+            => (ulong)_termsDictionary.Count;
 
-        public int VSpaceDimension
-            => GaSpaceDimension.ToVSpaceDimension();
+        public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension { get; }
+        public ulong GaSpaceDimension 
+            => VSpaceDimension.ToGaSpaceDimension();
 
 
-        private GaSymMultivectorTempHash(int gaSpaceDim)
+        private GaSymMultivectorTempHash(int vSpaceDim)
         {
-            GaSpaceDimension = gaSpaceDim;
-            _termsDictionary = new Dictionary<int, List<Expr>>();
+            VSpaceDimension = vSpaceDim;
+            _termsDictionary = new Dictionary<ulong, List<Expr>>();
         }
 
 
-        public bool ContainsBasisBlade(int id)
+        public bool ContainsBasisBlade(ulong id)
         {
             return _termsDictionary.ContainsKey(id);
         }
@@ -146,7 +146,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return Terms.All(v => v.Value.IsNullOrEqualZero());
         }
 
-        public IGaSymMultivectorTemp AddFactor(int id, Expr coef)
+        public IGaSymMultivectorTemp AddFactor(ulong id, Expr coef)
         {
             if (_termsDictionary.TryGetValue(id, out var oldCoef))
             {
@@ -161,7 +161,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return this;
         }
 
-        public IGaSymMultivectorTemp AddFactor(int id, bool isNegative, Expr coef)
+        public IGaSymMultivectorTemp AddFactor(ulong id, bool isNegative, Expr coef)
         {
             coef = isNegative ? Mfs.Minus[coef] : coef;
 
@@ -178,7 +178,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return this;
         }
 
-        public IGaSymMultivectorTemp SetTermCoef(int id, Expr coef)
+        public IGaSymMultivectorTemp SetTermCoef(ulong id, Expr coef)
         {
             if (_termsDictionary.TryGetValue(id, out var oldCoef))
             {
@@ -196,7 +196,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return this;
         }
 
-        public IGaSymMultivectorTemp SetTermCoef(int id, bool isNegative, Expr coef)
+        public IGaSymMultivectorTemp SetTermCoef(ulong id, bool isNegative, Expr coef)
         {
             coef = isNegative ? Mfs.Minus[coef] : coef;
 
@@ -251,7 +251,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 
         public GaSymMultivector ToMultivector()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             foreach (var term in NonZeroExprTerms)
                 mv.SetTermCoef(term.Key, term.Value);
@@ -261,7 +261,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 
         public GaSymMultivector GetVectorPart()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             foreach (var id in GaFrameUtils.BasisVectorIDs(VSpaceDimension))
             {
@@ -273,7 +273,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return mv;
         }
 
-        public IEnumerator<KeyValuePair<int, Expr>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, Expr>> GetEnumerator()
         {
             return NonZeroExprTerms.GetEnumerator();
         }

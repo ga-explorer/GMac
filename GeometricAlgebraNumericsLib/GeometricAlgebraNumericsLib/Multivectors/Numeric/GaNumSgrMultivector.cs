@@ -18,12 +18,12 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
     public sealed class GaNumSgrMultivector 
         : GaNumMultivector, IGaNumGradedMultivector
     {
-        internal Dictionary<int, double>[] CreateKVectorsArray(int vSpaceDim)
+        internal Dictionary<ulong, double>[] CreateKVectorsArray(int vSpaceDim)
         {
-            var kVectorsArray = new Dictionary<int, double>[vSpaceDim + 1];
+            var kVectorsArray = new Dictionary<ulong, double>[vSpaceDim + 1];
 
             for (var grade = 0; grade <= vSpaceDim; grade++)
-                kVectorsArray[grade] = new Dictionary<int, double>();
+                kVectorsArray[grade] = new Dictionary<ulong, double>();
 
             return kVectorsArray;
         }
@@ -31,7 +31,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
         public static GaNumSgrMultivector CreateZero(int vSpaceDim)
         {
-            var kVectorsArray = new IReadOnlyDictionary<int, double>[vSpaceDim + 1];
+            var kVectorsArray = new IReadOnlyDictionary<ulong, double>[vSpaceDim + 1];
 
             return new GaNumSgrMultivector(kVectorsArray);
         }
@@ -45,13 +45,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return factory.GetSgrMultivector();
         }
 
-        public static GaNumSgrMultivector CreateTerm(int vSpaceDim, int id, double value)
+        public static GaNumSgrMultivector CreateTerm(int vSpaceDim, ulong id, double value)
         {
-            var kVectorsArray = new IReadOnlyDictionary<int, double>[vSpaceDim + 1];
+            var kVectorsArray = new IReadOnlyDictionary<ulong, double>[vSpaceDim + 1];
 
             id.BasisBladeGradeIndex(out var grade, out var index);
 
-            kVectorsArray[grade] = new Dictionary<int, double> {{index, value}};
+            kVectorsArray[grade] = new Dictionary<ulong, double> {{index, value}};
 
             return new GaNumSgrMultivector(kVectorsArray);
         }
@@ -88,9 +88,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public IReadOnlyList<IReadOnlyDictionary<int, double>> GradedScalarValuesArray { get; }
+        public IReadOnlyList<IReadOnlyDictionary<ulong, double>> GradedScalarValuesArray { get; }
 
-        public override double this[int id] 
+        public override double this[ulong id] 
         { 
             get
             { 
@@ -107,7 +107,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             }
         }
 
-        public override double this[int grade, int index] 
+        public override double this[int grade, ulong index] 
         { 
             get 
             { 
@@ -143,7 +143,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 .Sum(a => a.Count);
 
         
-        internal GaNumSgrMultivector(IReadOnlyList<IReadOnlyDictionary<int, double>> kVectorsArray)
+        internal GaNumSgrMultivector(IReadOnlyList<IReadOnlyDictionary<ulong, double>> kVectorsArray)
             : base(kVectorsArray.Count - 1)
         {
             Debug.Assert(
@@ -152,7 +152,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                     .All(a => 
                         a.Item2.IsNullOrEmpty() ||
                         a.Item2.All(p => 
-                            p.Key >= 0 && p.Key < GaFrameUtils.KvSpaceDimension(VSpaceDimension, a.Item1)
+                            p.Key < GaFrameUtils.KvSpaceDimension(VSpaceDimension, a.Item1)
                         )
                 )
             );
@@ -234,7 +234,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -249,7 +249,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             }
         }
 
-        public override IEnumerable<int> GetNonZeroTermIds()
+        public override IEnumerable<ulong> GetNonZeroTermIds()
         {
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -300,7 +300,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         }
 
 
-        public override bool TryGetValue(int id, out double value)
+        public override bool TryGetValue(ulong id, out double value)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -316,7 +316,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return true;
         }
 
-        public override bool TryGetValue(int grade, int index, out double value)
+        public override bool TryGetValue(int grade, ulong index, out double value)
         {
             var scalarValues = GradedScalarValuesArray[grade];
 
@@ -330,7 +330,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return true;
         }
 
-        public override bool TryGetTerm(int id, out GaTerm<double> term)
+        public override bool TryGetTerm(ulong id, out GaTerm<double> term)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
@@ -346,7 +346,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return true;
         }
 
-        public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
+        public override bool TryGetTerm(int grade, ulong index, out GaTerm<double> term)
         {
             var scalarValues = GradedScalarValuesArray[grade];
 
@@ -366,20 +366,20 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
             return GradedScalarValuesArray.All(a => a == null);
         }
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
             id.BasisBladeGradeIndex(out var grade, out var index);
 
-            return id >= 0 && id < GaSpaceDimension &&
+            return id < GaSpaceDimension &&
                    !GradedScalarValuesArray[grade].IsNullOrEmpty() &&
                    GradedScalarValuesArray[grade].ContainsKey(index);
         }
 
-        public override bool ContainsStoredTerm(int grade, int index)
+        public override bool ContainsStoredTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
-            return id >= 0 && id < GaSpaceDimension &&
+            return id < GaSpaceDimension &&
                    !GradedScalarValuesArray[grade].IsNullOrEmpty() &&
                    GradedScalarValuesArray[grade].ContainsKey(index);
         }
@@ -394,7 +394,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override IGaNumVector GetVectorPart()
         {
             return GradedScalarValuesArray[1] != null 
-                ? GaNumVector.Create(new SparseReadOnlyList<double>(VSpaceDimension, GradedScalarValuesArray[1]))
+                ? GaNumVector.Create(new SparseReadOnlyListUInt64<double>(VSpaceDimension, GradedScalarValuesArray[1]))
                 : GaNumVector.CreateZero(VSpaceDimension);
         }
 
@@ -507,8 +507,8 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
                 if (scalarValues.Count == 0)
                     continue;
 
-                kVectors[grade] = new SparseReadOnlyList<double>(
-                    GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade),
+                kVectors[grade] = new SparseReadOnlyListUInt64<double>(
+                    (int)GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade),
                     scalarValues
                 );
             }
@@ -535,7 +535,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override IGaNumMultivector GetNegative()
         {
             var kVectorsArray = 
-                new IReadOnlyDictionary<int, double>[VSpaceDimension + 1];
+                new IReadOnlyDictionary<ulong, double>[VSpaceDimension + 1];
 
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -544,7 +544,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 kVectorsArray[grade] = 
                     (scalarValues.Count == 0)
-                        ? new EmptyReadOnlyDictionary<int, double>()
+                        ? new EmptyReadOnlyDictionary<ulong, double>()
                         : scalarValues.GetNegative();
             }
 
@@ -554,7 +554,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override IGaNumMultivector GetReverse()
         {
             var kVectorsArray =
-                new IReadOnlyDictionary<int, double>[VSpaceDimension + 1];
+                new IReadOnlyDictionary<ulong, double>[VSpaceDimension + 1];
 
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -563,7 +563,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 kVectorsArray[grade] = 
                     (scalarValues.Count == 0)
-                        ? new EmptyReadOnlyDictionary<int, double>()
+                        ? new EmptyReadOnlyDictionary<ulong, double>()
                         : (grade.GradeHasNegativeReverse() ? scalarValues.GetNegative() : scalarValues);
             }
 
@@ -573,7 +573,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override IGaNumMultivector GetGradeInv()
         {
             var kVectorsArray =
-                new IReadOnlyDictionary<int, double>[VSpaceDimension + 1];
+                new IReadOnlyDictionary<ulong, double>[VSpaceDimension + 1];
 
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -582,7 +582,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 kVectorsArray[grade] = 
                     (scalarValues.Count == 0)
-                        ? new EmptyReadOnlyDictionary<int, double>()
+                        ? new EmptyReadOnlyDictionary<ulong, double>()
                         : (grade.GradeHasNegativeGradeInv() ? scalarValues.GetNegative() : scalarValues);
             }
 
@@ -592,7 +592,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
         public override IGaNumMultivector GetCliffConj()
         {
             var kVectorsArray =
-                new IReadOnlyDictionary<int, double>[VSpaceDimension + 1];
+                new IReadOnlyDictionary<ulong, double>[VSpaceDimension + 1];
 
             for (var grade = 0; grade <= VSpaceDimension; grade++)
             {
@@ -601,7 +601,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric
 
                 kVectorsArray[grade] = 
                     (scalarValues.Count == 0)
-                        ? new EmptyReadOnlyDictionary<int, double>()
+                        ? new EmptyReadOnlyDictionary<ulong, double>()
                         : (grade.GradeHasNegativeCliffConj() ? scalarValues.GetNegative() : scalarValues);
             }
 

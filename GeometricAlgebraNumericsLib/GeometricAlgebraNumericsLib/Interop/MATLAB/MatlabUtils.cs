@@ -24,7 +24,7 @@ namespace GeometricAlgebraNumericsLib.Interop.MATLAB
                 .ToArray();
 
             var result = GaNumMatlabSparseMatrixData.CreateColumnMatrix(
-                mv.GaSpaceDimension,
+                (int)mv.GaSpaceDimension,
                 termsArray.Length
             );
 
@@ -33,7 +33,7 @@ namespace GeometricAlgebraNumericsLib.Interop.MATLAB
             {
                 result.SetItem(
                     sparseIndex, 
-                    term.BasisBladeId + 1, //MATLAB array indices start at 1 not 0
+                    (int)term.BasisBladeId + 1, //MATLAB array indices start at 1 not 0
                     term.ScalarValue
                 );
 
@@ -48,7 +48,7 @@ namespace GeometricAlgebraNumericsLib.Interop.MATLAB
         {
             for (var i = 0; i < matrixData.ItemsCount; i++)
                 yield return new GaTerm<double>(
-                    matrixData.RowIndicesArray[i] - 1, //MATLAB array indices start at 1 not 0
+                    (ulong)matrixData.RowIndicesArray[i] - 1, //MATLAB array indices start at 1 not 0
                     matrixData.ValuesArray[i]
                 );
         }

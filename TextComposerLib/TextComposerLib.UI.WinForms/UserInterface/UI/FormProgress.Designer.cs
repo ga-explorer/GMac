@@ -1,4 +1,4 @@
-﻿namespace TextComposerLib.Logs.Progress.UI
+﻿namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     partial class FormProgress
     {

@@ -7,41 +7,41 @@ using DataStructuresLib;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using TextComposerLib.Text.Linear;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 {
     public sealed class GaTreeMultivector 
         : IGaSymMultivector, IGaTreeMultivectorParentNode, ISymbolicVector
     {
-        public static GaTreeMultivector CreateZero(int gaSpaceDim)
+        public static GaTreeMultivector CreateZero(ulong gaSpaceDim)
         {
             return new GaTreeMultivector(gaSpaceDim);
         }
 
-        public static GaTreeMultivector CreateTerm(int gaSpaceDim, int id, MathematicaScalar coef)
+        public static GaTreeMultivector CreateTerm(ulong gaSpaceDim, ulong id, MathematicaScalar coef)
         {
             var resultMv = new GaTreeMultivector(gaSpaceDim) { [id] = coef.Expression };
 
             return resultMv;
         }
 
-        public static GaTreeMultivector CreateBasisBlade(int gaSpaceDim, int id)
+        public static GaTreeMultivector CreateBasisBlade(ulong gaSpaceDim, ulong id)
         {
             var resultMv = new GaTreeMultivector(gaSpaceDim) { [id] = Expr.INT_ONE };
 
             return resultMv;
         }
 
-        public static GaTreeMultivector CreateScalar(int gaSpaceDim, MathematicaScalar coef)
+        public static GaTreeMultivector CreateScalar(ulong gaSpaceDim, MathematicaScalar coef)
         {
             var resultMv = new GaTreeMultivector(gaSpaceDim) { [0] = coef.Expression };
 
             return resultMv;
         }
 
-        public static GaTreeMultivector CreatePseudoScalar(int gaSpaceDim, MathematicaScalar coef)
+        public static GaTreeMultivector CreatePseudoScalar(ulong gaSpaceDim, MathematicaScalar coef)
         {
             var resultMv = new GaTreeMultivector(gaSpaceDim) { [gaSpaceDim - 1] = coef.Expression };
 
@@ -95,16 +95,16 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             return resultMv;
         }
 
-        public static GaTreeMultivector CreateSymbolic(int gaSpaceDim, string baseCoefName)
+        public static GaTreeMultivector CreateSymbolic(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolic(
                 gaSpaceDim,
                 baseCoefName,
-                Enumerable.Range(0, gaSpaceDim)
+                Enumerable.Range(0, (int)gaSpaceDim).Select(i => (ulong)i)
                 );
         }
 
-        public static GaTreeMultivector CreateSymbolicVector(int gaSpaceDim, string baseCoefName)
+        public static GaTreeMultivector CreateSymbolicVector(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolic(
                 gaSpaceDim,
@@ -113,7 +113,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             );
         }
 
-        public static GaTreeMultivector CreateSymbolicKVector(int gaSpaceDim, string baseCoefName, int grade)
+        public static GaTreeMultivector CreateSymbolicKVector(ulong gaSpaceDim, string baseCoefName, int grade)
         {
             return CreateSymbolic(
                 gaSpaceDim,
@@ -122,7 +122,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             );
         }
 
-        public static GaTreeMultivector CreateSymbolicTerm(int gaSpaceDim, string baseCoefName, int id)
+        public static GaTreeMultivector CreateSymbolicTerm(ulong gaSpaceDim, string baseCoefName, ulong id)
         {
             var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
 
@@ -135,17 +135,17 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             };
         }
 
-        public static GaTreeMultivector CreateSymbolicScalar(int gaSpaceDim, string baseCoefName)
+        public static GaTreeMultivector CreateSymbolicScalar(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolicTerm(gaSpaceDim, baseCoefName, 0);
         }
 
-        public static GaTreeMultivector CreateSymbolicPseudoscalar(int gaSpaceDim, string baseCoefName)
+        public static GaTreeMultivector CreateSymbolicPseudoscalar(ulong gaSpaceDim, string baseCoefName)
         {
             return CreateSymbolicTerm(gaSpaceDim, baseCoefName, gaSpaceDim - 1);
         }
 
-        public static GaTreeMultivector CreateSymbolic(int gaSpaceDim, string baseCoefName, IEnumerable<int> idsList)
+        public static GaTreeMultivector CreateSymbolic(ulong gaSpaceDim, string baseCoefName, IEnumerable<ulong> idsList)
         {
             var resultMv = new GaTreeMultivector(gaSpaceDim);
             var vSpaceDim = gaSpaceDim.ToVSpaceDimension();
@@ -161,9 +161,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
         }
 
 
-        public IEnumerable<int> BasisBladeIds { get; }
+        public IEnumerable<ulong> BasisBladeIds { get; }
 
-        public IEnumerable<int> NonZeroBasisBladeIds { get; }
+        public IEnumerable<ulong> NonZeroBasisBladeIds { get; }
 
         public IEnumerable<MathematicaScalar> BasisBladeScalars { get; }
 
@@ -175,7 +175,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
         public MathematicaInterface CasInterface { get; }
@@ -190,7 +190,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             => CasInterface.Constants;
 
         public int Size 
-            => GaSpaceDimension;
+            => (int)GaSpaceDimension;
 
         MathematicaScalar ISymbolicVector.this[int index]
         {
@@ -211,13 +211,13 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 
         public bool HasRightChild => !ReferenceEquals(RightChild, null);
 
-        public Expr this[int grade, int index]
+        public Expr this[int grade, ulong index]
         {
             get { return this[GaFrameUtils.BasisBladeId(grade, index)]; }
             set { this[GaFrameUtils.BasisBladeId(grade, index)] = value; }
         }
 
-        public Expr this[int id]
+        public Expr this[ulong id]
         {
             get
             {
@@ -254,12 +254,12 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             }
         }
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms
         {
             get
             {
                 var levelStack = new Stack<int>();
-                var idStack = new Stack<int>();
+                var idStack = new Stack<ulong>();
                 var nodeStack = new Stack<IGaTreeMultivectorNode>();
 
                 levelStack.Push(0);
@@ -276,7 +276,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
                     if (!ReferenceEquals(leafNode, null))
                     {
                         yield return 
-                            new KeyValuePair<int, MathematicaScalar>(id, leafNode.Value);
+                            new KeyValuePair<ulong, MathematicaScalar>(id, leafNode.Value);
 
                         continue;
                     }
@@ -285,7 +285,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
                     if (!ReferenceEquals(leftChild, null))
                     {
                         levelStack.Push(level + 1);
-                        idStack.Push((1 << level) | id);
+                        idStack.Push((1UL << level) | id);
                         nodeStack.Push(leftChild);
                     }
 
@@ -300,24 +300,24 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             }
         }
 
-        public IEnumerable<KeyValuePair<int, Expr>> ExprTerms
-            => Terms.Select(p => new KeyValuePair<int, Expr>(p.Key, p.Value.Expression));
+        public IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms
+            => Terms.Select(p => new KeyValuePair<ulong, Expr>(p.Key, p.Value.Expression));
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms
             => Terms.Where(p => !p.Value.IsNullOrZero());
 
-        public IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms
-            => NonZeroTerms.Select(p => new KeyValuePair<int, Expr>(p.Key, p.Value.Expression));
+        public IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms
+            => NonZeroTerms.Select(p => new KeyValuePair<ulong, Expr>(p.Key, p.Value.Expression));
 
 
-        private GaTreeMultivector(int gaSpaceDim)
+        private GaTreeMultivector(ulong gaSpaceDim)
         {
             CasInterface = GaSymbolicsUtils.Cas;
             VSpaceDimension = gaSpaceDim.ToVSpaceDimension();
         }
 
 
-        public bool ContainsBasisBlade(int id)
+        public bool ContainsBasisBlade(ulong id)
         {
             throw new NotImplementedException();
         }
@@ -325,7 +325,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
         public bool IsTemp 
             => false;
 
-        public int TermsCount { get; }
+        public ulong TermsCount { get; }
 
         public void Simplify()
         {
@@ -369,7 +369,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
 
         public GaSymMultivector GetVectorPart()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             foreach (var id in GaFrameUtils.BasisVectorIDs(VSpaceDimension))
             {
@@ -411,7 +411,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             throw new NotImplementedException();
         }
 
-        IEnumerator<KeyValuePair<int, Expr>> IEnumerable<KeyValuePair<int, Expr>>.GetEnumerator()
+        IEnumerator<KeyValuePair<ulong, Expr>> IEnumerable<KeyValuePair<ulong, Expr>>.GetEnumerator()
         {
             throw new NotImplementedException();
         }
@@ -431,11 +431,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
             var textComposer = new LinearTextComposer();
 
             var levelStack = new Stack<int>();
-            var idStack = new Stack<int>();
+            var idStack = new Stack<ulong>();
             var nodeStack = new Stack<IGaTreeMultivectorNode>();
 
             levelStack.Push(0);
-            idStack.Push(0);
+            idStack.Push(0UL);
             nodeStack.Push(this);
 
             while (nodeStack.Count > 0)
@@ -487,7 +487,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Tree
                 if (!ReferenceEquals(leftChild, null))
                 {
                     levelStack.Push(level + 1);
-                    idStack.Push((1 << level) | id);
+                    idStack.Push((1UL << level) | id);
                     nodeStack.Push(leftChild);
                 }
             }

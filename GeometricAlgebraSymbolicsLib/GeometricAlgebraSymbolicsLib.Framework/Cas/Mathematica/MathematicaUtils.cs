@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using CodeComposerLib.SyntaxTree.Expressions;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica
 {
@@ -48,6 +49,16 @@ namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica
         public static Expr ToExpr(this double value)
         {
             return new Expr(value);
+        }
+
+        /// <summary>
+        /// Create a Mathematica Expr object from the given text expression using the Mathematica interface evaluator
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Expr ToExpr(this string value)
+        {
+            return MathematicaInterface.DefaultCas.Connection.EvaluateToExpr(value);
         }
 
         /// <summary>
@@ -252,6 +263,27 @@ namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica
             }
         }
 
+        public static Expr N(this Expr expr)
+        {
+            return MathematicaInterface.DefaultCas[
+                Mfs.N[expr]
+            ];
+        }
+
+        public static Expr Round(this Expr expr, int places)
+        {
+            return MathematicaInterface.DefaultCas[
+                Mfs.Round[Mfs.N[expr], Math.Pow(10, -places).ToExpr()]
+            ];
+        }
+
+        public static Expr Simplify(this Expr expr)
+        {
+            return expr.AtomQ() 
+                ? expr 
+                : MathematicaInterface.DefaultCas[Mfs.Simplify[expr]];
+        }
+
         public static Expr Simplify(this Expr expr, MathematicaInterface casInterface)
         {
             return expr.AtomQ() 
@@ -259,11 +291,49 @@ namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica
                 : casInterface[Mfs.Simplify[expr]];
         }
 
+        public static Expr SimplifyToExpr(this string exprText)
+        {
+            return $"Simplify[{exprText}]".ToExpr();
+        }
+
+        public static Expr FullSimplifyToExpr(this string exprText)
+        {
+            return $"FullSimplify[{exprText}]".ToExpr();
+        }
+
+        public static Expr FullSimplify(this Expr expr)
+        {
+            return expr.AtomQ() 
+                ? expr 
+                : MathematicaInterface.DefaultCas[Mfs.FullSimplify[expr]];
+        }
+
         public static Expr FullSimplify(this Expr expr, MathematicaInterface casInterface)
         {
             return expr.AtomQ() 
                 ? expr 
                 : casInterface[Mfs.FullSimplify[expr]];
+        }
+
+        public static Expr Evaluate(this Expr expr)
+        {
+            return expr.AtomQ() 
+                ? expr 
+                : MathematicaInterface.DefaultCas[expr];
+        }
+
+        public static string EvaluateToText(this Expr expr)
+        {
+            return expr.AtomQ() 
+                ? expr.ToString() 
+                : MathematicaInterface.DefaultCasConnection.EvaluateToString(expr);
+        }
+
+        public static Expr Expand(this Expr expr)
+        {
+            return expr.AtomQ() 
+                ? expr 
+                : MathematicaInterface.DefaultCas[Mfs.Expand[expr]];
         }
 
         public static Expr Expand(this Expr expr, MathematicaInterface casInterface)
@@ -557,6 +627,28 @@ namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica
         public static Expr SimplifyToExpr(this SteExpression symbolicExpr, MathematicaInterface cas)
         {
             return cas[Mfs.Simplify[symbolicExpr.ToString()]];
+        }
+
+
+        public static string GetLaTeX(this Expr expr)
+        {
+            return Mfs.EToString[Mfs.TeXForm[expr]].EvaluateToText().Trim();
+        }
+
+        public static string GetLaTeXInlineEquation(this Expr expr)
+        {
+            return "$" + Mfs.EToString[Mfs.TeXForm[expr]].EvaluateToText().Trim() + "$";
+        }
+
+        public static string GetLaTeXDisplayEquation(this Expr expr)
+        {
+            var textComposer = new StringBuilder();
+
+            textComposer.AppendLine(@"\[");
+            textComposer.AppendLine(Mfs.EToString[Mfs.TeXForm[expr]].EvaluateToText().Trim());
+            textComposer.AppendLine(@"\]");
+
+            return textComposer.ToString();
         }
     }
 }

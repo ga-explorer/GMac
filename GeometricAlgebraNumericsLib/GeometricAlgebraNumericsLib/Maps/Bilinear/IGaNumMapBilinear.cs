@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Maps;
 
 namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 {
@@ -8,11 +9,11 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
     {
         int DomainVSpaceDimension { get; }
 
-        int DomainGaSpaceDimension { get; }
+        ulong DomainGaSpaceDimension { get; }
 
         GaNumMapBilinearAssociativity Associativity { get; }
 
-        IGaNumMultivector this[int id1, int id2] { get; }
+        IGaNumMultivector this[ulong id1, ulong id2] { get; }
 
         GaNumSarMultivector this[GaNumSarMultivector mv1, GaNumSarMultivector mv2] { get; }
 
@@ -22,8 +23,8 @@ namespace GeometricAlgebraNumericsLib.Maps.Bilinear
 
         GaNumDgrMultivector this[params GaNumDgrMultivector[] mvList] { get; }
 
-        IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisBladesMaps();
+        IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisBladesMaps();
 
-        IEnumerable<Tuple<int, int, IGaNumMultivector>> BasisVectorsMaps();
+        IEnumerable<Tuple<ulong, ulong, IGaNumMultivector>> BasisVectorsMaps();
     }
 }

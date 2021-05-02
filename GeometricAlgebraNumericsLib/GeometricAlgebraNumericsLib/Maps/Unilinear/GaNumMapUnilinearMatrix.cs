@@ -18,7 +18,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int id1]
+        public override IGaNumMultivector this[ulong id1]
             => GaNumSarMultivector.CreateFromColumn(InternalMappingMatrix, id1);
 
         public override GaNumSarMultivector this[GaNumSarMultivector mv1]
@@ -36,9 +36,9 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            for (var id = 0; id < DomainGaSpaceDimension; id++)
+            for (var id = 0UL; id < DomainGaSpaceDimension; id++)
             {
                 var mv = this[id];
 

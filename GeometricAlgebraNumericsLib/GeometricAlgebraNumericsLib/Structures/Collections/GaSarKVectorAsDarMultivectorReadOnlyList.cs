@@ -13,7 +13,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         public T DefaultValue { get; }
 
-        public IReadOnlyDictionary<int, T> KVectorScalarValues { get; }
+        public IReadOnlyDictionary<ulong, T> KVectorScalarValues { get; }
 
         public int Count { get; }
 
@@ -21,7 +21,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                id.BasisBladeGradeIndex(out var grade, out var index);
+                ((ulong)id).BasisBladeGradeIndex(out var grade, out var index);
 
                 if (grade != KVectorGrade) 
                     return DefaultValue;
@@ -31,7 +31,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         }
 
 
-        internal GaSarKVectorAsDarMultivectorReadOnlyList(int vSpaceDim, int grade, IReadOnlyDictionary<int, T> kVectorScalarValues)
+        internal GaSarKVectorAsDarMultivectorReadOnlyList(int vSpaceDim, int grade, IReadOnlyDictionary<ulong, T> kVectorScalarValues)
         {
             Debug.Assert(
                 vSpaceDim.IsValidVSpaceDimension() &&
@@ -40,12 +40,12 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
-            Count = vSpaceDim.ToGaSpaceDimension();
+            Count = (int)vSpaceDim.ToGaSpaceDimension();
             DefaultValue = default;
             KVectorScalarValues = kVectorScalarValues;
         }
 
-        internal GaSarKVectorAsDarMultivectorReadOnlyList(int vSpaceDim, int grade, T defaultValue, IReadOnlyDictionary<int, T> kVectorScalarValues)
+        internal GaSarKVectorAsDarMultivectorReadOnlyList(int vSpaceDim, int grade, T defaultValue, IReadOnlyDictionary<ulong, T> kVectorScalarValues)
         {
             Debug.Assert(
                 vSpaceDim.IsValidVSpaceDimension() &&
@@ -54,7 +54,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
-            Count = vSpaceDim.ToGaSpaceDimension();
+            Count = (int)vSpaceDim.ToGaSpaceDimension();
             DefaultValue = defaultValue;
             KVectorScalarValues = kVectorScalarValues;
         }

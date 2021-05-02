@@ -31,12 +31,12 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter
             var stepByKey = valueAccessStep as ValueAccessStepByKey<int>;
 
             if (stepByKey != null)
-                return mvValue[stepByKey.AccessKey];
+                return mvValue[(ulong)stepByKey.AccessKey];
 
             var stepByKeyList = valueAccessStep as ValueAccessStepByKeyList<int>;
 
             if (stepByKeyList != null)
-                return mvValue[stepByKeyList.AccessKeyList];
+                return mvValue[stepByKeyList.AccessKeyList.Select(id => (ulong)id)];
 
             throw new InvalidOperationException("Invalid access step for a multivector");
         }
@@ -60,7 +60,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter
             var stepByKey = valueAccessStep as ValueAccessStepByKey<int>;
 
             if (stepByKey != null)
-                mvValue[stepByKey.AccessKey] = (ValuePrimitive<MathematicaScalar>)value;
+                mvValue[(ulong)stepByKey.AccessKey] = (ValuePrimitive<MathematicaScalar>)value;
 
             else
             {
@@ -69,7 +69,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter
                 if (stepByKeyList == null)
                     throw new InvalidOperationException("Invalid access step for a multivector");
                 
-                mvValue[stepByKeyList.AccessKeyList] = (GMacValueMultivector) value;
+                mvValue[stepByKeyList.AccessKeyList.Select(id => (ulong)id)] = (GMacValueMultivector) value;
             }
 
             return value;

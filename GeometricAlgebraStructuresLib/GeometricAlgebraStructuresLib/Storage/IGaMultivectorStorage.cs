@@ -6,7 +6,7 @@ using GeometricAlgebraStructuresLib.Trees;
 
 namespace GeometricAlgebraStructuresLib.Storage
 {
-    public interface IGaMultivectorStorage<T> : IEnumerable<KeyValuePair<int, T>>
+    public interface IGaMultivectorStorage<T> : IEnumerable<KeyValuePair<ulong, T>>
     {
         /// <summary>
         /// This is used for low-level computations on scalars like adding,
@@ -22,20 +22,20 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <summary>
         /// The dimension of the Geometric Algebra space of the multivector
         /// </summary>
-        int GaSpaceDimension { get; }
+        ulong GaSpaceDimension { get; }
         
         /// <summary>
         /// The number of terms stored in this multivector
         /// </summary>
         int StoredTermsCount { get; }
 
-        
+
         /// <summary>
         /// Read the scalar coefficient associated with the given basis blade
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T GetTermScalar(int id);
+        T GetTermScalar(ulong id);
 
         /// <summary>
         /// Read the scalar coefficient associated with the given basis blade
@@ -43,20 +43,20 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        T GetTermScalar(int grade, int index);
+        T GetTermScalar(int grade, ulong index);
 
-        IGaTerm<T> GetTerm(int id);
+        IGaTerm<T> GetTerm(ulong id);
         
-        IGaTerm<T> GetTerm(int grade, int index);
+        IGaTerm<T> GetTerm(int grade, ulong index);
 
-        
+
         /// <summary>
         /// Try to get the given term scalar value if stored in this multivector
         /// </summary>
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool TryGetTermScalar(int id, out T value);
+        bool TryGetTermScalar(ulong id, out T value);
 
         /// <summary>
         /// Try to get the given term scalar value if stored in this multivector
@@ -65,7 +65,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool TryGetTermScalar(int grade, int index, out T value);
+        bool TryGetTermScalar(int grade, ulong index, out T value);
 
         /// <summary>
         /// Try to get the given term if stored in this multivector
@@ -73,7 +73,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="id"></param>
         /// <param name="term"></param>
         /// <returns></returns>
-        bool TryGetTerm(int id, out IGaTerm<T> term);
+        bool TryGetTerm(ulong id, out IGaTerm<T> term);
 
         /// <summary>
         /// Try to get the given term if stored in this multivector
@@ -82,15 +82,15 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="term"></param>
         /// <returns></returns>
-        bool TryGetTerm(int grade, int index, out IGaTerm<T> term);
+        bool TryGetTerm(int grade, ulong index, out IGaTerm<T> term);
 
-        
+
         /// <summary>
         /// Set the scalar coefficient associated with the given basis blade
         /// </summary>
         /// <param name="id"></param>
         /// <param name="value"></param>
-        IGaMultivectorStorage<T> SetTermScalar(int id, T value);
+        IGaMultivectorStorage<T> SetTermScalar(ulong id, T value);
 
         /// <summary>
         /// Set the scalar coefficient associated with the given basis blade
@@ -98,7 +98,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        IGaMultivectorStorage<T> SetTermScalar(int grade, int index, T value);
+        IGaMultivectorStorage<T> SetTermScalar(int grade, ulong index, T value);
 
         /// <summary>
         /// Set the given terms
@@ -115,14 +115,14 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <returns></returns>
         IGaMultivectorStorage<T> SetTerms(T scalingFactor, IEnumerable<IGaTerm<T>> termsList);
 
-        
+
         /// <summary>
         /// Try to set the given term
         /// </summary>
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool TrySetTermScalar(int id, T value);
+        bool TrySetTermScalar(ulong id, T value);
 
         /// <summary>
         /// Try to set the given term
@@ -131,7 +131,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool TrySetTermScalar(int grade, int index, T value);
+        bool TrySetTermScalar(int grade, ulong index, T value);
         
         
         /// <summary>
@@ -157,7 +157,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="grade"></param>
         /// <param name="scalarValuesList"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> SetKVector(int grade, IEnumerable<KeyValuePair<int, T>> scalarValuesList);
+        IGaMultivectorStorage<T> SetKVector(int grade, IEnumerable<KeyValuePair<ulong, T>> scalarValuesList);
 
         /// <summary>
         /// Set some terms using the given k-vector data scaled by a scaling factor
@@ -166,7 +166,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="scalingFactor"></param>
         /// <param name="scalarValuesList"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> SetKVector(int grade, T scalingFactor, IEnumerable<KeyValuePair<int, T>> scalarValuesList);
+        IGaMultivectorStorage<T> SetKVector(int grade, T scalingFactor, IEnumerable<KeyValuePair<ulong, T>> scalarValuesList);
 
         /// <summary>
         /// Set some terms using the given k-vector data
@@ -197,14 +197,14 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <returns></returns>
         IGaMultivectorStorage<T> SetKVectors(IEnumerable<Tuple<T, IGaKVectorStorage<T>>> scaledKVectorsList);
 
-        
+
         /// <summary>
         /// Add the given term to this multivector
         /// </summary>
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> AddTerm(int id, T value);
+        IGaMultivectorStorage<T> AddTerm(ulong id, T value);
 
         /// <summary>
         /// Add the given term to this multivector
@@ -213,7 +213,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> AddTerm(int grade, int index, T value);
+        IGaMultivectorStorage<T> AddTerm(int grade, ulong index, T value);
 
         /// <summary>
         /// Add the given term to this multivector
@@ -245,14 +245,14 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <returns></returns>
         IGaMultivectorStorage<T> AddTerms(T scalingFactor, IEnumerable<IGaTerm<T>> termsList);
 
-        
+
         /// <summary>
         /// Try adding the given term to this multivector
         /// </summary>
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool TryAddTerm(int id, T value);
+        bool TryAddTerm(ulong id, T value);
 
         /// <summary>
         /// Try adding the given term to this multivector
@@ -261,7 +261,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool TryAddTerm(int grade, int index, T value);
+        bool TryAddTerm(int grade, ulong index, T value);
 
         
         /// <summary>
@@ -287,7 +287,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="grade"></param>
         /// <param name="scalarValuesList"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> AddKVector(int grade, IEnumerable<KeyValuePair<int, T>> scalarValuesList);
+        IGaMultivectorStorage<T> AddKVector(int grade, IEnumerable<KeyValuePair<ulong, T>> scalarValuesList);
 
         /// <summary>
         /// Add the scaled terms of the given k-vector to this multivector
@@ -296,7 +296,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="scalingFactor"></param>
         /// <param name="scalarValuesList"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> AddKVector(int grade, T scalingFactor, IEnumerable<KeyValuePair<int, T>> scalarValuesList);
+        IGaMultivectorStorage<T> AddKVector(int grade, T scalingFactor, IEnumerable<KeyValuePair<ulong, T>> scalarValuesList);
 
         IGaMultivectorStorage<T> AddKVector(IGaKVectorStorage<T> kvector);
 
@@ -305,43 +305,43 @@ namespace GeometricAlgebraStructuresLib.Storage
         IGaMultivectorStorage<T> AddKVectors(IEnumerable<IGaKVectorStorage<T>> kVectorsList);
 
         IGaMultivectorStorage<T> AddKVectors(IEnumerable<Tuple<T, IGaKVectorStorage<T>>> scaledKVectorsList);
-        
-        
+
+
         /// <summary>
         /// Remove the given term if possible, else set to zero
         /// </summary>
         /// <param name="id"></param>
-        IGaMultivectorStorage<T> RemoveTerm(int id);
+        IGaMultivectorStorage<T> RemoveTerm(ulong id);
         
         /// <summary>
         /// Remove the given term if possible, else set to zero
         /// </summary>
         /// <param name="grade"></param>
         /// <param name="index"></param>
-        IGaMultivectorStorage<T> RemoveTerm(int grade, int index);
+        IGaMultivectorStorage<T> RemoveTerm(int grade, ulong index);
 
         /// <summary>
         /// Remove the given terms if possible, else set to zero
         /// </summary>
         /// <param name="idsList"></param>
-        IGaMultivectorStorage<T> RemoveTerms(IEnumerable<int> idsList);
-        
+        IGaMultivectorStorage<T> RemoveTerms(IEnumerable<ulong> idsList);
+
         /// <summary>
         /// Remove the given terms if possible, else set to zero
         /// </summary>
         /// <param name="grade"></param>
         /// <param name="indexList"></param>
-        IGaMultivectorStorage<T> RemoveTerms(int grade, IEnumerable<int> indexList);
+        IGaMultivectorStorage<T> RemoveTerms(int grade, IEnumerable<ulong> indexList);
 
         IGaMultivectorStorage<T> RemoveTerms(Func<T, bool> selectionFilter);
 
-        IGaMultivectorStorage<T> RemoveTerms(Func<int, bool> selectionFilter);
+        IGaMultivectorStorage<T> RemoveTerms(Func<ulong, bool> selectionFilter);
 
-        IGaMultivectorStorage<T> RemoveTerms(Func<int, int, bool> selectionFilter);
+        IGaMultivectorStorage<T> RemoveTerms(Func<int, ulong, bool> selectionFilter);
         
-        IGaMultivectorStorage<T> RemoveTerms(Func<int, T, bool> selectionFilter);
+        IGaMultivectorStorage<T> RemoveTerms(Func<ulong, T, bool> selectionFilter);
         
-        IGaMultivectorStorage<T> RemoveTerms(Func<int, int, T, bool> selectionFilter);
+        IGaMultivectorStorage<T> RemoveTerms(Func<int, ulong, T, bool> selectionFilter);
         
         /// <summary>
         /// Remove the given terms if possible, else set to zero
@@ -356,7 +356,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="id"></param>
         /// <param name="nearZeroFlag"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> RemoveTermIfZero(int id, bool nearZeroFlag = false);
+        IGaMultivectorStorage<T> RemoveTermIfZero(ulong id, bool nearZeroFlag = false);
 
         /// <summary>
         /// Remove the given term if zero
@@ -365,7 +365,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="nearZeroFlag"></param>
         /// <returns></returns>
-        IGaMultivectorStorage<T> RemoveTermIfZero(int grade, int index, bool nearZeroFlag = false);
+        IGaMultivectorStorage<T> RemoveTermIfZero(int grade, ulong index, bool nearZeroFlag = false);
         
         /// <summary>
         /// Remove all terms from storage where their scalar values is zero
@@ -395,13 +395,13 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="nearZeroFlag"></param>
         /// <returns></returns>
         bool IsZero(bool nearZeroFlag = false);
-        
+
         /// <summary>
         /// Test if this storage contains the given term
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool ContainsStoredTerm(int id);
+        bool ContainsStoredTerm(ulong id);
 
         /// <summary>
         /// Test if this storage contains the given term
@@ -409,7 +409,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        bool ContainsStoredTerm(int grade, int index);
+        bool ContainsStoredTerm(int grade, ulong index);
         
         /// <summary>
         /// Test if this storage contains one or more terms of the given grade
@@ -418,13 +418,13 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <returns></returns>
         bool ContainsStoredTermOfGrade(int grade);
 
-        
+
         /// <summary>
         /// True if this storage can store the given term
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool CanStoreTerm(int id);
+        bool CanStoreTerm(ulong id);
 
         /// <summary>
         /// True if this storage can store the given term
@@ -432,7 +432,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        bool CanStoreTerm(int grade, int index);
+        bool CanStoreTerm(int grade, ulong index);
 
         /// <summary>
         /// True if this storage can store one or more terms of the given grade
@@ -452,70 +452,70 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <summary>
         /// The basis blade ids with coefficients stored in this multivector
         /// </summary>
-        IEnumerable<int> GetStoredTermIds();
+        IEnumerable<ulong> GetStoredTermIds();
 
         /// <summary>
         /// Select stored term IDs by a filter that takes the term's scalar value as input
         /// </summary>
         /// <param name="selectionFilter"></param>
         /// <returns></returns>
-        IEnumerable<int> GetStoredTermIds(Func<T, bool> selectionFilter);
-        
+        IEnumerable<ulong> GetStoredTermIds(Func<T, bool> selectionFilter);
+
         /// <summary>
         /// Select stored term IDs by a filter that takes the term's ID value as input
         /// </summary>
         /// <param name="selectionFilter"></param>
         /// <returns></returns>
-        IEnumerable<int> GetStoredTermIds(Func<int, bool> selectionFilter);
-        
+        IEnumerable<ulong> GetStoredTermIds(Func<ulong, bool> selectionFilter);
+
         /// <summary>
         /// Select stored term IDs by a filter that takes the term's grade and index as input
         /// </summary>
         /// <param name="selectionFilter"></param>
         /// <returns></returns>
-        IEnumerable<int> GetStoredTermIds(Func<int, int, bool> selectionFilter);
-        
+        IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, bool> selectionFilter);
+
         /// <summary>
         /// Select stored term IDs by a filter that takes the term's ID and scalar value as input
         /// </summary>
         /// <param name="selectionFilter"></param>
         /// <returns></returns>
-        IEnumerable<int> GetStoredTermIds(Func<int, T, bool> selectionFilter);
-        
+        IEnumerable<ulong> GetStoredTermIds(Func<ulong, T, bool> selectionFilter);
+
         /// <summary>
         /// Select stored term IDs by a filter that takes the term's grade, index, and scalar value as input
         /// </summary>
         /// <param name="selectionFilter"></param>
         /// <returns></returns>
-        IEnumerable<int> GetStoredTermIds(Func<int, int, T, bool> selectionFilter);
+        IEnumerable<ulong> GetStoredTermIds(Func<int, ulong, T, bool> selectionFilter);
 
-        IEnumerable<int> GetStoredTermIdsOfGrade(int grade);
+        IEnumerable<ulong> GetStoredTermIdsOfGrade(int grade);
         
         
-        IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices();
+        IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices();
 
-        IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<T, bool> selectionFilter);
+        IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<T, bool> selectionFilter);
 
-        IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, bool> selectionFilter);
+        IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<ulong, bool> selectionFilter);
 
-        IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, int, bool> selectionFilter);
+        IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<int, ulong, bool> selectionFilter);
 
-        IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, T, bool> selectionFilter);
+        IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<ulong, T, bool> selectionFilter);
 
-        IEnumerable<Tuple<int, int>> GetStoredTermGradeIndices(Func<int, int, T, bool> selectionFilter);
+        IEnumerable<Tuple<int, ulong>> GetStoredTermGradeIndices(Func<int, ulong, T, bool> selectionFilter);
         
-        IEnumerable<int> GetStoredTermIndicesOfGrade(int grade);
+        IEnumerable<ulong> GetStoredTermIndicesOfGrade(int grade);
         
 
         IEnumerable<T> GetStoredTermScalars();
 
         IEnumerable<T> GetStoredTermScalars(Func<T, bool> selectionFilter);
 
-        IEnumerable<T> GetStoredTermScalars(Func<int, bool> selectionFilter);
+        IEnumerable<T> GetStoredTermScalars(Func<ulong, bool> selectionFilter);
 
-        IEnumerable<T> GetStoredTermScalars(Func<int, T, bool> selectionFilter);
+        IEnumerable<T> GetStoredTermScalars(Func<ulong, T, bool> selectionFilter);
 
-        IEnumerable<T> GetStoredTermScalars(Func<int, int, T, bool> selectionFilter);
+        IEnumerable<T> GetStoredTermScalars(Func<int, ulong, T, bool> selectionFilter);
 
         IEnumerable<T> GetStoredTermScalarsOfGrade(int grade);
         
@@ -528,13 +528,13 @@ namespace GeometricAlgebraStructuresLib.Storage
         
         IEnumerable<IGaTerm<T>> GetStoredTerms(Func<T, bool> selectionFilter);
         
-        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, bool> selectionFilter);
+        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<ulong, bool> selectionFilter);
         
-        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, int, bool> selectionFilter);
+        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, ulong, bool> selectionFilter);
         
-        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, T, bool> selectionFilter);
+        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<ulong, T, bool> selectionFilter);
         
-        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, int, T, bool> selectionFilter);
+        IEnumerable<IGaTerm<T>> GetStoredTerms(Func<int, ulong, T, bool> selectionFilter);
 
         /// <summary>
         /// Get all terms of given grade currently stored inside this factory
@@ -551,13 +551,13 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <returns></returns>
         int GetStoredZeroTermsCount(bool nearZeroFlag = false);
         
-        IEnumerable<int> GetStoredZeroTermIds(bool nearZeroFlag = false);
+        IEnumerable<ulong> GetStoredZeroTermIds(bool nearZeroFlag = false);
         
-        IEnumerable<Tuple<int, int>> GetStoredZeroTermGradeIndices(bool nearZeroFlag = false);
+        IEnumerable<Tuple<int, ulong>> GetStoredZeroTermGradeIndices(bool nearZeroFlag = false);
         
-        IEnumerable<int> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false);
+        IEnumerable<ulong> GetStoredZeroTermIdsOfGrade(int grade, bool nearZeroFlag = false);
         
-        IEnumerable<int> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false);
+        IEnumerable<ulong> GetStoredZeroTermIndicesOfGrade(int grade, bool nearZeroFlag = false);
 
 
         /// <summary>
@@ -573,18 +573,18 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="nearZeroFlag"></param>
         /// <returns></returns>
         IReadOnlyDictionary<int, int> GetNonZeroTermsCountPerGrade(bool nearZeroFlag = false);
-        
+
         /// <summary>
         /// The basis blade ids with non-zero coefficients stored in this multivector storage
         /// </summary>
         /// <param name="nearZeroFlag"></param>
-        IEnumerable<int> GetNonZeroTermIds(bool nearZeroFlag = false);
-        
+        IEnumerable<ulong> GetNonZeroTermIds(bool nearZeroFlag = false);
+
         /// <summary>
         /// The basis blade ids with non-zero coefficients stored in this multivector
         /// </summary>
         /// <param name="nearZeroFlag"></param>
-        IEnumerable<Tuple<int, int>> GetNonZeroTermGradeIndices(bool nearZeroFlag = false);
+        IEnumerable<Tuple<int, ulong>> GetNonZeroTermGradeIndices(bool nearZeroFlag = false);
 
         /// <summary>
         /// The basis blade non-zero coefficients stored in this multivector
@@ -618,7 +618,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// Create a bit pattern where each active grades is a 1
         /// </summary>
         /// <returns></returns>
-        int GetStoredGradesBitPattern();
+        ulong GetStoredGradesBitPattern();
 
         
         /// <summary>
@@ -634,7 +634,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="id"></param>
         /// <param name="getCopy"></param>
         /// <returns></returns>
-        GaMvsTerm<T> GetTermStorage(int id, bool getCopy = false);
+        GaMvsTerm<T> GetTermStorage(ulong id, bool getCopy = false);
         
         /// <summary>
         /// Create a copy of a term stored inside this multivector
@@ -643,7 +643,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         /// <param name="index"></param>
         /// <param name="getCopy"></param>
         /// <returns></returns>
-        GaMvsTerm<T> GetTermStorage(int grade, int index, bool getCopy = false);
+        GaMvsTerm<T> GetTermStorage(int grade, ulong index, bool getCopy = false);
 
         /// <summary>
         /// Get a copy of the vector part stored inside this factory. If no vector terms are stored this returns null
@@ -701,8 +701,8 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         IGaMultivectorStorage<T> ApplyMapping(Func<T, T> mappingFunc);
 
-        IGaMultivectorStorage<T> ApplyMapping(Func<int, T, T> mappingFunc);
+        IGaMultivectorStorage<T> ApplyMapping(Func<ulong, T, T> mappingFunc);
 
-        IGaMultivectorStorage<T> ApplyMapping(Func<int, int, T, T> mappingFunc);
+        IGaMultivectorStorage<T> ApplyMapping(Func<int, ulong, T, T> mappingFunc);
     }
 }

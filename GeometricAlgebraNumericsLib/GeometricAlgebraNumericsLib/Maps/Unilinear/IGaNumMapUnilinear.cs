@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
+using GeometricAlgebraStructuresLib.Maps;
 
 namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 {
@@ -8,18 +9,18 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
     {
         int DomainVSpaceDimension { get; }
 
-        int DomainGaSpaceDimension { get; }
+        ulong DomainGaSpaceDimension { get; }
 
         IGaNumMultivector DomainPseudoScalarMap { get; }
 
-        IGaNumMultivector this[int id1] { get; }
+        IGaNumMultivector this[ulong id1] { get; }
 
         GaNumSarMultivector this[GaNumSarMultivector mv1] { get; }
 
         GaNumDgrMultivector this[GaNumDgrMultivector mv1] { get; }
 
-        IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps();
+        IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps();
 
-        IEnumerable<Tuple<int, IGaNumMultivector>> BasisVectorMaps();
+        IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisVectorMaps();
     }
 }

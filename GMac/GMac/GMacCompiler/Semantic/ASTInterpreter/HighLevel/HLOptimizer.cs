@@ -312,7 +312,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.HighLevel
             {
                 var id = stepByKey.AccessKey;
 
-                operandsByIndex.AddOperand(id, LanguageValueAccess.Create(newLvalue));
+                operandsByIndex.AddOperand((ulong)id, LanguageValueAccess.Create(newLvalue));
             }
             else
             {
@@ -324,7 +324,7 @@ namespace GMac.GMacCompiler.Semantic.ASTInterpreter.HighLevel
                 var idsList = stepByKeyList.AccessKeyList;
 
                 foreach (var id in idsList)
-                    operandsByIndex.AddOperand(id,
+                    operandsByIndex.AddOperand((ulong)id,
                         LanguageValueAccess.Create(newLvalue).Append(id, ((GMacAst) BaseMacro.RootAst).ScalarType));
             }
 

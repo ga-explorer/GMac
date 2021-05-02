@@ -10,17 +10,17 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         public int DomainVSpaceDimension1 { get; }
 
-        public int DomainGaSpaceDimension1
+        public ulong DomainGaSpaceDimension1
             => DomainVSpaceDimension1.ToGaSpaceDimension();
 
         public int DomainVSpaceDimension2 { get; }
 
-        public int DomainGaSpaceDimension2
+        public ulong DomainGaSpaceDimension2
             => DomainVSpaceDimension2.ToGaSpaceDimension();
 
         public int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
         public GaNumMultivectorBinaryTree1D this[int id1]
@@ -57,7 +57,7 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                 );
 
                 return ReferenceEquals(mvTree1D, null) 
-                    ? GaNumTerm.CreateZero(TargetGaSpaceDimension)
+                    ? GaNumTerm.CreateZero(TargetVSpaceDimension)
                     : mvTree1D[id2];
             }
             set
@@ -76,11 +76,11 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             }
         }
 
-        public double this[int id1, int id2, int id3]
+        public double this[ulong id1, ulong id2, ulong id3]
         {
             get
             {
-                if (RootNode.TryGetLeafValue(DomainVSpaceDimension1, (ulong)id1, out var mvTree1D) && !ReferenceEquals(mvTree1D, null))
+                if (RootNode.TryGetLeafValue(DomainVSpaceDimension1, id1, out var mvTree1D) && !ReferenceEquals(mvTree1D, null))
                     return mvTree1D[id2, id3];
 
                 return 0.0d;

@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors
 {
-    public interface IGaSymMultivector : IEnumerable<KeyValuePair<int, Expr>>
+    public interface IGaSymMultivector 
+        : IEnumerable<KeyValuePair<ulong, Expr>>
     {
         int VSpaceDimension { get; }
 
-        int GaSpaceDimension { get; }
+        ulong GaSpaceDimension { get; }
 
-        Expr this[int id] { get; }
+        Expr this[ulong id] { get; }
 
-        Expr this[int grade, int index] { get; }
+        Expr this[int grade, ulong index] { get; }
 
-        IEnumerable<int> BasisBladeIds { get; }
+        IEnumerable<ulong> BasisBladeIds { get; }
 
-        IEnumerable<int> NonZeroBasisBladeIds { get; }
+        IEnumerable<ulong> NonZeroBasisBladeIds { get; }
 
         IEnumerable<MathematicaScalar> BasisBladeScalars { get; }
 
@@ -26,19 +27,19 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors
 
         IEnumerable<Expr> NonZeroBasisBladeExprScalars { get; }
 
-        IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms { get; }
+        IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms { get; }
 
-        IEnumerable<KeyValuePair<int, Expr>> ExprTerms { get; }
+        IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms { get; }
 
-        IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms { get; }
+        IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms { get; }
 
-        IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms { get; }
+        IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms { get; }
 
-        bool ContainsBasisBlade(int id);
+        bool ContainsBasisBlade(ulong id);
 
         bool IsTemp { get; }
 
-        int TermsCount { get; }
+        ulong TermsCount { get; }
 
         bool IsTerm();
 

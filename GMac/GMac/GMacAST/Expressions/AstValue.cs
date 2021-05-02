@@ -1,8 +1,8 @@
 ﻿using CodeComposerLib.Irony.Semantic.Expression;
 using CodeComposerLib.Irony.Semantic.Expression.Value;
 using DataStructuresLib.SimpleTree;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacScripting;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Expressions
 {

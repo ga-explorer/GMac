@@ -1,4 +1,4 @@
-﻿namespace MeshComposerLib.Graphics.Xeogl
+﻿namespace GraphicsComposerLib.Xeogl
 {
     partial class FormXeoglRendering
     {

@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <summary>
 /// This exception is thrown in <see cref="StdLink.RequestTransaction"/> when the kernel is not in a state where it is

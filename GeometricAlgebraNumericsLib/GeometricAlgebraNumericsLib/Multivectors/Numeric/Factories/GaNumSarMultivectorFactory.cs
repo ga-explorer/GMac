@@ -12,13 +12,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
     /// </summary>
     public sealed class GaNumSarMultivectorFactory : GaNumMultivectorFactory
     {
-        private Dictionary<int, double> _scalarValuesDictionary;
+        private Dictionary<ulong, double> _scalarValuesDictionary;
 
 
         public override int StoredTermsCount
             => _scalarValuesDictionary.Count;
 
-        public override double this[int id]
+        public override double this[ulong id]
         {
             get => _scalarValuesDictionary.TryGetValue(id, out var value) ? value : 0.0d;
             set
@@ -30,7 +30,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             }
         }
 
-        public override double this[int grade, int index]
+        public override double this[int grade, ulong index]
         {
             get => _scalarValuesDictionary.TryGetValue(
                 GaFrameUtils.BasisBladeId(grade, index), 
@@ -51,13 +51,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         public GaNumSarMultivectorFactory(int vSpaceDim) 
             : base(vSpaceDim)
         {
-            _scalarValuesDictionary = new Dictionary<int, double>();
+            _scalarValuesDictionary = new Dictionary<ulong, double>();
         }
 
         public GaNumSarMultivectorFactory(GaNumTerm mv)
             : base(mv.VSpaceDimension)
         {
-            _scalarValuesDictionary = new Dictionary<int, double>
+            _scalarValuesDictionary = new Dictionary<ulong, double>
             {
                 {mv.BasisBladeId, mv.ScalarValue}
             };
@@ -90,7 +90,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory Reset()
         {
-            _scalarValuesDictionary = new Dictionary<int, double>();
+            _scalarValuesDictionary = new Dictionary<ulong, double>();
 
             return this;
         }
@@ -110,19 +110,19 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public override bool TryGetValue(int id, out double value)
+        public override bool TryGetValue(ulong id, out double value)
         {
             return _scalarValuesDictionary.TryGetValue(id, out value);
         }
 
-        public override bool TryGetValue(int grade, int index, out double value)
+        public override bool TryGetValue(int grade, ulong index, out double value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
             return _scalarValuesDictionary.TryGetValue(id, out value);
         }
 
-        public override bool TryGetTerm(int id, out GaTerm<double> term)
+        public override bool TryGetTerm(ulong id, out GaTerm<double> term)
         {
             if (_scalarValuesDictionary.TryGetValue(id, out var value))
             {
@@ -134,7 +134,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return false;
         }
 
-        public override bool TryGetTerm(int grade, int index, out GaTerm<double> term)
+        public override bool TryGetTerm(int grade, ulong index, out GaTerm<double> term)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -183,13 +183,13 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public override IEnumerable<int> GetStoredTermIds()
+        public override IEnumerable<ulong> GetStoredTermIds()
         {
             return _scalarValuesDictionary
                 .Select(pair => pair.Key);
         }
 
-        public override IEnumerable<int> GetNonZeroTermIds()
+        public override IEnumerable<ulong> GetNonZeroTermIds()
         {
             return _scalarValuesDictionary
                 .Where(pair => !pair.Value.IsNearZero())
@@ -210,17 +210,17 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public override bool ContainsStoredTerm(int id)
+        public override bool ContainsStoredTerm(ulong id)
         {
-            return id >= 0 && id < GaSpaceDimension &&
+            return id < GaSpaceDimension &&
                 _scalarValuesDictionary.ContainsKey(id);
         }
 
-        public override bool ContainsStoredTerm(int grade, int index)
+        public override bool ContainsStoredTerm(int grade, ulong index)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
-            return id >= 0 && id < GaSpaceDimension &&
+            return id < GaSpaceDimension &&
                 _scalarValuesDictionary.ContainsKey(id);
         }
 
@@ -277,7 +277,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             var scalarValues = new double[VSpaceDimension];
 
             var valueAddedFlag = false;
-            for (var i = 0; i < VSpaceDimension; i++)
+            for (var i = 0UL; i < (ulong)VSpaceDimension; i++)
                 if (_scalarValuesDictionary.TryGetValue(i, out var value))
                 {
                     valueAddedFlag = true;
@@ -316,7 +316,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumSarKVector GetStoredSarKVectorCopy(int grade)
         {
-            var scalarValues = new Dictionary<int, double>();
+            var scalarValues = new Dictionary<ulong, double>();
 
             var pairsList =
                 _scalarValuesDictionary.Where(pair => pair.Key.BasisBladeGrade() == grade);
@@ -333,7 +333,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         public override GaNumDarMultivector GetDarMultivector()
         {
             var scalarValues =
-                new SparseReadOnlyList<double>(GaSpaceDimension, _scalarValuesDictionary);
+                new SparseULongReadOnlyList<double>((int)GaSpaceDimension, _scalarValuesDictionary);
 
             return new GaNumDarMultivector(scalarValues);
         }
@@ -362,7 +362,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumSgrMultivector GetSgrMultivector()
         {
-            var kVectorsArray = new Dictionary<int, double>[VSpaceDimension + 1];
+            var kVectorsArray = new Dictionary<ulong, double>[VSpaceDimension + 1];
 
             var termsList =
                 _scalarValuesDictionary
@@ -373,7 +373,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 term.Key.BasisBladeGradeIndex(out var grade, out var index);
 
                 if (kVectorsArray[grade] == null)
-                    kVectorsArray[grade] = new Dictionary<int, double>();
+                    kVectorsArray[grade] = new Dictionary<ulong, double>();
 
                 kVectorsArray[grade].Add(index, term.Value);
             }
@@ -432,7 +432,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumSgrMultivector GetSgrMultivectorCopy()
         {
-            var kVectorsArray = new Dictionary<int, double>[VSpaceDimension + 1];
+            var kVectorsArray = new Dictionary<ulong, double>[VSpaceDimension + 1];
 
             var termsList =
                 _scalarValuesDictionary
@@ -443,7 +443,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
                 term.Key.BasisBladeGradeIndex(out var grade, out var index);
 
                 if (kVectorsArray[grade] == null)
-                    kVectorsArray[grade] = new Dictionary<int, double>();
+                    kVectorsArray[grade] = new Dictionary<ulong, double>();
 
                 kVectorsArray[grade].Add(index, term.Value);
             }
@@ -462,7 +462,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory ApplyScaling(double scalingFactor)
         {
-            var scalarValuesDictionary = new Dictionary<int, double>(_scalarValuesDictionary.Count);
+            var scalarValuesDictionary = new Dictionary<ulong, double>(_scalarValuesDictionary.Count);
 
             foreach (var pair in _scalarValuesDictionary)
                 scalarValuesDictionary.Add(
@@ -477,7 +477,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory ApplyMapping(Func<double, double> mappingFunc)
         {
-            var scalarValuesDictionary = new Dictionary<int, double>(_scalarValuesDictionary.Count);
+            var scalarValuesDictionary = new Dictionary<ulong, double>(_scalarValuesDictionary.Count);
 
             foreach (var pair in _scalarValuesDictionary)
                 scalarValuesDictionary.Add(
@@ -490,9 +490,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return this;
         }
 
-        public override GaNumMultivectorFactory ApplyMapping(Func<int, double, double> mappingFunc)
+        public override GaNumMultivectorFactory ApplyMapping(Func<ulong, double, double> mappingFunc)
         {
-            var scalarValuesDictionary = new Dictionary<int, double>(_scalarValuesDictionary.Count);
+            var scalarValuesDictionary = new Dictionary<ulong, double>(_scalarValuesDictionary.Count);
 
             foreach (var pair in _scalarValuesDictionary)
                 scalarValuesDictionary.Add(
@@ -505,9 +505,9 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return this;
         }
 
-        public override GaNumMultivectorFactory ApplyMapping(Func<int, int, double, double> mappingFunc)
+        public override GaNumMultivectorFactory ApplyMapping(Func<int, ulong, double, double> mappingFunc)
         {
-            var scalarValuesDictionary = new Dictionary<int, double>(_scalarValuesDictionary.Count);
+            var scalarValuesDictionary = new Dictionary<ulong, double>(_scalarValuesDictionary.Count);
 
             foreach (var pair in _scalarValuesDictionary)
             {
@@ -525,7 +525,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public override GaNumMultivectorFactory SetTerm(int id, double value)
+        public override GaNumMultivectorFactory SetTerm(ulong id, double value)
         {
             if (_scalarValuesDictionary.ContainsKey(id))
                 _scalarValuesDictionary[id] = value;
@@ -535,7 +535,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return this;
         }
 
-        public override GaNumMultivectorFactory SetTerm(int grade, int index, double value)
+        public override GaNumMultivectorFactory SetTerm(int grade, ulong index, double value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -570,21 +570,21 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory SetKVector(int grade, IReadOnlyList<double> scalarValuesList)
         {
-            for (var index = 0; index < scalarValuesList.Count; index++)
-                SetTerm(grade, index, scalarValuesList[index]);
+            for (var index = 0UL; index < (ulong)scalarValuesList.Count; index++)
+                SetTerm(grade, index, scalarValuesList[(int)index]);
 
             return this;
         }
 
         public override GaNumMultivectorFactory SetKVector(int grade, double scalingFactor, IReadOnlyList<double> scalarValuesList)
         {
-            for (var index = 0; index < scalarValuesList.Count; index++)
-                SetTerm(grade, index, scalingFactor * scalarValuesList[index]);
+            for (var index = 0UL; index < (ulong)scalarValuesList.Count; index++)
+                SetTerm(grade, index, scalingFactor * scalarValuesList[(int)index]);
 
             return this;
         }
 
-        public override GaNumMultivectorFactory SetKVector(int grade, IEnumerable<KeyValuePair<int, double>> scalarValuesList)
+        public override GaNumMultivectorFactory SetKVector(int grade, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 SetTerm(grade, pair.Key, pair.Value);
@@ -592,7 +592,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return this;
         }
 
-        public override GaNumMultivectorFactory SetKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<int, double>> scalarValuesList)
+        public override GaNumMultivectorFactory SetKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 SetTerm(grade, pair.Key, scalingFactor * pair.Value);
@@ -601,7 +601,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
         }
 
 
-        public override GaNumMultivectorFactory AddTerm(int id, double value)
+        public override GaNumMultivectorFactory AddTerm(ulong id, double value)
         {
             if (_scalarValuesDictionary.ContainsKey(id))
                 _scalarValuesDictionary[id] += value;
@@ -611,7 +611,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return this;
         }
 
-        public override GaNumMultivectorFactory AddTerm(int grade, int index, double value)
+        public override GaNumMultivectorFactory AddTerm(int grade, ulong index, double value)
         {
             var id = GaFrameUtils.BasisBladeId(grade, index);
 
@@ -662,21 +662,21 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
 
         public override GaNumMultivectorFactory AddKVector(int grade, IReadOnlyList<double> scalarValuesList)
         {
-            for (var index = 0; index < scalarValuesList.Count; index++)
-                AddTerm(grade, index, scalarValuesList[index]);
+            for (var index = 0UL; index < (ulong)scalarValuesList.Count; index++)
+                AddTerm(grade, index, scalarValuesList[(int)index]);
 
             return this;
         }
 
         public override GaNumMultivectorFactory AddKVector(int grade, double scalingFactor, IReadOnlyList<double> scalarValuesList)
         {
-            for (var index = 0; index < scalarValuesList.Count; index++)
-                AddTerm(grade, index, scalingFactor * scalarValuesList[index]);
+            for (var index = 0UL; index < (ulong)scalarValuesList.Count; index++)
+                AddTerm(grade, index, scalingFactor * scalarValuesList[(int)index]);
 
             return this;
         }
 
-        public override GaNumMultivectorFactory AddKVector(int grade, IEnumerable<KeyValuePair<int, double>> scalarValuesList)
+        public override GaNumMultivectorFactory AddKVector(int grade, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 AddTerm(grade, pair.Key, pair.Value);
@@ -684,7 +684,7 @@ namespace GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories
             return this;
         }
 
-        public override GaNumMultivectorFactory AddKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<int, double>> scalarValuesList)
+        public override GaNumMultivectorFactory AddKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<ulong, double>> scalarValuesList)
         {
             foreach (var pair in scalarValuesList)
                 AddTerm(grade, pair.Key, scalingFactor * pair.Value);

@@ -14,13 +14,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 {
     public sealed class GaNumMapUnilinearCoefSums : GaNumMapUnilinear
     {
-        private sealed class GaNumMapUnilinearCoefSumsTerm : IEnumerable<Tuple<int, double>>
+        private sealed class GaNumMapUnilinearCoefSumsTerm : IEnumerable<Tuple<ulong, double>>
         {
-            private readonly List<Tuple<int, double>> _factorsList
-                = new List<Tuple<int, double>>();
+            private readonly List<Tuple<ulong, double>> _factorsList
+                = new List<Tuple<ulong, double>>();
 
 
-            public int TargetBasisBladeId { get; private set; }
+            public ulong TargetBasisBladeId { get; private set; }
 
             public IEnumerable<string> TermsText
             {
@@ -39,7 +39,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 }
             }
 
-            public double this[int domainBasisBladeId]
+            public double this[ulong domainBasisBladeId]
                 => _factorsList
                        .FirstOrDefault(
                            factor =>
@@ -54,7 +54,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                         .Sum();
 
 
-            internal GaNumMapUnilinearCoefSumsTerm(int targetBasisBladeId)
+            internal GaNumMapUnilinearCoefSumsTerm(ulong targetBasisBladeId)
             {
                 TargetBasisBladeId = targetBasisBladeId;
             }
@@ -67,7 +67,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 return this;
             }
 
-            internal GaNumMapUnilinearCoefSumsTerm AddFactor(int domainBasisBladeId, bool isNegative = false)
+            internal GaNumMapUnilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId, bool isNegative = false)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -78,7 +78,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 return this;
             }
 
-            internal GaNumMapUnilinearCoefSumsTerm AddFactor(int domainBasisBladeId, double factorValue)
+            internal GaNumMapUnilinearCoefSumsTerm AddFactor(ulong domainBasisBladeId, double factorValue)
             {
                 _factorsList.Add(
                     Tuple.Create(
@@ -89,7 +89,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 return this;
             }
 
-            internal GaNumMapUnilinearCoefSumsTerm RemoveFactor(int domainBasisBladeId)
+            internal GaNumMapUnilinearCoefSumsTerm RemoveFactor(ulong domainBasisBladeId)
             {
                 var index = _factorsList.FindIndex(
                     factor =>
@@ -102,7 +102,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 return this;
             }
 
-            public IEnumerator<Tuple<int, double>> GetEnumerator()
+            public IEnumerator<Tuple<ulong, double>> GetEnumerator()
             {
                 return _factorsList.GetEnumerator();
             }
@@ -144,15 +144,15 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
         
 
-        private readonly GaSparseTable1D<int, GaNumMapUnilinearCoefSumsTerm> _coefSumsTable
-            = new GaSparseTable1D<int, GaNumMapUnilinearCoefSumsTerm>();
+        private readonly GaSparseTable1D<ulong, GaNumMapUnilinearCoefSumsTerm> _coefSumsTable
+            = new GaSparseTable1D<ulong, GaNumMapUnilinearCoefSumsTerm>();
 
 
         public override int TargetVSpaceDimension { get; }
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaNumMultivector this[int domainBasisBladeId]
+        public override IGaNumMultivector this[ulong domainBasisBladeId]
         {
             get
             {
@@ -194,7 +194,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 if (mv.GaSpaceDimension != DomainGaSpaceDimension)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var tempMv = new GaNumDgrMultivectorFactory(TargetGaSpaceDimension);
+                var tempMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var terms in _coefSumsTable.Values)
                     tempMv.AddTerm(
@@ -219,7 +219,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public GaNumMapUnilinearCoefSums SetBasisBladeMap(int domainBasisBladeId, IGaNumMultivector targetMv)
+        public GaNumMapUnilinearCoefSums SetBasisBladeMap(ulong domainBasisBladeId, IGaNumMultivector targetMv)
         {
             if (ReferenceEquals(targetMv, null))
                 return this;
@@ -230,7 +230,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId, bool isNegative = false)
+        public GaNumMapUnilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId, bool isNegative = false)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -243,7 +243,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearCoefSums SetFactor(int targetBasisBladeId, int domainBasisBladeId, double factorValue)
+        public GaNumMapUnilinearCoefSums SetFactor(ulong targetBasisBladeId, ulong domainBasisBladeId, double factorValue)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
             {
@@ -256,7 +256,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearCoefSums RemoveFactor(int targetBasisBladeId, int domainBasisBladeId)
+        public GaNumMapUnilinearCoefSums RemoveFactor(ulong targetBasisBladeId, ulong domainBasisBladeId)
         {
             if (!_coefSumsTable.TryGetValue(targetBasisBladeId, out var sum))
                 return this;
@@ -266,7 +266,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
             return this;
         }
 
-        public GaNumMapUnilinearCoefSums RemoveFactors(int targetBasisBladeId)
+        public GaNumMapUnilinearCoefSums RemoveFactors(ulong targetBasisBladeId)
         {
             _coefSumsTable.Remove(targetBasisBladeId);
 
@@ -274,14 +274,14 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
         
-        public override IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps()
+        public override IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
             {
-                var mv = this[id1];
+                var mv = this[(ulong) id1];
 
                 if (!mv.IsNullOrEmpty())
-                    yield return new Tuple<int, IGaNumMultivector>(id1, mv);
+                    yield return new Tuple<ulong, IGaNumMultivector>(id1, mv);
             }
         }
     }

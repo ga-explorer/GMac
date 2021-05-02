@@ -38,8 +38,8 @@ namespace GMac.GMacMath.Validators
             ReportComposer.AppendHeader("Symbolic Bilinear Products Validations");
 
             //Initialize multivectors with random coefficients
-            var mv1 = RandomGenerator.GetSymMultivectorFull(SymbolicFrame.GaSpaceDimension);
-            var mv2 = RandomGenerator.GetSymMultivectorFull(SymbolicFrame.GaSpaceDimension);
+            var mv1 = RandomGenerator.GetSymMultivectorFull(SymbolicFrame.VSpaceDimension);
+            var mv2 = RandomGenerator.GetSymMultivectorFull(SymbolicFrame.VSpaceDimension);
 
             var mvComputedGp = SymbolicFrame.ComputedGp[mv1, mv2];
             var mvComputedOp = SymbolicFrame.ComputedOp[mv1, mv2];

@@ -75,7 +75,7 @@ namespace GMacBenchmarks2.Samples.Generators
                 var indexList1 = id.PatternToPositions();
                 foreach (var index1 in indexList1)
                 {
-                    var id1 = 1 << index1;
+                    var id1 = 1UL << index1;
                     var id2 = id ^ id1;
                     var index2 = id2.BasisBladeIndex();
 

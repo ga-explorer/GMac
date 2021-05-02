@@ -645,9 +645,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Scripting.evaluator.cs" />
-    <Compile Include="Scripting.Extensions.cs" />
-    <Compile Include="Scripting.native.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GMacIDE\Editor\FormCompilerOptions.resx">

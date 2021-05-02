@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GeometricAlgebraSymbolicsLib.Exceptions;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GeometricAlgebraSymbolicsLib.Multivectors.Intermediate;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
 {
@@ -35,13 +35,13 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1, int id2, int id3]
+        public override IGaSymMultivector this[ulong id1, ulong id2, ulong id3]
         {
             get
             {
                 return
                     !_basisBladesMaps.TryGetValue(id1, id2, id3, out var basisBladeMv) || ReferenceEquals(basisBladeMv, null)
-                        ? GaSymMultivector.CreateZero(TargetGaSpaceDimension)
+                        ? GaSymMultivector.CreateZero(TargetVSpaceDimension)
                         : basisBladeMv;
             }
         }
@@ -66,7 +66,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
             return this;
         }
 
-        public GaSymMapTrilinearHash SetBasisBladesMap(int id1, int id2, int id3, IGaSymMultivector value)
+        public GaSymMapTrilinearHash SetBasisBladesMap(ulong id1, ulong id2, ulong id3, IGaSymMultivector value)
         {
             Debug.Assert(ReferenceEquals(value, null) || value.VSpaceDimension == TargetVSpaceDimension);
 
@@ -75,16 +75,16 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
             return this;
         }
 
-        public GaSymMapTrilinearHash RemoveBasisBladesMap(int id1, int id2, int id3)
+        public GaSymMapTrilinearHash RemoveBasisBladesMap(ulong id1, ulong id2, ulong id3)
         {
             _basisBladesMaps.Remove(id1, id2, id3);
             return this;
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2, int id3)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2, ulong id3)
         {
-            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             if (!_basisBladesMaps.TryGetValue(id1, id2, id3, out var basisBladeMv) || basisBladeMv == null)
                 return tempMultivector;
@@ -102,7 +102,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension || mv3.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMultivector = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var term1 in mv1.NonZeroExprTerms)
             {
@@ -134,7 +134,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
             return tempMultivector;
         }
 
-        public override IEnumerable<Tuple<int, int, int, IGaSymMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, ulong, IGaSymMultivector>> BasisBladesMaps()
         {
             foreach (var pair in _basisBladesMaps)
             {
@@ -144,7 +144,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Trilinear
                 var mv = pair.Value;
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, int, int, IGaSymMultivector>(id1, id2, id3, mv);
+                    yield return new Tuple<ulong, ulong, ulong, IGaSymMultivector>(id1, id2, id3, mv);
             }
         }
     }

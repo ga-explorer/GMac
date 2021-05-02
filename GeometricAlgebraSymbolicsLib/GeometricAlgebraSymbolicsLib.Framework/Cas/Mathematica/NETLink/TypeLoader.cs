@@ -10,10 +10,10 @@
 
 using System;
 using System.Collections;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /* TODO
 

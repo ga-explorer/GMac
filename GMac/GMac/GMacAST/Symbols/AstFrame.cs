@@ -36,12 +36,12 @@ namespace GMac.GMacAST.Symbols
         /// <summary>
         /// The GA dimension of this frame (2 ^ the number of basis vectors)
         /// </summary>
-        public int GaSpaceDimension => AssociatedFrame.GaSpaceDimension;
+        public ulong GaSpaceDimension => AssociatedFrame.GaSpaceDimension;
 
         /// <summary>
         /// The max basis blade ID for this frame (2 ^ the number of basis vectors - 1)
         /// </summary>
-        public int MaxBasisBladeId => AssociatedFrame.MaxBasisBladeId;
+        public ulong MaxBasisBladeId => AssociatedFrame.MaxBasisBladeId;
 
         /// <summary>
         /// The number of grades for this frame (the number of basis vectors + 1)
@@ -331,9 +331,9 @@ namespace GMac.GMacAST.Symbols
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public AstFrameBasisVector BasisVectorFromIndex(int index)
+        public AstFrameBasisVector BasisVectorFromIndex(ulong index)
         {
-            return new AstFrameBasisVector(AssociatedFrame.FrameBasisVectors.ElementAt(index));
+            return new AstFrameBasisVector(AssociatedFrame.FrameBasisVectors.ElementAt((int)index));
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace GMac.GMacAST.Symbols
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AstFrameBasisVector BasisVectorFromId(int id)
+        public AstFrameBasisVector BasisVectorFromId(ulong id)
         {
             return new AstFrameBasisVector(AssociatedFrame.FrameBasisVectors.ElementAt(id.FirstOneBitPosition()));
         }
@@ -351,7 +351,7 @@ namespace GMac.GMacAST.Symbols
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AstFrameBasisBlade BasisBlade(int id)
+        public AstFrameBasisBlade BasisBlade(ulong id)
         {
             return new AstFrameBasisBlade(AssociatedFrame, id);
         }
@@ -362,27 +362,27 @@ namespace GMac.GMacAST.Symbols
         /// <param name="grade"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public AstFrameBasisBlade BasisBlade(int grade, int index)
+        public AstFrameBasisBlade BasisBlade(int grade, ulong index)
         {
             return new AstFrameBasisBlade(AssociatedFrame, grade, index);
         }
 
 
-        public string BasisBladeName(int basisBladeId)
+        public string BasisBladeName(ulong basisBladeId)
         {
             return AssociatedFrame.BasisVectorNames.ConcatenateUsingPattern(
                 basisBladeId, "E0", "^"
                 );
         }
 
-        public string BasisBladeName(int grade, int index)
+        public string BasisBladeName(int grade, ulong index)
         {
             return AssociatedFrame.BasisVectorNames.ConcatenateUsingPattern(
                 GaFrameUtils.BasisBladeId(grade, index), "E0", "^"
                 );
         }
 
-        public string BasisBladeName(int basisBladeId, BasisBladeFormat nameFormat)
+        public string BasisBladeName(ulong basisBladeId, BasisBladeFormat nameFormat)
         {
             switch (nameFormat)
             {
@@ -400,7 +400,7 @@ namespace GMac.GMacAST.Symbols
             }
         }
 
-        public string BasisBladeName(int grade, int index, BasisBladeFormat nameFormat)
+        public string BasisBladeName(int grade, ulong index, BasisBladeFormat nameFormat)
         {
             switch (nameFormat)
             {
@@ -424,7 +424,7 @@ namespace GMac.GMacAST.Symbols
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public IEnumerable<AstFrameBasisBlade> BasisBlades(IEnumerable<int> ids)
+        public IEnumerable<AstFrameBasisBlade> BasisBlades(IEnumerable<ulong> ids)
         {
             return ids.Select(id => new AstFrameBasisBlade(AssociatedFrame, id));
         }
@@ -434,7 +434,7 @@ namespace GMac.GMacAST.Symbols
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public IEnumerable<AstFrameBasisBlade> BasisBlades(params int[] ids)
+        public IEnumerable<AstFrameBasisBlade> BasisBlades(params ulong[] ids)
         {
             return ids.Select(id => new AstFrameBasisBlade(AssociatedFrame, id));
         }
@@ -463,7 +463,7 @@ namespace GMac.GMacAST.Symbols
         /// <param name="grade"></param>
         /// <param name="indexSeq"></param>
         /// <returns></returns>
-        public IEnumerable<AstFrameBasisBlade> BasisBladesOfGrade(int grade, IEnumerable<int> indexSeq)
+        public IEnumerable<AstFrameBasisBlade> BasisBladesOfGrade(int grade, IEnumerable<ulong> indexSeq)
         {
             return BasisBlades(this.BasisBladeIDsOfGrade(grade, indexSeq));
         }
@@ -474,7 +474,7 @@ namespace GMac.GMacAST.Symbols
         /// <param name="grade"></param>
         /// <param name="indexSeq"></param>
         /// <returns></returns>
-        public IEnumerable<AstFrameBasisBlade> BasisBladesOfGrade(int grade, params int[] indexSeq)
+        public IEnumerable<AstFrameBasisBlade> BasisBladesOfGrade(int grade, params ulong[] indexSeq)
         {
             return BasisBlades(this.BasisBladeIDsOfGradeIndex(grade, indexSeq));
         }
@@ -522,9 +522,9 @@ namespace GMac.GMacAST.Symbols
             {
                 var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
+                var newList = new List<AstFrameBasisBlade>((int)kvSpaceDim);
 
-                for (var index = 0; index < kvSpaceDim; index++)
+                for (var index = 0UL; index < kvSpaceDim; index++)
                     newList.Add(BasisBlade(grade, index));
 
                 result.Add(grade, newList);
@@ -546,9 +546,9 @@ namespace GMac.GMacAST.Symbols
             {
                 var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
+                var newList = new List<AstFrameBasisBlade>((int)kvSpaceDim);
 
-                for (var index = 0; index < kvSpaceDim; index++)
+                for (var index = 0UL; index < kvSpaceDim; index++)
                     newList.Add(BasisBlade(grade, index));
 
                 result.Add(grade, newList);
@@ -570,9 +570,9 @@ namespace GMac.GMacAST.Symbols
             {
                 var kvSpaceDim = GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
 
-                var newList = new List<AstFrameBasisBlade>(kvSpaceDim);
+                var newList = new List<AstFrameBasisBlade>((int)kvSpaceDim);
 
-                for (var index = 0; index < kvSpaceDim; index++)
+                for (var index = 0UL; index < kvSpaceDim; index++)
                     newList.Add(BasisBlade(grade, index));
 
                 result.Add(grade, newList);
@@ -581,32 +581,32 @@ namespace GMac.GMacAST.Symbols
             return result;
         }
 
-        public IEnumerable<AstFrameBasisVector> BasisVectorsInside(int basisBladeId)
+        public IEnumerable<AstFrameBasisVector> BasisVectorsInside(ulong basisBladeId)
         {
             return this.BasisVectorIndexesInside(basisBladeId).Select(BasisVectorFromIndex);
         }
 
-        public IEnumerable<AstFrameBasisVector> BasisVectorsInside(int grade, int index)
+        public IEnumerable<AstFrameBasisVector> BasisVectorsInside(int grade, ulong index)
         {
             return this.BasisVectorIndexesInside(grade, index).Select(BasisVectorFromIndex);
         }
 
-        public IEnumerable<AstFrameBasisBlade> BasisBladesInside(int basisBladeId)
+        public IEnumerable<AstFrameBasisBlade> BasisBladesInside(ulong basisBladeId)
         {
             return BasisBlades(this.BasisVectorIDsInside(basisBladeId));
         }
 
-        public IEnumerable<AstFrameBasisBlade> BasisBladesInside(int grade, int index)
+        public IEnumerable<AstFrameBasisBlade> BasisBladesInside(int grade, ulong index)
         {
             return BasisBlades(this.BasisVectorIDsInside(grade, index));
         }
 
-        public IEnumerable<AstFrameBasisBlade> BasisBladesContaining(int basisBladeId)
+        public IEnumerable<AstFrameBasisBlade> BasisBladesContaining(ulong basisBladeId)
         {
             return BasisBlades(this.BasisBladeIDsContaining(basisBladeId));
         }
 
-        public IEnumerable<AstFrameBasisBlade> BasisBladesContaining(int grade, int index)
+        public IEnumerable<AstFrameBasisBlade> BasisBladesContaining(int grade, ulong index)
         {
             return BasisBlades(this.BasisBladeIDsContaining(grade, index));
         }

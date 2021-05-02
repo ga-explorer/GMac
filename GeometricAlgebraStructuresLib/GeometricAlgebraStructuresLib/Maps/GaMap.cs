@@ -1,5 +1,4 @@
-﻿using GeometricAlgebraNumericsLib.Maps;
-using GeometricAlgebraStructuresLib.Frames;
+﻿using GeometricAlgebraStructuresLib.Frames;
 
 namespace GeometricAlgebraStructuresLib.Maps
 {
@@ -7,7 +6,7 @@ namespace GeometricAlgebraStructuresLib.Maps
     {
         public abstract int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
     }
 }

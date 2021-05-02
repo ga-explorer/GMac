@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using GMac.GMacAST.Expressions;
 using TextComposerLib.Text.Linear;
@@ -37,7 +36,7 @@ namespace GMac.GMacScripting
 
         public GMacScriptOutputItem Store(string title, string item)
         {
-            var outputItem = new GMacScriptOutputItem(title, String.Empty, item);
+            var outputItem = new GMacScriptOutputItem(title, string.Empty, item);
 
             Items.Add(outputItem);
 
@@ -55,7 +54,7 @@ namespace GMac.GMacScripting
 
         public GMacScriptOutputItem Store(string title, Image item)
         {
-            var outputItem = new GMacScriptOutputItem(title, String.Empty, item);
+            var outputItem = new GMacScriptOutputItem(title, string.Empty, item);
 
             Items.Add(outputItem);
 
@@ -73,7 +72,7 @@ namespace GMac.GMacScripting
 
         public GMacScriptOutputItem Store(string title, AstValue item)
         {
-            var outputItem = new GMacScriptOutputItem(title, String.Empty, item);
+            var outputItem = new GMacScriptOutputItem(title, string.Empty, item);
 
             Items.Add(outputItem);
 

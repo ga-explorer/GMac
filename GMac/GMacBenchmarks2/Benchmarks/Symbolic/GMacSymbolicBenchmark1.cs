@@ -31,7 +31,7 @@ namespace GMacBenchmarks2.Benchmarks.Symbolic
             _lcpLookupTable = _frame.Lcp.ToHashMap();
 
             for (var i = 0; i < 10; i++)
-                _multivectors.Add(_randGen.GetSymMultivector(_frame.GaSpaceDimension));
+                _multivectors.Add(_randGen.GetSymMultivector(_frame.VSpaceDimension));
         }
 
 

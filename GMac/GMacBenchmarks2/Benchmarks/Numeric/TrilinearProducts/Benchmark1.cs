@@ -23,7 +23,7 @@ namespace GMacBenchmarks2.Benchmarks.Numeric.TrilinearProducts
         [Params(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)]
         public int VSpaceDimension { get; set; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
 

@@ -14,13 +14,13 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
 
         public abstract int DomainVSpaceDimension { get; }
 
-        public int DomainGaSpaceDimension
+        public ulong DomainGaSpaceDimension
             => DomainVSpaceDimension.ToGaSpaceDimension();
 
-        public IGaNumMultivector this[int grade1, int index1]
+        public IGaNumMultivector this[int grade1, ulong index1]
             => this[GaFrameUtils.BasisBladeId(grade1, index1)];
 
-        public abstract IGaNumMultivector this[int id1] { get; }
+        public abstract IGaNumMultivector this[ulong id1] { get; }
 
         public abstract GaNumSarMultivector this[GaNumSarMultivector mv1] { get; }
 
@@ -45,14 +45,14 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         {
             var matrixItems = new double[TargetGaSpaceDimension, DomainGaSpaceDimension];
 
-            for (var col = 0; col < DomainGaSpaceDimension; col++)
+            for (var col = 0UL; col < DomainGaSpaceDimension; col++)
             {
                 var mv = this[col];
 
                 if (mv.IsNullOrEmpty())
                     continue;
 
-                for (var row = 0; row < TargetGaSpaceDimension; row++)
+                for (var row = 0UL; row < TargetGaSpaceDimension; row++)
                     matrixItems[row, col] = mv[row];
             }
 
@@ -90,7 +90,7 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
                 DomainVSpaceDimension
             );
 
-            for (var id = 0; id < TargetGaSpaceDimension; id++)
+            for (var id = 0UL; id < TargetGaSpaceDimension; id++)
             {
                 var mv = GaNumSarMultivector.CreateFromRow(exprArray, id);
 
@@ -112,16 +112,16 @@ namespace GeometricAlgebraNumericsLib.Maps.Unilinear
         }
 
 
-        public abstract IEnumerable<Tuple<int, IGaNumMultivector>> BasisBladeMaps();
+        public abstract IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisBladeMaps();
 
-        public virtual IEnumerable<Tuple<int, IGaNumMultivector>> BasisVectorMaps()
+        public virtual IEnumerable<Tuple<ulong, IGaNumMultivector>> BasisVectorMaps()
         {
-            for (var index = 0; index < DomainVSpaceDimension; index++)
+            for (var index = 0UL; index < (ulong)DomainVSpaceDimension; index++)
             {
                 var mv = this[GaFrameUtils.BasisBladeId(1, index)];
 
                 if (!mv.IsNullOrEmpty())
-                    yield return new Tuple<int, IGaNumMultivector>(index, mv);
+                    yield return new Tuple<ulong, IGaNumMultivector>(index, mv);
             }
         }
     }

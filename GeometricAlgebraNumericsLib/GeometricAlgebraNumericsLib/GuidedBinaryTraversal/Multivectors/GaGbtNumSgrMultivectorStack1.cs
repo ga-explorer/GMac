@@ -95,7 +95,7 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
             }
             else
             {
-                TosValue = Multivector[(int)TosId];
+                TosValue = Multivector[TosId];
             }
 
             TosIndex--;
@@ -105,11 +105,11 @@ namespace GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Multivectors
         {
             if ((childIndex & 1) == 0)
                 return TosChildActiveGradesBitPattern0 != 0 && (
-                    TosTreeDepth > 1 || Multivector.ContainsStoredTerm((int)TosChildId0)
+                    TosTreeDepth > 1 || Multivector.ContainsStoredTerm(TosChildId0)
                 );
 
             return TosChildActiveGradesBitPattern1 != 0 && (
-                TosTreeDepth > 1 || Multivector.ContainsStoredTerm((int)TosChildId1)
+                TosTreeDepth > 1 || Multivector.ContainsStoredTerm(TosChildId1)
             );
         }
 

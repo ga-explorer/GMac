@@ -9,7 +9,7 @@ namespace GeometricAlgebraNumericsLib.Products.NonOrthogonal
 {
     public sealed class GaNumNonOrthogonalGp : GaNumBilinearProductNonOrthogonal
     {
-        public override IGaNumMultivector this[int id1, int id2]
+        public override IGaNumMultivector this[ulong id1, ulong id2]
         {
             get
             {
@@ -73,7 +73,7 @@ namespace GeometricAlgebraNumericsLib.Products.NonOrthogonal
                 if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension2)
                     throw new GaNumericsException("Multivector size mismatch");
 
-                var resultMv = new GaNumDgrMultivectorFactory(TargetGaSpaceDimension);
+                var resultMv = new GaNumDgrMultivectorFactory(TargetVSpaceDimension);
 
                 foreach (var term1 in mv1.GetNonZeroTerms())
                 {

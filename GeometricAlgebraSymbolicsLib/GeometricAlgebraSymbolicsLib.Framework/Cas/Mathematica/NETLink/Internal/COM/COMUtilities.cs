@@ -12,7 +12,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Wolfram.NETLink.Internal.COM {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink.Internal.COM {
 
 /// <summary>
 /// Various static methods for dealing with "raw" COM objects (runtime type is System.__ComObject).

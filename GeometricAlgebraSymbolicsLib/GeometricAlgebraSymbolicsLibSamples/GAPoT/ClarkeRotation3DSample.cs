@@ -65,7 +65,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             Console.WriteLine();
 
             //Find a simple rotor to get c1 from u1
-            var rotor1 = u1.GetRotorToVector(c1);
+            var rotor1 = GaPoTSymMultivector.CreateSimpleRotor(u1, c1);
             
             //Make sure this is a rotor
             Console.WriteLine($@"rotor1 = {rotor1.TermsToLaTeX()}");
@@ -84,7 +84,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             Console.WriteLine();
             
             //Find a simple rotor to get c2 from u2_1
-            var rotor2 = u2_1.GetRotorToVector(c2);
+            var rotor2 = GaPoTSymMultivector.CreateSimpleRotor(u2_1, c2);
             
             //Make sure this is a rotor
             Console.WriteLine($@"rotor2 = {rotor2.TermsToLaTeX()}");

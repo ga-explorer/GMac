@@ -10,12 +10,12 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
 
         public int DomainVSpaceDimension { get; }
 
-        public int DomainGaSpaceDimension
+        public ulong DomainGaSpaceDimension
             => DomainVSpaceDimension.ToGaSpaceDimension();
 
         public int TargetVSpaceDimension { get; }
 
-        public int TargetGaSpaceDimension
+        public ulong TargetGaSpaceDimension
             => TargetVSpaceDimension.ToGaSpaceDimension();
 
         public IGaNumMultivector this[int id1]
@@ -38,10 +38,10 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
                 );
         }
 
-        public double this[int id1, int id2] 
+        public double this[ulong id1, ulong id2] 
             => RootNode.TryGetLeafValue(
                    DomainVSpaceDimension, 
-                   (ulong)id1, 
+                   id1, 
                    out var mv
                ) && !ReferenceEquals(mv, null) ? mv[id2] : 0.0d;
 

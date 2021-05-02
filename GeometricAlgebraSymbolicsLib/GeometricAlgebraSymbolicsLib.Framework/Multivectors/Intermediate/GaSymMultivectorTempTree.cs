@@ -6,15 +6,15 @@ using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 
 namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 {
     public sealed class GaSymMultivectorTempTree : IGaSymMultivectorTemp
     {
-        public static GaSymMultivectorTempTree Create(int gaSpaceDim)
+        public static GaSymMultivectorTempTree Create(int vSpaceDim)
         {
-            return new GaSymMultivectorTempTree(gaSpaceDim);
+            return new GaSymMultivectorTempTree(vSpaceDim);
         }
 
 
@@ -23,14 +23,14 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 
         public int VSpaceDimension { get; }
 
-        public int GaSpaceDimension
+        public ulong GaSpaceDimension
             => VSpaceDimension.ToGaSpaceDimension();
 
-        public Expr this[int id]
+        public Expr this[ulong id]
         {
             get
             {
-                _termsTree.TryGetLeafValue(VSpaceDimension, (ulong) id, out var coef);
+                _termsTree.TryGetLeafValue(VSpaceDimension, id, out var coef);
 
                 return
                     ReferenceEquals(coef, null)
@@ -39,13 +39,13 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             }
         }
 
-        public Expr this[int grade, int index]
+        public Expr this[int grade, ulong index]
         {
             get
             {
                 var id = GaFrameUtils.BasisBladeId(grade, index);
 
-                _termsTree.TryGetLeafValue(VSpaceDimension, (ulong)id, out var coef);
+                _termsTree.TryGetLeafValue(VSpaceDimension, id, out var coef);
 
                 return
                     ReferenceEquals(coef, null)
@@ -54,18 +54,18 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             }
         }
 
-        public IEnumerable<int> BasisBladeIds 
+        public IEnumerable<ulong> BasisBladeIds 
             => _termsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodeIDs()
-                .Select(k => (int) k);
+                .Select(k => k);
 
-        public IEnumerable<int> NonZeroBasisBladeIds =>
+        public IEnumerable<ulong> NonZeroBasisBladeIds =>
             _termsTree
             .GetNodeInfo(VSpaceDimension, 0)
             .GetTreeLeafNodesInfo()
             .Where(pair => !pair.Value.Simplify().IsNullOrZero())
-            .Select(pair => (int)pair.Id);
+            .Select(pair => pair.Id);
 
         public IEnumerable<MathematicaScalar> BasisBladeScalars
             => _termsTree
@@ -87,54 +87,54 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
                 .Where(p => !p.Value.IsNullOrZero())
                 .Select(p => p.Value);
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> Terms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> Terms
             => _termsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodesInfo()
-                .Select(p => new KeyValuePair<int, MathematicaScalar>(
-                    (int)p.Id,
+                .Select(p => new KeyValuePair<ulong, MathematicaScalar>(
+                    p.Id,
                     p.Value.Simplify().ToMathematicaScalar()
                 ));
 
-        public IEnumerable<KeyValuePair<int, Expr>> ExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> ExprTerms
             => _termsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodesInfo()
-                .Select(p => new KeyValuePair<int, Expr>(
-                    (int)p.Id,
+                .Select(p => new KeyValuePair<ulong, Expr>(
+                    p.Id,
                     p.Value.Simplify()
                 ));
 
-        public IEnumerable<KeyValuePair<int, MathematicaScalar>> NonZeroTerms
+        public IEnumerable<KeyValuePair<ulong, MathematicaScalar>> NonZeroTerms
             => _termsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodesInfo()
-                .Select(p => new KeyValuePair<int, MathematicaScalar>(
-                    (int)p.Id, 
+                .Select(p => new KeyValuePair<ulong, MathematicaScalar>(
+                    p.Id, 
                     p.Value.Simplify().ToMathematicaScalar())
                 )
                 .Where(p => !p.Value.IsZero());
 
-        public IEnumerable<KeyValuePair<int, Expr>> NonZeroExprTerms
+        public IEnumerable<KeyValuePair<ulong, Expr>> NonZeroExprTerms
             => _termsTree
                 .GetNodeInfo(VSpaceDimension, 0)
                 .GetTreeLeafNodesInfo()
-                .Select(p => new KeyValuePair<int, Expr>(
-                    (int)p.Id, 
+                .Select(p => new KeyValuePair<ulong, Expr>(
+                    p.Id, 
                     p.Value.Simplify())
                 )
                 .Where(p => !p.Value.IsZero());
 
-        public bool ContainsBasisBlade(int id)
+        public bool ContainsBasisBlade(ulong id)
         {
-            return _termsTree.ContainsLeafNodeId(VSpaceDimension, (ulong)id);
+            return _termsTree.ContainsLeafNodeId(VSpaceDimension, id);
         }
 
         public bool IsTemp 
             => true;
 
-        public int TermsCount 
-            => _termsTree
+        public ulong TermsCount 
+            => (ulong)_termsTree
                 .GetTreeLeafNodes()
                 .Count();
 
@@ -171,17 +171,17 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
         }
 
 
-        private GaSymMultivectorTempTree(int gaSpaceDim)
+        private GaSymMultivectorTempTree(int vSpaceDim)
         {
-            VSpaceDimension = gaSpaceDim.ToVSpaceDimension();
+            VSpaceDimension = vSpaceDim;
 
             _termsTree = new GaBtrInternalNode<List<Expr>>();
         }
 
 
-        public IGaSymMultivectorTemp AddFactor(int id, Expr coef)
+        public IGaSymMultivectorTemp AddFactor(ulong id, Expr coef)
         {
-            var index = (ulong)id;
+            var index = id;
 
             var node = _termsTree.GetLeafNode(VSpaceDimension, index);
             if (ReferenceEquals(node, null))
@@ -203,11 +203,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return this;
         }
 
-        public IGaSymMultivectorTemp AddFactor(int id, bool isNegative, Expr coef)
+        public IGaSymMultivectorTemp AddFactor(ulong id, bool isNegative, Expr coef)
         {
             coef = isNegative ? Mfs.Minus[coef] : coef;
 
-            var index = (ulong)id;
+            var index = id;
 
             var node = _termsTree.GetLeafNode(VSpaceDimension, index);
             if (ReferenceEquals(node, null))
@@ -229,9 +229,9 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return this;
         }
 
-        public IGaSymMultivectorTemp SetTermCoef(int id, Expr coef)
+        public IGaSymMultivectorTemp SetTermCoef(ulong id, Expr coef)
         {
-            var index = (ulong)id;
+            var index = id;
 
             var node = _termsTree.GetLeafNode(VSpaceDimension, index);
             if (ReferenceEquals(node, null))
@@ -256,11 +256,11 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return this;
         }
 
-        public IGaSymMultivectorTemp SetTermCoef(int id, bool isNegative, Expr coef)
+        public IGaSymMultivectorTemp SetTermCoef(ulong id, bool isNegative, Expr coef)
         {
             coef = isNegative ? Mfs.Minus[coef] : coef;
 
-            var index = (ulong)id;
+            var index = id;
 
             var node = _termsTree.GetLeafNode(VSpaceDimension, index);
             if (ReferenceEquals(node, null))
@@ -294,7 +294,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             foreach (var pair in nonZeroTerms)
                 _termsTree.SetLeafValue(
                     VSpaceDimension, 
-                    (ulong)pair.Key,
+                    pair.Key,
                     new List<Expr>(1) { pair.Value }
                 );
         }
@@ -321,7 +321,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 
         public GaSymMultivector ToMultivector()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             foreach (var term in NonZeroTerms)
                 mv.SetTermCoef(term.Key, term.Value);
@@ -331,7 +331,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
 
         public GaSymMultivector GetVectorPart()
         {
-            var mv = GaSymMultivector.CreateZero(GaSpaceDimension);
+            var mv = GaSymMultivector.CreateZero(VSpaceDimension);
 
             foreach (var id in GaFrameUtils.BasisVectorIDs(VSpaceDimension))
             {
@@ -343,7 +343,7 @@ namespace GeometricAlgebraSymbolicsLib.Multivectors.Intermediate
             return mv;
         }
 
-        public IEnumerator<KeyValuePair<int, Expr>> GetEnumerator()
+        public IEnumerator<KeyValuePair<ulong, Expr>> GetEnumerator()
         {
             return NonZeroExprTerms.GetEnumerator();
         }

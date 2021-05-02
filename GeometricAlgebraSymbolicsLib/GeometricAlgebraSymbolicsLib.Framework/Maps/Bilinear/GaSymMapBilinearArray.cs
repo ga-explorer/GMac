@@ -46,9 +46,9 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
 
         public override int DomainVSpaceDimension { get; }
 
-        public override IGaSymMultivector this[int id1, int id2] 
+        public override IGaSymMultivector this[ulong id1, ulong id2] 
             => _basisBladesMaps[id1, id2] 
-               ?? GaSymMultivector.CreateZero(TargetGaSpaceDimension);
+               ?? GaSymMultivector.CreateZero(TargetVSpaceDimension);
 
 
         private GaSymMapBilinearArray(int targetVSpaceDim)
@@ -66,7 +66,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
         }
 
 
-        public GaSymMapBilinearArray SetBasisBladesMap(int basisBladeId1, int basisBladeId2, IGaSymMultivector targetMv)
+        public GaSymMapBilinearArray SetBasisBladesMap(ulong basisBladeId1, ulong basisBladeId2, IGaSymMultivector targetMv)
         {
             Debug.Assert(ReferenceEquals(targetMv, null) || targetMv.VSpaceDimension == TargetVSpaceDimension);
 
@@ -76,10 +76,10 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
         }
 
 
-        public override IGaSymMultivectorTemp MapToTemp(int id1, int id2)
+        public override IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2)
         {
             return _basisBladesMaps[id1, id2]?.ToTempMultivector() 
-                   ?? GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+                   ?? GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
         }
 
         public override IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1, GaSymMultivector mv2)
@@ -87,7 +87,7 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             if (mv1.GaSpaceDimension != DomainGaSpaceDimension || mv2.GaSpaceDimension != DomainGaSpaceDimension)
                 throw new GaSymbolicsException("Multivector size mismatch");
 
-            var tempMv = GaSymMultivector.CreateZeroTemp(TargetGaSpaceDimension);
+            var tempMv = GaSymMultivector.CreateZeroTemp(TargetVSpaceDimension);
 
             foreach (var biTerm in mv1.GetBiTermsForEGp(mv2))
             {
@@ -101,22 +101,22 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
             return tempMv;
         }
 
-        public override IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps()
+        public override IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps()
         {
-            for (var id1 = 0; id1 < DomainGaSpaceDimension; id1++)
-            for (var id2 = 0; id2 < DomainGaSpaceDimension; id2++)
+            for (var id1 = 0UL; id1 < DomainGaSpaceDimension; id1++)
+            for (var id2 = 0UL; id2 < DomainGaSpaceDimension; id2++)
             {
                 var mv = _basisBladesMaps[id1, id2];
 
                 if (!mv.IsNullOrZero())
-                    yield return new Tuple<int, int, IGaSymMultivector>(id1, id2, mv);
+                    yield return new Tuple<ulong, ulong, IGaSymMultivector>(id1, id2, mv);
             }
         }
 
 
         public override string ToString()
         {
-            var tableText = new TableComposer(TargetGaSpaceDimension, TargetGaSpaceDimension);
+            var tableText = new TableComposer((int)TargetGaSpaceDimension, (int)TargetGaSpaceDimension);
             var basisBladeIds = GaFrameUtils.BasisBladeIDs(TargetVSpaceDimension).ToArray();
 
             foreach (var basisBladeId in basisBladeIds)
@@ -125,8 +125,8 @@ namespace GeometricAlgebraSymbolicsLib.Maps.Bilinear
                 tableText.RowsInfo[basisBladeId].Header = basisBladeId.BasisBladeName();
             }
 
-            for (var basisBladeId1 = 0; basisBladeId1 < TargetGaSpaceDimension; basisBladeId1++)
-                for (var basisBladeId2 = 0; basisBladeId2 < TargetGaSpaceDimension; basisBladeId2++)
+            for (var basisBladeId1 = 0UL; basisBladeId1 < TargetGaSpaceDimension; basisBladeId1++)
+                for (var basisBladeId2 = 0UL; basisBladeId2 < TargetGaSpaceDimension; basisBladeId2++)
                 {
                     var mv = _basisBladesMaps[basisBladeId1, basisBladeId2];
                     if (mv != null)

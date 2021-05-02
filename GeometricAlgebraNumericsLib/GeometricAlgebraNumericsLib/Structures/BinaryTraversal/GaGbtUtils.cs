@@ -59,8 +59,8 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 
         public static GaTerm<double> GetNumEGpTerm(this GaGbtNode2 node)
         {
-            var id1 = (int)node.Id1;
-            var id2 = (int)node.Id2;
+            var id1 = node.Id1;
+            var id2 = node.Id2;
 
             var node1 = (IGaGbtNode1<double>)node.GbtNode1;
             var node2 = (IGaGbtNode1<double>)node.GbtNode2;
@@ -74,8 +74,8 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 
         public static GaTerm<double> GetNumEGpTerm(this GaGbtNode2 node, double scalingFactor)
         {
-            var id1 = (int)node.Id1;
-            var id2 = (int)node.Id2;
+            var id1 = node.Id1;
+            var id2 = node.Id2;
 
             var node1 = (IGaGbtNode1<double>)node.GbtNode1;
             var node2 = (IGaGbtNode1<double>)node.GbtNode2;
@@ -92,7 +92,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
             var node1 = (IGaGbtNode1<double>)node.GbtNode1;
             var node2 = (IGaGbtNode1<double>)node.GbtNode2;
 
-            var term = metric.ScaledGp((int)node.Id1, (int)node.Id2, node1.Value * node2.Value);
+            var term = metric.ScaledGp(node.Id1, node.Id2, node1.Value * node2.Value);
 
             return term;
         }

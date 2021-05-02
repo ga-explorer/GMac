@@ -4,7 +4,6 @@ using System.Linq;
 using GeometricAlgebraSymbolicsLib.Applications.GAPoT;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
-using Wolfram.NETLink;
 
 namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
 {
@@ -28,13 +27,13 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
                 frame[vectorIndex1] = new GaPoTSymVector();
                 frame[vectorIndex2] = new GaPoTSymVector();
                 
-                frame[vectorIndex1].SetTerm(1, $"{s}".GaPoTSymSimplify());
+                frame[vectorIndex1].SetTerm(1, $"{s}".SimplifyToExpr());
                 
                 for (var i = 1; i < m; i++)
                 {
                     var angle = $"2 * Pi * {(k + 1).ToString()} * {i.ToString()} / {m.ToString()}";
-                    var cosAngle = $"{s} * Cos[{angle}]".GaPoTSymSimplify();
-                    var sinAngle = $"{s} * Sin[{angle}]".GaPoTSymSimplify();
+                    var cosAngle = $"{s} * Cos[{angle}]".SimplifyToExpr();
+                    var sinAngle = $"{s} * Sin[{angle}]".SimplifyToExpr();
                     
                     frame[vectorIndex1].SetTerm(i + 1, cosAngle);
                     frame[vectorIndex2].SetTerm(i + 1, sinAngle);
@@ -44,7 +43,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Fill the last column
             frame[m - 1] = new GaPoTSymVector();
 
-            var v = $"1 / Sqrt[{m}]".GaPoTSymSimplify();
+            var v = $"1 / Sqrt[{m}]".SimplifyToExpr();
             for (var i = 0; i < m; i++)
             {
                 frame[m - 1].SetTerm(i + 1, v);
@@ -144,7 +143,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Find a simple rotor to get c1 from u1
             var rotor1 = 
                 u1.GetRotorToVector(c1).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
+                    e => Mfs.ToRadicals[e].Evaluate()
                 );
             
             //Make sure this is a rotor
@@ -171,7 +170,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Find a simple rotor to get c2 from u2_1
             var rotor2 = 
                 u2_1.GetRotorToVector(c2).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
+                    e => Mfs.ToRadicals[e].Evaluate()
                 );
             
             //Make sure this is a rotor
@@ -198,7 +197,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Find a simple rotor to get c3 from u3_2
             var rotor3 = 
                 u3_2.GetRotorToVector(c3).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
+                    e => Mfs.ToRadicals[e].Evaluate()
                 );
             
             //Make sure this is a rotor
@@ -225,7 +224,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Find a simple rotor to get c3 from u3_2
             var rotor4 = 
                 u4_3.GetRotorToVector(c4).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
+                    e => Mfs.ToRadicals[e].Evaluate()
                 );
             
             //Make sure this is a rotor
@@ -252,7 +251,7 @@ namespace GeometricAlgebraSymbolicsLibSamples.GAPoT
             //Compute final rotor as rotor3 gp rotor2 gp rotor1
             var rotor = 
                 rotor4.Gp(rotor3).Gp(rotor2).Gp(rotor1).MapScalars(
-                    e => Mfs.ToRadicals[e].GaPoTSymSimplify()
+                    e => Mfs.ToRadicals[e].Evaluate()
                 );
             
             //Make sure this is a rotor

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CodeComposerLib.GraphViz.Dot;
-using CodeComposerLib.GraphViz.UserInterface;
+using CodeComposerLib.UI.WinForms.GraphViz.UserInterface;
 using DataStructuresLib;
 using GMac.GMacAST;
 using GMac.GMacAST.Symbols;

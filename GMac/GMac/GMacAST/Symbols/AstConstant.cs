@@ -1,10 +1,10 @@
 ﻿using CodeComposerLib.Irony.Semantic.Expression.ValueAccess;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib.SimpleTree;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink;
 using GMac.GMacAST.Expressions;
 using GMac.GMacCompiler.Semantic.AST;
 using GMac.GMacScripting;
-using Wolfram.NETLink;
 
 namespace GMac.GMacAST.Symbols
 {

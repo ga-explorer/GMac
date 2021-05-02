@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace TextComposerLib.Text.Parametric.UI
+namespace TextComposerLib.UI.WinForms.UserInterface.UI
 {
     public partial class FormNewTemplate : Form
     {

@@ -10,7 +10,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
     {
         public static FixedStack<IGaGbtNode1<double>> CreateFixedStack(IReadOnlyList<GaNumVector> basisVectorMappingsList, GaNumSarMultivector multivector)
         {
-            var targetGaSpaceDimension = basisVectorMappingsList[0].GaSpaceDimension;
+            var targetVSpaceDimension = basisVectorMappingsList[0].VSpaceDimension;
             var stack = new FixedStack<IGaGbtNode1<double>>(multivector.VSpaceDimension + 1);
 
             stack.Push(
@@ -18,7 +18,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
                     multivector.VSpaceDimension,
                     0,
                     basisVectorMappingsList,
-                    GaNumDarKVector.CreateScalar(targetGaSpaceDimension, 1),
+                    GaNumDarKVector.CreateScalar(targetVSpaceDimension, 1),
                     multivector.BtrRootNode
                 )
             );
@@ -28,7 +28,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 
         public static Stack<IGaGbtNode1<double>> CreateStack(IReadOnlyList<GaNumVector> basisVectorMappingsList, GaNumSarMultivector multivector)
         {
-            var targetGaSpaceDimension = basisVectorMappingsList[0].GaSpaceDimension;
+            var targetVSpaceDimension = basisVectorMappingsList[0].VSpaceDimension;
             var stack = new Stack<IGaGbtNode1<double>>();
 
             stack.Push(
@@ -36,7 +36,7 @@ namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
                     multivector.VSpaceDimension,
                     0,
                     basisVectorMappingsList,
-                    GaNumDarKVector.CreateScalar(targetGaSpaceDimension, 1),
+                    GaNumDarKVector.CreateScalar(targetVSpaceDimension, 1),
                     multivector.BtrRootNode
                 )
             );

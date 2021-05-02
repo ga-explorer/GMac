@@ -100,7 +100,7 @@ namespace GMac.GMacAPI.Target
         /// <param name="valueAccess"></param>
         /// <param name="getTargetVarName"></param>
         /// <returns></returns>
-        public GMacTargetVariablesNaming SetMultivectorParameters(AstDatastoreValueAccess valueAccess, Func<int, string> getTargetVarName)
+        public GMacTargetVariablesNaming SetMultivectorParameters(AstDatastoreValueAccess valueAccess, Func<ulong, string> getTargetVarName)
         {
             if (valueAccess.IsNullOrInvalid()) return this;
 
@@ -112,7 +112,7 @@ namespace GMac.GMacAPI.Target
 
             foreach (var primitiveValueAccess in primitiveValueAccessList)
             {
-                var id = primitiveValueAccess.GetBasisBladeId();
+                var id = (ulong)primitiveValueAccess.GetBasisBladeId();
 
                 var targetVarName = getTargetVarName(id);
 
@@ -128,7 +128,7 @@ namespace GMac.GMacAPI.Target
         /// <param name="valueAccessName"></param>
         /// <param name="getTargetVarName"></param>
         /// <returns></returns>
-        public GMacTargetVariablesNaming SetMultivectorParameters(string valueAccessName, Func<int, string> getTargetVarName)
+        public GMacTargetVariablesNaming SetMultivectorParameters(string valueAccessName, Func<ulong, string> getTargetVarName)
         {
             return SetMultivectorParameters(BaseMacro.Parameter(valueAccessName), getTargetVarName);
         }
@@ -370,7 +370,7 @@ namespace GMac.GMacAPI.Target
         /// <param name="grade"></param>
         /// <param name="getTargetVarName"></param>
         /// <returns></returns>
-        public GMacTargetVariablesNaming SetMultivectorParameters(AstDatastoreValueAccess valueAccess, int grade, Func<int, string> getTargetVarName)
+        public GMacTargetVariablesNaming SetMultivectorParameters(AstDatastoreValueAccess valueAccess, int grade, Func<ulong, string> getTargetVarName)
         {
             if (valueAccess.AssociatedValueAccess.ExpressionType.IsFrameMultivector() == false)
                 throw new InvalidOperationException("Specified macro parameter is not of multivector type");
@@ -385,7 +385,7 @@ namespace GMac.GMacAPI.Target
             {
                 var id = primitiveValueAccess.GetBasisBladeId();
 
-                var targetVarName = getTargetVarName(id);
+                var targetVarName = getTargetVarName((ulong)id);
 
                 SetScalarParameter(primitiveValueAccess, targetVarName);
             }
@@ -400,7 +400,7 @@ namespace GMac.GMacAPI.Target
         /// <param name="grade"></param>
         /// <param name="getTargetVarName"></param>
         /// <returns></returns>
-        public GMacTargetVariablesNaming SetMultivectorParameters(string valueAccessName, int grade, Func<int, string> getTargetVarName)
+        public GMacTargetVariablesNaming SetMultivectorParameters(string valueAccessName, int grade, Func<ulong, string> getTargetVarName)
         {
             return SetMultivectorParameters(BaseMacro.Parameter(valueAccessName), grade, getTargetVarName);
         }

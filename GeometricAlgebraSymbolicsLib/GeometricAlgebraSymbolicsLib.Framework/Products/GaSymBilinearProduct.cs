@@ -27,33 +27,33 @@ namespace GeometricAlgebraSymbolicsLib.Products
         public int TargetVSpaceDimension 
             => Metric.VSpaceDimension;
 
-        public int TargetGaSpaceDimension 
+        public ulong TargetGaSpaceDimension 
             => Metric.GaSpaceDimension;
 
         public int DomainVSpaceDimension
             => Metric.VSpaceDimension;
 
-        public int DomainGaSpaceDimension
+        public ulong DomainGaSpaceDimension
             => Metric.GaSpaceDimension;
 
         public int DomainVSpaceDimension2
             => Metric.VSpaceDimension;
 
-        public int DomainGaSpaceDimension2
+        public ulong DomainGaSpaceDimension2
             => Metric.GaSpaceDimension;
 
-        public abstract IGaSymMultivector this[int id1, int id2] { get; }
+        public abstract IGaSymMultivector this[ulong id1, ulong id2] { get; }
 
         public GaSymMultivector this[GaSymMultivector mv1, GaSymMultivector mv2]
             => MapToTemp(mv1, mv2).ToMultivector();
 
 
-        public abstract IGaSymMultivectorTemp MapToTemp(int id1, int id2);
+        public abstract IGaSymMultivectorTemp MapToTemp(ulong id1, ulong id2);
 
         public abstract IGaSymMultivectorTemp MapToTemp(GaSymMultivector mv1, GaSymMultivector mv2);
 
-        public abstract IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisBladesMaps();
+        public abstract IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisBladesMaps();
 
-        public abstract IEnumerable<Tuple<int, int, IGaSymMultivector>> BasisVectorsMaps();
+        public abstract IEnumerable<Tuple<ulong, ulong, IGaSymMultivector>> BasisVectorsMaps();
     }
 }

@@ -21,9 +21,9 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
         {
             get
             {
-                id.BasisBladeGradeIndex(out var grade, out var index);
+                ((ulong)id).BasisBladeGradeIndex(out var grade, out var index);
 
-                return grade == KVectorGrade ? KVectorScalarValues[index] : DefaultValue;
+                return grade == KVectorGrade ? KVectorScalarValues[(int)index] : DefaultValue;
             }
         }
 
@@ -33,12 +33,12 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             Debug.Assert(
                 vSpaceDim.IsValidVSpaceDimension() &&
                 grade >= 0 && grade <= vSpaceDim &&
-                kVectorScalarValues.Count == GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
+                kVectorScalarValues.Count == (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
             );
 
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
-            Count = vSpaceDim.ToGaSpaceDimension();
+            Count = (int)vSpaceDim.ToGaSpaceDimension();
             DefaultValue = default;
             KVectorScalarValues = kVectorScalarValues;
         }
@@ -48,12 +48,12 @@ namespace GeometricAlgebraNumericsLib.Structures.Collections
             Debug.Assert(
                 vSpaceDim.IsValidVSpaceDimension() &&
                 grade >= 0 && grade <= vSpaceDim &&
-                kVectorScalarValues.Count == GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
+                kVectorScalarValues.Count == (int)GaFrameUtils.KvSpaceDimension(vSpaceDim, grade)
             );
 
             VSpaceDimension = vSpaceDim;
             KVectorGrade = grade;
-            Count = vSpaceDim.ToGaSpaceDimension();
+            Count = (int)vSpaceDim.ToGaSpaceDimension();
             DefaultValue = defaultValue;
             KVectorScalarValues = kVectorScalarValues;
         }

@@ -11,7 +11,7 @@
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Wolfram.NETLink {
+namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica.NETLink {
 
 /// <exclude/>
 /// <summary>

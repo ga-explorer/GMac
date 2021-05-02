@@ -26,12 +26,12 @@ namespace GMac.GMacAST
             return new AstType(langType);
         }
 
-        internal static AstFrameBasisBlade ToAstFrameBasisBlade(this GMacFrame frame, int id)
+        internal static AstFrameBasisBlade ToAstFrameBasisBlade(this GMacFrame frame, ulong id)
         {
             return new AstFrameBasisBlade(frame, id);
         }
 
-        internal static AstFrameBasisBlade ToAstFrameBasisBlade(this GMacFrame frame, int grade, int index)
+        internal static AstFrameBasisBlade ToAstFrameBasisBlade(this GMacFrame frame, int grade, ulong index)
         {
             return new AstFrameBasisBlade(frame, grade, index);
         }
