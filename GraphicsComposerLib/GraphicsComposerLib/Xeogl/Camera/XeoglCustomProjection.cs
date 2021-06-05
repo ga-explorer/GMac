@@ -1,4 +1,4 @@
-﻿using GeometryComposerLib.BasicMath.Matrices;
+﻿using EuclideanGeometryLib.BasicMath.Matrices;
 using GraphicsComposerLib.Xeogl.Constants;
 
 namespace GraphicsComposerLib.Xeogl.Camera

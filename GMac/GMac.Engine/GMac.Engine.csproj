@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeComposerLib\CodeComposerLib\CodeComposerLib.csproj" />
+    <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj" />
+    <ProjectReference Include="..\..\EuclideanGeometryLib\EuclideanGeometryLib\EuclideanGeometryLib.csproj" />
+    <ProjectReference Include="..\..\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib\GeometricAlgebraNumericsLib.csproj" />
+    <ProjectReference Include="..\..\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib.csproj" />
+    <ProjectReference Include="..\..\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib\GeometricAlgebraSymbolicsLib.csproj" />
+    <ProjectReference Include="..\..\GraphicsComposerLib\GraphicsComposerLib\GraphicsComposerLib.csproj" />
+    <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Wolfram.NETLink">
+      <HintPath>C:\Program Files\Wolfram Research\Mathematica\12.1\SystemFiles\Links\NETLink\Wolfram.NETLink.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

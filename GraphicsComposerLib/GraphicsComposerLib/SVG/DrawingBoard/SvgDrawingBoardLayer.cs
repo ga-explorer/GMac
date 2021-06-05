@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using GeometryComposerLib.BasicMath.Tuples;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 using GraphicsComposerLib.SVG.Content;
 using GraphicsComposerLib.SVG.Elements.Containers;
 using GraphicsComposerLib.SVG.Elements.Shape;

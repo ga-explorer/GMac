@@ -1,5 +1,5 @@
-﻿using GeometryComposerLib.BasicMath.Matrices;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
+﻿using EuclideanGeometryLib.BasicMath.Matrices;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 using TextComposerLib.Text.Linear;
 
 namespace GraphicsComposerLib.Xeogl.Transforms

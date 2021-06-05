@@ -1,4 +1,4 @@
-﻿using GraphicsComposerLib.Geometry.Points;
+﻿using EuclideanGeometryLib.GraphicsGeometry.Points;
 
 namespace GraphicsComposerLib.Xeogl.Generators
 {

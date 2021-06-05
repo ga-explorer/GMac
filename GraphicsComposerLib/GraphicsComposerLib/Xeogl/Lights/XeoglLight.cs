@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using GeometryComposerLib.Colors;
+using EuclideanGeometryLib.Colors;
 
 namespace GraphicsComposerLib.Xeogl.Lights
 {

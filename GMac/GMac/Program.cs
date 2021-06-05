@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using GMac.GMacIDE;
-using GMac.GMacIDE.Editor;
+using GMac.IDE;
+using GMac.IDE.Editor;
 
 namespace GMac
 {

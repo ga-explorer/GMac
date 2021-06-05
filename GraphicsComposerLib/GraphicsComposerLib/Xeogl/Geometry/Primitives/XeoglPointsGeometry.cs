@@ -1,5 +1,5 @@
-﻿using GraphicsComposerLib.Geometry;
-using GraphicsComposerLib.Geometry.Points;
+﻿using EuclideanGeometryLib.GraphicsGeometry;
+using EuclideanGeometryLib.GraphicsGeometry.Points;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Primitives
 {

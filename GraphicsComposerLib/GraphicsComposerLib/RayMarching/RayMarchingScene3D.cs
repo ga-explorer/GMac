@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
-using GeometryComposerLib.BasicShapes.Lines.Immutable;
-using GeometryComposerLib.SdfGeometry;
-using GeometryComposerLib.SdfGeometry.Primitives;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.BasicShapes.Lines.Immutable;
+using EuclideanGeometryLib.SdfGeometry;
+using EuclideanGeometryLib.SdfGeometry.Primitives;
 
 namespace GraphicsComposerLib.RayMarching
 {

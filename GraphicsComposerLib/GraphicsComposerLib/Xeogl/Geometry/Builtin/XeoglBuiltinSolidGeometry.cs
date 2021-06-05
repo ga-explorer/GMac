@@ -1,4 +1,5 @@
 ﻿using System;
+using EuclideanGeometryLib.GraphicsGeometry;
 using GraphicsComposerLib.Xeogl.Constants;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Builtin

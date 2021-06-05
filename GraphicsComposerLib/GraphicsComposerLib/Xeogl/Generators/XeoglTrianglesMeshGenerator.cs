@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using GraphicsComposerLib.Geometry.Triangles;
-using GraphicsComposerLib.Geometry.Vertices;
+using EuclideanGeometryLib.GraphicsGeometry.Triangles;
+using EuclideanGeometryLib.GraphicsGeometry.Vertices;
 using TextComposerLib.Text;
 
 namespace GraphicsComposerLib.Xeogl.Generators

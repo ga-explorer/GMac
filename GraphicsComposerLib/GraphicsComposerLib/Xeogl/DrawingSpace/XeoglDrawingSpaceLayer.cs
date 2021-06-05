@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using GeometryComposerLib.BasicMath.Maps.Space3D;
-using GeometryComposerLib.BasicMath.Matrices;
+using EuclideanGeometryLib.BasicMath.Maps.Space3D;
+using EuclideanGeometryLib.BasicMath.Matrices;
 using GraphicsComposerLib.Xeogl.Geometry;
 using GraphicsComposerLib.Xeogl.Geometry.Primitives;
 using GraphicsComposerLib.Xeogl.Materials;

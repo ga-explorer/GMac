@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using GeometryComposerLib.BasicMath.Tuples;
-using GraphicsComposerLib.Geometry;
+using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.GraphicsGeometry;
 using GraphicsComposerLib.Xeogl.Constants;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Primitives

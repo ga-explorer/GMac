@@ -1,4 +1,6 @@
-﻿namespace GraphicsComposerLib.Xeogl.Constants
+﻿using EuclideanGeometryLib.GraphicsGeometry;
+
+namespace GraphicsComposerLib.Xeogl.Constants
 {
     public static class XeoglConstantsUtils
     {

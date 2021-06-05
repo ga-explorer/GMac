@@ -1,7 +1,8 @@
-﻿using GeometryComposerLib.BasicMath.Tuples;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
-using GeometryComposerLib.BasicMath.Tuples.Mutable;
-using GraphicsComposerLib.Geometry.Constants;
+﻿using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.BasicMath.Tuples.Mutable;
+using EuclideanGeometryLib.GraphicsGeometry;
+using EuclideanGeometryLib.GraphicsGeometry.Constants;
 using GraphicsComposerLib.Xeogl.Constants;
 
 namespace GraphicsComposerLib.Xeogl.Camera

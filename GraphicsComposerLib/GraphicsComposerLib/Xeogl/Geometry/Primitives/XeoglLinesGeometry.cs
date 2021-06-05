@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GeometryComposerLib.BasicMath.Tuples;
-using GeometryComposerLib.BasicShapes.Lines;
-using GraphicsComposerLib.Geometry;
-using GraphicsComposerLib.Geometry.Lines;
+using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicShapes.Lines;
+using EuclideanGeometryLib.GraphicsGeometry;
+using EuclideanGeometryLib.GraphicsGeometry.Lines;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Primitives
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GeometryComposerLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicMath.Tuples;
 using GraphicsComposerLib.SVG.Attributes;
 using GraphicsComposerLib.SVG.Elements.Categories;
 using GraphicsComposerLib.SVG.Transforms;

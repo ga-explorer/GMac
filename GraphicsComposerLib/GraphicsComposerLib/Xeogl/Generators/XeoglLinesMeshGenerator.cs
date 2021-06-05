@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using GraphicsComposerLib.Geometry.Lines;
+using EuclideanGeometryLib.GraphicsGeometry.Lines;
 using TextComposerLib.Text;
 
 namespace GraphicsComposerLib.Xeogl.Generators

@@ -1,4 +1,4 @@
-﻿using GeometryComposerLib.BasicMath.Tuples.Immutable;
+﻿using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace GraphicsComposerLib.RayMarching
 {

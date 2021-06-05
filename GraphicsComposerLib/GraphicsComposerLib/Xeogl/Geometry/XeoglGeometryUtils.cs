@@ -1,7 +1,7 @@
-﻿using GraphicsComposerLib.Geometry;
-using GraphicsComposerLib.Geometry.Lines;
-using GraphicsComposerLib.Geometry.Points;
-using GraphicsComposerLib.Geometry.Triangles;
+﻿using EuclideanGeometryLib.GraphicsGeometry;
+using EuclideanGeometryLib.GraphicsGeometry.Lines;
+using EuclideanGeometryLib.GraphicsGeometry.Points;
+using EuclideanGeometryLib.GraphicsGeometry.Triangles;
 using GraphicsComposerLib.Xeogl.Geometry.Primitives;
 
 namespace GraphicsComposerLib.Xeogl.Geometry

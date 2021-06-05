@@ -390,5 +390,17 @@ namespace DataStructuresLib.Extensions
                     );
             }
         }
+
+        
+        public static KeyValuePair<TKey, TValue> First<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairsList, Func<TValue, TValue> valueMapping)
+        {
+            var pair = pairsList.First();
+
+            return new KeyValuePair<TKey, TValue>(
+                pair.Key, 
+                valueMapping(pair.Value)
+            );
+        }
+
     }
 }

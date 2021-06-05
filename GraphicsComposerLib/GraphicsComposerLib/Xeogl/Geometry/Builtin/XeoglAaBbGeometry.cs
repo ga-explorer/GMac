@@ -1,4 +1,4 @@
-﻿using GeometryComposerLib.Borders.Space3D.Mutable;
+﻿using EuclideanGeometryLib.Borders.Space3D.Mutable;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Builtin
 {

@@ -39,7 +39,7 @@ namespace DataStructuresLib.Combinations
             if (digitsCount == MaxSetSize && index == 0)
             {
                 for (var i = 0; i < MaxSetSize; i++)
-                    yield return 1;
+                    yield return i;
 
                 yield break;
             }

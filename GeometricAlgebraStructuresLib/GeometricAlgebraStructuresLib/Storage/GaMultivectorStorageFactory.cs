@@ -20,7 +20,7 @@ namespace GeometricAlgebraStructuresLib.Storage
 
         public int VSpaceDimension { get; private set; }
 
-        public int GaSpaceDimension 
+        public ulong GaSpaceDimension 
             => VSpaceDimension.ToGaSpaceDimension();
 
         public abstract int StoredTermsCount { get; }
@@ -54,7 +54,7 @@ namespace GeometricAlgebraStructuresLib.Storage
         }
 
 
-        public int GetKvSpaceDimension(int grade)
+        public ulong GetKvSpaceDimension(int grade)
         {
             return GaFrameUtils.KvSpaceDimension(VSpaceDimension, grade);
         }
@@ -215,50 +215,50 @@ namespace GeometricAlgebraStructuresLib.Storage
         public abstract GaMultivectorStorageFactory<T> SetKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<int, double>> scalarValuesList);
 
 
-        public GaMultivectorStorageFactory<T> SetKVector(GaNumDarKVector kvector)
-        {
-            return SetKVector(kvector.Grade, kvector.ScalarValuesArray);
-        }
+        //public GaMultivectorStorageFactory<T> SetKVector(GaNumDarKVector kvector)
+        //{
+        //    return SetKVector(kvector.Grade, kvector.ScalarValuesArray);
+        //}
 
-        public GaMultivectorStorageFactory<T> SetKVector(double scalingFactor, GaNumDarKVector kvector)
-        {
-            return SetKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesArray);
-        }
+        //public GaMultivectorStorageFactory<T> SetKVector(double scalingFactor, GaNumDarKVector kvector)
+        //{
+        //    return SetKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesArray);
+        //}
 
-        public GaMultivectorStorageFactory<T> SetKVector(GaNumSarKVector kvector)
-        {
-            return SetKVector(kvector.Grade, kvector.ScalarValuesDictionary);
-        }
+        //public GaMultivectorStorageFactory<T> SetKVector(GaNumSarKVector kvector)
+        //{
+        //    return SetKVector(kvector.Grade, kvector.ScalarValuesDictionary);
+        //}
 
-        public GaMultivectorStorageFactory<T> SetKVector(double scalingFactor, GaNumSarKVector kvector)
-        {
-            return SetKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesDictionary);
-        }
+        //public GaMultivectorStorageFactory<T> SetKVector(double scalingFactor, GaNumSarKVector kvector)
+        //{
+        //    return SetKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesDictionary);
+        //}
 
 
-        public GaMultivectorStorageFactory<T> SetKVectors(IEnumerable<GaNumDarKVector> kVectorsList)
-        {
-            foreach (var kvector in kVectorsList)
-                SetKVector(kvector.Grade, kvector.ScalarValuesArray);
+        //public GaMultivectorStorageFactory<T> SetKVectors(IEnumerable<GaNumDarKVector> kVectorsList)
+        //{
+        //    foreach (var kvector in kVectorsList)
+        //        SetKVector(kvector.Grade, kvector.ScalarValuesArray);
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GaMultivectorStorageFactory<T> SetKVectors(IEnumerable<KeyValuePair<double, GaNumDarKVector>> scaledKVectorsList)
-        {
-            foreach (var pair in scaledKVectorsList)
-                SetKVector(pair.Value.Grade, pair.Key, pair.Value.ScalarValuesArray);
+        //public GaMultivectorStorageFactory<T> SetKVectors(IEnumerable<KeyValuePair<double, GaNumDarKVector>> scaledKVectorsList)
+        //{
+        //    foreach (var pair in scaledKVectorsList)
+        //        SetKVector(pair.Value.Grade, pair.Key, pair.Value.ScalarValuesArray);
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GaMultivectorStorageFactory<T> SetKVectors(IEnumerable<Tuple<double, GaNumDarKVector>> scaledKVectorsList)
-        {
-            foreach (var (scalingFactor, kVector) in scaledKVectorsList)
-                SetKVector(kVector.Grade, scalingFactor, kVector.ScalarValuesArray);
+        //public GaMultivectorStorageFactory<T> SetKVectors(IEnumerable<Tuple<double, GaNumDarKVector>> scaledKVectorsList)
+        //{
+        //    foreach (var (scalingFactor, kVector) in scaledKVectorsList)
+        //        SetKVector(kVector.Grade, scalingFactor, kVector.ScalarValuesArray);
 
-            return this;
-        }
+        //    return this;
+        //}
 
 
         public abstract GaMultivectorStorageFactory<T> AddTerm(int id, double value);
@@ -284,50 +284,50 @@ namespace GeometricAlgebraStructuresLib.Storage
         public abstract GaMultivectorStorageFactory<T> AddKVector(int grade, double scalingFactor, IEnumerable<KeyValuePair<int, double>> scalarValuesList);
 
 
-        public GaMultivectorStorageFactory<T> AddKVector(GaNumDarKVector kvector)
-        {
-            return AddKVector(kvector.Grade, kvector.ScalarValuesArray);
-        }
+        //public GaMultivectorStorageFactory<T> AddKVector(GaNumDarKVector kvector)
+        //{
+        //    return AddKVector(kvector.Grade, kvector.ScalarValuesArray);
+        //}
 
-        public GaMultivectorStorageFactory<T> AddKVector(double scalingFactor, GaNumDarKVector kvector)
-        {
-            return AddKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesArray);
-        }
+        //public GaMultivectorStorageFactory<T> AddKVector(double scalingFactor, GaNumDarKVector kvector)
+        //{
+        //    return AddKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesArray);
+        //}
 
-        public GaMultivectorStorageFactory<T> AddKVector(GaNumSarKVector kvector)
-        {
-            return AddKVector(kvector.Grade, kvector.ScalarValuesDictionary);
-        }
+        //public GaMultivectorStorageFactory<T> AddKVector(GaNumSarKVector kvector)
+        //{
+        //    return AddKVector(kvector.Grade, kvector.ScalarValuesDictionary);
+        //}
 
-        public GaMultivectorStorageFactory<T> AddKVector(double scalingFactor, GaNumSarKVector kvector)
-        {
-            return AddKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesDictionary);
-        }
+        //public GaMultivectorStorageFactory<T> AddKVector(double scalingFactor, GaNumSarKVector kvector)
+        //{
+        //    return AddKVector(kvector.Grade, scalingFactor, kvector.ScalarValuesDictionary);
+        //}
 
 
-        public GaMultivectorStorageFactory<T> AddKVectors(IEnumerable<GaNumDarKVector> kVectorsList)
-        {
-            foreach (var kvector in kVectorsList)
-                AddKVector(kvector.Grade, kvector.ScalarValuesArray);
+        //public GaMultivectorStorageFactory<T> AddKVectors(IEnumerable<GaNumDarKVector> kVectorsList)
+        //{
+        //    foreach (var kvector in kVectorsList)
+        //        AddKVector(kvector.Grade, kvector.ScalarValuesArray);
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GaMultivectorStorageFactory<T> AddKVectors(IEnumerable<KeyValuePair<double, GaNumDarKVector>> scaledKVectorsList)
-        {
-            foreach (var pair in scaledKVectorsList)
-                AddKVector(pair.Value.Grade, pair.Key, pair.Value.ScalarValuesArray);
+        //public GaMultivectorStorageFactory<T> AddKVectors(IEnumerable<KeyValuePair<double, GaNumDarKVector>> scaledKVectorsList)
+        //{
+        //    foreach (var pair in scaledKVectorsList)
+        //        AddKVector(pair.Value.Grade, pair.Key, pair.Value.ScalarValuesArray);
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GaMultivectorStorageFactory<T> AddKVectors(IEnumerable<Tuple<double, GaNumDarKVector>> scaledKVectorsList)
-        {
-            foreach (var (scalingFactor, kVector) in scaledKVectorsList)
-                AddKVector(kVector.Grade, scalingFactor, kVector.ScalarValuesArray);
+        //public GaMultivectorStorageFactory<T> AddKVectors(IEnumerable<Tuple<double, GaNumDarKVector>> scaledKVectorsList)
+        //{
+        //    foreach (var (scalingFactor, kVector) in scaledKVectorsList)
+        //        AddKVector(kVector.Grade, scalingFactor, kVector.ScalarValuesArray);
 
-            return this;
-        }
+        //    return this;
+        //}
 
 
         public abstract GaMultivectorStorageFactory<T> ApplyReverse();

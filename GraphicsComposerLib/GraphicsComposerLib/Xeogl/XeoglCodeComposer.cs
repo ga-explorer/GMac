@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using GeometryComposerLib.BasicMath.Matrices;
-using GeometryComposerLib.BasicMath.Tuples;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
-using GeometryComposerLib.Borders.Space3D;
+using EuclideanGeometryLib.BasicMath.Matrices;
+using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.Borders.Space3D;
+using EuclideanGeometryLib.GraphicsGeometry;
 using GraphicsComposerLib.Xeogl.Constants;
 using GraphicsComposerLib.Xeogl.Geometry;
 using GraphicsComposerLib.Xeogl.Materials;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeometryComposerLib.BasicMath.Tuples.Mutable;
-using GraphicsComposerLib.Geometry.Lines;
-using GraphicsComposerLib.Geometry.Triangles;
+using EuclideanGeometryLib.BasicMath.Tuples.Mutable;
+using EuclideanGeometryLib.GraphicsGeometry.Lines;
+using EuclideanGeometryLib.GraphicsGeometry.Triangles;
 using GraphicsComposerLib.Xeogl.Generators;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Parametric;

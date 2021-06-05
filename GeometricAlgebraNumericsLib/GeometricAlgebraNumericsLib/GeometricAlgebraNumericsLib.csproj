@@ -1,26 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\CodeComposerLib\CodeComposerLib\CodeComposerLib.csproj" />
     <ProjectReference Include="..\..\DataStructuresLib\DataStructuresLib\DataStructuresLib.csproj" />
     <ProjectReference Include="..\..\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib\GeometricAlgebraStructuresLib.csproj" />
     <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Applications\" />
-    <Folder Include="Matrices\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Irony.Interpreter.NetCore" Version="1.1.11" />
-    <PackageReference Include="Irony.NetCore" Version="1.1.11" />
-    <PackageReference Include="MathNet.Numerics" Version="4.12.0" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using GeometryComposerLib.BasicMath.Tuples.Mutable;
+﻿using EuclideanGeometryLib.BasicMath.Tuples.Mutable;
 using TextComposerLib;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Builtin

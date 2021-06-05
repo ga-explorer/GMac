@@ -1,4 +1,4 @@
-﻿using GeometryComposerLib.BasicMath.Matrices;
+﻿using EuclideanGeometryLib.BasicMath.Matrices;
 using GraphicsComposerLib.Xeogl.Geometry;
 using GraphicsComposerLib.Xeogl.Materials;
 using GraphicsComposerLib.Xeogl.Transforms;

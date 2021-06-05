@@ -1,8 +1,9 @@
-﻿using GeometryComposerLib.BasicMath.Tuples;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
-using GeometryComposerLib.BasicMath.Tuples.Mutable;
-using GeometryComposerLib.Borders;
-using GeometryComposerLib.Borders.Space3D;
+﻿using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.BasicMath.Tuples.Mutable;
+using EuclideanGeometryLib.Borders;
+using EuclideanGeometryLib.Borders.Space3D;
+using EuclideanGeometryLib.GraphicsGeometry;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Builtin
 {

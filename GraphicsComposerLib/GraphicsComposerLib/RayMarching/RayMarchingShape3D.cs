@@ -1,4 +1,4 @@
-﻿using GeometryComposerLib.SdfGeometry;
+﻿using EuclideanGeometryLib.SdfGeometry;
 
 namespace GraphicsComposerLib.RayMarching
 {

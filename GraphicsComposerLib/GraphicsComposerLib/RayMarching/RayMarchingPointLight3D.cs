@@ -1,7 +1,7 @@
 ﻿using System;
-using GeometryComposerLib.BasicMath;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
-using GeometryComposerLib.SdfGeometry;
+using EuclideanGeometryLib.BasicMath;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.SdfGeometry;
 
 namespace GraphicsComposerLib.RayMarching
 {

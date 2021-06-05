@@ -1,5 +1,5 @@
-﻿using GraphicsComposerLib.Geometry;
-using GraphicsComposerLib.Geometry.Triangles;
+﻿using EuclideanGeometryLib.GraphicsGeometry;
+using EuclideanGeometryLib.GraphicsGeometry.Triangles;
 
 namespace GraphicsComposerLib.Xeogl.Geometry.Primitives
 {

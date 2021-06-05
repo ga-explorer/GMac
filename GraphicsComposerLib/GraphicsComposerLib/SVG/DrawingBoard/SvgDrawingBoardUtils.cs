@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using GeometryComposerLib.Accelerators.BIH.Space2D;
-using GeometryComposerLib.Accelerators.Grids;
-using GeometryComposerLib.Accelerators.Grids.Space2D;
-using GeometryComposerLib.BasicMath.Tuples;
-using GeometryComposerLib.BasicMath.Tuples.Immutable;
-using GeometryComposerLib.BasicShapes;
-using GeometryComposerLib.BasicShapes.Lines;
-using GeometryComposerLib.BasicShapes.Triangles;
-using GeometryComposerLib.Borders;
-using GeometryComposerLib.Borders.Space2D;
+using EuclideanGeometryLib.Accelerators.BIH.Space2D;
+using EuclideanGeometryLib.Accelerators.Grids;
+using EuclideanGeometryLib.Accelerators.Grids.Space2D;
+using EuclideanGeometryLib.BasicMath.Tuples;
+using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
+using EuclideanGeometryLib.BasicShapes;
+using EuclideanGeometryLib.BasicShapes.Lines;
+using EuclideanGeometryLib.BasicShapes.Triangles;
+using EuclideanGeometryLib.Borders;
+using EuclideanGeometryLib.Borders.Space2D;
 using GraphicsComposerLib.SVG.Styles;
 
 namespace GraphicsComposerLib.SVG.DrawingBoard
