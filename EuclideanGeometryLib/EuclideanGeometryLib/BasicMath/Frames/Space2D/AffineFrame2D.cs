@@ -19,7 +19,7 @@ namespace EuclideanGeometryLib.BasicMath.Frames.Space2D
         /// <returns></returns>
         public static AffineFrame2D CreateRightHanded(ITuple2D origin, ITuple2D uDirection)
         {
-            Debug.Assert(!origin.HasNaNComponent && !uDirection.HasNaNComponent);
+            Debug.Assert(!origin.IsInvalid && !uDirection.IsInvalid);
 
             var s = uDirection.GetLength();
 
@@ -41,7 +41,7 @@ namespace EuclideanGeometryLib.BasicMath.Frames.Space2D
         /// <returns></returns>
         public static AffineFrame2D CreateLeftHanded(ITuple2D origin, ITuple2D uDirection)
         {
-            Debug.Assert(!origin.HasNaNComponent && !uDirection.HasNaNComponent);
+            Debug.Assert(!origin.IsInvalid && !uDirection.IsInvalid);
 
             var s = uDirection.GetLength();
 

@@ -9,8 +9,8 @@ namespace GMac.Engine.API.Target.Cpp
     {
         public override string DefaultFileExtension => "cpp";
 
-        internal GMacCppLanguageServer(CppCodeGenerator codeGenerator, CppSyntaxFactory syntaxFactory)
-            : base(codeGenerator, syntaxFactory)
+        internal GMacCppLanguageServer(CclCppCodeGenerator codeComposer, CclCppSyntaxFactory syntaxFactory)
+            : base(codeComposer, syntaxFactory)
         {
             ExpressionConverter = new MathematicaToCppConverter();
         }

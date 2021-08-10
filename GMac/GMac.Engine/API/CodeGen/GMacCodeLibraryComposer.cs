@@ -5,7 +5,7 @@ using CodeComposerLib.Languages;
 using GMac.Engine.API.Target;
 using GMac.Engine.AST;
 using GMac.Engine.AST.Symbols;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.Engine.API.CodeGen
 {
@@ -13,7 +13,8 @@ namespace GMac.Engine.API.CodeGen
     /// This class represents a text generator that can access information from a GMacAST to generate text into
     /// code files in a base output folder. This class should be the base for all GMac-based code generation processes
     /// </summary>
-    public abstract class GMacCodeLibraryComposer : CodeLibraryComposer
+    public abstract class GMacCodeLibraryComposer : 
+        CclCodeLibraryComposerBase
     {
         public override string ProgressSourceId => Name;
 
@@ -24,7 +25,7 @@ namespace GMac.Engine.API.CodeGen
         /// </summary>
         public AstRoot Root { get; }
 
-        public override LanguageServer Language => GMacLanguage;
+        public override CclLanguageServerBase Language => GMacLanguage;
 
         /// <summary>
         /// The GMac target language of this generator
@@ -62,7 +63,7 @@ namespace GMac.Engine.API.CodeGen
         /// Create an un-initialized copy of this library generator
         /// </summary>
         /// <returns></returns>
-        public abstract GMacCodeLibraryComposer CreateEmptyGenerator();
+        public abstract GMacCodeLibraryComposer CreateEmptyComposer();
 
         /// <summary>
         /// This method can be used to select the AST symbols that code generation can start from
@@ -96,7 +97,7 @@ namespace GMac.Engine.API.CodeGen
         public void GenerateComment(string commentText)
         {
             ActiveFileTextComposer.AppendLineAtNewLine(
-                CodeGenerator.GenerateCode(
+                CodeComposer.GenerateCode(
                     SyntaxFactory.Comment(commentText)
                     )
                 );

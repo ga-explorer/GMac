@@ -21,7 +21,9 @@ namespace EuclideanGeometryLib.Accelerators.Grids.Space2D
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent => false;
+        public bool IsValid => true;
+
+        public bool IsInvalid => false;
 
         public int Count
             => _geometricObjectsList.Count;

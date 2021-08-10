@@ -3,7 +3,12 @@ using EuclideanGeometryLib.BasicMath.Tuples;
 
 namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
 {
-    public interface IGraphicsVertex3D : ITuple3D
+    /// <summary>
+    /// This interface represents an object with vertex information like
+    /// position, normal, color, or texture coordinates
+    /// </summary>
+    public interface IGraphicsVertex3D : 
+        ITuple3D
     {
         int Index { get; }
 
@@ -13,7 +18,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
 
         ITuple2D TextureUv { get; set; }
 
-        GraphicsNormal3D Normal { get; }
+        IGraphicsNormal3D Normal { get; }
 
         double TextureU { get; }
 
@@ -31,6 +36,6 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
 
         bool HasColor { get; }
 
-        GraphicsVertexDataInfo3D DataInfo { get; }
+        GraphicsVertexDataKind3D DataKind { get; }
     }
 }

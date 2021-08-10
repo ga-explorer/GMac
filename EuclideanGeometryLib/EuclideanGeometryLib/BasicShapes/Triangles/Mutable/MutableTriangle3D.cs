@@ -42,10 +42,27 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Mutable
         public double Point3Z { get; set; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(Point1X) || double.IsNaN(Point1Y) || double.IsNaN(Point1Z) ||
-               double.IsNaN(Point2X) || double.IsNaN(Point2Y) || double.IsNaN(Point2Z) ||
-               double.IsNaN(Point3X) || double.IsNaN(Point3Y) || double.IsNaN(Point3Z);
+        public bool IsValid
+            => !double.IsNaN(Point1X) &&
+               !double.IsNaN(Point1Y) &&
+               !double.IsNaN(Point1Z) &&
+               !double.IsNaN(Point2X) &&
+               !double.IsNaN(Point2Y) &&
+               !double.IsNaN(Point2Z) &&
+               !double.IsNaN(Point3X) &&
+               !double.IsNaN(Point3Y) &&
+               !double.IsNaN(Point3Z);
+
+        public bool IsInvalid
+            => double.IsNaN(Point1X) || 
+               double.IsNaN(Point1Y) || 
+               double.IsNaN(Point1Z) ||
+               double.IsNaN(Point2X) || 
+               double.IsNaN(Point2Y) || 
+               double.IsNaN(Point2Z) ||
+               double.IsNaN(Point3X) || 
+               double.IsNaN(Point3Y) || 
+               double.IsNaN(Point3Z);
 
 
         public MutableTriangle3D()
@@ -66,7 +83,7 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Mutable
             Point3Y = p3Y;
             Point3Z = p3Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 
@@ -76,7 +93,7 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Mutable
             Point1Y = y;
             Point1Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
 
             return this;
         }
@@ -87,7 +104,7 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Mutable
             Point2Y = y;
             Point2Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
 
             return this;
         }
@@ -98,7 +115,7 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Mutable
             Point3Y = y;
             Point3Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
 
             return this;
         }

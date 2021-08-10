@@ -45,7 +45,15 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
         public double ParameterMaxValue { get; }
 
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(OriginX) &&
+               !double.IsNaN(OriginY) &&
+               !double.IsNaN(DirectionX) &&
+               !double.IsNaN(DirectionY) &&
+               !double.IsNaN(ParameterMinValue) &&
+               !double.IsNaN(ParameterMaxValue);
+
+        public bool IsInvalid
             => double.IsNaN(OriginX) || 
                double.IsNaN(OriginY) ||
                double.IsNaN(DirectionX) || 

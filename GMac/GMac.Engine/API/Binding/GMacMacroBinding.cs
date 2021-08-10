@@ -17,7 +17,7 @@ using GMac.Engine.Compiler.Semantic.ASTDebug;
 using GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer;
 using TextComposerLib;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text;
 using TextComposerLib.Text.Linear;
 using Wolfram.NETLink;

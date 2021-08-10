@@ -33,10 +33,21 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Immutable
         public double Point3Y { get; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(Point1X) || double.IsNaN(Point1Y) ||
-               double.IsNaN(Point2X) || double.IsNaN(Point2Y) ||
-               double.IsNaN(Point3X) || double.IsNaN(Point3Y);
+        public bool IsValid
+            => !double.IsNaN(Point1X) &&
+               !double.IsNaN(Point1Y) &&
+               !double.IsNaN(Point2X) &&
+               !double.IsNaN(Point2Y) &&
+               !double.IsNaN(Point3X) &&
+               !double.IsNaN(Point3Y);
+
+        public bool IsInvalid
+            => double.IsNaN(Point1X) || 
+               double.IsNaN(Point1Y) ||
+               double.IsNaN(Point2X) || 
+               double.IsNaN(Point2Y) ||
+               double.IsNaN(Point3X) || 
+               double.IsNaN(Point3Y);
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
@@ -52,7 +63,7 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Immutable
             Point3X = p3X;
             Point3Y = p3Y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

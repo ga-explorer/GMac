@@ -19,7 +19,15 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
         public double DirectionZ { get; }
 
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(OriginX) &&
+               !double.IsNaN(OriginY) &&
+               !double.IsNaN(OriginZ) &&
+               !double.IsNaN(DirectionX) &&
+               !double.IsNaN(DirectionY) &&
+               !double.IsNaN(DirectionZ);
+
+        public bool IsInvalid
             => double.IsNaN(OriginX) || 
                double.IsNaN(OriginY) ||
                double.IsNaN(OriginZ) ||
@@ -49,7 +57,7 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
             DirectionY = direction.Y;
             DirectionZ = direction.Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

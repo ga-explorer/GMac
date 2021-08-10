@@ -239,7 +239,7 @@ namespace EuclideanGeometryLib.BasicMath
             return
                 Enumerable
                     .Range(firstSampleIndex, samplesCount)
-                    .Select(i => (double)i / (double)newSamplesCount)
+                    .Select(i => i / (double)newSamplesCount)
                     .Select(t => (1.0d - t) * firstValue + t * lastValue);
         }
 
@@ -581,7 +581,7 @@ namespace EuclideanGeometryLib.BasicMath
 
         public static Tuple2D Lerp(this double t, ITuple2D v1, ITuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent && !Double.IsNaN(t));
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid && !Double.IsNaN(t));
 
             var s = 1.0d - t;
 
@@ -593,7 +593,7 @@ namespace EuclideanGeometryLib.BasicMath
 
         public static Tuple3D Lerp(this double t, ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent && !Double.IsNaN(t));
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid && !Double.IsNaN(t));
 
             var s = 1.0d - t;
 
@@ -606,7 +606,7 @@ namespace EuclideanGeometryLib.BasicMath
 
         public static Tuple4D Lerp(this double t, ITuple4D v1, ITuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent && !Double.IsNaN(t));
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid && !Double.IsNaN(t));
 
             var s = 1.0d - t;
 

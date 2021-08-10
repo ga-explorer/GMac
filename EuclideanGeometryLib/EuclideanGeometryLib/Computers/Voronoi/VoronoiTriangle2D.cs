@@ -30,10 +30,21 @@ namespace EuclideanGeometryLib.Computers.Voronoi
 
         public double Point3Y => PointsList[PointIndex3].Y;
 
-        public bool HasNaNComponent
-            => double.IsNaN(Point1X) || double.IsNaN(Point1Y) ||
-               double.IsNaN(Point2X) || double.IsNaN(Point2Y) ||
-               double.IsNaN(Point3X) || double.IsNaN(Point3Y);
+        public bool IsValid
+            => !double.IsNaN(Point1X) && 
+               !double.IsNaN(Point1Y) &&
+               !double.IsNaN(Point2X) &&
+               !double.IsNaN(Point2Y) &&
+               !double.IsNaN(Point3X) &&
+               !double.IsNaN(Point3Y);
+
+        public bool IsInvalid
+            => double.IsNaN(Point1X) || 
+               double.IsNaN(Point1Y) ||
+               double.IsNaN(Point2X) || 
+               double.IsNaN(Point2Y) ||
+               double.IsNaN(Point3X) || 
+               double.IsNaN(Point3Y);
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 

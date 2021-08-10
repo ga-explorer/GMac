@@ -13,7 +13,7 @@ using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Multivectors;
 using GMac.Engine.Compiler.Semantic.AST;
 using GMac.Engine.Compiler.Semantic.AST.Extensions;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Generator
 {

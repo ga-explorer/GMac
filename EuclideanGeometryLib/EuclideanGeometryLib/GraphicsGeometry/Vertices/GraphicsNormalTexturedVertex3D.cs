@@ -6,7 +6,7 @@ using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
 {
     public sealed class GraphicsNormalTexturedVertex3D 
-        : IGraphicsNormalVertex3D
+        : IGraphicsVertex3D
     {
         public int Index { get; }
 
@@ -20,8 +20,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
 
         public ITuple2D TextureUv { get; set; }
 
-        public GraphicsNormal3D Normal { get; }
-            = new GraphicsNormal3D();
+        public IGraphicsNormal3D Normal { get; }
+            = new GraphicsNormal3D(0, 0, 0);
 
         public double X 
             => Point.X;
@@ -65,13 +65,18 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
         public bool HasNormal 
             => true;
 
-        public GraphicsVertexDataInfo3D DataInfo
-            => GraphicsVertexDataInfo3D.CreateNormalTexturedVertexDataInfo();
+        public GraphicsVertexDataKind3D DataKind
+            => GraphicsVertexDataKind3D.PositionNormalTextureVertex;
 
-        public bool HasNaNComponent
-            => Point.HasNaNComponent ||
-               TextureUv.HasNaNComponent ||
-               Normal.HasNaNComponent;
+        public bool IsValid
+            => Point.IsValid ||
+               TextureUv.IsValid ||
+               Normal.IsValid;
+
+        public bool IsInvalid
+            => Point.IsInvalid ||
+               TextureUv.IsInvalid ||
+               Normal.IsInvalid;
 
 
         public GraphicsNormalTexturedVertex3D(int index, ITuple3D point)
@@ -104,10 +109,5 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
             Normal.Set(vertex.Normal);
         }
 
-
-        public Tuple3D ToTuple3D()
-        {
-            return Point.ToTuple3D();
-        }
     }
 }

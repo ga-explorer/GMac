@@ -137,7 +137,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry
             => GraphicsTrianglesListGeometry3D.Create(trianglesList, reversePoints);
 
         
-        public static Tuple3D GetDisplacedPoint(this IGraphicsNormalVertex3D vertex, double t)
+        public static Tuple3D GetDisplacedPoint(this IGraphicsVertex3D vertex, double t)
         {
             return new Tuple3D(
                 vertex.Point.X + t * vertex.Normal.X,
@@ -146,7 +146,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry
             );
         }
         
-        public static LineSegment3D GetDisplacedLineSegment(this IGraphicsNormalVertex3D vertex, double t1, double t2)
+        public static LineSegment3D GetDisplacedLineSegment(this IGraphicsVertex3D vertex, double t1, double t2)
         {
             return LineSegment3D.Create(
                 new Tuple3D(

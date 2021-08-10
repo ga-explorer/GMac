@@ -39,9 +39,17 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Mutable
         public double Point2Y { get; set; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(Point1X) || double.IsNaN(Point1Y) ||
-               double.IsNaN(Point2X) || double.IsNaN(Point2Y);
+        public bool IsValid
+            => !double.IsNaN(Point1X) &&
+               !double.IsNaN(Point1Y) &&
+               !double.IsNaN(Point2X) &&
+               !double.IsNaN(Point2Y);
+
+        public bool IsInvalid
+            => double.IsNaN(Point1X) || 
+               double.IsNaN(Point1Y) ||
+               double.IsNaN(Point2X) || 
+               double.IsNaN(Point2Y);
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
@@ -58,7 +66,7 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Mutable
             Point2X = p2X;
             Point2Y = p2Y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

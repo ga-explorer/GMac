@@ -8,7 +8,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
     /// <summary>
     /// A 3-tuple of integer coordinates
     /// </summary>
-    public struct IntTuple3D : IEnumerable<int>
+    public readonly struct IntTuple3D : IEnumerable<int>
     {
         public static bool operator ==(IntTuple3D v1, IntTuple3D v2)
         {

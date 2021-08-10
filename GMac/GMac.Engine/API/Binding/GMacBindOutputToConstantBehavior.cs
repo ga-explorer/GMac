@@ -12,7 +12,7 @@
         Prevent = 0,
 
         /// <summary>
-        /// Binding an output parameter to a constant is ignored. No binding occures
+        /// Binding an output parameter to a constant is ignored. No binding occurs
         /// </summary>
         Ignore = 1,
 

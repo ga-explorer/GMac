@@ -111,7 +111,7 @@ namespace GMac.IDE.CodeGen
                 return;
 
             //Make an empty copy of the selected generator to sure previous generation session data are removed
-            activeGenerator = activeGenerator.CreateEmptyGenerator();
+            activeGenerator = activeGenerator.CreateEmptyComposer();
 
             activeGenerator.MacroGenDefaults.AllowGenerateMacroCode = checkBoxGenerateMacroCode.Checked;
 

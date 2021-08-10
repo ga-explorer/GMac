@@ -4,7 +4,7 @@ using CodeComposerLib.Irony.SourceCode;
 using GMac.Engine.Compiler.Semantic.AST;
 using GMac.Engine.Compiler.Semantic.ASTConstants;
 using Irony.Parsing;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.Engine.Compiler.Semantic.ASTGenerator
 {

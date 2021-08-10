@@ -49,19 +49,19 @@ namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer
         {
             var expr = computedVar.RhsExpr;
             var exprText = expr.ToString();
-            var tempVar = computedVar as GMacCbTempVariable;
 
-            if (tempVar != null)
+            if (computedVar is GMacCbTempVariable tempVar)
             {
-                //If this whole expression is already assigned to a temp variable add the temp to the output.
+                //If this whole expression is already assigned to a temp variable,
+                //add the temp to the output.
                 AddTempVariable(exprText, tempVar);
 
                 return;
             }
 
-            //If this whole expression is instead assigned to an output variabe create a factored expression
-            //temp variable and add it to the output with use count 1 and add the original output
-            //variable to the output
+            //If this whole expression is instead assigned to an output variable,
+            //create a factored expression temp variable and add it to the output
+            //with use count 1 and add the original output variable to the output
             if (expr.IsSimpleConstantOrLowLevelVariable() == false && _tempVarsDictionary.ContainsKey(exprText) == false)
             {
                 tempVar = new GMacCbTempVariable(CodeBlock.GetNewVarName(), expr, true) { SubExpressionUseCount = 1 };

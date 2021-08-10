@@ -150,10 +150,10 @@ namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer
             if (expr.ArgumentsCount < 3 || expr.HeadText != "Plus")
                 return expr;
 
-            var arg1 = SteExpressionUtils.CreateFunction(expr.HeadText, expr.Arguments.Take(expr.ArgumentsCount - 1).ToArray());
+            var arg1 = SteExpression.CreateFunction(expr.HeadText, expr.Arguments.Take(expr.ArgumentsCount - 1).ToArray());
             var arg2 = expr.LastArgument;
 
-            return SteExpressionUtils.CreateFunction(expr.HeadText, arg1, arg2);
+            return SteExpression.CreateFunction(expr.HeadText, arg1, arg2);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer
         /// <returns></returns>
         private SteExpression ReduceSubExpression(SteExpression initialExpr)
         {
-            string initialExprText = initialExpr.ToString();
+            var initialExprText = initialExpr.ToString();
 
             //Try to find the initial expression in the cache
             if (_reducedSubExpressionsCache.TryGetValue(initialExprText, out var reducedExpr))
@@ -188,13 +188,13 @@ namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer
                 rhsExprNewArgs[i] = ReduceSubExpression(reducedExpr[i]);
 
             //Create a new RHS expression from the converted arguments
-            reducedExpr = SteExpressionUtils.CreateFunction(reducedExpr.HeadText, rhsExprNewArgs);
+            reducedExpr = SteExpression.CreateFunction(reducedExpr.HeadText, rhsExprNewArgs);
 
             //Find or create a temp variable to hold the new RHS expression
             var tempVar = GetTempVariable(reducedExpr);
 
             //Return the final temp variable symbol expression
-            reducedExpr = SteExpressionUtils.CreateVariable(tempVar.LowLevelName);
+            reducedExpr = SteExpression.CreateVariable(tempVar.LowLevelName);
 
             //Add reduced expression to cache
             _reducedSubExpressionsCache.Add(initialExprText, reducedExpr);
@@ -222,7 +222,7 @@ namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer
             for (var i = 0; i < rhsExpr.ArgumentsCount; i++)
                 rhsExprNewArgs[i] = ReduceSubExpression(rhsExpr[i]);
 
-            outputVar.RhsExpr = SteExpressionUtils.CreateFunction(rhsExpr.HeadText, rhsExprNewArgs);
+            outputVar.RhsExpr = SteExpression.CreateFunction(rhsExpr.HeadText, rhsExprNewArgs);
 
             _outputVars.Add(outputVar);
         }

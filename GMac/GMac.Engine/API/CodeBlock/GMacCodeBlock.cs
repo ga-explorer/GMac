@@ -12,7 +12,7 @@ namespace GMac.Engine.API.CodeBlock
 {
     /// <summary>
     /// This class holds the final intermediate low-level optimized computations generated from a macro after
-    /// binding its parameters to variables or constants. The terget code is generated based on the information
+    /// binding its parameters to variables or constants. The target code is generated based on the information
     /// in this class
     /// </summary>
     public sealed class GMacCodeBlock

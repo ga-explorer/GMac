@@ -6,7 +6,8 @@ using EuclideanGeometryLib.Borders.Space2D.Mutable;
 
 namespace EuclideanGeometryLib.Accelerators.BIH.Space2D
 {
-    public sealed class AccBihNodeInternal2D<T> : IAccBihNode2D<T> 
+    public sealed class AccBihNodeInternal2D<T> : 
+        IAccBihNode2D<T> 
         where T : IFiniteGeometricShape2D
     {
         private readonly T[] _geometricObjectsArray;
@@ -15,7 +16,9 @@ namespace EuclideanGeometryLib.Accelerators.BIH.Space2D
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent => false;
+        public bool IsValid => true;
+
+        public bool IsInvalid => false;
 
         public int Count
             => LastObjectIndex - FirstObjectIndex + 1;

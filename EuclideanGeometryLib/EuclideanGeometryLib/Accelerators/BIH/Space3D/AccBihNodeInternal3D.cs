@@ -12,9 +12,12 @@ namespace EuclideanGeometryLib.Accelerators.BIH.Space3D
         private readonly T[] _geometricObjectsArray;
         private readonly double[] _clipValues = new double[2];
 
+
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent => false;
+        public bool IsValid => true;
+
+        public bool IsInvalid => false;
 
         public int Count
             => LastObjectIndex - FirstObjectIndex + 1;

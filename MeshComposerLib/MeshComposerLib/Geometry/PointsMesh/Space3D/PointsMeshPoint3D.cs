@@ -1,6 +1,5 @@
 ﻿using DataStructuresLib.Basic;
 using EuclideanGeometryLib.BasicMath.Tuples;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace MeshComposerLib.Geometry.PointsMesh.Space3D
 {
@@ -61,8 +60,11 @@ namespace MeshComposerLib.Geometry.PointsMesh.Space3D
         public double Item3
             => Z;
 
-        public bool HasNaNComponent 
-            => Point.HasNaNComponent;
+        public bool IsValid 
+            => Point.IsValid;
+
+        public bool IsInvalid 
+            => Point.IsInvalid;
 
 
         internal PointsMeshPoint3D(IPointsMesh3D baseMesh, int pointIndex1, int pointIndex2)
@@ -70,12 +72,6 @@ namespace MeshComposerLib.Geometry.PointsMesh.Space3D
             BaseMesh = baseMesh;
             PointIndex1 = pointIndex1.Mod(baseMesh.Count1);
             PointIndex2 = pointIndex2.Mod(baseMesh.Count2);
-        }
-
-
-        public Tuple3D ToTuple3D()
-        {
-            return new Tuple3D(Point);
         }
     }
 }

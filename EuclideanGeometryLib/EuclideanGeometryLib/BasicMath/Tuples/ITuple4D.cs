@@ -1,9 +1,10 @@
 ﻿using DataStructuresLib.Basic;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples
 {
-    public interface ITuple4D : IGeometryElement, IQuad<double>
+    public interface ITuple4D : 
+        IGeometricElement, 
+        IQuad<double>
     {
         double X { get; }
 
@@ -12,8 +13,5 @@ namespace EuclideanGeometryLib.BasicMath.Tuples
         double Z { get; }
 
         double W { get; }
-
-
-        Tuple4D ToTuple4D();
     }
 }

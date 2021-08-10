@@ -9,8 +9,8 @@ namespace GMac.Engine.API.Target.GMacDSL
     {
         public override string DefaultFileExtension => "gmac";
 
-        internal GMacDslGMacLanguageServer(GMacDslCodeGenerator codeGenerator, GMacDslSyntaxFactory syntaxFactory)
-            : base(codeGenerator, syntaxFactory)
+        internal GMacDslGMacLanguageServer(CclGMacDslCodeGenerator codeComposer, CclGMacDslSyntaxFactory syntaxFactory)
+            : base(codeComposer, syntaxFactory)
         {
         }
 

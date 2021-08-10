@@ -12,7 +12,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
     /// 3- 2D Normals
     /// 4- Complex numbers
     /// </summary>
-    public struct IntTuple2D : IEnumerable<int>
+    public readonly struct IntTuple2D : IEnumerable<int>
     {
         public static IntTuple2D operator -(IntTuple2D v1)
         {

@@ -17,29 +17,29 @@ namespace GMac.Engine.API.Target
     /// This class can be used to generate syntactically correct text code for some target language like
     /// comments, assignments, variable declarations, expressions, etc.
     /// </summary>
-    public abstract class GMacLanguageServer : LanguageServer
+    public abstract class GMacLanguageServer : CclLanguageServerBase
     {
         public static GMacCSharpLanguageServer CSharp4()
         {
             return new GMacCSharpLanguageServer(
-                CSharpUtils.CSharp4CodeGenerator(), 
-                CSharpUtils.CSharp4SyntaxFactory()
-                );
+                CclCSharpUtils.CSharp4CodeComposer(), 
+                CclCSharpUtils.CSharp4SyntaxFactory()
+            );
         }
 
         public static ExcelGMacLanguageServer Excel2007()
         {
             return new ExcelGMacLanguageServer(
-                ExcelUtils.ExcelCodeGenerator(),
-                ExcelUtils.ExcelSyntaxFactory()
+                CclExcelUtils.ExcelCodeComposer(),
+                CclExcelUtils.ExcelSyntaxFactory()
             );
         }
 
         public static GMacCppLanguageServer Cpp11()
         {
             return new GMacCppLanguageServer(
-                CppUtils.Cpp11CodeGenerator(), 
-                CppUtils.Cpp11SyntaxFactory()
+                CclCppUtils.Cpp11CodeComposer(), 
+                CclCppUtils.Cpp11SyntaxFactory()
             );
         }
 
@@ -71,9 +71,9 @@ namespace GMac.Engine.API.Target
         public static GMacDslGMacLanguageServer GMacDsl()
         {
             return new GMacDslGMacLanguageServer(
-                GMacDslUtils.GMacDslCodeGenerator(),
-                GMacDslUtils.GMacDslSyntaxFactory()
-                );
+                CclGMacDslUtils.GMacDslCodeComposer(),
+                CclGMacDslUtils.GMacDslSyntaxFactory()
+            );
         }
 
 
@@ -83,8 +83,8 @@ namespace GMac.Engine.API.Target
         public GMacMathematicaExpressionConverter ExpressionConverter { get; protected set; }
 
 
-        protected GMacLanguageServer(LanguageCodeGenerator codeGenerator, LanguageSyntaxFactory syntaxFactory)
-            : base(codeGenerator, syntaxFactory)
+        protected GMacLanguageServer(CclLanguageCodeGeneratorBase codeComposer, CclLanguageSyntaxFactory syntaxFactory)
+            : base(codeComposer, syntaxFactory)
         {
         }
 

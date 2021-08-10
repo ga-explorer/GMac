@@ -15,7 +15,7 @@ namespace GraphicsComposerLib.Samples.Samples.Computers.Voronoi
         public static void Execute()
         {
             //Create a set of random points
-            var randGen = new RandomGeometryGenerator(10);
+            var randGen = new RandomEuclideanGeometryComposer(10);
             var boundingBox = BoundingBox2D.Create(-100, -100, 100, 100);
 
             var pointsArray = 

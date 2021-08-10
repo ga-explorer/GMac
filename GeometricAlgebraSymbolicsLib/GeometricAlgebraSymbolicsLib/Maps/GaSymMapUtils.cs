@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;

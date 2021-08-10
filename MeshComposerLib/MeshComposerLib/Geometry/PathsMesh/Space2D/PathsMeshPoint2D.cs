@@ -55,8 +55,11 @@ namespace MeshComposerLib.Geometry.PathsMesh.Space2D
         public double Item2
             => Y;
 
-        public bool HasNaNComponent 
-            => Point.HasNaNComponent;
+        public bool IsValid 
+            => Point.IsValid;
+
+        public bool IsInvalid 
+            => Point.IsInvalid;
 
 
         internal PathsMeshPoint2D(IPathsMesh2D baseMesh, int pathIndex, int pathPointIndex)
@@ -66,10 +69,5 @@ namespace MeshComposerLib.Geometry.PathsMesh.Space2D
             PathPointIndex = pathPointIndex.Mod(baseMesh.PathPointsCount);
         }
 
-
-        public Tuple2D ToTuple2D()
-        {
-            return new Tuple2D(Point);
-        }
     }
 }

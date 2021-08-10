@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeComposerLib.Irony.SourceCode;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using DataStructuresLib.BooleanPattern;
 using GeometricAlgebraStructuresLib.Frames;
 using GMac.Engine.Compiler.Semantic.AST;

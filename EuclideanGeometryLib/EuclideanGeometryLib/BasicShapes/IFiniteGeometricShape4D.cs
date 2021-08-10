@@ -3,7 +3,7 @@
 namespace EuclideanGeometryLib.BasicShapes
 {
     public interface IFiniteGeometricShape4D 
-        : IGeometryElement, IIntersectable
+        : IGeometricElement, IIntersectable
     {
         //BoundingBox4D GetBoundingBox();
 

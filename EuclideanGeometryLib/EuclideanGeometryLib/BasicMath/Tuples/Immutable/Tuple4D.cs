@@ -1,9 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 {
-    public struct Tuple4D : ITuple4D
+    public readonly struct Tuple4D : 
+        ITuple4D,
+        IEquatable<Tuple4D>,
+        IEquatable<Tuple4D?>
     {
         public Tuple4D CreateAffineVector(double x, double y, double z)
         {
@@ -18,42 +22,42 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static Tuple4D operator -(Tuple4D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid);
 
             return new Tuple4D(-v1.X, -v1.Y, -v1.Z, -v1.W);
         }
 
         public static Tuple4D operator +(Tuple4D v1, Tuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new Tuple4D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z, v1.W + v2.W);
         }
 
         public static Tuple4D operator -(Tuple4D v1, Tuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new Tuple4D(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z, v1.W - v2.W);
         }
 
         public static Tuple4D operator *(Tuple4D v1, double s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new Tuple4D(v1.X * s, v1.Y * s, v1.Z * s, v1.W * s);
         }
 
         public static Tuple4D operator *(double s, Tuple4D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new Tuple4D(v1.X * s, v1.Y * s, v1.Z * s, v1.W * s);
         }
 
         public static Tuple4D operator /(Tuple4D v1, double s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             Debug.Assert(!s.IsAlmostZero());
 
@@ -63,24 +67,16 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static bool operator ==(Tuple4D v1, Tuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(v1.IsValid && v2.IsValid);
 
-            return
-                v1.X.IsAlmostEqual(v2.X) &&
-                v1.Y.IsAlmostEqual(v2.Y) &&
-                v1.Z.IsAlmostEqual(v2.Z) &&
-                v1.W.IsAlmostEqual(v2.W);
+            return v1.Equals(v2);
         }
 
         public static bool operator !=(Tuple4D v1, Tuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(v1.IsValid && v2.IsValid);
 
-            return
-                !v1.X.IsAlmostEqual(v2.X) ||
-                !v1.Y.IsAlmostEqual(v2.Y) ||
-                !v1.Z.IsAlmostEqual(v2.Z) ||
-                !v1.W.IsAlmostEqual(v2.W);
+            return !v1.Equals(v2);
         }
 
         
@@ -139,11 +135,18 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
             }
         }
 
-        /// <summary>
-        /// True if this tuple contains any NaN components
-        /// </summary>
-        public bool HasNaNComponent =>
-            double.IsNaN(X) || double.IsNaN(Y) || double.IsNaN(Z) || double.IsNaN(W);
+        
+        public bool IsValid =>
+            !double.IsNaN(X) && 
+            !double.IsNaN(Y) && 
+            !double.IsNaN(Z) && 
+            !double.IsNaN(W);
+        
+        public bool IsInvalid =>
+            double.IsNaN(X) || 
+            double.IsNaN(Y) || 
+            double.IsNaN(Z) || 
+            double.IsNaN(W);
 
 
         public Tuple4D(double x, double y, double z, double w)
@@ -156,7 +159,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public Tuple4D(ITuple4D v)
         {
-            Debug.Assert(!v.HasNaNComponent);
+            Debug.Assert(!v.IsInvalid);
 
             X = v.X;
             Y = v.Y;
@@ -165,30 +168,27 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
         }
 
 
-        public Tuple4D ToTuple4D()
-            => this;
-
         public bool Equals(Tuple4D tuple)
         {
-            return X.Equals(tuple.X) && Y.Equals(tuple.Y) && Z.Equals(tuple.Z) && W.Equals(tuple.W);
+            return X.Equals(tuple.X) && 
+                   Y.Equals(tuple.Y) && 
+                   Z.Equals(tuple.Z) && 
+                   W.Equals(tuple.W);
+        }
+
+        public bool Equals(Tuple4D? other)
+        {
+            return other.HasValue && Equals(other.Value);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            return obj is Tuple4D && Equals((Tuple4D)obj);
+            return obj is Tuple4D other && Equals(other);
         }
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                var hashCode = X.GetHashCode();
-                hashCode = (hashCode * 397) ^ Y.GetHashCode();
-                hashCode = (hashCode * 397) ^ Z.GetHashCode();
-                hashCode = (hashCode * 397) ^ W.GetHashCode();
-                return hashCode;
-            }
+            return HashCode.Combine(X, Y, Z, W);
         }
 
         public override string ToString()

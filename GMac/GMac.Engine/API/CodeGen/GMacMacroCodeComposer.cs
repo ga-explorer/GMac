@@ -7,7 +7,7 @@ using GMac.Engine.API.CodeBlock;
 using GMac.Engine.API.Target;
 using GMac.Engine.AST;
 using GMac.Engine.AST.Symbols;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.Engine.API.CodeGen
 {

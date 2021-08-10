@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 {
@@ -27,8 +26,13 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         public double Item4
             => W;
 
+        public bool IsValid =>
+            !double.IsNaN(X) &&
+            !double.IsNaN(Y) &&
+            !double.IsNaN(Z) &&
+            !double.IsNaN(W);
 
-        public bool HasNaNComponent =>
+        public bool IsInvalid =>
             double.IsNaN(X) || 
             double.IsNaN(Y) || 
             double.IsNaN(Z) || 
@@ -46,12 +50,12 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             Z = z;
             W = w;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public MutableTuple4D(ITuple4D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            Debug.Assert(!tuple.IsInvalid);
 
             X = tuple.X;
             Y = tuple.Y;
@@ -170,9 +174,6 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             return this;
         }
 
-
-        public Tuple4D ToTuple4D()
-            => new Tuple4D(X, Y, Z, W);
 
         public override string ToString()
         {

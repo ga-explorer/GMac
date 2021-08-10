@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Text;
 
@@ -8,7 +9,10 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
     /// <summary>
     /// A 3-tuple of double precision coordinates
     /// </summary>
-    public struct Tuple3D : ITuple3D
+    public readonly struct Tuple3D : 
+        ITuple3D,
+        IEquatable<Tuple3D>,
+        IEquatable<Tuple3D?>
     {
         public static Tuple3D Zero { get; } = new Tuple3D(0, 0, 0);
 
@@ -38,35 +42,35 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static Tuple3D operator -(Tuple3D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid);
 
             return new Tuple3D(-v1.X, -v1.Y, -v1.Z);
         }
 
         public static Tuple3D operator +(Tuple3D v1, Tuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new Tuple3D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
         }
 
         public static Tuple3D operator -(Tuple3D v1, Tuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new Tuple3D(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
         }
 
         public static Tuple3D operator *(Tuple3D v1, double s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new Tuple3D(v1.X * s, v1.Y * s, v1.Z * s);
         }
 
         public static Tuple3D operator *(double s, Tuple3D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new Tuple3D(v1.X * s, v1.Y * s, v1.Z * s);
         }
@@ -74,7 +78,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
         public static ComplexTuple3D operator *(Tuple3D v1, Complex s)
         {
             Debug.Assert(
-                !v1.HasNaNComponent && 
+                !v1.IsInvalid && 
                 !double.IsNaN(s.Real) &&
                 !double.IsNaN(s.Imaginary)
             );
@@ -85,7 +89,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
         public static ComplexTuple3D operator *(Complex s, Tuple3D v1)
         {
             Debug.Assert(
-                !v1.HasNaNComponent && 
+                !v1.IsInvalid && 
                 !double.IsNaN(s.Real) &&
                 !double.IsNaN(s.Imaginary)
             );
@@ -95,7 +99,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static Tuple3D operator /(Tuple3D v1, double s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             s = 1.0d / s;
 
@@ -104,22 +108,16 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static bool operator ==(Tuple3D v1, Tuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(v1.IsValid && v2.IsValid);
 
-            return
-                v1.X.IsAlmostEqual(v2.X) &&
-                v1.Y.IsAlmostEqual(v2.Y) &&
-                v1.Z.IsAlmostEqual(v2.Z);
+            return v1.Equals(v2);
         }
 
         public static bool operator !=(Tuple3D v1, Tuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
-            return
-                !v1.X.IsAlmostEqual(v2.X) ||
-                !v1.Y.IsAlmostEqual(v2.Y) ||
-                !v1.Z.IsAlmostEqual(v2.Z);
+            return !v1.Equals(v2);
         }
 
 
@@ -156,8 +154,11 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
                 return 0.0d;
             }
         }
+
+        public bool IsValid =>
+           !double.IsNaN(X) && !double.IsNaN(Y) && !double.IsNaN(Z);
         
-        public bool HasNaNComponent =>
+        public bool IsInvalid =>
             double.IsNaN(X) || double.IsNaN(Y) || double.IsNaN(Z);
 
 
@@ -167,12 +168,12 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
             Y = y;
             Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public Tuple3D(ITuple3D v)
         {
-            Debug.Assert(!v.HasNaNComponent);
+            Debug.Assert(!v.IsInvalid);
 
             X = v.X;
             Y = v.Y;
@@ -180,29 +181,29 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
         }
 
 
-        public Tuple3D ToTuple3D()
-            => this;
-
         public bool Equals(Tuple3D tuple)
         {
-            return X.Equals(tuple.X) && Y.Equals(tuple.Y) && Z.Equals(tuple.Z);
+            return X.Equals(tuple.X) && 
+                   Y.Equals(tuple.Y) && 
+                   Z.Equals(tuple.Z);
+        }
+
+        public bool Equals(Tuple3D? other)
+        {
+            return other.HasValue && Equals(other.Value);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            return obj is Tuple3D && Equals((Tuple3D)obj);
+            if (ReferenceEquals(obj, null))
+                return false;
+
+            return obj is Tuple3D other && Equals(other);
         }
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                var hashCode = X.GetHashCode();
-                hashCode = (hashCode * 397) ^ Y.GetHashCode();
-                hashCode = (hashCode * 397) ^ Z.GetHashCode();
-                return hashCode;
-            }
+            return HashCode.Combine(X, Y, Z);
         }
 
         public override string ToString()

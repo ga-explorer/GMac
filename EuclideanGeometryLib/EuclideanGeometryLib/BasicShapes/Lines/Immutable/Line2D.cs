@@ -35,9 +35,17 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
         public double DirectionY { get; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(OriginX) || double.IsNaN(OriginY) ||
-               double.IsNaN(DirectionX) || double.IsNaN(DirectionY);
+        public bool IsValid
+            => !double.IsNaN(OriginX) &&
+               !double.IsNaN(OriginY) &&
+               !double.IsNaN(DirectionX) &&
+               !double.IsNaN(DirectionY);
+
+        public bool IsInvalid
+            => double.IsNaN(OriginX) || 
+               double.IsNaN(OriginY) ||
+               double.IsNaN(DirectionX) || 
+               double.IsNaN(DirectionY);
 
 
         internal Line2D(double originX, double originY, double directionX, double directionY)

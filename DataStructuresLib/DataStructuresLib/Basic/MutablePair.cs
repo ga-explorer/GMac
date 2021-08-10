@@ -7,7 +7,8 @@ namespace DataStructuresLib.Basic
     /// This class represents a mutable pair of items of the same type
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class MutablePair<T> : IPair<T>
+    public sealed class MutablePair<T> : 
+        IPair<T>
     {
         public T Item1 { get; set; }
 

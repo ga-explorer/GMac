@@ -8,8 +8,8 @@ namespace GMac.Engine.API.Target.Excel
     {
         public override string DefaultFileExtension => "xlsx";
 
-        internal ExcelGMacLanguageServer(ExcelCodeGenerator codeGenerator, ExcelSyntaxFactory syntaxFactory)
-            : base(codeGenerator, syntaxFactory)
+        internal ExcelGMacLanguageServer(CclExcelCodeGenerator codeComposer, CclExcelSyntaxFactory syntaxFactory)
+            : base(codeComposer, syntaxFactory)
         {
             ExpressionConverter = new MathematicaToExcelConverter();
         }

@@ -29,11 +29,21 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
 
         public double Direction2Y { get; }
 
+        public bool IsValid
+            => !double.IsNaN(OriginX) &&
+               !double.IsNaN(OriginY) &&
+               !double.IsNaN(Direction1X) &&
+               !double.IsNaN(Direction1Y) &&
+               !double.IsNaN(Direction2X) &&
+               !double.IsNaN(Direction2Y);
 
-        public bool HasNaNComponent
-            => double.IsNaN(OriginX) || double.IsNaN(OriginY) ||
-               double.IsNaN(Direction1X) || double.IsNaN(Direction1Y) ||
-               double.IsNaN(Direction2X) || double.IsNaN(Direction2Y);
+        public bool IsInvalid
+            => double.IsNaN(OriginX) || 
+               double.IsNaN(OriginY) ||
+               double.IsNaN(Direction1X) || 
+               double.IsNaN(Direction1Y) ||
+               double.IsNaN(Direction2X) || 
+               double.IsNaN(Direction2Y);
 
 
         internal Beam2D(double pX, double pY, double v1X, double v1Y, double v2X, double v2Y)

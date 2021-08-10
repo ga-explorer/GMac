@@ -17,7 +17,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
     {
         public abstract GraphicsPrimitiveType3D PrimitiveType { get; }
 
-        public IEnumerable<IGraphicsVertex3D> Vertices{
+        public IEnumerable<IGraphicsVertex3D> Vertices
+        {
             get
             {
                 if (ContainsVertexNormals)
@@ -69,8 +70,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
         public GraphicsVertexNormalComputationMethod NormalComputationMethod { get; set; }
             = GraphicsVertexNormalComputationMethod.AverageNormals;
 
-        private GraphicsNormal3D[] _vertexNormals;
-        public IReadOnlyList<GraphicsNormal3D> VertexNormals 
+        private IGraphicsNormal3D[] _vertexNormals;
+        public IReadOnlyList<IGraphicsNormal3D> VertexNormals 
             => _vertexNormals;
 
         private ITuple2D[] _vertexUVs;
@@ -121,7 +122,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
             _vertexColors = null;
         }
 
-        public void SetVertexNormals(GraphicsNormal3D[] vertexNormals)
+        public void SetVertexNormals(IGraphicsNormal3D[] vertexNormals)
         {
             if (vertexNormals.Length != VertexPoints.Count)
                 throw new InvalidOperationException();
@@ -181,7 +182,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
                     !double.IsNaN(angle1) &&
                     !double.IsNaN(angle2) &&
                     !double.IsNaN(angle3) &&
-                    !normal.HasNaNComponent
+                    !normal.IsInvalid
                 );
 
                 //Update normals of triangle vertices. See here for more information:
@@ -201,7 +202,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
                     VectorAlgebraUtils.GetTriangleNormal(vertex1, vertex2, vertex3);
                 
                 //For debugging only
-                Debug.Assert(!normal.HasNaNComponent);
+                Debug.Assert(!normal.IsInvalid);
 
                 normal1.Update(normal);
                 normal2.Update(normal);
@@ -217,7 +218,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
                     VectorAlgebraUtils.GetTriangleNormal(vertex1, vertex2, vertex3);
 
                 //For debugging only
-                Debug.Assert(!normal.HasNaNComponent);
+                Debug.Assert(!normal.IsInvalid);
 
                 normal1.Update(normal);
                 normal2.Update(normal);

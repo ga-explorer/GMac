@@ -1,4 +1,5 @@
 ﻿using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraStructuresLib.Frames;
 using GMac.Benchmarks.Samples.Computations;
 using TextComposerLib.Text.Linear;

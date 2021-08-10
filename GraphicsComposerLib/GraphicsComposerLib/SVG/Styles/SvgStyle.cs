@@ -1247,7 +1247,7 @@ namespace GraphicsComposerLib.SVG.Styles
                 .IncreaseIndentation();
 
             foreach (var pair in _propertiesTable)
-                composer.AppendAtNewLine(pair.Value);
+                composer.AppendAtNewLine(pair.Value.ToString());
 
             composer
                 .DecreaseIndentation()

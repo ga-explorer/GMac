@@ -5,7 +5,7 @@ using CodeComposerLib.Irony.Semantic.Symbol;
 using GMac.Engine.AST.Symbols;
 using GMac.Engine.Compiler.Semantic.ASTGenerator;
 using GMac.Engine.Compiler.Syntax;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text;
 
 namespace GMac.Engine.Compiler

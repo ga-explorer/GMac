@@ -11,7 +11,7 @@ using EuclideanGeometryLib.GraphicsGeometry.Vertices;
 
 namespace EuclideanGeometryLib.GraphicsGeometry.Composers
 {
-    public sealed class GraphicsLinesListGeometryComposer3D
+    public class GraphicsLinesListGeometryComposer3D
     {
         private readonly List<IGraphicsVertex3D> _verticesList 
             = new List<IGraphicsVertex3D>();

@@ -7,6 +7,7 @@ using CodeComposerLib.MathML.Elements.Layout.Elementary;
 using CodeComposerLib.MathML.Elements.Layout.Tabular;
 using CodeComposerLib.MathML.Elements.Tokens;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Frames;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraStructuresLib.Frames;

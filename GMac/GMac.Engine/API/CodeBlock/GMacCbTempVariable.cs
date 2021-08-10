@@ -46,7 +46,7 @@ namespace GMac.Engine.API.CodeBlock
                 if (IsFactoredSubExpression == false)
                     return true;
 
-                ////This condition prodeces simplest rhs expressions per computation but take a lot of time
+                ////This condition produces simplest rhs expressions per computation but take a lot of time
                 ////during sub-expression substitution
                 //if (RhsExpr.IsSimpleConstantOrLowLevelVariable() == false)
                 //    return true;
@@ -106,11 +106,11 @@ namespace GMac.Engine.API.CodeBlock
         }
 
 
-        internal GMacCbTempVariable(string lowLevelName, SteExpression rhsExpr, bool isFactoreSubExpression)
+        internal GMacCbTempVariable(string lowLevelName, SteExpression rhsExpr, bool isFactoredSubExpression)
             : base(lowLevelName, rhsExpr)
         {
             LowLevelId = -1;
-            IsFactoredSubExpression = isFactoreSubExpression;
+            IsFactoredSubExpression = isFactoredSubExpression;
             NameIndex = -1;
         }
 

@@ -10,9 +10,6 @@ using EuclideanGeometryLib.Borders.Space2D.Immutable;
 
 namespace EuclideanGeometryLib.Borders.Space2D.Mutable
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public sealed class MutableBoundingBox2D : IBoundingBox2D
     {
         public static MutableBoundingBox2D CreateInfinite()
@@ -348,7 +345,13 @@ namespace EuclideanGeometryLib.Borders.Space2D.Mutable
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent =>
+        public bool IsValid =>
+            !double.IsNaN(MinX) &&
+            !double.IsNaN(MinY) &&
+            !double.IsNaN(MaxX) &&
+            !double.IsNaN(MaxY);
+
+        public bool IsInvalid =>
             double.IsNaN(MinX) ||
             double.IsNaN(MinY) ||
             double.IsNaN(MaxX) ||
@@ -400,7 +403,7 @@ namespace EuclideanGeometryLib.Borders.Space2D.Mutable
 
         private void ValidateValues()
         {
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
 
             if (MaxX < MinX)
             {

@@ -86,7 +86,12 @@ namespace EuclideanGeometryLib.Borders.Space2D.Immutable
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(Radius) &&
+               !double.IsNaN(CenterX) &&
+               !double.IsNaN(CenterY);
+
+        public bool IsInvalid
             => double.IsNaN(Radius) || 
                double.IsNaN(CenterX) || 
                double.IsNaN(CenterY);
@@ -98,7 +103,7 @@ namespace EuclideanGeometryLib.Borders.Space2D.Immutable
             CenterY = center.Y;
             Radius = Math.Abs(radius);
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         internal BoundingSphere2D(double centerX, double centerY, double radius)
@@ -107,7 +112,7 @@ namespace EuclideanGeometryLib.Borders.Space2D.Immutable
             CenterY = centerY;
             Radius = Math.Abs(radius);
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

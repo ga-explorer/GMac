@@ -1,5 +1,6 @@
 ﻿using System;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraStructuresLib.Frames;
 using GMac.Engine.API.Binding;
 using GMac.Engine.API.CodeGen;

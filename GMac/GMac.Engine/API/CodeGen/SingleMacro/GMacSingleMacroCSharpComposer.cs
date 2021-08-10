@@ -82,7 +82,7 @@ namespace GMac.Engine.API.CodeGen.SingleMacro
         }
 
 
-        public override GMacCodeLibraryComposer CreateEmptyGenerator()
+        public override GMacCodeLibraryComposer CreateEmptyComposer()
         {
             return new GMacSingleMacroCSharpComposer(MacroBinding);
         }

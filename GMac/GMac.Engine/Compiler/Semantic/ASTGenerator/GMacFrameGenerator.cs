@@ -13,7 +13,7 @@ using GMac.Engine.Compiler.Semantic.ASTConstants;
 using GMac.Engine.Compiler.Syntax;
 using GMac.Engine.Math;
 using Irony.Parsing;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.Engine.Compiler.Semantic.ASTGenerator
 {

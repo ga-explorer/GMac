@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using DataStructuresLib.Combinations;
 
 namespace GeometricAlgebraStructuresLib.Frames

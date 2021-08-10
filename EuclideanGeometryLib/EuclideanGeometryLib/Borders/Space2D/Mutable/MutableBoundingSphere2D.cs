@@ -91,7 +91,12 @@ namespace EuclideanGeometryLib.Borders.Space2D.Mutable
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(Radius) &&
+               !double.IsNaN(CenterX) &&
+               !double.IsNaN(CenterY);
+
+        public bool IsInvalid
             => double.IsNaN(Radius) || 
                double.IsNaN(CenterX) || 
                double.IsNaN(CenterY);
@@ -122,7 +127,7 @@ namespace EuclideanGeometryLib.Borders.Space2D.Mutable
 
         private void ValidateValues()
         {
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
 
             if (Radius < 0) Radius = -Radius;
         }

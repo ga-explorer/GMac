@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;
 using GeometricAlgebraStructuresLib.Frames;

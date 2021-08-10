@@ -5,7 +5,7 @@ using EuclideanGeometryLib.Borders.Space2D.Mutable;
 namespace EuclideanGeometryLib.BasicShapes
 {
     public interface IFiniteGeometricShape2D 
-        : IGeometryElement, IIntersectable
+        : IGeometricElement, IIntersectable
     {
         BoundingBox2D GetBoundingBox();
 

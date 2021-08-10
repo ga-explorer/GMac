@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 {
@@ -17,11 +16,13 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         public double Item2
             => Y;
 
-        /// <summary>
-        /// True if this tuple contains any NaN components
-        /// </summary>
-        public bool HasNaNComponent =>
-            double.IsNaN(X) || double.IsNaN(Y);
+        public bool IsValid =>
+            !double.IsNaN(X) && 
+            !double.IsNaN(Y);
+
+        public bool IsInvalid =>
+            double.IsNaN(X) || 
+            double.IsNaN(Y);
 
         /// <summary>
         /// Get or set the ith component of this tuple
@@ -59,12 +60,12 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             X = x;
             Y = y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public MutableTuple2D(ITuple2D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            Debug.Assert(!tuple.IsInvalid);
 
             X = tuple.X;
             Y = tuple.Y;
@@ -161,9 +162,6 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             return this;
         }
 
-
-        public Tuple2D ToTuple2D()
-            => new Tuple2D(X, Y);
 
         public override string ToString()
         {

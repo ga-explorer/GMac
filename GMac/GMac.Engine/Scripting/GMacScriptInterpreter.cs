@@ -17,7 +17,7 @@ using GMac.Engine.Compiler.Semantic.AST.Extensions;
 using GMac.Engine.Compiler.Semantic.ASTConstants;
 using GMac.Engine.Compiler.Semantic.ASTInterpreter.Evaluator;
 using TextComposerLib;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text.Parametric;
 using TextComposerLib.Text.Structured;
 using Wolfram.NETLink;

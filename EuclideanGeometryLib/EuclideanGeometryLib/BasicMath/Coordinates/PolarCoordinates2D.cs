@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace EuclideanGeometryLib.BasicMath.Coordinates
 {
@@ -26,7 +25,10 @@ namespace EuclideanGeometryLib.BasicMath.Coordinates
             => Y;
 
 
-        public bool HasNaNComponent
+        public bool IsValid 
+            => !double.IsNaN(R) && !double.IsNaN(Theta);
+
+        public bool IsInvalid
             => double.IsNaN(R) || double.IsNaN(Theta);
 
 
@@ -54,14 +56,8 @@ namespace EuclideanGeometryLib.BasicMath.Coordinates
             R = 1;
             Theta = theta.ClampAngle();
         }
-
-
-        public Tuple2D ToTuple2D()
-            => new Tuple2D(
-                R * Math.Cos(Theta),
-                R * Math.Sin(Theta)
-            );
-
+        
+        
         public override string ToString()
         {
             return new StringBuilder()

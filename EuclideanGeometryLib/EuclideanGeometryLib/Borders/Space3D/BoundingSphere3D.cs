@@ -17,7 +17,12 @@ namespace EuclideanGeometryLib.Borders.Space3D
 
         public double CenterZ { get; }
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(Radius) &&
+               !double.IsNaN(CenterX) &&
+               !double.IsNaN(CenterY);
+
+        public bool IsInvalid
             => double.IsNaN(Radius) ||
                double.IsNaN(CenterX) ||
                double.IsNaN(CenterY);

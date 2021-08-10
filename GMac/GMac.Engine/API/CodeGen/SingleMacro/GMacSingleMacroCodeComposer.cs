@@ -79,11 +79,11 @@ namespace GMac.Engine.API.CodeGen.SingleMacro
             return true;
         }
 
-        protected override void InitializeOtherComponents()
+        protected override void InitializeSubComponents()
         {
         }
 
-        protected override void FinalizeOtherComponents()
+        protected override void FinalizeSubComponents()
         {
         }
 

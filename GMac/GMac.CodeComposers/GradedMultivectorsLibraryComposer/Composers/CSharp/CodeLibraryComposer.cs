@@ -12,7 +12,7 @@ using GMac.Engine.AST.Expressions;
 using GMac.Engine.AST.Symbols;
 using GMac.Engine.Compiler;
 using GMac.Engine.Compiler.Semantic.ASTConstants;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text.Parametric;
 using TextComposerLib.Text.Structured;
 using ClassFileGenerator = GMac.CodeComposers.GradedMultivectorsLibraryComposer.Composers.CSharp.KVectorClass.ClassFileGenerator;
@@ -46,7 +46,7 @@ namespace GMac.CodeComposers.GradedMultivectorsLibraryComposer.Composers.CSharp
 
         internal int MaxTargetLocalVars => 16;
 
-        internal UniqueNameFactory UniqueNameGenerator { get; }
+        internal UniqueNameComposer NameComposer { get; }
 
 
         internal AstFrame CurrentFrame { get; private set; }
@@ -68,7 +68,7 @@ namespace GMac.CodeComposers.GradedMultivectorsLibraryComposer.Composers.CSharp
         {
             MacroGenDefaults = new GMacMacroCodeComposerDefaults(this);
 
-            UniqueNameGenerator = new UniqueNameFactory() { IndexFormatString = "X4" };
+            NameComposer = new UniqueNameComposer() { IndexFormatString = "X4" };
 
             TempSymbolsCompiler = new GMacTempSymbolCompiler();
         }
@@ -1188,7 +1188,7 @@ end
             return true;
         }
 
-        protected override void InitializeOtherComponents()
+        protected override void InitializeSubComponents()
         {
             //Setup some components of the code library composer
 
@@ -1199,7 +1199,7 @@ end
                 GeneratePostComputationsCode;
         }
 
-        protected override void FinalizeOtherComponents()
+        protected override void FinalizeSubComponents()
         {
             //Remove temporary GMacDSL symbols created during code composition
             TempSymbolsCompiler.RemoveCompiledSymbolsFromAst();
@@ -1208,7 +1208,7 @@ end
         protected override string GetSymbolTargetName(AstSymbol symbol)
         {
             if (symbol.IsValidFrame)
-                return UniqueNameGenerator.GetUniqueName(symbol.Name);
+                return NameComposer.GetUniqueName(symbol.Name);
 
             throw new InvalidOperationException();
         }
@@ -1231,7 +1231,7 @@ end
                 GenerateFrameCode(frameInfo);
         }
 
-        public override GMacCodeLibraryComposer CreateEmptyGenerator()
+        public override GMacCodeLibraryComposer CreateEmptyComposer()
         {
             return new CodeLibraryComposer(Root);
         }

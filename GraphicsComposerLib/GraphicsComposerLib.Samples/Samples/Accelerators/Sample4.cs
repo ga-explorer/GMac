@@ -22,7 +22,7 @@ namespace GraphicsComposerLib.Samples.Samples.Accelerators
             var lineSegmentsBih = lineSegmentsList.ToBih2D();
             var lineSegmentsGrid = lineSegmentsList.ToGrid2D();
 
-            var randGen = new RandomGeometryGenerator(10);
+            var randGen = new RandomEuclideanGeometryComposer(10);
 
             var intersector = new GcLineIntersector2D();
 
@@ -94,7 +94,7 @@ namespace GraphicsComposerLib.Samples.Samples.Accelerators
 
         public static void Execute()
         {
-            var randGen = new RandomGeometryGenerator(10);
+            var randGen = new RandomEuclideanGeometryComposer(10);
 
             var boundingBox = BoundingBox2D.Create(-160, -120, 160, 120);
             var divisions = boundingBox.GetSubdivisions(8, 8);

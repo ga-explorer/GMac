@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using CodeComposerLib.Irony;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;
 using Irony.Parsing;

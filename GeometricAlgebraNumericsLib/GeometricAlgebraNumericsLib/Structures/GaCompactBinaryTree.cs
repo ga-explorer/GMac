@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using TextComposerLib.Text.Linear;
 
 namespace GeometricAlgebraNumericsLib.Structures

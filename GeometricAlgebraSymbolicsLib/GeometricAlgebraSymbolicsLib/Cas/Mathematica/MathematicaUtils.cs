@@ -588,22 +588,22 @@ namespace GeometricAlgebraSymbolicsLib.Cas.Mathematica
             if (isNumber)
             {
                 return isSymbol
-                    ? SteExpressionUtils.CreateSymbolicNumber(expr.ToString())
-                    : SteExpressionUtils.CreateLiteralNumber(expr.ToString());
+                    ? SteExpression.CreateSymbolicNumber(expr.ToString())
+                    : SteExpression.CreateLiteralNumber(expr.ToString());
             }
 
             if (isSymbol)
-                return SteExpressionUtils.CreateVariable(expr.ToString());
+                return SteExpression.CreateVariable(expr.ToString());
 
             if (expr.Args.Length == 0)
-                return SteExpressionUtils.CreateFunction(expr.ToString());
+                return SteExpression.CreateFunction(expr.ToString());
 
             var args = new SteExpression[expr.Args.Length];
 
             for (var i = 0; i < expr.Args.Length; i++)
                 args[i] = ToSymbolicTextExpression(expr.Args[i]);
 
-            return SteExpressionUtils.CreateFunction(expr.Head.ToString(), args);
+            return SteExpression.CreateFunction(expr.Head.ToString(), args);
         }
 
 

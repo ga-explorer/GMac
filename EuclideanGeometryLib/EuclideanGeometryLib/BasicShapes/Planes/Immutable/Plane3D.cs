@@ -25,8 +25,19 @@ namespace EuclideanGeometryLib.BasicShapes.Planes.Immutable
 
         public double Direction2Z { get; }
 
+        
+        public bool IsValid 
+            => !double.IsNaN(OriginX) &&
+               !double.IsNaN(OriginY) &&
+               !double.IsNaN(OriginZ) &&
+               !double.IsNaN(Direction1X) &&
+               !double.IsNaN(Direction1Y) &&
+               !double.IsNaN(Direction1Z) &&
+               !double.IsNaN(Direction2X) &&
+               !double.IsNaN(Direction2Y) &&
+               !double.IsNaN(Direction2Z);
 
-        public bool HasNaNComponent 
+        public bool IsInvalid 
             => double.IsNaN(OriginX) ||
                double.IsNaN(OriginY) ||
                double.IsNaN(OriginZ) ||
@@ -52,7 +63,7 @@ namespace EuclideanGeometryLib.BasicShapes.Planes.Immutable
             Direction2Y = direction2Y;
             Direction2Z = direction2Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public Plane3D(ITuple3D origin, ITuple3D direction1, ITuple3D direction2)
@@ -69,7 +80,7 @@ namespace EuclideanGeometryLib.BasicShapes.Planes.Immutable
             Direction2Y = direction2.Y;
             Direction2Z = direction2.Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

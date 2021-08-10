@@ -48,11 +48,25 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
         public double Direction2Y { get; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(Origin1X) || double.IsNaN(Origin1Y) ||
-               double.IsNaN(Origin2X) || double.IsNaN(Origin2Y) ||
-               double.IsNaN(Direction1X) || double.IsNaN(Direction1Y) ||
-               double.IsNaN(Direction2X) || double.IsNaN(Direction2Y);
+        public bool IsValid
+            => !double.IsNaN(Origin1X) &&
+               !double.IsNaN(Origin1Y) &&
+               !double.IsNaN(Origin2X) &&
+               !double.IsNaN(Origin2Y) &&
+               !double.IsNaN(Direction1X) &&
+               !double.IsNaN(Direction1Y) &&
+               !double.IsNaN(Direction2X) &&
+               !double.IsNaN(Direction2Y);
+
+        public bool IsInvalid
+            => double.IsNaN(Origin1X) || 
+               double.IsNaN(Origin1Y) ||
+               double.IsNaN(Origin2X) || 
+               double.IsNaN(Origin2Y) ||
+               double.IsNaN(Direction1X) || 
+               double.IsNaN(Direction1Y) ||
+               double.IsNaN(Direction2X) || 
+               double.IsNaN(Direction2Y);
 
 
         internal LinePair2D(double o1X, double o1Y, double d1X, double d1Y, double o2X, double o2Y, double d2X, double d2Y)
@@ -69,7 +83,7 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
             Direction2X = d2X;
             Direction2Y = d2Y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
     }
 }

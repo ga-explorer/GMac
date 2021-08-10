@@ -9,7 +9,11 @@ namespace EuclideanGeometryLib.Accelerators.BIH.Space2D
     public class AccBih2D<T> : IAccBih2D<T> 
         where T : IFiniteGeometricShape2D
     {
-        public bool HasNaNComponent => false;
+        public bool IsValid 
+            => true;
+
+        public bool IsInvalid 
+            => false;
 
         public int BihDepth { get; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TextComposerLib;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text;
 using TextComposerLib.Text.Mapped;
 using TextComposerLib.Text.Parametric;

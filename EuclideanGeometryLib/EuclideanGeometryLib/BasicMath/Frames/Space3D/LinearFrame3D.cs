@@ -19,7 +19,7 @@ namespace EuclideanGeometryLib.BasicMath.Frames.Space3D
         /// <returns></returns>
         public static LinearFrame3D CreateRightHanded(ITuple3D uDirection)
         {
-            Debug.Assert(!uDirection.HasNaNComponent);
+            Debug.Assert(!uDirection.IsInvalid);
 
             var s = uDirection.GetLength();
 
@@ -41,7 +41,7 @@ namespace EuclideanGeometryLib.BasicMath.Frames.Space3D
         /// <returns></returns>
         public static LinearFrame3D CreateLeftHanded(ITuple3D uDirection)
         {
-            Debug.Assert(!uDirection.HasNaNComponent);
+            Debug.Assert(!uDirection.IsInvalid);
 
             var s = uDirection.GetLength();
 

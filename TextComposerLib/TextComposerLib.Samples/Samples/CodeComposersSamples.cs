@@ -7,7 +7,7 @@ namespace TextComposerLib.Samples.Samples
         internal static string Task1()
         {
             //Create a syntax tree for C#
-            var syntaxFactory = CSharpUtils.CSharp4SyntaxFactory();
+            var syntaxFactory = CclCSharpUtils.CSharp4SyntaxFactory();
 
             var mainCode = syntaxFactory.SyntaxElementsList();
 
@@ -25,12 +25,12 @@ namespace TextComposerLib.Samples.Samples
 
             mainCode.Add(
                 syntaxFactory.SetNamespace("MyNamespace", classCode)
-                );
+            );
 
             //Generate C# code from the syntax tree
-            var codeGenerator = CSharpUtils.CSharp4CodeGenerator();
+            var codeComposer = CclCSharpUtils.CSharp4CodeComposer();
 
-            return codeGenerator.GenerateCode(mainCode);
+            return codeComposer.GenerateCode(mainCode);
         }
     }
 }

@@ -3,7 +3,7 @@ using EuclideanGeometryLib.BasicShapes.Planes.Immutable;
 
 namespace EuclideanGeometryLib.BasicShapes.Planes
 {
-    public interface IPlane3D : IGeometryElement
+    public interface IPlane3D : IGeometricElement
     {
         double OriginX { get; }
 

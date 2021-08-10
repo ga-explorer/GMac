@@ -1,11 +1,11 @@
 ﻿namespace DataStructuresLib.Basic
 {
-    public interface ITriplet<out T>
+    public interface ITriplet<out TValue>
     {
-        T Item1 { get; }
+        TValue Item1 { get; }
 
-        T Item2 { get; }
+        TValue Item2 { get; }
 
-        T Item3 { get; }
+        TValue Item3 { get; }
     }
 }

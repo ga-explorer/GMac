@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using CodeComposerLib.Irony;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric.Factories;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;

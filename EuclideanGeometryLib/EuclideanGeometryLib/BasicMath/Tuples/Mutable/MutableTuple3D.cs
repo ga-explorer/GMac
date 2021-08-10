@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 {
@@ -22,11 +21,15 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         public double Item3
             => Z;
 
-        /// <summary>
-        /// True if this tuple contains any NaN components
-        /// </summary>
-        public bool HasNaNComponent =>
-            double.IsNaN(X) || double.IsNaN(Y) || double.IsNaN(Z);
+        public bool IsValid =>
+            !double.IsNaN(X) && 
+            !double.IsNaN(Y) && 
+            !double.IsNaN(Z);
+
+        public bool IsInvalid =>
+            double.IsNaN(X) || 
+            double.IsNaN(Y) || 
+            double.IsNaN(Z);
         
 
         /// <summary>
@@ -68,12 +71,12 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             Y = y;
             Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public MutableTuple3D(ITuple3D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            Debug.Assert(!tuple.IsInvalid);
 
             X = tuple.X;
             Y = tuple.Y;
@@ -182,9 +185,6 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         }
 
 
-        public Tuple3D ToTuple3D()
-            => new Tuple3D(X, Y, Z);
-        
         public override string ToString()
         {
             return new StringBuilder()

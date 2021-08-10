@@ -12,7 +12,7 @@ using GMac.Engine.Compiler.Semantic.ASTConstants;
 using GMac.Engine.Compiler.Semantic.ASTGenerator;
 using GMac.Engine.Compiler.Semantic.ASTInterpreter.Evaluator;
 using GMac.Engine.Compiler.Syntax;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text.Parametric;
 
 namespace GMac.Engine.Compiler

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
 using DataStructuresLib.Basic;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.GuidedBinaryTraversal.Outermorphisms;
 using GeometricAlgebraNumericsLib.Maps.Unilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;

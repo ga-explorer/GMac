@@ -18,7 +18,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
             set => throw new InvalidOperationException();
         }
 
-        public GraphicsNormal3D Normal
+        public IGraphicsNormal3D Normal
             => null;
 
         public Color Color
@@ -36,8 +36,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
         public bool HasColor 
             => false;
 
-        public GraphicsVertexDataInfo3D DataInfo
-            => GraphicsVertexDataInfo3D.CreateVertexDataInfo();
+        public GraphicsVertexDataKind3D DataKind
+            => GraphicsVertexDataKind3D.PositionVertex;
 
         public double X 
             => Point.X;
@@ -72,8 +72,11 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
         public double NormalZ 
             => 0;
 
-        public bool HasNaNComponent
-            => Point.HasNaNComponent;
+        public bool IsValid
+            => Point.IsValid;
+
+        public bool IsInvalid
+            => Point.IsInvalid;
 
 
         public GraphicsVertex3D(int index, ITuple3D point)
@@ -88,10 +91,5 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
             Point = vertex.Point;
         }
 
-
-        public Tuple3D ToTuple3D()
-        {
-            return new Tuple3D(X, Y, Z);
-        }
     }
 }

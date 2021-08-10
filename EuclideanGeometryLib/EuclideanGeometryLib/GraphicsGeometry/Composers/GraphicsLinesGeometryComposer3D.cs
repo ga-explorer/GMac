@@ -15,7 +15,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
     /// This class can be used to incrementally build a graphics line geometry
     /// in 3D
     /// </summary>
-    public sealed class GraphicsLinesGeometryComposer3D
+    public class GraphicsLinesGeometryComposer3D
     {
         private readonly Dictionary3Keys<double, GraphicsVertex3D> _verticesTable
             = new Dictionary3Keys<double, GraphicsVertex3D>();

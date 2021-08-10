@@ -33,7 +33,13 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Mutable
 
         public double DirectionY { get; set; }
         
-        public bool HasNaNComponent
+        public bool IsValid
+            => double.IsNaN(OriginX) &&
+               double.IsNaN(OriginY) &&
+               double.IsNaN(DirectionX) &&
+               double.IsNaN(DirectionY);
+        
+        public bool IsInvalid
             => double.IsNaN(OriginX) || 
                double.IsNaN(OriginY) ||
                double.IsNaN(DirectionX) || 

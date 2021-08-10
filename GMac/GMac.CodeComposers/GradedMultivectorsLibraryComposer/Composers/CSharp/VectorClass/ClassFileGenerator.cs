@@ -1,5 +1,6 @@
 ﻿using System;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using TextComposerLib.Text.Linear;
 using TextComposerLib.Text.Structured;
 

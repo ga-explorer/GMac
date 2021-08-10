@@ -10,20 +10,20 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 {
     public sealed class MutableComplexTuple2D : IComplexTuple2D, IEnumerable<Complex>
     {
-        public double ItemXReal { get; set; }
+        public double RealX { get; set; }
 
-        public double ItemXImaginary { get; set; }
+        public double ImagX { get; set; }
 
-        public double ItemYReal { get; set; }
+        public double RealY { get; set; }
 
-        public double ItemYImaginary { get; set; }
+        public double ImagY { get; set; }
 
 
         public Complex X
-            => new Complex(ItemXReal, ItemXImaginary);
+            => new Complex(RealX, ImagX);
 
         public Complex Y
-            => new Complex(ItemYReal, ItemYImaginary);
+            => new Complex(RealY, ImagY);
 
         public Complex Item1
             => X;
@@ -31,12 +31,17 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         public Complex Item2
             => Y;
 
+        public bool IsValid
+            => !double.IsNaN(RealX) &&
+               !double.IsNaN(ImagX) &&
+               !double.IsNaN(RealY) &&
+               !double.IsNaN(ImagY);
 
-        public bool HasNaNComponent
-            => double.IsNaN(ItemXReal) ||
-               double.IsNaN(ItemXImaginary) ||
-               double.IsNaN(ItemYReal) ||
-               double.IsNaN(ItemYImaginary);
+        public bool IsInvalid
+            => double.IsNaN(RealX) ||
+               double.IsNaN(ImagX) ||
+               double.IsNaN(RealY) ||
+               double.IsNaN(ImagY);
 
 
         /// <summary>
@@ -62,13 +67,13 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 
                 if (index == 0)
                 {
-                    ItemXReal = value.Real;
-                    ItemXImaginary = value.Imaginary;
+                    RealX = value.Real;
+                    ImagX = value.Imaginary;
                 }
                 else if (index == 1)
                 {
-                    ItemYReal = value.Real;
-                    ItemYImaginary = value.Imaginary;
+                    RealY = value.Real;
+                    ImagY = value.Imaginary;
                 }
             }
         }
@@ -80,85 +85,85 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 
         public MutableComplexTuple2D(double x, double y)
         {
-            ItemXReal = x;
-            ItemYReal = y;
+            RealX = x;
+            RealY = y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
         }
 
         public MutableComplexTuple2D(Complex x, Complex y)
         {
-            ItemXReal = x.Real;
-            ItemYReal = y.Real;
+            RealX = x.Real;
+            RealY = y.Real;
 
-            ItemXImaginary = x.Imaginary;
-            ItemYImaginary = y.Imaginary;
+            ImagX = x.Imaginary;
+            ImagY = y.Imaginary;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
         }
 
         public MutableComplexTuple2D(ITuple2D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            RealX = tuple.X;
+            RealY = tuple.Y;
 
-            ItemXReal = tuple.X;
-            ItemYReal = tuple.Y;
+            Debug.Assert(IsValid);
         }
 
         public MutableComplexTuple2D(IComplexTuple2D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            RealX = tuple.X.Real;
+            RealY = tuple.Y.Real;
 
-            ItemXReal = tuple.X.Real;
-            ItemYReal = tuple.Y.Real;
+            ImagX = tuple.X.Imaginary;
+            ImagY = tuple.Y.Imaginary;
 
-            ItemXImaginary = tuple.X.Imaginary;
-            ItemYImaginary = tuple.Y.Imaginary;
+            Debug.Assert(IsValid);
         }
 
 
         public MutableComplexTuple2D SetTuple(double x, double y)
         {
-            ItemXReal = x;
-            ItemYReal = y;
+            RealX = x;
+            RealY = y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
 
         public MutableComplexTuple2D SetTuple(Complex x, Complex y)
         {
-            ItemXReal = x.Real;
-            ItemYReal = y.Real;
+            RealX = x.Real;
+            RealY = y.Real;
 
-            ItemXImaginary = x.Imaginary;
-            ItemYImaginary = y.Imaginary;
+            ImagX = x.Imaginary;
+            ImagY = y.Imaginary;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
 
         public MutableComplexTuple2D SetTuple(ITuple2D tuple)
         {
-            ItemXReal = tuple.X;
-            ItemYReal = tuple.Y;
+            RealX = tuple.X;
+            RealY = tuple.Y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
 
         public MutableComplexTuple2D SetTuple(IComplexTuple2D tuple)
         {
-            ItemXReal = tuple.X.Real;
-            ItemYReal = tuple.Y.Real;
+            RealX = tuple.X.Real;
+            RealY = tuple.Y.Real;
 
-            ItemXImaginary = tuple.X.Imaginary;
-            ItemYImaginary = tuple.Y.Imaginary;
+            ImagX = tuple.X.Imaginary;
+            ImagY = tuple.Y.Imaginary;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -166,14 +171,14 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 
         public IEnumerator<Complex> GetEnumerator()
         {
-            yield return new Complex(ItemXReal, ItemXImaginary);
-            yield return new Complex(ItemYReal, ItemYImaginary);
+            yield return new Complex(RealX, ImagX);
+            yield return new Complex(RealY, ImagY);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            yield return new Complex(ItemXReal, ItemXImaginary);
-            yield return new Complex(ItemYReal, ItemYImaginary);
+            yield return new Complex(RealX, ImagX);
+            yield return new Complex(RealY, ImagY);
         }
 
 
@@ -181,9 +186,9 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         {
             return new StringBuilder()
                 .Append("(")
-                .AppendComplexNumber(ItemXReal, ItemXImaginary, "G")
+                .AppendComplexNumber(RealX, ImagX, "G")
                 .Append(", ")
-                .AppendComplexNumber(ItemYReal, ItemYImaginary, "G")
+                .AppendComplexNumber(RealY, ImagY, "G")
                 .Append(")")
                 .ToString();
         }

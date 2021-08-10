@@ -14,7 +14,9 @@ namespace EuclideanGeometryLib.Accelerators.BIH.Space3D
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
-        public bool HasNaNComponent => false;
+        public bool IsValid => true;
+
+        public bool IsInvalid => false;
 
         public int Count
             => LastObjectIndex - FirstObjectIndex + 1;

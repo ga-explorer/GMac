@@ -517,7 +517,15 @@ namespace EuclideanGeometryLib.Borders.Space3D.Mutable
 
         public double MaxZ { get; private set; }
 
-        public bool HasNaNComponent =>
+        public bool IsValid =>
+            !double.IsNaN(MinX) &&
+            !double.IsNaN(MinY) &&
+            !double.IsNaN(MinZ) &&
+            !double.IsNaN(MaxX) &&
+            !double.IsNaN(MaxY) &&
+            !double.IsNaN(MaxZ);
+
+        public bool IsInvalid =>
             double.IsNaN(MinX) ||
             double.IsNaN(MinY) ||
             double.IsNaN(MinZ) ||
@@ -542,7 +550,7 @@ namespace EuclideanGeometryLib.Borders.Space3D.Mutable
             MaxY = y;
             MaxZ = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         internal MutableBoundingBox3D(double minX, double minY, double minZ, double maxX, double maxY, double maxZ)
@@ -555,7 +563,7 @@ namespace EuclideanGeometryLib.Borders.Space3D.Mutable
             MaxY = maxY;
             MaxZ = maxZ;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         internal MutableBoundingBox3D(IBoundingBox3D boundingBox)
@@ -568,13 +576,13 @@ namespace EuclideanGeometryLib.Borders.Space3D.Mutable
             MaxY = boundingBox.MaxY;
             MaxZ = boundingBox.MaxZ;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 
         private void ValidateValues()
         {
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
 
             if (MaxX < MinX)
             {

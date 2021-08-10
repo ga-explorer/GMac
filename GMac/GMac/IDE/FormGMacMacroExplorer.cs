@@ -14,7 +14,7 @@ using GMac.Engine.AST.Symbols;
 using GMac.Engine.Compiler.Semantic.AST;
 using GMac.Engine.Compiler.Semantic.ASTDebug;
 using TextComposerLib;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.IDE
 {

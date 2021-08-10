@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Exceptions;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraStructuresLib.Frames;

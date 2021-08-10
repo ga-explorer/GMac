@@ -9,8 +9,8 @@ namespace GMac.Engine.API.Target.CSharp
     {
         public override string DefaultFileExtension => "cs";
 
-        internal GMacCSharpLanguageServer(CSharpCodeGenerator codeGenerator, CSharpSyntaxFactory syntaxFactory)
-            : base(codeGenerator, syntaxFactory)
+        internal GMacCSharpLanguageServer(CclCSharpCodeGenerator codeComposer, CclCSharpSyntaxFactory syntaxFactory)
+            : base(codeComposer, syntaxFactory)
         {
             ExpressionConverter = new MathematicaToCSharpConverter();
         }

@@ -15,24 +15,24 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
     {
         public static GraphicsTrianglesGeometry3D Create(IReadOnlyList<ITuple3D> pointsList)
         {
-            if ((pointsList.Count % 3) != 0)
-                throw new ArgumentException();
+            //if ((pointsList.Count % 3) != 0)
+            //    throw new ArgumentException();
 
             return new GraphicsTrianglesGeometry3D(pointsList);
         }
 
         public static GraphicsTrianglesGeometry3D Create(IReadOnlyList<ITuple3D> pointsList, List<int> indicesList)
         {
-            if ((pointsList.Count % 3) != 0)
-                throw new ArgumentException();
+            //if ((pointsList.Count % 3) != 0)
+            //    throw new ArgumentException();
 
             return new GraphicsTrianglesGeometry3D(pointsList, indicesList);
         }
 
         public static GraphicsTrianglesGeometry3D Create(params ITuple3D[] pointsList)
         {
-            if ((pointsList.Length % 3) != 0)
-                throw new ArgumentException();
+            //if ((pointsList.Length % 3) != 0)
+            //    throw new ArgumentException();
 
             return new GraphicsTrianglesGeometry3D(pointsList);
         }
@@ -41,8 +41,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
         {
             var pointsArray = pointsList.ToArray();
 
-            if ((pointsArray.Length % 3) != 0)
-                throw new ArgumentException();
+            //if ((pointsArray.Length % 3) != 0)
+            //    throw new ArgumentException();
 
             return new GraphicsTrianglesGeometry3D(pointsArray);
         }
@@ -51,8 +51,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
         {
             var pointsArray = pointsList.ToArray();
 
-            if ((pointsArray.Length % 3) != 0)
-                throw new ArgumentException();
+            //if ((pointsArray.Length % 3) != 0)
+            //    throw new ArgumentException();
 
             return new GraphicsTrianglesGeometry3D(pointsArray, indicesList.ToList());
         }
@@ -120,24 +120,24 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
             return new GraphicsTrianglesGeometry3D(pointsList, vertexIndicesList);
         }
 
-        public static GraphicsTrianglesGeometry3D Create(IReadOnlyList<IGraphicsVertex3D> verticesList, GraphicsVertexDataInfo3D vertexDataInfo)
+        public static GraphicsTrianglesGeometry3D Create(IReadOnlyList<IGraphicsVertex3D> verticesList, GraphicsVertexDataKind3D vertexDataKind)
         {
-            if ((verticesList.Count % 3) != 0)
-                throw new ArgumentException();
+            //if ((verticesList.Count % 3) != 0)
+            //    throw new ArgumentException();
 
             var geometry = new GraphicsTrianglesGeometry3D(verticesList);
 
-            if (vertexDataInfo.HasColor)
+            if (vertexDataKind.HasColor)
                 geometry.SetVertexColors(
                     verticesList.Select(v => v.Color).ToArray()
                 );
 
-            if (vertexDataInfo.HasTextureUv)
+            if (vertexDataKind.HasTextureUv)
                 geometry.SetVertexUVs(
                     verticesList.Select(v => v.TextureUv).ToArray()
                 );
 
-            if (vertexDataInfo.HasNormal)
+            if (vertexDataKind.HasNormal)
                 geometry.SetVertexNormals(
                     verticesList.Select(v => v.Normal).ToArray()
                 );
@@ -154,13 +154,13 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
             => _vertexIndicesList;
 
         public override int Count
-            => VertexPoints.Count / 3;
+            => _vertexIndicesList.Count / 3;
 
         public override ITriangle3D this[int index] 
             => Triangle3D.Create(
-                VertexPoints[VertexIndices[3 * index]],
-                VertexPoints[VertexIndices[3 * index + 1]],
-                VertexPoints[VertexIndices[3 * index + 2]]
+                VertexPoints[_vertexIndicesList[3 * index]],
+                VertexPoints[_vertexIndicesList[3 * index + 1]],
+                VertexPoints[_vertexIndicesList[3 * index + 2]]
             );
 
         public override IReadOnlyList<Triplet<ITuple3D>> TriangleVerticesPoints
@@ -169,11 +169,11 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
             {
                 var pointsList = new List<Triplet<ITuple3D>>(Count);
 
-                for (var i = 0; i < VertexPoints.Count; i += 3)
+                for (var i = 0; i < _vertexIndicesList.Count; i += 3)
                     pointsList.Add(new Triplet<ITuple3D>(
-                        VertexPoints[VertexIndices[i]],
-                        VertexPoints[VertexIndices[i + 1]],
-                        VertexPoints[VertexIndices[i + 2]]
+                        VertexPoints[_vertexIndicesList[i]],
+                        VertexPoints[_vertexIndicesList[i + 1]],
+                        VertexPoints[_vertexIndicesList[i + 2]]
                     ));
 
                 return pointsList;
@@ -186,11 +186,11 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
             {
                 var pointsList = new List<Triplet<int>>(Count);
 
-                for (var i = 0; i < VertexPoints.Count; i += 3)
+                for (var i = 0; i < _vertexIndicesList.Count; i += 3)
                     pointsList.Add(new Triplet<int>(
-                        VertexIndices[i], 
-                        VertexIndices[i + 1], 
-                        VertexIndices[i + 2]
+                        _vertexIndicesList[i], 
+                        _vertexIndicesList[i + 1], 
+                        _vertexIndicesList[i + 2]
                     ));
 
                 return pointsList;

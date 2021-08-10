@@ -2,14 +2,14 @@
 using GMac.Engine.API.Target;
 using GMac.Engine.AST;
 using GMac.Engine.AST.Symbols;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text.Parametric;
 
 namespace GMac.Engine.API.CodeGen
 {
     /// <summary>
     /// This abstract class can be used to implement a sub-process of code generation using the main
-    /// code library generator composnents
+    /// code library generator components
     /// </summary>
     public abstract class GMacCodePartComposer : IProgressReportSource
     {
@@ -27,9 +27,9 @@ namespace GMac.Engine.API.CodeGen
 
         public GMacLanguageServer GMacLanguage => LibraryComposer.GMacLanguage;
 
-        public LanguageCodeGenerator CodeGenerator => LibraryComposer.GMacLanguage.CodeGenerator;
+        public CclLanguageCodeGeneratorBase CodeGenerator => LibraryComposer.GMacLanguage.CodeGenerator;
 
-        public LanguageSyntaxFactory SyntaxFactory => LibraryComposer.GMacLanguage.SyntaxFactory;
+        public CclLanguageSyntaxFactory SyntaxFactory => LibraryComposer.GMacLanguage.SyntaxFactory;
 
 
         protected GMacCodePartComposer(GMacCodeLibraryComposer libGen)

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\..\TextComposerLib\TextComposerLib\TextComposerLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ThreeJs\" />
+  </ItemGroup>
+
 </Project>

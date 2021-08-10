@@ -18,7 +18,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
     /// This class can be used to incrementally build a graphics triangle geometry
     /// in 3D
     /// </summary>
-    public sealed class GraphicsTrianglesGeometryComposer3D
+    public class GraphicsTrianglesGeometryComposer3D
     {
         private readonly Dictionary3Keys<double, IGraphicsVertex3D> _verticesTable
             = new Dictionary3Keys<double, IGraphicsVertex3D>();
@@ -60,7 +60,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
         public IEnumerable<Color> VertexColors
             => _verticesList.Select(p => p.Color);
 
-        public IEnumerable<GraphicsNormal3D> VertexNormals
+        public IEnumerable<IGraphicsNormal3D> VertexNormals
             => _verticesList.Select(p => p.Normal);
 
         public IEnumerable<int> TriangleVertexIndices
@@ -75,7 +75,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
         public IEnumerable<ITuple2D> TriangleVertexTextureUVs
             => _indicesList.Select(i => _verticesList[i].TextureUv);
 
-        public IEnumerable<GraphicsNormal3D> TriangleVertexNormals
+        public IEnumerable<IGraphicsNormal3D> TriangleVertexNormals
             => _indicesList.Select(i => _verticesList[i].Normal);
 
         public int VerticesCount
@@ -158,17 +158,18 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
                         ? VectorAlgebraUtils.GetTriangleNormal(vertex3, vertex2, vertex1)
                         : VectorAlgebraUtils.GetTriangleNormal(vertex1, vertex2, vertex3);
 
-                //For debugging only
+                // For debugging only
                 Debug.Assert(
                     !double.IsNaN(angle1) &&
                     !double.IsNaN(angle2) &&
                     !double.IsNaN(angle3) &&
-                    !normal.HasNaNComponent
+                    normal.IsValid
                 );
 
-                //Update normals of triangle vertices. See here for more information:
-                //http://www.bytehazard.com/articles/vertnorm.html
-                //normal.MakeUnitVector();
+                // Update normals of triangle vertices.
+                // See here for more information:
+                // http://www.bytehazard.com/articles/vertnorm.html
+                // normal.MakeUnitVector();
                 vertex1.Normal.Update(angle1 * normal);
                 vertex2.Normal.Update(angle2 * normal);
                 vertex3.Normal.Update(angle3 * normal);
@@ -185,7 +186,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
                         : VectorAlgebraUtils.GetTriangleUnitNormal(vertex1, vertex2, vertex3);
                 
                 //For debugging only
-                Debug.Assert(!normal.HasNaNComponent);
+                Debug.Assert(!normal.IsInvalid);
 
                 vertex1.Normal.Update(normal);
                 vertex2.Normal.Update(normal);
@@ -203,7 +204,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
                         : VectorAlgebraUtils.GetTriangleNormal(vertex1, vertex2, vertex3);
 
                 //For debugging only
-                Debug.Assert(!normal.HasNaNComponent);
+                Debug.Assert(!normal.IsInvalid);
 
                 vertex1.Normal.Update(normal);
                 vertex2.Normal.Update(normal);

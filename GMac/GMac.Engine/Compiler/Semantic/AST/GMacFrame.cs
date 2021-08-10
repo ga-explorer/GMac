@@ -4,6 +4,7 @@ using CodeComposerLib.Irony.Semantic.Expression.Value;
 using CodeComposerLib.Irony.Semantic.Scope;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using DataStructuresLib.BooleanPattern;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Frames;

@@ -224,7 +224,7 @@ namespace EuclideanGeometryLib.BasicMath.Matrices
 
         public static Matrix4X4 CreateRotationMatrix(Tuple3D unitAxis, double radianAngle)
         {
-            Debug.Assert(!unitAxis.HasNaNComponent && !double.IsNaN(radianAngle));
+            Debug.Assert(!unitAxis.IsInvalid && !double.IsNaN(radianAngle));
 
             Debug.Assert(unitAxis.IsUnitVector());
 

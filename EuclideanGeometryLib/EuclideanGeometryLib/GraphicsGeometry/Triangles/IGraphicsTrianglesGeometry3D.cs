@@ -14,7 +14,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Triangles
 
         IReadOnlyList<Triplet<int>> TriangleVerticesIndices { get; }
 
-        IReadOnlyList<GraphicsNormal3D> VertexNormals { get; }
+        IReadOnlyList<IGraphicsNormal3D> VertexNormals { get; }
 
         IReadOnlyList<ITuple2D> VertexUVs { get; }
 

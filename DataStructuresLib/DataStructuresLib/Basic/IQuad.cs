@@ -1,13 +1,13 @@
 ﻿namespace DataStructuresLib.Basic
 {
-    public interface IQuad<out T>
+    public interface IQuad<out TValue>
     {
-        T Item1 { get; }
+        TValue Item1 { get; }
 
-        T Item2 { get; }
+        TValue Item2 { get; }
 
-        T Item3 { get; }
+        TValue Item3 { get; }
 
-        T Item4 { get; }
+        TValue Item4 { get; }
     }
 }

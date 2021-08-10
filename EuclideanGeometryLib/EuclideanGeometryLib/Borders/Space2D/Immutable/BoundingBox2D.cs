@@ -376,7 +376,10 @@ namespace EuclideanGeometryLib.Borders.Space2D.Immutable
         public bool IntersectionTestsEnabled { get; set; } 
             = true;
 
-        public bool HasNaNComponent { get; }
+        public bool IsValid 
+            => !IsInvalid;
+
+        public bool IsInvalid { get; }
 
 
         internal BoundingBox2D(double minX, double minY, double maxX, double maxY)
@@ -387,13 +390,13 @@ namespace EuclideanGeometryLib.Borders.Space2D.Immutable
             MaxY = maxY;
             MaxX = maxX;
 
-            HasNaNComponent =
+            IsInvalid =
                 double.IsNaN(MinX) ||
                 double.IsNaN(MinY) ||
                 double.IsNaN(MaxX) ||
                 double.IsNaN(MaxY);
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         internal BoundingBox2D(IBoundingBox2D boundingBox)
@@ -404,13 +407,13 @@ namespace EuclideanGeometryLib.Borders.Space2D.Immutable
             MaxY = boundingBox.MaxY;
             MaxX = boundingBox.MaxX;
 
-            HasNaNComponent =
+            IsInvalid =
                 double.IsNaN(MinX) ||
                 double.IsNaN(MinY) ||
                 double.IsNaN(MaxX) ||
                 double.IsNaN(MaxY);
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

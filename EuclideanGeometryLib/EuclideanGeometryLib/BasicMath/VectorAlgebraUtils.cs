@@ -332,7 +332,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double VectorDot(this ITuple2D v1, ITuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return v1.X * v2.X + v1.Y * v2.Y;
         }
@@ -356,7 +356,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double VectorDot(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
         }
@@ -380,7 +380,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double VectorDot(this ITuple4D v1, ITuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z + v1.W * v2.W;
         }
@@ -408,7 +408,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double VectorAbsDot(this ITuple2D v1, ITuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return Math.Abs(v1.X * v2.X + v1.Y * v2.Y);
         }
@@ -432,7 +432,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double VectorAbsDot(this Tuple3D v1, Tuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return Math.Abs(v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z);
         }
@@ -456,7 +456,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double VectorAbsDot(this Tuple4D v1, Tuple4D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return Math.Abs(v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z + v1.W * v2.W);
         }
@@ -549,7 +549,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple2D FaceDirection(this ITuple2D vector, ITuple2D planeNormal)
         {
-            Debug.Assert(!vector.HasNaNComponent && !planeNormal.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid && !planeNormal.IsInvalid);
             Debug.Assert(!planeNormal.IsZeroVector());
 
             return
@@ -567,7 +567,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple3D FaceDirection(this ITuple3D vector, ITuple3D planeNormal)
         {
-            Debug.Assert(!vector.HasNaNComponent && !planeNormal.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid && !planeNormal.IsInvalid);
             Debug.Assert(!planeNormal.IsZeroVector());
 
             return
@@ -583,7 +583,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple2D GetNormal(this ITuple2D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             return new Tuple2D(-vector.Y, vector.X);
         }
@@ -603,7 +603,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple2D GetUnitNormal(this ITuple2D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -622,7 +622,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple3D VectorCross(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new Tuple3D(
                 v1.Y * v2.Z - v1.Z * v2.Y,
@@ -633,7 +633,7 @@ namespace EuclideanGeometryLib.BasicMath
 
         public static double VectorCrossLength(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var x = v1.Y * v2.Z - v1.Z * v2.Y;
             var y = v1.Z * v2.X - v1.X * v2.Z;
@@ -644,7 +644,7 @@ namespace EuclideanGeometryLib.BasicMath
 
         public static double VectorCrossLengthSquared(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var x = v1.Y * v2.Z - v1.Z * v2.Y;
             var y = v1.Z * v2.X - v1.X * v2.Z;
@@ -655,7 +655,7 @@ namespace EuclideanGeometryLib.BasicMath
 
         public static bool IsParallelTo(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var x = v1.Y * v2.Z - v1.Z * v2.Y;
             var y = v1.Z * v2.X - v1.X * v2.Z;
@@ -690,7 +690,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple3D VectorUnitCrossXy(this ITuple2D v1, ITuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var vz = v1.X * v2.Y - v1.Y * v2.X;
 
@@ -726,7 +726,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple3D VectorUnitCross(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var vx = v1.Y * v2.Z - v1.Z * v2.Y;
             var vy = v1.Z * v2.X - v1.X * v2.Z;
@@ -802,7 +802,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple2D ToUnitVector(this ITuple2D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -830,7 +830,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple3D ToUnitVector(this ITuple3D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -858,7 +858,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple4D ToUnitVector(this ITuple4D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -885,7 +885,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple2D ToNegativeUnitVector(this ITuple2D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -912,7 +912,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple3D ToNegativeUnitVector(this Tuple3D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -939,7 +939,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static Tuple4D ToNegativeUnitVector(this Tuple4D vector)
         {
-            Debug.Assert(!vector.HasNaNComponent);
+            Debug.Assert(!vector.IsInvalid);
 
             var s = vector.GetLength();
             if (s.IsAlmostZero())
@@ -1256,7 +1256,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double GetVectorsAngle(this ITuple2D v1, ITuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var t1 = v1.X * v2.X + v1.Y * v2.Y;
             var t2 = v1.X * v1.X + v1.Y * v1.Y;
@@ -1325,7 +1325,7 @@ namespace EuclideanGeometryLib.BasicMath
         /// <returns></returns>
         public static double GetVectorsAngle(this ITuple3D v1, ITuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             var t1 = v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
             var t2 = v1.X * v1.X + v1.Y * v1.Y + v1.Z * v1.Z;

@@ -6,6 +6,7 @@ using CodeComposerLib.GraphViz.Dot;
 using CodeComposerLib.GraphViz.Dot.Color;
 using CodeComposerLib.GraphViz.Dot.Value;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Maps.Bilinear;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraNumericsLib.Structures;

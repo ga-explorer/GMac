@@ -11,7 +11,7 @@ using GMac.Engine.Compiler.Semantic.AST;
 using GMac.Engine.Compiler.Semantic.ASTConstants;
 using GMac.Engine.Scripting;
 using TextComposerLib;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.WinForms.UserInterface.UI;
 
 namespace GMac.IDE.Scripting

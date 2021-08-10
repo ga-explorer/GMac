@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using GMac.Engine.Compiler;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Settings;
 
 namespace GMac.Engine

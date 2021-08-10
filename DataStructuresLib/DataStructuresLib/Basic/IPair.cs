@@ -1,9 +1,9 @@
 ﻿namespace DataStructuresLib.Basic
 {
-    public interface IPair<out T>
+    public interface IPair<out TValue>
     {
-        T Item1 { get; }
+        TValue Item1 { get; }
 
-        T Item2 { get; }
+        TValue Item2 { get; }
     }
 }

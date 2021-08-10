@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 
 namespace GeometricAlgebraNumericsLib.Structures.BinaryTraversal
 {

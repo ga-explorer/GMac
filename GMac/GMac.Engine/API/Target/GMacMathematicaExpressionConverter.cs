@@ -1,10 +1,11 @@
 ﻿using CodeComposerLib.Languages;
 using CodeComposerLib.Languages.Mathematica;
+using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GMac.Engine.API.CodeBlock;
 
 namespace GMac.Engine.API.Target
 {
-    public abstract class GMacMathematicaExpressionConverter : LanguageExpressionConverter
+    public abstract class GMacMathematicaExpressionConverter : CclLanguageExpressionConverterBase
     {
         /// <summary>
         /// The code block containing a dictionary used to convert low-level variables names into 
@@ -13,8 +14,8 @@ namespace GMac.Engine.API.Target
         public GMacCodeBlock ActiveCodeBlock { get; set; }
 
 
-        protected GMacMathematicaExpressionConverter(LanguageInfo targetLanguageInfo)
-            : base(targetLanguageInfo, MathematicaUtils.Mathematica7Info)
+        protected GMacMathematicaExpressionConverter(CclLanguageInfo targetLanguageInfo)
+            : base(targetLanguageInfo, CclMathematicaUtils.Mathematica7Info)
         {
             
         }

@@ -546,7 +546,7 @@ namespace MeshComposerLib.Geometry.PointsMesh
             var geometry = 
                 GraphicsTrianglesGeometry3D.Create(
                     verticesList,
-                    verticesList[0].DataInfo
+                    verticesList[0].DataKind
                 );
 
             geometry.NormalComputationMethod = normalComputationMethod;

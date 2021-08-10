@@ -20,7 +20,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
 
         public ITuple2D TextureUv { get; set; }
 
-        public GraphicsNormal3D Normal
+        public IGraphicsNormal3D Normal
             => null;
 
         public bool HasColor 
@@ -32,8 +32,8 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
         public bool HasNormal 
             => false;
 
-        public GraphicsVertexDataInfo3D DataInfo
-            => GraphicsVertexDataInfo3D.CreateTexturedVertexDataInfo();
+        public GraphicsVertexDataKind3D DataKind
+            => GraphicsVertexDataKind3D.PositionTextureVertex;
 
         public double X 
             => Point.X;
@@ -68,9 +68,13 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
         public double NormalZ 
             => 0;
 
-        public bool HasNaNComponent
-            => Point.HasNaNComponent || 
-               TextureUv.HasNaNComponent;
+        public bool IsValid
+            => Point.IsValid &&
+               TextureUv.IsValid;
+
+        public bool IsInvalid
+            => Point.IsInvalid || 
+               TextureUv.IsInvalid;
 
 
         public GraphicsTexturedVertex3D(int index, ITuple3D point)
@@ -94,10 +98,5 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Vertices
             TextureUv = vertex.TextureUv;
         }
 
-
-        public Tuple3D ToTuple3D()
-        {
-            return new Tuple3D(X, Y, Z);
-        }
     }
 }

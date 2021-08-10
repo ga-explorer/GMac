@@ -4,6 +4,7 @@ using System.Text;
 using CodeComposerLib.Irony.Semantic.Expression.Value;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using DataStructuresLib.SimpleTree;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib;

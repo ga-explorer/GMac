@@ -9,7 +9,7 @@ namespace GMac.Engine.API.Target.CSharp
     public sealed class MathematicaToCSharpConverter : GMacMathematicaExpressionConverter
     {
         public MathematicaToCSharpConverter()
-            : base(CSharpUtils.CSharp4Info)
+            : base(CclCSharpUtils.CSharp4Info)
         {
             
         }
@@ -22,152 +22,152 @@ namespace GMac.Engine.API.Target.CSharp
             {
                 //case "Rational":
                 //    return SteExpressionUtils.CreateOperator(
-                //        CSharpUtils.Operators.Divide, 
+                //        CclCSharpUtils.Operators.Divide, 
                 //        SteExpressionUtils.CreateLiteralNumber(arguments[0].ToString()),
                 //        SteExpressionUtils.CreateLiteralNumber(arguments[1].ToString())
                 //        );
 
                 case "Plus":
-                    return SteExpressionUtils.CreateOperator(
-                        CSharpUtils.Operators.Add, arguments
+                    return SteExpression.CreateOperator(
+                        CclCSharpUtils.Operators.Add, arguments
                         );
 
                 case "Minus":
-                    return SteExpressionUtils.CreateOperator(
-                        CSharpUtils.Operators.UnaryMinus, arguments
+                    return SteExpression.CreateOperator(
+                        CclCSharpUtils.Operators.UnaryMinus, arguments
                         );
 
                 case "Subtract":
-                    return SteExpressionUtils.CreateOperator(
-                        CSharpUtils.Operators.Subtract, arguments
+                    return SteExpression.CreateOperator(
+                        CclCSharpUtils.Operators.Subtract, arguments
                         );
 
                 case "Times":
                     if (arguments[0].ToString() == "-1" && arguments.Length == 2)
-                        return SteExpressionUtils.CreateOperator(
-                            CSharpUtils.Operators.UnaryMinus, arguments[1]
+                        return SteExpression.CreateOperator(
+                            CclCSharpUtils.Operators.UnaryMinus, arguments[1]
                         );
 
-                    return SteExpressionUtils.CreateOperator(
-                        CSharpUtils.Operators.Multiply, arguments
+                    return SteExpression.CreateOperator(
+                        CclCSharpUtils.Operators.Multiply, arguments
                         );
 
                 case "Divide":
-                    return SteExpressionUtils.CreateOperator(
-                        CSharpUtils.Operators.Divide, arguments
+                    return SteExpression.CreateOperator(
+                        CclCSharpUtils.Operators.Divide, arguments
                         );
 
                 case "Power":
                     if (arguments[1].ToString() == "-1")
-                        return SteExpressionUtils.CreateOperator(
-                            CSharpUtils.Operators.Divide,
-                            SteExpressionUtils.CreateLiteralNumber(1),
+                        return SteExpression.CreateOperator(
+                            CclCSharpUtils.Operators.Divide,
+                            SteExpression.CreateLiteralNumber(1),
                             arguments[0]
                         );
 
                     if (arguments[1].ToString() == "2")
-                        return SteExpressionUtils.CreateOperator(
-                            CSharpUtils.Operators.Multiply,
+                        return SteExpression.CreateOperator(
+                            CclCSharpUtils.Operators.Multiply,
                             arguments[0],
                             arguments[0]
                         );
 
                     if (arguments[1].ToString() == "3")
-                        return SteExpressionUtils.CreateOperator(
-                            CSharpUtils.Operators.Multiply,
+                        return SteExpression.CreateOperator(
+                            CclCSharpUtils.Operators.Multiply,
                             arguments[0],
                             arguments[0],
                             arguments[0]
                         );
 
-                    return SteExpressionUtils.CreateFunction("Math.Pow", arguments);
+                    return SteExpression.CreateFunction("Math.Pow", arguments);
 
                 case "Abs":
-                    return SteExpressionUtils.CreateFunction("Math.Abs", arguments);
+                    return SteExpression.CreateFunction("Math.Abs", arguments);
 
                 case "Exp":
-                    return SteExpressionUtils.CreateFunction("Math.Exp", arguments);
+                    return SteExpression.CreateFunction("Math.Exp", arguments);
 
                 case "Sin":
-                    return SteExpressionUtils.CreateFunction("Math.Sin", arguments);
+                    return SteExpression.CreateFunction("Math.Sin", arguments);
 
                 case "Cos":
-                    return SteExpressionUtils.CreateFunction("Math.Cos", arguments);
+                    return SteExpression.CreateFunction("Math.Cos", arguments);
 
                 case "Tan":
-                    return SteExpressionUtils.CreateFunction("Math.Tan", arguments);
+                    return SteExpression.CreateFunction("Math.Tan", arguments);
 
                 case "ArcSin":
-                    return SteExpressionUtils.CreateFunction("Math.Asin", arguments);
+                    return SteExpression.CreateFunction("Math.Asin", arguments);
 
                 case "ArcCos":
-                    return SteExpressionUtils.CreateFunction("Math.Acos", arguments);
+                    return SteExpression.CreateFunction("Math.Acos", arguments);
 
                 case "ArcTan":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "Math.Atan" : "Math.Atan2",
                         arguments
                         );
 
                 case "Sinh":
-                    return SteExpressionUtils.CreateFunction("Math.Sinh", arguments);
+                    return SteExpression.CreateFunction("Math.Sinh", arguments);
 
                 case "Cosh":
-                    return SteExpressionUtils.CreateFunction("Math.Cosh", arguments);
+                    return SteExpression.CreateFunction("Math.Cosh", arguments);
 
                 case "Tanh":
-                    return SteExpressionUtils.CreateFunction("Math.Tanh", arguments);
+                    return SteExpression.CreateFunction("Math.Tanh", arguments);
 
                 case "Log":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         "Math.Log", 
                         arguments.Length == 1 ? arguments : arguments.Reverse()
                         );
 
                 case "Log10":
-                    return SteExpressionUtils.CreateFunction("Math.Log10", arguments);
+                    return SteExpression.CreateFunction("Math.Log10", arguments);
 
                 case "Sqrt":
-                    return SteExpressionUtils.CreateFunction("Math.Sqrt", arguments);
+                    return SteExpression.CreateFunction("Math.Sqrt", arguments);
 
                 case "Floor":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "Math.Floor" : "MathHelper.Floor",
                         arguments
                         );
 
                 case "Ceiling":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "Math.Ceiling" : "MathHelper.Ceiling",
                         arguments
                         );
 
                 case "Round":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "Math.Round" : "MathHelper.Round",
                         arguments
                         );
 
                 case "Min":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "Math.Min" : "MathHelper.Min",
                         arguments
                         );
 
                 case "Max":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "Math.Max" : "MathHelper.Max",
                         arguments
                         );
 
                 case "Sign":
-                    return SteExpressionUtils.CreateFunction("Math.Sign", arguments);
+                    return SteExpression.CreateFunction("Math.Sign", arguments);
 
                 case "IntegerPart":
-                    return SteExpressionUtils.CreateFunction("Math.Truncate", arguments);
+                    return SteExpression.CreateFunction("Math.Truncate", arguments);
             }
 
-            return SteExpressionUtils.CreateFunction("MathHelper." + functionName, arguments);
+            return SteExpression.CreateFunction("MathHelper." + functionName, arguments);
         }
 
         private static SteExpression ConvertNumber(SteExpression numberExpr)
@@ -189,7 +189,7 @@ namespace GMac.Engine.API.Target.CSharp
             var num1Text = numberTextFull.Substring(0, commaIndex);
             var num2Text = numberTextFull.Substring(commaIndex + 1, bracketIndex - commaIndex - 1);
 
-            return SteExpressionUtils.CreateLiteralNumber(
+            return SteExpression.CreateLiteralNumber(
                 double.Parse(num1Text) / double.Parse(num2Text)
                 );
         }
@@ -209,7 +209,7 @@ namespace GMac.Engine.API.Target.CSharp
                 //Try convert a low-level Mathematica variable name into a target variable name
 
                 if (ActiveCodeBlock != null && ActiveCodeBlock.VariablesDictionary.TryGetValue(expr.HeadText, out var targetVar))
-                    return SteExpressionUtils.CreateVariable(targetVar.TargetVariableName);
+                    return SteExpression.CreateVariable(targetVar.TargetVariableName);
 
                 return expr.CreateCopy();
             }
@@ -220,10 +220,10 @@ namespace GMac.Engine.API.Target.CSharp
                 switch (expr.HeadText)
                 {
                     case "Pi":
-                        return SteExpressionUtils.CreateSymbolicNumber("Math.PI");
+                        return SteExpression.CreateSymbolicNumber("Math.PI");
 
                     case "E":
-                        return SteExpressionUtils.CreateSymbolicNumber("Math.E");
+                        return SteExpression.CreateSymbolicNumber("Math.E");
                 }
 
                 return expr.CreateCopy();
@@ -252,7 +252,7 @@ namespace GMac.Engine.API.Target.CSharp
                 //Try convert a low-level Mathematica variable name into a target variable name
 
                 if (targetVarsDictionary != null && targetVarsDictionary.TryGetValue(expr.HeadText, out var targetVarName))
-                    return SteExpressionUtils.CreateVariable(targetVarName);
+                    return SteExpression.CreateVariable(targetVarName);
 
                 return expr.CreateCopy();
             }
@@ -263,10 +263,10 @@ namespace GMac.Engine.API.Target.CSharp
                 switch (expr.HeadText)
                 {
                     case "Pi":
-                        return SteExpressionUtils.CreateSymbolicNumber("Math.PI");
+                        return SteExpression.CreateSymbolicNumber("Math.PI");
 
                     case "E":
-                        return SteExpressionUtils.CreateSymbolicNumber("Math.E");
+                        return SteExpression.CreateSymbolicNumber("Math.E");
                 }
 
                 return expr.CreateCopy();

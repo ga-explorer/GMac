@@ -3,7 +3,7 @@ using EuclideanGeometryLib.BasicShapes.Lines.Immutable;
 
 namespace EuclideanGeometryLib.BasicShapes.Lines
 {
-    public interface ILine2D : IGeometryElement
+    public interface ILine2D : IGeometricElement
     {
         double OriginX { get; }
 

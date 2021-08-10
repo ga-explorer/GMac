@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataStructuresLib.Basic;
+using DataStructuresLib.Collections.PeriodicLists2D;
 
 namespace DataStructuresLib.Collections
 {
@@ -96,10 +98,31 @@ namespace DataStructuresLib.Collections
 
             return index1 + index2 * inputList.Count1;
         }
+        
+        public static Tuple<int, int> GetItemIndexTuple<T>(this IPeriodicReadOnlyList2D<T> inputList, int index)
+        {
+            index = index.Mod(inputList.Count);
+
+            var index1 = index % inputList.Count1;
+            var index2 = (index - index1) / inputList.Count1;
+
+            return new Tuple<int, int>(index1, index2);
+        }
+        
+        public static Tuple<int, int> GetItemIndexTuple<T>(this IReadOnlyList2D<T> inputList, int index)
+        {
+            index = index.Mod(inputList.Count);
+
+            var index1 = index % inputList.Count1;
+            var index2 = (index - index1) / inputList.Count1;
+
+            return new Tuple<int, int>(index1, index2);
+        }
 
         public static Pair<int> GetItemIndexPair<T>(this IReadOnlyList2D<T> inputList, int index)
         {
             index = index.Mod(inputList.Count);
+
             var index1 = index % inputList.Count1;
             var index2 = (index - index1) / inputList.Count1;
 

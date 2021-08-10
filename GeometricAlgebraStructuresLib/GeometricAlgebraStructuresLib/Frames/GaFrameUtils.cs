@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using DataStructuresLib.Combinations;
 
 namespace GeometricAlgebraStructuresLib.Frames
@@ -176,7 +177,7 @@ namespace GeometricAlgebraStructuresLib.Frames
         /// <returns></returns>
         public static IEnumerable<ulong> BasisBladeIDsOfGrade(this IGaFrame frame, int grade)
         {
-            return UnsignedLongBitUtils.OnesPermutations(
+            return UInt64BitUtils.OnesPermutations(
                 frame.VSpaceDimension, 
                 grade
             );
@@ -190,7 +191,7 @@ namespace GeometricAlgebraStructuresLib.Frames
         /// <returns></returns>
         public static IEnumerable<ulong> BasisBladeIDsOfGrade(int vSpaceDim, int grade)
         {
-            return UnsignedLongBitUtils.OnesPermutations(
+            return UInt64BitUtils.OnesPermutations(
                 vSpaceDim, 
                 grade
             );

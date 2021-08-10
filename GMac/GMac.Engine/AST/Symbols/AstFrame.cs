@@ -2,6 +2,7 @@
 using System.Linq;
 using CodeComposerLib.Irony.Semantic.Symbol;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Frames;

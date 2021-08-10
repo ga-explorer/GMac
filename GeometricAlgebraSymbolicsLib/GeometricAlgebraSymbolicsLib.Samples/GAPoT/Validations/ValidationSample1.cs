@@ -1,5 +1,6 @@
 ﻿using System;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraSymbolicsLib.Applications.GAPoT;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 

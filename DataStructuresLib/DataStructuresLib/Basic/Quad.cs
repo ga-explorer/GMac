@@ -4,21 +4,35 @@ using System.Text;
 namespace DataStructuresLib.Basic
 {
     /// <summary>
-    /// This class represents an immutable pair of items of the same type
+    /// This structure represents an immutable quad of items of the same type
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public sealed class Quad<T> : IQuad<T>
+    /// <typeparam name="TValue"></typeparam>
+    public readonly struct Quad<TValue> : 
+        IQuad<TValue>,
+        IEquatable<Quad<TValue>>, 
+        IEquatable<Quad<TValue>?>
     {
-        public T Item1 { get; }
+        public static bool operator ==(Quad<TValue> p1, Quad<TValue> p2)
+        {
+            return p1.Equals(p2);
+        }
 
-        public T Item2 { get; }
+        public static bool operator !=(Quad<TValue> p1, Quad<TValue> p2)
+        {
+            return !p1.Equals(p2);
+        }
+        
+        
+        public TValue Item1 { get; }
 
-        public T Item3 { get; }
+        public TValue Item2 { get; }
 
-        public T Item4 { get; }
+        public TValue Item3 { get; }
+
+        public TValue Item4 { get; }
 
 
-        public Quad(T item1, T item2, T item3, T item4)
+        public Quad(TValue item1, TValue item2, TValue item3, TValue item4)
         {
             Item1 = item1;
             Item2 = item2;
@@ -26,7 +40,7 @@ namespace DataStructuresLib.Basic
             Item4 = item4;
         }
 
-        public Quad(IQuad<T> quad)
+        public Quad(IQuad<TValue> quad)
         {
             Item1 = quad.Item1;
             Item2 = quad.Item2;
@@ -34,15 +48,74 @@ namespace DataStructuresLib.Basic
             Item4 = quad.Item4;
         }
 
-        public Quad(Tuple<T, T, T, T> tuple)
+        public Quad(Tuple<TValue, TValue, TValue, TValue> quad)
         {
-            (Item1, Item2, Item3, Item4) = tuple;
+            (Item1, Item2, Item3, Item4) = quad;
         }
 
 
-        public Quad<T> GetCopy()
+        public Quad<TValue> GetCopy()
         {
-            return new Quad<T>(this);
+            return new Quad<TValue>(this);
+        }
+
+        /// <summary>
+        /// Returns a new pair containing (this.Item2, nextItem)
+        /// </summary>
+        /// <param name="nextItem"></param>
+        /// <returns></returns>
+        public Quad<TValue> NextQuad(TValue nextItem)
+        {
+            return new Quad<TValue>(Item2, Item3, Item4, nextItem);
+        }
+
+        /// <summary>
+        /// Returns a new pair containing (previousItem, this.Item1)
+        /// </summary>
+        /// <param name="previousItem"></param>
+        /// <returns></returns>
+        public Quad<TValue> PreviousQuad(TValue previousItem)
+        {
+            return new Quad<TValue>(previousItem, Item1, Item2, Item3);
+        }
+
+        public Quad<TValue> RotateForward()
+        {
+            return new Quad<TValue>(Item4, Item1, Item2, Item3);
+        }
+
+        public Quad<TValue> RotateBackward()
+        {
+            return new Quad<TValue>(Item2, Item3, Item4, Item1);
+        }
+        
+        public bool Equals(Quad<TValue> other)
+        {
+            return 
+                Item1.Equals(other.Item1) && 
+                Item2.Equals(other.Item2) &&
+                Item3.Equals(other.Item3) &&
+                Item3.Equals(other.Item4);
+        }
+
+        public bool Equals(Quad<TValue>? other)
+        {
+            return other.HasValue && Equals(other.Value);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Quad<TValue> other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(
+                Item1.GetHashCode(), 
+                Item2.GetHashCode(),
+                Item3.GetHashCode(),
+                Item4.GetHashCode()
+            );
         }
 
         public override string ToString()

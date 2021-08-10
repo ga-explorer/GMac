@@ -5,7 +5,7 @@ using System.Linq;
 using CSScriptLib;
 using GMac.Engine.AST;
 using TextComposerLib;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 using TextComposerLib.Text;
 using TextComposerLib.Text.Linear;
 

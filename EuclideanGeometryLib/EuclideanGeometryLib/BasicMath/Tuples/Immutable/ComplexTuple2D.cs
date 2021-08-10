@@ -11,7 +11,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
     /// <summary>
     /// An immutable 2-tuple of double precision numbers
     /// </summary>
-    public struct ComplexTuple2D : IComplexTuple2D, IEnumerable<Complex>
+    public readonly struct ComplexTuple2D : IComplexTuple2D, IEnumerable<Complex>
     {
         public static ComplexTuple2D Zero { get; } 
             = new ComplexTuple2D(0, 0);
@@ -19,42 +19,42 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple2D operator -(ComplexTuple2D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid);
 
             return new ComplexTuple2D(-v1.X, -v1.Y);
         }
 
         public static ComplexTuple2D operator +(ComplexTuple2D v1, ComplexTuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new ComplexTuple2D(v1.X + v2.X, v1.Y + v2.Y);
         }
 
         public static ComplexTuple2D operator -(ComplexTuple2D v1, ComplexTuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new ComplexTuple2D(v1.X - v2.X, v1.Y - v2.Y);
         }
 
         public static ComplexTuple2D operator *(ComplexTuple2D v1, double s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new ComplexTuple2D(v1.X * s, v1.Y * s);
         }
 
         public static ComplexTuple2D operator *(double s, ComplexTuple2D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new ComplexTuple2D(v1.X * s, v1.Y * s);
         }
 
         public static ComplexTuple2D operator /(ComplexTuple2D v1, Complex s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !s.IsNaN());
+            Debug.Assert(!v1.IsInvalid && !s.IsNaN());
 
             s = 1.0d / s;
 
@@ -63,7 +63,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static bool operator ==(ComplexTuple2D v1, ComplexTuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return
                 v1.X.IsAlmostEqual(v2.X) &&
@@ -72,7 +72,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static bool operator !=(ComplexTuple2D v1, ComplexTuple2D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return
                 !v1.X.IsAlmostEqual(v2.X) ||
@@ -109,10 +109,13 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         }
 
+        public bool IsValid 
+            => !X.IsNaN() && !Y.IsNaN();
+
         /// <summary>
         /// True if this tuple contains any NaN components
         /// </summary>
-        public bool HasNaNComponent =>
+        public bool IsInvalid =>
             X.IsNaN() || Y.IsNaN();
 
 
@@ -121,7 +124,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
             X = x;
             Y = y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public ComplexTuple2D(Complex x, Complex y)
@@ -129,12 +132,12 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
             X = x;
             Y = y;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public ComplexTuple2D(IComplexTuple2D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            Debug.Assert(!tuple.IsInvalid);
 
             X = tuple.X;
             Y = tuple.Y;

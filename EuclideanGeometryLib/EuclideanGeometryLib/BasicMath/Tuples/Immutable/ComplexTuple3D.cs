@@ -11,7 +11,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
     /// <summary>
     /// An immutable 2-tuple of double precision numbers
     /// </summary>
-    public struct ComplexTuple3D : IComplexTuple3D, IEnumerable<Complex>
+    public readonly struct ComplexTuple3D : IComplexTuple3D, IEnumerable<Complex>
     {
         public static ComplexTuple3D Zero { get; }
             = new ComplexTuple3D(0, 0, 0);
@@ -19,7 +19,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple3D operator -(ComplexTuple3D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid);
 
             return new ComplexTuple3D(
                 -v1.X, 
@@ -30,7 +30,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple3D operator +(ComplexTuple3D v1, ComplexTuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new ComplexTuple3D(
                 v1.X + v2.X, 
@@ -41,7 +41,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple3D operator -(ComplexTuple3D v1, ComplexTuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return new ComplexTuple3D(
                 v1.X - v2.X, 
@@ -52,7 +52,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple3D operator *(ComplexTuple3D v1, double s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new ComplexTuple3D(
                 v1.X * s, 
@@ -63,7 +63,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple3D operator *(double s, ComplexTuple3D v1)
         {
-            Debug.Assert(!v1.HasNaNComponent && !double.IsNaN(s));
+            Debug.Assert(!v1.IsInvalid && !double.IsNaN(s));
 
             return new ComplexTuple3D(
                 v1.X * s, 
@@ -74,7 +74,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static ComplexTuple3D operator /(ComplexTuple3D v1, Complex s)
         {
-            Debug.Assert(!v1.HasNaNComponent && !s.IsNaN());
+            Debug.Assert(!v1.IsInvalid && !s.IsNaN());
 
             s = s.Reciprocal();
 
@@ -87,7 +87,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static bool operator ==(ComplexTuple3D v1, ComplexTuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return
                 v1.X.IsAlmostEqual(v2.X) &&
@@ -97,7 +97,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         public static bool operator !=(ComplexTuple3D v1, ComplexTuple3D v2)
         {
-            Debug.Assert(!v1.HasNaNComponent && !v2.HasNaNComponent);
+            Debug.Assert(!v1.IsInvalid && !v2.IsInvalid);
 
             return
                 !v1.X.IsAlmostEqual(v2.X) ||
@@ -141,10 +141,10 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 
         }
 
-        /// <summary>
-        /// True if this tuple contains any NaN components
-        /// </summary>
-        public bool HasNaNComponent =>
+        public bool IsValid 
+            => !X.IsNaN() && !Y.IsNaN() && !Z.IsNaN();
+
+        public bool IsInvalid =>
             X.IsNaN() || Y.IsNaN() || Z.IsNaN();
 
 
@@ -154,7 +154,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
             Y = y;
             Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public ComplexTuple3D(Complex x, Complex y, Complex z)
@@ -163,12 +163,12 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
             Y = y;
             Z = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         public ComplexTuple3D(IComplexTuple3D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
+            Debug.Assert(!tuple.IsInvalid);
 
             X = tuple.X;
             Y = tuple.Y;

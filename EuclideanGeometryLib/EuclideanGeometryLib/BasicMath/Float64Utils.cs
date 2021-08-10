@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using EuclideanGeometryLib.BasicMath.Tuples;
 using MathNet.Numerics;
 
 namespace EuclideanGeometryLib.BasicMath
@@ -153,6 +154,48 @@ namespace EuclideanGeometryLib.BasicMath
         public static bool IsAlmostEqual(this Complex x1, Complex x2)
         {
             return (x1 - x2).Magnitude.IsAlmostZero();
+        }
+        
+        /// <summary>
+        /// True if the given values are equal relative to the default accuracy
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <returns></returns>
+        public static bool IsAlmostEqual(this ITuple2D x1, ITuple2D x2)
+        {
+            return
+                IsAlmostEqual(x1.X, x2.X) &&
+                IsAlmostEqual(x1.Y, x2.Y);
+        }
+        
+        /// <summary>
+        /// True if the given values are equal relative to the default accuracy
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <returns></returns>
+        public static bool IsAlmostEqual(this ITuple3D x1, ITuple3D x2)
+        {
+            return
+                IsAlmostEqual(x1.X, x2.X) &&
+                IsAlmostEqual(x1.Y, x2.Y) &&
+                IsAlmostEqual(x1.Z, x2.Z);
+        }
+        
+        /// <summary>
+        /// True if the given values are equal relative to the default accuracy
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <returns></returns>
+        public static bool IsAlmostEqual(this ITuple4D x1, ITuple4D x2)
+        {
+            return
+                IsAlmostEqual(x1.X, x2.X) &&
+                IsAlmostEqual(x1.Y, x2.Y) &&
+                IsAlmostEqual(x1.Z, x2.Z) &&
+                IsAlmostEqual(x1.W, x2.W);
         }
 
 

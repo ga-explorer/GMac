@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.Expression;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;

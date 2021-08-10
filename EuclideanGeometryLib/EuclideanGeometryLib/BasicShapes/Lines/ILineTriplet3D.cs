@@ -2,7 +2,7 @@
 
 namespace EuclideanGeometryLib.BasicShapes.Lines
 {
-    public interface ILineTriplet3D : IGeometryElement
+    public interface ILineTriplet3D : IGeometricElement
     {
         double Origin1X { get; }
 

@@ -42,10 +42,27 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Immutable
         public double Point3Z { get; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(Point1X) || double.IsNaN(Point1Y) || double.IsNaN(Point1Z) ||
-               double.IsNaN(Point2X) || double.IsNaN(Point2Y) || double.IsNaN(Point2Z) ||
-               double.IsNaN(Point3X) || double.IsNaN(Point3Y) || double.IsNaN(Point3Z);
+        public bool IsValid
+            => !double.IsNaN(Point1X) && 
+               !double.IsNaN(Point1Y) &&
+               !double.IsNaN(Point1Z) &&
+               !double.IsNaN(Point2X) &&
+               !double.IsNaN(Point2Y) &&
+               !double.IsNaN(Point2Z) &&
+               !double.IsNaN(Point3X) &&
+               !double.IsNaN(Point3Y) &&
+               !double.IsNaN(Point3Z);
+
+        public bool IsInvalid
+            => double.IsNaN(Point1X) || 
+               double.IsNaN(Point1Y) || 
+               double.IsNaN(Point1Z) ||
+               double.IsNaN(Point2X) || 
+               double.IsNaN(Point2Y) || 
+               double.IsNaN(Point2Z) ||
+               double.IsNaN(Point3X) || 
+               double.IsNaN(Point3Y) || 
+               double.IsNaN(Point3Z);
 
 
         internal Triangle3D(double p1X, double p1Y, double p1Z, double p2X, double p2Y, double p2Z, double p3X, double p3Y, double p3Z)
@@ -62,7 +79,7 @@ namespace EuclideanGeometryLib.BasicShapes.Triangles.Immutable
             Point3Y = p3Y;
             Point3Z = p3Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

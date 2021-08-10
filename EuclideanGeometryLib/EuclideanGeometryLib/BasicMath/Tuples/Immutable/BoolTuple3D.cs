@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples.Immutable
 {
-    public struct BoolTuple3D : IEnumerable<bool>
+    public readonly struct BoolTuple3D : IEnumerable<bool>
     {
         public static BoolTuple3D operator !(BoolTuple3D v1)
         {

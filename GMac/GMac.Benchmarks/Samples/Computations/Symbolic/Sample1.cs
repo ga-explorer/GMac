@@ -149,7 +149,7 @@ namespace GMac.Benchmarks.Samples.Computations.Symbolic
             {
                 mdComposer
                     .AppendHeader("Space Dimension: " + n, 2)
-                    .AppendLineAtNewLine(CreateTable(n));
+                    .AppendLineAtNewLine(CreateTable(n).ToString());
             }
 
             return mdComposer.ToString();

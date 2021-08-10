@@ -6,7 +6,8 @@ namespace GMac.Engine.API.CodeBlock
     /// <summary>
     /// This class holds dependency information of low-level variables inside a code block
     /// </summary>
-    public sealed class GMacCbDependencyGraph : DependencyGraph<string, GMacCbVariable>
+    public sealed class GMacCbDependencyGraph : 
+        DependencyGraph<string, GMacCbVariable>
     {
         public GMacCodeBlock CodeBlock { get; }
 

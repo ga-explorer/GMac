@@ -67,7 +67,7 @@ namespace GMac.Benchmarks.Benchmarks.Numeric.Outermorphisms
         //[Benchmark]
         public Pair<GaNumSarMultivector> OmComputed_BtrMultivectorsSeparate()
         {
-            Pair<GaNumSarMultivector> result = null;
+            Pair<GaNumSarMultivector> result = new Pair<GaNumSarMultivector>();
 
             for (var i1 = 0; i1 < MultivectorsCount; i1++)
             for (var i2 = 0; i2 < MultivectorsCount; i2++)
@@ -112,7 +112,7 @@ namespace GMac.Benchmarks.Benchmarks.Numeric.Outermorphisms
         //[Benchmark]
         public Pair<GaNumSarMultivector> OmComputed_BtrMultivectorsCombined()
         {
-            Pair<GaNumSarMultivector> result = null;
+            Pair<GaNumSarMultivector> result = new Pair<GaNumSarMultivector>();
 
             for (var i1 = 0; i1 < MultivectorsCount; i1++)
             for (var i2 = 0; i2 < MultivectorsCount; i2++)
@@ -127,7 +127,7 @@ namespace GMac.Benchmarks.Benchmarks.Numeric.Outermorphisms
         [Benchmark]
         public Pair<GaNumDgrMultivector> OmComputed_JarMultivectorsSeparate()
         {
-            Pair<GaNumDgrMultivector> result = null;
+            Pair<GaNumDgrMultivector> result = new Pair<GaNumDgrMultivector>();
 
             for (var i1 = 0; i1 < MultivectorsCount; i1++)
             for (var i2 = 0; i2 < MultivectorsCount; i2++)

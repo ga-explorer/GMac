@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using TextComposerLib.Text.Linear;
 
 namespace GeometricAlgebraNumericsLib.Structures.BinaryTrees.NodeInfo

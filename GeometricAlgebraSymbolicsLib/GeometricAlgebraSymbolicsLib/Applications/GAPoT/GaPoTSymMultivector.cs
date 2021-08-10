@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraStructuresLib.Frames;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica;
 using GeometricAlgebraSymbolicsLib.Cas.Mathematica.ExprFactory;

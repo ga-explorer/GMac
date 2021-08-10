@@ -9,7 +9,7 @@ namespace GMac.Engine.API.Target.Excel
     public sealed class MathematicaToExcelConverter : GMacMathematicaExpressionConverter
     {
         public MathematicaToExcelConverter()
-            : base(ExcelUtils.Excel2007Info)
+            : base(CclExcelUtils.Excel2007Info)
         {
 
         }
@@ -26,146 +26,146 @@ namespace GMac.Engine.API.Target.Excel
             {
                 //case "Rational":
                 //    return SteExpressionUtils.CreateOperator(
-                //        ExcelUtils.Operators.Divide, 
+                //        CclExcelUtils.Operators.Divide, 
                 //        SteExpressionUtils.CreateLiteralNumber(arguments[0].ToString()),
                 //        SteExpressionUtils.CreateLiteralNumber(arguments[1].ToString())
                 //        );
 
                 case "Plus":
-                    return SteExpressionUtils.CreateOperator(
-                        ExcelUtils.Operators.Add, arguments
+                    return SteExpression.CreateOperator(
+                        CclExcelUtils.Operators.Add, arguments
                     );
 
                 case "Minus":
-                    return SteExpressionUtils.CreateOperator(
-                        ExcelUtils.Operators.UnaryMinus, arguments
+                    return SteExpression.CreateOperator(
+                        CclExcelUtils.Operators.UnaryMinus, arguments
                     );
 
                 case "Subtract":
-                    return SteExpressionUtils.CreateOperator(
-                        ExcelUtils.Operators.Subtract, arguments
+                    return SteExpression.CreateOperator(
+                        CclExcelUtils.Operators.Subtract, arguments
                     );
 
                 case "Times":
                     if (arguments[0].ToString() == "-1" && arguments.Length == 2)
-                        return SteExpressionUtils.CreateOperator(
-                            ExcelUtils.Operators.UnaryMinus, arguments[1]
+                        return SteExpression.CreateOperator(
+                            CclExcelUtils.Operators.UnaryMinus, arguments[1]
                         );
 
-                    return SteExpressionUtils.CreateOperator(
-                        ExcelUtils.Operators.Multiply, arguments
+                    return SteExpression.CreateOperator(
+                        CclExcelUtils.Operators.Multiply, arguments
                     );
 
                 case "Divide":
-                    return SteExpressionUtils.CreateOperator(
-                        ExcelUtils.Operators.Divide, arguments
+                    return SteExpression.CreateOperator(
+                        CclExcelUtils.Operators.Divide, arguments
                     );
 
                 case "Power":
                     if (arguments[1].ToString() == "-1")
-                        return SteExpressionUtils.CreateOperator(
-                            ExcelUtils.Operators.Divide,
-                            SteExpressionUtils.CreateLiteralNumber(1),
+                        return SteExpression.CreateOperator(
+                            CclExcelUtils.Operators.Divide,
+                            SteExpression.CreateLiteralNumber(1),
                             arguments[0]
                         );
 
                     if (arguments[1].ToString() == "2")
-                        return SteExpressionUtils.CreateOperator(
-                            ExcelUtils.Operators.Multiply,
+                        return SteExpression.CreateOperator(
+                            CclExcelUtils.Operators.Multiply,
                             arguments[0],
                             arguments[0]
                         );
 
                     if (arguments[1].ToString() == "3")
-                        return SteExpressionUtils.CreateOperator(
-                            ExcelUtils.Operators.Multiply,
+                        return SteExpression.CreateOperator(
+                            CclExcelUtils.Operators.Multiply,
                             arguments[0],
                             arguments[0],
                             arguments[0]
                         );
 
-                    return SteExpressionUtils.CreateFunction("POWER", arguments);
+                    return SteExpression.CreateFunction("POWER", arguments);
 
                 case "Abs":
-                    return SteExpressionUtils.CreateFunction("ABS", arguments);
+                    return SteExpression.CreateFunction("ABS", arguments);
 
                 case "Exp":
-                    return SteExpressionUtils.CreateFunction("EXP", arguments);
+                    return SteExpression.CreateFunction("EXP", arguments);
 
                 case "Sin":
-                    return SteExpressionUtils.CreateFunction("SIN", arguments);
+                    return SteExpression.CreateFunction("SIN", arguments);
 
                 case "Cos":
-                    return SteExpressionUtils.CreateFunction("COS", arguments);
+                    return SteExpression.CreateFunction("COS", arguments);
 
                 case "Tan":
-                    return SteExpressionUtils.CreateFunction("TAN", arguments);
+                    return SteExpression.CreateFunction("TAN", arguments);
 
                 case "ArcSin":
-                    return SteExpressionUtils.CreateFunction("ASIN", arguments);
+                    return SteExpression.CreateFunction("ASIN", arguments);
 
                 case "ArcCos":
-                    return SteExpressionUtils.CreateFunction("ACOS", arguments);
+                    return SteExpression.CreateFunction("ACOS", arguments);
 
                 case "ArcTan":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "ATAN" : "ATAN2",
                         arguments
                     );
 
                 case "Sinh":
-                    return SteExpressionUtils.CreateFunction("SINH", arguments);
+                    return SteExpression.CreateFunction("SINH", arguments);
 
                 case "Cosh":
-                    return SteExpressionUtils.CreateFunction("COSH", arguments);
+                    return SteExpression.CreateFunction("COSH", arguments);
 
                 case "Tanh":
-                    return SteExpressionUtils.CreateFunction("TANH", arguments);
+                    return SteExpression.CreateFunction("TANH", arguments);
 
                 case "Log":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "LN" : "LOG",
                         arguments.Length == 1 ? arguments : arguments.Reverse()
                     );
 
                 case "Log10":
-                    return SteExpressionUtils.CreateFunction("LOG10", arguments);
+                    return SteExpression.CreateFunction("LOG10", arguments);
 
                 case "Sqrt":
-                    return SteExpressionUtils.CreateFunction("SQRT", arguments);
+                    return SteExpression.CreateFunction("SQRT", arguments);
 
                 case "Floor":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "FLOOR" : "FLOOR.MATH",
                         arguments
                     );
 
                 case "Ceiling":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "CEILING" : "CEILING.MATH",
                         arguments
                     );
 
                 case "Round":
-                    return SteExpressionUtils.CreateFunction(
+                    return SteExpression.CreateFunction(
                         arguments.Length == 1 ? "ROUND" : "MROUND",
                         arguments
                     );
 
                 case "Min":
-                    return SteExpressionUtils.CreateFunction("MIN", arguments);
+                    return SteExpression.CreateFunction("MIN", arguments);
 
                 case "Max":
-                    return SteExpressionUtils.CreateFunction("MAX", arguments);
+                    return SteExpression.CreateFunction("MAX", arguments);
 
                 case "Sign":
-                    return SteExpressionUtils.CreateFunction("SIGN", arguments);
+                    return SteExpression.CreateFunction("SIGN", arguments);
 
                 case "IntegerPart":
-                    return SteExpressionUtils.CreateFunction("TRUNC", arguments);
+                    return SteExpression.CreateFunction("TRUNC", arguments);
             }
 
-            return SteExpressionUtils.CreateFunction(functionName, arguments);
+            return SteExpression.CreateFunction(functionName, arguments);
         }
 
         private static SteExpression ConvertNumber(SteExpression numberExpr)
@@ -187,7 +187,7 @@ namespace GMac.Engine.API.Target.Excel
             var num1Text = numberTextFull.Substring(0, commaIndex);
             var num2Text = numberTextFull.Substring(commaIndex + 1, bracketIndex - commaIndex - 1);
 
-            return SteExpressionUtils.CreateLiteralNumber(
+            return SteExpression.CreateLiteralNumber(
                 double.Parse(num1Text) / double.Parse(num2Text)
             );
         }
@@ -207,7 +207,7 @@ namespace GMac.Engine.API.Target.Excel
                 //Try convert a low-level Mathematica variable name into a target variable name
 
                 if (ActiveCodeBlock != null && ActiveCodeBlock.VariablesDictionary.TryGetValue(expr.HeadText, out var targetVar))
-                    return SteExpressionUtils.CreateVariable(targetVar.TargetVariableName);
+                    return SteExpression.CreateVariable(targetVar.TargetVariableName);
 
                 return expr.CreateCopy();
             }
@@ -218,10 +218,10 @@ namespace GMac.Engine.API.Target.Excel
                 switch (expr.HeadText)
                 {
                     case "Pi":
-                        return SteExpressionUtils.CreateSymbolicNumber("PI");
+                        return SteExpression.CreateSymbolicNumber("PI");
 
                     case "E":
-                        return SteExpressionUtils.CreateSymbolicNumber("EXP(1)");
+                        return SteExpression.CreateSymbolicNumber("EXP(1)");
                 }
 
                 return expr.CreateCopy();
@@ -250,7 +250,7 @@ namespace GMac.Engine.API.Target.Excel
                 //Try convert a low-level Mathematica variable name into a target variable name
 
                 if (targetVarsDictionary != null && targetVarsDictionary.TryGetValue(expr.HeadText, out var targetVarName))
-                    return SteExpressionUtils.CreateVariable(targetVarName);
+                    return SteExpression.CreateVariable(targetVarName);
 
                 return expr.CreateCopy();
             }
@@ -261,10 +261,10 @@ namespace GMac.Engine.API.Target.Excel
                 switch (expr.HeadText)
                 {
                     case "Pi":
-                        return SteExpressionUtils.CreateSymbolicNumber("PI");
+                        return SteExpression.CreateSymbolicNumber("PI");
 
                     case "E":
-                        return SteExpressionUtils.CreateSymbolicNumber("EXP(1)");
+                        return SteExpression.CreateSymbolicNumber("EXP(1)");
                 }
 
                 return expr.CreateCopy();

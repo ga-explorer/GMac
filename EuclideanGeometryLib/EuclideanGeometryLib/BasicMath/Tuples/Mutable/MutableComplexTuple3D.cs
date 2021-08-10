@@ -17,21 +17,21 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         public double RealZ { get; set; }
 
 
-        public double ImaginaryX { get; set; }
+        public double ImagX { get; set; }
 
-        public double ImaginaryY { get; set; }
+        public double ImagY { get; set; }
 
-        public double ImaginaryZ { get; set; }
+        public double ImagZ { get; set; }
 
 
         public Complex X 
-            => new Complex(RealX, ImaginaryX);
+            => new Complex(RealX, ImagX);
 
         public Complex Y
-            => new Complex(RealY, ImaginaryY);
+            => new Complex(RealY, ImagY);
 
         public Complex Z 
-            => new Complex(RealZ, ImaginaryZ);
+            => new Complex(RealZ, ImagZ);
 
         public Complex Item1
             => X;
@@ -42,14 +42,22 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         public Complex Item3
             => Z;
 
+        
+        public bool IsValid
+            => !double.IsNaN(RealX) &&
+               !double.IsNaN(ImagX) &&
+               !double.IsNaN(RealY) &&
+               !double.IsNaN(ImagY) &&
+               !double.IsNaN(RealZ) &&
+               !double.IsNaN(ImagZ);
 
-        public bool HasNaNComponent
+        public bool IsInvalid
             => double.IsNaN(RealX) ||
-               double.IsNaN(ImaginaryX) ||
+               double.IsNaN(ImagX) ||
                double.IsNaN(RealY) ||
-               double.IsNaN(ImaginaryY) ||
+               double.IsNaN(ImagY) ||
                double.IsNaN(RealZ) ||
-               double.IsNaN(ImaginaryZ);
+               double.IsNaN(ImagZ);
 
 
         /// <summary>
@@ -77,17 +85,17 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
                 if (index == 0)
                 {
                     RealX = value.Real;
-                    ImaginaryX = value.Imaginary;
+                    ImagX = value.Imaginary;
                 }
                 else if (index == 1)
                 {
                     RealY = value.Real;
-                    ImaginaryY = value.Imaginary;
+                    ImagY = value.Imaginary;
                 }
                 else if (index == 2)
                 {
                     RealZ = value.Real;
-                    ImaginaryZ = value.Imaginary;
+                    ImagZ = value.Imaginary;
                 }
             }
         }
@@ -103,7 +111,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = y;
             RealZ = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
         }
 
         public MutableComplexTuple3D(Complex x, Complex y, Complex z)
@@ -112,33 +120,33 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = y.Real;
             RealZ = z.Real;
 
-            ImaginaryX = x.Imaginary;
-            ImaginaryY = y.Imaginary;
-            ImaginaryZ = z.Imaginary;
+            ImagX = x.Imaginary;
+            ImagY = y.Imaginary;
+            ImagZ = z.Imaginary;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
         }
 
         public MutableComplexTuple3D(ITuple3D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
-
             RealX = tuple.X;
             RealY = tuple.Y;
             RealZ = tuple.Z;
+
+            Debug.Assert(IsValid);
         }
 
         public MutableComplexTuple3D(IComplexTuple3D tuple)
         {
-            Debug.Assert(!tuple.HasNaNComponent);
-
             RealX = tuple.X.Real;
             RealY = tuple.Y.Real;
             RealZ = tuple.Z.Real;
 
-            ImaginaryX = tuple.X.Imaginary;
-            ImaginaryY = tuple.Y.Imaginary;
-            ImaginaryZ = tuple.Z.Imaginary;
+            ImagX = tuple.X.Imaginary;
+            ImagY = tuple.Y.Imaginary;
+            ImagZ = tuple.Z.Imaginary;
+
+            Debug.Assert(IsValid);
         }
 
 
@@ -148,7 +156,7 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = y;
             RealZ = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -159,18 +167,18 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = y;
             RealZ = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
 
         public MutableComplexTuple3D SetImaginaryTuple(double x, double y, double z)
         {
-            ImaginaryX = x;
-            ImaginaryY = y;
-            ImaginaryZ = z;
+            ImagX = x;
+            ImagY = y;
+            ImagZ = z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -181,11 +189,11 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = y.Real;
             RealZ = z.Real;
 
-            ImaginaryX = x.Imaginary;
-            ImaginaryY = y.Imaginary;
-            ImaginaryZ = z.Imaginary;
+            ImagX = x.Imaginary;
+            ImagY = y.Imaginary;
+            ImagZ = z.Imaginary;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -196,11 +204,11 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = tuple.Y;
             RealZ = tuple.Z;
 
-            ImaginaryX = 0;
-            ImaginaryY = 0;
-            ImaginaryZ = 0;
+            ImagX = 0;
+            ImagY = 0;
+            ImagZ = 0;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -211,18 +219,18 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = tuple.Y;
             RealZ = tuple.Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
 
         public MutableComplexTuple3D SetImaginaryTuple(ITuple3D tuple)
         {
-            ImaginaryX = tuple.X;
-            ImaginaryY = tuple.Y;
-            ImaginaryZ = tuple.Z;
+            ImagX = tuple.X;
+            ImagY = tuple.Y;
+            ImagZ = tuple.Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -233,11 +241,11 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
             RealY = tuple.Y.Real;
             RealZ = tuple.Z.Real;
 
-            ImaginaryX = tuple.X.Imaginary;
-            ImaginaryY = tuple.Y.Imaginary;
-            ImaginaryZ = tuple.Z.Imaginary;
+            ImagX = tuple.X.Imaginary;
+            ImagY = tuple.Y.Imaginary;
+            ImagZ = tuple.Z.Imaginary;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(IsValid);
 
             return this;
         }
@@ -245,16 +253,16 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
 
         public IEnumerator<Complex> GetEnumerator()
         {
-            yield return new Complex(RealX, ImaginaryX);
-            yield return new Complex(RealY, ImaginaryY);
-            yield return new Complex(RealZ, ImaginaryZ);
+            yield return new Complex(RealX, ImagX);
+            yield return new Complex(RealY, ImagY);
+            yield return new Complex(RealZ, ImagZ);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            yield return new Complex(RealX, ImaginaryX);
-            yield return new Complex(RealY, ImaginaryY);
-            yield return new Complex(RealZ, ImaginaryZ);
+            yield return new Complex(RealX, ImagX);
+            yield return new Complex(RealY, ImagY);
+            yield return new Complex(RealZ, ImagZ);
         }
 
 
@@ -262,11 +270,11 @@ namespace EuclideanGeometryLib.BasicMath.Tuples.Mutable
         {
             return new StringBuilder()
                 .Append("(")
-                .AppendComplexNumber(RealX, ImaginaryX, "G")
+                .AppendComplexNumber(RealX, ImagX, "G")
                 .Append(", ")
-                .AppendComplexNumber(RealY, ImaginaryY, "G")
+                .AppendComplexNumber(RealY, ImagY, "G")
                 .Append(", ")
-                .AppendComplexNumber(RealZ, ImaginaryZ, "G")
+                .AppendComplexNumber(RealZ, ImagZ, "G")
                 .Append(")")
                 .ToString();
         }

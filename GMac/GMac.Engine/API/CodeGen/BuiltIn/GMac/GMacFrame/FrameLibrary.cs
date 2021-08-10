@@ -15,22 +15,22 @@ namespace GMac.Engine.API.CodeGen.BuiltIn.GMac.GMacFrame
     {
         public static string Generate(AstFrame frame)
         {
-            var codeGenerator = new FrameLibrary(frame.Root);
+            var codeComposer = new FrameLibrary(frame.Root);
 
-            codeGenerator.SelectedSymbols.Add(frame);
+            codeComposer.SelectedSymbols.Add(frame);
 
-            codeGenerator.Generate(
+            codeComposer.Generate(
                 () =>
                 {
-                    codeGenerator.CodeFilesComposer.InitalizeFile(frame.AccessName + ".gmac");
+                    codeComposer.CodeFilesComposer.InitalizeFile(frame.AccessName + ".gmac");
 
-                    codeGenerator.GenerateFrameCode(frame);
+                    codeComposer.GenerateFrameCode(frame);
 
-                    codeGenerator.CodeFilesComposer.UnselectActiveFile();
+                    codeComposer.CodeFilesComposer.UnselectActiveFile();
                 }
                 );
 
-            return codeGenerator.CodeFilesComposer.FirstFileFinalText;
+            return codeComposer.CodeFilesComposer.FirstFileFinalText;
         }
 
 
@@ -52,7 +52,7 @@ namespace GMac.Engine.API.CodeGen.BuiltIn.GMac.GMacFrame
 
         public override string Description => "Generate GMacDSL code for default objects for a given frame";
 
-        public GMacDslSyntaxFactory GMacDslSyntaxFactory => GMacLanguage.SyntaxFactory as GMacDslSyntaxFactory;
+        public CclGMacDslSyntaxFactory GMacDslSyntaxFactory => GMacLanguage.SyntaxFactory as CclGMacDslSyntaxFactory;
 
 
         public FrameLibrary(AstRoot ast)
@@ -261,7 +261,7 @@ namespace GMac.Engine.API.CodeGen.BuiltIn.GMac.GMacFrame
         }
 
 
-        public override GMacCodeLibraryComposer CreateEmptyGenerator()
+        public override GMacCodeLibraryComposer CreateEmptyComposer()
         {
             return new FrameLibrary(Root);
         }
@@ -276,12 +276,12 @@ namespace GMac.Engine.API.CodeGen.BuiltIn.GMac.GMacFrame
             return SelectedSymbols.All(s => s.IsValidFrame);
         }
 
-        protected override void InitializeOtherComponents()
+        protected override void InitializeSubComponents()
         {
 
         }
 
-        protected override void FinalizeOtherComponents()
+        protected override void FinalizeSubComponents()
         {
 
         }

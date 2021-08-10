@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using EuclideanGeometryLib.BasicMath.Tuples.Immutable;
 
 namespace EuclideanGeometryLib.BasicMath.Coordinates
 {
@@ -18,7 +17,12 @@ namespace EuclideanGeometryLib.BasicMath.Coordinates
         public double PhiInDegrees 
             => Phi.RadiansToDegrees();
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(R) &&
+               !double.IsNaN(Theta) &&
+               !double.IsNaN(Phi);
+
+        public bool IsInvalid
             => double.IsNaN(R) ||
                double.IsNaN(Theta) ||
                double.IsNaN(Phi);
@@ -56,13 +60,6 @@ namespace EuclideanGeometryLib.BasicMath.Coordinates
             R = r > 0 ? r : 0;
         }
 
-
-        public Tuple3D ToTuple3D()
-            => new Tuple3D(
-                R * Math.Sin(Theta) * Math.Cos(Phi),
-                R * Math.Sin(Theta) * Math.Sin(Phi),
-                R * Math.Cos(Theta)
-            );
 
         public override string ToString()
         {

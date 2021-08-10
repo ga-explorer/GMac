@@ -2,7 +2,7 @@
 
 namespace EuclideanGeometryLib.BasicShapes.Lines
 {
-    public interface IBeam3D : IGeometryElement
+    public interface IBeam3D : IGeometricElement
     {
         double OriginX { get; }
 

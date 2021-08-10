@@ -5,7 +5,7 @@ using GMac.Engine.AST.Symbols;
 using GMac.Engine.Compiler.Semantic.AST;
 using GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Generator;
 using GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer.Evaluator;
-using TextComposerLib.Logs.Progress;
+using TextComposerLib.Loggers.Progress;
 
 namespace GMac.Engine.Compiler.Semantic.ASTInterpreter.LowLevel.Optimizer
 {

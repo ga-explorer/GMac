@@ -68,11 +68,25 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
 
         public double Direction2Z { get; }
 
-        public bool HasNaNComponent
-            => double.IsNaN(Origin1X) || double.IsNaN(Origin1Y) ||
-               double.IsNaN(Direction1X) || double.IsNaN(Direction1Y) ||
-               double.IsNaN(Origin2X) || double.IsNaN(Origin2Y) ||
-               double.IsNaN(Direction2X) || double.IsNaN(Direction2Y);
+        public bool IsValid
+            => !double.IsNaN(Origin1X) &&
+               !double.IsNaN(Origin1Y) &&
+               !double.IsNaN(Direction1X) &&
+               !double.IsNaN(Direction1Y) &&
+               !double.IsNaN(Origin2X) &&
+               !double.IsNaN(Origin2Y) &&
+               !double.IsNaN(Direction2X) &&
+               !double.IsNaN(Direction2Y);
+
+        public bool IsInvalid
+            => double.IsNaN(Origin1X) || 
+               double.IsNaN(Origin1Y) ||
+               double.IsNaN(Direction1X) || 
+               double.IsNaN(Direction1Y) ||
+               double.IsNaN(Origin2X) || 
+               double.IsNaN(Origin2Y) ||
+               double.IsNaN(Direction2X) || 
+               double.IsNaN(Direction2Y);
 
 
         internal LinePair3D(double o1X, double o1Y, double o1Z, double d1X, double d1Y, double d1Z, double o2X, double o2Y, double o2Z, double d2X, double d2Y, double d2Z)

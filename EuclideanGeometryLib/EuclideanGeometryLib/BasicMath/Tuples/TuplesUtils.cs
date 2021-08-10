@@ -466,6 +466,9 @@ namespace EuclideanGeometryLib.BasicMath.Tuples
         public static Tuple4D ToTuple4D(this ITuple3D tuple) 
             => new Tuple4D(tuple.X, tuple.Y, tuple.Z, 0.0d);
 
+        public static Tuple4D ToTuple4D(this ITuple4D tuple) 
+            => new Tuple4D(tuple.X, tuple.Y, tuple.Z, tuple.W);
+
         public static Tuple4D ToTuple4D(this IntTuple3D tuple) 
             => new Tuple4D(tuple.ItemX, tuple.ItemY, tuple.ItemZ, 0.0d);
 

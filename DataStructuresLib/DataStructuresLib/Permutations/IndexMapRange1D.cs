@@ -22,10 +22,14 @@ namespace DataStructuresLib.Permutations
                 : FirstIndex - Count + 1;
 
         public int MinIndex
-            => MoveForward ? FirstIndex : LastIndex;
+            => MoveForward 
+                ? FirstIndex 
+                : FirstIndex - Count + 1;
 
         public int MaxIndex
-            => MoveForward ? LastIndex : FirstIndex;
+            => MoveForward 
+                ? FirstIndex + Count - 1 
+                : FirstIndex;
 
         public bool MoveForward { get; set; }
 

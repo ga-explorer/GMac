@@ -34,10 +34,21 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Mutable
         public double Direction2Y { get; set; }
 
 
-        public bool HasNaNComponent
-            => double.IsNaN(OriginX) || double.IsNaN(OriginY) ||
-               double.IsNaN(Direction1X) || double.IsNaN(Direction1Y) ||
-               double.IsNaN(Direction2X) || double.IsNaN(Direction2Y);
+        public bool IsValid
+            => !double.IsNaN(OriginX) &&
+               !double.IsNaN(OriginY) &&
+               !double.IsNaN(Direction1X) &&
+               !double.IsNaN(Direction1Y) &&
+               !double.IsNaN(Direction2X) &&
+               !double.IsNaN(Direction2Y);
+
+        public bool IsInvalid
+            => double.IsNaN(OriginX) || 
+               double.IsNaN(OriginY) ||
+               double.IsNaN(Direction1X) || 
+               double.IsNaN(Direction1Y) ||
+               double.IsNaN(Direction2X) || 
+               double.IsNaN(Direction2Y);
 
 
         public MutableBeam2D()

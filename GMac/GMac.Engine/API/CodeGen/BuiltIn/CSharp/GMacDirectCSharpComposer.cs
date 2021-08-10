@@ -470,11 +470,11 @@ public Multivector(IEnumerable<double> coefs)
         }
 
 
-        protected override void InitializeOtherComponents()
+        protected override void InitializeSubComponents()
         {
         }
 
-        protected override void FinalizeOtherComponents()
+        protected override void FinalizeSubComponents()
         {
 
         }
@@ -490,7 +490,7 @@ public Multivector(IEnumerable<double> coefs)
                 GenerateNamespaceCode(namespaceInfo);
         }
 
-        public override GMacCodeLibraryComposer CreateEmptyGenerator()
+        public override GMacCodeLibraryComposer CreateEmptyComposer()
         {
             return new GMacDirectCSharpComposer(Root);
         }

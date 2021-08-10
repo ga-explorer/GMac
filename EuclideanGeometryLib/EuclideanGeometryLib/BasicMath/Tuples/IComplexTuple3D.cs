@@ -3,7 +3,7 @@ using DataStructuresLib.Basic;
 
 namespace EuclideanGeometryLib.BasicMath.Tuples
 {
-    public interface IComplexTuple3D : IGeometryElement, ITriplet<Complex>
+    public interface IComplexTuple3D : IGeometricElement, ITriplet<Complex>
     {
         Complex X { get; }
 

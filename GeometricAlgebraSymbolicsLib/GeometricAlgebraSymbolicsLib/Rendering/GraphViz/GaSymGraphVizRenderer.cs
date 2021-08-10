@@ -7,6 +7,7 @@ using CodeComposerLib.GraphViz.Dot;
 using CodeComposerLib.GraphViz.Dot.Color;
 using CodeComposerLib.GraphViz.Dot.Value;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Rendering.LaTeX;
 using GeometricAlgebraNumericsLib.Structures;
 using GeometricAlgebraNumericsLib.Structures.BinaryTrees;

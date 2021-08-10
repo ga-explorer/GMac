@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using CodeComposerLib.LaTeX;
 using DataStructuresLib;
+using DataStructuresLib.BitManipulation;
 using GeometricAlgebraNumericsLib.Multivectors;
 using GeometricAlgebraNumericsLib.Multivectors.Numeric;
 using GeometricAlgebraStructuresLib.Frames;

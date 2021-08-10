@@ -519,7 +519,10 @@ namespace EuclideanGeometryLib.Borders.Space3D.Immutable
 
         public double MaxZ { get; }
 
-        public bool HasNaNComponent { get; }
+        public bool IsValid 
+            => !IsInvalid;
+
+        public bool IsInvalid { get; }
 
         public bool IntersectionTestsEnabled { get; set; } = true;
 
@@ -534,7 +537,7 @@ namespace EuclideanGeometryLib.Borders.Space3D.Immutable
             MaxX = maxX;
             MaxZ = maxZ;
 
-            HasNaNComponent =
+            IsInvalid =
                 double.IsNaN(MinX) ||
                 double.IsNaN(MinY) ||
                 double.IsNaN(MinZ) ||
@@ -542,7 +545,7 @@ namespace EuclideanGeometryLib.Borders.Space3D.Immutable
                 double.IsNaN(MaxY) ||
                 double.IsNaN(MaxZ);
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
         internal BoundingBox3D(IBoundingBox3D boundingBox)
@@ -555,7 +558,7 @@ namespace EuclideanGeometryLib.Borders.Space3D.Immutable
             MaxX = boundingBox.MaxX;
             MaxZ = boundingBox.MaxZ;
 
-            HasNaNComponent =
+            IsInvalid =
                 double.IsNaN(MinX) ||
                 double.IsNaN(MinY) ||
                 double.IsNaN(MinZ) ||
@@ -563,7 +566,7 @@ namespace EuclideanGeometryLib.Borders.Space3D.Immutable
                 double.IsNaN(MaxY) ||
                 double.IsNaN(MaxZ);
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

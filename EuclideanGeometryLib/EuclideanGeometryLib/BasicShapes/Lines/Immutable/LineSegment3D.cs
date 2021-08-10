@@ -58,7 +58,15 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
         public double Point2Z { get; }
 
 
-        public bool HasNaNComponent
+        public bool IsValid
+            => !double.IsNaN(Point1X) &&
+               !double.IsNaN(Point1Y) &&
+               !double.IsNaN(Point1Z) &&
+               !double.IsNaN(Point2X) &&
+               !double.IsNaN(Point2Y) &&
+               !double.IsNaN(Point2Z);
+
+        public bool IsInvalid
             => double.IsNaN(Point1X) || 
                double.IsNaN(Point1Y) || 
                double.IsNaN(Point1Z) ||
@@ -80,7 +88,7 @@ namespace EuclideanGeometryLib.BasicShapes.Lines.Immutable
             Point2Y = p2Y;
             Point2Z = p2Z;
 
-            Debug.Assert(!HasNaNComponent);
+            Debug.Assert(!IsInvalid);
         }
 
 

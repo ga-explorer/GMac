@@ -13,7 +13,7 @@ using EuclideanGeometryLib.GraphicsGeometry.Vertices;
 
 namespace EuclideanGeometryLib.GraphicsGeometry.Composers
 {
-    public sealed class GraphicsTrianglesListGeometryComposer3D
+    public class GraphicsTrianglesListGeometryComposer3D
     {
         private readonly List<IGraphicsVertex3D> _verticesList 
             = new List<IGraphicsVertex3D>();
@@ -52,7 +52,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
             => _verticesList
                 .Select(p => p.Color);
 
-        public IEnumerable<GraphicsNormal3D> VertexNormals
+        public IEnumerable<IGraphicsNormal3D> VertexNormals
             => _verticesList
                 .Select(p => p.Normal);
 
@@ -80,7 +80,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
                 .Range(0, _verticesList.Count)
                 .Select(i => _verticesList[i].Color);
 
-        public IEnumerable<GraphicsNormal3D> TriangleVertexNormals
+        public IEnumerable<IGraphicsNormal3D> TriangleVertexNormals
             => Enumerable
                 .Range(0, _verticesList.Count)
                 .Select(i => _verticesList[i].Normal);
@@ -203,7 +203,7 @@ namespace EuclideanGeometryLib.GraphicsGeometry.Composers
                         ? VectorAlgebraUtils.GetTriangleUnitNormal(vertex3, vertex2, vertex1)
                         : VectorAlgebraUtils.GetTriangleUnitNormal(vertex1, vertex2, vertex3);
 
-                Debug.Assert(!normal.HasNaNComponent);
+                Debug.Assert(!normal.IsInvalid);
 
                 vertex1.Normal.Set(normal);
                 vertex2.Normal.Set(normal);
